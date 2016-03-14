@@ -10,8 +10,8 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DECLVOKE_HPP
 #define CALLABLE_TRAITS_DECLVOKE_HPP
 
-#include <callable/substitution.hpp>
-#include <callable/normalize_reference.hpp>
+#include <callable_traits/substitution.hpp>
+#include <callable_traits/normalize_reference.hpp>
 
 #include <type_traits>
 #include <utility>

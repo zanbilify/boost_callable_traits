@@ -10,8 +10,8 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_ARITY_HPP
 #define CALLABLE_TRAITS_ARITY_HPP
 
-#include <callable/disjunction.hpp>
-#include <callable/can_invoke_t.hpp>
+#include <callable_traits/disjunction.hpp>
+#include <callable_traits/can_invoke_t.hpp>
 #include <cstdint>
 
 namespace callable_traits {

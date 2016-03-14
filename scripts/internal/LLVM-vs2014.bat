@@ -2,7 +2,7 @@
 
 @echo off
 
-set clbl_root=..\..\
+set project_root=..\..\
 
 ::process 1st argument
 if "%~1"=="x64" (
@@ -63,19 +63,19 @@ if not defined msbuild_cmd (
   call :exit_script
 )
 
-cd %clbl_root%
+cd %project_root%
 set build_dir= "build_LLVM_vs2014_%1_%2"
 
 echo BUILD SCRIPT: Building at %build_dir%...
 
 if exist %build_dir% (
   cd %build_dir%
-  if exist "CLBL.sln" (
-    echo BUILD SCRIPT: CLBL.sln found - cleaning...
-    echo . | %msbuild_cmd% CLBL.sln /t:clean %msbuild_environment% /v:m /m /nologo
+  if exist "callable_traits.sln" (
+    echo BUILD SCRIPT: callable_traits.sln found - cleaning...
+    echo . | %msbuild_cmd% callable_traits.sln /t:clean %msbuild_environment% /v:m /m /nologo
 	cd ..\
   ) else (
-    echo BUILD SCRIPT: CLBL.sln not found - deleting build directory...
+    echo BUILD SCRIPT: callable_traits.sln not found - deleting build directory...
     cd ..
     rmdir /q /s %build_dir%
   )
@@ -89,8 +89,8 @@ if exist %build_dir% (
   cd %build_dir%
   echo BUILD SCRIPT: Running cmake...
   echo . | %cmake_cmd%
-  echo BUILD SCRIPT: CLBL.sln...
-  echo . | %msbuild_cmd% CLBL.sln %msbuild_environment% /v:m /m /nologo
+  echo BUILD SCRIPT: callable_traits.sln...
+  echo . | %msbuild_cmd% callable_traits.sln %msbuild_environment% /v:m /m /nologo
 )
 
 echo BUILD SCRIPT: CHECK.vcxproj...

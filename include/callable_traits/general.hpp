@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_GENERAL_HPP
 #define CALLABLE_TRAITS_GENERAL_HPP
 
-#include <callable/can_dereference.hpp>
+#include <callable_traits/can_dereference.hpp>
 
 #include <type_traits>
 #include <utility>

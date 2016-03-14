@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_FLAG_MAP_HPP
 #define CALLABLE_TRAITS_FLAG_MAP_HPP
 
-#include <callable/flags.hpp>
+#include <callable_traits/flags.hpp>
 
 namespace callable_traits {
 

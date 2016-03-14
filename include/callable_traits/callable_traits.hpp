@@ -11,10 +11,10 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_HPP
 
 
-#include <callable/traits_dispatch.hpp>
-#include <callable/can_invoke_t.hpp>
-#include <callable/substitution.hpp>
-#include <callable/arity.hpp>
+#include <callable_traits/traits_dispatch.hpp>
+#include <callable_traits/can_invoke_t.hpp>
+#include <callable_traits/substitution.hpp>
+#include <callable_traits/arity.hpp>
 
 #include <type_traits>
 
@@ -53,7 +53,7 @@ namespace callable_traits {
 
     template<typename Callable>
     inline constexpr auto
-    has_varargs(Callable&& c) { 
+    has_varargs(Callable&&) { 
         return typename ctdetail::traits<Callable&&>::has_varargs{};
     }
 

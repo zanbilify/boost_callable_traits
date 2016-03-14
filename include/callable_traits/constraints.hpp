@@ -11,8 +11,8 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_CONSTRAINTS_HPP
 
 #include <type_traits>
-#include <callable/has_normal_call_operator.hpp>
-#include <callable/can_dereference.hpp>
+#include <callable_traits/has_normal_call_operator.hpp>
+#include <callable_traits/can_dereference.hpp>
 
 // CALLABLE_TRAITS_REQUIRES_ and CALLABLE_TRAITS_REQUIRES adapted from Range-v3 here:
 // https://github.com/ericniebler/range-v3/blob/6600e6054513202e61a067de48c4a05ca2b11099/include/range/v3/utility/concepts.hpp#L861

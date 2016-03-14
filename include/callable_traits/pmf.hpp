@@ -10,12 +10,12 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_PMF_HPP
 #define CALLABLE_TRAITS_PMF_HPP
 
-#include <callable/set_function_qualifiers.hpp>
-#include <callable/qualifier_traits.hpp>
-#include <callable/constraints.hpp>
-#include <callable/has_normal_call_operator.hpp>
-#include <callable/tags.hpp>
-#include <callable/flags.hpp>
+#include <callable_traits/set_function_qualifiers.hpp>
+#include <callable_traits/qualifier_traits.hpp>
+#include <callable_traits/constraints.hpp>
+#include <callable_traits/has_normal_call_operator.hpp>
+#include <callable_traits/tags.hpp>
+#include <callable_traits/flags.hpp>
 #include <tuple>
 
 #define CALLABLE_TRAITS_SPECIALIZE_PMF(QUAL)                                         \

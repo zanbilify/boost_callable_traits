@@ -10,12 +10,12 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_TRAITS_HPP
 #define CALLABLE_TRAITS_TRAITS_HPP
 
-#include <callable/disjunction.hpp>
-#include <callable/general.hpp>
-#include <callable/function_object.hpp>
-#include <callable/function.hpp>
-#include <callable/pmf.hpp>
-#include <callable/default_dispatch.hpp>
+#include <callable_traits/disjunction.hpp>
+#include <callable_traits/general.hpp>
+#include <callable_traits/function_object.hpp>
+#include <callable_traits/function.hpp>
+#include <callable_traits/pmf.hpp>
+#include <callable_traits/default_dispatch.hpp>
 
 #include <type_traits>
 

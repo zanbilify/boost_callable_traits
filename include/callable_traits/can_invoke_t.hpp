@@ -10,9 +10,9 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_CAN_INVOKE_T_HPP
 #define CALLABLE_TRAITS_CAN_INVOKE_T_HPP
 
-#include <callable/test_invoke.hpp>
-#include <callable/substitution.hpp>
-#include <callable/normalize_reference.hpp>
+#include <callable_traits/test_invoke.hpp>
+#include <callable_traits/substitution.hpp>
+#include <callable_traits/normalize_reference.hpp>
 #include <type_traits>
 
 namespace callable_traits {

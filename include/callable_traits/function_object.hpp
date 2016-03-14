@@ -10,10 +10,10 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_FUNCTION_OBJECT_HPP
 #define CALLABLE_TRAITS_FUNCTION_OBJECT_HPP
 
-#include <callable/general.hpp>
-#include <callable/pmf.hpp>
-#include <callable/has_normal_call_operator.hpp>
-#include <callable/tags.hpp>
+#include <callable_traits/general.hpp>
+#include <callable_traits/pmf.hpp>
+#include <callable_traits/has_normal_call_operator.hpp>
+#include <callable_traits/tags.hpp>
 
 #include <tuple>
 
