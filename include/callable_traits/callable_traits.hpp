@@ -23,6 +23,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/can_invoke_t.hpp>
 #include <callable_traits/substitution.hpp>
 #include <callable_traits/arity.hpp>
+#include <callable_traits/bind_args_t.hpp>
 
 //todo remove?
 #include <callable_traits/can_invoke_t.hpp>
@@ -113,6 +114,10 @@ namespace callable_traits {
     arity() {
         return ctdetail::arity_t<ctdetail::traits<Callable>>{};
     }
+
+    template<typename Callable, typename... Args>
+    auto bind_args(Callable, Args...) ->
+        typename ctdetail::bind_args_t<Callable, Args...>::type;
 }
 
 #endif

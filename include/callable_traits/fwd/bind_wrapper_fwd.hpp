@@ -1,0 +1,21 @@
+/*!
+Copyright (c) 2016 Barrett Adair
+
+Distributed under the Boost Software License, Version 1.0.
+(See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
+*/
+
+#ifndef CALLABLE_TRAITS_FWD_BIND_WRAPPER_FWD_HPP
+#define CALLABLE_TRAITS_FWD_BIND_WRAPPER_FWD_HPP
+
+namespace callable_traits {
+
+    namespace ctdetail {
+
+        template<typename Traits, typename ArgsTuple>
+        struct bind_wrapper;
+
+    }
+}
+
+#endif
