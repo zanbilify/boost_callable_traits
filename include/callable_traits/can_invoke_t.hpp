@@ -24,29 +24,31 @@ namespace callable_traits {
             
             using callable = typename Dispatch::type;
             using class_type = typename Dispatch::class_type;
+            using is_member_pointer = typename Dispatch::is_member_pointer;
 
-            using invoke_t = typename std::conditional<
-                std::is_same<class_type, invalid_type>::value,
-                test_invoke<Dispatch, Args...>,
-                test_invoke<Dispatch, class_type, Args...>
+            using invoker = typename std::conditional<
+                is_member_pointer::value,
+                test_invoke<Dispatch, class_type, Args...>,
+                test_invoke<Dispatch, Args...>
+            >::type;
+
+            using test = typename std::conditional<
+                is_member_pointer::value,
+                decltype(invoker{}(
+                    std::declval<callable>(),
+                    std::declval<typename Dispatch::invoke_type>(),
+                    std::declval<Args>()...
+                )),
+                decltype(invoker{}(
+                    std::declval<callable>(),
+                    std::declval<Args>()...
+                ))
             >::type;
 
             static constexpr bool value =
-                !std::is_same<
-                    substitution_failure,
-                    decltype(invoke_t{}(
-                        std::declval<callable>(),
-                        std::declval<Args>()...
-                ))>::value
-                || !std::is_same<
-                    substitution_failure,
-                    decltype(invoke_t{}(
-                        std::declval<callable>(),
-                        std::declval<typename Dispatch::invoke_type>(),
-                        std::declval<Args>()...
-                ))>::value;
-
-            static constexpr int arg_count = invoke_t::arg_count;
+                !std::is_same<substitution_failure, test>{};
+                
+            static constexpr int arg_count = invoker::arg_count;
         };
 
         template<typename Dispatch>
@@ -54,25 +56,27 @@ namespace callable_traits {
 
             using callable = typename Dispatch::type;
             using class_type = typename Dispatch::class_type;
+            using is_member_pointer = typename Dispatch::is_member_pointer;
 
-            using invoke_t = typename std::conditional<
-                std::is_same<class_type, invalid_type>::value,
+            using invoker = typename std::conditional<
+                is_member_pointer::value,
                 test_invoke<Dispatch>,
                 test_invoke<Dispatch, class_type>
             >::type;
 
-            static constexpr bool value =
-                !std::is_same<
-                substitution_failure,
-                decltype(invoke_t{}(
-                    std::declval<callable>()
-                ))>::value
-                || !std::is_same<
-                substitution_failure,
-                decltype(invoke_t{}(
+            using invoke_type = typename Dispatch::invoke_type;
+
+            using test = typename std::conditional<
+                is_member_pointer::value,
+                decltype(invoker{}(
                     std::declval<callable>(),
-                    std::declval<typename Dispatch::invoke_type>()
-                ))>::value;
+                    std::declval<invoke_type>()
+                )),
+                decltype(invoker{}(std::declval<callable>()))
+            >::type;
+
+            static constexpr bool value =
+                !std::is_same<substitution_failure, test>::value;
 
             static constexpr int arg_count = 0;
         };

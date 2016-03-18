@@ -23,18 +23,19 @@ namespace callable_traits {
         struct any_arg {
 
             template<typename T>
-            operator T&& () {
-                return std::declval<T&&>();
-            }
+            operator T& () const;
 
-            any_arg() {}
+            template<typename T>
+            operator T&& () const;
 
+            any_arg() = default;
+
+#if !defined(_MSC_VER)
             template<typename... T>
-            any_arg(T&&...) {}
-
-            //todo - this is currently unused
-            static constexpr std::size_t index = I;
+            any_arg(T&&...);
+#endif
         };
+
 
 
         template<typename, typename>
@@ -47,16 +48,16 @@ namespace callable_traits {
         struct max_args<U, std::index_sequence<0>> {
             static constexpr bool value = true;
             static constexpr int arg_count =
-                can_invoke_t<U, any_arg<1>>::value ? 1 : (
+                can_invoke_t<U, const any_arg<0> &>::value ? 1 : (
                     can_invoke_t<U, void>::value ? 0 : -1
-                    );
+                );
         };
 
         template<typename U, std::size_t... I>
         struct max_args<U, std::index_sequence<I...>> {
 
             using result_type = disjunction<
-                can_invoke_t<U, any_arg<I>...>,
+                can_invoke_t<U, const any_arg<I>&...>,
                 max_args<U, std::make_index_sequence<sizeof...(I)-1> >
             >;
 
@@ -85,7 +86,7 @@ namespace callable_traits {
             >;
 
             using result_type = disjunction<
-                can_invoke_t<U, any_arg<I>...>,
+                can_invoke_t<U, const any_arg<I>&...>,
                 min_args<U, Max, next>
             >;
 
@@ -93,12 +94,12 @@ namespace callable_traits {
             static constexpr int arg_count = result_type::arg_count;
         };
 
+        /* useful for debugging
         template<typename U, std::size_t Max>
         struct min_args<U, Max, std::index_sequence<0, 1, 2>> {
 
             using T = can_invoke_t<U, any_arg<0>, any_arg<1>, any_arg<2>>;
-            using Y = typename T::invoke_t;
-
+            using g = typename T::asdf;
             using result_type = disjunction<
                 T,
                 min_args<U, Max, std::make_index_sequence<4>>
@@ -106,7 +107,7 @@ namespace callable_traits {
 
             static constexpr bool value = result_type::value;
             static constexpr int arg_count = result_type::arg_count;
-        };
+        };*/
 
         template<typename U, std::size_t Max>
         struct min_args<U, Max, void> {
@@ -160,7 +161,7 @@ namespace callable_traits {
                 ? tentative_min_arity : precient_arity;
         };
 
-        template<typename T, std::size_t SearchLimit = 10>
+        template<typename T, std::size_t SearchLimit>
         struct function_object_max_arity {
 
         private:
@@ -185,20 +186,20 @@ namespace callable_traits {
             arg_tuple_size<typename Dispatch::arg_types>::value
         >;
 
-        template<typename Dispatch>
+        template<typename Dispatch, std::size_t SearchLimit>
         using min_arity_t = std::integral_constant<int,
             std::conditional<
                 Dispatch::is_function_object::value,
-                function_object_min_arity<Dispatch>,
+                function_object_min_arity<Dispatch, SearchLimit>,
                 arity_t<Dispatch>
             >::type::value
         >;
 
-        template<typename Dispatch>
+        template<typename Dispatch, std::size_t SearchLimit>
         using max_arity_t = std::integral_constant<int,
             std::conditional<
                 Dispatch::is_function_object::value,
-                function_object_max_arity<Dispatch>,
+                function_object_max_arity<Dispatch, SearchLimit>,
                 arity_t<Dispatch>
             >::type::value
         >;

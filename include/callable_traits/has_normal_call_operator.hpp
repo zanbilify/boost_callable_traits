@@ -27,9 +27,9 @@ namespace callable_traits {
 
             template<typename>
             static std::int16_t test(...);
-
-            static constexpr const bool value =
-                sizeof(test<T>(nullptr)) == sizeof(std::int8_t);
+                 
+            static constexpr bool value = sizeof(test<T>(nullptr)) == sizeof(std::int8_t);
+            
         };
     }
 }

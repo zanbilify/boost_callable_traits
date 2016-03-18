@@ -14,7 +14,7 @@ template<typename T>
 struct default_dispatch {
     static constexpr const bool is_valid = true;
     static constexpr const bool value = is_valid;
-    using dispatch_type = T;
+    using traits = T;
 };
 
 #endif

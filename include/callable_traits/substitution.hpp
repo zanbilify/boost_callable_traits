@@ -21,7 +21,7 @@ namespace callable_traits {
         template<typename T>
         struct substitution_success {
             std::int8_t buffer;
-            T* data;
+            typename std::remove_reference<T>::type* data;
         };
 
         using substitution_failure = std::int8_t;

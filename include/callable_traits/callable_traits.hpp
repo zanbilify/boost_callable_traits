@@ -11,10 +11,21 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_HPP
 
 
-#include <callable_traits/traits_dispatch.hpp>
+#include <callable_traits/traits.hpp>
+#include <callable_traits/pmd.hpp>
+#include <callable_traits/pmf.hpp>
+#include <callable_traits/function.hpp>
+#include <callable_traits/function_object.hpp>
+#include <callable_traits/general.hpp>
+#include <callable_traits/disjunction.hpp>
+#include <callable_traits/remove_reference_if_ptr.hpp>
+#include <callable_traits/default_dispatch.hpp>
 #include <callable_traits/can_invoke_t.hpp>
 #include <callable_traits/substitution.hpp>
 #include <callable_traits/arity.hpp>
+
+//todo remove?
+#include <callable_traits/can_invoke_t.hpp>
 
 #include <type_traits>
 
@@ -39,13 +50,17 @@ namespace callable_traits {
     template<typename Callable, typename... Ts>
     inline constexpr auto
     can_invoke(Callable&& c, Ts&&... ts) {
+
         using failure = callable_traits::ctdetail::substitution_failure;
-        using invoke_t = callable_traits::ctdetail::test_invoke<ctdetail::traits<Callable&&>, Ts&&...>;
+
+        using invoke_t = callable_traits::ctdetail::test_invoke<
+            ctdetail::traits<Callable&&>, Ts&&...
+        >;
 
         return std::integral_constant<
             bool,
             !std::is_same<failure, decltype(invoke_t{}(
-                static_cast<Callable&&>(c),
+                std::forward<Callable>(c),
                 std::forward<Ts>(ts)...
             ))>::value
         >{}; 
@@ -63,28 +78,28 @@ namespace callable_traits {
         return typename ctdetail::traits<Callable>::has_varargs{};
     }
 
-    template<typename Callable>
+    template<std::size_t SearchLimit = constants::arity_search_limit, typename Callable>
     inline constexpr auto
     min_arity(Callable&&) {
-        return ctdetail::min_arity_t<ctdetail::traits<Callable&&>>{};
+        return ctdetail::min_arity_t<ctdetail::traits<Callable&&>, SearchLimit>{};
     }
 
-    template<typename Callable>
+    template<typename Callable, std::size_t SearchLimit = constants::arity_search_limit>
     inline constexpr auto
     min_arity() {
-        return ctdetail::min_arity_t<ctdetail::traits<Callable>>{};
+        return ctdetail::min_arity_t<ctdetail::traits<Callable>, SearchLimit>{};
     }
 
-    template<typename Callable>
+    template<std::size_t SearchLimit = constants::arity_search_limit, typename Callable>
     inline constexpr auto
     max_arity(Callable&&) {
-        return ctdetail::max_arity_t<ctdetail::traits<Callable&&>>{};
+        return ctdetail::max_arity_t<ctdetail::traits<Callable&&>, SearchLimit>{};
     }
 
-    template<typename Callable>
+    template<typename Callable, std::size_t SearchLimit = constants::arity_search_limit>
     inline constexpr auto
     max_arity() {
-        return ctdetail::max_arity_t<ctdetail::traits<Callable>>{};
+        return ctdetail::max_arity_t<ctdetail::traits<Callable>, SearchLimit>{};
     }
 
     template<typename Callable>

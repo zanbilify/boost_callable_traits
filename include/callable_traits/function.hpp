@@ -15,12 +15,16 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/has_normal_call_operator.hpp>
 #include <callable_traits/tags.hpp>
 #include <callable_traits/flags.hpp>
+#include <callable_traits/member_pointer_utilities.hpp>
+#include <callable_traits/function_object.hpp>
+#include <callable_traits/qualifier_traits.hpp>
+
 #include <tuple>
 
-#define CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CATEGORY, QUAL)                          \
+#define CALLABLE_TRAITS_SPECIALIZE_FUNCTION(QUAL)                                    \
                                                                                      \
 template<typename Return, typename... Args>                                          \
-struct function<Return CATEGORY (Args...) QUAL>                                      \
+struct function<Return(Args...) QUAL>                                                \
  : public qualifier_traits<dummy QUAL> {                                             \
                                                                                      \
 public:                                                                              \
@@ -28,19 +32,28 @@ public:                                                                         
     static constexpr bool value = true;                                              \
     using has_varargs = std::false_type;                                             \
     static constexpr bool is_ambiguous = false;                                      \
+    using is_member_pointer = std::false_type;                                       \
     using is_function_object = std::false_type;                                      \
+    using is_member_function_pointer = std::false_type;                              \
+    using is_function_reference = std::false_type;                                   \
+    using is_function_pointer = std::false_type;                                     \
+    using is_function = std::true_type;                                              \
+    using is_function_general = std::true_type;                                      \
                                                                                      \
-    using dispatch_type = function;                                                  \
+    using traits = function;                                                         \
     using callable_traits_tag = function_tag;                                        \
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
-    using type = Return CATEGORY (Args...) QUAL;                                     \
+    using type = Return(Args...) QUAL;                                               \
     using function_type = Return(Args...);                                           \
     using abominable_type = Return(Args...) QUAL;                                    \
+    using remove_abominable = type;                                                  \
     using remove_varargs = type;                                                     \
-    using add_varargs = Return CATEGORY (Args..., ...) QUAL;                         \
+    using add_varargs = Return (Args..., ...) QUAL;                                  \
     using class_type = invalid_type;                                                 \
     using invoke_type = invalid_type;                                                \
+    using is_abominable_function = std::integral_constant<bool,                      \
+        !std::is_same<abominable_type, function_type>::value>;                       \
                                                                                      \
 private:                                                                             \
                                                                                      \
@@ -65,14 +78,15 @@ public:                                                                         
     using remove_cv = set_qualifiers<qualifiers::ref_flags>;                         \
                                                                                      \
     template<typename U>                                                             \
-    using apply_class = Return(U::*)(Args...) QUAL;                                  \
+    using apply_member_pointer = add_member_pointer<type, U>;                        \
                                                                                      \
     template<typename NewReturn>                                                     \
-    using apply_return = NewReturn CATEGORY (Args...) QUAL;                          \
+    using apply_return = NewReturn(Args...) QUAL;                                    \
+                                                                                     \
 };                                                                                   \
                                                                                      \
 template<typename Return, typename... Args>                                          \
-struct function<Return CATEGORY (Args..., ...) QUAL>                                 \
+struct function<Return (Args..., ...) QUAL>                                          \
  : public qualifier_traits<dummy QUAL> {                                             \
                                                                                      \
 public:                                                                              \
@@ -80,16 +94,21 @@ public:                                                                         
     static constexpr bool value = true;                                              \
     using has_varargs = std::true_type;                                              \
     static constexpr bool is_ambiguous = false;                                      \
+    using is_member_pointer = std::false_type;                                       \
     using is_function_object = std::false_type;                                      \
-                                                                                     \
-    using dispatch_type = function;                                                  \
+    using is_member_function_pointer = std::false_type;                              \
+    using is_function_reference = std::false_type;                                   \
+    using is_function_pointer = std::false_type;                                     \
+    using is_function = std::true_type;                                              \
+    using is_function_general = std::true_type;                                      \
+    using traits = function;                                                         \
     using callable_traits_tag = function_tag;                                        \
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
-    using type = Return CATEGORY (Args..., ...) QUAL;                                \
+    using type = Return (Args..., ...) QUAL;                                         \
     using function_type = Return(Args..., ...);                                      \
     using abominable_type = Return(Args..., ...) QUAL;                               \
-    using remove_varargs = Return CATEGORY (Args...) QUAL;                           \
+    using remove_varargs = Return (Args...) QUAL;                                    \
     using add_varargs = type;                                                        \
     using class_type = invalid_type;                                                 \
     using invoke_type = invalid_type;                                                \
@@ -118,46 +137,85 @@ public:                                                                         
     using remove_cv = set_qualifiers<qualifiers::ref_flags>;                         \
                                                                                      \
     template<typename U>                                                             \
-    using apply_class = Return(U::*)(Args..., ...) QUAL;                             \
+    using apply_member_pointer =                                                     \
+        Return( CALLABLE_TRAITS_VARARGS_CC U::*)(Args..., ...) QUAL;                 \
                                                                                      \
     template<typename NewReturn>                                                     \
     using apply_return = NewReturn(Args..., ...) QUAL;                               \
 }                                                                                    \
 /**/
-
-#define CALLABLE_TRAITS_PTR (*)
-#define CALLABLE_TRAITS_REF (&)
-
 namespace callable_traits {
 
     namespace ctdetail {
 
         template<typename T>
-        struct function {
-            static constexpr const bool is_valid = false;
-            static constexpr const bool value = is_valid;
-            static constexpr const bool is_ambiguous = true;
-            using dispatch_type = function;
+        struct function : function_object<general<ambiguous_type>> {
+            static constexpr const bool value = false;
+            using traits = function;
         };
 
-        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_EMPTY, CALLABLE_TRAITS_EMPTY);
-        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_PTR, CALLABLE_TRAITS_EMPTY);
-        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_REF, CALLABLE_TRAITS_EMPTY);
-        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_EMPTY, &);
-        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_EMPTY, &&);
-        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_EMPTY, const);
-        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_EMPTY, volatile);
-        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_EMPTY, const volatile);
-        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_EMPTY, const &);
-        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_EMPTY, volatile &);
-        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_EMPTY, const volatile &);
-        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_EMPTY, const &&);
-        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_EMPTY, volatile &&);
-        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_EMPTY, const volatile &&);
+        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_EMPTY);
+        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(&);
+        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(&&);
+        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(const);
+        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(volatile);
+        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(const volatile);
+        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(const &);
+        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(volatile &);
+        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(const volatile &);
+        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(const &&);
+        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(volatile &&);
+        CALLABLE_TRAITS_SPECIALIZE_FUNCTION(const volatile &&);
 
         template<typename T, T Value>
         struct function<std::integral_constant<T, Value> > {
-            using dispatch_type = function<T>;
+            using traits = function<T>;
+        };
+
+        template<typename T>
+        struct function<T*> : function<T> {
+            using traits = function;
+            using type = T*;
+            using base = function<T>;
+            using remove_varargs = typename base::remove_varargs*;
+            using add_varargs = typename base::add_varargs*;
+
+            using remove_reference = T*;
+            using add_lvalue_reference = T*&;
+            using add_rvalue_reference = T*&&;
+
+            using add_const =  T * const;
+            using add_volatile = T * volatile;
+            using add_cv = T * const volatile;
+            using remove_const = typename base::remove_cv *;
+            using remove_volatile = typename base::remove_cv *;
+            using remove_cv = typename base::remove_cv *;
+
+            template<typename NewReturn>
+            using apply_return = typename base::template apply_return<NewReturn>&;
+        };
+
+        template<typename T>
+        struct function<T&> : function<T> {
+            using traits = function;
+            using base = function<T>;
+            using type = T&;
+            using remove_varargs = typename base::remove_varargs&;
+            using add_varargs = typename base::add_varargs&;
+
+            using remove_reference = T;
+            using add_lvalue_reference = T&;
+            using add_rvalue_reference = T&&;
+
+            using add_const =  typename base::add_const;
+            using add_volatile = typename base::add_volatile;
+            using add_cv = typename base::add_cv;
+            using remove_const = typename base::remove_const;
+            using remove_volatile = typename base::remove_volatile;
+            using remove_cv = typename base::remove_cv;
+
+            template<typename NewReturn>
+            using apply_return = typename base::template apply_return<NewReturn>&;
         };
     }
 }

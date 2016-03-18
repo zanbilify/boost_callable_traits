@@ -25,6 +25,7 @@ namespace callable_traits {
         struct ambiguous_function_object {
             using arg_types = std::tuple<ambiguous_type>;
             using return_type = ambiguous_type;
+            using has_varargs = std::false_type;
         };
 
         template<typename General>
@@ -35,22 +36,49 @@ namespace callable_traits {
                 ambiguous_function_object<General>
             >::type {
 
-            using type = typename General::type;
+            using type = typename General::original_type;
+            using general_type = typename General::type;
+            
             static constexpr const bool value = std::is_class<type>::value;
-            static constexpr const bool is_ambiguous = !has_normal_call_operator<type>::value;
-            using dispatch_type = function_object;
+            using is_ambiguous = std::integral_constant<bool, !has_normal_call_operator<type>::value>;
+            using traits = function_object;
             using class_type = invalid_type;
             using invoke_type = invalid_type;
-            using is_function_object = std::true_type;
-            static constexpr const bool is_member_function_ptr = false;
-            static constexpr const bool is_function_ptr = false;
+
+            using is_function_object = std::integral_constant<bool,
+                std::is_class<general_type>::value>;
+
+            using is_member_pointer = std::false_type;
+            using is_member_function_pointer = std::false_type;
+            using is_function_reference = std::false_type;
+            using is_function_pointer = std::false_type;
+            using is_function = std::false_type;
+            using is_function_general = std::false_type;
+            using remove_member_pointer = type;
+            using remove_varargs = invalid_type;
+            using add_varargs = invalid_type;
+
+            template<typename>
+            using add_member_pointer = invalid_type;
+
+            template<typename>
+            using apply_return = invalid_type;
+
+            using remove_reference = invalid_type;
+            using add_lvalue_reference = invalid_type;
+            using add_rvalue_reference = invalid_type;
+            using add_const = invalid_type;
+            using add_volatile = invalid_type;
+            using add_cv = invalid_type;
+            using remove_const = invalid_type;
+            using remove_volatile = invalid_type;
+            using remove_cv = invalid_type;
         };
 
         template<typename T, typename U>
         struct function_object <general<T U::*> > {
-            static constexpr const bool is_valid = false;
-            static constexpr const bool value = is_valid;
-            using dispatch_type = function_object;
+            static constexpr const bool value = false;
+            using traits = function_object;
         };
     }
 }

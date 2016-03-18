@@ -29,9 +29,15 @@ public:                                                                         
     static constexpr bool value = true;                                              \
     using has_varargs = std::false_type;                                             \
     static constexpr bool is_ambiguous = false;                                      \
+    using is_member_pointer = std::true_type;                                        \
     using is_function_object = std::false_type;                                      \
+    using is_member_function_pointer = std::true_type;                               \
+    using is_function_reference = std::false_type;                                   \
+    using is_function_pointer = std::false_type;                                     \
+    using is_function = std::false_type;                                             \
+    using is_function_general = std::false_type;                                     \
                                                                                      \
-    using dispatch_type = pmf;                                                       \
+    using traits = pmf;                                                              \
     using callable_traits_tag = pmf_tag;                                             \
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
@@ -66,7 +72,7 @@ public:                                                                         
     using remove_cv = set_qualifiers<qualifiers::ref_flags>;                         \
                                                                                      \
     template<typename U>                                                             \
-    using apply_class = Return(U::*)(Args...) QUAL;                                  \
+    using apply_member_pointer = Return(U::*)(Args...) QUAL;                         \
                                                                                      \
     template<typename NewReturn>                                                     \
     using apply_return = NewReturn(T::*)(Args...) QUAL;                              \
@@ -81,9 +87,15 @@ public:                                                                         
     static constexpr bool value = true;                                              \
     using has_varargs = std::true_type;                                              \
     static constexpr bool is_ambiguous = false;                                      \
+    using is_member_pointer = std::true_type;                                        \
     using is_function_object = std::false_type;                                      \
+    using is_member_function_pointer = std::true_type;                               \
+    using is_function_reference = std::false_type;                                   \
+    using is_function_pointer = std::false_type;                                     \
+    using is_function = std::false_type;                                             \
+    using is_function_general = std::false_type;                                     \
                                                                                      \
-    using dispatch_type = pmf;                                                       \
+    using traits = pmf;                                                              \
     using callable_traits_tag = pmf_tag;                                             \
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
@@ -120,7 +132,8 @@ public:                                                                         
     using remove_cv = set_qualifiers<qualifiers::ref_flags>;                         \
                                                                                      \
     template<typename U>                                                             \
-    using apply_class = Return(CALLABLE_TRAITS_VARARGS_CC U::*)(Args..., ...) QUAL;  \
+    using apply_member_pointer =                                                     \
+        Return(CALLABLE_TRAITS_VARARGS_CC U::*)(Args..., ...) QUAL;                  \
                                                                                      \
     template<typename NewReturn>                                                     \
     using apply_return =                                                             \
@@ -137,7 +150,7 @@ namespace callable_traits {
             static constexpr const bool is_valid = false;
             static constexpr const bool value = is_valid;
             static constexpr const bool is_ambiguous = true;
-            using dispatch_type = pmf;
+            using traits = pmf;
         };
 
         CALLABLE_TRAITS_SPECIALIZE_PMF(CALLABLE_TRAITS_EMPTY);
@@ -155,7 +168,7 @@ namespace callable_traits {
 
         template<typename T, T Value>
         struct pmf<std::integral_constant<T, Value> > {
-            using dispatch_type = pmf<T>;
+            using traits = pmf<T>;
         };
     }
 }
