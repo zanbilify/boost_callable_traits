@@ -18,7 +18,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/sort_tuple.hpp>
 #include <callable_traits/placeholder_routes.hpp>
 #include <callable_traits/remove_duplicate_placeholders.hpp>
-#include <callable_traits/fwd/bind_wrapper_fwd.hpp>
+#include <callable_traits/fwd/bind_args_t_fwd.hpp>
 
 #include <tuple>
 #include <functional>
