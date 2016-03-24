@@ -15,6 +15,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/tuple_group_by.hpp>
 #include <callable_traits/sort_tuple.hpp>
 #include <callable_traits/bind_expression.hpp>
+#include <callable_traits/weak_common_type.hpp>
 #include <tuple>
 #include <functional>
 
@@ -79,38 +80,12 @@ namespace callable_traits {
             >::type;
         };
 
-        template <class ...T> struct common_type;
- 
-        template <class T>
-        struct common_type<T> {
-            using type = T;
-        };
-         
-        template <class T, class U>
-        struct common_type<T, U> {
-
-            using type = typename std::conditional<
-                std::is_convertible<T, U>::value,
-                U,
-                typename std::conditional<
-                    std::is_convertible<U, T>::value,
-                    T,
-                    decltype(true ? std::declval<T>() : std::declval<U>())
-                >::type
-            >::type;
-        };
-         
-        template <class T, class U, class... V>
-        struct common_type<T, U, V...> {
-            using type = typename common_type<typename common_type<T, U>::type, V...>::type;
-        };
-
         template<typename Tup>
         struct custom_common_type;
 
         template<typename... Ts>
         struct custom_common_type<std::tuple<Ts...>> {
-            using type = typename common_type<Ts...>::type;
+            using type = weak_common_type<Ts...>;
         };
 
         template<typename Tup>

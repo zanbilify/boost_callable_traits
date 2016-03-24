@@ -8,7 +8,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_PREPEND_HPP
 #define CALLABLE_TRAITS_PREPEND_HPP
 
-#include <callable_traits/private_tuple.hpp>
+//#include <callable_traits/private_tuple.hpp>
 
 namespace callable_traits { 
 
@@ -25,10 +25,10 @@ namespace callable_traits {
             using type = std::tuple<T, Args...>;
         };
 
-        template <typename T, typename... Args>
+        /*template <typename T, typename... Args>
         struct prepend<T, private_tuple<Args...> > {
             using type = private_tuple<T, Args...>;
-        };
+        };*/
     }
 }
 
