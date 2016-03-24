@@ -8,7 +8,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 <!--![Build Status](https://travis-ci.org/badair/CLBL.svg?branch=master)-->
 
-<!--[![Join the chat at https://gitter.im/badair/CLBL](https://badges.gitter.im/badair/CLBL.svg)](https://gitter.im/badair/CLBL?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) -->
+[![Gitter](https://badges.gitter.im/badair/callable_traits.svg)](https://gitter.im/badair/callable_traits?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 <!--</a> <a target="_blank" href="http://melpon.org/wandbox/permlink/TlioDiz6yYNxZFnv">![Try it online][badge.wandbox]</a>-->
 
@@ -106,7 +106,7 @@ int main() {
 
     // For function objects, the following checks are determined by the 
     // qualifiers on operator(). For member function pointers and abominable
-    // function types, the qualifier on the function type are used.
+    // function types, the qualifiers on the function type are used.
     static_assert(ct::is_const_qualified(foo{}), "");
     static_assert(!ct::is_volatile_qualified(foo{}), "");
     static_assert(!ct::is_reference_qualified(foo{}), "");
@@ -123,3 +123,4 @@ Please see [LICENSE.md](LICENSE.md).
 <!-- Links -->
 [badge.Wandbox]: https://img.shields.io/badge/try%20it-online-blue.svg
 [example.Wandbox]: http://melpon.org/wandbox/permlink/TlioDiz6yYNxZFnv
+
