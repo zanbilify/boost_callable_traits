@@ -51,6 +51,16 @@ namespace callable_traits {
         ctdetail::traits<T>
     >::type::arg_types;
 
+    template<
+        typename T,
+        typename U = typename std::remove_cv<typename std::remove_reference<T>::type>::type
+    >
+    using signature = typename std::conditional<
+        ctdetail::is_bind_expression<U>::value,
+        ctdetail::bind_expression_parser<U>,
+        ctdetail::traits<T>
+    >::type::function_type;
+
     template<size_t Index, typename T>
     using arg_at = typename std::tuple_element<Index, args<T>>::type;
 
