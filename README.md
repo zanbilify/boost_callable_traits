@@ -6,7 +6,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 # CallableTraits
 
-<!--![Build Status](https://travis-ci.org/badair/CLBL.svg?branch=master)-->
+![Build Status](https://travis-ci.org/badair/callable_traits.svg?branch=master)
 
 [![Gitter](https://badges.gitter.im/badair/callable_traits.svg)](https://gitter.im/badair/callable_traits?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
