@@ -23,9 +23,10 @@ namespace callable_traits {
 
         template<typename General>
         struct ambiguous_function_object {
-            using arg_types = std::tuple<ambiguous_type>;
-            using return_type = ambiguous_type;
+            using arg_types = std::tuple<unknown>;
+            using return_type = unknown;
             using has_varargs = std::false_type;
+            using function_type = unknown(unknown);
         };
 
         template<typename General>

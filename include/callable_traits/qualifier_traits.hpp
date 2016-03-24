@@ -10,6 +10,8 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_QUALIFIER_TRAITS_HPP
 #define CALLABLE_TRAITS_QUALIFIER_TRAITS_HPP
 
+#include <type_traits>
+
 namespace callable_traits {
 
     namespace ctdetail {
@@ -25,12 +27,12 @@ namespace callable_traits {
 
         public:
 
-            static constexpr bool is_reference_qualified = ref_flags > 0;
-            static constexpr bool is_lvalue_reference_qualified = ref_flags == lref_;
-            static constexpr bool is_rvalue_reference_qualified = ref_flags == rref_;
-            static constexpr bool is_const_qualified = (cv_flags & const_) > 0;
-            static constexpr bool is_volatile_qualified = (cv_flags & volatile_) > 0;
-            static constexpr bool is_cv_qualified = cv_flags == (const_ | volatile_);
+            using is_reference_qualified = std::integral_constant<bool, 0 < ref_flags>;
+            using is_lvalue_reference_qualified = std::integral_constant<bool, ref_flags == lref_>;
+            using is_rvalue_reference_qualified = std::integral_constant<bool, ref_flags == rref_>;
+            using is_const_qualified = std::integral_constant<bool, 0 < (cv_flags & const_)>;
+            using is_volatile_qualified = std::integral_constant<bool, 0 < (cv_flags & volatile_)>;
+            using is_cv_qualified = std::integral_constant<bool, cv_flags == (const_ | volatile_)>;
         };
     }
 }

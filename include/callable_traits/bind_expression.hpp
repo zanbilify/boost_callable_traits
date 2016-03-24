@@ -59,8 +59,8 @@ namespace callable_traits {
 
         template <typename T, std::size_t... I>
         struct placeholders_mapped_to_original_signature<
-            T, std::tuple<ambiguous_type>, std::index_sequence<I...>> {
-            using type = std::tuple<ambiguous_type>;
+            T, std::tuple<unknown>, std::index_sequence<I...>> {
+            using type = std::tuple<unknown>;
         };
 
         template <typename...> struct bind_expressions_filter;

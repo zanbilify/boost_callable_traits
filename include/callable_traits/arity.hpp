@@ -103,7 +103,7 @@ namespace callable_traits {
         };
 
         struct dummy_wrapper {
-            using arg_types = std::tuple<ambiguous_type>;
+            using arg_types = std::tuple<unknown>;
         };
 
         template<typename T>
@@ -112,7 +112,7 @@ namespace callable_traits {
         };
 
         template<>
-        struct arg_tuple_size<std::tuple<ambiguous_type>> {
+        struct arg_tuple_size<std::tuple<unknown>> {
             static constexpr int value = -1;
         };
 

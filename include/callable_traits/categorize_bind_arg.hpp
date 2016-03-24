@@ -60,7 +60,7 @@ namespace callable_traits {
             using return_type =  typename bind_expression<Callable, Args...>::return_type;
 
             using type = typename std::conditional<
-                std::is_same<return_type, ambiguous_type>::value,
+                std::is_same<return_type, unknown>::value,
                 any_arg<>,
                 return_type
             >::type;

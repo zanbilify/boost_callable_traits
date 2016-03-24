@@ -37,7 +37,7 @@ namespace callable_traits {
     };
 
     struct invalid_type { invalid_type() = delete; };
-    struct ambiguous_type { ambiguous_type() = delete; };
+    struct unknown { unknown() = delete; };
 }
 
 

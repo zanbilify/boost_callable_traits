@@ -39,6 +39,17 @@ namespace callable_traits {
         struct weak_common_type_t<
             std::integral_constant<
                 bool,
+                std::is_convertible<U, T>::value
+                    && std::is_convertible<T, U>::value
+            >, T, U
+        > {
+            using type = T;
+        };
+
+        template <class T, class U>
+        struct weak_common_type_t<
+            std::integral_constant<
+                bool,
                 std::is_convertible<U, T>::value && !std::is_convertible<T, U>::value
             >, T, U
         > {
@@ -50,16 +61,6 @@ namespace callable_traits {
             std::integral_constant<
                 bool,
                 !std::is_convertible<U, T>::value && !std::is_convertible<T, U>::value
-            >, T, U
-        > {
-            using type = T;
-        };
-         
-        template <class T, class U>
-        struct weak_common_type_t<
-            std::integral_constant<
-            bool,
-            std::is_same<U, T>::value
             >, T, U
         > {
             using type = T;

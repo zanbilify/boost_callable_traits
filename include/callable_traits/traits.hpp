@@ -20,17 +20,13 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/fwd/function_fwd.hpp>
 #include <callable_traits/fwd/function_object_fwd.hpp>
 #include <callable_traits/fwd/bind_expression_fwd.hpp>
+#include <callable_traits/shallow_decay.hpp>
 
 #include <type_traits>
 
 namespace callable_traits {
 
     namespace ctdetail {
-
-        template<typename T>
-        using shallow_decay = typename std::remove_cv<
-            typename std::remove_reference<T>::type
-        >::type;
 
         template<typename T>
         using traits = 

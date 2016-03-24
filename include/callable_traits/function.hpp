@@ -149,7 +149,7 @@ namespace callable_traits {
     namespace ctdetail {
 
         template<typename T>
-        struct function : function_object<general<ambiguous_type>> {
+        struct function : function_object<general<unknown>> {
             static constexpr const bool value = false;
             using traits = function;
         };

@@ -26,35 +26,31 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/bind_expression.hpp>
 #include <callable_traits/bind_expression_parser.hpp>
 #include <callable_traits/is_bind_expression.hpp>
+#include <callable_traits/shallow_decay.hpp>
 
 //todo remove?
 #include <callable_traits/can_invoke_t.hpp>
 
 #include <type_traits>
+#include <utility>
 
 namespace callable_traits {
 
     template<typename T, typename U = typename std::remove_reference<T>::type>
     inline constexpr
-    std::integral_constant<bool, ctdetail::traits<U>::is_ambiguous>
+    typename ctdetail::traits<U>::is_ambiguous
     is_ambiguous(T&&) {
         return{};
     }
 
-    template<
-        typename T,
-        typename U = typename std::remove_cv<typename std::remove_reference<T>::type>::type
-    >
+    template<typename T, typename U = ctdetail::shallow_decay<T>>
     using args = typename std::conditional<
         ctdetail::is_bind_expression<U>::value,
         ctdetail::bind_expression_parser<U>,
         ctdetail::traits<T>
     >::type::arg_types;
 
-    template<
-        typename T,
-        typename U = typename std::remove_cv<typename std::remove_reference<T>::type>::type
-    >
+    template<typename T, typename U = ctdetail::shallow_decay<T>>
     using signature = typename std::conditional<
         ctdetail::is_bind_expression<U>::value,
         ctdetail::bind_expression_parser<U>,
@@ -135,9 +131,76 @@ namespace callable_traits {
     }
 
     template<typename Callable, typename... Args>
-    auto bind_expr(Callable, Args...) ->
+    inline constexpr auto
+    bind_expr(Callable, Args...) ->
         ctdetail::bind_expression<Callable, Args...> {
         return{};
+    }
+
+    template<typename Callable>
+    inline constexpr auto
+    is_const_qualified(Callable&&) {
+        return typename ctdetail::traits<Callable&&>::is_const_qualified{};
+    }
+
+    template<typename Callable>
+    inline constexpr auto
+    is_cv_qualified() {
+        return typename ctdetail::traits<Callable>::is_cv_qualified{};
+    }
+
+    template<typename Callable>
+    inline constexpr auto
+    is_cv_qualified(Callable&&) {
+        return typename ctdetail::traits<Callable&&>::is_cv_qualified{};
+    }
+
+    template<typename Callable>
+    inline constexpr auto
+    is_volatile_qualified() {
+        return typename ctdetail::traits<Callable>::is_volatile_qualified{};
+    }
+
+    template<typename Callable>
+    inline constexpr auto
+    is_volatile_qualified(Callable&&) {
+        return typename ctdetail::traits<Callable&&>::is_volatile_qualified{};
+    }
+
+    template<typename Callable>
+    inline constexpr auto
+    is_reference_qualified() {
+        return typename ctdetail::traits<Callable>::is_reference_qualified{};
+    }
+
+    template<typename Callable>
+    inline constexpr auto
+    is_reference_qualified(Callable&&) {
+        return typename ctdetail::traits<Callable&&>::is_reference_qualified{};
+    }
+
+    template<typename Callable>
+    inline constexpr auto
+    is_lvalue_reference_qualified() {
+        return typename ctdetail::traits<Callable>::is_lvalue_reference_qualified{};
+    }
+
+    template<typename Callable>
+    inline constexpr auto
+    is_lvalue_reference_qualified(Callable&&) {
+        return typename ctdetail::traits<Callable&&>::is_lvalue_reference_qualified{};
+    }
+
+    template<typename Callable>
+    inline constexpr auto
+    is_rvalue_reference_qualified() {
+        return typename ctdetail::traits<Callable>::is_rvalue_reference_qualified{};
+    }
+
+    template<typename Callable>
+    inline constexpr auto
+    is_rvalue_reference_qualified(Callable&&) {
+        return typename ctdetail::traits<Callable&&>::is_rvalue_reference_qualified{};
     }
 }
 
