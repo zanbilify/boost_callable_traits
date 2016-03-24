@@ -14,7 +14,10 @@ Distributed under the Boost Software License, Version 1.0.
 
 This is currently an unfinished project. Lack of documentation, gaps in cross-platform compatibility, and spotty code quality are the most glaring issues right now, but progress is being made on all fronts.
 
+CallableTraits intends to provide a uniform and comprehensive interface for type-level manipulation of all callable types in C++.
+
 ## Overview
+
 <!-- Important: keep this in sync with example/intro.cpp -->
 ```cpp
 
