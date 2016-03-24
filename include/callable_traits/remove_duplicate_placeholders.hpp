@@ -26,7 +26,7 @@ namespace callable_traits {
         template<typename PhRoute1, typename PhRoute2, typename... Tail>
         struct remove_duplicate_placeholders<PhRoute1, PhRoute2, Tail...> {
             using type = typename std::conditional<
-                PhRoute1::input_index == PhRoute2::input_index,
+                PhRoute1::ph_value == PhRoute2::ph_value,
                 typename remove_duplicate_placeholders<PhRoute1, Tail...>::type,
                 typename prepend<PhRoute1, typename remove_duplicate_placeholders<PhRoute2, Tail...>::type>::type
             >::type;
@@ -36,7 +36,7 @@ namespace callable_traits {
         template<typename PhRoute1, typename PhRoute2>
         struct remove_duplicate_placeholders<PhRoute1, PhRoute2> {
             using type = typename std::conditional<
-                PhRoute1::input_index == PhRoute2::input_index,
+                PhRoute1::ph_value == PhRoute2::ph_value,
                 std::tuple<PhRoute1>,
                 std::tuple<PhRoute1, PhRoute2>
             >::type;

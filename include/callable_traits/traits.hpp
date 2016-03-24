@@ -19,6 +19,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/fwd/pmf_fwd.hpp>
 #include <callable_traits/fwd/function_fwd.hpp>
 #include <callable_traits/fwd/function_object_fwd.hpp>
+#include <callable_traits/fwd/bind_expression_fwd.hpp>
 
 #include <type_traits>
 

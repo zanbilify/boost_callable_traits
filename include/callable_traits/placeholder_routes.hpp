@@ -8,40 +8,33 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_BIND_PLACEHOLDER_ROUTES_HPP
 #define CALLABLE_TRAITS_BIND_PLACEHOLDER_ROUTES_HPP
 
+#include <callable_traits/prepend.hpp>
+
 namespace callable_traits { 
 
     namespace ctdetail { 
 
-        template<std::size_t OutputIndex, std::size_t InputIndex>
+        template<typename Expression, std::size_t OriginalArgIndex, std::size_t PhValue>
         struct ph_route {
-            static constexpr const auto output_index = OutputIndex;
-            static constexpr const auto input_index = InputIndex;
+            using expression = Expression;
+            static constexpr const auto original_arg_index = OriginalArgIndex;
+            static constexpr const auto ph_value = PhValue;
         };
 
-        template<typename, typename> struct argument_routing {};
+        template<typename Expression, typename, typename> struct argument_routing {};
 
-        template<std::size_t... I, typename Tuple>
-        struct argument_routing<std::index_sequence<I...>, Tuple> {
+        template<typename Expression, std::size_t... I, typename Tuple>
+        struct argument_routing<Expression, std::index_sequence<I...>, Tuple> {
             using type =
                 std::tuple<
                     ph_route<
+                        Expression,
                         I,
                         std::is_placeholder<
                             typename std::tuple_element<I, Tuple>::type
                         >::value
                     >...
                 >;
-        };
-
-        template <typename...> struct prepend;
-
-        template <> struct prepend<> {
-            using type = std::tuple<>;
-        };
-
-        template <typename T, typename... Args>
-        struct prepend<T, std::tuple<Args...> > {
-            using type = std::tuple<T, Args...>;
         };
 
         //base case
@@ -54,7 +47,7 @@ namespace callable_traits {
         struct placeholder_routes_detail<Head, Tail...> {
             //TODO - is there a faster way to do this?
             using type = typename std::conditional<
-                Head::input_index == 0,
+                Head::ph_value == 0,
                 typename placeholder_routes_detail<Tail...>::type,
                 typename prepend<
                     Head,
@@ -74,14 +67,15 @@ namespace callable_traits {
                 std::is_placeholder<PhLeft>::value < std::is_placeholder<PhRight>::value;
         };
 
-        template <typename...> struct placeholder_routes;
-        template <> struct placeholder_routes<> { using type = std::tuple<>; };
+        template <typename Expression, typename...> struct placeholder_routes;
+        template <typename Expression> struct placeholder_routes<Expression> { using type = std::tuple<>; };
 
-        template <typename... Args>
-        struct placeholder_routes<std::tuple<Args...> >
+        template <typename Expression, typename... Args>
+        struct placeholder_routes<Expression, std::tuple<Args...> >
         {
             using routed_placeholders = typename placeholder_routes_detail<
                 typename argument_routing<
+                    Expression,
                     std::make_index_sequence<sizeof...(Args)>,
                     std::tuple<Args...>
                 >::type

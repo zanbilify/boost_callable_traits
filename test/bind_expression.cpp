@@ -71,7 +71,7 @@ apply(F&& f, Tuple&& t) {
         std::forward<F>(f),
         std::forward<Tuple>(t),
         std::make_index_sequence<
-            std::tuple_size<std::remove_reference_t<Tuple>>::value
+        std::tuple_size<std::remove_reference_t<Tuple>>::value
         >{}
     );
 }
@@ -89,61 +89,45 @@ int main() {
     assert(letters(a, b, c, d, e, f, g) == "ABCDEFG");
     assert(ordered_letters(a, b, c, d, e, f, g) == "ABCDEFG");
 
+
     {
-        using args = decltype(ct::bind_args(
-            &ordered_letters, _1, _2, _3, _4, _5, _6, _7));
+        auto expr = ct::bind_expr(&ordered_letters, _1, _2, _3, _4, _5, _6, _7);
+        using args = ct::args<decltype(expr)>;
         using expected_args = std::tuple<A, B, C, D, E, F, G>;
         CT_ASSERT(std::is_same<args, expected_args>{});
-
         auto test = std::bind(&ordered_letters, _1, _2, _3, _4, _5, _6, _7);
         assert(apply(test, expected_args{}) == "ABCDEFG");
-    } {   
-        using args = decltype(ct::bind_args(
-            &ordered_letters, a, b, c, _1, _2, _3, _4));
+    } {
+        auto expr = ct::bind_expr(&ordered_letters, a, b, c, _1, _2, _3, _4);
+        using args = ct::args<decltype(expr)>;
         using expected_args = std::tuple<D, E, F, G>;
         CT_ASSERT(std::is_same<args, expected_args>{});
-
         auto test = std::bind(&ordered_letters, a, b, c, _1, _2, _3, _4);
         assert(apply(test, expected_args{}) == "ABCDEFG");
     } {
-        using args = decltype(ct::bind_args(
-            &ordered_letters, _7, _6, _5, _4, _3, _2, _1));
+        auto expr = ct::bind_expr(&ordered_letters, _7, _6, _5, _4, _3, _2, _1);
+        using args = ct::args<decltype(expr)>;
         using expected_args = std::tuple<G, F, E, D, C, B, A>;
         CT_ASSERT(std::is_same<args, expected_args>{});
-
         auto test = std::bind(&ordered_letters, _7, _6, _5, _4, _3, _2, _1);
         assert(apply(test, expected_args{}) == "ABCDEFG");
     } {
-        using args = decltype(ct::bind_args(
-            &ordered_letters, a, b, c, _4, _3, _2, _1));
+        auto expr = ct::bind_expr(&ordered_letters, a, b, c, _4, _3, _2, _1);
+        using args = ct::args<decltype(expr)>;
         using expected_args = std::tuple<G, F, E, D>;
         CT_ASSERT(std::is_same<args, expected_args>{});
-
         auto test = std::bind(&ordered_letters, a, b, c, _4, _3, _2, _1);
         assert(apply(test, expected_args{}) == "ABCDEFG");
     } {
-        using args = decltype(ct::bind_args(
-            &ordered_letters, _4, _3, _2, _1, e, f, g));
+        auto expr = ct::bind_expr(&ordered_letters, _4, _3, _2, _1, e, f, g);
+        using args = ct::args<decltype(expr)>;
         using expected_args = std::tuple<D, C, B, A>;
         CT_ASSERT(std::is_same<args, expected_args>{});
-
         auto test = std::bind(&ordered_letters, _4, _3, _2, _1, e, f, g);
         assert(apply(test, expected_args{}) == "ABCDEFG");
     } {
-        //These aren't valid binds. Here we are testing the
-        //correctness of the arg_types alias in binding_wrapper.
-        using args = decltype(ct::bind_args(
-            &ordered_letters, _1, _1, _3, _3, _2, _1, _2));
-        using expected_args = std::tuple<A, E, C>;
-        CT_ASSERT(std::is_same<args, expected_args>{});
-    } {
-        using args = decltype(ct::bind_args(
-            &ordered_letters, _4, _1, _2, _3, _1, _2, _4));
-        using expected_args = std::tuple<B, C, D, A>;
-        CT_ASSERT(std::is_same<args, expected_args>{});
-    } {
-        using args = decltype(ct::bind_args(
-            &letters, _1, _1, _3, _3, _2, a, b));
+        auto expr = ct::bind_expr(&letters, _1, _1, _3, _3, _2, a, b);
+        using args = ct::args<decltype(expr)>;
         using expected_args = std::tuple<const Letter&, const Letter&, const Letter&>;
         CT_ASSERT(std::is_same<args, expected_args>{});
     }

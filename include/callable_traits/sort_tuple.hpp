@@ -18,17 +18,16 @@ namespace callable_traits {
 
     namespace ctdetail {
 
-        using index = std::size_t;
         using empty_seq = std::index_sequence<>;
 
-        template <typename Pred, index Insert, bool IsInsertionPoint,
-            typename Left, index ...Right>
+        template <typename Pred, std::size_t Insert, bool IsInsertionPoint,
+            typename Left, std::size_t ...Right>
         struct insert;
 
         // We did not find the insertion point; continue processing elements
         // recursively.
-        template <typename Pred, index Insert, index ...Left,
-            index Right1, index Right2, index ...Right>
+        template <typename Pred, std::size_t Insert, std::size_t ...Left,
+            std::size_t Right1, std::size_t Right2, std::size_t ...Right>
         struct insert<Pred, Insert, false, std::index_sequence<Left...>,
             Right1, Right2, Right...> {
             using type = typename insert<
@@ -40,22 +39,22 @@ namespace callable_traits {
 
         // We did not find the insertion point, but there is only one element
         // left. We insert at the end of the list, and we're done.
-        template <typename Pred, index Insert, index ...Left, index Last>
+        template <typename Pred, std::size_t Insert, std::size_t ...Left, std::size_t Last>
         struct insert<Pred, Insert, false, std::index_sequence<Left...>, Last> {
             using type = std::index_sequence<Left..., Last, Insert>;
         };
 
         // We found the insertion point, we're done.
-        template <typename Pred, index Insert, index ...Left, index ...Right>
+        template <typename Pred, std::size_t Insert, std::size_t ...Left, std::size_t ...Right>
         struct insert<Pred, Insert, true, std::index_sequence<Left...>, Right...> {
             using type = std::index_sequence<Left..., Insert, Right...>;
         };
 
-        template <typename Pred, typename Result, index ...T>
+        template <typename Pred, typename Result, std::size_t ...T>
         struct insertion_sort;
 
-        template <typename Pred, index Result1, index ...Results,
-            index T, index ...Ts>
+        template <typename Pred, std::size_t Result1, std::size_t ...Results,
+            std::size_t T, std::size_t ...Ts>
         struct insertion_sort<Pred, std::index_sequence<Result1, Results...>, T, Ts...> {
             static constexpr bool pred_result = Pred::template apply<T, Result1>::value;
             using insert_result = typename insert<
@@ -64,7 +63,7 @@ namespace callable_traits {
             using type = typename insertion_sort<Pred, insert_result, Ts...>::type;
         };
 
-        template <typename Pred, index T, index ...Ts>
+        template <typename Pred, std::size_t T, std::size_t ...Ts>
         struct insertion_sort<Pred, empty_seq, T, Ts...> {
             using type = typename insertion_sort<
                 Pred, std::index_sequence<T>, Ts...
@@ -79,26 +78,26 @@ namespace callable_traits {
         template <typename Pred, typename Indices>
         struct sort_indices;
 
-        template <typename Pred, index ...i>
+        template <typename Pred, std::size_t ...i>
         struct sort_indices<Pred, std::index_sequence<i...>> {
             using type = typename insertion_sort<Pred, empty_seq, i...>::type;
         };
 
         template<typename Tup, typename Pred>
         struct sort_impl {
-            static constexpr index len = std::tuple_size<Tup>::value;
+            static constexpr std::size_t len = std::tuple_size<Tup>::value;
             using indices = typename sort_indices<Pred, std::make_index_sequence<len>>::type;
             using type = typename sort_impl<Tup, indices>::type;
         };
 
-        template <typename Tup, index ...i>
+        template <typename Tup, std::size_t ...i>
         struct sort_impl<Tup, std::index_sequence<i...>> {
             using type = std::tuple<typename std::tuple_element<i, Tup>::type...>;
         };
 
         template <typename Tup, template<class, class> class Pred>
         struct predicate {
-            template <index I, index J>
+            template <std::size_t I, std::size_t J>
             using apply = Pred<
                 typename std::tuple_element<I, Tup>::type,
                 typename std::tuple_element<J, Tup>::type

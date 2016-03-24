@@ -12,31 +12,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/disjunction.hpp>
 #include <callable_traits/can_invoke_t.hpp>
+#include <callable_traits/any_arg.hpp>
 #include <cstdint>
 
 namespace callable_traits {
 
     namespace ctdetail {
-
-        //any_arg is only used in unevaluated contexts
-        template<std::size_t I>
-        struct any_arg {
-
-            template<typename T>
-            operator T& () const;
-
-            template<typename T>
-            operator T&& () const;
-
-            any_arg() = default;
-
-#if !defined(_MSC_VER)
-            template<typename... T>
-            any_arg(T&&...);
-#endif
-        };
-
-
 
         template<typename, typename>
         struct max_args {

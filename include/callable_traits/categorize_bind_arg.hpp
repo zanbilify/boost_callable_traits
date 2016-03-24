@@ -9,6 +9,9 @@ Distributed under the Boost Software License, Version 1.0.
 */
 
 #include <callable_traits/ph.hpp>
+#include <callable_traits/fwd/bind_expression_fwd.hpp>
+#include <callable_traits/any_arg.hpp>
+#include <callable_traits/tags.hpp>
 #include <functional>
 
 namespace callable_traits {
@@ -25,21 +28,45 @@ namespace callable_traits {
                 bind_value<T>,
                 ph<std::is_placeholder< T >::value>
             >::type;
+
+            using bind_expression = invalid_type;
+            using is_bind_expression = std::false_type;
         };
 
         template<typename T>
         struct categorize_bind_arg< bind_value<T> > {
             using type = ctdetail::bind_value<T>;
+            using bind_expression = invalid_type;
+            using is_bind_expression = std::false_type;
         };
 
         template<typename T>
         struct categorize_bind_arg< std::reference_wrapper<T> > {
             using type = std::reference_wrapper<T>;
+            using bind_expression = invalid_type;
+            using is_bind_expression = std::false_type;
         };
 
         template<int I>
         struct categorize_bind_arg< ph<I> > {
             using type = ph<I>;
+            using bind_expression = invalid_type;
+            using is_bind_expression = std::false_type;
+        };
+
+        template<typename Callable, typename... Args>
+        struct categorize_bind_arg<bind_expression<Callable, Args...>> {
+
+            using return_type =  typename bind_expression<Callable, Args...>::return_type;
+
+            using type = typename std::conditional<
+                std::is_same<return_type, ambiguous_type>::value,
+                any_arg<>,
+                return_type
+            >::type;
+
+            using bind_expression = bind_expression<Callable, Args...>;
+            using is_bind_expression = std::true_type;
         };
     }
 }

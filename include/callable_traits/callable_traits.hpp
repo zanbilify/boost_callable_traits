@@ -23,7 +23,9 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/can_invoke_t.hpp>
 #include <callable_traits/substitution.hpp>
 #include <callable_traits/arity.hpp>
-#include <callable_traits/bind_args_t.hpp>
+#include <callable_traits/bind_expression.hpp>
+#include <callable_traits/bind_expression_parser.hpp>
+#include <callable_traits/is_bind_expression.hpp>
 
 //todo remove?
 #include <callable_traits/can_invoke_t.hpp>
@@ -39,8 +41,15 @@ namespace callable_traits {
         return{};
     }
 
-    template<typename T>
-    using args = typename ctdetail::traits<T>::arg_types;
+    template<
+        typename T,
+        typename U = typename std::remove_cv<typename std::remove_reference<T>::type>::type
+    >
+    using args = typename std::conditional<
+        ctdetail::is_bind_expression<U>::value,
+        ctdetail::bind_expression_parser<U>,
+        ctdetail::traits<T>
+    >::type::arg_types;
 
     template<size_t Index, typename T>
     using arg_at = typename std::tuple_element<Index, args<T>>::type;
@@ -116,8 +125,10 @@ namespace callable_traits {
     }
 
     template<typename Callable, typename... Args>
-    auto bind_args(Callable, Args...) ->
-        typename ctdetail::bind_args_t<Callable, Args...>::type;
+    auto bind_expr(Callable, Args...) ->
+        ctdetail::bind_expression<Callable, Args...> {
+        return{};
+    }
 }
 
 #endif
