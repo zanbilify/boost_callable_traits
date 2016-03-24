@@ -12,7 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 <!--</a> <a target="_blank" href="http://melpon.org/wandbox/permlink/TlioDiz6yYNxZFnv">![Try it online][badge.wandbox]</a>-->
 
-Note: This is a work-in-progress.
+This is currently an unfinished project. Lack of documentation, gaps in cross-platform compatibility, and spotty code quality are the most glaring issues right now, but progress is being made on all fronts.
 
 ## Overview
 <!-- Important: keep this in sync with example/intro.cpp -->
