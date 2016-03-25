@@ -29,28 +29,28 @@ namespace callable_traits {
                 ph<std::is_placeholder< T >::value>
             >::type;
 
-            using bind_expression = invalid_type;
+            using bind_expr = invalid_type;
             using is_bind_expression = std::false_type;
         };
 
         template<typename T>
         struct categorize_bind_arg< bind_value<T> > {
             using type = ctdetail::bind_value<T>;
-            using bind_expression = invalid_type;
+            using bind_expr = invalid_type;
             using is_bind_expression = std::false_type;
         };
 
         template<typename T>
         struct categorize_bind_arg< std::reference_wrapper<T> > {
             using type = std::reference_wrapper<T>;
-            using bind_expression = invalid_type;
+            using bind_expr = invalid_type;
             using is_bind_expression = std::false_type;
         };
 
         template<int I>
         struct categorize_bind_arg< ph<I> > {
             using type = ph<I>;
-            using bind_expression = invalid_type;
+            using bind_expr = invalid_type;
             using is_bind_expression = std::false_type;
         };
 
@@ -65,7 +65,7 @@ namespace callable_traits {
                 return_type
             >::type;
 
-            using bind_expression = bind_expression<Callable, Args...>;
+            using bind_expr = bind_expression<Callable, Args...>;
             using is_bind_expression = std::true_type;
         };
     }

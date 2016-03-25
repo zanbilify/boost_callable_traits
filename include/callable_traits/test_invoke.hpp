@@ -100,7 +100,7 @@ namespace callable_traits {
             template<typename T, typename... Rgs>
             auto operator()(T&& t, Rgs&&... rgs) const ->
             substitution_success<
-                decltype(static_cast<T&&>(t)(std::forward<Rgs>(rgs)...))
+                decltype(std::declval<normalize_reference<T&&>>()(std::forward<Rgs>(rgs)...))
             >;
 
             substitution_failure operator()(...) const;
