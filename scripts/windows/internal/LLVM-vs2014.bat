@@ -2,7 +2,8 @@
 
 @echo off
 
-set project_root=..\..\
+set project_root=%3
+set project_name=%4
 
 ::process 1st argument
 if "%~1"=="x64" (
@@ -70,12 +71,12 @@ echo BUILD SCRIPT: Building at %build_dir%...
 
 if exist %build_dir% (
   cd %build_dir%
-  if exist "callable_traits.sln" (
-    echo BUILD SCRIPT: callable_traits.sln found - cleaning...
-    echo . | %msbuild_cmd% callable_traits.sln /t:clean %msbuild_environment% /v:m /m /nologo
+  if exist "%project_name%.sln" (
+    echo BUILD SCRIPT: %project_name%.sln found - cleaning...
+    echo . | %msbuild_cmd% %project_name%.sln /t:clean %msbuild_environment% /v:m /m /nologo
 	cd ..\
   ) else (
-    echo BUILD SCRIPT: callable_traits.sln not found - deleting build directory...
+    echo BUILD SCRIPT: %project_name%.sln not found - deleting build directory...
     cd ..
     rmdir /q /s %build_dir%
   )
@@ -89,8 +90,8 @@ if exist %build_dir% (
   cd %build_dir%
   echo BUILD SCRIPT: Running cmake...
   echo . | %cmake_cmd%
-  echo BUILD SCRIPT: callable_traits.sln...
-  echo . | %msbuild_cmd% callable_traits.sln %msbuild_environment% /v:m /m /nologo
+  echo BUILD SCRIPT: %project_name%.sln...
+  echo . | %msbuild_cmd% %project_name%.sln %msbuild_environment% /v:m /m /nologo
 )
 
 echo BUILD SCRIPT: CHECK.vcxproj...
@@ -98,9 +99,6 @@ echo . | %msbuild_cmd% CHECK.vcxproj %msbuild_environment%
 
 ::echo BUILD SCRIPT: doc/doc.vcxproj...
 ::echo . | %msbuild_cmd% doc\doc.vcxproj %msbuild_environment%
-
-::echo BUILD SCRIPT: RUN_TESTS.vcxproj...
-::echo . | %msbuild_cmd% RUN_TESTS.vcxproj %msbuild_environment%
 
 :exit_script
 ::pause if this script was started by double clicked from Windows

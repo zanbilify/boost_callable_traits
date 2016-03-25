@@ -1,6 +1,7 @@
 @echo off
 
-cd ..\..\
+cd %2
+
 set build_dir=%cd%\build_gcc
 
 if not exist "%1\bin\g++.exe" (
