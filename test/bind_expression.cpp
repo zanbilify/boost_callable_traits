@@ -47,13 +47,13 @@ auto letters(
     const Letter& l6,
     const Letter& l7
     ) {
-    auto ss = std::stringstream{};
+    std::stringstream ss{};
     ss << l1 << l2 << l3 << l4 << l5 << l6 << l7;
     return ss.str();
 }
 
 auto ordered_letters(A a, B b, C c, D d, E e, F f, G g) {
-    auto ss = std::stringstream{};
+    std::stringstream ss{};
     ss << a << b << c << d << e << f << g;
     return ss.str();
 }

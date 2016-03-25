@@ -48,13 +48,6 @@ matrix:
             - llvm-toolchain-precise-3.7
             - llvm-toolchain-precise
 
-    # Clang 3.6
-    - env: UNIT_TESTS=true COMPILER=clang++-3.6
-      addons:
-        apt:
-          packages: ["clang-3.6"]
-          sources: *sources
-
     # Clang 3.7
     - env: UNIT_TESTS=true COMPILER=clang++-3.7
       addons:
@@ -62,25 +55,10 @@ matrix:
           packages: ["clang-3.7"]
           sources: *sources
 
-    # Xcode 7
-    - os: osx
-      env: UNIT_TESTS=true COMPILER=clang++
-      osx_image: xcode7
-
     # Xcode 6.3
     - os: osx
       env: UNIT_TESTS=true COMPILER=clang++
       osx_image: beta-xcode6.3
-
-    # Xcode 6.4
-    - os: osx
-      env: UNIT_TESTS=true COMPILER=clang++
-      osx_image: xcode6.4
-
-    # Xcode 7
-    - os: osx
-      env: UNIT_TESTS=true COMPILER=clang++
-      osx_image: xcode7
 
     # Xcode 7.1
     - os: osx

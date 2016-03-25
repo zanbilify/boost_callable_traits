@@ -43,7 +43,7 @@ DEFINE_TEST_LETTER(G);
 // with ct::bind_expr
 
 auto ordered_letters(A a, B b, C c, D d, E e, F f, G g) {
-    auto ss = std::stringstream{};
+    std::stringstream ss{};
     ss << a << b << c << d << e << f << g;
     return ss.str();
 }
