@@ -12,17 +12,15 @@ enable_testing()
 # Perform checks to make sure we support the current compiler
 include(CheckCxxCompilerSupport)
 
-if(callable_traits_CXX_STD)
+if(BUILD_CXX_STD)
 else()
   # Defaults to C++14 if not set:
-  set(callable_traits_CXX_STD 14) 
+  set(BUILD_CXX_STD 14) 
 endif()
 
 set (CMAKE_CXX_STANDARD ${callable_traits_CXX_STD})
 
 # Setting up CMake options and compiler flags (more flags can be set on a per-target basis or in subdirectories)
-
-option(callable_traits_ENABLE_WERROR   "Fail and stop if a warning is triggered." OFF)
 
 include(CheckCXXCompilerFlag)
 macro(callable_traits_append_flag testname flag)
@@ -32,11 +30,9 @@ macro(callable_traits_append_flag testname flag)
     endif()
 endmacro()
 
-if (callable_traits_ENABLE_WERROR)
-    callable_traits_append_flag(callable_traits_HAS_WERROR -Werror)
-    callable_traits_append_flag(callable_traits_HAS_WX -WX)
-endif()
 
+callable_traits_append_flag(callable_traits_HAS_WERROR -Werror)
+callable_traits_append_flag(callable_traits_HAS_WX -WX)
 callable_traits_append_flag(callable_traits_HAS_FTEMPLATE_BACKTRACE_LIMIT  -ftemplate-backtrace-limit=0)
 callable_traits_append_flag(callable_traits_HAS_PEDANTIC                   -pedantic)
 callable_traits_append_flag(callable_traits_HAS_STDCXX1Y                   -std=c++1y)
@@ -47,7 +43,7 @@ callable_traits_append_flag(callable_traits_HAS_WEXTRA                     -Wext
 callable_traits_append_flag(callable_traits_HAS_WNO_UNUSED_LOCAL_TYPEDEFS  -Wno-unused-local-typedefs)
 callable_traits_append_flag(callable_traits_HAS_WWRITE_STRINGS             -Wwrite-strings)
 
-#find_package(Boost 1.59)
+#find_package(Boost)
 #if (Boost_FOUND)
 #    include_directories(${Boost_INCLUDE_DIRS})
 #else()
