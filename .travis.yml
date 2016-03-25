@@ -54,14 +54,14 @@ matrix:
         apt:
           packages: ["clang-3.6"]
           sources: *sources
-		  
+
     # Clang 3.7
     - env: UNIT_TESTS=true COMPILER=clang++-3.7
       addons:
         apt:
           packages: ["clang-3.7"]
           sources: *sources
-		  
+
     # Xcode 7
     - os: osx
       env: UNIT_TESTS=true COMPILER=clang++
@@ -86,7 +86,7 @@ matrix:
     - os: osx
       env: UNIT_TESTS=true COMPILER=clang++
       osx_image: xcode7.1
-	  
+
     ##########################################################################
     # Build with variations in the configuration
     ##########################################################################
@@ -97,7 +97,7 @@ matrix:
         apt:
           packages: ["clang-3.7"]
           sources: *sources
-		  
+
     # GCC 5.2
     - env: UNIT_TESTS=true COMPILER=g++-5 STDLIB=libstdc++
       os: linux
@@ -115,10 +115,7 @@ matrix:
         apt:
           packages: ["g++-4.8"]
           sources: *sources
-		  
-      
 
-    
 before_install:
 
   - if [ -z "$CPP" ]; then export CPP="14"; fi
