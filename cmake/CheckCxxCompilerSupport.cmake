@@ -10,12 +10,14 @@
 # provides friendly hints to the user.
 
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
-    if (${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS "3.7")
+    if (${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS "3.5")
         message(WARNING "
-    ### You appear to be using Clang ${CMAKE_CXX_COMPILER_VERSION}, which is known
-    ### to be unable to compile CLBL. Consider switching to
-    ### Clang >= 3.7. If it is already installed on your
-    ### system, you can tell CMake about it with
+    ### You appear to be using Clang ${CMAKE_CXX_COMPILER_VERSION}, 
+    ### which might not be unable to compile CallableTraits. If it compiles
+	### successfully, please let us know by opening an issue at 
+	### https://github.com/badair/callable_traits/issues. If not, consider
+	### switching to Clang >= 3.5. If it is already installed on your system,
+	### you can tell CMake about it with
     ###
     ###     cmake .. -DCMAKE_CXX_COMPILER=/path/to/clang
         ")
@@ -51,11 +53,11 @@ if (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
         endif()
     endif()
 elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "AppleClang")
-    if (${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS "7")
+    if (${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS "6.3")
         message(WARNING "
-    ### You appear to be using Apple's Clang ${CMAKE_CXX_COMPILER_VERSION}, which is
-    ### shipped with Xcode < 7. You should consider using a 
-	### non-Apple Clang >= 3.7, which can be installed via 
+    ### You appear to be using Apple's Clang ${CMAKE_CXX_COMPILER_VERSION}, 
+    ### which is shipped with Xcode < 6.3. You should consider using a 
+	### non-Apple Clang >= 3.5, which can be installed via 
 	### Homebrew with
     ###
     ###     brew install llvm --with-clang
@@ -68,8 +70,9 @@ elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "AppleClang")
 elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
     if (${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS "5.2.1")
     message(WARNING "
-    ### You appear to be using GCC ${CMAKE_CXX_COMPILER_VERSION}, which may
-    ### not be able to compile CLBL. CLBL officially supports GCC versions >= 5.2.1.
+    ### You appear to be using GCC ${CMAKE_CXX_COMPILER_VERSION}, which might
+    ### not be able to compile CallableTraits. CallableTraits officially supports
+	### GCC versions >= 5.2.1.
     ")
     endif()
 elseif (MSVC)
@@ -84,9 +87,9 @@ elseif (MSVC)
     ")
 else()
     message(WARNING "
-    ### You appear to be using a compiler that is not yet tested with CLBL.
+    ### You appear to be using a compiler that is not yet tested with CallableTraits.
     ### Please tell us whether it successfully compiles or if and how it
-    ### fails by opening an issue at https://github.com/badair/CLBL/issues.
+    ### fails by opening an issue at https://github.com/badair/callable_traits/issues.
     ### Thanks!
     ")
 endif()
