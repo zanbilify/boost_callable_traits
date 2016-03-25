@@ -26,7 +26,7 @@ namespace callable_traits {
 
         template<typename T, typename... Ts>
         struct disjunction<T, Ts...>
-            : std::conditional_t<T::value != false, T, disjunction<Ts...>> { };
+            : std::conditional<T::value != false, T, disjunction<Ts...>>::type { };
     }
 }
 

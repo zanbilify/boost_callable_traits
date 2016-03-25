@@ -17,7 +17,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/function.hpp>
 #include <callable_traits/function_object.hpp>
 #include <callable_traits/general.hpp>
-#include <callable_traits/disjunction.hpp>
 #include <callable_traits/remove_reference_if_ptr.hpp>
 #include <callable_traits/default_dispatch.hpp>
 #include <callable_traits/can_invoke_t.hpp>
