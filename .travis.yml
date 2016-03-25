@@ -178,7 +178,7 @@ before_script:
   ############################################################################
   - cd ${TRAVIS_BUILD_DIR}
   - export CXX=$COMPILER
-  - (mkdir build && cd build && cmake .. -DCMAKE_CXX_COMPILER=${COMPILER} -DBUILD_CXX_STD=$CPP
+  - (mkdir build && cd build && cmake .. -DCMAKE_CXX_COMPILER=${COMPILER} -DBUILD_CXX_STD=$CPP)
 
 
 script:
