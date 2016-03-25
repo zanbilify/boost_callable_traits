@@ -41,6 +41,9 @@
 ///   described in the previous item;
 ///   (1.5) - f(t1, t2, ..., tN) in all other cases.
 
+//useless MSVC /Wall warnings
+#pragma warning(disable: 4514 4711)
+
 #include <functional>
 #include <type_traits>
 #include <utility>

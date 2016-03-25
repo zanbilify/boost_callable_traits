@@ -6,6 +6,9 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
+//useless MSVC /Wall warnings
+#pragma warning(disable: 4514 4711)
+
 #include <type_traits>
 #include <functional>
 #include <tuple>
