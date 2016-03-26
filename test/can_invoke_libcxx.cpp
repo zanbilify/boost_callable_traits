@@ -41,13 +41,11 @@
 ///   described in the previous item;
 ///   (1.5) - f(t1, t2, ..., tN) in all other cases.
 
-//useless MSVC /Wall warnings
-#pragma warning(disable: 4514 4711)
-
 #include <functional>
 #include <type_traits>
 #include <utility>
 #include <callable_traits/callable_traits.hpp>
+
 
 #ifndef CT_ASSERT
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
@@ -150,7 +148,7 @@ void bullet_one_two_tests() {
         test_b12<int const volatile&(NonCopyable&&) const volatile &, int const volatile&>(cl);
 
 //MSVC doesn't handle these correctly
-#if not defined(_MSC_VER) || _MSC_VER > 1900
+#if ! defined(_MSC_VER) || _MSC_VER > 1900
         test_b12<int&&(NonCopyable&&) && , int&&>(std::move(cl));
         test_b12<int const&&(NonCopyable&&) const &&, int const&&>(std::move(cl));
         test_b12<int volatile&&(NonCopyable&&) volatile &&, int volatile&&>(std::move(cl));

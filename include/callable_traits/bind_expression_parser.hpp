@@ -15,7 +15,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/tuple_group_by.hpp>
 #include <callable_traits/sort_tuple.hpp>
 #include <callable_traits/bind_expression.hpp>
-#include <callable_traits/weak_common_type.hpp>
+#include <callable_traits/best_match.hpp>
 #include <tuple>
 #include <functional>
 
@@ -81,11 +81,11 @@ namespace callable_traits {
         };
 
         template<typename Tup>
-        struct custom_common_type;
+        struct find_best_match;
 
         template<typename... Ts>
-        struct custom_common_type<std::tuple<Ts...>> {
-            using type = weak_common_type<Ts...>;
+        struct find_best_match<std::tuple<Ts...>> {
+            using type = best_match<Ts...>;
         };
 
         template<typename Tup>
@@ -102,7 +102,7 @@ namespace callable_traits {
             >;
 
             using type = typename prepend<
-                typename custom_common_type<typename valid_args<expected_types>::type>::type,
+                typename find_best_match<typename valid_args<expected_types>::type>::type,
                 typename common_expected_arg_types<std::tuple<OtherGroupTuples...>>::type
             >::type;
         };

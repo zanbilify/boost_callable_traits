@@ -10,6 +10,11 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_HPP
 #define CALLABLE_TRAITS_HPP
 
+#ifdef _MSVC_VER
+#pragma warning(push)
+#pragma warning(disable : 4503)
+#endif //ifdef _MSVC_VER
+
 #include <callable_traits/traits.hpp>
 #include <callable_traits/pmd.hpp>
 #include <callable_traits/pmf.hpp>
@@ -200,6 +205,62 @@ namespace callable_traits {
     is_rvalue_reference_qualified(Callable&&) {
         return typename ctdetail::traits<Callable&&>::is_rvalue_reference_qualified{};
     }
+
+    template<typename Callable>
+    using remove_const_qualifier =
+        typename ctdetail::traits<Callable>::remove_const;
+
+    template<typename Callable>
+    using remove_volatile_qualifier =
+        typename ctdetail::traits<Callable>::remove_volatile;
+
+    template<typename Callable>
+    using remove_cv_qualifiers =
+        typename ctdetail::traits<Callable>::remove_cv;
+
+    template<typename Callable>
+    using remove_lvalue_qualifier =
+        typename ctdetail::traits<Callable>::remove_lvalue_reference;
+
+    template<typename Callable>
+    using remove_rvalue_qualifier =
+        typename ctdetail::traits<Callable>::remove_rvalue_reference;
+
+    template<typename Callable>
+    using remove_reference_qualifiers =
+        typename ctdetail::traits<Callable>::remove_reference;
+
+    template<typename Callable>
+    using remove_varargs =
+        typename ctdetail::traits<Callable>::remove_varargs;
+
+    template<typename Callable>
+    using add_const_qualifier =
+        typename ctdetail::traits<Callable>::add_const;
+
+    template<typename Callable>
+    using add_volatile_qualifier =
+        typename ctdetail::traits<Callable>::add_volatile;
+
+    template<typename Callable>
+    using add_cv_qualifiers =
+        typename ctdetail::traits<Callable>::add_cv;
+
+    template<typename Callable>
+    using add_lvalue_qualifier =
+        typename ctdetail::traits<Callable>::add_lvalue_reference;
+
+    template<typename Callable>
+    using add_rvalue_qualifier =
+        typename ctdetail::traits<Callable>::add_rvalue_reference;
+
+    template<typename Callable>
+    using add_varargs =
+        typename ctdetail::traits<Callable>::add_varargs;
 }
+
+#ifdef _MSVC_VER
+#pragma warning(pop)
+#endif //ifdef _MSVC_VER
 
 #endif

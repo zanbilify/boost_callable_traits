@@ -6,9 +6,6 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-//useless MSVC /Wall warnings
-#pragma warning(disable: 4514 4711)
-
 #include <cassert>
 #include <type_traits>
 #include <functional>
@@ -76,6 +73,9 @@ int main() {
             _1
         );
 
+    // the last _1 placeholder in this bind expression forces all other
+    // _1 slots to accept VampireRobotPoodle, the narrowest of the bunch.
+        
     using bind_args = ct::args<bind_expr>;
     using expected_args = std::tuple<VampireRobotPoodle, Poodle, Vampire>;
     static_assert(std::is_same<bind_args, expected_args>{}, "");

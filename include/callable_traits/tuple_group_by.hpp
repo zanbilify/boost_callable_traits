@@ -54,8 +54,9 @@ namespace callable_traits {
 
         template <typename Pred, typename Head, typename ...Tail>
         struct group_by_filter_impl<Pred, Head, Tail...> {
+            using pred_result = decltype(std::declval<Pred>()(std::declval<Head>()));
             using type = typename std::conditional<
-                decltype(std::declval<Pred>()(std::declval<Head>()))::value,
+                pred_result::value,
                 typename prepend<Head, typename group_by_filter_impl<Pred, Tail...>::type>::type,
                 typename group_by_filter_impl<Pred, Tail...>::type
             >::type;
