@@ -12,9 +12,9 @@ Distributed under the Boost Software License, Version 1.0.
 
 <!--</a> <a target="_blank" href="http://melpon.org/wandbox/permlink/TlioDiz6yYNxZFnv">![Try it online][badge.wandbox]</a>-->
 
-This project is nearing completion, but is not quite finished. Lack of documentation and spotty code quality are the most glaring issues right now, but progress is being made on both fronts.
+This project is nearing completion, but is not quite finished. Lack of documentation and spotty code quality are the most glaring issues right now, but progress is being made on both fronts. Test coverage is not 100% yet, but we'll be there soon.
 
-CallableTraits provides a uniform and comprehensive interface for the type-level manipulation of all callable types in C++.
+CallableTraits is a header-only toolkit providing a uniform and comprehensive interface for the type-level manipulation of all callable types in C++. CallableTraits does all the dirty work for you (see an `std::is_function` [implementation ](http://en.cppreference.com/w/cpp/types/is_function#Possible_implementation)  for a glimpse of the "dirty work").
 
 ## Overview
 
@@ -198,6 +198,62 @@ int main() {
     return 0;
 }
 ```
+## Compatibility
+
+CallableTraits is currently tested and working on the following platforms, unless otherwise noted:
+- Linux
+  - clang 3.5 and later (both libc++ and libstdc++)
+  - gcc 5.2 and later
+- OSX
+  - Apple Xcode 6.3 and later
+  - open-source clang 3.5 and later should work, but is not tested
+- Windows
+  - Microsoft Visual Studio 2015 (native MSVC)
+  - MinGW32 - GCC 5.3 (other versions not tested)
+  - clang-cl in Visual Studio's LLVM toolkit cannot build CallableTraits tests because of [this curious bug](http://stackoverflow.com/questions/36026352/compiler-attribute-stuck-on-a-function-type-is-there-a-workaround-for-this-cla). I filed a bug report, but I should be able to work around it when I find the time to do so.
+
+I do not know the compatibility of CallableTraits for other/older compilers, but the `stdlib` implementation must include `std::index_sequence` and friends.
+
+## Dependencies
+
+CallableTraits does not use Boost or any other libraries outside of the standard headers.
+
+## Building the tests
+
+First, you'll need a recent version of [CMake](https://cmake.org/). These commands assume that `git` and `cmake` are available in your environment path. If you need help with this, message me on Gitter.
+
+__GNU/Linux/OSX__
+
+Open a shell and enter the following commands:
+
+```shell
+git clone http://github.com/badair/callable_traits
+cd callable_traits
+mkdir build
+cd build
+cmake ..
+make check
+```
+If your system doesn't have a default C++ compiler, or your default C++ compiler is too old, you'll need to point CMake to a compatible C++ compiler like this, before running `make check`:
+
+```shell
+cmake .. -DCMAKE_CXX_COMPILER=/path/to/compiler
+```
+
+CMake should yell at you if your compiler is too old.
+
+__Windows__
+
+Cygwin/MSYS/MSYS2 users should refer to the Linux section. For Visual Studio 2015, fire up `cmd.exe` and enter the following commands:
+
+```shell
+git clone http://github.com/badair/callable_traits
+cd callable_traits
+mkdir build
+cd build
+cmake ..-G"Visual Studio 14 2015 Win64"
+```
+Then, open the generated `callable_traits.sln` solution file in Visual Studio.
 
 ## License
 Please see [LICENSE.md](LICENSE.md).
