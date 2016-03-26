@@ -12,9 +12,9 @@ Distributed under the Boost Software License, Version 1.0.
 
 <!--</a> <a target="_blank" href="http://melpon.org/wandbox/permlink/TlioDiz6yYNxZFnv">![Try it online][badge.wandbox]</a>-->
 
-This project is nearing completion, but is not quite finished. Lack of documentation and spotty code quality are the most glaring issues right now, but progress is being made on both fronts. Test coverage is not 100% yet, but we'll be there soon.
+CallableTraits is a small header-only library providing a uniform and comprehensive interface for the type-level manipulation of all callable types in C++. CallableTraits does all the dirty work for you (see an `std::is_function` [implementation ](http://en.cppreference.com/w/cpp/types/is_function#Possible_implementation)  for a glimpse of the "dirty work").
 
-CallableTraits is a header-only toolkit providing a uniform and comprehensive interface for the type-level manipulation of all callable types in C++. CallableTraits does all the dirty work for you (see an `std::is_function` [implementation ](http://en.cppreference.com/w/cpp/types/is_function#Possible_implementation)  for a glimpse of the "dirty work").
+This project is nearing completion. Lack of documentation and spotty code quality are the most glaring issues right now, but progress is being made on both fronts. Test coverage is not 100% yet, but we'll be there soon.
 
 ## Overview
 
@@ -220,7 +220,7 @@ CallableTraits does not use Boost or any other libraries outside of the standard
 
 ## Building the tests
 
-First, you'll need a recent version of [CMake](https://cmake.org/). These commands assume that `git` and `cmake` are available in your environment path. If you need help with this, message me on Gitter.
+First, you'll need a recent version of [CMake](https://cmake.org/). These commands assume that `git` and `cmake` are available in your environment path. If you need help with this, [message me on Gitter](https://gitter.im/badair/callable_traits).
 
 __GNU/Linux/OSX__
 
@@ -251,7 +251,7 @@ git clone http://github.com/badair/callable_traits
 cd callable_traits
 mkdir build
 cd build
-cmake ..-G"Visual Studio 14 2015 Win64"
+cmake .. -G"Visual Studio 14 2015 Win64"
 ```
 Then, open the generated `callable_traits.sln` solution file in Visual Studio.
 
