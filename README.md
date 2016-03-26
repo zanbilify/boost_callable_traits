@@ -255,6 +255,10 @@ cmake .. -G"Visual Studio 14 2015 Win64"
 ```
 Then, open the generated `callable_traits.sln` solution file in Visual Studio.
 
+## See Also
+
+CallableTraits is a spin-off of a sillier, more experimental project of mine called [CLBL](https://github.com/badair/CLBL), which has a storied commit history.
+
 ## License
 Please see [LICENSE.md](LICENSE.md).
 
