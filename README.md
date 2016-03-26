@@ -12,7 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 <a target="_blank" href="http://melpon.org/wandbox/permlink/IKBYJ5EE4umXo9qb">![Try it online][badge.wandbox]</a>
 
-CallableTraits is a small header-only library providing a uniform and comprehensive interface for the type-level manipulation of all callable types in C++. CallableTraits does all the dirty work for you (see an `std::is_function` [implementation ](http://en.cppreference.com/w/cpp/types/is_function#Possible_implementation)  for a glimpse of the "dirty work").
+CallableTraits is a small, header-only library providing a uniform and comprehensive interface for the type-level manipulation of all callable types in C++. CallableTraits does all the dirty work for you (see an `std::is_function` [implementation ](http://en.cppreference.com/w/cpp/types/is_function#Possible_implementation)  for a glimpse of the "dirty work").
 
 This project is nearing completion. Lack of documentation and spotty code quality are the most glaring issues right now, but progress is being made on both fronts. Test coverage is not 100% yet, but we'll be there soon.
 
