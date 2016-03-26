@@ -216,7 +216,7 @@ I do not know the compatibility of CallableTraits for other/older compilers, but
 
 ## Dependencies
 
-CallableTraits does not use Boost or any other libraries outside of the standard headers.
+CallableTraits does not use Boost or any other libraries outside of the standard headers. However, much credit is due to Boost.Hana for the type sorting algorithm borrowed here, and to Boost.Bind for getting me started on the bind expression parts.
 
 ## Building the tests and examples
 
