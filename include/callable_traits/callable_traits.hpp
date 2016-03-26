@@ -12,6 +12,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 #ifdef _MSVC_VER
 #pragma warning(push)
+// disabling the MSVC warning about symbol truncation. This is
+// harmless, because none of these symbols are involved in linking.
 #pragma warning(disable : 4503)
 #endif //ifdef _MSVC_VER
 

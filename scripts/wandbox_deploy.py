@@ -22,8 +22,8 @@ import os
 import re
 import urllib2
 
-main = 'example\\intro.cpp'
-directory = 'include\\'
+main = '..\\example\\intro.cpp'
+directory = '..\\include\\'
 
 # Strips C and C++ comments from the given string.
 #
@@ -51,7 +51,7 @@ def upload(options):
     return json.loads(response.read())
 
 
-# Returns a list of the '.h' headers in the given directory and in
+# Returns a list of the '.hpp' headers in the given directory and in
 # subdirectories.
 #
 # The path must be absolute, and the returned paths are all absolute too.
