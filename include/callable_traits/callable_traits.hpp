@@ -144,6 +144,24 @@ namespace callable_traits {
 
     template<typename Callable>
     inline constexpr auto
+    is_unqualified() {
+        return typename ctdetail::traits<Callable>::is_const_qualified{};
+    }
+
+    template<typename Callable>
+    inline constexpr auto
+    is_unqualified(Callable&&) {
+        return typename ctdetail::traits<Callable&&>::is_const_qualified{};
+    }
+
+    template<typename Callable>
+    inline constexpr auto
+    is_const_qualified() {
+        return typename ctdetail::traits<Callable>::is_const_qualified{};
+    }
+
+    template<typename Callable>
+    inline constexpr auto
     is_const_qualified(Callable&&) {
         return typename ctdetail::traits<Callable&&>::is_const_qualified{};
     }
@@ -221,15 +239,7 @@ namespace callable_traits {
         typename ctdetail::traits<Callable>::remove_cv;
 
     template<typename Callable>
-    using remove_lvalue_qualifier =
-        typename ctdetail::traits<Callable>::remove_lvalue_reference;
-
-    template<typename Callable>
-    using remove_rvalue_qualifier =
-        typename ctdetail::traits<Callable>::remove_rvalue_reference;
-
-    template<typename Callable>
-    using remove_reference_qualifiers =
+    using remove_reference_qualifier =
         typename ctdetail::traits<Callable>::remove_reference;
 
     template<typename Callable>
