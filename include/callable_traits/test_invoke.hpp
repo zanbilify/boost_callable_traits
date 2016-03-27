@@ -47,7 +47,7 @@ namespace callable_traits {
                 CALLABLE_TRAITS_REQUIRES_(!is_value_invocation)>
             auto operator()(P&& p, U&& u, Rgs&&... rgs) const ->
             substitution_success<decltype(
-                (std::declval<normalize_reference<U&&>>().*p)
+                (std::declval<normalize_ptr_or_reference<U&&>>().*p)
                     (std::forward<Rgs>(rgs)...)
             )>;
 
@@ -86,7 +86,7 @@ namespace callable_traits {
             >
             auto operator()(P&& p, U&& u) const ->
             substitution_success<decltype(
-                (std::declval<normalize_reference<U&&>>().*p)
+                (std::declval<normalize_ptr_or_reference<U&&>>().*p)
             )>;
 
             substitution_failure operator()(...) const;

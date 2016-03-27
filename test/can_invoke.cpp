@@ -70,9 +70,9 @@ int main() {
 
         CT_ASSERT(decltype(ct::can_invoke(foo3{}, 'a', f, 1)){});
         CT_ASSERT(!decltype(ct::can_invoke(foo3{}, 'a', 3.0, 1)){});
-        //CT_ASSERT( decltype(ct::can_invoke(std::declval<foo3*>(), 'a', f, 1)){});
+        CT_ASSERT(!decltype(ct::can_invoke(std::declval<foo3*>(), 'a', f, 1)){});
         CT_ASSERT(!decltype(ct::can_invoke(std::declval<foo3*>(), 'a', 3.0, 1)){});
-        //CT_ASSERT( decltype(ct::can_invoke(std::make_unique<foo3>(), 'a', f, 1)){});
+        CT_ASSERT(!decltype(ct::can_invoke(std::make_unique<foo3>(), 'a', f, 1)){});
         CT_ASSERT(!decltype(ct::can_invoke(std::make_unique<foo3>(), 'a', 3.0, 1)){});
         CT_ASSERT(decltype(ct::can_invoke(std::ref(foo), 'a', f, 1)){});
         CT_ASSERT(!decltype(ct::can_invoke(std::ref(foo), 'a', 3.0, 1)){});
@@ -82,9 +82,9 @@ int main() {
 
         CT_ASSERT(decltype(ct::can_invoke(foo4{}, 'a', f, 1)){});
         CT_ASSERT(!decltype(ct::can_invoke(foo4{}, 'a', 3.0, 1)){});
-        //CT_ASSERT( decltype(ct::can_invoke(std::declval<foo4*>(), 'a', f, 1)){});
+        CT_ASSERT(!decltype(ct::can_invoke(std::declval<foo4*>(), 'a', f, 1)){});
         CT_ASSERT(!decltype(ct::can_invoke(std::declval<foo4*>(), 'a', 3.0, 1)){});
-        //CT_ASSERT( decltype(ct::can_invoke(std::make_unique<foo4>(), 'a', f, 1)){});
+        CT_ASSERT(!decltype(ct::can_invoke(std::make_unique<foo4>(), 'a', f, 1)){});
         CT_ASSERT(!decltype(ct::can_invoke(std::make_unique<foo4>(), 'a', 3.0, 1)){});
         CT_ASSERT(decltype(ct::can_invoke(std::ref(foo), 'a', f, 1)){});
         CT_ASSERT(!decltype(ct::can_invoke(std::ref(foo), 'a', 3.0, 1)){});

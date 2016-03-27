@@ -12,7 +12,6 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/test_invoke.hpp>
 #include <callable_traits/substitution.hpp>
-#include <callable_traits/normalize_reference.hpp>
 #include <type_traits>
 
 namespace callable_traits {
