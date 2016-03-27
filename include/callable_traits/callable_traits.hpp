@@ -49,25 +49,13 @@ namespace callable_traits {
     }
 
     template<typename T, typename U = ctdetail::shallow_decay<T>>
-    using args = typename std::conditional<
-        ctdetail::is_bind_expression<U>::value,
-        ctdetail::bind_expression_parser<U>,
-        ctdetail::traits<T>
-    >::type::arg_types;
+    using args = typename ctdetail::traits<T>::arg_types;
 
     template<typename T, typename U = ctdetail::shallow_decay<T>>
-    using signature = typename std::conditional<
-        ctdetail::is_bind_expression<U>::value,
-        ctdetail::bind_expression_parser<U>,
-        ctdetail::traits<T>
-    >::type::function_type;
+    using signature = typename ctdetail::traits<T>::function_type;
 
     template<typename T, typename U = ctdetail::shallow_decay<T>>
-    using qualified_signature = typename std::conditional<
-        ctdetail::is_bind_expression<U>::value,
-        ctdetail::bind_expression_parser<U>,
-        ctdetail::traits<T>
-    >::type::abominable_type;
+    using qualified_signature = typename ctdetail::traits<T>::abominable_type;
 
     template<size_t Index, typename T>
     using arg_at = typename std::tuple_element<Index, args<T>>::type;

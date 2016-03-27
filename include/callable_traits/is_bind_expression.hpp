@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_IS_BIND_EXPRESSION_HPP
 #define CALLABLE_TRAITS_IS_BIND_EXPRESSION_HPP
 
-#include <callable_traits/bind_expression.hpp>
+#include <callable_traits/fwd/bind_expression_fwd.hpp>
 
 namespace callable_traits {
 

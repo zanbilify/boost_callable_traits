@@ -1,7 +1,4 @@
 /*!
-Copyright (c) 2001-2004 Peter Dimov and Multi Media Ltd.
-Copyright (c) 2001 David Abrahams
-Copyright (c) 2005 Peter Dimov
 Copyright (c) 2016 Barrett Adair
 
 Distributed under the Boost Software License, Version 1.0.
@@ -15,6 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/tuple_group_by.hpp>
 #include <callable_traits/sort_tuple.hpp>
 #include <callable_traits/bind_expression.hpp>
+#include <callable_traits/fwd/bind_expression_parser_fwd.hpp>
 #include <callable_traits/best_match.hpp>
 #include <tuple>
 #include <functional>
@@ -120,11 +118,20 @@ namespace callable_traits {
             using type = Return(Args...);
         };
 
-        template<typename BindExpr>
-        struct bind_expression_parser;
+        template<typename T>
+        struct bind_expression_parser
+        {
+            static constexpr const bool value = false;
+            using arg_types = invalid_type;
+            using return_type = invalid_type;
+            using function_type = invalid_type;
+            using abominable_type = invalid_type;
+        };
 
         template<typename Callable, typename... Args>
         struct bind_expression_parser<bind_expression<Callable, Args...>> {
+
+            static constexpr const bool value = true;
 
             using root_expression = bind_expression<Callable, Args...>;
 
