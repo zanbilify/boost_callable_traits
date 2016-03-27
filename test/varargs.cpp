@@ -60,6 +60,20 @@ int main() {
     } {
         CT_ASSERT(decltype(ct::has_varargs(&foo6)){});
         CT_ASSERT(decltype(ct::has_varargs<decltype(foo6)>()){});
+    } {
+        //qualified_signature removes the member pointer
+        using f1 = ct::qualified_signature<decltype(&foo1::bar)>;
+        using f2 = ct::qualified_signature<decltype(&foo2::bar)>;
+        CT_ASSERT(std::is_same<ct::add_varargs<f1>, f2>{});
+        CT_ASSERT(std::is_same<f1, ct::remove_varargs<f2>>{});
+    } {
+        //already has varargs
+        using pmf = decltype(&foo2::bar);
+        CT_ASSERT(std::is_same<ct::add_varargs<pmf>, pmf>{});
+    } {
+        //already has no varargs
+        using pmf = decltype(&foo1::bar);
+        CT_ASSERT(std::is_same<ct::remove_varargs<pmf>, pmf>{});
     }
 
     return 0;

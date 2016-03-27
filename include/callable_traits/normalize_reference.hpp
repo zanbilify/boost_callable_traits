@@ -41,7 +41,6 @@ namespace callable_traits {
         struct normalize_reference_t<T, std::integral_constant<bool,
                 can_dereference<T>::value && !is_reference_wrapper<T>::value
         >>{
-            //using type = decltype(*std::declval<T>());
             using type = T;
         };
 
