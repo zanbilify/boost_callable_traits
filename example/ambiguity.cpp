@@ -7,36 +7,30 @@ Distributed under the Boost Software License, Version 1.0.
 */
 
 #include <type_traits>
-#include <functional>
-#include <tuple>
 #include <callable_traits/callable_traits.hpp>
 
 struct foo {
-
-    template<typename... Args>
-    std::enable_if_t<sizeof...(Args) >= 4, int>
-    operator()(Args...) const {
-        return{};
-    }
-
-    template<typename... Args>
-    std::enable_if_t<sizeof...(Args) < 4, char>
-        operator()(Args...) const {
-        return{};
-    }
+    void operator()(int);
+    void operator()(char);
 };
 
 namespace ct = callable_traits;
 
 int main() {
 
-    using args = ct::args<foo>;
-    using expected_args = std::tuple<ct::unknown>;
-    static_assert(std::is_same<args, expected_args>{}, "");
+    {
+        using test = ct::args<foo>;
+        using expect = std::tuple<ct::unknown>;
+        static_assert(std::is_same<test, expect>{}, "");
+    } {
+        using test = ct::signature<foo>;
+        using expect = ct::unknown(ct::unknown);
+        static_assert(std::is_same<test, expect>{}, "");
+    } {
+        using test = ct::result_of<foo>;
+        using expect = ct::unknown;
+        static_assert(std::is_same<test, expect>{}, "");
+    }
 
-    using signature = ct::signature<foo>;
-    using expected_signature = ct::unknown(ct::unknown);
-    static_assert(std::is_same<signature, expected_signature>{}, "");
-    
     return 0;
 }
