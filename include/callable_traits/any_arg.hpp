@@ -12,7 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace ctdetail {
+    namespace detail {
 
         //any_arg is only used in unevaluated contexts
         template<std::size_t I = 0>

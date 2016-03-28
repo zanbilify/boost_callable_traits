@@ -16,7 +16,7 @@ static_assert(false, "<callable_traits/fwd/pmf_fwd.hpp> must be included before 
 
 namespace callable_traits {
 
-    namespace ctdetail {
+    namespace detail {
 
         template<typename T>
         struct pmf;

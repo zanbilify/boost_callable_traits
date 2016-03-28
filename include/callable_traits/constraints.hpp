@@ -40,7 +40,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace ctdetail {
+    namespace detail {
 
         struct callable_dummy {
             void operator()() {}

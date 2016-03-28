@@ -21,7 +21,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace ctdetail {
+    namespace detail {
 
         template<typename T>
         struct pmd : std::false_type {
@@ -43,7 +43,7 @@ namespace callable_traits {
 
             using is_member_pointer = std::true_type;
             using is_function_object = std::false_type;
-            using is_member_function_pointer = typename ctdetail::traits<D>::is_function;
+            using is_member_function_pointer = typename detail::traits<D>::is_function;
             using is_function_reference = std::false_type;
             using is_function_pointer = std::false_type;
             using is_function = std::false_type;
@@ -51,7 +51,7 @@ namespace callable_traits {
             using traits = pmd;   
             using class_type = T;
             using invoke_type = T;
-            using base = ctdetail::traits<D>;
+            using base = detail::traits<D>;
 
             using remove_member_pointer = D;
 
@@ -80,7 +80,7 @@ namespace callable_traits {
             using remove_cv = typename base::remove_cv T::*;
 
             template<typename U>
-            using apply_return = ctdetail::add_member_pointer<
+            using apply_return = detail::add_member_pointer<
                 msvc_workaround::apply_return_helper<base, U>,
                 T
             >;

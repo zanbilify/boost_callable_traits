@@ -146,7 +146,7 @@ public:                                                                         
 /**/
 namespace callable_traits {
 
-    namespace ctdetail {
+    namespace detail {
 
         template<typename T>
         struct function : function_object<general<unknown>> {

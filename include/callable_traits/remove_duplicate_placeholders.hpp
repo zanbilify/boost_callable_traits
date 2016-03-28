@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace ctdetail {
+    namespace detail {
 
         template<typename...>
         struct remove_duplicate_placeholders {

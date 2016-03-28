@@ -12,7 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace ctdetail {
+    namespace detail {
 
         template<typename BindExpr>
         struct bind_expression_traits {

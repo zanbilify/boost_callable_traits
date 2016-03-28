@@ -18,7 +18,7 @@ Distributed under the Boost Software License, Version 1.0.
 //This is a slightly modified version of Boost.Hana's sort
 namespace callable_traits { 
 
-    namespace ctdetail {
+    namespace detail {
 
         using empty_seq = std::index_sequence<>;
 

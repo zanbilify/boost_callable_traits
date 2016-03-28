@@ -16,7 +16,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace ctdetail {
+    namespace detail {
 
         template<typename T>
         struct bind_value {};
@@ -35,7 +35,7 @@ namespace callable_traits {
 
         template<typename T>
         struct categorize_bind_arg< bind_value<T> > {
-            using type = ctdetail::bind_value<T>;
+            using type = detail::bind_value<T>;
             using bind_expr = invalid_type;
             using is_bind_expression = std::false_type;
         };

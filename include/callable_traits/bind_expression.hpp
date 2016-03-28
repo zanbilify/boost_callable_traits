@@ -27,7 +27,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
     
-    namespace ctdetail {
+    namespace detail {
 
         template<typename PhRouteLeft, typename PhRouteRight>
         struct compare_ph_value {

@@ -16,7 +16,7 @@ static_assert(false, "<callable_traits/fwd/function_object_fwd.hpp> must be incl
 
 namespace callable_traits {
 
-    namespace ctdetail {
+    namespace detail {
 
         template<typename T>
         struct function_object;

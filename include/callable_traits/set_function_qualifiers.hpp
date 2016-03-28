@@ -40,7 +40,7 @@ struct set_varargs_member_function_qualifiers_t <                  \
 
 namespace callable_traits {
 
-    namespace ctdetail {
+    namespace detail {
 
         template<flags Applied, typename Return, typename... Args>
         struct set_function_qualifiers_t {

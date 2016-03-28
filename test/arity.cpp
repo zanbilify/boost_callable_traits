@@ -123,7 +123,7 @@ constexpr const auto limit_minus = limit - 1;
 static_assert(5 <= limit_minus,
     "constants::arity_search_limit unexpectedly low for these test cases.");
 
-namespace ctd = ct::ctdetail;
+namespace ctd = ct::detail;
 int main() {
 
     {
