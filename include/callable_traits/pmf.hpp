@@ -11,11 +11,8 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_PMF_HPP
 
 #include <callable_traits/set_function_qualifiers.hpp>
-#include <callable_traits/qualifier_traits.hpp>
-#include <callable_traits/constraints.hpp>
-#include <callable_traits/has_normal_call_operator.hpp>
 #include <callable_traits/tags.hpp>
-#include <callable_traits/flags.hpp>
+#include <callable_traits/qualifiers.hpp>
 #include <tuple>
 
 #define CALLABLE_TRAITS_SPECIALIZE_PMF(QUAL)                                         \
@@ -38,7 +35,6 @@ public:                                                                         
     using is_function_general = std::false_type;                                     \
                                                                                      \
     using traits = pmf;                                                              \
-    using callable_traits_tag = pmf_tag;                                             \
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
     using type = Return(T::*)(Args...) QUAL;                                         \
@@ -96,7 +92,6 @@ public:                                                                         
     using is_function_general = std::false_type;                                     \
                                                                                      \
     using traits = pmf;                                                              \
-    using callable_traits_tag = pmf_tag;                                             \
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
     using type = Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL;         \
@@ -165,11 +160,6 @@ namespace callable_traits {
         CALLABLE_TRAITS_SPECIALIZE_PMF(const &&);
         CALLABLE_TRAITS_SPECIALIZE_PMF(volatile &&);
         CALLABLE_TRAITS_SPECIALIZE_PMF(const volatile &&);
-
-        template<typename T, T Value>
-        struct pmf<std::integral_constant<T, Value> > {
-            using traits = pmf<T>;
-        };
     }
 }
 

@@ -10,14 +10,77 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_ARITY_HPP
 #define CALLABLE_TRAITS_ARITY_HPP
 
+#include <callable_traits/test_invoke.hpp>
+#include <callable_traits/substitution.hpp>
 #include <callable_traits/disjunction.hpp>
-#include <callable_traits/can_invoke_t.hpp>
 #include <callable_traits/any_arg.hpp>
 #include <cstdint>
 
 namespace callable_traits {
 
     namespace detail {
+
+        template<typename Dispatch, typename... Args>
+        struct can_invoke_t {
+            
+            using callable = typename Dispatch::type;
+            using class_type = typename Dispatch::class_type;
+            using is_member_pointer = typename Dispatch::is_member_pointer;
+
+            using invoker = typename std::conditional<
+                is_member_pointer::value,
+                test_invoke<Dispatch, class_type, Args...>,
+                test_invoke<Dispatch, Args...>
+            >::type;
+
+            using test = typename std::conditional<
+                is_member_pointer::value,
+                decltype(invoker{}(
+                    std::declval<callable>(),
+                    std::declval<typename Dispatch::invoke_type>(),
+                    std::declval<Args>()...
+                )),
+                decltype(invoker{}(
+                    std::declval<callable>(),
+                    std::declval<Args>()...
+                ))
+            >::type;
+
+            static constexpr bool value =
+                !std::is_same<substitution_failure, test>{};
+                
+            static constexpr int arg_count = invoker::arg_count;
+        };
+
+        template<typename Dispatch>
+        struct can_invoke_t<Dispatch, void> {
+
+            using callable = typename Dispatch::type;
+            using class_type = typename Dispatch::class_type;
+            using is_member_pointer = typename Dispatch::is_member_pointer;
+
+            using invoker = typename std::conditional<
+                is_member_pointer::value,
+                test_invoke<Dispatch>,
+                test_invoke<Dispatch, class_type>
+            >::type;
+
+            using invoke_type = typename Dispatch::invoke_type;
+
+            using test = typename std::conditional<
+                is_member_pointer::value,
+                decltype(invoker{}(
+                    std::declval<callable>(),
+                    std::declval<invoke_type>()
+                )),
+                decltype(invoker{}(std::declval<callable>()))
+            >::type;
+
+            static constexpr bool value =
+                !std::is_same<substitution_failure, test>::value;
+
+            static constexpr int arg_count = 0;
+        };
 
         template<typename, typename>
         struct max_args {

@@ -11,7 +11,8 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_DECLVOKE_HPP
 
 #include <callable_traits/substitution.hpp>
-#include <callable_traits/normalize_reference.hpp>
+#include <callable_traits/generalize.hpp>
+#include <callable_traits/unwrap_reference.hpp>
 #include <callable_traits/shallow_decay.hpp>
 
 #include <type_traits>
@@ -22,13 +23,13 @@ namespace callable_traits {
     namespace detail {
         
         template<typename T>
-        struct subst_success {};
+        struct success {};
 
         template<typename Base, typename T,
                  typename IsBaseOf = std::is_base_of<Base, shallow_decay<T>>,
                  typename IsSame = std::is_same<Base, shallow_decay<T>>>
         using generalize_if_dissimilar = typename std::conditional<
-            IsBaseOf::value || IsSame::value, T, normalize_ptr_or_reference<T>
+            IsBaseOf::value || IsSame::value, T, generalize<T>
         >::type;
 
         template<typename...>
@@ -42,7 +43,7 @@ namespace callable_traits {
            template<typename P, typename U, typename... Rgs,
                 typename Obj = generalize_if_dissimilar<class_t, U&&>>
             auto operator()(P&& p, U&& u, Rgs&&... rgs) const ->
-                subst_success<decltype((std::declval<Obj>().*p)(std::forward<Rgs>(rgs)...))>;
+                success<decltype((std::declval<Obj>().*p)(std::forward<Rgs>(rgs)...))>;
 
             auto operator()(...) const -> substitution_failure;
 
@@ -57,7 +58,7 @@ namespace callable_traits {
             template<typename P, typename U,
                 typename Obj = generalize_if_dissimilar<class_t, U&&>>
             auto operator()(P&& p, U&& u) const ->
-                subst_success<decltype((std::declval<Obj>().*p))>;
+                success<decltype((std::declval<Obj>().*p))>;
 
             auto operator()(...) const -> substitution_failure;
 
@@ -68,9 +69,9 @@ namespace callable_traits {
         struct test_invoke<F, Args...> {
 
             template<typename T, typename... Rgs,
-                typename U = normalize_reference<T&&>>
+                typename U = unwrap_reference<T&&>>
             auto operator()(T&& t, Rgs&&... rgs) const ->
-                subst_success<decltype(std::declval<U>()(std::forward<Rgs>(rgs)...))>;
+                success<decltype(std::declval<U>()(std::forward<Rgs>(rgs)...))>;
 
             auto operator()(...) const -> substitution_failure;
 

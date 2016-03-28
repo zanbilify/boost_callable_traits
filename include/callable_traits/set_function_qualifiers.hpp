@@ -10,8 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS_HPP
 #define CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS_HPP
 
-#include <callable_traits/flags.hpp>
-#include <callable_traits/flag_map.hpp>
+#include <callable_traits/qualifiers.hpp>
 #include <callable_traits/tags.hpp>
 
 #define CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS(QUAL)              \

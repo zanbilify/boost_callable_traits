@@ -27,9 +27,11 @@ namespace callable_traits {
             any_arg() = default;
 
 #if !defined(_MSC_VER)
+            //MSVC doesn't like this because it can deduce 'void'
             template<typename... T>
             any_arg(T&&...);
 #endif //!defined(_MSC_VER)
+            
         };
     }
 }

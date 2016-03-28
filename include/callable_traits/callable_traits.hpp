@@ -22,29 +22,37 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/pmf.hpp>
 #include <callable_traits/function.hpp>
 #include <callable_traits/function_object.hpp>
-#include <callable_traits/general.hpp>
-#include <callable_traits/remove_reference_if_ptr.hpp>
-#include <callable_traits/default_dispatch.hpp>
-#include <callable_traits/can_invoke_t.hpp>
 #include <callable_traits/substitution.hpp>
 #include <callable_traits/arity.hpp>
 #include <callable_traits/bind_expression.hpp>
 #include <callable_traits/bind_expression_parser.hpp>
-#include <callable_traits/is_bind_expression.hpp>
 #include <callable_traits/shallow_decay.hpp>
-
-//todo remove?
-#include <callable_traits/can_invoke_t.hpp>
+#include <callable_traits/disjunction.hpp>
 
 #include <type_traits>
 #include <utility>
 
 namespace callable_traits {
 
+    namespace detail {
+
+        template<bool Value, typename T> 
+        struct value_type_pair {
+            using type = T;
+            static constexpr const bool value = Value;
+        };
+    }
+
     namespace no_sfinae {
 
         template<typename T>
         using args = typename detail::traits<T>::arg_types;
+
+        template<size_t I, typename T>
+        using arg_at = typename detail::disjunction<
+            detail::value_type_pair<std::tuple_size<args<T>>::value <= I, invalid_type>,
+            detail::value_type_pair<true, typename std::tuple_element<I, no_sfinae::args<T>>::type>
+        >::type;
 
         template<typename T>
         using signature = typename detail::traits<T>::function_type;

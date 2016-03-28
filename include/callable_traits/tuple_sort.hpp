@@ -107,7 +107,7 @@ namespace callable_traits {
         };
 
         template<typename Tup, template<class, class> class Pred>
-        using sort_tuple = typename sort_impl<Tup, predicate<Tup, Pred>>::type;
+        using tuple_sort = typename sort_impl<Tup, predicate<Tup, Pred>>::type;
     }
 }
 

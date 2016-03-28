@@ -10,9 +10,8 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_FUNCTION_OBJECT_HPP
 #define CALLABLE_TRAITS_FUNCTION_OBJECT_HPP
 
-#include <callable_traits/general.hpp>
+#include <callable_traits/generalized_class.hpp>
 #include <callable_traits/pmf.hpp>
-#include <callable_traits/has_normal_call_operator.hpp>
 #include <callable_traits/tags.hpp>
 
 #include <tuple>
@@ -21,6 +20,32 @@ namespace callable_traits {
 
     namespace detail {
 
+        template<typename T>
+        struct has_normal_call_operator
+        {
+            template<typename N, N Value> struct check { check(std::nullptr_t) {} };
+
+            template<typename U>
+            static std::int8_t test(check<decltype(&U::operator()), &U::operator()>);
+
+            template<typename>
+            static std::int16_t test(...);
+                 
+            static constexpr bool value = sizeof(test<T>(nullptr)) == sizeof(std::int8_t);
+            
+        };
+        
+        struct callable_dummy {
+            void operator()() {}
+        };
+
+        template<typename T>
+        using default_normal_callable = typename std::conditional<
+            has_normal_call_operator<T>::value,
+            T,
+            callable_dummy
+        >::type;
+        
         template<typename General>
         struct ambiguous_function_object {
             using arg_types = std::tuple<unknown>;
@@ -79,7 +104,7 @@ namespace callable_traits {
         };
 
         template<typename T, typename U>
-        struct function_object <general<T U::*> > {
+        struct function_object <generalized_class<T U::*> > {
             static constexpr const bool value = false;
             using traits = function_object;
         };

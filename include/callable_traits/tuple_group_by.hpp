@@ -9,7 +9,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_TUPLE_GROUP_BY_HPP
 #define CALLABLE_TRAITS_TUPLE_GROUP_BY_HPP
 
-#include <callable_traits/sort_tuple.hpp>
+#include <callable_traits/tuple_sort.hpp>
 #include <callable_traits/prepend.hpp>
 #include <tuple>
 #include <type_traits>
@@ -108,7 +108,7 @@ namespace callable_traits {
             using group_by_values = typename distinct_group_by_values<Tup, Pred>::type;
 
             using type = typename group_by_impl<
-                sort_tuple<Tup, sort_predicate>,
+                tuple_sort<Tup, sort_predicate>,
                 group_by_values,
                 Pred,
                 std::make_index_sequence<std::tuple_size<group_by_values>::value>

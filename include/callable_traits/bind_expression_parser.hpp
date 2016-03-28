@@ -10,10 +10,11 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/traits.hpp>
 #include <callable_traits/tuple_group_by.hpp>
-#include <callable_traits/sort_tuple.hpp>
+#include <callable_traits/tuple_sort.hpp>
 #include <callable_traits/bind_expression.hpp>
 #include <callable_traits/fwd/bind_expression_parser_fwd.hpp>
 #include <callable_traits/best_match.hpp>
+#include <callable_traits/prepend.hpp>
 #include <tuple>
 #include <functional>
 
@@ -33,7 +34,7 @@ namespace callable_traits {
                     typename BindExprs::bind_args_tuple
             >::type>()...));
 
-            using type = sort_tuple<
+            using type = tuple_sort<
                 placeholder_route_map,
                 compare_ph_value
             >;

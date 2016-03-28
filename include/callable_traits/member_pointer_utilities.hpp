@@ -19,22 +19,19 @@ namespace callable_traits {
         template<typename T, typename Class>
         using add_member_pointer = T Class::*;
 
-        namespace mpdetail {
+        template<typename T>
+        struct remove_member_pointer_t {
+            using type = T;
+        };
 
-            template<typename T>
-            struct remove_member_pointer_t {
-                using type = T;
-            };
-
-            template<typename T, typename U>
-            struct remove_member_pointer_t<T U::*>{
-                using type = T;
-            };
-        }
+        template<typename T, typename U>
+        struct remove_member_pointer_t<T U::*>{
+            using type = T;
+        };
 
         template<typename T>
         using remove_member_pointer =
-            typename mpdetail::remove_member_pointer_t<T>::type;
+            typename remove_member_pointer_t<T>::type;
     }
 }
 

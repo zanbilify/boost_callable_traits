@@ -12,11 +12,9 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <type_traits>
 
-#include <callable_traits/general.hpp>
 #include <callable_traits/fwd/function_object_fwd.hpp>
 #include <callable_traits/function.hpp>
 #include <callable_traits/traits.hpp>
-#include <callable_traits/default_dispatch.hpp>
 #include <callable_traits/member_pointer_utilities.hpp>
 
 namespace callable_traits {
@@ -55,7 +53,6 @@ namespace callable_traits {
 
             using remove_member_pointer = D;
 
-#ifdef _MSC_VER
             using remove_reference = invalid_type;
             using add_lvalue_reference = invalid_type;
             using add_rvalue_reference = invalid_type;
@@ -68,29 +65,6 @@ namespace callable_traits {
 
             template<typename>
             using apply_return = invalid_type;
-#else
-            using remove_reference = typename base::remove_reference T::*;
-            using add_lvalue_reference = typename base::add_lvalue_reference T::*;
-            using add_rvalue_reference = typename base::add_lvalue_reference T::*;
-            using add_const = typename base::add_const T::*;
-            using add_volatile = typename base::add_volatile T::*;
-            using add_cv = typename base::add_cv T::*;
-            using remove_const = typename base::remove_const T::*;
-            using remove_volatile = typename base::remove_volatile T::*;
-            using remove_cv = typename base::remove_cv T::*;
-
-            template<typename U>
-            using apply_return = detail::add_member_pointer<
-                msvc_workaround::apply_return_helper<base, U>,
-                T
-            >;
-#endif
-
-        };
-
-        template<typename T, T Value>
-        struct pmd<std::integral_constant<T, Value> > {
-            using traits = pmd<T>;
         };
     }
 }

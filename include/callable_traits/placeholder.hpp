@@ -1,18 +1,46 @@
 /*!
-@copyright Barrett Adair 2016
+Copyright (c) 2002 Peter Dimov and Multi Media Ltd.
+Copyright (c) 2016 Barrett Adair
 
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 */
 
-#ifndef CALLABLE_TRAITS_BIND_PLACEHOLDER_ROUTES_HPP
-#define CALLABLE_TRAITS_BIND_PLACEHOLDER_ROUTES_HPP
+#ifndef CALLABLE_TRAITS_PLACEHOLDER_HPP
+#define CALLABLE_TRAITS_PLACEHOLDER_HPP
 
 #include <callable_traits/prepend.hpp>
+#include <callable_traits/tuple_sort.hpp>
+#include <type_traits>
+#include <functional>
 
-namespace callable_traits { 
+namespace callable_traits {
 
-    namespace detail { 
+    namespace detail {
+
+    template<int I>
+        struct placeholder {
+
+            placeholder() = default;
+
+            template<typename T>
+            placeholder(T const &) {
+                static_assert(I == std::is_placeholder<T>::value, "Invalid placeholder");
+            }
+        };
+    }
+}
+namespace std {
+
+    template<int I> 
+    struct is_placeholder< callable_traits::detail::placeholder<I> > {
+        static constexpr const int value = I;
+    };
+}
+
+namespace callable_traits {
+
+    namespace detail {
 
         template<typename Expression, std::size_t OriginalArgIndex, std::size_t PhValue>
         struct ph_route {
@@ -81,10 +109,8 @@ namespace callable_traits {
                 >::type
             >::type;
 
-            using type = sort_tuple<routed_placeholders, compare_placeholders>;
+            using type = tuple_sort<routed_placeholders, compare_placeholders>;
         };
-
-        }
+    }
 }
-
 #endif

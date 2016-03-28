@@ -22,13 +22,6 @@ Distributed under the Boost Software License, Version 1.0.
 namespace callable_traits {
 
     namespace detail {
-        struct pmf_tag {};
-        struct pmd_tag {};
-        struct function_tag {};
-        struct function_reference_tag : function_tag {};
-        struct function_ptr_tag : function_tag {};
-        struct function_object_tag {};
-        struct ambiguous_function_object_tag : function_object_tag {};
         struct dummy {};
     }
     

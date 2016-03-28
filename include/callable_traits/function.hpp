@@ -11,13 +11,11 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_FUNCTION_HPP
 
 #include <callable_traits/set_function_qualifiers.hpp>
-#include <callable_traits/constraints.hpp>
-#include <callable_traits/has_normal_call_operator.hpp>
 #include <callable_traits/tags.hpp>
-#include <callable_traits/flags.hpp>
+#include <callable_traits/qualifiers.hpp>
 #include <callable_traits/member_pointer_utilities.hpp>
 #include <callable_traits/function_object.hpp>
-#include <callable_traits/qualifier_traits.hpp>
+#include <callable_traits/generalized_class.hpp>
 
 #include <tuple>
 
@@ -41,7 +39,6 @@ public:                                                                         
     using is_function_general = std::true_type;                                      \
                                                                                      \
     using traits = function;                                                         \
-    using callable_traits_tag = function_tag;                                        \
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
     using type = Return(Args...) QUAL;                                               \
@@ -102,7 +99,6 @@ public:                                                                         
     using is_function = std::true_type;                                              \
     using is_function_general = std::true_type;                                      \
     using traits = function;                                                         \
-    using callable_traits_tag = function_tag;                                        \
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
     using type = Return (Args..., ...) QUAL;                                         \
@@ -149,7 +145,7 @@ namespace callable_traits {
     namespace detail {
 
         template<typename T>
-        struct function : function_object<general<unknown>> {
+        struct function : function_object<generalized_class<unknown>> {
             static constexpr const bool value = false;
             using traits = function;
         };
@@ -166,11 +162,6 @@ namespace callable_traits {
         CALLABLE_TRAITS_SPECIALIZE_FUNCTION(const &&);
         CALLABLE_TRAITS_SPECIALIZE_FUNCTION(volatile &&);
         CALLABLE_TRAITS_SPECIALIZE_FUNCTION(const volatile &&);
-
-        template<typename T, T Value>
-        struct function<std::integral_constant<T, Value> > {
-            using traits = function<T>;
-        };
 
         template<typename T>
         struct function<T*> : function<T> {

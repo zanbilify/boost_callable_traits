@@ -8,7 +8,8 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_BEST_MATCH_HPP
 #define CALLABLE_TRAITS_BEST_MATCH_HPP
 
-#include <callable_traits/sort_tuple.hpp>
+#include <callable_traits/tuple_sort.hpp>
+#include <callable_traits/prepend.hpp>
 #include <tuple>
 #include <type_traits>
 
@@ -107,7 +108,7 @@ namespace callable_traits {
         };
 
         template<typename... Ts>
-        using sorted_cartesian_product_of_conversions = sort_tuple<
+        using sorted_cartesian_product_of_conversions = tuple_sort<
             std::tuple<map_conversions<Ts, Ts...>...>,
             conversion_result_sort_predicate
         >;
