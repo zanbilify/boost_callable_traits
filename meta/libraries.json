@@ -1,0 +1,10 @@
+{
+    "key": "callable_traits",
+    "name": "CallableTraits",
+    "authors": [ "Barrett Adair" ],
+    "maintainers": [ "Barrett Adair <barrettellisadair -at- gmail.com>" ],
+    "description": "A header-only C++14 library providing a uniform, comprehensive interface for the inspection and manipulation of function types, function pointers, function references, member function pointers, member data pointers, function objects/lambdas, and abominable function types.",
+    "category": [
+        "Metaprogramming"
+    ]
+}
