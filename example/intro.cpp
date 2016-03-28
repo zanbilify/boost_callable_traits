@@ -71,9 +71,9 @@ int main() {
     // C-style varargs (ellipses in a signature) can be detected.
     static_assert(!ct::has_varargs(foo{}), "");
 
-    // callable_traits::is_ambiguous yields std::true_type 
-    // only when the callable is overloaded or templated.
-    static_assert(!ct::is_ambiguous(foo{}), "");
+    // callable_traits::is_overloaded yields std::true_type
+    // for function objects that have overloaded or templated operator()
+    static_assert(!ct::is_overloaded(foo{}), "");
 
     // callable_traits::can_invoke allows us to preview whether
     // std::invoke will compile with the given arguments. Keep

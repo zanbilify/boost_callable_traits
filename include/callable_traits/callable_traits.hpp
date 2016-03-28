@@ -41,13 +41,6 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    template<typename T, typename U = typename std::remove_reference<T>::type>
-    inline constexpr
-    typename ctdetail::traits<U>::is_ambiguous
-    is_ambiguous(T&&) {
-        return{};
-    }
-
     template<typename T, typename U = ctdetail::shallow_decay<T>>
     using args = typename ctdetail::traits<T>::arg_types;
 
@@ -80,6 +73,18 @@ namespace callable_traits {
                 std::forward<Ts>(ts)...
             ))>::value
         >{}; 
+    }
+
+    template<typename T>
+    inline constexpr auto
+    is_overloaded(T&&) {
+        return typename ctdetail::traits<T&&>::is_ambiguous{};
+    }
+
+    template<typename T>
+    inline constexpr auto
+    is_overloaded() {
+        return typename ctdetail::traits<T>::is_ambiguous{};
     }
 
     template<typename Callable>

@@ -41,7 +41,9 @@ namespace callable_traits {
             using general_type = typename General::type;
             
             static constexpr const bool value = std::is_class<type>::value;
-            using is_ambiguous = std::integral_constant<bool, !has_normal_call_operator<type>::value>;
+            using is_ambiguous = std::integral_constant<bool,
+                !has_normal_call_operator<general_type>::value>;
+
             using traits = function_object;
             using class_type = invalid_type;
             using invoke_type = invalid_type;

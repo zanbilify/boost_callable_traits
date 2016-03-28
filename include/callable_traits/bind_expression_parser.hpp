@@ -22,10 +22,10 @@ namespace callable_traits {
     namespace ctdetail {
 
         template<typename BindExpressionTuple>
-        struct combined_placeholder_routes;
+        struct combine_placeholder_routes;
 
         template<typename... BindExprs>
-        struct combined_placeholder_routes<std::tuple<BindExprs...>> {
+        struct combine_placeholder_routes<std::tuple<BindExprs...>> {
 
             using placeholder_route_map = decltype(std::tuple_cat(std::declval<
                 typename placeholder_routes<
@@ -138,7 +138,7 @@ namespace callable_traits {
             using flattened_bind_expressions =
                 typename root_expression::flattened_bind_expressions;
 
-            using placeholder_routes = typename combined_placeholder_routes<
+            using placeholder_routes = typename combine_placeholder_routes<
                 flattened_bind_expressions
             >::type;
 
