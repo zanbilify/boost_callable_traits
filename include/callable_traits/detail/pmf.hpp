@@ -19,9 +19,7 @@ Distributed under the Boost Software License, Version 1.0.
                                                                                      \
 template<typename Return, typename T, typename... Args>                              \
 struct pmf<Return(T::*)(Args...) QUAL>                                               \
- : public qualifier_traits<dummy QUAL> {                                             \
-                                                                                     \
-public:                                                                              \
+ : qualifier_traits<dummy QUAL> {                                                    \
                                                                                      \
     static constexpr bool value = true;                                              \
     using has_varargs = std::false_type;                                             \
@@ -45,13 +43,9 @@ public:                                                                         
     using class_type = T;                                                            \
     using invoke_type = T QUAL;                                                      \
                                                                                      \
-private:                                                                             \
-                                                                                     \
     using qualifiers = qualifier_traits<dummy QUAL>;                                 \
     template<flags Flags>                                                            \
     using set_qualifiers = set_function_qualifiers<Flags, Return, Args...> T::*;     \
-                                                                                     \
-public:                                                                              \
                                                                                      \
     using remove_reference = set_qualifiers<qualifiers::cv_flags>;                   \
     using add_lvalue_reference = set_qualifiers<qualifiers::q_flags | lref_>;        \
@@ -76,9 +70,7 @@ public:                                                                         
                                                                                      \
 template<typename Return, typename T, typename... Args>                              \
 struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL>               \
- : public qualifier_traits<dummy QUAL> {                                             \
-                                                                                     \
-public:                                                                              \
+ : qualifier_traits<dummy QUAL> {                                                    \
                                                                                      \
     static constexpr bool value = true;                                              \
     using has_varargs = std::true_type;                                              \
@@ -102,15 +94,11 @@ public:                                                                         
     using class_type = T;                                                            \
     using invoke_type = T QUAL;                                                      \
                                                                                      \
-private:                                                                             \
-                                                                                     \
     using qualifiers = qualifier_traits<dummy QUAL>;                                 \
                                                                                      \
     template<flags Flags>                                                            \
     using set_qualifiers =                                                           \
         set_varargs_member_function_qualifiers<Flags, T, Return, Args...>;           \
-                                                                                     \
-public:                                                                              \
                                                                                      \
     using remove_reference = set_qualifiers<qualifiers::cv_flags>;                   \
     using add_lvalue_reference = set_qualifiers<qualifiers::q_flags | lref_>;        \

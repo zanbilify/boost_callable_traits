@@ -23,9 +23,7 @@ Distributed under the Boost Software License, Version 1.0.
                                                                                      \
 template<typename Return, typename... Args>                                          \
 struct function<Return(Args...) QUAL>                                                \
- : public qualifier_traits<dummy QUAL> {                                             \
-                                                                                     \
-public:                                                                              \
+ : qualifier_traits<dummy QUAL> {                                                    \
                                                                                      \
     static constexpr bool value = true;                                              \
     using has_varargs = std::false_type;                                             \
@@ -52,13 +50,9 @@ public:                                                                         
     using is_abominable_function = std::integral_constant<bool,                      \
         !std::is_same<abominable_type, function_type>::value>;                       \
                                                                                      \
-private:                                                                             \
-                                                                                     \
     using qualifiers = qualifier_traits<dummy QUAL>;                                 \
     template<flags Flags>                                                            \
     using set_qualifiers = set_function_qualifiers<Flags, Return, Args...>;          \
-                                                                                     \
-public:                                                                              \
                                                                                      \
     using remove_reference = set_qualifiers<qualifiers::cv_flags>;                   \
     using add_lvalue_reference = set_qualifiers<qualifiers::q_flags | lref_>;        \
@@ -84,9 +78,7 @@ public:                                                                         
                                                                                      \
 template<typename Return, typename... Args>                                          \
 struct function<Return (Args..., ...) QUAL>                                          \
- : public qualifier_traits<dummy QUAL> {                                             \
-                                                                                     \
-public:                                                                              \
+ : qualifier_traits<dummy QUAL> {                                                    \
                                                                                      \
     static constexpr bool value = true;                                              \
     using has_varargs = std::true_type;                                              \
@@ -109,14 +101,10 @@ public:                                                                         
     using class_type = invalid_type;                                                 \
     using invoke_type = invalid_type;                                                \
                                                                                      \
-private:                                                                             \
-                                                                                     \
     using qualifiers = qualifier_traits<dummy QUAL>;                                 \
                                                                                      \
     template<flags Flags>                                                            \
     using set_qualifiers = set_varargs_function_qualifiers<Flags, Return, Args...>;  \
-                                                                                     \
-public:                                                                              \
                                                                                      \
     using remove_reference = set_qualifiers<qualifiers::cv_flags>;                   \
     using add_lvalue_reference = set_qualifiers<qualifiers::q_flags | lref_>;        \
