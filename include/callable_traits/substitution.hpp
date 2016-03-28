@@ -16,13 +16,8 @@ namespace callable_traits {
 
     namespace ctdetail {
 
-        // sizeof(substitution_success<T>) is always greater than sizeof(substitution_failure)
-
         template<typename T>
-        struct substitution_success {
-            std::int8_t buffer;
-            typename std::remove_reference<T>::type* data;
-        };
+        struct sub_success {};
 
         using substitution_failure = std::int8_t;
     }

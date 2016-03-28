@@ -41,38 +41,132 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    template<typename T, typename U = ctdetail::shallow_decay<T>>
-    using args = typename ctdetail::traits<T>::arg_types;
+    namespace no_sfinae {
 
-    template<typename T, typename U = ctdetail::shallow_decay<T>>
-    using signature = typename ctdetail::traits<T>::function_type;
+        template<typename T>
+        using args = typename ctdetail::traits<T>::arg_types;
 
-    template<typename T, typename U = ctdetail::shallow_decay<T>>
-    using qualified_signature = typename ctdetail::traits<T>::abominable_type;
+        template<typename T>
+        using signature = typename ctdetail::traits<T>::function_type;
 
-    template<size_t Index, typename T>
-    using arg_at = typename std::tuple_element<Index, args<T>>::type;
+        template<typename T>
+        using qualified_signature = typename ctdetail::traits<T>::abominable_type;
+
+        template<typename T>
+        using result_of = typename ctdetail::traits<T>::return_type;
+
+        template<typename T>
+        using remove_const_qualifier =
+            typename ctdetail::traits<T>::remove_const;
+
+        template<typename T>
+        using remove_volatile_qualifier =
+            typename ctdetail::traits<T>::remove_volatile;
+
+        template<typename T>
+        using remove_cv_qualifiers =
+            typename ctdetail::traits<T>::remove_cv;
+
+        template<typename T>
+        using remove_reference_qualifier =
+            typename ctdetail::traits<T>::remove_reference;
+
+        template<typename T>
+        using remove_varargs =
+            typename ctdetail::traits<T>::remove_varargs;
+
+        template<typename T>
+        using add_const_qualifier =
+            typename ctdetail::traits<T>::add_const;
+
+        template<typename T>
+        using add_volatile_qualifier =
+            typename ctdetail::traits<T>::add_volatile;
+
+        template<typename T>
+        using add_cv_qualifiers =
+            typename ctdetail::traits<T>::add_cv;
+
+        template<typename T>
+        using add_lvalue_qualifier =
+            typename ctdetail::traits<T>::add_lvalue_reference;
+
+        template<typename T>
+        using add_rvalue_qualifier =
+            typename ctdetail::traits<T>::add_rvalue_reference;
+
+        template<typename T>
+        using add_varargs =
+            typename ctdetail::traits<T>::add_varargs;
+    }
+
+    namespace ctdetail {
+
+        template<typename T>
+        using if_valid = typename std::enable_if<
+            !std::is_same<T, unknown>::value
+                && !std::is_same<T, invalid_type>::value,
+            T
+        >::type;
+    }
 
     template<typename T>
-    using result_of = typename ctdetail::traits<T>::return_type;
+    using args = ctdetail::if_valid<no_sfinae::args<T>>;
 
-    template<typename Callable, typename... Ts>
+    template<size_t I, typename T>
+    using arg_at = ctdetail::if_valid<typename std::tuple_element<I, no_sfinae::args<T>>::type>;
+
+    template<typename T>
+    using signature = ctdetail::if_valid<no_sfinae::signature<T>>;
+
+    template<typename T>
+    using qualified_signature = ctdetail::if_valid<no_sfinae::qualified_signature<T>>;
+
+    template<typename T>
+    using result_of = ctdetail::if_valid<no_sfinae::result_of<T>>;
+
+    template<typename T>
+    using remove_const_qualifier = ctdetail::if_valid<no_sfinae::remove_const_qualifier<T>>;
+
+    template<typename T>
+    using remove_volatile_qualifier = ctdetail::if_valid<no_sfinae::remove_volatile_qualifier<T>>;
+
+    template<typename T>
+    using remove_cv_qualifiers = ctdetail::if_valid<no_sfinae::remove_cv_qualifiers<T>>;
+
+    template<typename T>
+    using remove_reference_qualifier = ctdetail::if_valid<no_sfinae::remove_reference_qualifier<T>>;
+
+    template<typename T>
+    using add_const_qualifier = ctdetail::if_valid<no_sfinae::add_const_qualifier<T>>;
+
+    template<typename T>
+    using add_volatile_qualifier = ctdetail::if_valid<no_sfinae::add_volatile_qualifier<T>>;
+
+    template<typename T>
+    using add_cv_qualifiers = ctdetail::if_valid<no_sfinae::add_cv_qualifiers<T>>;
+
+    template<typename T>
+    using add_lvalue_qualifier = ctdetail::if_valid<no_sfinae::add_lvalue_qualifier<T>>;
+
+    template<typename T>
+    using add_rvalue_qualifier = ctdetail::if_valid<no_sfinae::add_rvalue_qualifier<T>>;
+
+    template<typename T>
+    using add_varargs = ctdetail::if_valid<no_sfinae::add_varargs<T>>;
+
+    template<typename T>
+    using remove_varargs = ctdetail::if_valid<no_sfinae::remove_varargs<T>>;
+
+    template<typename T, typename... Args>
     inline constexpr auto
-    can_invoke(Callable&& c, Ts&&... ts) {
-
-        using failure = callable_traits::ctdetail::substitution_failure;
-
-        using invoke_t = callable_traits::ctdetail::test_invoke<
-            ctdetail::traits<Callable&&>, Ts&&...
-        >;
-
-        return std::integral_constant<
-            bool,
-            !std::is_same<failure, decltype(invoke_t{}(
-                std::forward<Callable>(c),
-                std::forward<Ts>(ts)...
-            ))>::value
-        >{}; 
+    can_invoke(T&& t, Args&&... args) {
+        using traits = ctdetail::traits<T&&>;
+        using test = ctdetail::test_invoke<traits, Args&&...>;
+        using result = decltype(test{}(::std::forward<T>(t), ::std::forward<Args>(args)...));
+        using failure = ctdetail::substitution_failure;
+        using is_invalid_invoke = std::is_same<result, failure>;
+        return std::integral_constant<bool, !is_invalid_invoke::value>{};
     }
 
     template<typename T>
@@ -87,188 +181,145 @@ namespace callable_traits {
         return typename ctdetail::traits<T>::is_ambiguous{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
-    has_varargs(Callable&&) { 
-        return typename ctdetail::traits<Callable&&>::has_varargs{};
+    has_varargs(T&&) {
+        return typename ctdetail::traits<T&&>::has_varargs{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
     has_varargs() {
-        return typename ctdetail::traits<Callable>::has_varargs{};
+        return typename ctdetail::traits<T>::has_varargs{};
     }
 
-    template<std::size_t SearchLimit = constants::arity_search_limit, typename Callable>
+    template< std::size_t SearchLimit = constants::arity_search_limit, typename T>
     inline constexpr auto
-    min_arity(Callable&&) {
-        return ctdetail::min_arity_t<ctdetail::traits<Callable&&>, SearchLimit>{};
+    min_arity(T&&) {
+        using traits = ctdetail::traits<T&&>;
+        return ctdetail::min_arity_t<traits, SearchLimit>{};
     }
 
-    template<typename Callable, std::size_t SearchLimit = constants::arity_search_limit>
+    template<typename T, std::size_t SearchLimit = constants::arity_search_limit>
     inline constexpr auto
     min_arity() {
-        return ctdetail::min_arity_t<ctdetail::traits<Callable>, SearchLimit>{};
+        using traits = ctdetail::traits<T>;
+        return ctdetail::min_arity_t<traits, SearchLimit>{};
     }
 
-    template<std::size_t SearchLimit = constants::arity_search_limit, typename Callable>
+    template<std::size_t SearchLimit = constants::arity_search_limit, typename T>
     inline constexpr auto
-    max_arity(Callable&&) {
-        return ctdetail::max_arity_t<ctdetail::traits<Callable&&>, SearchLimit>{};
+    max_arity(T&&) {
+        return ctdetail::max_arity_t<ctdetail::traits<T&&>, SearchLimit>{};
     }
 
-    template<typename Callable, std::size_t SearchLimit = constants::arity_search_limit>
+    template<typename T, std::size_t SearchLimit = constants::arity_search_limit>
     inline constexpr auto
     max_arity() {
-        return ctdetail::max_arity_t<ctdetail::traits<Callable>, SearchLimit>{};
+        return ctdetail::max_arity_t<ctdetail::traits<T>, SearchLimit>{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
-    arity(Callable&&) {
-        return ctdetail::arity_t<ctdetail::traits<Callable&&>>{};
+    arity(T&&) {
+        return ctdetail::arity_t<ctdetail::traits<T&&>>{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
     arity() {
-        return ctdetail::arity_t<ctdetail::traits<Callable>>{};
+        return ctdetail::arity_t<ctdetail::traits<T>>{};
     }
 
-    template<typename Callable, typename... Args>
+    template<typename T, typename... Args>
     inline constexpr auto
-    bind_expr(Callable, Args...) ->
-        ctdetail::bind_expression<Callable, Args...> {
+    bind_expr(T, Args...) -> ctdetail::bind_expression<T, Args...> {
         return{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
     is_unqualified() {
-        return typename ctdetail::traits<Callable>::is_const_qualified{};
+        return typename ctdetail::traits<T>::is_unqualified{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
-    is_unqualified(Callable&&) {
-        return typename ctdetail::traits<Callable&&>::is_const_qualified{};
+    is_unqualified(T&&) {
+        return typename ctdetail::traits<T&&>::is_unqualified{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
     is_const_qualified() {
-        return typename ctdetail::traits<Callable>::is_const_qualified{};
+        return typename ctdetail::traits<T>::is_const_qualified{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
-    is_const_qualified(Callable&&) {
-        return typename ctdetail::traits<Callable&&>::is_const_qualified{};
+    is_const_qualified(T&&) {
+        return typename ctdetail::traits<T&&>::is_const_qualified{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
     is_cv_qualified() {
-        return typename ctdetail::traits<Callable>::is_cv_qualified{};
+        return typename ctdetail::traits<T>::is_cv_qualified{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
-    is_cv_qualified(Callable&&) {
-        return typename ctdetail::traits<Callable&&>::is_cv_qualified{};
+    is_cv_qualified(T&&) {
+        return typename ctdetail::traits<T&&>::is_cv_qualified{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
     is_volatile_qualified() {
-        return typename ctdetail::traits<Callable>::is_volatile_qualified{};
+        return typename ctdetail::traits<T>::is_volatile_qualified{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
-    is_volatile_qualified(Callable&&) {
-        return typename ctdetail::traits<Callable&&>::is_volatile_qualified{};
+    is_volatile_qualified(T&&) {
+        return typename ctdetail::traits<T&&>::is_volatile_qualified{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
     is_reference_qualified() {
-        return typename ctdetail::traits<Callable>::is_reference_qualified{};
+        return typename ctdetail::traits<T>::is_reference_qualified{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
-    is_reference_qualified(Callable&&) {
-        return typename ctdetail::traits<Callable&&>::is_reference_qualified{};
+    is_reference_qualified(T&&) {
+        return typename ctdetail::traits<T&&>::is_reference_qualified{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
     is_lvalue_reference_qualified() {
-        return typename ctdetail::traits<Callable>::is_lvalue_reference_qualified{};
+        return typename ctdetail::traits<T>::is_lvalue_reference_qualified{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
-    is_lvalue_reference_qualified(Callable&&) {
-        return typename ctdetail::traits<Callable&&>::is_lvalue_reference_qualified{};
+    is_lvalue_reference_qualified(T&&) {
+        return typename ctdetail::traits<T&&>::is_lvalue_reference_qualified{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
     is_rvalue_reference_qualified() {
-        return typename ctdetail::traits<Callable>::is_rvalue_reference_qualified{};
+        return typename ctdetail::traits<T>::is_rvalue_reference_qualified{};
     }
 
-    template<typename Callable>
+    template<typename T>
     inline constexpr auto
-    is_rvalue_reference_qualified(Callable&&) {
-        return typename ctdetail::traits<Callable&&>::is_rvalue_reference_qualified{};
+    is_rvalue_reference_qualified(T&&) {
+        return typename ctdetail::traits<T&&>::is_rvalue_reference_qualified{};
     }
-
-    template<typename Callable>
-    using remove_const_qualifier =
-        typename ctdetail::traits<Callable>::remove_const;
-
-    template<typename Callable>
-    using remove_volatile_qualifier =
-        typename ctdetail::traits<Callable>::remove_volatile;
-
-    template<typename Callable>
-    using remove_cv_qualifiers =
-        typename ctdetail::traits<Callable>::remove_cv;
-
-    template<typename Callable>
-    using remove_reference_qualifier =
-        typename ctdetail::traits<Callable>::remove_reference;
-
-    template<typename Callable>
-    using remove_varargs =
-        typename ctdetail::traits<Callable>::remove_varargs;
-
-    template<typename Callable>
-    using add_const_qualifier =
-        typename ctdetail::traits<Callable>::add_const;
-
-    template<typename Callable>
-    using add_volatile_qualifier =
-        typename ctdetail::traits<Callable>::add_volatile;
-
-    template<typename Callable>
-    using add_cv_qualifiers =
-        typename ctdetail::traits<Callable>::add_cv;
-
-    template<typename Callable>
-    using add_lvalue_qualifier =
-        typename ctdetail::traits<Callable>::add_lvalue_reference;
-
-    template<typename Callable>
-    using add_rvalue_qualifier =
-        typename ctdetail::traits<Callable>::add_rvalue_reference;
-
-    template<typename Callable>
-    using add_varargs =
-        typename ctdetail::traits<Callable>::add_varargs;
 }
 
 #ifdef _MSVC_VER

@@ -19,15 +19,15 @@ namespace ct = callable_traits;
 int main() {
 
     {
-        using test = ct::args<foo>;
+        using test = ct::no_sfinae::args<foo>;
         using expect = std::tuple<ct::unknown>;
         static_assert(std::is_same<test, expect>{}, "");
     } {
-        using test = ct::signature<foo>;
+        using test = ct::no_sfinae::signature<foo>;
         using expect = ct::unknown(ct::unknown);
         static_assert(std::is_same<test, expect>{}, "");
     } {
-        using test = ct::result_of<foo>;
+        using test = ct::no_sfinae::result_of<foo>;
         using expect = ct::unknown;
         static_assert(std::is_same<test, expect>{}, "");
     }

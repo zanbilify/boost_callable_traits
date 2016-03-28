@@ -12,6 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/substitution.hpp>
 #include <callable_traits/normalize_reference.hpp>
+#include <callable_traits/shallow_decay.hpp>
 
 #include <type_traits>
 #include <utility>
@@ -20,76 +21,45 @@ namespace callable_traits {
 
     namespace ctdetail {
         
+        template<typename T>
+        struct subst_success {};
+
+        template<typename Base, typename T,
+                 typename IsBaseOf = std::is_base_of<Base, shallow_decay<T>>,
+                 typename IsSame = std::is_same<Base, shallow_decay<T>>>
+        using generalize_if_dissimilar = typename std::conditional<
+            IsBaseOf::value || IsSame::value, T, normalize_ptr_or_reference<T>
+        >::type;
+
         template<typename...>
         struct test_invoke;
 
         template<typename Pmf, typename T, typename... Args>
         struct test_invoke<pmf<Pmf>, T, Args...> {
 
-            using dispatch = pmf<Pmf>;
-            using base = typename dispatch::class_type;
-            using derived = typename std::remove_cv<
-                typename std::remove_reference<T>::type
-            >::type;
-
-            static constexpr bool is_value_invocation = 
-                std::is_base_of<base, derived>::value
-                || std::is_same<base, derived>::value;
-
-            template<typename P, typename U, typename... Rgs,
-                CALLABLE_TRAITS_REQUIRES_(is_value_invocation)>
-            auto operator()(P&& p, U&& u, Rgs&&... rgs) const ->
-            substitution_success<decltype(
-                (std::forward<U>(u).*p)(std::forward<Rgs>(rgs)...)
-            )>;
+            using class_t = typename pmf<Pmf>::class_type;
 
            template<typename P, typename U, typename... Rgs,
-                CALLABLE_TRAITS_REQUIRES_(!is_value_invocation)>
+                typename Obj = generalize_if_dissimilar<class_t, U&&>>
             auto operator()(P&& p, U&& u, Rgs&&... rgs) const ->
-            substitution_success<decltype(
-                (std::declval<normalize_ptr_or_reference<U&&>>().*p)
-                    (std::forward<Rgs>(rgs)...)
-            )>;
+                subst_success<decltype((std::declval<Obj>().*p)(std::forward<Rgs>(rgs)...))>;
 
-            substitution_failure operator()(...) const;
+            auto operator()(...) const -> substitution_failure;
 
             static constexpr int arg_count = sizeof...(Args) - 1;
         };
 
-        template<typename Pmd, typename T>
-        struct test_invoke<pmd<Pmd>, T> {
+        template<typename Pmd, typename... Args>
+        struct test_invoke<pmd<Pmd>, Args...> {
 
-            using dispatch = pmd<Pmd>;
-            using base = typename dispatch::class_type;
-            using derived = typename std::remove_cv<
-                typename std::remove_reference<T>::type
-            >::type;
+            using class_t = typename pmd<Pmd>::class_type;
 
-            static constexpr bool is_value_invocation =
-                std::is_base_of<base, derived>::value
-                || std::is_same<base, derived>::value;
-
-            template<
-                typename P,
-                typename U,
-                CALLABLE_TRAITS_REQUIRES_(is_value_invocation)
-            >
-            auto operator()(P&&, U&&) const ->
-            substitution_success<decltype(
-                (std::declval<U&&>().*std::declval<P&&>())
-            )>;
-
-            template<
-                typename P,
-                typename U,
-                CALLABLE_TRAITS_REQUIRES_(!is_value_invocation)
-            >
+            template<typename P, typename U,
+                typename Obj = generalize_if_dissimilar<class_t, U&&>>
             auto operator()(P&& p, U&& u) const ->
-            substitution_success<decltype(
-                (std::declval<normalize_ptr_or_reference<U&&>>().*p)
-            )>;
+                subst_success<decltype((std::declval<Obj>().*p))>;
 
-            substitution_failure operator()(...) const;
+            auto operator()(...) const -> substitution_failure;
 
             static constexpr int arg_count = -1;
         };
@@ -97,13 +67,12 @@ namespace callable_traits {
         template<typename F, typename... Args>
         struct test_invoke<F, Args...> {
 
-            template<typename T, typename... Rgs>
+            template<typename T, typename... Rgs,
+                typename U = normalize_reference<T&&>>
             auto operator()(T&& t, Rgs&&... rgs) const ->
-            substitution_success<
-                decltype(std::declval<normalize_reference<T&&>>()(std::forward<Rgs>(rgs)...))
-            >;
+                subst_success<decltype(std::declval<U>()(std::forward<Rgs>(rgs)...))>;
 
-            substitution_failure operator()(...) const;
+            auto operator()(...) const -> substitution_failure;
 
             static constexpr int arg_count = sizeof...(Args);
         };
