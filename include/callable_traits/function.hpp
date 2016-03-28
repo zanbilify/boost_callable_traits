@@ -11,11 +11,11 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_FUNCTION_HPP
 
 #include <callable_traits/set_function_qualifiers.hpp>
-#include <callable_traits/tags.hpp>
 #include <callable_traits/qualifiers.hpp>
 #include <callable_traits/member_pointer_utilities.hpp>
 #include <callable_traits/function_object.hpp>
 #include <callable_traits/generalized_class.hpp>
+#include <callable_traits/config.hpp>
 
 #include <tuple>
 
@@ -162,6 +162,8 @@ namespace callable_traits {
         CALLABLE_TRAITS_SPECIALIZE_FUNCTION(const &&);
         CALLABLE_TRAITS_SPECIALIZE_FUNCTION(volatile &&);
         CALLABLE_TRAITS_SPECIALIZE_FUNCTION(const volatile &&);
+        
+#undef CLBL_SPECIALIZE_FUNCTION
 
         template<typename T>
         struct function<T*> : function<T> {
@@ -210,7 +212,5 @@ namespace callable_traits {
         };
     }
 }
-
-#undef CLBL_SPECIALIZE_FUNCTION
 
 #endif

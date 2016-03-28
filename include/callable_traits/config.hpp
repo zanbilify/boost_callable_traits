@@ -7,8 +7,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_TAGS_HPP
-#define CALLABLE_TRAITS_TAGS_HPP
+#ifndef CALLABLE_TRAITS_CONFIG_HPP
+#define CALLABLE_TRAITS_CONFIG_HPP
 
 #define CALLABLE_TRAITS_EMPTY_
 #define CALLABLE_TRAITS_EMPTY CALLABLE_TRAITS_EMPTY_
@@ -19,10 +19,19 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_VARARGS_CC
 #endif //_MSC_VER
 
+#include <utility>
+
 namespace callable_traits {
 
     namespace detail {
+
         struct dummy {};
+
+        template<bool Value, typename T> 
+        struct value_type_pair {
+            using type = T;
+            static constexpr const bool value = Value;
+        };
     }
     
     struct constants {
@@ -32,6 +41,5 @@ namespace callable_traits {
     struct invalid_type { invalid_type() = delete; };
     struct unknown { unknown() = delete; };
 }
-
 
 #endif

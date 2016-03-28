@@ -11,8 +11,8 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_PMF_HPP
 
 #include <callable_traits/set_function_qualifiers.hpp>
-#include <callable_traits/tags.hpp>
 #include <callable_traits/qualifiers.hpp>
+#include <callable_traits/config.hpp>
 #include <tuple>
 
 #define CALLABLE_TRAITS_SPECIALIZE_PMF(QUAL)                                         \
@@ -160,9 +160,10 @@ namespace callable_traits {
         CALLABLE_TRAITS_SPECIALIZE_PMF(const &&);
         CALLABLE_TRAITS_SPECIALIZE_PMF(volatile &&);
         CALLABLE_TRAITS_SPECIALIZE_PMF(const volatile &&);
-    }
-}
 
 #undef CALLABLE_TRAITS_SPECIALIZE_PMF
+        
+    }
+}
 
 #endif

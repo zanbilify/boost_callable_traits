@@ -10,8 +10,6 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef MEMBER_POINTER_UTILITIES_HPP
 #define MEMBER_POINTER_UTILITIES_HPP
 
-#include <callable_traits/tags.hpp>
-
 namespace callable_traits {
 
     namespace detail {

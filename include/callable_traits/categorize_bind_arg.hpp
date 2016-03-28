@@ -11,7 +11,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/placeholder.hpp>
 #include <callable_traits/fwd/bind_expression_fwd.hpp>
 #include <callable_traits/any_arg.hpp>
-#include <callable_traits/tags.hpp>
 #include <functional>
 
 namespace callable_traits {
