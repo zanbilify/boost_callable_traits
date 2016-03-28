@@ -10,17 +10,17 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_INTERFACE_HPP
 #define CALLABLE_TRAITS_INTERFACE_HPP
 
-#include <callable_traits/traits.hpp>
-#include <callable_traits/pmd.hpp>
-#include <callable_traits/pmf.hpp>
-#include <callable_traits/function.hpp>
-#include <callable_traits/function_object.hpp>
-#include <callable_traits/substitution.hpp>
-#include <callable_traits/arity.hpp>
-#include <callable_traits/bind_expression.hpp>
-#include <callable_traits/bind_expression_parser.hpp>
-#include <callable_traits/shallow_decay.hpp>
-#include <callable_traits/disjunction.hpp>
+#include <callable_traits/detail/traits.hpp>
+#include <callable_traits/detail/pmd.hpp>
+#include <callable_traits/detail/pmf.hpp>
+#include <callable_traits/detail/function.hpp>
+#include <callable_traits/detail/function_object.hpp>
+#include <callable_traits/detail/substitution.hpp>
+#include <callable_traits/detail/arity.hpp>
+#include <callable_traits/detail/bind_expression.hpp>
+#include <callable_traits/detail/bind_expression_parser.hpp>
+#include <callable_traits/detail/shallow_decay.hpp>
+#include <callable_traits/detail/disjunction.hpp>
 #include <type_traits>
 #include <utility>
 
