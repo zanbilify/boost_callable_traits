@@ -160,6 +160,17 @@ namespace callable_traits {
         return std::integral_constant<bool, !is_invalid_invoke::value>{};
     }
 
+    template<typename T, typename... Args>
+    inline constexpr auto
+    can_invoke_constexpr(T&& t, Args&&... args) {
+        using traits = detail::traits<T&&>;
+        using test = detail::test_invoke_constexpr<traits, Args&&...>;
+        using result = decltype(test{}(::std::forward<T>(t), ::std::forward<Args>(args)...));
+        using failure = detail::substitution_failure;
+        using is_invalid_invoke = std::is_same<result, failure>;
+        return std::integral_constant<bool, !is_invalid_invoke::value>{};
+    }
+
     template<typename T>
     inline constexpr auto
     is_overloaded(T&&) {

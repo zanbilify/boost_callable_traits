@@ -77,6 +77,33 @@ namespace callable_traits {
 
             static constexpr int arg_count = sizeof...(Args);
         };
+
+        template<int>
+        struct success_constepxr {};
+
+        template<typename...>
+        struct test_invoke_constexpr;
+
+        template<typename Pmf, typename T, typename... Args>
+        struct test_invoke_constexpr<pmf<Pmf>, T, Args...> {
+            auto operator()(...) const -> substitution_failure;
+        };
+
+        template<typename Pmd, typename... Args>
+        struct test_invoke_constexpr<pmd<Pmd>, Args...> {
+            auto operator()(...) const -> substitution_failure;
+        };
+
+        template<typename F, typename... Args>
+        struct test_invoke_constexpr<F, Args...> {
+
+            template<typename T, typename... Rgs,
+                typename U = typename std::remove_reference<unwrap_reference<T&&>>::type>
+            auto operator()(T&& t, Rgs&&... rgs) const ->
+                success_constepxr<(U{}(Rgs{}...), 0)>;
+
+            auto operator()(...) const -> substitution_failure;
+        };
     }
 }
 
