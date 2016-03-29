@@ -1,6 +1,10 @@
 #include <type_traits>
 #include <callable_traits/callable_traits.hpp>
 
+#ifndef CT_ASSERT
+#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
+#endif //CT_ASSERT
+
 struct foo1 {
     int operator()() const {
         return 0;
@@ -39,19 +43,19 @@ namespace ct = callable_traits;
 #define IF_ENABLED
 #endif
 
-static_assert(!ct::can_invoke_constexpr(foo1{}), "");
-static_assert(!ct::can_invoke_constexpr(foo1{}, 0), "");
+CT_ASSERT(!ct::can_invoke_constexpr(foo1{}));
+CT_ASSERT(!ct::can_invoke_constexpr(foo1{}, 0));
 
-static_assert(IF_ENABLED ct::can_invoke_constexpr(foo2{}), "");
-static_assert(IF_ENABLED ct::can_invoke_constexpr(foo2{}, 0), "");
+CT_ASSERT(IF_ENABLED ct::can_invoke_constexpr(foo2{}));
+CT_ASSERT(IF_ENABLED ct::can_invoke_constexpr(foo2{}, 0));
 
-static_assert(!ct::can_invoke_constexpr(foo4{}), "");
-static_assert(IF_ENABLED ct::can_invoke_constexpr(foo4{}, 0), "");
+CT_ASSERT(!ct::can_invoke_constexpr(foo4{}));
+CT_ASSERT(IF_ENABLED ct::can_invoke_constexpr(foo4{}, 0));
 
-static_assert(!ct::can_invoke_constexpr(foo1_pmf{}, foo1{}), "");
-static_assert(!ct::can_invoke_constexpr(foo1_pmf{}, foo1{}, 0), "");
+CT_ASSERT(!ct::can_invoke_constexpr(foo1_pmf{}, foo1{}));
+CT_ASSERT(!ct::can_invoke_constexpr(foo1_pmf{}, foo1{}, 0));
 
-static_assert(!ct::can_invoke_constexpr(foo3_pmf{}, foo3{}), "");
-static_assert(IF_ENABLED ct::can_invoke_constexpr(foo3_pmf{}, foo3{}, 0), "");
+CT_ASSERT(!ct::can_invoke_constexpr(foo3_pmf{}, foo3{}));
+CT_ASSERT(IF_ENABLED ct::can_invoke_constexpr(foo3_pmf{}, foo3{}, 0));
 
 int main() { return 0; }
