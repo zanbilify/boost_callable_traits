@@ -198,6 +198,12 @@ namespace callable_traits {
             template<typename NewReturn>
             using apply_return = typename base::template apply_return<NewReturn>&;
         };
+
+        template<typename T, T Value>
+        struct function<std::integral_constant<T, Value>> {
+            using traits = function<T>;
+            static constexpr const bool value = traits::value;
+        };
     }
 }
 

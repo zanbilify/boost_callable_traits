@@ -130,10 +130,14 @@ namespace callable_traits {
 
         template<typename T>
         struct pmf {
-            static constexpr const bool is_valid = false;
-            static constexpr const bool value = is_valid;
-            static constexpr const bool is_ambiguous = true;
+            static constexpr const bool value = false;
             using traits = pmf;
+        };
+
+        template<typename T, T Value>
+        struct pmf <std::integral_constant<T, Value>> {
+            using traits = pmf<T>;
+            static constexpr const bool value = traits::value;
         };
 
         CALLABLE_TRAITS_SPECIALIZE_PMF(CALLABLE_TRAITS_EMPTY);

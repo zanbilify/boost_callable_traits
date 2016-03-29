@@ -13,10 +13,14 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_EMPTY_
 #define CALLABLE_TRAITS_EMPTY CALLABLE_TRAITS_EMPTY_
 
-#ifdef _MSC_VER
-#define CALLABLE_TRAITS_VARARGS_CC __cdecl
-#else
 #define CALLABLE_TRAITS_VARARGS_CC
+
+#ifdef _MSC_VER
+#ifndef __clang__
+#undef CALLABLE_TRAITS_VARARGS_CC
+#define CALLABLE_TRAITS_VARARGS_CC __cdecl
+#define CALLABLE_TRAITS_CAN_INVOKE_CONSTEXPR_DISABLED
+#endif //ifndef __clang__
 #endif //_MSC_VER
 
 #include <utility>

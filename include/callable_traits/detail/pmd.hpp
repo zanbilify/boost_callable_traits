@@ -23,8 +23,14 @@ namespace callable_traits {
 
         template<typename T>
         struct pmd : std::false_type {
-            static constexpr const bool is_ambiguous = true;
             using traits = pmd;
+            static constexpr const bool value = false;
+        };
+
+        template<typename T, T Value>
+        struct pmd <std::integral_constant<T, Value>> {
+            using traits = pmd<T>;
+            static constexpr const bool value = traits::value;
         };
 
         namespace msvc_workaround {

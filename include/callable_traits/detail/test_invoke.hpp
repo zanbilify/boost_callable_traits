@@ -13,7 +13,10 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/substitution.hpp>
 #include <callable_traits/detail/generalize.hpp>
 #include <callable_traits/detail/unwrap_reference.hpp>
+#include <callable_traits/detail/is_integral_constant.hpp>
 #include <callable_traits/detail/shallow_decay.hpp>
+#include <callable_traits/detail/make_constexpr.hpp>
+#include <callable_traits/config.hpp>
 
 #include <type_traits>
 #include <utility>
@@ -78,14 +81,34 @@ namespace callable_traits {
             static constexpr int arg_count = sizeof...(Args);
         };
 
-        template<int>
-        struct success_constepxr {};
-
         template<typename...>
         struct test_invoke_constexpr;
 
+        template<typename Check, typename Result>
+        using if_integral_constant =
+            typename std::enable_if<is_integral_constant<Check>::value, Result>::type;
+
+        template<typename Check, typename Result>
+        using if_not_integral_constant =
+            typename std::enable_if<!is_integral_constant<Check>::value, Result>::type;
+
         template<typename Pmf, typename T, typename... Args>
         struct test_invoke_constexpr<pmf<Pmf>, T, Args...> {
+
+            using class_t = typename pmf<Pmf>::class_type;
+
+#ifndef CALLABLE_TRAITS_CAN_INVOKE_CONSTEXPR_DISABLED
+
+            template<typename P, typename U, typename... Rgs,
+                typename Obj = generalize_if_dissimilar<class_t, U&&>>
+            auto operator()(P&& p, U&& u, Rgs&&... rgs) const -> if_integral_constant<P,
+                std::integral_constant<int,
+                    ((CALLABLE_TRAITS_MAKE_CONSTEXPR(Obj).*std::remove_reference<P>::type::value)(
+                        CALLABLE_TRAITS_MAKE_CONSTEXPR(Rgs&&)...
+                    ), 0)>>;
+
+#endif //ifndef CALLABLE_TRAITS_CAN_INVOKE_CONSTEXPR_DISABLED
+
             auto operator()(...) const -> substitution_failure;
         };
 
@@ -97,11 +120,19 @@ namespace callable_traits {
         template<typename F, typename... Args>
         struct test_invoke_constexpr<F, Args...> {
 
-            template<typename T, typename... Rgs,
-                typename U = typename std::remove_reference<unwrap_reference<T&&>>::type>
-            auto operator()(T&& t, Rgs&&... rgs) const ->
-                success_constepxr<(U{}(Rgs{}...), 0)>;
+#ifndef CALLABLE_TRAITS_CAN_INVOKE_CONSTEXPR_DISABLED
 
+            template<typename T, typename... Rgs>
+            auto operator()(T&& t, Rgs&&...) const -> if_not_integral_constant<T,
+                std::integral_constant<int,
+                    (CALLABLE_TRAITS_MAKE_CONSTEXPR(T&&)(CALLABLE_TRAITS_MAKE_CONSTEXPR(Rgs&&)...), 0)>>;
+
+            template<typename T, typename... Rgs, typename U = typename std::remove_reference<T>::type>
+            auto operator()(T&& t, Rgs&&...) const -> if_integral_constant<T,
+                std::integral_constant<int, (U::value(CALLABLE_TRAITS_MAKE_CONSTEXPR(Rgs&&)...), 0)>>;
+            
+ #endif //ifndef CALLABLE_TRAITS_CAN_INVOKE_CONSTEXPR_DISABLED
+                
             auto operator()(...) const -> substitution_failure;
         };
     }
