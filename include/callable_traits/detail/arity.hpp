@@ -187,8 +187,6 @@ namespace callable_traits {
         template<typename T, std::size_t SearchLimit = 10>
         struct function_object_min_arity {
 
-        private:
-
             static constexpr int precient_arity = arg_tuple_size<
                 typename T::arg_types
             >::value;
@@ -196,8 +194,6 @@ namespace callable_traits {
             static constexpr int tentative_min_arity = min_args<
                 T, SearchLimit, void
             >::arg_count;
-
-        public:
 
             static constexpr int value =
                 precient_arity == -1
@@ -208,8 +204,6 @@ namespace callable_traits {
         template<typename T, std::size_t SearchLimit>
         struct function_object_max_arity {
 
-        private:
-
             static constexpr int precient_arity = arg_tuple_size<
                 typename T::arg_types
             >::value;
@@ -217,8 +211,6 @@ namespace callable_traits {
             static constexpr int tentative_max_arity = max_args<
                 T, std::make_index_sequence<SearchLimit>
             >::arg_count;
-
-        public:
 
             static constexpr int value =
                 precient_arity == -1 || tentative_max_arity > precient_arity
