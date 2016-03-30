@@ -65,7 +65,7 @@ namespace callable_traits {
 
             auto operator()(...) const -> substitution_failure;
 
-            static constexpr int arg_count = -1;
+            static constexpr int arg_count = 0;
         };
 
         template<typename F, typename... Args>
@@ -82,22 +82,16 @@ namespace callable_traits {
         };
 
         template<typename...>
-        struct test_invoke_constexpr;
+        struct test_invoke_constexpr {
+            auto operator()(...) const->substitution_failure;
+        };
 
-        template<typename Check, typename Result>
-        using if_integral_constant =
-            typename std::enable_if<is_integral_constant<Check>::value, Result>::type;
-
-        template<typename Check, typename Result>
-        using if_not_integral_constant =
-            typename std::enable_if<!is_integral_constant<Check>::value, Result>::type;
+#ifndef CALLABLE_TRAITS_CONSTEXPR_CHECKS_DISABLED
 
         template<typename Pmf, typename T, typename... Args>
         struct test_invoke_constexpr<pmf<Pmf>, T, Args...> {
 
             using class_t = typename pmf<Pmf>::class_type;
-
-#ifndef CALLABLE_TRAITS_CAN_INVOKE_CONSTEXPR_DISABLED
 
             template<typename P, typename U, typename... Rgs,
                 typename Obj = generalize_if_dissimilar<class_t, U&&>>
@@ -106,8 +100,6 @@ namespace callable_traits {
                     ((CALLABLE_TRAITS_MAKE_CONSTEXPR(Obj).*std::remove_reference<P>::type::value)(
                         CALLABLE_TRAITS_MAKE_CONSTEXPR(Rgs&&)...
                     ), 0)>>;
-
-#endif //ifndef CALLABLE_TRAITS_CAN_INVOKE_CONSTEXPR_DISABLED
 
             auto operator()(...) const -> substitution_failure;
         };
@@ -120,8 +112,6 @@ namespace callable_traits {
         template<typename F, typename... Args>
         struct test_invoke_constexpr<F, Args...> {
 
-#ifndef CALLABLE_TRAITS_CAN_INVOKE_CONSTEXPR_DISABLED
-
             template<typename T, typename... Rgs>
             auto operator()(T&& t, Rgs&&...) const -> if_not_integral_constant<T,
                 std::integral_constant<int,
@@ -130,11 +120,11 @@ namespace callable_traits {
             template<typename T, typename... Rgs, typename U = typename std::remove_reference<T>::type>
             auto operator()(T&& t, Rgs&&...) const -> if_integral_constant<T,
                 std::integral_constant<int, (U::value(CALLABLE_TRAITS_MAKE_CONSTEXPR(Rgs&&)...), 0)>>;
-            
- #endif //ifndef CALLABLE_TRAITS_CAN_INVOKE_CONSTEXPR_DISABLED
-                
+
             auto operator()(...) const -> substitution_failure;
         };
+
+#endif //ifndef CALLABLE_TRAITS_CONSTEXPR_CHECKS_DISABLED
     }
 }
 

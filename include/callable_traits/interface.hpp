@@ -21,6 +21,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/bind_expression_parser.hpp>
 #include <callable_traits/detail/shallow_decay.hpp>
 #include <callable_traits/detail/disjunction.hpp>
+#include <callable_traits/detail/is_constexpr_t.hpp>
 #include <type_traits>
 #include <utility>
 
@@ -169,6 +170,25 @@ namespace callable_traits {
         using failure = detail::substitution_failure;
         using is_invalid_invoke = std::is_same<result, failure>;
         return std::integral_constant<bool, !is_invalid_invoke::value>{};
+    }
+
+    template<typename T>
+    inline constexpr auto
+    is_constexpr(T&& t){
+        using traits = detail::traits<T&&>;
+        using min_args = detail::min_arity_t<traits, constants::arity_search_limit>;
+        using seq = std::make_index_sequence<min_args::value < 0 ? 0 : min_args::value>;
+        using test = detail::is_constexpr_t<traits, seq>;
+        using result = decltype(test{}(::std::forward<T>(t)));
+        using failure = detail::substitution_failure;
+        using is_not_constexpr = std::is_same<result, failure>;
+        return std::integral_constant<bool, !is_not_constexpr::value>{};
+    }
+
+    template<typename T>
+    inline constexpr auto
+    is_constexpr(){
+        return is_constexpr(CALLABLE_TRAITS_MAKE_CONSTEXPR(T));
     }
 
     template<typename T>

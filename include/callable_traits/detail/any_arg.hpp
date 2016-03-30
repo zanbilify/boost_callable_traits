@@ -10,6 +10,9 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_ANY_ARG_HPP
 #define CALLABLE_TRAITS_DETAIL_ANY_ARG_HPP
 
+#include <utility>
+#include <callable_traits/detail/make_constexpr.hpp>
+
 namespace callable_traits {
 
     namespace detail {
@@ -32,6 +35,29 @@ namespace callable_traits {
             any_arg(T&&...);
 #endif //!defined(_MSC_VER)
             
+        };
+
+        template<typename T, typename U = shallow_decay<T>>
+        using int_if_trivial = 
+            typename std::enable_if<
+                std::is_trivially_default_constructible<U>::value,
+                T
+            >::type;
+
+        template<std::size_t I = 0>
+        struct any_arg_evaluated {
+
+            template<typename T, int_if_trivial<T> = 0>
+            inline constexpr operator T& () const {
+                return CALLABLE_TRAITS_MAKE_CONSTEXPR(T&);
+            }
+
+            template<typename T, int_if_trivial<T> = 0>
+            inline constexpr operator T&& () const {
+                return CALLABLE_TRAITS_MAKE_CONSTEXPR(T&&);
+            }
+
+            any_arg_evaluated() = default;
         };
     }
 }

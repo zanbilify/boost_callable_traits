@@ -32,6 +32,15 @@ namespace callable_traits {
         template<typename T>
         using is_integral_constant = std::integral_constant<bool,
             is_integral_constant_t<shallow_decay<T>>::value>;
+
+        template<typename Check, typename Result>
+        using if_integral_constant =
+            typename std::enable_if<is_integral_constant<Check>::value, Result>::type;
+
+        template<typename Check, typename Result>
+        using if_not_integral_constant =
+            typename std::enable_if<!is_integral_constant<Check>::value, Result>::type;
+
     }
 }
 

@@ -5,6 +5,12 @@
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
 
+#ifdef  CALLABLE_TRAITS_CONSTEXPR_CHECKS_DISABLED
+#define IF_ENABLED !
+#else
+#define IF_ENABLED
+#endif
+
 struct foo1 {
     int operator()() const {
         return 0;
@@ -36,12 +42,6 @@ using foo1_pmf = std::integral_constant<decltype(&foo1::operator()), &foo1::oper
 using foo3_pmf = std::integral_constant<decltype(&foo3::bar), &foo3::bar>;
 
 namespace ct = callable_traits;
-
-#ifdef  CALLABLE_TRAITS_CAN_INVOKE_CONSTEXPR_DISABLED
-#define IF_ENABLED !
-#else
-#define IF_ENABLED
-#endif
 
 CT_ASSERT(!ct::can_invoke_constexpr(foo1{}));
 CT_ASSERT(!ct::can_invoke_constexpr(foo1{}, 0));

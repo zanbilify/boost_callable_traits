@@ -19,7 +19,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef __clang__
 #undef CALLABLE_TRAITS_VARARGS_CC
 #define CALLABLE_TRAITS_VARARGS_CC __cdecl
-#define CALLABLE_TRAITS_CAN_INVOKE_CONSTEXPR_DISABLED
+#define CALLABLE_TRAITS_CONSTEXPR_CHECKS_DISABLED
 #endif //ifndef __clang__
 #endif //_MSC_VER
 

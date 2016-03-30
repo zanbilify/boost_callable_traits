@@ -12,6 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/generalized_class.hpp>
 #include <callable_traits/detail/pmf.hpp>
+#include <callable_traits/detail/is_integral_constant.hpp>
 
 #include <tuple>
 
@@ -64,7 +65,9 @@ namespace callable_traits {
             using type = typename General::original_type;
             using general_type = typename General::type;
             
-            static constexpr const bool value = std::is_class<type>::value;
+            static constexpr const bool value =
+                std::is_class<type>::value && !is_integral_constant<type>::value;
+
             using is_ambiguous = std::integral_constant<bool,
                 !has_normal_call_operator<general_type>::value>;
 
