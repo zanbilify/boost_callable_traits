@@ -12,6 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <utility>
 #include <callable_traits/detail/make_constexpr.hpp>
+#include <callable_traits/config.hpp>
 
 namespace callable_traits {
 
@@ -40,7 +41,7 @@ namespace callable_traits {
         template<typename T, typename U = shallow_decay<T>>
         using int_if_trivial = 
             typename std::enable_if<
-                std::is_trivially_default_constructible<U>::value,
+                CALLABLE_TRAITS_IS_TRIVIALLY_DEFAULT_CONSTRUCTIBLE(U),
                 T
             >::type;
 

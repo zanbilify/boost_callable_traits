@@ -23,6 +23,15 @@ Distributed under the Boost Software License, Version 1.0.
 #endif //ifndef __clang__
 #endif //_MSC_VER
 
+//libstdc++ formerly used this non-conforming trait
+#if defined(__GLIBCXX__) && __GLIBCXX__ < 20150422
+#define CALLABLE_TRAITS_IS_TRIVIALLY_DEFAULT_CONSTRUCTIBLE(T) \
+    std::has_trivial_default_constructor<T>::value
+#else
+#define CALLABLE_TRAITS_IS_TRIVIALLY_DEFAULT_CONSTRUCTIBLE(T) \
+    std::is_trivially_default_constructible<T>::value
+#endif //if defined(__GLIBCXX__) && __GLIBCXX__ < 20150422
+
 #include <utility>
 
 namespace callable_traits {
