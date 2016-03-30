@@ -1,8 +1,18 @@
+/*!
+Copyright (c) 2016 Barrett Adair
+
+Distributed under the Boost Software License, Version 1.0.
+(See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
+*/
+
+#include <callable_traits/config.hpp>
 #include <callable_traits/detail/make_constexpr.hpp>
 
 #ifndef CT_ASSERT
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
+
+#ifndef CALLABLE_TRAITS_CONSTEXPR_CHECKS_DISABLED
 
 struct foo {
 
@@ -83,5 +93,7 @@ CT_ASSERT(12 == CALLABLE_TRAITS_MAKE_CONSTEXPR(const foo&&)(CALLABLE_TRAITS_MAKE
 CT_ASSERT(12 == CALLABLE_TRAITS_MAKE_CONSTEXPR(const foo)(CALLABLE_TRAITS_MAKE_CONSTEXPR(int&&)));
 CT_ASSERT(12 == CALLABLE_TRAITS_MAKE_CONSTEXPR(const foo&&)(CALLABLE_TRAITS_MAKE_CONSTEXPR(int)));
 CT_ASSERT(12 == CALLABLE_TRAITS_MAKE_CONSTEXPR(const foo)(CALLABLE_TRAITS_MAKE_CONSTEXPR(int)));
+
+#endif
 
 int main() { return 0; }

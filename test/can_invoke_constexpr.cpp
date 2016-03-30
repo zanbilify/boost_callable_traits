@@ -1,3 +1,10 @@
+/*!
+Copyright (c) 2016 Barrett Adair
+
+Distributed under the Boost Software License, Version 1.0.
+(See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
+*/
+
 #include <type_traits>
 #include <callable_traits/callable_traits.hpp>
 

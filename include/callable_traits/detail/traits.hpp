@@ -26,9 +26,10 @@ namespace callable_traits {
 
     namespace detail {
 
-        template<typename T, typename U = typename std::remove_reference<T>::type>
+        template<typename T>
         using decay_if_ptr_or_integral_constant = typename std::conditional<
-            std::is_pointer<U>::value || is_integral_constant<T>::value,
+            std::is_pointer<typename std::remove_reference<T>::type>::value
+                || is_integral_constant<T>::value,
             shallow_decay<T>,
             T
         >::type;

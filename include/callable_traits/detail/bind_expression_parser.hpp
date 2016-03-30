@@ -15,6 +15,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/fwd/bind_expression_parser_fwd.hpp>
 #include <callable_traits/detail/best_match.hpp>
 #include <callable_traits/detail/prepend.hpp>
+#include <callable_traits/detail/build_function.hpp>
 #include <tuple>
 #include <functional>
 
@@ -111,14 +112,6 @@ namespace callable_traits {
             using type = std::tuple<>;
         };
 
-        template<typename...>
-        struct build_function {};
-
-        template<typename Return, typename... Args>
-        struct build_function<Return, std::tuple<Args...>>{
-            using type = Return(Args...);
-        };
-
         template<typename T>
         struct bind_expression_parser
         {
@@ -150,7 +143,7 @@ namespace callable_traits {
 
             using arg_types = typename common_expected_arg_types<grouped_placeholders>::type;
             using return_type = typename root_expression::return_type;
-            using function_type = typename build_function<return_type, arg_types>::type;
+            using function_type = build_function<return_type, arg_types>;
             using abominable_type = function_type;
         };
     }
