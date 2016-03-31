@@ -7,6 +7,10 @@ Distributed under the Boost Software License, Version 1.0.
 #include <type_traits>
 #include <callable_traits/callable_traits.hpp>
 
+// NOTE: Due to non-compliance in MSVC, can_invoke_constexpr
+// always return std::false_type on that compiler, which causes
+// the static asserts below to fail.
+
 namespace ct = callable_traits;
 
 using T1 = std::integral_constant<int, 3>;
@@ -20,7 +24,7 @@ struct subtract {
     // must have a SFINAE-safe signature. In this case, 'subtract' is made
     // SFINAE-safe with an explicit, trailing return type.
     template<typename T1, typename T2>
-    constexpr auto operator()(T1, T2) -> decltype(T1::value - T2::value) {
+    constexpr auto operator()(T1, T2) const -> decltype(T1::value - T2::value) {
         return T1::value - T2::value;
     }
 };
@@ -35,7 +39,7 @@ static_assert(!ct::can_invoke_constexpr(subtract{}, T1{}), "");
 //this is a function object, but is NOT constexpr
 struct add {
     template<typename T1, typename T2>
-    auto operator()(T1, T2) -> decltype(T1::value + T2::value) {
+    auto operator()(T1, T2) const -> decltype(T1::value + T2::value) {
         return T1::value + T2::value;
     }
 };

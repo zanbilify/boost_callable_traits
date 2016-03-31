@@ -4,6 +4,10 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
 */
 
+// NOTE: Due to non-compliance in MSVC, is_constexpr always
+// returns std::false_type on that compiler, which causes
+// the static asserts below to fail.
+
 #include <type_traits>
 #include <callable_traits/callable_traits.hpp>
 
@@ -12,7 +16,7 @@ namespace ct = callable_traits;
 //this is a constexpr function object (non-templated)
 struct zero {
 
-    constexpr auto operator()() {
+    constexpr auto operator()() const {
         return 0;
     }
 };
@@ -30,7 +34,7 @@ struct subtract {
     // function accesses member names besides "type" and "value".
     // Unary/binary operators and constructor calls are okay to use.
     template<typename T1, typename T2>
-    constexpr auto operator()(T1, T2) {
+    constexpr auto operator()(T1, T2) const {
         return T1{} - T2{};
     }
 };
@@ -43,7 +47,7 @@ static_assert(ct::is_constexpr(subtract{}), "");
 //this is NOT a constexpr function object
 struct add {
     template<typename T1, typename T2>
-    auto operator()(T1, T2) {
+    auto operator()(T1, T2) const {
         return T1{} + T2{};
     }
 };

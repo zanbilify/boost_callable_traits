@@ -47,12 +47,11 @@ namespace callable_traits {
 
             any_arg_evaluated() = default;
 
+#if !defined(CALLABLE_TRAITS_MSVC)
             //MSVC doesn't like this because it can deduce 'void'
             template<typename... T>
             any_arg_evaluated(T&&...);
-
-            template<typename T, typename std::enable_if<!std::is_same<T, void>::value, int>::type = 0>
-            any_arg_evaluated(T);
+#endif //!defined(CALLABLE_TRAITS_MSVC)
 
             inline constexpr auto operator+() const { return type{}; }
             inline constexpr auto operator-() const { return type{}; }
@@ -74,7 +73,11 @@ namespace callable_traits {
         template<std::size_t I = 0>
         struct any_arg : any_arg_evaluated<I> {
             
+#if !defined(CALLABLE_TRAITS_MSVC)
+            //msvc doesn't like this
             static constexpr const auto value = any_arg_evaluated<I>{};
+#endif //!defined(CALLABLE_TRAITS_MSVC)
+
 
             template<typename T>
             operator T& () const;
@@ -84,11 +87,11 @@ namespace callable_traits {
 
             any_arg() = default;
 
-#if !defined(_MSC_VER)
+#if !defined(CALLABLE_TRAITS_MSVC)
             //MSVC doesn't like this because it can deduce 'void'
             template<typename... T>
             any_arg(T&&...);
-#endif //!defined(_MSC_VER)
+#endif //!defined(CALLABLE_TRAITS_MSVC)
             
             any_arg<I> operator+() const;
             any_arg<I> operator-() const;

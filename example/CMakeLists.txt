@@ -7,9 +7,6 @@ add_custom_target(examples COMMENT "Build all the examples.")
 add_dependencies(check examples)
 
 include_directories(${callable_traits_SOURCE_DIR}/include)
-#if (Boost_FOUND)
-#    include_directories(${Boost_INCLUDE_DIRS})
-#endif()
 
 file(GLOB_RECURSE EXAMPLES "*.cpp")
 file(GLOB_RECURSE EXCLUDED_EXAMPLES ${EXCLUDED_EXAMPLES})
