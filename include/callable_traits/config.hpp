@@ -24,14 +24,17 @@ Distributed under the Boost Software License, Version 1.0.
 #endif //ifndef __clang__
 #endif //_MSC_VER
 
-//libstdc++ formerly used this non-conforming trait
-#if defined(__GLIBCXX__) && __GLIBCXX__ < 20150422
+
+#if defined(__GLIBCXX__) && (defined(__GNUC__) || defined(__clang__))
+// libstdc++ did not implement std::is_trivially_default_constructible 
+// until GCC 5. It's difficult to check for this reliably, especially in
+// Clang, so I use a compiler hook instead.
 #define CALLABLE_TRAITS_IS_TRIVIALLY_DEFAULT_CONSTRUCTIBLE(T) \
-    std::has_trivial_default_constructor<T>::value
+    (std::is_default_constructible<T>::value && __has_trivial_constructor(T))
 #else
 #define CALLABLE_TRAITS_IS_TRIVIALLY_DEFAULT_CONSTRUCTIBLE(T) \
     std::is_trivially_default_constructible<T>::value
-#endif //if defined(__GLIBCXX__) && __GLIBCXX__ < 20150422
+#endif //if defined(__GLIBCXX__) && (defined(__GNUC__) || defined(__clang__))
 
 #include <utility>
 
