@@ -65,10 +65,6 @@ namespace callable_traits {
         template<std::size_t I>
         const any_arg_evaluated<I> any_arg_evaluated<I>::value = {};
 
-#undef CALLABLE_TRAITS_CONCAT_
-#undef CALLABLE_TRAITS_CONCAT
-#undef CALLABLE_TRAITS_INITIALIZE_ANY_ARG_VALUE
-
         //any_arg is only used in unevaluated contexts
         template<std::size_t I = 0>
         struct any_arg : any_arg_evaluated<I> {
