@@ -25,7 +25,7 @@ Distributed under the Boost Software License, Version 1.0.
 #endif //_MSC_VER
 
 
-#if defined(__GLIBCXX__) && (defined(__GNUC__) || defined(__clang__))
+#if defined(__GNUC__) || defined(__clang__)
 // libstdc++ did not implement std::is_trivially_default_constructible 
 // until GCC 5. It's difficult to check for this reliably, especially in
 // Clang, so I use a compiler hook instead.
