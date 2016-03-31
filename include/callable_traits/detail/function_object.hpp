@@ -56,11 +56,17 @@ namespace callable_traits {
 
         template<typename General>
         struct function_object
-            : public std::conditional<
+            : std::conditional<
                 has_normal_call_operator<typename General::type>::value,
                 pmf<decltype(&default_normal_callable<typename General::type>::operator())>,
                 ambiguous_function_object<General>
             >::type {
+
+            using base = typename std::conditional<
+                has_normal_call_operator<typename General::type>::value,
+                pmf<decltype(&default_normal_callable<typename General::type>::operator())>,
+                ambiguous_function_object<General>
+            >::type;
 
             using type = typename General::original_type;
             using general_type = typename General::type;

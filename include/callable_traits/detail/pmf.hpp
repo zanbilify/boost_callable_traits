@@ -36,12 +36,17 @@ struct pmf<Return(T::*)(Args...) QUAL>                                          
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
     using type = Return(T::*)(Args...) QUAL;                                         \
+    using invoke_type = typename std::conditional<                                   \
+            std::is_rvalue_reference<T QUAL>::value,                                 \
+            T QUAL,                                                                  \
+            typename std::add_lvalue_reference<T QUAL>::type                         \
+        >::type;                                                                     \
+                                                                                     \
     using function_type = Return(Args...);                                           \
     using abominable_type = Return(Args...) QUAL;                                    \
     using remove_varargs = type;                                                     \
     using add_varargs = Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL;  \
     using class_type = T;                                                            \
-    using invoke_type = T QUAL;                                                      \
                                                                                      \
     using qualifiers = qualifier_traits<dummy QUAL>;                                 \
     template<flags Flags>                                                            \
@@ -87,12 +92,18 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL>          
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
     using type = Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL;         \
+                                                                                     \
+    using invoke_type = typename std::conditional<                                   \
+            std::is_rvalue_reference<T QUAL>::value,                                 \
+            T QUAL,                                                                  \
+            typename std::add_lvalue_reference<T QUAL>::type                         \
+        >::type;                                                                     \
+                                                                                     \
     using function_type = Return(Args..., ...);                                      \
     using abominable_type = Return(Args..., ...) QUAL;                               \
     using remove_varargs = Return(T::*)(Args...) QUAL;                               \
     using add_varargs = type;                                                        \
     using class_type = T;                                                            \
-    using invoke_type = T QUAL;                                                      \
                                                                                      \
     using qualifiers = qualifier_traits<dummy QUAL>;                                 \
                                                                                      \

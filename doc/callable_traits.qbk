@@ -1,0 +1,110 @@
+[library CallableTraits
+    [authors [Adair, Barrett]]
+    [copyright 2016 Barrett Adair]
+    [license
+        Distributed under the Boost Software License, Version 1.0.
+        (See accompanying file LICENSE_1_0.txt or copy at
+        <ulink url="http://www.boost.org/LICENSE_1_0.txt">
+            http://www.boost.org/LICENSE_1_0.txt
+        </ulink>)
+    ]
+    [id callable_traits]
+    [last-revision $Date$]
+]
+
+[section:moti Motivation]
+
+[c++]
+
+The complexity of callable types in C++ is extensive:
+
+*function types
+*function pointers
+*function references
+*objects with `operator()`
+*objects with function pointer conversions
+*[@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0172r0.html "abominable" function types]
+*pointers to member data
+*pointers to member functions
+*qualified overloads of member functions: `const`, `volatile`, `&`, `&&`
+*C-style varargs (`...`)
+*calling conventions (`__cdecl`, `__stdcall`, `__fastcall`, `pascal`, etc.)
+*`noexcept` (part of the function type system in C++17)
+
+CallableTraits provides a comprehensive, uniform and modern type-level interface for the manipulation and inspection of callable types in C++. CallableTraits aims to provide such an exhaustive interface for the features listed above that the libary writer will *never again be required to specialize templates for callable types*. In other words, library writers should never need to write a template like this one:, for *any* reason:
+
+    template<typename Ret, typename T, typename... Args>
+	struct foo<Ret(T::*)(Args..., ...) const volatile &&>{
+		//...
+	};
+
+Several library solutions exist to manipulate these types, or to abstract away their complexities. However, in the opinion of the author, these solutions are often inflexible and lacking in features, especially in regard to function objects and lambdas. In many cases, the CallableTraits interface allow authors of generic code to treat these types as interchangeable: function objects, function pointers, function references, function types, abominable function types, member function pointers, member data pointers, and references/pointers/smart pointers to all of the above (whenever applicable).
+
+CallableTraits contains the following type traits and metafunctions (psuedo-code):
+
+[*`std::integral_constant` constexpr functions]
+
+* `can_invoke(T&&, Args&&...)`
+* `can_invoke_constexpr(T&&, Args&&...)`
+* `is_constexpr(T&&)`
+* `is_constexpr<T>()`
+* `is_overloaded(T&&)`
+* `is_overloaded<T>()`
+* `has_varargs(T&&)`
+* `has_varargs<T>()`
+* `arity(T&&)`
+* `arity<T>()`
+* `min_arity(T&&)`
+* `min_arity<T>()`
+* `max_arity(T&&)`
+* `max_arity<T>()`
+* `is_unqualified(T&&)`
+* `is_unqualified<T>()`
+* `is_const_qualified(T&&)`
+* `is_const_qualified<T>()`
+* `is_volatile_qualified(T&&)`
+* `is_volatile_qualified<T>()`
+* `is_cv_qualified(T&&)`
+* `is_cv_qualified<T>()`
+* `is_reference_qualified(T&&)`
+* `is_reference_qualified<T>()`
+* `is_lvalue_reference_qualified(T&&)`
+* `is_lvalue_reference_qualified<T>()`
+* `is_rvalue_reference_qualified(T&&)`
+* `is_rvalue_reference_qualified<T>()`
+
+[*Template aliases]
+
+* `args<T>`
+* `arg_at<I, T>`
+* `signature<T>`
+* `qualified_signature<T>`
+* `common_signature<T...>`
+* `result_of<T>`
+* `remove_const_qualifier<T>`
+* `remove_volatile_qualifier<T>`
+* `remove_cv_qualifiers<T>`
+* `remove_reference_qualifiers<T>`
+* `remove_varargs<T>`
+* `add_const_qualifier<T>`
+* `add_volatile_qualifier<T>`
+* `add_cv_qualifiers<T>`
+* `add_lvalue_qualifier<T>`
+* `add_rvalue_qualifier<T>`
+* `add_varargs<T>`
+
+[*Other]
+
+* `bind_expr(T, Args...)`
+
+[endsect]
+
+[section:tuto Overview]
+
+These are the 
+
+To start using CallableTraits, include the header file:
+
+    #include <callable_traits/callable_traits.hpp>
+
+[endsect]
