@@ -81,6 +81,72 @@ namespace callable_traits {
             static constexpr int arg_count = sizeof...(Args);
         };
 
+
+        template<typename IsMemberPointer, typename Traits, typename... Args>
+        struct build_invoke_t;
+
+        template<typename Traits, typename... Args>
+        struct build_invoke_t<std::false_type, Traits, Args...> {
+            using test = detail::test_invoke<Traits, Args...>;
+            using original_type = typename Traits::type;
+
+            using result = decltype(test{}(
+                ::std::declval<original_type>(),
+                ::std::declval<Args>()...
+            ));
+
+            using failure = detail::substitution_failure;
+            static constexpr bool value = !std::is_same<result, failure>::value;
+            static constexpr int arg_count = test::arg_count;
+        };
+
+        template<typename Traits, typename... Args>
+        struct build_invoke_t<std::true_type, Traits, Args...> {
+            using test = detail::test_invoke<Traits, Args...>;
+            using original_type = typename Traits::type;
+            using invoke_type = typename Traits::invoke_type;
+
+            using result = decltype(test{}(
+                ::std::declval<original_type>(),
+                ::std::declval<invoke_type>(),
+                ::std::declval<Args>()...
+            ));
+
+            using failure = detail::substitution_failure;
+            static constexpr bool value = !std::is_same<result, failure>::value;
+            static constexpr int arg_count = test::arg_count;
+        };
+
+        template<typename Traits>
+        struct build_invoke_t<std::false_type, Traits, void> {
+            using test = detail::test_invoke<Traits>;
+            using original_type = typename Traits::type;
+            using result = decltype(test{}(::std::declval<original_type>()));
+            using failure = detail::substitution_failure;
+            static constexpr bool value = !std::is_same<result, failure>::value;
+            static constexpr int arg_count = test::arg_count;
+        };
+
+        template<typename Traits>
+        struct build_invoke_t<std::true_type, Traits, void> {
+            using test = detail::test_invoke<Traits>;
+            using original_type = typename Traits::type;
+            using invoke_type = typename Traits::invoke_type;
+
+            using result = decltype(test{}(
+                ::std::declval<original_type>(),
+                ::std::declval<invoke_type>()
+            ));
+
+            using failure = detail::substitution_failure;
+            static constexpr bool value = !std::is_same<result, failure>::value;
+            static constexpr int arg_count = test::arg_count;
+        };
+
+        template<typename Traits, typename... Args>
+        using is_invokable = build_invoke_t<
+            typename Traits::is_member_pointer, Traits, Args...>;
+
         template<typename...>
         struct test_invoke_constexpr {
             auto operator()(...) const->substitution_failure;

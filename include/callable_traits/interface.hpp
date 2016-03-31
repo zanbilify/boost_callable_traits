@@ -104,7 +104,8 @@ namespace callable_traits {
         template<typename T>
         using if_valid = typename std::enable_if<
             !std::is_same<T, unknown>::value
-                && !std::is_same<T, invalid_type>::value,
+                && !std::is_same<T, invalid_type>::value
+                && !std::is_same<T, std::tuple<unknown>>::value,
             T
         >::type;
     }
@@ -122,7 +123,7 @@ namespace callable_traits {
     using qualified_signature = detail::if_valid<no_sfinae::qualified_signature<T>>;
 
     template<typename... Ts>
-    using common_signature = no_sfinae::common_signature<Ts...>;
+    using common_signature = detail::if_valid<no_sfinae::common_signature<Ts...>>;
 
     template<typename T>
     using result_of = detail::if_valid<no_sfinae::result_of<T>>;

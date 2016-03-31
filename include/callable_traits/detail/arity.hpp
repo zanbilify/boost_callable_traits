@@ -20,68 +20,6 @@ namespace callable_traits {
 
     namespace detail {
 
-        template<typename Dispatch, typename... Args>
-        struct can_invoke_t {
-            
-            using callable = typename Dispatch::type;
-            using class_type = typename Dispatch::class_type;
-            using is_member_pointer = typename Dispatch::is_member_pointer;
-
-            using invoker = typename std::conditional<
-                is_member_pointer::value,
-                test_invoke<Dispatch, class_type, Args...>,
-                test_invoke<Dispatch, Args...>
-            >::type;
-
-            using test = typename std::conditional<
-                is_member_pointer::value,
-                decltype(invoker{}(
-                    std::declval<callable>(),
-                    std::declval<typename Dispatch::invoke_type>(),
-                    std::declval<Args>()...
-                )),
-                decltype(invoker{}(
-                    std::declval<callable>(),
-                    std::declval<Args>()...
-                ))
-            >::type;
-
-            static constexpr bool value =
-                !std::is_same<substitution_failure, test>{};
-                
-            static constexpr int arg_count = invoker::arg_count;
-        };
-
-        template<typename Dispatch>
-        struct can_invoke_t<Dispatch, void> {
-
-            using callable = typename Dispatch::type;
-            using class_type = typename Dispatch::class_type;
-            using is_member_pointer = typename Dispatch::is_member_pointer;
-
-            using invoker = typename std::conditional<
-                is_member_pointer::value,
-                test_invoke<Dispatch>,
-                test_invoke<Dispatch, class_type>
-            >::type;
-
-            using invoke_type = typename Dispatch::invoke_type;
-
-            using test = typename std::conditional<
-                is_member_pointer::value,
-                decltype(invoker{}(
-                    std::declval<callable>(),
-                    std::declval<invoke_type>()
-                )),
-                decltype(invoker{}(std::declval<callable>()))
-            >::type;
-
-            static constexpr bool value =
-                !std::is_same<substitution_failure, test>::value;
-
-            static constexpr int arg_count = 0;
-        };
-
         template<typename, typename>
         struct max_args {
             static constexpr bool value = true;
@@ -92,8 +30,8 @@ namespace callable_traits {
         struct max_args<U, std::index_sequence<0>> {
             static constexpr bool value = true;
             static constexpr int arg_count =
-                can_invoke_t<U, const any_arg<0> &>::value ? 1 : (
-                    can_invoke_t<U, void>::value ? 0 : -1
+                is_invokable<U, const any_arg<0> &>::value ? 1 : (
+                    is_invokable<U, void>::value ? 0 : -1
                 );
         };
 
@@ -101,7 +39,7 @@ namespace callable_traits {
         struct max_args<U, std::index_sequence<I...>> {
 
             using result_type = disjunction<
-                can_invoke_t<U, const any_arg<I>&...>,
+                is_invokable<U, const any_arg<I>&...>,
                 max_args<U, std::make_index_sequence<sizeof...(I)-1> >
             >;
 
@@ -130,7 +68,7 @@ namespace callable_traits {
             >;
 
             using result_type = disjunction<
-                can_invoke_t<U, const any_arg<I>&...>,
+                is_invokable<U, const any_arg<I>&...>,
                 min_args<U, Max, next>
             >;
 
@@ -142,7 +80,7 @@ namespace callable_traits {
         template<typename U, std::size_t Max>
         struct min_args<U, Max, std::index_sequence<0, 1, 2>> {
 
-            using T = can_invoke_t<U, any_arg<0>, any_arg<1>, any_arg<2>>;
+            using T = is_invokable<U, any_arg<0>, any_arg<1>, any_arg<2>>;
             using g = typename T::asdf;
             using result_type = disjunction<
                 T,
@@ -157,7 +95,7 @@ namespace callable_traits {
         struct min_args<U, Max, void> {
 
             using result_type = disjunction<
-                can_invoke_t<U, void>,
+                is_invokable<U, void>,
                 min_args<U, Max, std::make_index_sequence<1>>
             >;
 
