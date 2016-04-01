@@ -92,18 +92,15 @@ namespace callable_traits {
             using type = typename sort_impl<Tup, indices>::type;
         };
 
-        template <typename Tup, std::size_t ...i>
-        struct sort_impl<Tup, std::index_sequence<i...>> {
-            using type = std::tuple<typename std::tuple_element<i, Tup>::type...>;
+        template <typename Tup, std::size_t ...I>
+        struct sort_impl<Tup, std::index_sequence<I...>> {
+            using type = std::tuple<at<I, Tup>...>;
         };
 
         template <typename Tup, template<class, class> class Pred>
         struct predicate {
             template <std::size_t I, std::size_t J>
-            using apply = Pred<
-                typename std::tuple_element<I, Tup>::type,
-                typename std::tuple_element<J, Tup>::type
-            >;
+            using apply = Pred<at<I, Tup>, at<J, Tup>>;
         };
 
         template<typename Tup, template<class, class> class Pred>

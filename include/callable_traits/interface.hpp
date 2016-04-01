@@ -35,10 +35,7 @@ namespace callable_traits {
         using args = typename detail::traits<T>::arg_types;
 
         template<size_t I, typename T>
-        using arg_at = typename detail::disjunction<
-            detail::value_type_pair<std::tuple_size<args<T>>::value <= I, invalid_type>,
-            detail::value_type_pair<true, typename std::tuple_element<I, no_sfinae::args<T>>::type>
-        >::type;
+        using arg_at = detail::weak_at<I, args<T>>;
 
         template<typename T>
         using signature = typename detail::traits<T>::function_type;
@@ -116,7 +113,7 @@ namespace callable_traits {
     using args = detail::if_valid<no_sfinae::args<T>>;
 
     template<size_t I, typename T>
-    using arg_at = detail::if_valid<typename std::tuple_element<I, no_sfinae::args<T>>::type>;
+    using arg_at = detail::at<I, no_sfinae::args<T>>;
 
     template<typename T>
     using signature = detail::if_valid<no_sfinae::signature<T>>;
@@ -215,15 +212,13 @@ namespace callable_traits {
     template< std::size_t SearchLimit = constants::arity_search_limit, typename T>
     inline constexpr auto
     min_arity(T&&) {
-        using traits = detail::traits<T&&>;
-        return detail::min_arity_t<traits, SearchLimit>{};
+        return detail::min_arity_t<detail::traits<T&&>, SearchLimit>{};
     }
 
     template<typename T, std::size_t SearchLimit = constants::arity_search_limit>
     inline constexpr auto
     min_arity() {
-        using traits = detail::traits<T>;
-        return detail::min_arity_t<traits, SearchLimit>{};
+        return detail::min_arity_t<detail::traits<T>, SearchLimit>{};
     }
 
     template<std::size_t SearchLimit = constants::arity_search_limit, typename T>

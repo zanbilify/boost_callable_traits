@@ -58,9 +58,7 @@ namespace callable_traits {
                     ph_route<
                         Expression,
                         I,
-                        std::is_placeholder<
-                            typename std::tuple_element<I, Tuple>::type
-                        >::value
+                        std::is_placeholder<at<I, Tuple>>::value
                     >...
                 >;
         };

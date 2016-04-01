@@ -94,11 +94,7 @@ namespace callable_traits {
         struct common_expected_arg_types<std::tuple<std::tuple<PhRoutes...>, OtherGroupTuples...>> {
 
             using expected_types = std::tuple<
-                typename std::tuple_element<
-                    PhRoutes::original_arg_index,
-                    typename PhRoutes::expression::original_args
-                >::type...
-            >;
+                at<PhRoutes::original_arg_index, typename PhRoutes::expression::original_args>...>;
 
             using type = typename prepend<
                 typename find_best_match<typename valid_args<expected_types>::type>::type,

@@ -73,8 +73,7 @@ namespace callable_traits {
         template<typename DistinctGroupByValues, template<class> class Pred, std::size_t I>
         struct filter_predicate {
 
-            using compare_against =
-                typename std::tuple_element<I, DistinctGroupByValues>::type;
+            using compare_against = at<I, DistinctGroupByValues>;
 
             template<typename T>
             auto operator()(T) ->

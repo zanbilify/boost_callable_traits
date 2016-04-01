@@ -116,8 +116,8 @@ namespace callable_traits {
         };
 
         template<typename... Ts>
-        using best_conversion_result =
-            typename std::tuple_element<0, typename sorted_cartesian_product_of_conversions<Ts...>::type>::type;
+        using best_conversion_result = at<0,
+            typename sorted_cartesian_product_of_conversions<Ts...>::type>;
 
         template<typename... Ts>
         using best_match = typename best_conversion_result<Ts...>::key;
