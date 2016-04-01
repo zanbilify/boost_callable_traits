@@ -55,23 +55,32 @@ struct add {
 static_assert(!ct::is_constexpr<add>(), "");
 static_assert(!ct::is_constexpr(add{}), "");
 
-
-
-
-/*
-// The case below fails to compile, because lambdas are not trivially
-// default constructible. (Note: This restriction also applies to the
-// argument types). Error message: "Cannot perform constexpr checks
-// with this type, because it is not trivially default constructible."
-
 auto multiply = [](auto t1, auto t2) -> decltype(t1.value * t2.value) {
     return t1.value * t2.value;
 };
 
 static_assert(!ct::is_constexpr<decltype(multiply)>(), "");
 static_assert(!ct::is_constexpr(multiply), "");
-*/
 
 
+// is_constexpr will always return std::false_type when the argument
+// is either not a literal type, or is not default constructible. Below,
+// `divide` is not default constructible, so is_constexpr returns
+// std::false_type. For literal types that are default constructible, a
+// constexpr default constructor is assumed.
+
+struct divide {
+
+    divide() = delete;
+    constexpr divide(int){};
+
+    template<typename T1, typename T2>
+    constexpr auto operator()(T1, T2) const {
+        return T1{} / T2{};
+    }
+};
+
+static_assert(!ct::is_constexpr<divide>(), "");
+static_assert(!ct::is_constexpr(divide{0}), "");
 
 int main() {}

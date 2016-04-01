@@ -50,22 +50,21 @@ struct add {
 static_assert(!ct::can_invoke_constexpr(add{}, T1{}, T2{}), "");
 static_assert(!ct::can_invoke_constexpr(add{}, 3, 7), "");
 
-/*
-// This last section serves to demonstrate that can_invoke_constexpr
-// can only be used with trivially default constructible types. Even
-// though 'S' is a constexpr function object, it is incompatible with
-// can_invoke_constexpr because it has no trivial default constructor.
-// The same restrictions also apply to the supplied arguments.
-// Error message: "Cannot perform constexpr checks with this type, 
-//                 because it is not trivially default constructible. " 
+
+// This last section demonstrates that can_invoke_constexpr will always
+// return std::false_type when any of the arguments do not decay to literal
+// types. (see http://en.cppreference.com/w/cpp/concept/LiteralType).
+// Even though 'S' below is a constexpr function object, it is incompatible
+// with can_invoke_constexpr because 'S' isn't literal type.
 
 struct S {
     S() = delete;
+    S(int){};
     constexpr int operator()() { return 0; }
 };
 
-using S_result = decltype(ct::can_invoke_constexpr(std::declval<S>()));
-static_assert(S_result::value, "");
-*/
+S s{0};
+static_assert(!ct::can_invoke_constexpr(s), "");
+
 
 int main() {}

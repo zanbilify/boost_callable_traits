@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_GENERALIZE_HPP
 #define CALLABLE_TRAITS_DETAIL_GENERALIZE_HPP
 
-#include <callable_traits/detail/is_reference_wrapper.hpp>
+#include <callable_traits/detail/utility.hpp>
 #include <type_traits>
 #include <utility>
 

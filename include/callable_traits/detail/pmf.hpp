@@ -12,6 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/set_function_qualifiers.hpp>
 #include <callable_traits/detail/qualifiers.hpp>
+#include <callable_traits/detail/utility.hpp>
 #include <callable_traits/config.hpp>
 #include <tuple>
 

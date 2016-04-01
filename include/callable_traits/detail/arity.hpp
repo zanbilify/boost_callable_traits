@@ -11,8 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_DETAIL_ARITY_HPP
 
 #include <callable_traits/detail/test_invoke.hpp>
-#include <callable_traits/detail/substitution.hpp>
-#include <callable_traits/detail/disjunction.hpp>
+#include <callable_traits/detail/utility.hpp>
 #include <callable_traits/detail/any_arg.hpp>
 #include <cstdint>
 

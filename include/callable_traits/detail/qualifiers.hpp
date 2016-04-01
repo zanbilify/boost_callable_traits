@@ -12,6 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_DETAIL_QUALIFIERS_HPP
 
 #include <type_traits>
+#include <cstdint>
 
 namespace callable_traits {
 

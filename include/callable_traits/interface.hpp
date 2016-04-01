@@ -15,14 +15,15 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/pmf.hpp>
 #include <callable_traits/detail/function.hpp>
 #include <callable_traits/detail/function_object.hpp>
-#include <callable_traits/detail/substitution.hpp>
+#include <callable_traits/detail/utility.hpp>
 #include <callable_traits/detail/arity.hpp>
 #include <callable_traits/detail/bind_expression.hpp>
 #include <callable_traits/detail/bind_expression_parser.hpp>
-#include <callable_traits/detail/shallow_decay.hpp>
-#include <callable_traits/detail/disjunction.hpp>
-#include <callable_traits/detail/is_constexpr_t.hpp>
 #include <callable_traits/detail/common_signature_t.hpp>
+#include <callable_traits/detail/can_invoke_impl.hpp>
+#include <callable_traits/detail/can_invoke_constexpr_impl.hpp>
+#include <callable_traits/detail/is_constexpr_impl.hpp>
+
 #include <type_traits>
 #include <utility>
 
@@ -105,7 +106,8 @@ namespace callable_traits {
         using if_valid = typename std::enable_if<
             !std::is_same<T, unknown>::value
                 && !std::is_same<T, invalid_type>::value
-                && !std::is_same<T, std::tuple<unknown>>::value,
+                && !std::is_same<T, std::tuple<unknown>>::value
+                && !std::is_same<T, unknown(unknown)>::value,
             T
         >::type;
     }
@@ -161,45 +163,29 @@ namespace callable_traits {
     template<typename T>
     using remove_varargs = detail::if_valid<no_sfinae::remove_varargs<T>>;
 
-    template<typename T, typename... Args>
+    template<typename... Args>
     inline constexpr auto
-    can_invoke(T&& t, Args&&... args) {
-        using traits = detail::traits<T&&>;
-        using test = detail::test_invoke<traits, Args&&...>;
-        using result = decltype(test{}(::std::forward<T>(t), ::std::forward<Args>(args)...));
-        using failure = detail::substitution_failure;
-        using is_invalid_invoke = std::is_same<result, failure>;
-        return std::integral_constant<bool, !is_invalid_invoke::value>{};
+    can_invoke(Args&&... args) {
+        return detail::can_invoke_impl(std::forward<Args&&>(args)...);
     }
 
-    template<typename T, typename... Args>
+    template<typename... Args>
     inline constexpr auto
-    can_invoke_constexpr(T&& t, Args&&... args) {
-        using traits = detail::traits<T&&>;
-        using test = detail::test_invoke_constexpr<traits, Args&&...>;
-        using result = decltype(test{}(::std::forward<T>(t), ::std::forward<Args>(args)...));
-        using failure = detail::substitution_failure;
-        using is_invalid_invoke = std::is_same<result, failure>;
-        return std::integral_constant<bool, !is_invalid_invoke::value>{};
+    can_invoke_constexpr(Args&&... args) {
+        return detail::can_invoke_constexpr_impl(std::forward<Args&&>(args)...);
     }
 
     template<typename T>
     inline constexpr auto
     is_constexpr(T&& t){
-        using traits = detail::traits<T&&>;
-        using min_args = detail::min_arity_t<traits, constants::arity_search_limit>;
-        using seq = std::make_index_sequence<min_args::value < 0 ? 0 : min_args::value>;
-        using test = detail::is_constexpr_t<traits, seq>;
-        using result = decltype(test{}(::std::forward<T>(t)));
-        using failure = detail::substitution_failure;
-        using is_not_constexpr = std::is_same<result, failure>;
-        return std::integral_constant<bool, !is_not_constexpr::value>{};
+        using can_construct = detail::is_constexpr_constructible<T>;
+        return detail::is_constexpr_impl(std::forward<T>(t), can_construct{});
     }
 
     template<typename T>
     inline constexpr auto
     is_constexpr(){
-        return is_constexpr(CALLABLE_TRAITS_MAKE_CONSTEXPR(T));
+        return decltype(is_constexpr(std::declval<T>())){};
     }
 
     template<typename T>

@@ -10,18 +10,10 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_MAKE_CONSTEXPR_HPP
 #define CALLABLE_TRAITS_DETAIL_MAKE_CONSTEXPR_HPP
 
-#include <callable_traits/detail/shallow_decay.hpp>
+#include <callable_traits/detail/utility.hpp>
 
 #include <type_traits>
 #include <utility>
-
-#define CALLABLE_TRAITS_MAKE_CONSTEXPR(T)                                                \
-static_cast<T>(                                                                          \
-    const_cast<typename ::callable_traits::detail::make_constexpr<T>::const_cast_type>(  \
-        ::callable_traits::detail::make_constexpr<T>::value                              \
-    )                                                                                    \
-)                                                                                        \
-/**/
 
 namespace callable_traits {
 
@@ -31,12 +23,11 @@ namespace callable_traits {
         struct make_constexpr {
             static_assert(sizeof(typename std::decay<T>::type) < 1,
                 "Cannot perform constexpr checks with this type, "
-                "because it is not trivially default constructible.");
+                "because either it is not a literal type, or it is not default constructible.");
         };
 
         template<typename T>
-        struct make_constexpr<T, std::integral_constant<bool, 
-            CALLABLE_TRAITS_IS_TRIVIALLY_DEFAULT_CONSTRUCTIBLE(shallow_decay<T>)>> {
+        struct make_constexpr<T, typename is_constexpr_constructible<shallow_decay<T>>::type> {
             
             using decayed = shallow_decay<T>;
             
@@ -50,5 +41,13 @@ namespace callable_traits {
         };
     }
 }
+
+#define CALLABLE_TRAITS_MAKE_CONSTEXPR(T)                                                \
+static_cast<T>(                                                                          \
+    const_cast<typename ::callable_traits::detail::make_constexpr<T>::const_cast_type>(  \
+        ::callable_traits::detail::make_constexpr<T>::value                              \
+    )                                                                                    \
+)                                                                                        \
+/**/
 
 #endif

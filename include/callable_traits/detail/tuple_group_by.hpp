@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_DETAIL_TUPLE_GROUP_BY_HPP
 
 #include <callable_traits/detail/tuple_sort.hpp>
-#include <callable_traits/detail/prepend.hpp>
+#include <callable_traits/detail/utility.hpp>
 #include <tuple>
 #include <type_traits>
 

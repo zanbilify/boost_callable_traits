@@ -19,11 +19,8 @@ namespace callable_traits {
     namespace detail {
 
         template<typename T, typename U = shallow_decay<T>>
-        using int_if_trivial = 
-            typename std::enable_if<
-                CALLABLE_TRAITS_IS_TRIVIALLY_DEFAULT_CONSTRUCTIBLE(U),
-                T
-            >::type;
+        using int_if_literal =
+            typename std::enable_if<is_constexpr_constructible<U>::value, T>::type;
 
         template<std::size_t I = 0>
         struct any_arg_evaluated;
@@ -35,12 +32,12 @@ namespace callable_traits {
 
             static const any_arg_evaluated<I> value;
 
-            template<typename T, int_if_trivial<T> = 0>
+            template<typename T, int_if_literal<T> = 0>
             inline constexpr operator T& () const {
                 return CALLABLE_TRAITS_MAKE_CONSTEXPR(T&);
             }
 
-            template<typename T, int_if_trivial<T> = 0>
+            template<typename T, int_if_literal<T> = 0>
             inline constexpr operator T&& () const {
                 return CALLABLE_TRAITS_MAKE_CONSTEXPR(T&&);
             }
@@ -73,7 +70,6 @@ namespace callable_traits {
             //msvc doesn't like this
             static constexpr const auto value = any_arg_evaluated<I>{};
 #endif //!defined(CALLABLE_TRAITS_MSVC)
-
 
             template<typename T>
             operator T& () const;

@@ -12,7 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/generalized_class.hpp>
 #include <callable_traits/detail/pmf.hpp>
-#include <callable_traits/detail/is_integral_constant.hpp>
+#include <callable_traits/detail/utility.hpp>
 
 #include <tuple>
 

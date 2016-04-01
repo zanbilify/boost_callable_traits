@@ -15,7 +15,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/fwd/function_object_fwd.hpp>
 #include <callable_traits/detail/function.hpp>
 #include <callable_traits/detail/traits.hpp>
-#include <callable_traits/detail/member_pointer_utilities.hpp>
+#include <callable_traits/detail/utility.hpp>
 
 namespace callable_traits {
 

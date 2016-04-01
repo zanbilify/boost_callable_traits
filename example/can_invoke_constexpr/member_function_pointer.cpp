@@ -31,7 +31,4 @@ static_assert(ct::can_invoke_constexpr(pmf_constant{}, foo{}, 0), "");
 // foo::bar is constexpr, the arguments do not obey INVOKE rules
 static_assert(!ct::can_invoke_constexpr(pmf_constant{}, foo{}), "");
 
-// Don't forget that all arguments to can_invoke_constexpr
-// must be trivially default constructible
-
 int main() { return 0; }

@@ -14,8 +14,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/bind_expression.hpp>
 #include <callable_traits/detail/fwd/bind_expression_parser_fwd.hpp>
 #include <callable_traits/detail/best_match.hpp>
-#include <callable_traits/detail/prepend.hpp>
-#include <callable_traits/detail/build_function.hpp>
+#include <callable_traits/detail/utility.hpp>
 #include <tuple>
 #include <functional>
 
