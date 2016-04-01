@@ -87,10 +87,6 @@ namespace callable_traits {
             static constexpr bool value = result_type::value;
         };
 
-        struct dummy_wrapper {
-            using arg_types = std::tuple<unknown>;
-        };
-
         template<typename T>
         struct arg_tuple_size {
             static constexpr int value = -1;

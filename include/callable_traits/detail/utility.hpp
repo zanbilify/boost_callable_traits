@@ -14,11 +14,12 @@ Distributed under the Boost Software License, Version 1.0.
 #include <type_traits>
 #include <tuple>
 #include <utility>
+#include <cstdint>
 
 namespace callable_traits {
 
 struct constants {
-    static constexpr std::size_t arity_search_limit = CALLABLE_TRAITS_MAX_ARITY_SEARCH;
+    static constexpr std::size_t arity_search_limit = CALLABLE_TRAITS_ARITY_SEARCH_LIMIT;
 };
 
 struct invalid_type { invalid_type() = delete; };
@@ -28,37 +29,45 @@ struct unknown { unknown() = delete; };
 
     namespace detail {
 
+        // used to convey "this type doesn't matter" in code
         struct dummy {};
 
+
+        // used as return type in failed SFINAE tests
         struct substitution_failure{};
 
+
+        // shorthand for std::tuple_element
         template<std::size_t I, typename Tup>
         using at = typename std::tuple_element<I, Tup>::type;
 
-        template<std::size_t I, typename Tup, typename = std::true_type>
-        struct weak_at_t {
-            using type = at<I, Tup>;
-        };
 
+        namespace util_detail {
+
+            template<std::size_t I, typename Tup, typename = std::true_type>
+            struct weak_at_t {
+                using type = at<I, Tup>;
+            };
+
+            template<std::size_t I, typename Tup>
+            struct weak_at_t<I, Tup, std::integral_constant<bool, I >= std::tuple_size<Tup>::value>>{
+                using type = invalid_type;
+            };
+        }
+
+        // bounds-checked version of at (see above)
         template<std::size_t I, typename Tup>
-        struct weak_at_t<I, Tup, std::integral_constant<bool, I >= std::tuple_size<Tup>::value>>{
-            using type = invalid_type;
-        };
+        using weak_at = typename util_detail::weak_at_t<I, Tup>::type;
 
-        template<std::size_t I, typename Tup>
-        using weak_at = typename weak_at_t<I, Tup>::type;
 
-        template<bool Value, typename T>
-        struct value_type_pair {
-            using type = T;
-            static constexpr const bool value = Value;
-        };
-
+        // a faster version of std::decay_t
         template<typename T>
         using shallow_decay = typename std::remove_cv<
             typename std::remove_reference<T>::type
         >::type;
 
+
+        //polyfill for C++17 std::conjunction
         template<typename...>
         struct conjunction
             : std::true_type {};
@@ -71,6 +80,8 @@ struct unknown { unknown() = delete; };
         struct conjunction<T, Ts...>
             : std::conditional<T::value != false, T, conjunction<Ts...>>::type { };
 
+
+        //polyfill for C++17 std::disjunction
         template<typename...>
         struct disjunction
             : std::false_type {};
@@ -83,21 +94,29 @@ struct unknown { unknown() = delete; };
         struct disjunction<T, Ts...>
             : std::conditional<T::value != false, T, disjunction<Ts...>>::type { };
 
+
+        //polyfill for C++17 negation
         template<typename BoolType>
         using negate = std::integral_constant<bool, !BoolType::value>;
 
-        template<typename T>
-        struct is_reference_wrapper_t {
-            using type = std::false_type;
-        };
+
+        namespace util_detail {
+
+            template<typename T>
+            struct is_reference_wrapper_t {
+                using type = std::false_type;
+            };
+
+            template<typename T>
+            struct is_reference_wrapper_t<std::reference_wrapper<T>> {
+                using type = std::true_type;
+            };
+        }
 
         template<typename T>
-        struct is_reference_wrapper_t<std::reference_wrapper<T>> {
-            using type = std::true_type;
-        };
+        using is_reference_wrapper =
+            typename util_detail::is_reference_wrapper_t<shallow_decay<T>>::type;
 
-        template<typename T>
-        using is_reference_wrapper = typename is_reference_wrapper_t<shallow_decay<T>>::type;
 
         template<typename T, typename = std::true_type>
         struct unwrap_reference_t {
@@ -109,22 +128,28 @@ struct unknown { unknown() = delete; };
             using type = decltype(std::declval<T>().get());
         };
 
+        // removes std::reference_wrapper
         template<typename T>
         using unwrap_reference = typename unwrap_reference_t<T>::type;
 
-        template<typename T>
-        struct is_integral_constant_t {
-            static constexpr bool value = false;
-        };
 
-        template<typename T, T Value>
-        struct is_integral_constant_t<std::integral_constant<T, Value>> {
-            static constexpr bool value = true;
-        };
+        namespace util_detail {
+
+            template<typename T>
+            struct is_integral_constant_t {
+                using type = std::false_type;
+            };
+
+            template<typename T, T Value>
+            struct is_integral_constant_t<std::integral_constant<T, Value>> {
+                using type = std::true_type;
+            };
+        }
 
         template<typename T>
-        using is_integral_constant = std::integral_constant<bool,
-            is_integral_constant_t<shallow_decay<T>>::value>;
+        using is_integral_constant = typename util_detail::is_integral_constant_t<
+            shallow_decay<T>>::type;
+
 
         template<typename Check, typename Result>
         using if_integral_constant =
@@ -134,39 +159,116 @@ struct unknown { unknown() = delete; };
         using if_not_integral_constant =
             typename std::enable_if<!is_integral_constant<Check>::value, Result>::type;
 
+
         template<typename T, typename Class>
         using add_member_pointer = T Class::*;
 
-        template<typename T>
-        struct remove_member_pointer_t {
-            using type = T;
-        };
 
-        template<typename T, typename U>
-        struct remove_member_pointer_t<T U::*>{
-            using type = T;
-        };
+        namespace util_detail {
+
+            template<typename T>
+            struct remove_member_pointer_t {
+                using type = T;
+            };
+
+            template<typename T, typename U>
+            struct remove_member_pointer_t<T U::*>{
+                using type = T;
+            };
+        }
 
         template<typename T>
         using remove_member_pointer =
-            typename remove_member_pointer_t<T>::type;
+            typename util_detail::remove_member_pointer_t<T>::type;
+
 
         template<typename T, typename U = shallow_decay<T>>
         using is_constexpr_constructible = std::integral_constant<bool,
             std::is_literal_type<U>::value && std::is_default_constructible<U>::value
         >;
 
-        template<typename...>
-        struct build_function_t;
 
-        template<typename Return, typename... Args>
-        struct build_function_t<Return, std::tuple<Args...>>{
-            using type = Return(Args...);
-        };
+        namespace util_detail {
+
+            template<typename...>
+            struct build_function_t;
+
+            template<typename Return, typename... Args>
+            struct build_function_t<Return, std::tuple<Args...>>{
+                using type = Return(Args...);
+            };
+        }
 
         template<typename Ret, typename Tup>
-        using build_function = typename build_function_t<Ret, Tup>::type;
+        using build_function =
+            typename util_detail::build_function_t<Ret, Tup>::type;
 
+
+        namespace util_detail {
+
+            template<typename T>
+            struct can_dereference_t
+            {
+                template<typename>
+                struct check {};
+
+                template<typename U>
+                static std::int8_t test(
+                    check<typename std::remove_reference<decltype(*std::declval<U>())>::type>*
+                );
+
+                template<typename>
+                static std::int16_t test(...);
+
+                static constexpr const bool value =
+                    sizeof(test<T>(nullptr)) == sizeof(std::int8_t);
+            };
+        }
+
+        //returns std::true_type for pointers and smart pointers
+        template<typename T>
+        using can_dereference = std::integral_constant<bool,
+            util_detail::can_dereference_t<T>::value
+        >;
+
+
+        namespace util_detail {
+
+            template<typename T, typename = std::true_type>
+            struct generalize_t {
+                using type = T;
+            };
+
+            template<typename T>
+            struct generalize_t<T, std::integral_constant<bool,
+                    can_dereference<T>::value && !is_reference_wrapper<T>::value
+            >>{
+                using type = decltype(*std::declval<T>());
+            };
+
+            template<typename T>
+            struct generalize_t<T, is_reference_wrapper<T>> {
+                using type = decltype(std::declval<T>().get());
+            };
+        }
+
+        // When T is a pointer, generalize<T> is the resulting type of the
+        // pointer dereferenced. When T is an std::reference_wrapper, generalize<T>
+        // is the underlying reference type. Otherwise, generalize<T> is T.
+        template<typename T>
+        using generalize = typename util_detail::generalize_t<T>::type;
+
+
+        // handles the member pointer rules of INVOKE
+        template<typename Base, typename T,
+                 typename IsBaseOf = std::is_base_of<Base, shallow_decay<T>>,
+                 typename IsSame = std::is_same<Base, shallow_decay<T>>>
+        using generalize_if_dissimilar = typename std::conditional<
+            IsBaseOf::value || IsSame::value, T, generalize<T>
+        >::type;
+
+
+        //used to prepend a type to a tuple
         template <typename...> struct prepend;
 
         template <> struct prepend<> {
