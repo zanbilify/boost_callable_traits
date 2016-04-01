@@ -28,4 +28,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 #endif //_MSC_VER
 
+#ifndef CALLABLE_TRAITS_MAX_ARITY_SEARCH
+#define CALLABLE_TRAITS_MAX_ARITY_SEARCH 10
+#endif //CALLABLE_TRAITS_MAX_ARITY_SEARCH
+
 #endif

@@ -10,6 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_UTILITY_HPP
 #define CALLABLE_TRAITS_DETAIL_UTILITY_HPP
 
+#include <callable_traits/config.hpp>
 #include <type_traits>
 #include <tuple>
 #include <utility>
@@ -17,7 +18,7 @@ Distributed under the Boost Software License, Version 1.0.
 namespace callable_traits {
 
 struct constants {
-    static constexpr std::size_t arity_search_limit = 10;
+    static constexpr std::size_t arity_search_limit = CALLABLE_TRAITS_MAX_ARITY_SEARCH;
 };
 
 struct invalid_type { invalid_type() = delete; };

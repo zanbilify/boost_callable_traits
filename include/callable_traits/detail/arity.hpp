@@ -75,21 +75,6 @@ namespace callable_traits {
             static constexpr int arg_count = result_type::arg_count;
         };
 
-        /* useful for debugging
-        template<typename U, std::size_t Max>
-        struct min_args<U, Max, std::index_sequence<0, 1, 2>> {
-
-            using T = is_invokable<U, any_arg<0>, any_arg<1>, any_arg<2>>;
-            using g = typename T::asdf;
-            using result_type = disjunction<
-                T,
-                min_args<U, Max, std::make_index_sequence<4>>
-            >;
-
-            static constexpr bool value = result_type::value;
-            static constexpr int arg_count = result_type::arg_count;
-        };*/
-
         template<typename U, std::size_t Max>
         struct min_args<U, Max, void> {
 

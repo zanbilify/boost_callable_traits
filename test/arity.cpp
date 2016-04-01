@@ -245,16 +245,15 @@ int main() {
         test_arity<-1, 2, 5, limit_minus>(T{});
     } {
         //testing cv/ref qualified overloads
-        //TODO make this work
-        /*using T = simple_overloaded_function_object;
-        test_arity<T&, -1, 1, 1, limit>();
-        test_arity<T&&, -1, 2, 2, limit>();
-        test_arity<T const &, -1, 3, 3, limit>();
-        test_arity<T const &&, -1, 4, 4, limit>();
-        test_arity<T volatile &, -1, 5, 5, limit>();
-        test_arity<T volatile &&, -1, 6, 6, limit>();
+        using T = overloaded_function_object;
+        test_arity<T&, -1, 1, 7, limit>();
+        test_arity<T&&, -1, 2, 8, limit>();
+        test_arity<T const &, -1, 3, 7, limit>();
+        test_arity<T const &&, -1, 3, 8, limit>();
+        test_arity<T volatile &, -1, 5, 7, limit>();
+        test_arity<T volatile &&, -1, 6, 8, limit>();
         test_arity<T const volatile &, -1, 7, 7, limit>();
-        test_arity<T const volatile &&, -1, 8, 8, limit>();*/
+        test_arity<T const volatile &&, -1, 8, 8, limit>();
     }
     {
         //testing function without varargs
