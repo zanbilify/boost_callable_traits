@@ -10,3 +10,5 @@ OTHER_FILES += ../../test/*.cpp \
             ../../example/args/*.cpp \
             ../../example/signature/*.cpp \
             ../../example/common_signature/*.cpp \
+            ../../example/apply_member_pointer/*.cpp \
+            ../../example/remove_member_pointer/.cpp \

@@ -73,6 +73,10 @@ namespace callable_traits {
             typename detail::traits<T>::remove_varargs;
 
         template<typename T>
+        using remove_member_pointer =
+            typename detail::traits<T>::remove_member_pointer;
+
+        template<typename T>
         using add_const_qualifier =
             typename detail::traits<T>::add_const;
 
@@ -95,6 +99,14 @@ namespace callable_traits {
         template<typename T>
         using add_varargs =
             typename detail::traits<T>::add_varargs;
+
+        template<typename T, typename C>
+        using apply_member_pointer =
+            typename detail::traits<T>::template apply_member_pointer<C>;
+
+        template<typename T, typename C>
+        using apply_return =
+            typename detail::traits<T>::template apply_return<C>;
     }
 
     namespace detail {
@@ -140,6 +152,12 @@ namespace callable_traits {
     using remove_reference_qualifier = detail::if_valid<no_sfinae::remove_reference_qualifier<T>>;
 
     template<typename T>
+    using remove_varargs = detail::if_valid<no_sfinae::remove_varargs<T>>;
+
+    template<typename T>
+    using remove_member_pointer = detail::if_valid<no_sfinae::remove_member_pointer<T>>;
+
+    template<typename T>
     using add_const_qualifier = detail::if_valid<no_sfinae::add_const_qualifier<T>>;
 
     template<typename T>
@@ -157,8 +175,13 @@ namespace callable_traits {
     template<typename T>
     using add_varargs = detail::if_valid<no_sfinae::add_varargs<T>>;
 
-    template<typename T>
-    using remove_varargs = detail::if_valid<no_sfinae::remove_varargs<T>>;
+    template<typename T, typename C>
+    using apply_member_pointer =
+        detail::if_valid<typename no_sfinae::apply_member_pointer<T, C>>;
+
+    template<typename T, typename C>
+    using apply_return =
+        detail::if_valid<typename no_sfinae::apply_return<T, C>>;
 
     template<typename... Args>
     inline constexpr auto
@@ -207,6 +230,18 @@ namespace callable_traits {
     inline constexpr auto
     has_varargs() {
         return typename detail::traits<T>::has_varargs{};
+    }
+
+    template<typename T>
+    inline constexpr auto
+    has_void_return(T&&) {
+        return typename std::is_same<result_of<T&&>, void>::type{};
+    }
+
+    template<typename T>
+    inline constexpr auto
+    has_void_return() {
+        return typename std::is_same<result_of<T>, void>::type{};
     }
 
     template< std::size_t SearchLimit = constants::arity_search_limit, typename T>

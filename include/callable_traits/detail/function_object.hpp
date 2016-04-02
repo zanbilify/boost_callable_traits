@@ -95,7 +95,7 @@ namespace callable_traits {
             using add_varargs = invalid_type;
 
             template<typename>
-            using add_member_pointer = invalid_type;
+            using apply_member_pointer = invalid_type;
 
             template<typename>
             using apply_return = invalid_type;

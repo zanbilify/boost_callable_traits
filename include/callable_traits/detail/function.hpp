@@ -71,6 +71,8 @@ struct function<Return(Args...) QUAL>                                           
     template<typename U>                                                             \
     using apply_member_pointer = add_member_pointer<type, U>;                        \
                                                                                      \
+    using remove_member_pointer = type;                                              \
+                                                                                     \
     template<typename NewReturn>                                                     \
     using apply_return = NewReturn(Args...) QUAL;                                    \
                                                                                      \
@@ -124,6 +126,8 @@ struct function<Return (Args..., ...) QUAL>                                     
     using apply_member_pointer =                                                     \
         Return( CALLABLE_TRAITS_VARARGS_CC U::*)(Args..., ...) QUAL;                 \
                                                                                      \
+    using remove_member_pointer = type;                                              \
+                                                                                     \
     template<typename NewReturn>                                                     \
     using apply_return = NewReturn(Args..., ...) QUAL;                               \
 }                                                                                    \
@@ -174,6 +178,8 @@ namespace callable_traits {
 
             template<typename NewReturn>
             using apply_return = typename base::template apply_return<NewReturn>&;
+
+            using remove_member_pointer = type;
         };
 
         template<typename T>
@@ -197,6 +203,8 @@ namespace callable_traits {
 
             template<typename NewReturn>
             using apply_return = typename base::template apply_return<NewReturn>&;
+
+            using remove_member_pointer = type;
         };
 
         template<typename T, T Value>

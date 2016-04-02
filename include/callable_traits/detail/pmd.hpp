@@ -59,6 +59,9 @@ namespace callable_traits {
 
             using remove_member_pointer = D;
 
+            template<typename C>
+            using apply_member_pointer = D C::*;
+
             using remove_reference = invalid_type;
             using add_lvalue_reference = invalid_type;
             using add_rvalue_reference = invalid_type;

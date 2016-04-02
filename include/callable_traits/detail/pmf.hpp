@@ -24,7 +24,7 @@ struct pmf<Return(T::*)(Args...) QUAL>                                          
                                                                                      \
     static constexpr bool value = true;                                              \
     using has_varargs = std::false_type;                                             \
-    static constexpr bool is_ambiguous = false;                                      \
+    using is_ambiguous = std::false_type;                                            \
     using is_member_pointer = std::true_type;                                        \
     using is_function_object = std::false_type;                                      \
     using is_member_function_pointer = std::true_type;                               \
@@ -72,6 +72,8 @@ struct pmf<Return(T::*)(Args...) QUAL>                                          
                                                                                      \
     template<typename NewReturn>                                                     \
     using apply_return = NewReturn(T::*)(Args...) QUAL;                              \
+                                                                                     \
+    using remove_member_pointer = abominable_type;                                   \
 };                                                                                   \
                                                                                      \
 template<typename Return, typename T, typename... Args>                              \
@@ -80,7 +82,7 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL>          
                                                                                      \
     static constexpr bool value = true;                                              \
     using has_varargs = std::true_type;                                              \
-    static constexpr bool is_ambiguous = false;                                      \
+    using is_ambiguous = std::false_type;                                            \
     using is_member_pointer = std::true_type;                                        \
     using is_function_object = std::false_type;                                      \
     using is_member_function_pointer = std::true_type;                               \
@@ -133,6 +135,8 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL>          
     template<typename NewReturn>                                                     \
     using apply_return =                                                             \
         NewReturn(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL;               \
+                                                                                     \
+    using remove_member_pointer = abominable_type;                                   \
 }                                                                                    \
 /**/
 
