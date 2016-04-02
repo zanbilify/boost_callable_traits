@@ -61,7 +61,7 @@ static_assert(!ct::can_invoke_constexpr(add{}, 3, 7), "");
 struct S {
     S() = delete;
     S(int){};
-    constexpr int operator()() { return 0; }
+    constexpr int operator()() const { return 0; }
 };
 
 S s{0};

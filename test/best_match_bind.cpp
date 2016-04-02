@@ -72,7 +72,7 @@ int main() {
 
         using args = ct::args<decltype(bind_expr)>;
         using expected_args = std::tuple<const VampireRobotPoodle&>;
-        CT_ASSERT(std::is_same<args, expected_args>{});
+        CT_ASSERT(std::is_same<args, expected_args>::value);
         
         VampireRobotPoodle vampire_robot_poodle;
         assert(bind_obj(vampire_robot_poodle) == 0);
@@ -97,7 +97,7 @@ int main() {
 
         using args = ct::args<decltype(bind_expr)>;
         using expected_args = std::tuple<const VampireRobotPoodle&>;
-        CT_ASSERT(std::is_same<args, expected_args>{});
+        CT_ASSERT(std::is_same<args, expected_args>::value);
 
         VampireRobotPoodle vampire_robot_poodle;
         assert(bind_obj(vampire_robot_poodle) == 0);

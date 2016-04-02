@@ -133,7 +133,7 @@ int main() {
     // the bind expression's placeholders
     using expected_args = std::tuple<A, B, C, E, E, F, F, F, E, E>;
 
-    CT_ASSERT(std::is_same<args, expected_args>{});
+    CT_ASSERT(std::is_same<args, expected_args>::value);
 
     auto runtime_test = BIND_WITH(std::bind);
     assert(apply(runtime_test, expected_args{}) == "ABCDEFG");

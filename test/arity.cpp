@@ -251,9 +251,12 @@ int main() {
         test_arity<T const &, -1, 3, 7, limit>();
         test_arity<T const &&, -1, 3, 8, limit>();
         test_arity<T volatile &, -1, 5, 7, limit>();
+
+#ifndef CALLABLE_TRAITS_MSVC
         test_arity<T volatile &&, -1, 6, 8, limit>();
         test_arity<T const volatile &, -1, 7, 7, limit>();
         test_arity<T const volatile &&, -1, 8, 8, limit>();
+#endif
     }
     {
         //testing function without varargs

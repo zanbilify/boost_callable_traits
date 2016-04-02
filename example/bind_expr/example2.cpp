@@ -49,11 +49,11 @@ int main() {
 
     using bind_args = ct::args<bind_expr>;
     using expected_args = std::tuple<const VampireRobotPoodle&>;
-    static_assert(std::is_same<bind_args, expected_args>{}, "");
+    static_assert(std::is_same<bind_args, expected_args>::value, "");
     
     using bind_signature = ct::signature<bind_expr>;
     using expected_signature = int(const VampireRobotPoodle&);
-    static_assert(std::is_same<bind_signature, expected_signature>{}, "");
+    static_assert(std::is_same<bind_signature, expected_signature>::value, "");
 
     VampireRobotPoodle vampire_robot_poodle;
     assert(bind_obj(vampire_robot_poodle) == 0);

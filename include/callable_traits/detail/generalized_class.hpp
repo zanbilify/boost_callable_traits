@@ -22,22 +22,18 @@ namespace callable_traits {
         template<typename T>
         struct can_make_reference {
 
-            template<typename U>
-            static dummy test(typename std::remove_reference<U&>::type*);
+            template<typename U = T>
+            static U& test(std::nullptr_t);
 
-            template<typename>
-            static void test(...);
+            static dummy test(...);
 
-            using type = decltype(can_make_reference::test<T>(nullptr));
-            static constexpr bool value = std::is_same<dummy, type>::value;
+            using type = decltype(can_make_reference::test(nullptr));
+            static constexpr bool value = !std::is_same<dummy, type>::value;
         };
 
         template<typename T>
         struct is_class_after_dereference
         {
-            template<typename>
-            struct check {};
-
             template<typename U,
                 typename K = typename std::enable_if<can_make_reference<U>::value, U>::type,
                 typename Dereferenced = decltype(*std::declval<K>()),

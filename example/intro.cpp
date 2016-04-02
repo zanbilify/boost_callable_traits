@@ -31,22 +31,22 @@ int main() {
 
     // indexed argument types
     using second_arg = ct::arg_at<1, foo>;
-    static_assert(std::is_same<second_arg, int&&>{}, "");
+    static_assert(std::is_same<second_arg, int&&>::value, "");
 
     // arg types are packaged into std::tuple, which serves as the default
     // type list in CallableTraits (runtime capabilities are not used).
     using args = ct::args<foo>;
     using expected_args = std::tuple<int, int&&, const int&, void*>;
-    static_assert(std::is_same<args, expected_args>{}, "");
+    static_assert(std::is_same<args, expected_args>::value, "");
 
     //callable_traits::result_of is a bit friendlier than std::result_of 
     using return_type = ct::result_of<foo>;
-    static_assert(std::is_same<return_type, void>{}, "");
+    static_assert(std::is_same<return_type, void>::value, "");
 
     // callable_traits::signature yields a plain function type
     using signature = ct::signature<foo>;
     using expected_signature = void(int, int&&, const int&, void*);
-    static_assert(std::is_same<signature, expected_signature>{}, "");
+    static_assert(std::is_same<signature, expected_signature>::value, "");
 
     // when trait information can be conveyed in an integral_constant,
     // callable_traits uses constexpr functions instead of template aliases.
@@ -109,10 +109,11 @@ int main() {
     static_assert(std::is_same<
         ct::args<bind_expression>,
         std::tuple<int&&>
-    >{}, "");
+    >::value, "");
 
     // callable_traits can facilitate the construction of std::function objects.
-    auto fn = std::function<ct::signature<bind_expression>>{ bind_obj };
+    using bind_signature = ct::signature<bind_expression>;
+    auto fn = std::function<bind_signature>{ bind_obj };
     fn(0);
 
     // For function objects, the following checks are determined by the 
@@ -138,21 +139,21 @@ int main() {
     {
         // So that you don't have to scroll back up to see, here's the type of pmf:
         using expected_pmf = void (foo::*)(int, int&&, const int&, void*) const;
-        static_assert(std::is_same<pmf, expected_pmf>{}, "");
+        static_assert(std::is_same<pmf, expected_pmf>::value, "");
     }
 
     {
         // Let's remove the const qualifier:
         using mutable_pmf = ct::remove_const_qualifier<pmf>;
         using expected_pmf = void (foo::*)(int, int&&, const int&, void*) /*no const!*/;
-        static_assert(std::is_same<mutable_pmf, expected_pmf>{}, "");
+        static_assert(std::is_same<mutable_pmf, expected_pmf>::value, "");
     }
 
     {
         // Now let's add an rvalue qualifier (&&):
         using rvalue_pmf = ct::add_rvalue_qualifier<pmf>;
         using expected_pmf = void (foo::*)(int, int&&, const int&, void*) const &&;
-        static_assert(std::is_same<rvalue_pmf, expected_pmf>{}, ""); //        ^^^^
+        static_assert(std::is_same<rvalue_pmf, expected_pmf>::value, ""); //        ^^^^
     }
 
     // You get the picture. CallableTraits lets you add and remove all PMF
@@ -169,7 +170,7 @@ int main() {
 
         using varargs_pmf = ct::add_varargs<pmf>;
         using expected_pmf = void (foo::*)(int, int&&, const int&, void*, ...) const;
-        static_assert(std::is_same<varargs_pmf, expected_pmf>{}, ""); //  ^^^
+        static_assert(std::is_same<varargs_pmf, expected_pmf>::value, ""); //  ^^^
 
         // note: MSVC likely requires __cdecl for a varargs PMF on your
         // machine, at least if you intend to do anything useful with it.
