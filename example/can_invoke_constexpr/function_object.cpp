@@ -55,7 +55,8 @@ static_assert(!ct::can_invoke_constexpr(add{}, 3, 7), "");
 // return std::false_type when any of the arguments do not decay to literal
 // types. (see http://en.cppreference.com/w/cpp/concept/LiteralType).
 // Even though 'S' below is a constexpr function object, it is incompatible
-// with can_invoke_constexpr because 'S' isn't literal type.
+// with can_invoke_constexpr because 'S' isn't a literal type. Additionally,
+// all arguments must be default constructible.
 
 struct S {
     S() = delete;

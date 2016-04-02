@@ -72,7 +72,13 @@ namespace callable_traits {
 
         template<typename Tup, std::size_t I, std::size_t... J>
         struct best_match_cross_section<Tup, I, std::index_sequence<J...>>{
-            using type = best_match<weak_at<I, weak_at<J, Tup>>...>;
+            using result = best_match<weak_at<I, weak_at<J, Tup>>...>;
+
+            using type = typename std::conditional<
+                std::is_rvalue_reference<result>::value,
+                typename std::remove_reference<result>::type,
+                result
+            >::type;
         };
 
         template<typename ArgsTuplesTuple, typename Seq>

@@ -20,24 +20,36 @@ namespace callable_traits {
     namespace detail {
 
         template<typename T>
+        struct can_make_reference {
+
+            template<typename U>
+            static dummy test(typename std::remove_reference<U&>::type*);
+
+            template<typename>
+            static void test(...);
+
+            using type = decltype(can_make_reference::test<T>(nullptr));
+            static constexpr bool value = std::is_same<dummy, type>::value;
+        };
+
+        template<typename T>
         struct is_class_after_dereference
         {
             template<typename>
             struct check {};
 
-            template<typename U, typename K = typename std::enable_if<!std::is_function<typename std::remove_reference<U>::value>::value, U>::type>
-            static typename std::enable_if<
-                std::is_class<
-                    typename std::remove_reference<decltype(*std::declval<K>())>::type
-                >::value,
-                std::int8_t
-            >::type test(std::nullptr_t);
+            template<typename U,
+                typename K = typename std::enable_if<can_make_reference<U>::value, U>::type,
+                typename Dereferenced = decltype(*std::declval<K>()),
+                typename C = typename std::remove_reference<Dereferenced>::type,
+                typename std::enable_if<std::is_class<C>::value, int>::type = 0>
+            static std::int8_t test(int);
 
             template<typename>
             static std::int16_t test(...);
 
             static constexpr const bool value =
-                sizeof(test<T>(nullptr)) == sizeof(std::int8_t);
+                sizeof(test<T>(0)) == sizeof(std::int8_t);
         };
 
         template<typename T>

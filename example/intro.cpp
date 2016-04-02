@@ -104,14 +104,11 @@ int main() {
 
     // Here, int is chosen as the expected argument for the bind expression
     // because it's the best fit for all three placeholder slots. Behind
-    // the scenes, this is determined by a cartesian product of conversion
-    // combinations of the known parameter types represented by the reused
-    // placeholders (yes, this is slow). The type with the highest number of
-    // successful conversions "wins". int is chosen over int&& because
-    // non-reference types are preferred in the case of a tie.
+    // the scenes, this is determined by a cartesian product of parameter
+    // conversion combinations that are represented by the reused placeholders.
     static_assert(std::is_same<
         ct::args<bind_expression>,
-        std::tuple<int>
+        std::tuple<int&&>
     >{}, "");
 
     // callable_traits can facilitate the construction of std::function objects.
@@ -177,6 +174,4 @@ int main() {
         // note: MSVC likely requires __cdecl for a varargs PMF on your
         // machine, at least if you intend to do anything useful with it.
     }
-
-    return 0;
 }

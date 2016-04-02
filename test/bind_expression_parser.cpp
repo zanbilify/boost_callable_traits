@@ -74,7 +74,7 @@ apply(F&& f, Tuple&& t) {
         std::forward<F>(f),
         std::forward<Tuple>(t),
         std::make_index_sequence<
-        std::tuple_size<std::remove_reference_t<Tuple>>::value
+        std::tuple_size<typename std::remove_reference<Tuple>::type>::value
         >{}
     );
 }

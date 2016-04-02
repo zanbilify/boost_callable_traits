@@ -9,19 +9,20 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace ct = callable_traits;
 
-struct foo {
-    int bar(int) const {
-        return 1;
-    }
-};
+int foo(int&& i) {
+    return i;
+}
 
 // can_invoke returns std::true_type here because the
 // arguments are valid to INVOKE
-static_assert(ct::can_invoke(&foo::bar, foo{}, 0), "");
+static_assert(ct::can_invoke(foo, 0), "");
+
+int i = 0;
 
 // can_invoke returns std::false_type here because the
-// arguments are NOT valid to INVOKE - foo::bar can't be
-// invoked like a void member function.
-static_assert(!ct::can_invoke(&foo::bar, foo{}), "");
+// arguments are NOT valid to INVOKE - foo expects an
+// rvalue reference, not an lvalue reference.
+static_assert(!ct::can_invoke(foo, i), "");
 
 int main() { return 0; }
+

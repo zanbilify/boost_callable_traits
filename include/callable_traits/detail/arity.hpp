@@ -60,11 +60,11 @@ namespace callable_traits {
         template<typename U, std::size_t Max, std::size_t... I>
         struct min_args<U, Max, std::index_sequence<I...>> {
 
-            using next = std::conditional_t<
+            using next = typename std::conditional<
                 sizeof...(I)+1 <= Max,
                 std::make_index_sequence<sizeof...(I)+1>,
                 sentinel
-            >;
+            >::type;
 
             using result_type = disjunction<
                 is_invokable<U, const any_arg<I>&...>,

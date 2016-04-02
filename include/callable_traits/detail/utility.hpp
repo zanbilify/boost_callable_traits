@@ -203,7 +203,6 @@ struct unknown { unknown() = delete; };
         using build_function =
             typename util_detail::build_function_t<Ret, Tup>::type;
 
-
         namespace util_detail {
 
             template<typename T>

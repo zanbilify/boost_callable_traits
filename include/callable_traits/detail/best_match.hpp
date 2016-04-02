@@ -39,13 +39,21 @@ namespace callable_traits {
         template<typename T>
         struct can_convert {
             
+            using is_non_reference = std::is_same<T, typename std::remove_reference<T>::type>;
+
+            using arg_type = typename std::conditional<
+                is_non_reference::value,
+                T&,
+                T
+            >::type;
+
             //todo - this should probably use std::is_convertible instead
             template<typename K>
             struct apply {
                 
                 struct bad{};
                 
-                template<typename U, typename Ret = decltype(std::declval<U>()(std::declval<T>()))>
+                template<typename U, typename Ret = decltype(std::declval<U>()(std::declval<arg_type>()))>
                 static Ret test(U);
                     
                 template<typename>
@@ -120,12 +128,33 @@ namespace callable_traits {
             typename sorted_cartesian_product_of_conversions<Ts...>::type>;
 
         template<typename... Ts>
-        using best_match = typename best_conversion_result<Ts...>::key;
-
-        template<typename... Ts>
         using has_valid_match = std::integral_constant<bool,
             best_conversion_result<Ts...>::count == sizeof...(Ts)
         >;
+
+        template<typename T>
+        struct is_invalid : std::is_same<T, invalid_type>::type {};
+
+        template<typename... Ts>
+        using remove_invalid_types = filter<is_invalid, Ts...>;
+
+        template<typename... Ts>
+        struct best_match_t {
+
+            using has_valid = has_valid_match<Ts...>;
+
+            static_assert(has_valid::value, "Conversion not found for all parameter types.");
+
+            using result = typename best_conversion_result<Ts...>::key;
+
+            using type = typename std::enable_if<
+                has_valid::value,
+                result
+            >::type;
+        };
+
+        template<typename... Ts>
+        using best_match = typename best_match_t<Ts...>::type;
     }
 }
 

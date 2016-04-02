@@ -66,8 +66,8 @@ static_assert(ct::can_invoke(multiply, 1, 2), ""); // <-- success
 static_assert(!ct::can_invoke(multiply, 1, 2, 3), "");
 //static_assert(!ct::can_invoke(multiply, bad, bad), "");
 
-// The last, commented static_assert would fail compile, because
-// the call cannot be SFINAE'd away. Error message in Clang: 
+// The last, commented static_assert above would fail compile,
+// because the call cannot be SFINAE'd away. Error message in Clang:
 // "invalid operands to binary expression ('Bad' and 'Bad')"
 
 int main() {}

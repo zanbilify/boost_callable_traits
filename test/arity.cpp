@@ -56,7 +56,7 @@ struct variadic_template_function_object_plus_one {
 
 struct constrained_variadic_template_function_object {
     template<typename... Args>
-    std::enable_if_t<sizeof...(Args) < 7, void> operator()(Args...) {}
+    typename std::enable_if<sizeof...(Args) < 7, void>::type operator()(Args...) {}
 };
 
 struct simple_overloaded_function_object {
