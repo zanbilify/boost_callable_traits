@@ -19,7 +19,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/arity.hpp>
 #include <callable_traits/detail/bind_expression.hpp>
 #include <callable_traits/detail/bind_expression_parser.hpp>
-#include <callable_traits/detail/common_signature_t.hpp>
 #include <callable_traits/detail/can_invoke_impl.hpp>
 #include <callable_traits/detail/can_invoke_constexpr_impl.hpp>
 #include <callable_traits/detail/is_constexpr_impl.hpp>
@@ -42,12 +41,6 @@ namespace callable_traits {
 
         template<typename T>
         using qualified_signature = typename detail::traits<T>::abominable_type;
-
-        template<typename... Ts>
-        using common_signature = typename detail::common_signature_t<
-            std::tuple<detail::traits<Ts>...>,
-            std::make_index_sequence<sizeof...(Ts)>
-        >::type;
 
         template<typename T>
         using result_of = typename detail::traits<T>::return_type;
@@ -132,9 +125,6 @@ namespace callable_traits {
 
     template<typename T>
     using qualified_signature = detail::if_valid<no_sfinae::qualified_signature<T>>;
-
-    template<typename... Ts>
-    using common_signature = detail::if_valid<no_sfinae::common_signature<Ts...>>;
 
     template<typename T>
     using result_of = detail::if_valid<no_sfinae::result_of<T>>;
