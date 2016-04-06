@@ -31,7 +31,7 @@ namespace callable_traits {
             shallow_decay<T>,
             T
         >::type;
-        
+
         template<typename T>
         using traits = typename disjunction<
             bind_expression_traits<shallow_decay<T>>,

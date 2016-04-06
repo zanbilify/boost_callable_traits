@@ -20,15 +20,15 @@ int main() {
 
     {
         using test = ct::no_sfinae::args<foo>;
-        using expect = std::tuple<ct::unknown>;
+        using expect = ct::invalid_type;
         static_assert(std::is_same<test, expect>{}, "");
     } {
         using test = ct::no_sfinae::function_type<foo>;
-        using expect = ct::unknown(ct::unknown);
+        using expect = ct::invalid_type;
         static_assert(std::is_same<test, expect>{}, "");
     } {
         using test = ct::no_sfinae::result_of<foo>;
-        using expect = ct::unknown;
+        using expect = ct::invalid_type;
         static_assert(std::is_same<test, expect>{}, "");
     }
 

@@ -71,10 +71,6 @@ int main() {
     // C-style varargs (ellipses in a signature) can be detected.
     static_assert(!ct::has_varargs(foo{}), "");
 
-    // callable_traits::is_overloaded yields std::true_type
-    // for function objects that have overloaded or templated operator()
-    static_assert(!ct::is_overloaded(foo{}), "");
-
     // callable_traits::can_invoke allows us to preview whether
     // std::invoke will compile with the given arguments. Keep
     // in mind that failing cases must be SFINAE-friendly (i.e.
@@ -112,8 +108,8 @@ int main() {
     static_assert(ct::is_const_qualified(foo{}), "");
     static_assert(!ct::is_volatile_qualified(foo{}), "");
     static_assert(!ct::is_reference_qualified(foo{}), "");
-    static_assert(!ct::is_lvalue_reference_qualified(foo{}), "");
-    static_assert(!ct::is_rvalue_reference_qualified(foo{}), "");
+    static_assert(!ct::is_lvalue_qualified(foo{}), "");
+    static_assert(!ct::is_lvalue_qualified(foo{}), "");
 
 
 

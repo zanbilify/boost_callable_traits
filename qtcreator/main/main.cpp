@@ -1,34 +1,53 @@
-/*!
-Copyright (c) 2016 Barrett Adair
+/*
 
+Copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
+
 */
 
-#include <callable_traits/callable_traits.hpp>
+#include <cassert>
+#include "../example/std_function/make_function.hpp"
 
-namespace ct = callable_traits;
+using example::make_function;
+using namespace std::placeholders;
 
-using expect = int;
+int add(int i, int j) {
+    return i + j;
+}
 
-struct foo;
+struct adder {
 
-template<typename T>
-void test() {
-    using result = ct::result_of<T>;
-    static_assert(std::is_same<expect, result>{}, "");
+    int eval(int i, int j) const {
+        return i + j;
+    }
+};
+
+void check_add(std::function<int(int, int)> f) {
+
+    auto add_result = f(99, 1);
+    assert(add_result == 100);
 }
 
 int main() {
 
-    test<int()>();
-    test<int(*)()>();
-    test<int(&)()>();
-    test<int() const>();
-    test<int(foo::*)() const>();
+    //function pointer
+    auto f = make_function(&add);
+    check_add(f);
 
-    auto x = []() -> int { return 0; };
+    //function reference
+    f = make_function(add);
+    check_add(f);
 
-    test<decltype(x)>();
+    //lambda
+    f = make_function([](int i, int j) {
+        return i + j;
+    });
+
+    check_add(f);
+
+    //member function pointer (bound to object)
+    f = make_function(&adder::eval, adder{}, _1, _2);
+
+    check_add(f);
 }
-

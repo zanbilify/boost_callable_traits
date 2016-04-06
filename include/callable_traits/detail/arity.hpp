@@ -92,11 +92,6 @@ namespace callable_traits {
             static constexpr int value = -1;
         };
 
-        template<>
-        struct arg_tuple_size<std::tuple<unknown>> {
-            static constexpr int value = -1;
-        };
-
         template<typename... T>
         struct arg_tuple_size<std::tuple<T...>> {
             static constexpr int value = sizeof...(T);

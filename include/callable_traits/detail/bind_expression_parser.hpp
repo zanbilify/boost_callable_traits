@@ -56,7 +56,6 @@ namespace callable_traits {
 
             static constexpr const auto is_legal_arg =
                 !std::is_same<Head, any_arg<>>{}
-                && !std::is_same<Head, unknown>{}
                 && !std::is_same<Head, invalid_type>{};
 
             using type = typename std::conditional<
@@ -74,7 +73,7 @@ namespace callable_traits {
             using filtered_args = typename filter_invalid_args<Ts...>::type;
             using type = typename std::conditional<
                 std::is_same<filtered_args, std::tuple<>>::value,
-                std::tuple<unknown>,
+                invalid_type,
                 filtered_args
             >::type;
         };

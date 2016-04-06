@@ -139,7 +139,7 @@ namespace callable_traits {
     namespace detail {
 
         template<typename T>
-        struct function : function_object<generalized_class<unknown>> {
+        struct function : function_object<generalized_class<invalid_type>> {
             static constexpr const bool value = false;
             using traits = function;
         };

@@ -24,9 +24,6 @@ struct constants {
 
 struct invalid_type { invalid_type() = delete; };
 
-struct unknown { unknown() = delete; };
-
-
     namespace detail {
 
         // used to convey "this type doesn't matter" in code
@@ -266,6 +263,20 @@ struct unknown { unknown() = delete; };
             IsBaseOf::value || IsSame::value, T, generalize<T>
         >::type;
 
+
+        namespace util_detail {
+            template<typename T, bool Value>
+            struct type_value {
+                static constexpr const bool value = Value;
+                using type = T;
+            };
+        }
+
+        template<typename T, typename FailType>
+        using fail_if_invalid = typename disjunction<
+            util_detail::type_value<T, !std::is_same<T, invalid_type>::value>,
+            FailType
+        >::type;
 
         //used to prepend a type to a tuple
         template <typename...> struct prepend;

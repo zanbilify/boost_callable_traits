@@ -49,8 +49,6 @@ CallableTraits contains the following type traits and metafunctions (psuedo-code
 * `can_invoke_constexpr(T&&, Args&&...)`
 * `is_constexpr(T&&)`
 * `is_constexpr<T>()`
-* `is_overloaded(T&&)`
-* `is_overloaded<T>()`
 * `has_varargs(T&&)`
 * `has_varargs<T>()`
 * `has_void_return(T&&)`
@@ -71,10 +69,10 @@ CallableTraits contains the following type traits and metafunctions (psuedo-code
 * `is_cv_qualified<T>()`
 * `is_reference_qualified(T&&)`
 * `is_reference_qualified<T>()`
-* `is_lvalue_reference_qualified(T&&)`
-* `is_lvalue_reference_qualified<T>()`
-* `is_rvalue_reference_qualified(T&&)`
-* `is_rvalue_reference_qualified<T>()`
+* `is_lvalue_qualified(T&&)`
+* `is_lvalue_qualified<T>()`
+* `is_rvalue_qualified(T&&)`
+* `is_rvalue_qualified<T>()`
 
 [*Template aliases]
 
