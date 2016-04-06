@@ -1,14 +1,16 @@
 TEMPLATE = aux
 CONFIG -= qt
 
-OTHER_FILES += ../../test/*.cpp \
-            ../../example/*.cpp \
-            ../../example/is_constexpr/*.cpp \
-            ../../example/can_invoke/*.cpp \
-            ../../example/can_invoke_constexpr/*.cpp \
-            ../../example/bind_expr/*.cpp \
-            ../../example/args/*.cpp \
-            ../../example/signature/*.cpp \
-            ../../example/apply_member_pointer/*.cpp \
-            ../../example/remove_member_pointer/*.cpp \
-            ../../example/result_of/*.cpp \
+OTHER_FILES += ../../test/* \
+            ../../test/detail/* \
+            ../../example/* \
+            ../../example/is_constexpr/* \
+            ../../example/can_invoke/* \
+            ../../example/can_invoke_constexpr/* \
+            ../../example/bind/* \
+            ../../example/args/* \
+            ../../example/function_type/* \
+            ../../example/apply_member_pointer/* \
+            ../../example/remove_member_pointer/* \
+            ../../example/result_of/* \
+            ../../example/std_function/* \

@@ -23,34 +23,34 @@ namespace callable_traits {
         template<typename T>
         struct bind_value {};
 
-        template<typename T>
+        template<typename T, typename NoRef>
         struct categorize_bind_arg {
             using type = typename std::conditional<
-                std::is_placeholder< T >::value == 0,
+                std::is_placeholder< NoRef >::value == 0,
                 bind_value<T>,
-                placeholder<std::is_placeholder< T >::value>
+                placeholder<std::is_placeholder< NoRef >::value>
             >::type;
         };
 
-        template<typename T>
-        struct categorize_bind_arg< bind_value<T> > {
+        template<typename T, typename Ref>
+        struct categorize_bind_arg< Ref, bind_value<T>> {
             using type = detail::bind_value<T>;
         };
 
-        template<typename T>
-        struct categorize_bind_arg< std::reference_wrapper<T> > {
+        template<typename T, typename Ref>
+        struct categorize_bind_arg< Ref, std::reference_wrapper<T> > {
             using type = std::reference_wrapper<T>;
         };
 
-        template<int I>
-        struct categorize_bind_arg< placeholder<I> > {
+        template<int I, typename Ref>
+        struct categorize_bind_arg< Ref, placeholder<I> > {
             using type = placeholder<I>;
         };
 
-        template<typename Callable, typename... Args>
-        struct categorize_bind_arg<bind_expression<Callable, Args...>> {
+        template<typename Ref, typename Callable, typename... Args>
+        struct categorize_bind_arg<Ref, bind_expression<Callable, Args...>> {
 
-            using return_type =  typename bind_expression<Callable, Args...>::return_type;
+            using return_type = typename bind_expression<Callable, Args...>::return_type;
 
             using type = typename std::conditional<
                 std::is_same<return_type, unknown>::value,

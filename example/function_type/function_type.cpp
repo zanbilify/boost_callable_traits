@@ -15,9 +15,9 @@ using expect = void(int, float&, const char*);
 
 template<typename T>
 void test(){
-    // this example shows how callable_traits::signature
+    // this example shows how callable_traits::function_type
     // bevaves consistently for many different types
-    using args = ct::signature<T>;
+    using args = ct::function_type<T>;
     static_assert(std::is_same<expect, args>{}, "");
 }
 
@@ -31,12 +31,12 @@ int main() {
     test<lam&&>();
     test<lam const &>();
 
-    struct foo;
+    /*struct foo;
     using pmf = void(foo::*)(int, float&, const char*);
     test<pmf>();
     test<pmf&>();
     test<pmf&&>();
-    test<pmf const &>();
+    test<pmf const &>();*/
 
     using function_ptr = void(*)(int, float&, const char*);
     test<function_ptr>();

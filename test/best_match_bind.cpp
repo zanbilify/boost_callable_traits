@@ -54,53 +54,37 @@ int foo(int, int, int, int) {
 int main() {
 
     {
-        auto bind_expr = ct::bind_expr(
+        auto b = ct::bind(
             &foo,
-            ct::bind_expr(&take_vampire, _1),
-            ct::bind_expr(&take_robot, _1),
-            ct::bind_expr(&take_dog, _1),
-            ct::bind_expr(&take_vampire_robot_poodle, _1)
+            ct::bind(&take_vampire, _1),
+            ct::bind(&take_robot, _1),
+            ct::bind(&take_dog, _1),
+            ct::bind(&take_vampire_robot_poodle, _1)
         );
 
-        auto bind_obj = std::bind(
-            &foo,
-            std::bind(&take_vampire, _1),
-            std::bind(&take_robot, _1),
-            std::bind(&take_dog, _1),
-            std::bind(&take_vampire_robot_poodle, _1)
-        );
-
-        using args = ct::args<decltype(bind_expr)>;
+        using args = ct::args<decltype(b)>;
         using expected_args = std::tuple<const VampireRobotPoodle&>;
         CT_ASSERT(std::is_same<args, expected_args>::value);
         
         VampireRobotPoodle vampire_robot_poodle;
-        assert(bind_obj(vampire_robot_poodle) == 0);
+        assert(b(vampire_robot_poodle) == 0);
     }
 
     {
-        auto bind_expr = ct::bind_expr(
+        auto b = ct::bind(
             &foo,
-            ct::bind_expr(&take_vampire_robot_poodle, _1),
-            ct::bind_expr(&take_vampire, _1),
-            ct::bind_expr(&take_robot, _1),
-            ct::bind_expr(&take_dog, _1)
+            ct::bind(&take_vampire_robot_poodle, _1),
+            ct::bind(&take_vampire, _1),
+            ct::bind(&take_robot, _1),
+            ct::bind(&take_dog, _1)
         );
 
-        auto bind_obj = std::bind(
-            &foo,
-            std::bind(&take_vampire_robot_poodle, _1),
-            std::bind(&take_vampire, _1),
-            std::bind(&take_robot, _1),
-            std::bind(&take_dog, _1)
-        );
-
-        using args = ct::args<decltype(bind_expr)>;
+        using args = ct::args<decltype(b)>;
         using expected_args = std::tuple<const VampireRobotPoodle&>;
         CT_ASSERT(std::is_same<args, expected_args>::value);
 
         VampireRobotPoodle vampire_robot_poodle;
-        assert(bind_obj(vampire_robot_poodle) == 0);
+        assert(b(vampire_robot_poodle) == 0);
     }
 
     return 0;

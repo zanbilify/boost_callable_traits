@@ -43,10 +43,10 @@ int main() {
     using return_type = ct::result_of<foo>;
     static_assert(std::is_same<return_type, void>::value, "");
 
-    // callable_traits::signature yields a plain function type
-    using signature = ct::signature<foo>;
-    using expected_signature = void(int, int&&, const int&, void*);
-    static_assert(std::is_same<signature, expected_signature>::value, "");
+    // callable_traits::function_type yields a plain function type
+    using function_type = ct::function_type<foo>;
+    using expected_function_type = void(int, int&&, const int&, void*);
+    static_assert(std::is_same<function_type, expected_function_type>::value, "");
 
     // when trait information can be conveyed in an integral_constant,
     // callable_traits uses constexpr functions instead of template aliases.
@@ -60,7 +60,7 @@ int main() {
     // need to worry about reference collapsing or decltype when dealing with
     // universal references to callables. Still, you don't need an instance,
     // because CallableTraits provides non-deduced function templates for
-    // all constexpr functions besides can_invoke and bind_expr, which
+    // all constexpr functions besides can_invoke and bind, which
     // model std::invoke and std::bind, respectively (more on these below).
     // Here's an example of the non-deduced functions, which take an explicit
     // type argument. We'll ignore these for the rest of the example.
@@ -88,33 +88,22 @@ int main() {
     static_assert(!ct::can_invoke(foo{}, nullptr), "");
     // error:         std::invoke(foo{}, nullptr);
 
-    // callable_traits::bind_expr is a compile-time bind expression parser,
+    // callable_traits::bind is a compile-time bind expression parser,
     // very loosely based on the Boost.Bind implementation. Nested bind
-    // expressions are fully supported. The return type of bind_expr only
+    // expressions are fully supported. The return type of bind only
     // contains type information, but can still be used in an evaluated
     // context. The return type can be treated like a callable type when passed
-    // to result_of, signature, args, or arg_at template aliases. 
-    using bind_expression = decltype(ct::bind_expr(foo{}, _1, _1, _1));
+    // to result_of, function_type, args, or arg_at template aliases.
+    auto b = ct::bind(foo{}, _1, _1, _1);
 
-    // Unfortunately, we can't do type manipulations with std::bind directly,
-    // because the ISO C++ standard says very little about the return type of
-    // std::bind. The purpose of callable_traits::bind_expr is to undo some of
-    // the arbitrary black-boxing that std::bind incurs.
-    auto bind_obj = std::bind(foo{}, _1, _1, _1);
-
-    // Here, int is chosen as the expected argument for the bind expression
+    // Here, int&& is chosen as the expected argument for the bind expression
     // because it's the best fit for all three placeholder slots. Behind
     // the scenes, this is determined by a cartesian product of parameter
     // conversion combinations that are represented by the reused placeholders.
     static_assert(std::is_same<
-        ct::args<bind_expression>,
+        ct::args<decltype(b)>,
         std::tuple<int&&>
     >::value, "");
-
-    // callable_traits can facilitate the construction of std::function objects.
-    using bind_signature = ct::signature<bind_expression>;
-    auto fn = std::function<bind_signature>{ bind_obj };
-    fn(0);
 
     // For function objects, the following checks are determined by the 
     // qualifiers on operator(), rather than the category of the passed value.

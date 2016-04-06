@@ -24,6 +24,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/is_constexpr_impl.hpp>
 
 #include <type_traits>
+#include <functional>
 #include <utility>
 
 namespace callable_traits {
@@ -37,10 +38,10 @@ namespace callable_traits {
         using arg_at = detail::weak_at<I, args<T>>;
 
         template<typename T>
-        using signature = typename detail::traits<T>::function_type;
+        using function_type = typename detail::traits<T>::function_type;
 
         template<typename T>
-        using qualified_signature = typename detail::traits<T>::abominable_type;
+        using qualified_function_type = typename detail::traits<T>::abominable_type;
 
         template<typename T>
         using result_of = typename detail::traits<T>::return_type;
@@ -121,10 +122,10 @@ namespace callable_traits {
     using arg_at = detail::at<I, no_sfinae::args<T>>;
 
     template<typename T>
-    using signature = detail::if_valid<no_sfinae::signature<T>>;
+    using function_type = detail::if_valid<no_sfinae::function_type<T>>;
 
     template<typename T>
-    using qualified_signature = detail::if_valid<no_sfinae::qualified_signature<T>>;
+    using qualified_function_type = detail::if_valid<no_sfinae::qualified_function_type<T>>;
 
     template<typename T>
     using result_of = detail::if_valid<no_sfinae::result_of<T>>;
@@ -272,8 +273,8 @@ namespace callable_traits {
 
     template<typename T, typename... Args>
     inline constexpr auto
-    bind_expr(T, Args...) -> detail::bind_expression<T, Args...> {
-        return{};
+    bind(T&& t, Args&&... args) -> detail::bind_expression<T&&, Args&&...> {
+        return {::std::forward<T>(t), ::std::forward<Args>(args)...};
     }
 
     template<typename T>

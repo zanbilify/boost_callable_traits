@@ -43,7 +43,9 @@ struct pmf<Return(T::*)(Args...) QUAL>                                          
             typename std::add_lvalue_reference<T QUAL>::type                         \
         >::type;                                                                     \
                                                                                      \
-    using function_type = Return(Args...);                                           \
+    using function_object_type = Return(Args...);                                    \
+    using function_type = Return(invoke_type, Args...);                              \
+    using invoke_arg_types = std::tuple<invoke_type, Args...>;                       \
     using abominable_type = Return(Args...) QUAL;                                    \
     using remove_varargs = type;                                                     \
     using add_varargs = Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL;  \
@@ -102,7 +104,9 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL>          
             typename std::add_lvalue_reference<T QUAL>::type                         \
         >::type;                                                                     \
                                                                                      \
-    using function_type = Return(Args..., ...);                                      \
+    using function_object_type = Return(Args..., ...);                               \
+    using function_type = Return(invoke_type, Args..., ...);                         \
+    using invoke_arg_types = std::tuple<invoke_type, Args...>;                       \
     using abominable_type = Return(Args..., ...) QUAL;                               \
     using remove_varargs = Return(T::*)(Args...) QUAL;                               \
     using add_varargs = type;                                                        \

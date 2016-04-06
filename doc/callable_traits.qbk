@@ -10,6 +10,7 @@
     ]
     [id callable_traits]
     [last-revision $Date$]
+        [quickbook 1.5]
 ]
 
 [section:moti Motivation]
@@ -29,14 +30,14 @@ The complexity of callable types in C++ is extensive:
 *qualified overloads of member functions: `const`, `volatile`, `&`, `&&`
 *C-style varargs (`...`)
 *calling conventions (`__cdecl`, `__stdcall`, `__fastcall`, `pascal`, etc.)
-*`noexcept` (part of the function type system in C++17)
+*`noexcept` ([@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html part of the function type system in C++17])
 
-CallableTraits provides a comprehensive, uniform and modern type-level interface for the manipulation and inspection of callable types in C++. CallableTraits aims to provide such an exhaustive interface for the features listed above that the libary writer will *never again be required to specialize templates for callable types*. In other words, library writers should never need to write a template like this one:, for *any* reason:
+CallableTraits provides a comprehensive, uniform, and modern type-level interface for the manipulation and inspection of callable types in C++. CallableTraits aims to provide such an exhaustive interface for the features listed above that libary writers will *never again be required to specialize templates for callable types*. With CallableTraits, ibrary writers will never need to write a template like this one, for *any* reason:
 
     template<typename Ret, typename T, typename... Args>
-	struct foo<Ret(T::*)(Args..., ...) const volatile &&>{
-		//...
-	};
+        struct foo<Ret(T::*)(Args..., ...) const volatile &&>{
+                //...
+        };
 
 Several library solutions exist to manipulate these types, or to abstract away their complexities. However, in the opinion of the author, these solutions are often inflexible and lacking in features, especially in regard to function objects and lambdas. In many cases, the CallableTraits interface allow authors of generic code to treat these types as interchangeable: function objects, function pointers, function references, function types, abominable function types, member function pointers, member data pointers, and references/pointers/smart pointers to all of the above (whenever applicable).
 
@@ -52,6 +53,8 @@ CallableTraits contains the following type traits and metafunctions (psuedo-code
 * `is_overloaded<T>()`
 * `has_varargs(T&&)`
 * `has_varargs<T>()`
+* `has_void_return(T&&)`
+* `has_void_return<T>()`
 * `arity(T&&)`
 * `arity<T>()`
 * `min_arity(T&&)`
@@ -77,31 +80,35 @@ CallableTraits contains the following type traits and metafunctions (psuedo-code
 
 * `args<T>`
 * `arg_at<I, T>`
-* `signature<T>`
-* `qualified_signature<T>`
-* `common_signature<T...>`
+* `function_type<T>`
+* `qualified_function_type<T>`
 * `result_of<T>`
-* `remove_const_qualifier<T>`
-* `remove_volatile_qualifier<T>`
-* `remove_cv_qualifiers<T>`
-* `remove_reference_qualifiers<T>`
-* `remove_varargs<T>`
+* `apply_return<T, R>`
+* `apply_member_pointer<T, C>`
+* `remove_member_pointer<T>`
 * `add_const_qualifier<T>`
+* `remove_const_qualifier<T>`
 * `add_volatile_qualifier<T>`
+* `remove_volatile_qualifier<T>`
 * `add_cv_qualifiers<T>`
+* `remove_cv_qualifiers<T>`
 * `add_lvalue_qualifier<T>`
 * `add_rvalue_qualifier<T>`
+* `remove_reference_qualifiers<T>`
 * `add_varargs<T>`
+* `remove_varargs<T>`
 
 [*Other]
 
-* `bind_expr(T, Args...)`
+* `bind(T&&, Args&&...)`
+
+Note: CallableTraits currently does little with regard to calling conventions, and no features are implemented for C++17's `noexcept`.
 
 [endsect]
 
 [section:tuto Overview]
 
-These are the 
+These are the
 
 To start using CallableTraits, include the header file:
 

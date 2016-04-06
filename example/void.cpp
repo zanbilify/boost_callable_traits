@@ -23,7 +23,7 @@ int main() {
     using expected_args = std::tuple<>;
     static_assert(std::is_same<args, expected_args>{}, "");
 
-    using signature = ct::signature<foo>;
+    using signature = ct::function_type<foo>;
     using expected_signature = void();
     static_assert(std::is_same<signature, expected_signature>{}, "");
 

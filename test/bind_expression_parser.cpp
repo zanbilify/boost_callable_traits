@@ -6,7 +6,6 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#include <cassert>
 #include <type_traits>
 #include <functional>
 #include <iostream>
@@ -19,6 +18,12 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CT_ASSERT
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
+
+#ifndef CT_RUNTIME_ASSERT
+#include <cassert>
+#undef NDEBUG
+#define CT_RUNTIME_ASSERT(...) assert(__VA_ARGS__)
+#endif //CT_RUNTIME_ASSERT
 
 using namespace std::placeholders;
 namespace ct = callable_traits;
@@ -40,7 +45,7 @@ DEFINE_TEST_LETTER(G);
 
 // functions `ordered_letters`, `BEEF_returns_D`, `BEEF_returns_G`,
 // and `BEEF_returns_B` are used to set up a complex bind expression
-// with ct::bind_expr
+// with ct::bind
 
 auto ordered_letters(A a, B b, C c, D d, E e, F f, G g) {
     std::stringstream ss{};
@@ -88,7 +93,7 @@ const auto f = F{};
 const auto g = G{};
 
 // lets us create a complex bind expression with both
-// `std::bind` and `ct::bind_expr`
+// `std::bind` and `ct::bind`
 #define BIND_WITH(bind_name)                     \
         bind_name(&ordered_letters,              \
             _1,                                  \
@@ -123,43 +128,16 @@ int main() {
 
     assert(ordered_letters(a, b, c, d, e, f, g) == "ABCDEFG");
 
-    using bind_expr = decltype(BIND_WITH(ct::bind_expr));
+    auto ct_bind = BIND_WITH(ct::bind);
+    auto std_bind = BIND_WITH(std::bind);
 
-    check_expression_flattening<bind_expr>();
-
-    using args = ct::args<bind_expr>;
-
-    // these are the argument types as dictated by 
-    // the bind expression's placeholders
+    // these are the argument types as dictated by the bind expression's placeholders
     using expected_args = std::tuple<A, B, C, E, E, F, F, F, E, E>;
+    using args = ct::args<decltype(ct_bind)>;
 
     CT_ASSERT(std::is_same<args, expected_args>::value);
-
-    auto runtime_test = BIND_WITH(std::bind);
-    assert(apply(runtime_test, expected_args{}) == "ABCDEFG");
+    CT_RUNTIME_ASSERT(apply(ct_bind, expected_args{}) == "ABCDEFG");
+    CT_RUNTIME_ASSERT(apply(std_bind, expected_args{}) == "ABCDEFG");
 
     return 0;
-}
-
-template<typename BindExpr>
-void check_expression_flattening() {
-    using inner3 = decltype(ct::bind_expr(&BEEF_returns_B, b, _10, e, f));
-    using inner2 = decltype(ct::bind_expr(&BEEF_returns_G, inner3{}, _9, e, _8));
-    using inner1 = decltype(ct::bind_expr(&BEEF_returns_D, _2, e, _4, _7));
-
-    using bind_expr_check = decltype(ct::bind_expr(
-        &ordered_letters, _1, _2, _3,
-        inner1{},
-        _5, _6,
-        inner2{}
-    ));
-
-    // this assert makes sure the BIND_WITH macro (defined above)
-    // hasn't been modified out of sync with this function definition
-    CT_ASSERT(std::is_same<BindExpr, bind_expr_check>{});
-
-    using flattened_exprs = typename BindExpr::flattened_bind_expressions;
-    using expected_exprs = std::tuple<BindExpr, inner1, inner2, inner3>;
-
-    CT_ASSERT(std::is_same<flattened_exprs, expected_exprs>{});
 }

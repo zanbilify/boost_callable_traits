@@ -52,6 +52,7 @@ namespace callable_traits {
             using return_type = unknown;
             using has_varargs = std::false_type;
             using function_type = unknown(unknown);
+            using function_object_type = function_type;
         };
 
         template<typename General>
@@ -70,7 +71,9 @@ namespace callable_traits {
 
             using type = typename General::original_type;
             using general_type = typename General::type;
-            
+            using function_type = typename base::function_object_type;
+            using invoke_arg_types = typename base::arg_types;
+
             static constexpr const bool value =
                 std::is_class<type>::value && !is_integral_constant<type>::value;
 

@@ -54,8 +54,11 @@ namespace callable_traits {
             using is_function_general = std::false_type;
             using traits = pmd;   
             using class_type = T;
-            using invoke_type = T;
-            using base = detail::traits<D>;
+            using invoke_type = T const &;
+
+            using function_type = D(invoke_type);
+            using arg_types = std::tuple<invoke_type>;
+            using invoke_arg_types = arg_types;
 
             using remove_member_pointer = D;
 

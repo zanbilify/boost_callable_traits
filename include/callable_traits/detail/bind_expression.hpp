@@ -25,6 +25,14 @@ namespace callable_traits {
     
     namespace detail {
 
+        template <typename T>
+        struct is_callable_traits_bind
+            : std::false_type {};
+
+        template <typename Callable, typename... Args>
+        struct is_callable_traits_bind<bind_expression<Callable, Args...>>
+            : std::true_type {};
+
         template<typename PhRouteLeft, typename PhRouteRight>
         struct compare_ph_value {
             static constexpr bool value = 
@@ -33,20 +41,20 @@ namespace callable_traits {
 
         template <typename...> struct bind_expressions_filter;
 
-        template <> struct bind_expressions_filter<> { using type = std::tuple<>; };
+        template <> struct bind_expressions_filter<> {
+            using type = std::tuple<>;
+        };
 
         template <typename Head, typename... Tail>
         struct bind_expressions_filter<Head, Tail...> {
-            using type = typename bind_expressions_filter<Tail...>::type;
-        };
 
-        template<typename Callable, typename... BindExprArgs, typename ...Tail>
-        struct bind_expressions_filter<
-            bind_expression<Callable, BindExprArgs...>, Tail...
-        > {
-            using type = typename prepend<
-                bind_expression<Callable, BindExprArgs...>,
-                typename bind_expressions_filter<Tail...>::type
+            using filtered_tail = typename bind_expressions_filter<Tail...>::type;
+            using decayed_head = shallow_decay<Head>;
+
+            using type = typename std::conditional<
+                is_callable_traits_bind<decayed_head>::value,
+                typename prepend<decayed_head, filtered_tail>::type,
+                filtered_tail
             >::type;
         };
 
@@ -56,24 +64,16 @@ namespace callable_traits {
         };
 
         template<typename T>
-        struct is_empty_tuple {
-            using value_type = std::false_type;
-        };
+        struct is_empty_tuple : std::false_type{};
 
         template<>
-        struct is_empty_tuple<std::tuple<>> {
-            using value_type = std::true_type;
-        };
+        struct is_empty_tuple<std::tuple<>> : std::true_type{};
 
         template<typename T>
-        struct is_not_empty_tuple {
-            using value_type = std::true_type;
-        };
+        struct is_not_empty_tuple : std::true_type {};
 
         template<>
-        struct is_not_empty_tuple<std::tuple<>> {
-            using value_type = std::false_type;
-        };
+        struct is_not_empty_tuple<std::tuple<>> : std::false_type {};
 
         template <typename BindExpr, typename = std::true_type>
         struct flatten_bind_expressions;
@@ -91,7 +91,7 @@ namespace callable_traits {
         template <typename BindExpr>
         struct flatten_bind_expressions<
             BindExpr,
-            typename is_not_empty_tuple<typename BindExpr::inner_bind_expressions>::value_type
+            typename is_not_empty_tuple<typename BindExpr::inner_bind_expressions>::type
         > {
             using type = typename prepend<
                 BindExpr,
@@ -105,16 +105,41 @@ namespace callable_traits {
         template <typename BindExpr>
         struct flatten_bind_expressions<
             BindExpr,
-            typename is_empty_tuple<typename BindExpr::inner_bind_expressions>::value_type
+            typename is_empty_tuple<typename BindExpr::inner_bind_expressions>::type
         > {
             using type = std::tuple<BindExpr>;
         };
 
+        template<typename T, typename std::enable_if<
+            is_callable_traits_bind<shallow_decay<T>>::value, int>::type = 0>
+        inline constexpr decltype(auto) unwrap_std_bind(T&& t){
+            return t.get_std_bind();
+        }
+
+        template<typename T, typename std::enable_if<
+            !is_callable_traits_bind<shallow_decay<T>>::value, int>::type = 0>
+        inline constexpr T&& unwrap_std_bind(T&& t){
+            return std::forward<T>(t);
+        }
+
         template<typename Callable, typename... Args>
         struct bind_expression {
 
+            private:
+
+            using bind_type = typename std::remove_reference<decltype(
+                std::bind(std::declval<Callable>(), unwrap_std_bind(std::declval<Args>())...)
+            )>::type;
+
+            bind_type std_bind;
+
+            public:
+
             using bind_args_tuple = std::tuple<
-                typename categorize_bind_arg<Args>::type...
+                typename categorize_bind_arg<
+                    Args,
+                    typename std::remove_reference<Args>::type
+                >::type...
             >;
 
             using inner_bind_expressions =
@@ -128,8 +153,35 @@ namespace callable_traits {
                 bind_args_tuple
             >::type;
 
-            using original_args = typename traits<Callable>::arg_types;
+            using original_args = typename traits<Callable>::invoke_arg_types;
             using return_type = typename traits<Callable>::return_type;
+            using result_type = return_type;
+
+            inline constexpr bind_type&
+            get_std_bind() & {
+                return std_bind;
+            }
+
+            inline constexpr bind_type&&
+            get_std_bind() && {
+                return std::move(std_bind);
+            }
+
+            inline constexpr
+            bind_expression(Callable c, Args... args)
+                : std_bind(
+                    std::bind(static_cast<Callable>(c),
+                        unwrap_std_bind(static_cast<Args>(args))...)) {}
+
+            template<typename... Rgs>
+            inline constexpr decltype(auto)
+            operator()(Rgs&&... args) {
+                return std_bind(std::forward<Rgs>(args)...);
+            }
+
+            inline constexpr operator bind_type&() {
+                return std_bind;
+            }
         };
 
     }

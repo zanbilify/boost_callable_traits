@@ -39,6 +39,7 @@ struct function<Return(Args...) QUAL>                                           
     using traits = function;                                                         \
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
+    using invoke_arg_types = arg_types;                                              \
     using type = Return(Args...) QUAL;                                               \
     using function_type = Return(Args...);                                           \
     using abominable_type = Return(Args...) QUAL;                                    \
@@ -95,6 +96,7 @@ struct function<Return (Args..., ...) QUAL>                                     
     using traits = function;                                                         \
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
+    using invoke_arg_types = arg_types;                                              \
     using type = Return (Args..., ...) QUAL;                                         \
     using function_type = Return(Args..., ...);                                      \
     using abominable_type = Return(Args..., ...) QUAL;                               \

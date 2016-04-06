@@ -23,7 +23,7 @@ int main() {
         using expect = std::tuple<ct::unknown>;
         static_assert(std::is_same<test, expect>{}, "");
     } {
-        using test = ct::no_sfinae::signature<foo>;
+        using test = ct::no_sfinae::function_type<foo>;
         using expect = ct::unknown(ct::unknown);
         static_assert(std::is_same<test, expect>{}, "");
     } {
