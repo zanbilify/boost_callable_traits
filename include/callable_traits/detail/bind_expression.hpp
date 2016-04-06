@@ -157,12 +157,12 @@ namespace callable_traits {
             using return_type = typename traits<Callable>::return_type;
             using result_type = return_type;
 
-            inline constexpr bind_type&
+            inline bind_type&
             get_std_bind() & {
                 return std_bind;
             }
 
-            inline constexpr bind_type&&
+            inline bind_type&&
             get_std_bind() && {
                 return std::move(std_bind);
             }
@@ -174,12 +174,12 @@ namespace callable_traits {
                         unwrap_std_bind(static_cast<Args>(args))...)) {}
 
             template<typename... Rgs>
-            inline constexpr decltype(auto)
+            inline decltype(auto)
             operator()(Rgs&&... args) {
                 return std_bind(std::forward<Rgs>(args)...);
             }
 
-            inline constexpr operator bind_type&() {
+            inline operator bind_type&() {
                 return std_bind;
             }
         };

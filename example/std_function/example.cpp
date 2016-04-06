@@ -24,7 +24,7 @@ struct adder {
     }
 };
 
-void check_add(std::function<int(int, int)> f) {
+void check_add(std::function<int(int, int)>& f) {
 
     auto add_result = f(99, 1);
     assert(add_result == 100);

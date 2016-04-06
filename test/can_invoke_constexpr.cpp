@@ -12,12 +12,6 @@ Distributed under the Boost Software License, Version 1.0.
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
 
-#ifdef  CALLABLE_TRAITS_CONSTEXPR_CHECKS_DISABLED
-#define IF_ENABLED !
-#else
-#define IF_ENABLED
-#endif
-
 struct foo1 {
     int operator()() const {
         return 0;
@@ -53,16 +47,16 @@ namespace ct = callable_traits;
 CT_ASSERT(!ct::can_invoke_constexpr(foo1{}));
 CT_ASSERT(!ct::can_invoke_constexpr(foo1{}, 0));
 
-CT_ASSERT(IF_ENABLED ct::can_invoke_constexpr(foo2{}));
-CT_ASSERT(IF_ENABLED ct::can_invoke_constexpr(foo2{}, 0));
+CT_ASSERT( ct::can_invoke_constexpr(foo2{}));
+CT_ASSERT( ct::can_invoke_constexpr(foo2{}, 0));
 
 CT_ASSERT(!ct::can_invoke_constexpr(foo4{}));
-CT_ASSERT(IF_ENABLED ct::can_invoke_constexpr(foo4{}, 0));
+CT_ASSERT( ct::can_invoke_constexpr(foo4{}, 0));
 
 CT_ASSERT(!ct::can_invoke_constexpr(foo1_pmf{}, foo1{}));
 CT_ASSERT(!ct::can_invoke_constexpr(foo1_pmf{}, foo1{}, 0));
 
 CT_ASSERT(!ct::can_invoke_constexpr(foo3_pmf{}, foo3{}));
-CT_ASSERT(IF_ENABLED ct::can_invoke_constexpr(foo3_pmf{}, foo3{}, 0));
+CT_ASSERT( ct::can_invoke_constexpr(foo3_pmf{}, foo3{}, 0));
 
 int main() { return 0; }
