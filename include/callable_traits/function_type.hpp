@@ -20,8 +20,11 @@ namespace callable_traits {
 
         template<int i = 0>
         struct function_type_error {
+
+#ifdef CALLABLE_TRAITS_DEBUG
 			static_assert(i != 0,
 				"Unable to determine a function type for type T in callable_traits::function_type<T>.");
+#endif
         };
     }
 	

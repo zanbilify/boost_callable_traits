@@ -109,7 +109,7 @@ int main() {
     static_assert(!ct::is_volatile_qualified(foo{}), "");
     static_assert(!ct::is_reference_qualified(foo{}), "");
     static_assert(!ct::is_lvalue_qualified(foo{}), "");
-    static_assert(!ct::is_lvalue_qualified(foo{}), "");
+    static_assert(!ct::is_rvalue_qualified(foo{}), "");
 
 
 

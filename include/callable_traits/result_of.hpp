@@ -19,8 +19,11 @@ namespace callable_traits {
 
         template<int i = 0>
         struct result_of_error {
+
+#ifdef CALLABLE_TRAITS_DEBUG
 			static_assert(i != 0,
 				"Unable to determine the return type of T in callable_traits::result_of<T>.");
+#endif
         };
     }
 

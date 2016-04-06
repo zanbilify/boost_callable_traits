@@ -24,8 +24,11 @@ namespace callable_traits {
 
         template<int i = 0>
         struct args_error {
+
+#ifdef CALLABLE_TRAITS_DEBUG
 			static_assert(i != 0,
 				"Unable to determine arguments of type T in callable_traits::args<T>.");
+#endif
         };
     }
 	

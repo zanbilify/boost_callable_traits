@@ -20,8 +20,11 @@ namespace callable_traits {
 
         template<int i = 0>
         struct qualified_function_type_error {
+
+#ifdef CALLABLE_TRAITS_DEBUG
 			static_assert(i != 0,
 				"Unable to determine the qualified function type for type T in callable_traits::qualified_function_type<T>.");
+#endif
         };
     }
 

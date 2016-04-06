@@ -19,8 +19,11 @@ namespace callable_traits {
 
         template<int i = 0>
         struct apply_return_error {
+
+#ifdef CALLABLE_TRAITS_DEBUG
 			static_assert(i != 0,
 				"callable_traits::apply_return<T> is not a meaningful operation for this T.");
+#endif
         };
     }
 

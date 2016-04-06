@@ -19,8 +19,11 @@ namespace callable_traits {
 
         template<int i = 0>
         struct apply_member_pointer_error {
+
+#ifdef CALLABLE_TRAITS_DEBUG
 			static_assert(i != 0,
 				"callable_traits::apply_member_pointer<T> is not a meaningful operation for this T.");
+#endif
         };
     }
 
