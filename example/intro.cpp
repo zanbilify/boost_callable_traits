@@ -84,23 +84,6 @@ int main() {
     static_assert(!ct::can_invoke(foo{}, nullptr), "");
     // error:         std::invoke(foo{}, nullptr);
 
-    // callable_traits::bind is a compile-time bind expression parser,
-    // very loosely based on the Boost.Bind implementation. Nested bind
-    // expressions are fully supported. The return type of bind only
-    // contains type information, but can still be used in an evaluated
-    // context. The return type can be treated like a callable type when passed
-    // to result_of, function_type, args, or arg_at template aliases.
-    auto b = ct::bind(foo{}, _1, _1, _1);
-
-    // Here, int&& is chosen as the expected argument for the bind expression
-    // because it's the best fit for all three placeholder slots. Behind
-    // the scenes, this is determined by a cartesian product of parameter
-    // conversion combinations that are represented by the reused placeholders.
-    static_assert(std::is_same<
-        ct::args<decltype(b)>,
-        std::tuple<int&&>
-    >::value, "");
-
     // For function objects, the following checks are determined by the 
     // qualifiers on operator(), rather than the category of the passed value.
     // For member function pointers and abominable function types, the
@@ -112,11 +95,9 @@ int main() {
     static_assert(!ct::is_rvalue_qualified(foo{}), "");
 
 
-
     // If you find yourself in the unfortunate situation of needing
     // to manipulate member function pointer types, CallableTraits
     // has all the tools you need to maintain your sanity.
-
 
 
     using pmf = decltype(&foo::operator());
@@ -138,7 +119,7 @@ int main() {
         // Now let's add an rvalue qualifier (&&):
         using rvalue_pmf = ct::add_rvalue_qualifier<pmf>;
         using expected_pmf = void (foo::*)(int, int&&, const int&, void*) const &&;
-        static_assert(std::is_same<rvalue_pmf, expected_pmf>::value, ""); //        ^^^^
+        static_assert(std::is_same<rvalue_pmf, expected_pmf>::value, "");
     }
 
     // You get the picture. CallableTraits lets you add and remove all PMF
@@ -155,7 +136,7 @@ int main() {
 
         using varargs_pmf = ct::add_varargs<pmf>;
         using expected_pmf = void (foo::*)(int, int&&, const int&, void*, ...) const;
-        static_assert(std::is_same<varargs_pmf, expected_pmf>::value, ""); //  ^^^
+        static_assert(std::is_same<varargs_pmf, expected_pmf>::value, "");
 
         // note: MSVC likely requires __cdecl for a varargs PMF on your
         // machine, at least if you intend to do anything useful with it.

@@ -10,7 +10,6 @@
     ]
     [id callable_traits]
     [last-revision $Date$]
-        [quickbook 1.5]
 ]
 
 [section:moti Motivation]
@@ -32,14 +31,146 @@ The complexity of callable types in C++ is extensive:
 *calling conventions (`__cdecl`, `__stdcall`, `__fastcall`, `pascal`, etc.)
 *`noexcept` ([@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html part of the function type system in C++17])
 
-CallableTraits provides a comprehensive, uniform, and modern type-level interface for the manipulation and inspection of callable types in C++. CallableTraits aims to provide such an exhaustive interface for the features listed above that libary writers will *never again be required to specialize templates for callable types*. With CallableTraits, ibrary writers will never need to write a template like this one, for *any* reason:
+CallableTraits provides a comprehensive, uniform, and modern type-level interface for the manipulation and inspection of callable types in C++. By filling the gaps where existing library solutions fall short, CallableTraits aims to provide such an exhaustive interface for the features listed above that libary writers will *never again* need to specialize templates for callable types. With CallableTraits, library writers should never need to write a template like this one:
 
     template<typename Ret, typename T, typename... Args>
         struct foo<Ret(T::*)(Args..., ...) const volatile &&>{
-                //...
+                        //...
         };
 
-Several library solutions exist to manipulate these types, or to abstract away their complexities. However, in the opinion of the author, these solutions are often inflexible and lacking in features, especially in regard to function objects and lambdas. In many cases, the CallableTraits interface allow authors of generic code to treat these types as interchangeable: function objects, function pointers, function references, function types, abominable function types, member function pointers, member data pointers, and references/pointers/smart pointers to all of the above (whenever applicable).
+Several library solutions exist to manipulate these types, or to abstract away their complexities. However, these solutions are occasionally inflexible or lacking in features, especially regarding function objects/lambdas. In CallableTraits, function pointers, function references, function types, abominable function types, member function pointers, member data pointers, function objects/lambdas, and references/pointers/smart pointers thereof are generally interchangeable.
+
+The use cases for CallableTraits are closely related to those of [@http://www.boost.org/doc/libs/1_60_0/libs/type_traits/doc/html/boost_typetraits/reference/function_traits.html function_traits] and [@http://www.boost.org/doc/libs/1_60_0/libs/function_types/doc/html/index.html FunctionTypes].
+
+[section:tenr 10 reasons to use CallableTraits]
+
+# CallableTraits' interface is user-friendly
+        * template aliases and `constexpr` `std::integral_constant` functions are preferable to `typename foo::type` and `foo::value`
+
+# CallableTraits offers a familar, consistent interface for the synthesis and decomposition of callable types
+        * e.g. `callable_traits::remove_const_qualifier` parallels `std::remove_const`
+
+# universal references are accepted everywhere, so you don't need to worry about using `std::remove_reference` first
+
+# function object pointers/ pointers are accepted (when `INVOKE` is not an immediate concern)
+
+# `arg_at<2, Callable>` can be used instead of `typename function_traits<Callable>::arg2_type`
+
+# function objects are first-class citizens in CallableTraits
+        * e.g. `result_of` can accept a function object
+
+# `is_constexpr` lets you check whether a function, member function, or function object is `constexpr`
+
+# `can_invoke` lets you test `INVOKE`-ability at compile-time using value semantics
+
+# `can_invoke_constexpr` adds a `constexpr`-ness check to `can_invoke`
+
+# `min_arity` can be used to detect default arguments of a function object
+
+[endsect]
+
+[section:sugr Example use case: `std::function` sugar]
+
+At the time of this writing, there are 260 [@http://stackoverflow.com/search?q=convert+std%3A%3Abind+to+std%3A%3Afunction search results] on Stack Overflow concerning the conversion from `std::bind` to `std::function`. There are 336 [@http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction search results] concerning the conversion of lambdas to `std::function`. With this example, we'll kill both birds with the same stone. The `make_function` function defined below will leverage CallableTraits to...
+
+# Create an `std::function<T>` where T is not explicitly supplied by the user
+# Create an `std::function<T>` where T is the deduced "signature" of an `std::placeholders` expression.
+
+Without real-world context, `make_function` may seem rather silly to those who are aware of the runtime costs of type erasure. However, whenever `std::function` is required by some 3rd party API, this example makes a bit more sense.
+
+        #include <functional>
+        #include <callable_traits/callable_traits.hpp>
+
+        namespace example_library {
+
+                namespace ct = callable_traits;
+
+                //`make_function` turns a non-overloaded callable into a type-erased std::function object
+                template<typename T>
+                inline decltype(auto) make_function(T&& t) {
+
+                        // callable_traits::function_type decays any non-overloaded callable type to
+                        // a plain function type, which is structured in terms of INVOKE.
+
+                        using signature = ct::function_type<T&&>;
+                        using result_type = std::function<signature>;
+                        return result_type{ std::forward<T>(t) };
+                }
+
+                //this `make_function` overload turns a bind expression into a type-erased std::function object
+                template<typename T, typename First, typename... Others>
+                inline decltype(auto) make_function(T&& t, First&& first, Others&&... others) {
+
+                        // callable_traits::bind is essentially a compile-time parser of placeholders
+                        // expressions, for the purpose of retaining more type information than
+            // std::bind normally allows - specifically, callable_traits::bind is used to
+            // determine the de-facto signature of the std::bind return type, with special
+                        // considerations for conversions between reused placeholders and nested
+                        // placeholder expressions. For the sake of convenience, callable_traits::bind
+                        // is also a thin forwarding wrapper around std::bind (which is the only true
+                        // runtime element in CallableTraits).
+
+                        using bind_expr = decltype(ct::bind(
+                                std::forward<T>(t),
+                                std::forward<First>(first),
+                                std::forward<Others>(others)...
+                        ));
+
+                        using signature = ct::function_type<bind_expr>;
+                        using result_type = std::function<signature>;
+
+                        return result_type{ std::bind(
+                                std::forward<T>(t),
+                                std::forward<First>(first),
+                                std::forward<Others>(others)...
+                        )};
+                }
+        }
+
+        //client code starts here
+        #include <cassert>
+
+        using namespace example_library;
+        using namespace std::placeholders;
+
+        int add(int i, int j) {
+                return i + j;
+        }
+
+        struct adder {
+
+                int eval(int i, int j) const {
+                        return i + j;
+                }
+        };
+
+        int main() {
+
+                //function pointer
+                auto f = make_function(&add);
+                assert(f(99, 1) == 100);
+
+                //function reference
+                f = make_function(add);
+                assert(f(99, 1) == 100);
+
+                //member function pointer (bound to object)
+                f = make_function(&adder::eval, adder{}, _1, _2);
+                assert(f(99, 1) == 100);
+
+                //lambda
+                f = make_function([](int i, int j) {
+                        return i + j;
+                });
+
+                assert(f(99, 1) == 100);
+        }
+
+[endsect]
+
+[endsect]
+
+[section:tuto Overview]
 
 CallableTraits contains the following type traits and metafunctions (psuedo-code):
 
@@ -100,16 +231,47 @@ CallableTraits contains the following type traits and metafunctions (psuedo-code
 
 * `bind(T&&, Args&&...)`
 
-Note: CallableTraits currently does little with regard to calling conventions, and no features are implemented for C++17's `noexcept`.
+Note: CallableTraits currently offers no interface for the manipulation of calling conventions. Also, no features are currently implemented to account for C++17's `noexcept`, but will be added in future versions for supported compilers.
 
-[endsect]
-
-[section:tuto Overview]
-
-These are the
-
-To start using CallableTraits, include the header file:
+The simplest way to use CallableTraits is to include the main header file:
 
     #include <callable_traits/callable_traits.hpp>
+
+CallableTraits interface is also broken down by trait into individual header files. To use only the traits you need, include one or more of the following headers, which are listed alphabetically:
+
+    #include <callable_traits/add_const_qualifier.hpp>
+    #include <callable_traits/add_cv_qualifiers.hpp>
+    #include <callable_traits/add_lvalue_qualifier.hpp>
+    #include <callable_traits/add_rvalue_qualifier.hpp>
+    #include <callable_traits/add_varargs.hpp>
+    #include <callable_traits/add_volatile_qualifier.hpp>
+    #include <callable_traits/apply_member_pointer.hpp>
+    #include <callable_traits/apply_return.hpp>
+    #include <callable_traits/arg_at.hpp>
+    #include <callable_traits/args.hpp>
+    #include <callable_traits/arity.hpp>
+    #include <callable_traits/bind.hpp>
+    #include <callable_traits/can_invoke.hpp>
+    #include <callable_traits/can_invoke_constexpr.hpp>
+    #include <callable_traits/function_type.hpp>
+    #include <callable_traits/has_varargs.hpp>
+    #include <callable_traits/has_void_return.hpp>
+    #include <callable_traits/is_const_qualified.hpp>
+    #include <callable_traits/is_constexpr.hpp>
+    #include <callable_traits/is_lvalue_qualified.hpp>
+    #include <callable_traits/is_reference_qualified.hpp>
+    #include <callable_traits/is_rvalue_qualified.hpp>
+    #include <callable_traits/is_unqualified.hpp>
+    #include <callable_traits/is_volatile_qualified.hpp>
+    #include <callable_traits/max_arity.hpp>
+    #include <callable_traits/min_arity.hpp>
+    #include <callable_traits/qualified_function_type.hpp>
+    #include <callable_traits/remove_const_qualifier.hpp>
+    #include <callable_traits/remove_cv_qualifiers.hpp>
+    #include <callable_traits/remove_member_pointer.hpp>
+    #include <callable_traits/remove_reference_qualifier.hpp>
+    #include <callable_traits/remove_varargs.hpp>
+    #include <callable_traits/remove_volatile_qualifier.hpp>
+    #include <callable_traits/result_of.hpp>
 
 [endsect]
