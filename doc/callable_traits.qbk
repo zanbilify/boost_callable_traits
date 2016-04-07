@@ -44,8 +44,7 @@ The use cases for CallableTraits are closely related to those of [@http://www.bo
 
 [section:tenr 10 reasons to use CallableTraits]
 
-# CallableTraits' interface is user-friendly
-        * template aliases and `constexpr` `std::integral_constant` functions are preferable to `typename foo::type` and `foo::value`
+# CallableTraits' template aliases and `constexpr` `std::integral_constant` functions are preferable to `typename foo::type` and `foo::value`
 
 # CallableTraits offers a familar, consistent interface for the synthesis and decomposition of callable types
         * e.g. `callable_traits::remove_const_qualifier` parallels `std::remove_const`
@@ -54,7 +53,7 @@ The use cases for CallableTraits are closely related to those of [@http://www.bo
 
 # function object pointers/ pointers are accepted (when `INVOKE` is not an immediate concern)
 
-# `arg_at<2, Callable>` can be used instead of `typename function_traits<Callable>::arg2_type`
+# `arg_at<2, Callable>` is better than `typename function_traits<Callable>::arg2_type`
 
 # function objects are first-class citizens in CallableTraits
         * e.g. `result_of` can accept a function object
@@ -69,7 +68,7 @@ The use cases for CallableTraits are closely related to those of [@http://www.bo
 
 [endsect]
 
-[section:sugr Example use case: `std::function` sugar]
+[section:sugr Use case example: `std::function` sugar]
 
 At the time of this writing, there are 260 [@http://stackoverflow.com/search?q=convert+std%3A%3Abind+to+std%3A%3Afunction search results] on Stack Overflow concerning the conversion from `std::bind` to `std::function`. There are 336 [@http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction search results] concerning the conversion of lambdas to `std::function`. With this example, we'll kill both birds with the same stone. The `make_function` function defined below will leverage CallableTraits to...
 
