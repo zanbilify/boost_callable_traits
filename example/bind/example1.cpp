@@ -1,11 +1,12 @@
-/*
+/*<-
 
 Copyright Barrett Adair 2016
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 
-*/
+->*/
 
+//[ bind_example1
 #include <cassert>
 #include <type_traits>
 #include <functional>
@@ -57,9 +58,9 @@ int main() {
             _1
         );
 
-    // the last _1 placeholder in this bind expression forces
-    // all other _1 slots to accept ScaryMonster, the
-    // narrowest of all _1 parameters.
+    /*` the last _1 placeholder in this bind expression forces
+    all other _1 slots to accept ScaryMonster, the
+    narrowest of all _1 parameters. */
 
     {
         using args = ct::args<decltype(b)>;
@@ -75,3 +76,4 @@ int main() {
 
     return 0;
 }
+//]

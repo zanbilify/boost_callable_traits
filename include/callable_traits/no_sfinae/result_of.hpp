@@ -11,9 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_NO_SFINAE_RESULT_OF_HPP
 
 #include <callable_traits/detail/traits.hpp>
-#include <type_traits>
-#include <functional>
-#include <utility>
+#include <callable_traits/detail/required_definitions.hpp>
 
 namespace callable_traits {
 

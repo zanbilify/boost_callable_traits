@@ -12,6 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/bind_expression.hpp>
 #include <callable_traits/detail/bind_expression_parser.hpp>
+#include <callable_traits/detail/required_definitions.hpp>
 #include <utility>
 
 namespace callable_traits {

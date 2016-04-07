@@ -1,23 +1,24 @@
-/*!
+/*<-
 Copyright (c) 2016 Barrett Adair
 
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
-*/
+->*/
 
+//[ args_args
 #include <type_traits>
 #include <memory>
 #include <callable_traits/callable_traits.hpp>
 
 namespace ct = callable_traits;
 
-//all callable types in this example use these parameter types
+//` all callable types in this example use these parameter types
 using expect = std::tuple<int, float&, const char*>;
 
 template<typename T>
 void test(){
-    //this example shows how callable_traits::args
-    //bevaves consistently for many different types
+    /*` this example shows how callable_traits::args
+    bevaves consistently for many different types */
     using args = ct::args<T>;
     static_assert(std::is_same<expect, args>{}, "");
 }
@@ -55,4 +56,5 @@ int main() {
     using abominable = void(int, float&, const char*) const;
     test<abominable>();
 }
+//]
 

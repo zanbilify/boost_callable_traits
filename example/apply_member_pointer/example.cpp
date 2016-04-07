@@ -1,11 +1,13 @@
-/*!
+/*<-
 Copyright (c) 2016 Barrett Adair
 
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
-*/
+->*/
 
-#include <callable_traits/callable_traits.hpp>
+//[ apply_member_pointer_example
+#include <type_traits>
+#include <callable_traits/apply_member_pointer.hpp>
 
 namespace ct = callable_traits;
 
@@ -29,4 +31,5 @@ int main() {
     test<int(foo::*)(int)>();
     test<int(bar::*)(int)>();
 }
+//]
 

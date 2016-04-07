@@ -11,6 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_CAN_INVOKE_CONSTEXPR_HPP
 
 #include <callable_traits/detail/can_invoke_constexpr_impl.hpp>
+#include <callable_traits/detail/required_definitions.hpp>
 #include <utility>
 
 namespace callable_traits {

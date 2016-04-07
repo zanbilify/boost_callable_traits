@@ -12,6 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/utility.hpp>
 #include <callable_traits/no_sfinae/remove_const_qualifier.hpp>
+#include <callable_traits/detail/required_definitions.hpp>
 
 namespace callable_traits {
 
