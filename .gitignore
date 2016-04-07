@@ -1,5 +1,4 @@
 build*/
-doc/html/
 *.user
 /test/Makefile
 /example/Makefile

@@ -1,0 +1,247 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>Overview</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;CallableTraits">
+<link rel="up" href="../index.html" title="Chapter&#160;1.&#160;CallableTraits">
+<link rel="prev" href="../index.html" title="Chapter&#160;1.&#160;CallableTraits">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="../index.html">Prev</a><a accesskey="u" href="../index.html">Up</a><a accesskey="h" href="../index.html">Home</a>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="callable_traits.tuto"></a>Overview</h2></div></div></div>
+<p>
+      CallableTraits contains the following type traits and metafunctions (psuedo-code):
+    </p>
+<p>
+      <span class="bold"><strong><code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span></code> constexpr functions</strong></span>
+    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">can_invoke</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;,</span>
+          <span class="identifier">Args</span><span class="special">&amp;&amp;...)</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">can_invoke_constexpr</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;,</span>
+          <span class="identifier">Args</span><span class="special">&amp;&amp;...)</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_constexpr</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;)</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_constexpr</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;()</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">has_varargs</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;)</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">has_varargs</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;()</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">has_void_return</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;)</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">has_void_return</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;()</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">arity</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;)</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">arity</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;()</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">min_arity</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;)</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">min_arity</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;()</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">max_arity</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;)</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">max_arity</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;()</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_unqualified</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;)</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_unqualified</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;()</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_const_qualified</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;)</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_const_qualified</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;()</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_volatile_qualified</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;)</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_volatile_qualified</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;()</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_cv_qualified</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;)</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_cv_qualified</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;()</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_reference_qualified</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;)</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_reference_qualified</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;()</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_lvalue_qualified</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;)</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_lvalue_qualified</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;()</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_rvalue_qualified</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;)</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">is_rvalue_qualified</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;()</span></code>
+        </li>
+</ul></div>
+<p>
+      <span class="bold"><strong>Template aliases</strong></span>
+    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">args</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">arg_at</span><span class="special">&lt;</span><span class="identifier">I</span><span class="special">,</span> <span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">qualified_function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">result_of</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">R</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">apply_member_pointer</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">C</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">remove_member_pointer</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">add_const_qualifier</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">remove_const_qualifier</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">add_volatile_qualifier</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">remove_volatile_qualifier</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">add_cv_qualifiers</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">remove_cv_qualifiers</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">add_lvalue_qualifier</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">add_rvalue_qualifier</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">remove_reference_qualifiers</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">remove_varargs</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+        </li>
+</ul></div>
+<p>
+      <span class="bold"><strong>Other</strong></span>
+    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+          <code class="computeroutput"><span class="identifier">bind</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;,</span>
+          <span class="identifier">Args</span><span class="special">&amp;&amp;...)</span></code>
+        </li></ul></div>
+<p>
+      Note: CallableTraits currently offers no interface for the manipulation of
+      calling conventions. Also, no features are currently implemented to account
+      for C++17's <code class="computeroutput"><span class="keyword">noexcept</span></code>, but will
+      be added in future versions for supported compilers.
+    </p>
+<p>
+      The simplest way to use CallableTraits is to include the main header file:
+    </p>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+</pre>
+<p>
+      CallableTraits interface is also broken down by trait into individual header
+      files. To use only the traits you need, include one or more of the following
+      headers, which are listed alphabetically:
+    </p>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_const_qualifier</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_cv_qualifiers</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_lvalue_qualifier</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_rvalue_qualifier</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_volatile_qualifier</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">apply_member_pointer</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">apply_return</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">arg_at</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">arity</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">bind</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">can_invoke</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">can_invoke_constexpr</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">function_type</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">has_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">has_void_return</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_const_qualified</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_constexpr</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_lvalue_qualified</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_reference_qualified</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_rvalue_qualified</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_unqualified</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_volatile_qualified</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">max_arity</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">min_arity</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">qualified_function_type</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_const_qualifier</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_cv_qualifiers</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_member_pointer</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_reference_qualifier</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_volatile_qualifier</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">result_of</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+</pre>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><div class="copyright-footer">Copyright &#169; 2016 Barrett Adair<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">
+        http://www.boost.org/LICENSE_1_0.txt </a>)
+      </p>
+</div></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="../index.html">Prev</a><a accesskey="u" href="../index.html">Up</a><a accesskey="h" href="../index.html">Home</a>
+</div>
+</body>
+</html>
