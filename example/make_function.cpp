@@ -6,7 +6,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 //[ make_function
 #include <functional>
-#include <callable_traits/callable_traits.hpp>
+#include <callable_traits/function_type.hpp>
+#include <callable_traits/bind.hpp>
 
 namespace example_library {
 
@@ -54,7 +55,7 @@ namespace example_library {
     }
 }
 
-//client code starts here
+// client code starts here
 #include <cassert>
 
 using namespace example_library;
@@ -73,19 +74,19 @@ struct adder {
 
 int main() {
 
-    //function pointer
+    // function pointer
     auto f = make_function(&add);
     assert(f(99, 1) == 100);
 
-    //function reference
+    // function reference
     f = make_function(add);
     assert(f(99, 1) == 100);
 
-    //member function pointer (bound to object)
+    // member function pointer (bound to object)
     f = make_function(&adder::eval, adder{}, _1, _2);
     assert(f(99, 1) == 100);
 
-    //lambda
+    // lambda
     f = make_function([](int i, int j) {
         return i + j;
     });

@@ -18,7 +18,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    template< std::size_t SearchLimit = constants::arity_search_limit, typename T>
+    template<std::size_t SearchLimit = constants::arity_search_limit, typename T>
     inline constexpr auto
     min_arity(T&&) {
         return detail::min_arity_t<detail::traits<T&&>, SearchLimit>{};

@@ -97,12 +97,12 @@ int main() {
     static_assert(std::is_same<pmf, with_const>::value, "");
 
     // Let's remove the const qualifier:
-    using mutable_pmf = ct::remove_const_qualifier<pmf>;
+    using mutable_pmf = ct::remove_function_const<pmf>;
     using without_const = void (foo::*)(int, int&&, const int&, void*) /*no const!*/;
     static_assert(std::is_same<mutable_pmf, without_const>::value, "");
 
     // Now let's add an rvalue qualifier (&&):
-    using rvalue_pmf = ct::add_rvalue_qualifier<pmf>;
+    using rvalue_pmf = ct::add_function_rvalue<pmf>;
     using with_rvalue = void (foo::*)(int, int&&, const int&, void*) const &&;
     static_assert(std::is_same<rvalue_pmf, with_rvalue>::value, "");
 

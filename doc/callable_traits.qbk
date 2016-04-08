@@ -34,8 +34,8 @@ The complexity of callable types in C++ is extensive:
 *pointers to member functions
 *qualified overloads of member functions: `const`, `volatile`, `&`, `&&`
 *C-style varargs (`...`)
-*calling conventions (`__cdecl`, `__stdcall`, `__fastcall`, `pascal`, etc.)
-*`noexcept` ([@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html part of the function type system in C++17])
+*calling conventions/attributes (`__cdecl`, `__stdcall`, `__fastcall`, `pascal`, etc.)
+*[@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html [^noexcept]]
 
 [library_name] provides a comprehensive, uniform, and modern type-level interface for the manipulation and inspection of callable types in C++. By filling the gaps where existing library solutions fall short, [library_name] aims to provide such an exhaustive interface for the features listed above that library writers will *never again* need to specialize templates for callable types. [library_name] eliminates the need for horrific template specializations like these:
 
@@ -48,7 +48,7 @@ Several library solutions exist to manipulate these types, or to abstract away t
 
 The use cases for [library_name] are closely related to those of [@http://www.boost.org/doc/libs/1_60_0/libs/type_traits/doc/html/boost_typetraits/reference/function_traits.html function_traits] and [@http://www.boost.org/doc/libs/1_60_0/libs/function_types/doc/html/index.html FunctionTypes].
 
-[important [library_name] currently offers no interface for the manipulation of calling conventions. Also, no features are currently implemented to account for C++17's `noexcept`. These features are planned for future versions on supported platforms.]
+[important The upcoming C++17 ISO standard brings a language change that adds `noexcept` to signatures. Currently, this is not handled in [library_name], but will be in the future for platforms that support it.]
 
 [endsect]
 
@@ -57,7 +57,7 @@ The use cases for [library_name] are closely related to those of [@http://www.bo
 # [library_name]' template aliases and `constexpr` `std::integral_constant` functions are preferable to `typename foo::type` and `foo::value`
 
 # [library_name] offers a familar, consistent interface for the synthesis and decomposition of callable types
-        * e.g. `remove_const_qualifier` parallels `std::remove_const`
+        * e.g. `remove_function_const` parallels `std::remove_const`
 
 # universal references are accepted everywhere, so you don't need to worry about using `std::remove_reference` first
 
@@ -94,9 +94,14 @@ Without real-world context, `make_function` may seem rather silly to those who k
 
 [endsect]
 
+
+
 [template ct_open_include[]    `#include<`[^[header_include_prefix]]]
 [template ct_close_include[]`.hpp>`]
 [template include_header[name][ct_open_include][^[name]][ct_close_include][br]]
+
+
+
 [section:headers Headers]
 
 The simplest way to use [library_name] is to include the main header file:
@@ -105,12 +110,13 @@ The simplest way to use [library_name] is to include the main header file:
 
 [library_name] interface is also broken down by trait into individual header files. To use only the traits you need, include one or more of the following headers, listed alphabetically:
 
-[include_header [link callable_traits.ref_add_const_qualifier add_const_qualifier]]
-[include_header [link callable_traits.ref_add_cv_qualifiers add_cv_qualifiers]]
-[include_header [link callable_traits.ref_add_lvalue_qualifier add_lvalue_qualifier]]
-[include_header [link callable_traits.ref_add_rvalue_qualifier add_rvalue_qualifier]]
+[include_header [link callable_traits.ref_add_calling_convention add_calling_convention]]
+[include_header [link callable_traits.ref_add_function_const add_function_const]]
+[include_header [link callable_traits.ref_add_function_cv add_function_cv]]
+[include_header [link callable_traits.ref_add_function_lvalue add_function_lvalue]]
+[include_header [link callable_traits.ref_add_function_rvalue add_function_rvalue]]
 [include_header [link callable_traits.ref_add_varargs add_varargs]]
-[include_header [link callable_traits.ref_add_volatile_qualifier add_volatile_qualifier]]
+[include_header [link callable_traits.ref_add_function_volatile add_function_volatile]]
 [include_header [link callable_traits.ref_apply_member_pointer apply_member_pointer]]
 [include_header [link callable_traits.ref_apply_return apply_return]]
 [include_header [link callable_traits.ref_arg_at arg_at]]
@@ -120,6 +126,7 @@ The simplest way to use [library_name] is to include the main header file:
 [include_header [link callable_traits.ref_can_invoke can_invoke]]
 [include_header [link callable_traits.ref_can_invoke_constexpr can_invoke_constexpr]]
 [include_header [link callable_traits.ref_function_type function_type]]
+[include_header [link callable_traits.ref_has_calling_convention has_calling_convention]]
 [include_header [link callable_traits.ref_has_varargs has_varargs]]
 [include_header [link callable_traits.ref_has_void_return has_void_return]]
 [include_header [link callable_traits.ref_is_const_qualified is_const_qualified]]
@@ -132,56 +139,67 @@ The simplest way to use [library_name] is to include the main header file:
 [include_header [link callable_traits.ref_max_arity max_arity]]
 [include_header [link callable_traits.ref_min_arity min_arity]]
 [include_header [link callable_traits.ref_qualified_function_type qualified_function_type]]
-[include_header [link callable_traits.ref_remove_const_qualifier remove_const_qualifier]]
-[include_header [link callable_traits.ref_remove_cv_qualifiers remove_cv_qualifiers]]
+[include_header [link callable_traits.ref_remove_calling_convention remove_calling_convention]]
+[include_header [link callable_traits.ref_remove_function_const remove_function_const]]
+[include_header [link callable_traits.ref_remove_function_cv remove_function_cv]]
 [include_header [link callable_traits.ref_remove_member_pointer remove_member_pointer]]
-[include_header [link callable_traits.ref_remove_reference_qualifier remove_reference_qualifier]]
+[include_header [link callable_traits.ref_remove_function_reference remove_function_reference]]
 [include_header [link callable_traits.ref_remove_varargs remove_varargs]]
-[include_header [link callable_traits.ref_remove_volatile_qualifier remove_volatile_qualifier]]
+[include_header [link callable_traits.ref_remove_function_volatile remove_function_volatile]]
 [include_header [link callable_traits.ref_result_of result_of]]
 
 [endsect]
 
 
 
-[section:ref_add_const_qualifier add_const_qualifier]
-[include_header add_const_qualifier]
+[section:ref_add_calling_convention add_calling_convention]
+TODO
+[heading Example - [^__fastcall] to [^__stdcall]]
+[import ../example/changing_calling_conventions.cpp]
+[changing_calling_conventions]
+[heading Example - [^__cdecl]]
+[import ../example/calling_convention_cdecl.cpp]
+[calling_convention_cdecl]
+
+[endsect]
+
+[section:ref_add_function_const add_function_const]
 TODO
 [heading Example]
-[import ../example/add_const_qualifier.cpp]
-[add_const_qualifier]
+[import ../example/add_function_const.cpp]
+[add_function_const]
 [endsect]
 
-[section:ref_add_cv_qualifiers add_cv_qualifiers]
-[include_header add_cv_qualifiers]
+[section:ref_add_function_cv add_function_cv]
 TODO
 [heading Example]
-[import ../example/add_cv_qualifiers.cpp]
-[add_cv_qualifiers]
+[import ../example/add_function_cv.cpp]
+[add_function_cv]
 [endsect]
 
-[section:ref_add_lvalue_qualifier add_lvalue_qualifier]
-[include_header add_lvalue_qualifier]
+[section:ref_add_function_lvalue add_function_lvalue]
 TODO
+[import ../example/add_function_lvalue.cpp]
+[add_function_lvalue]
 [endsect]
 
-[section:ref_add_rvalue_qualifier add_rvalue_qualifier]
-[include_header add_rvalue_qualifier]
+[section:ref_add_function_rvalue add_function_rvalue]
 TODO
+[import ../example/add_function_rvalue.cpp]
+[add_function_rvalue]
 [endsect]
 
 [section:ref_add_varargs add_varargs]
-[include_header add_varargs]
 TODO
+[import ../example/add_varargs.cpp]
+[add_varargs]
 [endsect]
 
-[section:ref_add_volatile_qualifier add_volatile_qualifier]
-[include_header add_volatile_qualifier]
+[section:ref_add_function_volatile add_function_volatile]
 TODO
 [endsect]
 
 [section:ref_apply_member_pointer apply_member_pointer]
-[include_header apply_member_pointer]
 TODO
 [heading Example]
 [import ../example/apply_member_pointer.cpp]
@@ -189,7 +207,6 @@ TODO
 [endsect]
 
 [section:ref_apply_return apply_return]
-[include_header apply_return]
 TODO
 [heading Example]
 [/import ../example/apply_return.cpp]
@@ -197,7 +214,6 @@ TODO
 [endsect]
 
 [section:ref_arg_at arg_at]
-[include_header arg_at]
 TODO
 [heading Example]
 [/import ../example/arg_at.cpp]
@@ -205,7 +221,6 @@ TODO
 [endsect]
 
 [section:ref_args args]
-[include_header args]
 TODO
 [heading Example]
 [import ../example/args.cpp]
@@ -213,7 +228,6 @@ TODO
 [endsect]
 
 [section:ref_arity arity]
-[include_header arity]
 TODO
 [heading Example]
 [/import ../example/arity.cpp]
@@ -221,7 +235,6 @@ TODO
 [endsect]
 
 [section:ref_bind bind]
-[include_header bind]
 TODO
 [heading Example 1]
 [import ../example/bind_1.cpp]
@@ -232,7 +245,6 @@ TODO
 [endsect]
 
 [section:ref_can_invoke can_invoke]
-[include_header can_invoke]
 TODO
 [heading Example - Function Object]
 [import ../example/can_invoke_function_object.cpp]
@@ -249,7 +261,6 @@ TODO
 [endsect]
 
 [section:ref_can_invoke_constexpr can_invoke_constexpr]
-[include_header can_invoke_constexpr]
 TODO
 [heading Example - Function Object]
 [import ../example/can_invoke_constexpr_function_object.cpp]
@@ -263,15 +274,19 @@ TODO
 [endsect]
 
 [section:ref_function_type function_type]
-[include_header function_type]
 TODO
 [heading Example]
 [import ../example/function_type.cpp]
 [function_type]
 [endsect]
 
+[section:ref_has_calling_convention has_calling_convention]
+TODO
+[heading Example - [^__fastcall] to [^__stdcall]]
+[changing_calling_conventions]
+[endsect]
+
 [section:ref_has_varargs has_varargs]
-[include_header has_varargs]
 TODO
 [heading Example]
 [/import ../example/has_varargs.cpp]
@@ -279,7 +294,6 @@ TODO
 [endsect]
 
 [section:ref_has_void_return has_void_return]
-[include_header has_void_return]
 TODO
 [heading Example]
 [/import ../example/has_void_return.cpp]
@@ -287,7 +301,6 @@ TODO
 [endsect]
 
 [section:ref_is_const_qualified is_const_qualified]
-[include_header is_const_qualified]
 TODO
 [heading Example]
 [/import ../example/is_const_qualified.cpp]
@@ -295,7 +308,6 @@ TODO
 [endsect]
 
 [section:ref_is_constexpr is_constexpr]
-[include_header is_constexpr]
 TODO
 [heading Example - Function Object]
 [import ../example/is_constexpr_function_object.cpp]
@@ -306,7 +318,6 @@ TODO
 [endsect]
 
 [section:ref_is_lvalue_qualified is_lvalue_qualified]
-[include_header is_lvalue_qualified]
 TODO
 [heading Example]
 [/import ../example/is_lvalue_qualified.cpp]
@@ -314,7 +325,6 @@ TODO
 [endsect]
 
 [section:ref_is_reference_qualified is_reference_qualified]
-[include_header is_reference_qualified]
 TODO
 [heading Example]
 [/import ../example/is_reference_qualified.cpp]
@@ -322,7 +332,6 @@ TODO
 [endsect]
 
 [section:ref_is_rvalue_qualified is_rvalue_qualified]
-[include_header is_rvalue_qualified]
 TODO
 [heading Example]
 [/import ../example/is_rvalue_qualified.cpp]
@@ -330,7 +339,6 @@ TODO
 [endsect]
 
 [section:ref_is_unqualified is_unqualified]
-[include_header is_unqualified]
 TODO
 [heading Example]
 [/import ../example/is_unqualified.cpp]
@@ -338,7 +346,6 @@ TODO
 [endsect]
 
 [section:ref_is_volatile_qualified is_volatile_qualified]
-[include_header is_volatile_qualified]
 TODO
 [heading Example]
 [/import ../example/is_volatile_qualified.cpp]
@@ -346,7 +353,6 @@ TODO
 [endsect]
 
 [section:ref_max_arity max_arity]
-[include_header max_arity]
 TODO
 [heading Example]
 [/import ../example/max_arity.cpp]
@@ -354,7 +360,6 @@ TODO
 [endsect]
 
 [section:ref_min_arity min_arity]
-[include_header min_arity]
 TODO
 [heading Example]
 [/import ../example/min_arity.cpp]
@@ -362,63 +367,62 @@ TODO
 [endsect]
 
 [section:ref_qualified_function_type qualified_function_type]
-[include_header qualified_function_type]
 TODO
 [heading Example]
 [/import ../example/qualified_function_type.cpp]
 [qualified_function_type]
 [endsect]
 
-[section:ref_remove_const_qualifier remove_const_qualifier]
-[include_header remove_const_qualifier]
+[section:ref_remove_calling_convention remove_calling_convention]
 TODO
-[heading Example]
-[/import ../example/remove_const_qualifier.cpp]
-[remove_const_qualifier]
+[heading Example - [^__fastcall] to [^__stdcall]]
+[changing_calling_conventions]
 [endsect]
 
-[section:ref_remove_cv_qualifiers remove_cv_qualifiers]
-[include_header remove_cv_qualifiers]
+[section:ref_remove_function_const remove_function_const]
 TODO
 [heading Example]
-[/import ../example/remove_cv_qualifiers.cpp]
-[remove_cv_qualifiers]
+[/import ../example/remove_function_const.cpp]
+[remove_function_const]
+[endsect]
+
+[section:ref_remove_function_cv remove_function_cv]
+TODO
+[heading Example]
+[/import ../example/remove_function_cv.cpp]
+[remove_function_cv]
 [endsect]
 
 [section:ref_remove_member_pointer remove_member_pointer]
-[include_header remove_member_pointer]
 TODO
 [heading Example]
 [import ../example/remove_member_pointer.cpp]
 [remove_member_pointer]
 [endsect]
 
-[section:ref_remove_reference_qualifier remove_reference_qualifier]
-[include_header remove_reference_qualifier]
+[section:ref_remove_function_reference remove_function_reference]
 TODO
 [heading Example]
-[/import ../example/remove_reference_qualifier.cpp]
-[remove_reference_qualifier]
+[/import ../example/remove_function_reference.cpp]
+[remove_function_reference]
 [endsect]
 
 [section:ref_remove_varargs remove_varargs]
-[include_header remove_varargs]
 TODO
 [heading Example]
 [/import ../example/remove_varargs.cpp]
 [remove_varargs]
 [endsect]
 
-[section:ref_remove_volatile_qualifier remove_volatile_qualifier]
-[include_header remove_volatile_qualifier]
+[section:ref_remove_function_volatile remove_function_volatile]
 TODO
 [heading Example]
-[/import ../example/remove_volatile_qualifier.cpp]
-[remove_volatile_qualifier]
+[/import ../example/remove_function_volatile.cpp]
+[remove_function_volatile]
 [endsect]
 
 [section:ref_result_of result_of]
-[include_header result_of]
+TODO
 [heading Example]
 [import ../example/result_of.cpp]
 [result_of]

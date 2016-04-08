@@ -113,7 +113,7 @@ namespace callable_traits {
             using arg_types = invalid_type;
             using return_type = invalid_type;
             using function_type = invalid_type;
-            using abominable_type = invalid_type;
+            using qualified_function_type = invalid_type;
         };
 
         template<typename Callable, typename... Args>
@@ -138,7 +138,7 @@ namespace callable_traits {
             using arg_types = typename common_expected_arg_types<grouped_placeholders>::type;
             using return_type = typename root_expression::return_type;
             using function_type = build_function<return_type, arg_types>;
-            using abominable_type = function_type;
+            using qualified_function_type = function_type;
         };
     }
 }

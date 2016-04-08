@@ -1,12 +1,19 @@
-/*<-
-Copyright Barrett Adair 2016
+/*!<-
+Copyright (c) 2016 Barrett Adair
+
 Distributed under the Boost Software License, Version 1.0.
-(See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
+(See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 ->*/
 
-//[ add_cv_qualifiers
+//[ calling_convention_cdecl
+
+#define CALLABLE_TRAITS_ENABLE_STDCALL
+#define CALLABLE_TRAITS_ENABLE_FASTCALL
+
 #include <type_traits>
-#include <callable_traits/add_cv_qualifiers.hpp>
+#include <callable_traits/has_calling_convention.hpp>
+#include <callable_traits/add_calling_convention.hpp>
+#include <callable_traits/remove_calling_convention.hpp>
 
 namespace ct = callable_traits;
 
@@ -14,37 +21,20 @@ struct foo {};
 
 int main() {
 
-    {
-        using pmf = void(foo::*)();
-        using expect = void(foo::*)() const volatile;
-        using test = ct::add_cv_qualifiers<pmf>;
-        static_assert(std::is_same<test, expect>::value, "");
-    } {
-        // add_cv_qualifiers doesn't change anything when
-        // the function type is already cv-qualified.
-        using pmf = void(foo::*)() const volatile &&;
-        using expect = void(foo::*)() const volatile &&;
-        using test = ct::add_cv_qualifiers<pmf>;
-        static_assert(std::is_same<test, expect>::value, "");
-    } {
-        using pmf = void(foo::*)() volatile &;
-        using expect = void(foo::*)() const volatile &;
-        using test = ct::add_cv_qualifiers<pmf>;
-        static_assert(std::is_same<test, expect>::value, "");
-    } {
-        // add_cv_qualifiers can also be used to create "abominable"
-        // function types.
-        using f = void();
-        using expect = void() const volatile;
-        using test = ct::add_cv_qualifiers<f>;
-        static_assert(std::is_same<test, expect>::value, "");
-    } {
-        // add_cv_qualifiers has no affect on function pointers,
-        // function references, function objects, or member data pointers.
-        using f = void(&)();
-        using expect = void(&)();
-        using test = ct::add_cv_qualifiers<f>;
-        static_assert(std::is_same<test, expect>::value, "");
-    }
+    using f = void(__fastcall *)(int);
+
+    static_assert(ct::has_calling_convention<f, ct::fastcall_tag>(), "");
+    static_assert(!ct::has_calling_convention<f, ct::stdcall_tag>(), "");
+
+    using expect = void(__stdcall *)(int);
+
+    static_assert(ct::has_calling_convention<expect, ct::stdcall_tag>(), "");
+    static_assert(!ct::has_calling_convention<expect, ct::fastcall_tag>(), "");
+
+    using g = ct::remove_calling_convention<f>;
+    using test = ct::add_calling_convention<g, ct::stdcall_tag>;
+
+    static_assert(ct::has_calling_convention<test, ct::stdcall_tag>(), "");
+    static_assert(std::is_same<test, expect>::value, "");
 }
 //]

@@ -24,11 +24,11 @@ struct constants {
 
 struct invalid_type { invalid_type() = delete; };
 
+
     namespace detail {
 
         // used to convey "this type doesn't matter" in code
         struct dummy {};
-
 
         // used as return type in failed SFINAE tests
         struct substitution_failure{};
@@ -276,6 +276,13 @@ struct invalid_type { invalid_type() = delete; };
         using fail_if_invalid = typename disjunction<
             util_detail::type_value<T, !std::is_same<T, invalid_type>::value>,
             FailType
+        >::type;
+
+        template<typename T, typename Fallback>
+        using fallback_if_invalid = typename std::conditional<
+            std::is_same<T, invalid_type>::value,
+            Fallback,
+            T
         >::type;
 
         //used to prepend a type to a tuple

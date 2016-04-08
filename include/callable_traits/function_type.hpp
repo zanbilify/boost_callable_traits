@@ -10,30 +10,42 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_FUNCTION_TYPE_HPP
 #define CALLABLE_TRAITS_FUNCTION_TYPE_HPP
 
-#include <callable_traits/detail/traits.hpp>
-#include <callable_traits/detail/utility.hpp>
-#include <callable_traits/no_sfinae/function_type.hpp>
 #include <callable_traits/detail/required_definitions.hpp>
 
 namespace callable_traits {
 
     namespace detail {
 
-        template<int i = 0>
+        template<bool Sfinae>
         struct function_type_error {
 
-#ifdef CALLABLE_TRAITS_DEBUG
-			static_assert(i != 0,
-				"Unable to determine a function type for type T in callable_traits::function_type<T>.");
-#endif
+            static_assert(Sfinae,
+                "Unable to determine a function type from "
+                "T in callable_traits::function_type<T>.");
         };
     }
 	
+    namespace permissive {
+
+        template<typename T>
+        using function_type = detail::fallback_if_invalid<
+            typename detail::traits<T>::function_type,
+            T
+        >;
+    }
+
+    namespace verbose {
+
+        template<typename T>
+        using function_type = detail::fail_if_invalid<
+            typename detail::traits<T>::function_type,
+            detail::function_type_error<false>>;
+    }
+
     template<typename T>
     using function_type = detail::fail_if_invalid<
-		no_sfinae::function_type<T>,
-        detail::function_type_error<>
-	>;
+        typename detail::traits<T>::function_type,
+        detail::function_type_error<true>>;
 }
 
 #endif

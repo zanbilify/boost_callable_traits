@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="yes"?>
-<library-reference><header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_const_qualifier.hpp">
+<library-reference><header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_function_const.hpp">
 <namespace name="callable_traits">
-<typedef name="add_const_qualifier"><type><emphasis>unspecified</emphasis></type></typedef>
+<typedef name="add_function_const"><type><emphasis>unspecified</emphasis></type></typedef>
 
 
 
@@ -33,10 +33,10 @@
 
 </namespace>
 </header>
-<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_cv_qualifiers.hpp">
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_function_cv.hpp">
 <para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
 </para><namespace name="callable_traits">
-<typedef name="add_cv_qualifiers"><type><emphasis>unspecified</emphasis></type></typedef>
+<typedef name="add_function_cv"><type><emphasis>unspecified</emphasis></type></typedef>
 
 
 
@@ -68,10 +68,10 @@
 
 </namespace>
 </header>
-<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_lvalue_qualifier.hpp">
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_function_lvalue.hpp">
 <para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
 </para><namespace name="callable_traits">
-<typedef name="add_lvalue_qualifier"><type><emphasis>unspecified</emphasis></type></typedef>
+<typedef name="add_function_lvalue"><type><emphasis>unspecified</emphasis></type></typedef>
 
 
 
@@ -103,10 +103,10 @@
 
 </namespace>
 </header>
-<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_rvalue_qualifier.hpp">
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_function_rvalue.hpp">
 <para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
 </para><namespace name="callable_traits">
-<typedef name="add_rvalue_qualifier"><type><emphasis>unspecified</emphasis></type></typedef>
+<typedef name="add_function_rvalue"><type><emphasis>unspecified</emphasis></type></typedef>
 
 
 
@@ -173,10 +173,10 @@
 
 </namespace>
 </header>
-<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_volatile_qualifier.hpp">
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_function_volatile.hpp">
 <para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
 </para><namespace name="callable_traits">
-<typedef name="add_volatile_qualifier"><type><emphasis>unspecified</emphasis></type></typedef>
+<typedef name="add_function_volatile"><type><emphasis>unspecified</emphasis></type></typedef>
 
 
 
@@ -1035,10 +1035,10 @@
 
 </namespace>
 </header>
-<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/remove_const_qualifier.hpp">
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/remove_function_const.hpp">
 <para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
 </para><namespace name="callable_traits">
-<typedef name="remove_const_qualifier"><type><emphasis>unspecified</emphasis></type></typedef>
+<typedef name="remove_function_const"><type><emphasis>unspecified</emphasis></type></typedef>
 
 
 
@@ -1070,10 +1070,10 @@
 
 </namespace>
 </header>
-<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/remove_cv_qualifiers.hpp">
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/remove_function_cv.hpp">
 <para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
 </para><namespace name="callable_traits">
-<typedef name="remove_cv_qualifiers"><type><emphasis>unspecified</emphasis></type></typedef>
+<typedef name="remove_function_cv"><type><emphasis>unspecified</emphasis></type></typedef>
 
 
 
@@ -1140,10 +1140,10 @@
 
 </namespace>
 </header>
-<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/remove_reference_qualifier.hpp">
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/remove_function_reference.hpp">
 <para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
 </para><namespace name="callable_traits">
-<typedef name="remove_reference_qualifier"><type><emphasis>unspecified</emphasis></type></typedef>
+<typedef name="remove_function_reference"><type><emphasis>unspecified</emphasis></type></typedef>
 
 
 
@@ -1210,10 +1210,10 @@
 
 </namespace>
 </header>
-<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/remove_volatile_qualifier.hpp">
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/remove_function_volatile.hpp">
 <para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
 </para><namespace name="callable_traits">
-<typedef name="remove_volatile_qualifier"><type><emphasis>unspecified</emphasis></type></typedef>
+<typedef name="remove_function_volatile"><type><emphasis>unspecified</emphasis></type></typedef>
 
 
 

@@ -19,7 +19,9 @@ namespace callable_traits {
     template<typename... Args>
     inline constexpr auto
     can_invoke(Args&&... args) {
-        return detail::can_invoke_impl(std::forward<Args&&>(args)...);
+        return detail::can_invoke_impl(
+            ::std::forward<Args>(args)...
+        );
     }
 }
 

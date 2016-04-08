@@ -12,6 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/generalized_class.hpp>
 #include <callable_traits/detail/pmf.hpp>
+#include <callable_traits/detail/default_callable_traits.hpp>
 #include <callable_traits/detail/utility.hpp>
 
 #include <tuple>
@@ -47,26 +48,17 @@ namespace callable_traits {
         >::type;
         
         template<typename General>
-        struct ambiguous_function_object {
-            using arg_types = invalid_type;
-            using return_type = invalid_type;
-            using has_varargs = std::false_type;
-            using function_type = invalid_type;
-            using function_object_type = function_type;
-        };
-
-        template<typename General>
         struct function_object
             : std::conditional<
                 has_normal_call_operator<typename General::type>::value,
                 pmf<decltype(&default_normal_callable<typename General::type>::operator())>,
-                ambiguous_function_object<General>
+                default_callable_traits
             >::type {
 
             using base = typename std::conditional<
                 has_normal_call_operator<typename General::type>::value,
                 pmf<decltype(&default_normal_callable<typename General::type>::operator())>,
-                ambiguous_function_object<General>
+                default_callable_traits
             >::type;
 
             using type = typename General::original_type;
@@ -77,9 +69,6 @@ namespace callable_traits {
             static constexpr const bool value =
                 std::is_class<type>::value && !is_integral_constant<type>::value;
 
-            using is_ambiguous = std::integral_constant<bool,
-                !has_normal_call_operator<general_type>::value>;
-
             using traits = function_object;
             using class_type = invalid_type;
             using invoke_type = invalid_type;
@@ -89,10 +78,6 @@ namespace callable_traits {
 
             using is_member_pointer = std::false_type;
             using is_member_function_pointer = std::false_type;
-            using is_function_reference = std::false_type;
-            using is_function_pointer = std::false_type;
-            using is_function = std::false_type;
-            using is_function_general = std::false_type;
             using remove_member_pointer = type;
             using remove_varargs = invalid_type;
             using add_varargs = invalid_type;
@@ -103,22 +88,20 @@ namespace callable_traits {
             template<typename>
             using apply_return = invalid_type;
 
-            using remove_reference = type;
-            using add_lvalue_reference = type;
-            using add_rvalue_reference = type;
-            using add_const = type;
-            using add_volatile = type;
-            using add_cv = type;
-            using remove_const = type;
-            using remove_volatile = type;
-            using remove_cv = type;
+            using remove_function_reference = invalid_type;
+            using add_function_lvalue = invalid_type;
+            using add_function_rvalue = invalid_type;
+            using add_function_const = invalid_type;
+            using add_function_volatile = invalid_type;
+            using add_function_cv = invalid_type;
+            using remove_function_const = invalid_type;
+            using remove_function_volatile = invalid_type;
+            using remove_function_cv = invalid_type;
         };
 
         template<typename T, typename U>
-        struct function_object <generalized_class<T U::*> > {
-            static constexpr const bool value = false;
-            using traits = function_object;
-        };
+        struct function_object <generalized_class<T U::*> >
+            : default_callable_traits {};
     }
 }
 

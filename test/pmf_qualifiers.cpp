@@ -30,58 +30,58 @@ using pmf_cv = void(foo::*)() const volatile;
 using pmf_cvl = void(foo::*)() const volatile &;
 using pmf_cvr = void(foo::*)() const volatile &&;
 
-CT_ASSERT(std::is_same<pmf_l,   ct::add_lvalue_qualifier<pmf>>{});
-CT_ASSERT(std::is_same<pmf_r,   ct::add_rvalue_qualifier<pmf>>{});
+CT_ASSERT(std::is_same<pmf_l,   ct::add_function_lvalue<pmf>>{});
+CT_ASSERT(std::is_same<pmf_r,   ct::add_function_rvalue<pmf>>{});
 
-CT_ASSERT(std::is_same<pmf_c,   ct::add_const_qualifier<pmf>>{});
-CT_ASSERT(std::is_same<pmf_cl,  ct::add_const_qualifier<pmf_l>>{});
-CT_ASSERT(std::is_same<pmf_cl,  ct::add_lvalue_qualifier<pmf_c>>{});
-CT_ASSERT(std::is_same<pmf_cr,  ct::add_const_qualifier<pmf_r>>{});
-CT_ASSERT(std::is_same<pmf_cr,  ct::add_rvalue_qualifier<pmf_c>>{});
+CT_ASSERT(std::is_same<pmf_c,   ct::add_function_const<pmf>>{});
+CT_ASSERT(std::is_same<pmf_cl,  ct::add_function_const<pmf_l>>{});
+CT_ASSERT(std::is_same<pmf_cl,  ct::add_function_lvalue<pmf_c>>{});
+CT_ASSERT(std::is_same<pmf_cr,  ct::add_function_const<pmf_r>>{});
+CT_ASSERT(std::is_same<pmf_cr,  ct::add_function_rvalue<pmf_c>>{});
 
-CT_ASSERT(std::is_same<pmf_v,   ct::add_volatile_qualifier<pmf>>{});
-CT_ASSERT(std::is_same<pmf_vl,  ct::add_lvalue_qualifier<pmf_v>>{});
-CT_ASSERT(std::is_same<pmf_vl,  ct::add_lvalue_qualifier<pmf_v>>{});
-CT_ASSERT(std::is_same<pmf_vr,  ct::add_volatile_qualifier<pmf_r>>{});
-CT_ASSERT(std::is_same<pmf_vr,  ct::add_rvalue_qualifier<pmf_v>>{});
+CT_ASSERT(std::is_same<pmf_v,   ct::add_function_volatile<pmf>>{});
+CT_ASSERT(std::is_same<pmf_vl,  ct::add_function_lvalue<pmf_v>>{});
+CT_ASSERT(std::is_same<pmf_vl,  ct::add_function_lvalue<pmf_v>>{});
+CT_ASSERT(std::is_same<pmf_vr,  ct::add_function_volatile<pmf_r>>{});
+CT_ASSERT(std::is_same<pmf_vr,  ct::add_function_rvalue<pmf_v>>{});
 
-CT_ASSERT(std::is_same<pmf_cv,  ct::add_cv_qualifiers<pmf>>{});
-CT_ASSERT(std::is_same<pmf_cv,  ct::add_volatile_qualifier<pmf_c>>{});
-CT_ASSERT(std::is_same<pmf_cv,  ct::add_const_qualifier<pmf_v>>{});
-CT_ASSERT(std::is_same<pmf_cvl, ct::add_cv_qualifiers<pmf_l>>{});
-CT_ASSERT(std::is_same<pmf_cvl, ct::add_volatile_qualifier<pmf_cl>>{});
-CT_ASSERT(std::is_same<pmf_cvl, ct::add_const_qualifier<pmf_vl>>{});
-CT_ASSERT(std::is_same<pmf_cvl, ct::add_lvalue_qualifier<pmf_cv>>{});
-CT_ASSERT(std::is_same<pmf_cvr, ct::add_cv_qualifiers<pmf_r>>{});
-CT_ASSERT(std::is_same<pmf_cvr, ct::add_volatile_qualifier<pmf_cr>>{});
-CT_ASSERT(std::is_same<pmf_cvr, ct::add_const_qualifier<pmf_vr>>{});
-CT_ASSERT(std::is_same<pmf_cvr, ct::add_rvalue_qualifier<pmf_cv>>{});
+CT_ASSERT(std::is_same<pmf_cv,  ct::add_function_cv<pmf>>{});
+CT_ASSERT(std::is_same<pmf_cv,  ct::add_function_volatile<pmf_c>>{});
+CT_ASSERT(std::is_same<pmf_cv,  ct::add_function_const<pmf_v>>{});
+CT_ASSERT(std::is_same<pmf_cvl, ct::add_function_cv<pmf_l>>{});
+CT_ASSERT(std::is_same<pmf_cvl, ct::add_function_volatile<pmf_cl>>{});
+CT_ASSERT(std::is_same<pmf_cvl, ct::add_function_const<pmf_vl>>{});
+CT_ASSERT(std::is_same<pmf_cvl, ct::add_function_lvalue<pmf_cv>>{});
+CT_ASSERT(std::is_same<pmf_cvr, ct::add_function_cv<pmf_r>>{});
+CT_ASSERT(std::is_same<pmf_cvr, ct::add_function_volatile<pmf_cr>>{});
+CT_ASSERT(std::is_same<pmf_cvr, ct::add_function_const<pmf_vr>>{});
+CT_ASSERT(std::is_same<pmf_cvr, ct::add_function_rvalue<pmf_cv>>{});
 
-CT_ASSERT(std::is_same<pmf,     ct::remove_volatile_qualifier<pmf_v>>{});
-CT_ASSERT(std::is_same<pmf,     ct::remove_const_qualifier<pmf_c>>{});
-CT_ASSERT(std::is_same<pmf,     ct::remove_reference_qualifier<pmf_l>>{});
-CT_ASSERT(std::is_same<pmf,     ct::remove_reference_qualifier<pmf_r>>{});
-CT_ASSERT(std::is_same<pmf,     ct::remove_cv_qualifiers<pmf_cv>>{});
+CT_ASSERT(std::is_same<pmf,     ct::remove_function_volatile<pmf_v>>{});
+CT_ASSERT(std::is_same<pmf,     ct::remove_function_const<pmf_c>>{});
+CT_ASSERT(std::is_same<pmf,     ct::remove_function_reference<pmf_l>>{});
+CT_ASSERT(std::is_same<pmf,     ct::remove_function_reference<pmf_r>>{});
+CT_ASSERT(std::is_same<pmf,     ct::remove_function_cv<pmf_cv>>{});
 
-CT_ASSERT(std::is_same<pmf_l,   ct::remove_volatile_qualifier<pmf_vl>>{});
-CT_ASSERT(std::is_same<pmf_l,   ct::remove_const_qualifier<pmf_cl>>{});
-CT_ASSERT(std::is_same<pmf_l,   ct::remove_cv_qualifiers<pmf_cvl>>{});
+CT_ASSERT(std::is_same<pmf_l,   ct::remove_function_volatile<pmf_vl>>{});
+CT_ASSERT(std::is_same<pmf_l,   ct::remove_function_const<pmf_cl>>{});
+CT_ASSERT(std::is_same<pmf_l,   ct::remove_function_cv<pmf_cvl>>{});
 
-CT_ASSERT(std::is_same<pmf_r,   ct::remove_volatile_qualifier<pmf_vr>>{});
-CT_ASSERT(std::is_same<pmf_r,   ct::remove_const_qualifier<pmf_cr>>{});
-CT_ASSERT(std::is_same<pmf_r,   ct::remove_cv_qualifiers<pmf_cvr>>{});
+CT_ASSERT(std::is_same<pmf_r,   ct::remove_function_volatile<pmf_vr>>{});
+CT_ASSERT(std::is_same<pmf_r,   ct::remove_function_const<pmf_cr>>{});
+CT_ASSERT(std::is_same<pmf_r,   ct::remove_function_cv<pmf_cvr>>{});
 
-CT_ASSERT(std::is_same<pmf_c,   ct::remove_volatile_qualifier<pmf_cv>>{});
-CT_ASSERT(std::is_same<pmf_c,   ct::remove_reference_qualifier<pmf_cl>>{});
-CT_ASSERT(std::is_same<pmf_c,   ct::remove_reference_qualifier<pmf_cr>>{});
+CT_ASSERT(std::is_same<pmf_c,   ct::remove_function_volatile<pmf_cv>>{});
+CT_ASSERT(std::is_same<pmf_c,   ct::remove_function_reference<pmf_cl>>{});
+CT_ASSERT(std::is_same<pmf_c,   ct::remove_function_reference<pmf_cr>>{});
 
 
-CT_ASSERT(std::is_same<pmf_v,   ct::remove_const_qualifier<pmf_cv>>{});
-CT_ASSERT(std::is_same<pmf_v,   ct::remove_reference_qualifier<pmf_vl>>{});
-CT_ASSERT(std::is_same<pmf_v,   ct::remove_reference_qualifier<pmf_vr>>{});
+CT_ASSERT(std::is_same<pmf_v,   ct::remove_function_const<pmf_cv>>{});
+CT_ASSERT(std::is_same<pmf_v,   ct::remove_function_reference<pmf_vl>>{});
+CT_ASSERT(std::is_same<pmf_v,   ct::remove_function_reference<pmf_vr>>{});
 
-CT_ASSERT(std::is_same<pmf_cv,  ct::remove_reference_qualifier<pmf_cvl>>{});
-CT_ASSERT(std::is_same<pmf_cv,  ct::remove_reference_qualifier<pmf_cvr>>{});
+CT_ASSERT(std::is_same<pmf_cv,  ct::remove_function_reference<pmf_cvl>>{});
+CT_ASSERT(std::is_same<pmf_cv,  ct::remove_function_reference<pmf_cvr>>{});
 
 CT_ASSERT(!ct::is_const_qualified<pmf>());
 CT_ASSERT(!ct::is_const_qualified(pmf{}));
