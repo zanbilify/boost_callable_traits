@@ -20,7 +20,7 @@ namespace callable_traits {
 
         template<typename T>
         using add_function_cv =
-            typename detail::traits<T>::add_cv;
+            typename detail::traits<T>::add_function_cv;
     }
 
     namespace detail {

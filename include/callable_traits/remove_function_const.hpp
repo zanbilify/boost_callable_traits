@@ -20,7 +20,7 @@ namespace callable_traits {
 
         template<typename T>
         using remove_function_const =
-            typename detail::traits<T>::remove_const;
+            typename detail::traits<T>::remove_function_const;
     }
 
     namespace detail {

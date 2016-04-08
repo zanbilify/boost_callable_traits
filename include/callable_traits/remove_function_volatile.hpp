@@ -20,7 +20,7 @@ namespace callable_traits {
 
         template<typename T>
         using remove_function_volatile =
-            typename detail::traits<T>::remove_volatile;
+            typename detail::traits<T>::remove_function_volatile;
     }
 
     namespace detail {

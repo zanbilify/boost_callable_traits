@@ -67,7 +67,7 @@ namespace callable_traits {
         constexpr flags cv_ = 3;
 
         template<flags Flags>
-        using remove_const = std::integral_constant<flags, Flags & ~const_>;
+        using remove_const_flag = std::integral_constant<flags, Flags & ~const_>;
 
         template<flags Flags>
         using is_const = std::integral_constant<bool,
@@ -75,7 +75,7 @@ namespace callable_traits {
         >;
 
         template<flags Flags>
-        using remove_volatile = std::integral_constant<flags, Flags & ~volatile_>;
+        using remove_volatile_flag = std::integral_constant<flags, Flags & ~volatile_>;
 
         template<typename U, typename T = typename std::remove_reference<U>::type>
         using cv_of = std::integral_constant<flags,

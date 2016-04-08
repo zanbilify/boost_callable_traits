@@ -20,7 +20,7 @@ namespace callable_traits {
 
         template<typename T>
         using qualified_function_type =
-            typename detail::traits<T>::abominable_type;
+            typename detail::traits<T>::qualified_function_type;
     }
 
     namespace detail {

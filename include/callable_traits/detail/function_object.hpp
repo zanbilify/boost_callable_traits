@@ -106,12 +106,12 @@ namespace callable_traits {
             using remove_reference = type;
             using add_lvalue_reference = type;
             using add_rvalue_reference = type;
-            using add_const = type;
-            using add_volatile = type;
-            using add_cv = type;
-            using remove_const = type;
-            using remove_volatile = type;
-            using remove_cv = type;
+            using add_function_const = type;
+            using add_function_volatile = type;
+            using add_function_cv = type;
+            using remove_function_const = type;
+            using remove_function_volatile = type;
+            using remove_function_cv = type;
         };
 
         template<typename T, typename U>

@@ -40,8 +40,7 @@ namespace callable_traits {
         }
 
         template<typename D, typename T>
-        struct pmd<D T::*>
-            : traits<D> {
+        struct pmd<D T::*> {
                 
             static constexpr bool value = true;
 
@@ -56,28 +55,28 @@ namespace callable_traits {
             using class_type = T;
             using invoke_type = T const &;
             using type = D T::*;
-
             using function_type = D(invoke_type);
+            using qualified_function_type = D(invoke_type);
             using arg_types = std::tuple<invoke_type>;
             using invoke_arg_types = arg_types;
+            using return_type = typename std::add_lvalue_reference<D>::type;
 
             using remove_member_pointer = D;
+            using remove_reference = type;
+            using add_lvalue_reference = type;
+            using add_rvalue_reference = type;
+            using add_function_const = type;
+            using add_function_volatile = type;
+            using add_function_cv = type;
+            using remove_function_const = type;
+            using remove_function_volatile = type;
+            using remove_function_cv = type;
 
             template<typename C>
             using apply_member_pointer = D C::*;
 
-            using remove_reference = type;
-            using add_lvalue_reference = type;
-            using add_rvalue_reference = type;
-            using add_const = type;
-            using add_volatile = type;
-            using add_cv = type;
-            using remove_const = type;
-            using remove_volatile = type;
-            using remove_cv = type;
-
-            template<typename>
-            using apply_return = invalid_type;
+            template<typename R>
+            using apply_return = R T::*;
         };
     }
 }

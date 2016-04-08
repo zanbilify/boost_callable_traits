@@ -23,6 +23,7 @@ struct pmf<Return(T::*)(Args...) QUAL>                                          
  : qualifier_traits<dummy QUAL> {                                                    \
                                                                                      \
     static constexpr bool value = true;                                              \
+                                                                                     \
     using has_varargs = std::false_type;                                             \
     using is_ambiguous = std::false_type;                                            \
     using is_member_pointer = std::true_type;                                        \
@@ -32,21 +33,21 @@ struct pmf<Return(T::*)(Args...) QUAL>                                          
     using is_function_pointer = std::false_type;                                     \
     using is_function = std::false_type;                                             \
     using is_function_general = std::false_type;                                     \
-                                                                                     \
     using traits = pmf;                                                              \
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
     using type = Return(T::*)(Args...) QUAL;                                         \
+                                                                                     \
     using invoke_type = typename std::conditional<                                   \
-            std::is_rvalue_reference<T QUAL>::value,                                 \
-            T QUAL,                                                                  \
-            typename std::add_lvalue_reference<T QUAL>::type                         \
-        >::type;                                                                     \
+        std::is_rvalue_reference<T QUAL>::value,                                     \
+        T QUAL,                                                                      \
+        typename std::add_lvalue_reference<T QUAL>::type                             \
+    >::type;                                                                         \
                                                                                      \
     using function_object_type = Return(Args...);                                    \
     using function_type = Return(invoke_type, Args...);                              \
     using invoke_arg_types = std::tuple<invoke_type, Args...>;                       \
-    using abominable_type = Return(Args...) QUAL;                                    \
+    using qualified_function_type = Return(Args...) QUAL;                            \
     using remove_varargs = type;                                                     \
     using add_varargs = Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL;  \
     using class_type = T;                                                            \
@@ -63,16 +64,17 @@ struct pmf<Return(T::*)(Args...) QUAL>                                          
     using add_rvalue_reference = set_qualifiers<                                     \
         collapse_flags<qualifiers::q_flags, rref_>::value>;                          \
                                                                                      \
-    using add_const = set_qualifiers<qualifiers::q_flags | const_>;                  \
-    using add_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;            \
-    using add_cv = set_qualifiers<qualifiers::q_flags | cv_>;                        \
-    using remove_const = set_qualifiers<                                             \
-        qualifiers::ref_flags | remove_const<qualifiers::cv_flags>::value            \
-    >;                                                                               \
-    using remove_volatile = set_qualifiers<                                          \
-        qualifiers::ref_flags | remove_volatile<qualifiers::cv_flags>::value         \
-    >;                                                                               \
-    using remove_cv = set_qualifiers<qualifiers::ref_flags>;                         \
+    using add_function_const = set_qualifiers<qualifiers::q_flags | const_>;         \
+    using add_function_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;   \
+    using add_function_cv = set_qualifiers<qualifiers::q_flags | cv_>;               \
+                                                                                     \
+    using remove_function_const = set_qualifiers<                                    \
+        qualifiers::ref_flags | remove_const_flag<qualifiers::cv_flags>::value>;     \
+                                                                                     \
+    using remove_function_volatile = set_qualifiers<                                 \
+        qualifiers::ref_flags | remove_volatile_flag<qualifiers::cv_flags>::value>;  \
+                                                                                     \
+    using remove_function_cv = set_qualifiers<qualifiers::ref_flags>;                \
                                                                                      \
     template<typename U>                                                             \
     using apply_member_pointer = Return(U::*)(Args...) QUAL;                         \
@@ -80,7 +82,7 @@ struct pmf<Return(T::*)(Args...) QUAL>                                          
     template<typename NewReturn>                                                     \
     using apply_return = NewReturn(T::*)(Args...) QUAL;                              \
                                                                                      \
-    using remove_member_pointer = abominable_type;                                   \
+    using remove_member_pointer = qualified_function_type;                           \
 };                                                                                   \
                                                                                      \
 template<typename Return, typename T, typename... Args>                              \
@@ -88,6 +90,7 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL>          
  : qualifier_traits<dummy QUAL> {                                                    \
                                                                                      \
     static constexpr bool value = true;                                              \
+                                                                                     \
     using has_varargs = std::true_type;                                              \
     using is_ambiguous = std::false_type;                                            \
     using is_member_pointer = std::true_type;                                        \
@@ -97,22 +100,21 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL>          
     using is_function_pointer = std::false_type;                                     \
     using is_function = std::false_type;                                             \
     using is_function_general = std::false_type;                                     \
-                                                                                     \
     using traits = pmf;                                                              \
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
     using type = Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL;         \
                                                                                      \
     using invoke_type = typename std::conditional<                                   \
-            std::is_rvalue_reference<T QUAL>::value,                                 \
-            T QUAL,                                                                  \
-            typename std::add_lvalue_reference<T QUAL>::type                         \
-        >::type;                                                                     \
+        std::is_rvalue_reference<T QUAL>::value,                                     \
+        T QUAL,                                                                      \
+        typename std::add_lvalue_reference<T QUAL>::type                             \
+    >::type;                                                                         \
                                                                                      \
     using function_object_type = Return(Args..., ...);                               \
     using function_type = Return(invoke_type, Args..., ...);                         \
     using invoke_arg_types = std::tuple<invoke_type, Args...>;                       \
-    using abominable_type = Return(Args..., ...) QUAL;                               \
+    using qualified_function_type = Return(Args..., ...) QUAL;                       \
     using remove_varargs = Return(T::*)(Args...) QUAL;                               \
     using add_varargs = type;                                                        \
     using class_type = T;                                                            \
@@ -131,16 +133,17 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL>          
     using add_rvalue_reference = set_qualifiers<                                     \
         collapse_flags<qualifiers::q_flags, rref_>::value>;                          \
                                                                                      \
-    using add_const = set_qualifiers<qualifiers::q_flags | const_>;                  \
-    using add_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;            \
-    using add_cv = set_qualifiers<qualifiers::q_flags | cv_>;                        \
-    using remove_const = set_qualifiers<                                             \
-        qualifiers::ref_flags | remove_const<qualifiers::cv_flags>::value            \
-    >;                                                                               \
-    using remove_volatile = set_qualifiers<                                          \
-        qualifiers::ref_flags | remove_volatile<qualifiers::cv_flags>::value         \
-    >;                                                                               \
-    using remove_cv = set_qualifiers<qualifiers::ref_flags>;                         \
+    using add_function_const = set_qualifiers<qualifiers::q_flags | const_>;         \
+    using add_function_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;   \
+    using add_function_cv = set_qualifiers<qualifiers::q_flags | cv_>;               \
+                                                                                     \
+    using remove_function_const = set_qualifiers<                                    \
+        qualifiers::ref_flags | remove_const_flag<qualifiers::cv_flags>::value>;     \
+                                                                                     \
+    using remove_function_volatile = set_qualifiers<                                 \
+        qualifiers::ref_flags | remove_volatile_flag<qualifiers::cv_flags>::value>;  \
+                                                                                     \
+    using remove_function_cv = set_qualifiers<qualifiers::ref_flags>;                \
                                                                                      \
     template<typename U>                                                             \
     using apply_member_pointer =                                                     \
@@ -150,7 +153,7 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL>          
     using apply_return =                                                             \
         NewReturn(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL;               \
                                                                                      \
-    using remove_member_pointer = abominable_type;                                   \
+    using remove_member_pointer = qualified_function_type;                           \
 }                                                                                    \
 /**/
 

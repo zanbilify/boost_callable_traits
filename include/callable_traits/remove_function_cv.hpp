@@ -21,7 +21,7 @@ namespace callable_traits {
 
         template<typename T>
         using remove_function_cv =
-            typename detail::traits<T>::remove_cv;
+            typename detail::traits<T>::remove_function_cv;
     }
 
     namespace detail {

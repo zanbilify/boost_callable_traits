@@ -42,16 +42,17 @@ struct function<Return(Args...) QUAL>                                           
     using invoke_arg_types = arg_types;                                              \
     using type = Return(Args...) QUAL;                                               \
     using function_type = Return(Args...);                                           \
-    using abominable_type = Return(Args...) QUAL;                                    \
+    using qualified_function_type = Return(Args...) QUAL;                            \
     using remove_abominable = type;                                                  \
     using remove_varargs = type;                                                     \
     using add_varargs = Return (Args..., ...) QUAL;                                  \
     using class_type = invalid_type;                                                 \
     using invoke_type = invalid_type;                                                \
     using is_abominable_function = std::integral_constant<bool,                      \
-        !std::is_same<abominable_type, function_type>::value>;                       \
+        !std::is_same<qualified_function_type, function_type>::value>;               \
                                                                                      \
     using qualifiers = qualifier_traits<dummy QUAL>;                                 \
+                                                                                     \
     template<flags Flags>                                                            \
     using set_qualifiers = set_function_qualifiers<Flags, Return, Args...>;          \
                                                                                      \
@@ -63,16 +64,17 @@ struct function<Return(Args...) QUAL>                                           
     using add_rvalue_reference = set_qualifiers<                                     \
         collapse_flags<qualifiers::q_flags, rref_>::value>;                          \
                                                                                      \
-    using add_const = set_qualifiers<qualifiers::q_flags | const_>;                  \
-    using add_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;            \
-    using add_cv = set_qualifiers<qualifiers::q_flags | cv_>;                        \
-    using remove_const = set_qualifiers<                                             \
-        qualifiers::ref_flags | remove_const<qualifiers::cv_flags>::value            \
-    >;                                                                               \
-    using remove_volatile = set_qualifiers<                                          \
-        qualifiers::ref_flags | remove_volatile<qualifiers::cv_flags>::value         \
-    >;                                                                               \
-    using remove_cv = set_qualifiers<qualifiers::ref_flags>;                         \
+    using add_function_const = set_qualifiers<qualifiers::q_flags | const_>;         \
+    using add_function_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;   \
+    using add_function_cv = set_qualifiers<qualifiers::q_flags | cv_>;               \
+                                                                                     \
+    using remove_function_const = set_qualifiers<                                    \
+        qualifiers::ref_flags | remove_const_flag<qualifiers::cv_flags>::value>;     \
+                                                                                     \
+    using remove_function_volatile = set_qualifiers<                                 \
+        qualifiers::ref_flags | remove_volatile_flag<qualifiers::cv_flags>::value>;  \
+                                                                                     \
+    using remove_function_cv = set_qualifiers<qualifiers::ref_flags>;                \
                                                                                      \
     template<typename U>                                                             \
     using apply_member_pointer = add_member_pointer<type, U>;                        \
@@ -104,7 +106,7 @@ struct function<Return (Args..., ...) QUAL>                                     
     using invoke_arg_types = arg_types;                                              \
     using type = Return (Args..., ...) QUAL;                                         \
     using function_type = Return(Args..., ...);                                      \
-    using abominable_type = Return(Args..., ...) QUAL;                               \
+    using qualified_function_type = Return(Args..., ...) QUAL;                       \
     using remove_varargs = Return (Args...) QUAL;                                    \
     using add_varargs = type;                                                        \
     using class_type = invalid_type;                                                 \
@@ -123,16 +125,17 @@ struct function<Return (Args..., ...) QUAL>                                     
     using add_rvalue_reference = set_qualifiers<                                     \
         collapse_flags<qualifiers::q_flags, rref_>::value>;                          \
                                                                                      \
-    using add_const = set_qualifiers<qualifiers::q_flags | const_>;                  \
-    using add_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;            \
-    using add_cv = set_qualifiers<qualifiers::q_flags | cv_>;                        \
-    using remove_const = set_qualifiers<                                             \
-        qualifiers::ref_flags | remove_const<qualifiers::cv_flags>::value            \
-    >;                                                                               \
-    using remove_volatile = set_qualifiers<                                          \
-        qualifiers::ref_flags | remove_volatile<qualifiers::cv_flags>::value         \
-    >;                                                                               \
-    using remove_cv = set_qualifiers<qualifiers::ref_flags>;                         \
+    using add_function_const = set_qualifiers<qualifiers::q_flags | const_>;         \
+    using add_function_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;   \
+    using add_function_cv = set_qualifiers<qualifiers::q_flags | cv_>;               \
+                                                                                     \
+    using remove_function_const = set_qualifiers<                                    \
+        qualifiers::ref_flags | remove_const_flag<qualifiers::cv_flags>::value>;     \
+                                                                                     \
+    using remove_function_volatile = set_qualifiers<                                 \
+        qualifiers::ref_flags | remove_volatile_flag<qualifiers::cv_flags>::value>;  \
+                                                                                     \
+    using remove_function_cv = set_qualifiers<qualifiers::ref_flags>;                \
                                                                                      \
     template<typename U>                                                             \
     using apply_member_pointer =                                                     \
@@ -181,12 +184,12 @@ namespace callable_traits {
             using add_lvalue_reference = T*;
             using add_rvalue_reference = T*;
 
-            using add_const =  T*;
-            using add_volatile = T*;
-            using add_cv = T*;
-            using remove_const = T*;
-            using remove_volatile = T*;
-            using remove_cv = T*;
+            using add_function_const =  T*;
+            using add_function_volatile = T*;
+            using add_function_cv = T*;
+            using remove_function_const = T*;
+            using remove_function_volatile = T*;
+            using remove_function_cv = T*;
 
             template<typename NewReturn>
             using apply_return = typename base::template apply_return<NewReturn>&;
@@ -206,12 +209,12 @@ namespace callable_traits {
             using add_lvalue_reference = T&;
             using add_rvalue_reference = T&;
 
-            using add_const = T&;
-            using add_volatile = T&;
-            using add_cv = T&;
-            using remove_const = T&;
-            using remove_volatile = T&;
-            using remove_cv = T&;
+            using add_function_const = T&;
+            using add_function_volatile = T&;
+            using add_function_cv = T&;
+            using remove_function_const = T&;
+            using remove_function_volatile = T&;
+            using remove_function_cv = T&;
 
             template<typename NewReturn>
             using apply_return = typename base::template apply_return<NewReturn>&;
