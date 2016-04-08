@@ -7,8 +7,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_ADD_VOLATILE_QUALIFIER_HPP
-#define CALLABLE_TRAITS_ADD_VOLATILE_QUALIFIER_HPP
+#ifndef CALLABLE_TRAITS_ADD_FUNCTION_VOLATILE_HPP
+#define CALLABLE_TRAITS_ADD_FUNCTION_VOLATILE_HPP
 
 #include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/utility.hpp>
@@ -19,36 +19,36 @@ namespace callable_traits {
     namespace permissive {
 
         template<typename T>
-        using add_volatile_qualifier =
+        using add_function_volatile =
             typename detail::traits<T>::add_volatile;
     }
 
     namespace detail {
 
         template<bool Sfinae>
-        struct add_volatile_qualifier_error {
+        struct add_function_volatile_error {
 
             static_assert(Sfinae,
-                "callable_traits::add_volatile_qualifier<T> "
+                "callable_traits::add_function_volatile<T> "
                 "is not a meaningful operation for this T.");
         };
 
         template<typename T, bool Sfinae>
-        using add_volatile_qualifier_t = fail_if_invalid<
-            permissive::add_volatile_qualifier<T>,
-            add_volatile_qualifier_error<Sfinae>>;
+        using add_function_volatile_t = fail_if_invalid<
+            permissive::add_function_volatile<T>,
+            add_function_volatile_error<Sfinae>>;
     }
 
     namespace verbose {
 
         template<typename T>
-        using add_volatile_qualifier =
-            detail::add_volatile_qualifier_t<T, false>;
+        using add_function_volatile =
+            detail::add_function_volatile_t<T, false>;
     }
 
     template<typename T>
-    using add_volatile_qualifier =
-        detail::add_volatile_qualifier_t<T, true>;
+    using add_function_volatile =
+        detail::add_function_volatile_t<T, true>;
 }
 
 #endif

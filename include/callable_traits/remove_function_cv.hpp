@@ -7,48 +7,49 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_REMOVE_REFERENCE_QUALIFIER_HPP
-#define CALLABLE_TRAITS_REMOVE_REFERENCE_QUALIFIER_HPP
+#ifndef CALLABLE_TRAITS_REMOVE_FUNCTION_CV_HPP
+#define CALLABLE_TRAITS_REMOVE_FUNCTION_CV_HPP
 
 #include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/utility.hpp>
 #include <callable_traits/detail/required_definitions.hpp>
+
 
 namespace callable_traits {
 
     namespace permissive {
 
         template<typename T>
-        using remove_reference_qualifier =
-            typename detail::traits<T>::remove_reference;
+        using remove_function_cv =
+            typename detail::traits<T>::remove_cv;
     }
 
     namespace detail {
 
         template<bool Sfinae>
-        struct remove_reference_qualifier_error {
+        struct remove_function_cv_error {
 
             static_assert(Sfinae,
-                "callable_traits::remove_reference_qualifier<T> "
+                "callable_traits::remove_function_cv<T> "
                 "is not a meaningful operation for this T.");
         };
 
         template<typename T, bool Sfinae>
-        using remove_reference_qualifier_t = fail_if_invalid<
-            permissive::remove_reference_qualifier<T>,
-            remove_reference_qualifier_error<Sfinae>>;
+        using remove_function_cv_t = fail_if_invalid<
+            permissive::remove_function_cv<T>,
+            remove_function_cv_error<Sfinae>>;
     }
 
     namespace verbose {
 
         template<typename T>
-        using remove_reference_qualifier =
-            detail::remove_reference_qualifier_t<T, false>;
+        using remove_function_cv =
+            detail::remove_function_cv_t<T, false>;
     }
 
     template<typename T>
-    using remove_reference_qualifier =
-        detail::remove_reference_qualifier_t<T, true>;
+    using remove_function_cv =
+        detail::remove_function_cv_t<T, true>;
 }
 
 #endif

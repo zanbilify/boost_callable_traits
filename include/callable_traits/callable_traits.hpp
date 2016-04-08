@@ -10,12 +10,12 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_CALLABLE_TRAITS_HPP
 #define CALLABLE_TRAITS_CALLABLE_TRAITS_HPP
 
-#include <callable_traits/add_const_qualifier.hpp>
-#include <callable_traits/add_cv_qualifiers.hpp>
-#include <callable_traits/add_lvalue_qualifier.hpp>
-#include <callable_traits/add_rvalue_qualifier.hpp>
+#include <callable_traits/add_function_const.hpp>
+#include <callable_traits/add_function_cv.hpp>
+#include <callable_traits/add_function_lvalue.hpp>
+#include <callable_traits/add_function_rvalue.hpp>
 #include <callable_traits/add_varargs.hpp>
-#include <callable_traits/add_volatile_qualifier.hpp>
+#include <callable_traits/add_function_volatile.hpp>
 #include <callable_traits/apply_member_pointer.hpp>
 #include <callable_traits/apply_return.hpp>
 #include <callable_traits/arg_at.hpp>
@@ -37,12 +37,12 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/max_arity.hpp>
 #include <callable_traits/min_arity.hpp>
 #include <callable_traits/qualified_function_type.hpp>
-#include <callable_traits/remove_const_qualifier.hpp>
-#include <callable_traits/remove_cv_qualifiers.hpp>
+#include <callable_traits/remove_function_const.hpp>
+#include <callable_traits/remove_function_cv.hpp>
 #include <callable_traits/remove_member_pointer.hpp>
-#include <callable_traits/remove_reference_qualifier.hpp>
+#include <callable_traits/remove_function_reference.hpp>
 #include <callable_traits/remove_varargs.hpp>
-#include <callable_traits/remove_volatile_qualifier.hpp>
+#include <callable_traits/remove_function_volatile.hpp>
 #include <callable_traits/result_of.hpp>
 #include <callable_traits/detail/required_definitions.hpp>
 

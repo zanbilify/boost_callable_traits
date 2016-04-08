@@ -7,8 +7,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_REMOVE_CONST_QUALIFIER_HPP
-#define CALLABLE_TRAITS_REMOVE_CONST_QUALIFIER_HPP
+#ifndef CALLABLE_TRAITS_REMOVE_FUNCTION_CONST_HPP
+#define CALLABLE_TRAITS_REMOVE_FUNCTION_CONST_HPP
 
 #include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/utility.hpp>
@@ -19,36 +19,36 @@ namespace callable_traits {
     namespace permissive {
 
         template<typename T>
-        using remove_const_qualifier =
+        using remove_function_const =
             typename detail::traits<T>::remove_const;
     }
 
     namespace detail {
 
         template<bool Sfinae>
-        struct remove_const_qualifier_error {
+        struct remove_function_const_error {
 
             static_assert(Sfinae,
-                "callable_traits::remove_const_qualifier<T> "
+                "callable_traits::remove_function_const<T> "
                 "is not a meaningful operation for this T.");
         };
 
         template<typename T, bool Sfinae>
-        using remove_const_qualifier_t = fail_if_invalid<
-            permissive::remove_const_qualifier<T>,
-            remove_const_qualifier_error<Sfinae>>;
+        using remove_function_const_t = fail_if_invalid<
+            permissive::remove_function_const<T>,
+            remove_function_const_error<Sfinae>>;
     }
 
     namespace verbose {
 
         template<typename T>
-        using remove_const_qualifier =
-            detail::remove_const_qualifier_t<T, false>;
+        using remove_function_const =
+            detail::remove_function_const_t<T, false>;
     }
 
     template<typename T>
-    using remove_const_qualifier =
-        detail::remove_const_qualifier_t<T, true>;
+    using remove_function_const =
+        detail::remove_function_const_t<T, true>;
 }
 
 #endif

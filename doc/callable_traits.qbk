@@ -57,7 +57,7 @@ The use cases for [library_name] are closely related to those of [@http://www.bo
 # [library_name]' template aliases and `constexpr` `std::integral_constant` functions are preferable to `typename foo::type` and `foo::value`
 
 # [library_name] offers a familar, consistent interface for the synthesis and decomposition of callable types
-        * e.g. `remove_const_qualifier` parallels `std::remove_const`
+        * e.g. `remove_function_const` parallels `std::remove_const`
 
 # universal references are accepted everywhere, so you don't need to worry about using `std::remove_reference` first
 
@@ -110,12 +110,12 @@ The simplest way to use [library_name] is to include the main header file:
 
 [library_name] interface is also broken down by trait into individual header files. To use only the traits you need, include one or more of the following headers, listed alphabetically:
 
-[include_header [link callable_traits.ref_add_const_qualifier add_const_qualifier]]
-[include_header [link callable_traits.ref_add_cv_qualifiers add_cv_qualifiers]]
-[include_header [link callable_traits.ref_add_lvalue_qualifier add_lvalue_qualifier]]
-[include_header [link callable_traits.ref_add_rvalue_qualifier add_rvalue_qualifier]]
+[include_header [link callable_traits.ref_add_function_const add_function_const]]
+[include_header [link callable_traits.ref_add_function_cv add_function_cv]]
+[include_header [link callable_traits.ref_add_function_lvalue add_function_lvalue]]
+[include_header [link callable_traits.ref_add_function_rvalue add_function_rvalue]]
 [include_header [link callable_traits.ref_add_varargs add_varargs]]
-[include_header [link callable_traits.ref_add_volatile_qualifier add_volatile_qualifier]]
+[include_header [link callable_traits.ref_add_function_volatile add_function_volatile]]
 [include_header [link callable_traits.ref_apply_member_pointer apply_member_pointer]]
 [include_header [link callable_traits.ref_apply_return apply_return]]
 [include_header [link callable_traits.ref_arg_at arg_at]]
@@ -137,42 +137,42 @@ The simplest way to use [library_name] is to include the main header file:
 [include_header [link callable_traits.ref_max_arity max_arity]]
 [include_header [link callable_traits.ref_min_arity min_arity]]
 [include_header [link callable_traits.ref_qualified_function_type qualified_function_type]]
-[include_header [link callable_traits.ref_remove_const_qualifier remove_const_qualifier]]
-[include_header [link callable_traits.ref_remove_cv_qualifiers remove_cv_qualifiers]]
+[include_header [link callable_traits.ref_remove_function_const remove_function_const]]
+[include_header [link callable_traits.ref_remove_function_cv remove_function_cv]]
 [include_header [link callable_traits.ref_remove_member_pointer remove_member_pointer]]
-[include_header [link callable_traits.ref_remove_reference_qualifier remove_reference_qualifier]]
+[include_header [link callable_traits.ref_remove_function_reference remove_function_reference]]
 [include_header [link callable_traits.ref_remove_varargs remove_varargs]]
-[include_header [link callable_traits.ref_remove_volatile_qualifier remove_volatile_qualifier]]
+[include_header [link callable_traits.ref_remove_function_volatile remove_function_volatile]]
 [include_header [link callable_traits.ref_result_of result_of]]
 
 [endsect]
 
 
 
-[section:ref_add_const_qualifier add_const_qualifier]
+[section:ref_add_function_const add_function_const]
 TODO
 [heading Example]
-[import ../example/add_const_qualifier.cpp]
-[add_const_qualifier]
+[import ../example/add_function_const.cpp]
+[add_function_const]
 [endsect]
 
-[section:ref_add_cv_qualifiers add_cv_qualifiers]
+[section:ref_add_function_cv add_function_cv]
 TODO
 [heading Example]
-[import ../example/add_cv_qualifiers.cpp]
-[add_cv_qualifiers]
+[import ../example/add_function_cv.cpp]
+[add_function_cv]
 [endsect]
 
-[section:ref_add_lvalue_qualifier add_lvalue_qualifier]
+[section:ref_add_function_lvalue add_function_lvalue]
 TODO
-[import ../example/add_lvalue_qualifier.cpp]
-[add_lvalue_qualifier]
+[import ../example/add_function_lvalue.cpp]
+[add_function_lvalue]
 [endsect]
 
-[section:ref_add_rvalue_qualifier add_rvalue_qualifier]
+[section:ref_add_function_rvalue add_function_rvalue]
 TODO
-[import ../example/add_rvalue_qualifier.cpp]
-[add_rvalue_qualifier]
+[import ../example/add_function_rvalue.cpp]
+[add_function_rvalue]
 [endsect]
 
 [section:ref_add_varargs add_varargs]
@@ -181,7 +181,7 @@ TODO
 [add_varargs]
 [endsect]
 
-[section:ref_add_volatile_qualifier add_volatile_qualifier]
+[section:ref_add_function_volatile add_function_volatile]
 TODO
 [endsect]
 
@@ -353,18 +353,18 @@ TODO
 [qualified_function_type]
 [endsect]
 
-[section:ref_remove_const_qualifier remove_const_qualifier]
+[section:ref_remove_function_const remove_function_const]
 TODO
 [heading Example]
-[/import ../example/remove_const_qualifier.cpp]
-[remove_const_qualifier]
+[/import ../example/remove_function_const.cpp]
+[remove_function_const]
 [endsect]
 
-[section:ref_remove_cv_qualifiers remove_cv_qualifiers]
+[section:ref_remove_function_cv remove_function_cv]
 TODO
 [heading Example]
-[/import ../example/remove_cv_qualifiers.cpp]
-[remove_cv_qualifiers]
+[/import ../example/remove_function_cv.cpp]
+[remove_function_cv]
 [endsect]
 
 [section:ref_remove_member_pointer remove_member_pointer]
@@ -374,11 +374,11 @@ TODO
 [remove_member_pointer]
 [endsect]
 
-[section:ref_remove_reference_qualifier remove_reference_qualifier]
+[section:ref_remove_function_reference remove_function_reference]
 TODO
 [heading Example]
-[/import ../example/remove_reference_qualifier.cpp]
-[remove_reference_qualifier]
+[/import ../example/remove_function_reference.cpp]
+[remove_function_reference]
 [endsect]
 
 [section:ref_remove_varargs remove_varargs]
@@ -388,11 +388,11 @@ TODO
 [remove_varargs]
 [endsect]
 
-[section:ref_remove_volatile_qualifier remove_volatile_qualifier]
+[section:ref_remove_function_volatile remove_function_volatile]
 TODO
 [heading Example]
-[/import ../example/remove_volatile_qualifier.cpp]
-[remove_volatile_qualifier]
+[/import ../example/remove_function_volatile.cpp]
+[remove_function_volatile]
 [endsect]
 
 [section:ref_result_of result_of]

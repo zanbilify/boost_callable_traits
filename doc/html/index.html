@@ -45,12 +45,12 @@
       <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code> sugar</a></span></dt>
 </dl></dd>
 <dt><span class="section"><a href="callable_traits/headers.html">Headers</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_add_const_qualifier.html">add_const_qualifier</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_add_cv_qualifiers.html">add_cv_qualifiers</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_add_lvalue_qualifier.html">add_lvalue_qualifier</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_add_rvalue_qualifier.html">add_rvalue_qualifier</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_add_function_const.html">add_function_const</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_add_function_cv.html">add_function_cv</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_add_function_lvalue.html">add_function_lvalue</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_add_function_rvalue.html">add_function_rvalue</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_add_varargs.html">add_varargs</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_add_volatile_qualifier.html">add_volatile_qualifier</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_add_function_volatile.html">add_function_volatile</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_apply_member_pointer.html">apply_member_pointer</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_apply_return.html">apply_return</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_arg_at.html">arg_at</a></span></dt>
@@ -72,12 +72,12 @@
 <dt><span class="section"><a href="callable_traits/ref_max_arity.html">max_arity</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_min_arity.html">min_arity</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_qualified_function_type.html">qualified_function_type</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_remove_const_qualifier.html">remove_const_qualifier</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_remove_cv_qualifiers.html">remove_cv_qualifiers</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_remove_function_const.html">remove_function_const</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_remove_function_cv.html">remove_function_cv</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_remove_member_pointer.html">remove_member_pointer</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_remove_reference_qualifier.html">remove_reference_qualifier</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_remove_function_reference.html">remove_function_reference</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_remove_varargs.html">remove_varargs</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_remove_volatile_qualifier.html">remove_volatile_qualifier</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_remove_function_volatile.html">remove_function_volatile</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_result_of.html">result_of</a></span></dt>
 </dl>
 </div>
@@ -189,12 +189,12 @@
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">,</span> <span class="identifier">with_const</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
     <span class="comment">// Let's remove the const qualifier:</span>
-    <span class="keyword">using</span> <span class="identifier">mutable_pmf</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_const_qualifier</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
+    <span class="keyword">using</span> <span class="identifier">mutable_pmf</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_function_const</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
     <span class="keyword">using</span> <span class="identifier">without_const</span> <span class="special">=</span> <span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*)</span> <span class="comment">/*no const!*/</span><span class="special">;</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">mutable_pmf</span><span class="special">,</span> <span class="identifier">without_const</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
     <span class="comment">// Now let's add an rvalue qualifier (&amp;&amp;):</span>
-    <span class="keyword">using</span> <span class="identifier">rvalue_pmf</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_rvalue_qualifier</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
+    <span class="keyword">using</span> <span class="identifier">rvalue_pmf</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_function_rvalue</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
     <span class="keyword">using</span> <span class="identifier">with_rvalue</span> <span class="special">=</span> <span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*)</span> <span class="keyword">const</span> <span class="special">&amp;&amp;;</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">rvalue_pmf</span><span class="special">,</span> <span class="identifier">with_rvalue</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
@@ -318,7 +318,7 @@
             <code class="literal">CallableTraits</code> offers a familar, consistent interface
             for the synthesis and decomposition of callable types
             <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-                  e.g. <code class="computeroutput"><span class="identifier">remove_const_qualifier</span></code>
+                  e.g. <code class="computeroutput"><span class="identifier">remove_function_const</span></code>
                   parallels <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">remove_const</span></code>
                 </li></ul></div>
           </li>
@@ -392,7 +392,8 @@
         API, this example might make a bit more sense.
       </p>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">function_type</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">bind</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">namespace</span> <span class="identifier">example_library</span> <span class="special">{</span>
 
@@ -440,7 +441,7 @@
     <span class="special">}</span>
 <span class="special">}</span>
 
-<span class="comment">//client code starts here</span>
+<span class="comment">// client code starts here</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">cassert</span><span class="special">&gt;</span>
 
 <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="identifier">example_library</span><span class="special">;</span>
@@ -459,19 +460,19 @@
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
 
-    <span class="comment">//function pointer</span>
+    <span class="comment">// function pointer</span>
     <span class="keyword">auto</span> <span class="identifier">f</span> <span class="special">=</span> <span class="identifier">make_function</span><span class="special">(&amp;</span><span class="identifier">add</span><span class="special">);</span>
     <span class="identifier">assert</span><span class="special">(</span><span class="identifier">f</span><span class="special">(</span><span class="number">99</span><span class="special">,</span> <span class="number">1</span><span class="special">)</span> <span class="special">==</span> <span class="number">100</span><span class="special">);</span>
 
-    <span class="comment">//function reference</span>
+    <span class="comment">// function reference</span>
     <span class="identifier">f</span> <span class="special">=</span> <span class="identifier">make_function</span><span class="special">(</span><span class="identifier">add</span><span class="special">);</span>
     <span class="identifier">assert</span><span class="special">(</span><span class="identifier">f</span><span class="special">(</span><span class="number">99</span><span class="special">,</span> <span class="number">1</span><span class="special">)</span> <span class="special">==</span> <span class="number">100</span><span class="special">);</span>
 
-    <span class="comment">//member function pointer (bound to object)</span>
+    <span class="comment">// member function pointer (bound to object)</span>
     <span class="identifier">f</span> <span class="special">=</span> <span class="identifier">make_function</span><span class="special">(&amp;</span><span class="identifier">adder</span><span class="special">::</span><span class="identifier">eval</span><span class="special">,</span> <span class="identifier">adder</span><span class="special">{},</span> <span class="identifier">_1</span><span class="special">,</span> <span class="identifier">_2</span><span class="special">);</span>
     <span class="identifier">assert</span><span class="special">(</span><span class="identifier">f</span><span class="special">(</span><span class="number">99</span><span class="special">,</span> <span class="number">1</span><span class="special">)</span> <span class="special">==</span> <span class="number">100</span><span class="special">);</span>
 
-    <span class="comment">//lambda</span>
+    <span class="comment">// lambda</span>
     <span class="identifier">f</span> <span class="special">=</span> <span class="identifier">make_function</span><span class="special">([](</span><span class="keyword">int</span> <span class="identifier">i</span><span class="special">,</span> <span class="keyword">int</span> <span class="identifier">j</span><span class="special">)</span> <span class="special">{</span>
         <span class="keyword">return</span> <span class="identifier">i</span> <span class="special">+</span> <span class="identifier">j</span><span class="special">;</span>
     <span class="special">});</span>

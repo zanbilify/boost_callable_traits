@@ -4,9 +4,9 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
 ->*/
 
-//[ add_lvalue_qualifier
+//[ add_function_lvalue
 #include <type_traits>
-#include <callable_traits/add_lvalue_qualifier.hpp>
+#include <callable_traits/add_function_lvalue.hpp>
 
 namespace ct = callable_traits;
 
@@ -17,36 +17,36 @@ int main() {
     {
         using pmf = void(foo::*)();
         using expect = void(foo::*)() &;
-        using test = ct::add_lvalue_qualifier<pmf>;
+        using test = ct::add_function_lvalue<pmf>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
-        // add_lvalue_qualifier doesn't change anything when
+        // add_function_lvalue doesn't change anything when
         // the function type already has an lvalue qualifier.
         using pmf = void(foo::*)() &;
         using expect = void(foo::*)() &;
-        using test = ct::add_lvalue_qualifier<pmf>;
+        using test = ct::add_function_lvalue<pmf>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
-        // add_lvalue_qualifier models C++11 reference collapsing
+        // add_function_lvalue models C++11 reference collapsing
         // rules, so that adding an lvalue qualifier to an
         // rvalue-qualified type will force the lvalue.
         using pmf = void(foo::*)() &&;
         using expect = void(foo::*)() &;
-        using test = ct::add_lvalue_qualifier<pmf>;
+        using test = ct::add_function_lvalue<pmf>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
-        // add_lvalue_qualifier can also be used to create "abominable"
+        // add_function_lvalue can also be used to create "abominable"
         // function types.
         using f = void();
         using expect = void() &;
-        using test = ct::add_lvalue_qualifier<f>;
+        using test = ct::add_function_lvalue<f>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
-        // add_lvalue_qualifier has no affect on function pointers,
+        // add_function_lvalue has no affect on function pointers,
         // function references, function objects, or member data pointers.
         using f = int foo::*;
         using expect = int foo::*;
-        using test = ct::add_lvalue_qualifier<f>;
+        using test = ct::add_function_lvalue<f>;
         static_assert(std::is_same<test, expect>::value, "");
     }
 }

@@ -7,8 +7,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_REMOVE_VOLATILE_QUALIFIER_HPP
-#define CALLABLE_TRAITS_REMOVE_VOLATILE_QUALIFIER_HPP
+#ifndef CALLABLE_TRAITS_ADD_FUNCTION_CV_HPP
+#define CALLABLE_TRAITS_ADD_FUNCTION_CV_HPP
 
 #include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/utility.hpp>
@@ -19,36 +19,36 @@ namespace callable_traits {
     namespace permissive {
 
         template<typename T>
-        using remove_volatile_qualifier =
-            typename detail::traits<T>::remove_volatile;
+        using add_function_cv =
+            typename detail::traits<T>::add_cv;
     }
 
     namespace detail {
 
         template<bool Sfinae>
-        struct remove_volatile_qualifier_error {
+        struct add_function_cv_error {
 
             static_assert(Sfinae,
-                "callable_traits::remove_volatile_qualifier<T> "
+                "callable_traits::add_function_cv<T> "
                 "is not a meaningful operation for this T.");
         };
 
         template<typename T, bool Sfinae>
-        using remove_volatile_qualifier_t = fail_if_invalid<
-            permissive::remove_volatile_qualifier<T>,
-            remove_volatile_qualifier_error<Sfinae>>;
+        using add_function_cv_t = fail_if_invalid<
+            permissive::add_function_cv<T>,
+            add_function_cv_error<Sfinae>>;
     }
 
     namespace verbose {
 
         template<typename T>
-        using remove_volatile_qualifier =
-            detail::remove_volatile_qualifier_t<T, false>;
+        using add_function_cv =
+            detail::add_function_cv_t<T, false>;
     }
 
     template<typename T>
-    using remove_volatile_qualifier =
-        detail::remove_volatile_qualifier_t<T, true>;
+    using add_function_cv =
+        detail::add_function_cv_t<T, true>;
 }
 
 #endif
