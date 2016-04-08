@@ -55,6 +55,7 @@ namespace callable_traits {
             using traits = pmd;   
             using class_type = T;
             using invoke_type = T const &;
+            using type = D T::*;
 
             using function_type = D(invoke_type);
             using arg_types = std::tuple<invoke_type>;
@@ -65,15 +66,15 @@ namespace callable_traits {
             template<typename C>
             using apply_member_pointer = D C::*;
 
-            using remove_reference = invalid_type;
-            using add_lvalue_reference = invalid_type;
-            using add_rvalue_reference = invalid_type;
-            using add_const = invalid_type;
-            using add_volatile = invalid_type;
-            using add_cv = invalid_type;
-            using remove_const = invalid_type;
-            using remove_volatile = invalid_type;
-            using remove_cv = invalid_type;
+            using remove_reference = type;
+            using add_lvalue_reference = type;
+            using add_rvalue_reference = type;
+            using add_const = type;
+            using add_volatile = type;
+            using add_cv = type;
+            using remove_const = type;
+            using remove_volatile = type;
+            using remove_cv = type;
 
             template<typename>
             using apply_return = invalid_type;
