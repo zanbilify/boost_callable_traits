@@ -160,14 +160,17 @@ namespace callable_traits {
         #define CALLABLE_TRAITS_CC
         #define CALLABLE_TRAITS_ST
         #include <callable_traits/detail/function_cc.hpp>
+        #include <callable_traits/detail/varargs_function_cc.hpp>
         #undef CALLABLE_TRAITS_ST
         #undef CALLABLE_TRAITS_CC
         #undef CALLABLE_TRAITS_CC_TAG
         #undef CALLABLE_TRAITS_VARARGS_CC
 
+        //todo cdecl - need to split variadic and normal function pointers
+
         #ifdef CALLABLE_TRAITS_ENABLE_STDCALL
-        #define CALLABLE_TRAITS_CC_TAG calling_conventions::stdcall
-        #define CALLABLE_TRAITS_VARARGS_CC __stdcall
+        #define CALLABLE_TRAITS_CC_TAG stdcall_tag
+        #define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
         #define CALLABLE_TRAITS_CC __stdcall
         #define CALLABLE_TRAITS_ST
         #include <callable_traits/detail/function_cc.hpp>
@@ -178,8 +181,8 @@ namespace callable_traits {
         #endif
 
         #ifdef CALLABLE_TRAITS_ENABLE_FASTCALL
-        #define CALLABLE_TRAITS_CC_TAG calling_conventions::fastcall
-        #define CALLABLE_TRAITS_VARARGS_CC __fastcall
+        #define CALLABLE_TRAITS_CC_TAG fastcall_tag
+        #define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
         #define CALLABLE_TRAITS_CC __fastcall
         #define CALLABLE_TRAITS_ST
         #include <callable_traits/detail/function_cc.hpp>
@@ -190,7 +193,7 @@ namespace callable_traits {
         #endif
 
         #ifdef CALLABLE_TRAITS_ENABLE_PASCAL
-        #define CALLABLE_TRAITS_CC_TAG calling_conventions::pascal
+        #define CALLABLE_TRAITS_CC_TAG pascal_tag
         #define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
         #define CALLABLE_TRAITS_CC
         #define CALLABLE_TRAITS_ST pascal

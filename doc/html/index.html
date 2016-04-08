@@ -45,6 +45,7 @@
       <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code> sugar</a></span></dt>
 </dl></dd>
 <dt><span class="section"><a href="callable_traits/headers.html">Headers</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_add_calling_convention.html">add_calling_convention</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_add_function_const.html">add_function_const</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_add_function_cv.html">add_function_cv</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_add_function_lvalue.html">add_function_lvalue</a></span></dt>
@@ -60,6 +61,7 @@
 <dt><span class="section"><a href="callable_traits/ref_can_invoke.html">can_invoke</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_can_invoke_constexpr.html">can_invoke_constexpr</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_function_type.html">function_type</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_has_calling_convention.html">has_calling_convention</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_has_varargs.html">has_varargs</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_has_void_return.html">has_void_return</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_is_const_qualified.html">is_const_qualified</a></span></dt>
@@ -72,6 +74,7 @@
 <dt><span class="section"><a href="callable_traits/ref_max_arity.html">max_arity</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_min_arity.html">min_arity</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_qualified_function_type.html">qualified_function_type</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_remove_calling_convention.html">remove_calling_convention</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_remove_function_const.html">remove_function_const</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_remove_function_cv.html">remove_function_cv</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_remove_member_pointer.html">remove_member_pointer</a></span></dt>
@@ -253,13 +256,12 @@
             C-style varargs (<code class="computeroutput"><span class="special">...</span></code>)
           </li>
 <li class="listitem">
-            calling conventions (<code class="computeroutput"><span class="identifier">__cdecl</span></code>,
+            calling conventions/attributes (<code class="computeroutput"><span class="identifier">__cdecl</span></code>,
             <code class="computeroutput"><span class="identifier">__stdcall</span></code>, <code class="computeroutput"><span class="identifier">__fastcall</span></code>, <code class="computeroutput"><span class="identifier">pascal</span></code>,
             etc.)
           </li>
 <li class="listitem">
-            <code class="computeroutput"><span class="keyword">noexcept</span></code> (<a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html" target="_top">part
-            of the function type system in C++17</a>)
+            <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html" target="_top"><code class="literal">noexcept</code></a>
           </li>
 </ul></div>
 <p>
@@ -296,10 +298,9 @@
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>
-          <code class="literal">CallableTraits</code> currently offers no interface for the
-          manipulation of calling conventions. Also, no features are currently implemented
-          to account for C++17's <code class="computeroutput"><span class="keyword">noexcept</span></code>.
-          These features are planned for future versions on supported platforms.
+          The upcoming C++17 ISO standard brings a language change that adds <code class="computeroutput"><span class="keyword">noexcept</span></code> to signatures. Currently, this
+          is not handled in <code class="literal">CallableTraits</code>, but will be in the
+          future for platforms that support it.
         </p></td></tr>
 </table></div>
 </div>

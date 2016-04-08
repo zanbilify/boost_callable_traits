@@ -80,17 +80,9 @@ namespace callable_traits {
 
         #ifdef CALLABLE_TRAITS_ENABLE_STDCALL
         #define CALLABLE_TRAITS_CC_TAG stdcall_tag
-        #define CALLABLE_TRAITS_VARARGS_CC __stdcall
+        #define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
         #define CALLABLE_TRAITS_CC __stdcall
         #include <callable_traits/detail/pmf_cc.hpp>
-        #undef CALLABLE_TRAITS_CC
-        #undef CALLABLE_TRAITS_CC_TAG
-        #undef CALLABLE_TRAITS_VARARGS_CC
-
-        #define CALLABLE_TRAITS_CC_TAG stdcall_tag
-        #define CALLABLE_TRAITS_VARARGS_CC __stdcall
-        #define CALLABLE_TRAITS_CC __stdcall
-        #include <callable_traits/detail/varargs_pmf_cc.hpp>
         #undef CALLABLE_TRAITS_CC
         #undef CALLABLE_TRAITS_CC_TAG
         #undef CALLABLE_TRAITS_VARARGS_CC
@@ -98,17 +90,9 @@ namespace callable_traits {
 
         #ifdef CALLABLE_TRAITS_ENABLE_FASTCALL
         #define CALLABLE_TRAITS_CC_TAG fastcall_tag
-        #define CALLABLE_TRAITS_VARARGS_CC __fastcall
+        #define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
         #define CALLABLE_TRAITS_CC __fastcall
         #include <callable_traits/detail/pmf_cc.hpp>
-        #undef CALLABLE_TRAITS_CC
-        #undef CALLABLE_TRAITS_CC_TAG
-        #undef CALLABLE_TRAITS_VARARGS_CC
-
-        #define CALLABLE_TRAITS_CC_TAG fastcall_tag
-        #define CALLABLE_TRAITS_VARARGS_CC __fastcall
-        #define CALLABLE_TRAITS_CC __fastcall
-        #include <callable_traits/detail/varargs_pmf_cc.hpp>
         #undef CALLABLE_TRAITS_CC
         #undef CALLABLE_TRAITS_CC_TAG
         #undef CALLABLE_TRAITS_VARARGS_CC

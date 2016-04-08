@@ -5,8 +5,7 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 ->*/
 
-//[ calling_convention_cdecl
-
+//[ changing_calling_conventions
 #define CALLABLE_TRAITS_ENABLE_STDCALL
 #define CALLABLE_TRAITS_ENABLE_FASTCALL
 
@@ -16,8 +15,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/remove_calling_convention.hpp>
 
 namespace ct = callable_traits;
-
-struct foo {};
 
 int main() {
 

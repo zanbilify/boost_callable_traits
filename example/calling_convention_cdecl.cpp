@@ -19,15 +19,13 @@ struct foo {};
 
 int main() {
 
+    //depending on your platform, pmf may alrady have an implicit __cdecl
     using pmf = void(foo::*)();
-    using pmf_cdecl = void(__cdecl foo::*)();
-
-    static_assert(!std::is_same<pmf, pmf_cdecl>::value, "");
-    static_assert(!ct::has_calling_convention<pmf, ct::cdecl_tag>(), "");
-    static_assert(ct::has_calling_convention<pmf_cdecl, ct::cdecl_tag>(), "");
-
+    using expect = void(__cdecl foo::*)();
     using test = ct::add_calling_convention<pmf, ct::cdecl_tag>;
-    static_assert(std::is_same<test, pmf_cdecl>::value, "");
+
+    static_assert(std::is_same<test, expect>::value, "");
+    static_assert(ct::has_calling_convention<expect, ct::cdecl_tag>(), "");
     static_assert(ct::has_calling_convention<test, ct::cdecl_tag>(), "");
 }
 //]
