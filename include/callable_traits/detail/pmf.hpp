@@ -43,7 +43,10 @@ struct pmf<Return(T::*)(Args...) QUAL>                                          
     using invoke_arg_types = std::tuple<invoke_type, Args...>;                       \
     using qualified_function_type = Return(Args...) QUAL;                            \
     using remove_varargs = type;                                                     \
-    using add_varargs = Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL;  \
+                                                                                     \
+    using add_varargs = Return(CALLABLE_TRAITS_DEFAULT_VARARGS_CC                    \
+        T::*)(Args..., ...) QUAL;                                                    \
+                                                                                     \
     using class_type = T;                                                            \
                                                                                      \
     using qualifiers = qualifier_traits<dummy QUAL>;                                 \
@@ -80,7 +83,7 @@ struct pmf<Return(T::*)(Args...) QUAL>                                          
 };                                                                                   \
                                                                                      \
 template<typename Return, typename T, typename... Args>                              \
-struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL>               \
+struct pmf<Return(CALLABLE_TRAITS_DEFAULT_VARARGS_CC T::*)(Args..., ...) QUAL>       \
  : qualifier_traits<dummy QUAL>, default_callable_traits {                           \
                                                                                      \
     static constexpr bool value = true;                                              \
@@ -91,7 +94,7 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL>          
     using traits = pmf;                                                              \
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
-    using type = Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL;         \
+    using type = Return(CALLABLE_TRAITS_DEFAULT_VARARGS_CC T::*)(Args..., ...) QUAL; \
                                                                                      \
     using invoke_type = typename std::conditional<                                   \
         std::is_rvalue_reference<T QUAL>::value,                                     \
@@ -135,11 +138,11 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL>          
                                                                                      \
     template<typename U>                                                             \
     using apply_member_pointer =                                                     \
-        Return(CALLABLE_TRAITS_VARARGS_CC U::*)(Args..., ...) QUAL;                  \
+        Return(CALLABLE_TRAITS_DEFAULT_VARARGS_CC U::*)(Args..., ...) QUAL;          \
                                                                                      \
     template<typename NewReturn>                                                     \
     using apply_return =                                                             \
-        NewReturn(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL;               \
+        NewReturn(CALLABLE_TRAITS_DEFAULT_VARARGS_CC T::*)(Args..., ...) QUAL;       \
                                                                                      \
     using remove_member_pointer = qualified_function_type;                           \
 }                                                                                    \

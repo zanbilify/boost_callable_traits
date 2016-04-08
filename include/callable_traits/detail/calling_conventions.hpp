@@ -34,38 +34,6 @@ namespace callable_traits {
 			using type = std::false_type;
 		};
 
-		// function pointers
-
-		#ifdef CALLABLE_TRAITS_ENABLE_STDCALL
-		#define CALLABLE_TRAITS_CC_TAG calling_conventions::stdcall
-		#define CALLABLE_TRAITS_CC __stdcall
-		#define CALLABLE_TRAITS_ST
-        #include <callable_traits/detail/function_cc.hpp>
-		#undef CALLABLE_TRAITS_CC
-		#undef CALLABLE_TRAITS_ST
-        #undef CALLABLE_TRAITS_CC_TAG
-		#endif
-
-		#ifdef CALLABLE_TRAITS_ENABLE_FASTCALL
-		#define CALLABLE_TRAITS_CC_TAG calling_conventions::fastcall
-		#define CALLABLE_TRAITS_CC __fastcall
-		#define CALLABLE_TRAITS_ST
-        #include <callable_traits/detail/function_cc.hpp>
-		#undef CALLABLE_TRAITS_CC
-		#undef CALLABLE_TRAITS_ST
-        #undef CALLABLE_TRAITS_CC_TAG
-		#endif
-
-		#ifdef CALLABLE_TRAITS_ENABLE_PASCAL
-		#define CALLABLE_TRAITS_CC_TAG calling_conventions::pascal
-		#define CALLABLE_TRAITS_CC
-		#define CALLABLE_TRAITS_ST pascal
-        #include <callable_traits/detail/function_cc.hpp>
-		#undef CALLABLE_TRAITS_CC
-		#undef CALLABLE_TRAITS_ST
-        #undef CALLABLE_TRAITS_CC_TAG
-		#endif
-
 		// member function pointers
 
 		#ifdef CALLABLE_TRAITS_ENABLE_CDECL

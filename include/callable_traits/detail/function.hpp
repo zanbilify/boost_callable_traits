@@ -10,6 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_FUNCTION_HPP
 #define CALLABLE_TRAITS_DETAIL_FUNCTION_HPP
 
+#include <callable_traits/detail/calling_conventions.hpp>
 #include <callable_traits/detail/set_function_qualifiers.hpp>
 #include <callable_traits/detail/qualifiers.hpp>
 #include <callable_traits/detail/default_callable_traits.hpp>
@@ -121,7 +122,7 @@ struct function<Return (Args..., ...) QUAL>                                     
                                                                                      \
     template<typename U>                                                             \
     using apply_member_pointer =                                                     \
-        Return( CALLABLE_TRAITS_VARARGS_CC U::*)(Args..., ...) QUAL;                 \
+        Return( CALLABLE_TRAITS_DEFAULT_VARARGS_CC U::*)(Args..., ...) QUAL;         \
                                                                                      \
     using remove_member_pointer = type;                                              \
                                                                                      \
@@ -150,30 +151,55 @@ namespace callable_traits {
         CALLABLE_TRAITS_SPECIALIZE_FUNCTION(volatile &&);
         CALLABLE_TRAITS_SPECIALIZE_FUNCTION(const volatile &&);
 
-#undef CLBL_SPECIALIZE_FUNCTION
+        #undef CALLABLE_TRAITS_SPECIALIZE_FUNCTION
 
-        template<typename T>
-        struct function<T*> : function<T> {
-            using traits = function;
-            using type = T*;
-            using base = function<T>;
-            using remove_varargs = typename base::remove_varargs*;
-            using add_varargs = typename base::add_varargs*;
-            using remove_member_pointer = type;
+        // function pointers
 
-            using remove_function_reference = invalid_type;
-            using add_function_lvalue = invalid_type;
-            using add_function_rvalue = invalid_type;
-            using add_function_const =  invalid_type;
-            using add_function_volatile = invalid_type;
-            using add_function_cv = invalid_type;
-            using remove_function_const = invalid_type;
-            using remove_function_volatile = invalid_type;
-            using remove_function_cv = invalid_type;
+        #define CALLABLE_TRAITS_CC_TAG dummy
+        #define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
+        #define CALLABLE_TRAITS_CC
+        #define CALLABLE_TRAITS_ST
+        #include <callable_traits/detail/function_cc.hpp>
+        #undef CALLABLE_TRAITS_ST
+        #undef CALLABLE_TRAITS_CC
+        #undef CALLABLE_TRAITS_CC_TAG
+        #undef CALLABLE_TRAITS_VARARGS_CC
 
-            template<typename NewReturn>
-            using apply_return = typename base::template apply_return<NewReturn>*;
-        };
+        #ifdef CALLABLE_TRAITS_ENABLE_STDCALL
+        #define CALLABLE_TRAITS_CC_TAG calling_conventions::stdcall
+        #define CALLABLE_TRAITS_VARARGS_CC __stdcall
+        #define CALLABLE_TRAITS_CC __stdcall
+        #define CALLABLE_TRAITS_ST
+        #include <callable_traits/detail/function_cc.hpp>
+        #undef CALLABLE_TRAITS_ST
+        #undef CALLABLE_TRAITS_CC
+        #undef CALLABLE_TRAITS_CC_TAG
+        #undef CALLABLE_TRAITS_VARARGS_CC
+        #endif
+
+        #ifdef CALLABLE_TRAITS_ENABLE_FASTCALL
+        #define CALLABLE_TRAITS_CC_TAG calling_conventions::fastcall
+        #define CALLABLE_TRAITS_VARARGS_CC __fastcall
+        #define CALLABLE_TRAITS_CC __fastcall
+        #define CALLABLE_TRAITS_ST
+        #include <callable_traits/detail/function_cc.hpp>
+        #undef CALLABLE_TRAITS_CC
+        #undef CALLABLE_TRAITS_ST
+        #undef CALLABLE_TRAITS_CC_TAG
+        #undef CALLABLE_TRAITS_VARARGS_CC
+        #endif
+
+        #ifdef CALLABLE_TRAITS_ENABLE_PASCAL
+        #define CALLABLE_TRAITS_CC_TAG calling_conventions::pascal
+        #define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
+        #define CALLABLE_TRAITS_CC
+        #define CALLABLE_TRAITS_ST pascal
+        #include <callable_traits/detail/function_cc.hpp>
+        #undef CALLABLE_TRAITS_CC
+        #undef CALLABLE_TRAITS_ST
+        #undef CALLABLE_TRAITS_CC_TAG
+        #undef CALLABLE_TRAITS_VARARGS_CC
+        #endif
 
         template<typename T>
         struct function<T&> : function<T> {
