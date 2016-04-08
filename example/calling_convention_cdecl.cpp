@@ -14,7 +14,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/add_calling_convention.hpp>
 
 namespace ct = callable_traits;
-namespace cc = callable_traits::calling_conventions;
 
 struct foo {};
 
@@ -24,11 +23,11 @@ int main() {
     using pmf_cdecl = void(__cdecl foo::*)();
 
     static_assert(!std::is_same<pmf, pmf_cdecl>::value, "");
-    static_assert(!ct::has_calling_convention<pmf, cc::cdecl>(), "");
-    static_assert(ct::has_calling_convention<pmf_cdecl, cc::cdecl>(), "");
+    static_assert(!ct::has_calling_convention<pmf, ct::cdecl_tag>(), "");
+    static_assert(ct::has_calling_convention<pmf_cdecl, ct::cdecl_tag>(), "");
 
-    using test = ct::add_calling_convention<pmf, cc::cdecl>;
+    using test = ct::add_calling_convention<pmf, ct::cdecl_tag>;
     static_assert(std::is_same<test, pmf_cdecl>::value, "");
-    static_assert(ct::has_calling_convention<test, cc::cdecl>(), "");
+    static_assert(ct::has_calling_convention<test, ct::cdecl_tag>(), "");
 }
 //]

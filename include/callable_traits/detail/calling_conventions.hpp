@@ -15,12 +15,10 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-	namespace calling_conventions {
-		struct cdecl{};
-		struct stdcall{};
-		struct fastcall{};
-		struct pascal{};
-	}
+    struct cdecl_tag{};
+    struct stdcall_tag{};
+    struct fastcall_tag{};
+    struct pascal_tag{};
 
 	namespace detail {
 
@@ -33,33 +31,6 @@ namespace callable_traits {
 		struct has_calling_convention_t {
 			using type = std::false_type;
 		};
-
-		// member function pointers
-
-		#ifdef CALLABLE_TRAITS_ENABLE_CDECL
-		#define CALLABLE_TRAITS_CC_TAG calling_conventions::cdecl
-		#define CALLABLE_TRAITS_CC __cdecl
-        #include <callable_traits/detail/pmf_cc.hpp>
-		#undef CALLABLE_TRAITS_CC
-        #undef CALLABLE_TRAITS_CC_TAG
-		#endif
-
-		#ifdef CALLABLE_TRAITS_ENABLE_STDCALL
-		#define CALLABLE_TRAITS_CC_TAG calling_conventions::stdcall
-		#define CALLABLE_TRAITS_CC __stdcall
-        #include <callable_traits/detail/pmf_cc.hpp>
-		#undef CALLABLE_TRAITS_CC
-        #undef CALLABLE_TRAITS_CC_TAG
-		#endif
-
-		#ifdef CALLABLE_TRAITS_ENABLE_FASTCALL
-		#define CALLABLE_TRAITS_CC_TAG calling_conventions::fastcall
-		#define CALLABLE_TRAITS_CC __fastcall
-        #include <callable_traits/detail/pmf_cc.hpp>
-		#undef CALLABLE_TRAITS_CC
-        #undef CALLABLE_TRAITS_CC_TAG
-		#endif
-
 	}
 }
 
