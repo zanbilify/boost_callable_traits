@@ -19,7 +19,9 @@ namespace callable_traits {
     template<typename... Args>
     inline constexpr auto
     can_invoke_constexpr(Args&&... args) {
-        return detail::can_invoke_constexpr_impl(std::forward<Args&&>(args)...);
+        return detail::can_invoke_constexpr_impl(
+            ::std::forward<Args>(args)...
+        );
     }
 }
 

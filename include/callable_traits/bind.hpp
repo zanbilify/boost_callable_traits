@@ -19,8 +19,13 @@ namespace callable_traits {
 
     template<typename T, typename... Args>
     inline constexpr auto
-    bind(T&& t, Args&&... args) -> detail::bind_expression<T&&, Args&&...> {
-        return {::std::forward<T>(t), ::std::forward<Args>(args)...};
+    bind(T&& t, Args&&... args) ->
+        detail::bind_expression<T&&, Args&&...> {
+
+        return {
+            ::std::forward<T>(t),
+            ::std::forward<Args>(args)...
+        };
     }
 }
 

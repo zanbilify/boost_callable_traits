@@ -16,8 +16,28 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 	
+    namespace permissive {
+
+        template<size_t I, typename T>
+        using arg_at = detail::weak_at<I, args<T>>;
+    }
+
+    namespace detail {
+        struct arg_at_error{};
+    }
+
+    namespace verbose {
+
+        //Let the static_assert in std::tuple_element
+        //handle the error message here.
+        template<size_t I, typename T>
+        using arg_at = typename std::tuple_element<I, args<T>>::type;
+    }
+
     template<size_t I, typename T>
-    using arg_at = typename std::tuple_element<I, args<T>>::type;
+    using arg_at = detail::fail_if_invalid<
+        permissive::arg_at<I, T>,
+        detail::arg_at_error>;
 }
 
 #endif

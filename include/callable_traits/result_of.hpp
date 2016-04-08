@@ -10,29 +10,45 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_RESULT_OF_HPP
 #define CALLABLE_TRAITS_RESULT_OF_HPP
 
+#include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/utility.hpp>
-#include <callable_traits/no_sfinae/result_of.hpp>
 #include <callable_traits/detail/required_definitions.hpp>
 
 namespace callable_traits {
 
+    namespace permissive {
+
+        template<typename T>
+        using result_of =
+            typename detail::traits<T>::return_type;
+    }
+
     namespace detail {
 
-        template<int i = 0>
+        template<bool Sfinae>
         struct result_of_error {
 
-#ifdef CALLABLE_TRAITS_DEBUG
-			static_assert(i != 0,
-				"Unable to determine the return type of T in callable_traits::result_of<T>.");
-#endif
+            static_assert(Sfinae,
+                "callable_traits::result_of<T> is not "
+                "a meaningful operation for this T.");
         };
+
+        template<typename T, bool Sfinae>
+        using result_of_t = fail_if_invalid<
+            permissive::result_of<T>,
+            result_of_error<Sfinae>>;
+    }
+
+    namespace verbose {
+
+        template<typename T>
+        using result_of =
+            detail::result_of_t<T, false>;
     }
 
     template<typename T>
-    using result_of = detail::fail_if_invalid<
-		no_sfinae::result_of<T>,
-		detail::result_of_error<>
-	>;
+    using result_of =
+        detail::result_of_t<T, true>;
 }
 
 #endif

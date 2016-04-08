@@ -20,14 +20,21 @@ namespace callable_traits {
     template<typename T>
     inline constexpr auto
     is_constexpr(T&& t){
-        using can_construct = detail::is_constexpr_constructible<T>;
-        return detail::is_constexpr_impl(std::forward<T>(t), can_construct{});
+
+        return detail::is_constexpr_impl(
+            ::std::forward<T>(t),
+            detail::is_constexpr_constructible<T>{}
+        );
     }
 
     template<typename T>
     inline constexpr auto
     is_constexpr(){
-        return decltype(is_constexpr(std::declval<T>())){};
+
+        using result_type =
+            decltype(is_constexpr(std::declval<T>()));
+
+        return result_type{};
     }
 }
 

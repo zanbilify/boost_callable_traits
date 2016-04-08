@@ -19,15 +19,15 @@ namespace ct = callable_traits;
 int main() {
 
     {
-        using test = ct::no_sfinae::args<foo>;
+        using test = ct::permissive::args<foo>;
         using expect = ct::invalid_type;
         static_assert(std::is_same<test, expect>{}, "");
     } {
-        using test = ct::no_sfinae::function_type<foo>;
+        using test = ct::permissive::function_type<foo>;
         using expect = ct::invalid_type;
         static_assert(std::is_same<test, expect>{}, "");
     } {
-        using test = ct::no_sfinae::result_of<foo>;
+        using test = ct::permissive::result_of<foo>;
         using expect = ct::invalid_type;
         static_assert(std::is_same<test, expect>{}, "");
     }

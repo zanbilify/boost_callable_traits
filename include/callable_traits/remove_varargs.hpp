@@ -10,29 +10,45 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_REMOVE_VARARGS_HPP
 #define CALLABLE_TRAITS_REMOVE_VARARGS_HPP
 
+#include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/utility.hpp>
-#include <callable_traits/no_sfinae/remove_varargs.hpp>
 #include <callable_traits/detail/required_definitions.hpp>
 
 namespace callable_traits {
 
+    namespace permissive {
+
+        template<typename T>
+        using remove_varargs =
+            typename detail::traits<T>::remove_varargs;
+    }
+
     namespace detail {
 
-        template<int i = 0>
+        template<bool Sfinae>
         struct remove_varargs_error {
 
-#ifdef CALLABLE_TRAITS_DEBUG
-			static_assert(i != 0,
-				"callable_traits::remove_varargs<T> is not a meaningful operation for this T.");
-#endif
+            static_assert(Sfinae,
+                "callable_traits::remove_varargs<T> "
+                "is not a meaningful operation for this T.");
         };
+
+        template<typename T, bool Sfinae>
+        using remove_varargs_t = fail_if_invalid<
+            permissive::remove_varargs<T>,
+            remove_varargs_error<Sfinae>>;
+    }
+
+    namespace verbose {
+
+        template<typename T>
+        using remove_varargs =
+            detail::remove_varargs_t<T, false>;
     }
 
     template<typename T>
-    using remove_varargs = detail::fail_if_invalid<
-		no_sfinae::remove_varargs<T>,
-		detail::remove_varargs_error<>
-	>;
+    using remove_varargs =
+        detail::remove_varargs_t<T, true>;
 }
 
 #endif
