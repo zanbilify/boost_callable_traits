@@ -163,6 +163,8 @@ TODO
 [section:ref_add_lvalue_qualifier add_lvalue_qualifier]
 [include_header add_lvalue_qualifier]
 TODO
+[import ../example/add_lvalue_qualifier.cpp]
+[add_lvalue_qualifier]
 [endsect]
 
 [section:ref_add_rvalue_qualifier add_rvalue_qualifier]

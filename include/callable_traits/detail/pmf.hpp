@@ -56,8 +56,13 @@ struct pmf<Return(T::*)(Args...) QUAL>                                          
     using set_qualifiers = set_function_qualifiers<Flags, Return, Args...> T::*;     \
                                                                                      \
     using remove_reference = set_qualifiers<qualifiers::cv_flags>;                   \
-    using add_lvalue_reference = set_qualifiers<qualifiers::q_flags | lref_>;        \
-    using add_rvalue_reference = set_qualifiers<qualifiers::q_flags | rref_>;        \
+                                                                                     \
+    using add_lvalue_reference = set_qualifiers<                                     \
+        collapse_flags<qualifiers::q_flags, lref_>::value>;                          \
+                                                                                     \
+    using add_rvalue_reference = set_qualifiers<                                     \
+        collapse_flags<qualifiers::q_flags, rref_>::value>;                          \
+                                                                                     \
     using add_const = set_qualifiers<qualifiers::q_flags | const_>;                  \
     using add_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;            \
     using add_cv = set_qualifiers<qualifiers::q_flags | cv_>;                        \
@@ -119,8 +124,13 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL>          
         set_varargs_member_function_qualifiers<Flags, T, Return, Args...>;           \
                                                                                      \
     using remove_reference = set_qualifiers<qualifiers::cv_flags>;                   \
-    using add_lvalue_reference = set_qualifiers<qualifiers::q_flags | lref_>;        \
-    using add_rvalue_reference = set_qualifiers<qualifiers::q_flags | rref_>;        \
+                                                                                     \
+    using add_lvalue_reference = set_qualifiers<                                     \
+        collapse_flags<qualifiers::q_flags, lref_>::value>;                          \
+                                                                                     \
+    using add_rvalue_reference = set_qualifiers<                                     \
+        collapse_flags<qualifiers::q_flags, rref_>::value>;                          \
+                                                                                     \
     using add_const = set_qualifiers<qualifiers::q_flags | const_>;                  \
     using add_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;            \
     using add_cv = set_qualifiers<qualifiers::q_flags | cv_>;                        \
@@ -174,7 +184,7 @@ namespace callable_traits {
         CALLABLE_TRAITS_SPECIALIZE_PMF(const volatile &&);
 
 #undef CALLABLE_TRAITS_SPECIALIZE_PMF
-        
+
     }
 }
 

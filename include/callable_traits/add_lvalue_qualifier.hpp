@@ -22,17 +22,17 @@ namespace callable_traits {
         struct add_lvalue_qualifier_error {
 
 #ifdef CALLABLE_TRAITS_DEBUG
-			static_assert(i != 0,
-				"callable_traits::add_lvalue_qualifier<T> is not a meaningful operation for this T.");
+            static_assert(i != 0,
+                "callable_traits::add_lvalue_qualifier<T> is not a meaningful operation for this T.");
 #endif
         };
     }
 
     template<typename T>
     using add_lvalue_qualifier = detail::fail_if_invalid<
-		no_sfinae::add_lvalue_qualifier<T>,
-		detail::add_lvalue_qualifier_error<>
-	>;
+        no_sfinae::add_lvalue_qualifier<T>,
+        detail::add_lvalue_qualifier_error<>
+    >;
 }
 
 #endif

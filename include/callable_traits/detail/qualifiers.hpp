@@ -83,12 +83,25 @@ namespace callable_traits {
             | (std::is_volatile<T>::value ? volatile_ : default_)
         >;
 
-        template<typename T, typename ForceRef = std::false_type>
+        template<typename T>
         using ref_of = std::integral_constant<flags,
             std::is_rvalue_reference<T>::value ? rref_
             : (std::is_lvalue_reference<T>::value ? lref_
-                : (ForceRef::value ? lref_ : default_))
+                : default_)
         >;
+
+        //bit-flag implementation of C++11 reference collapsing rules
+        template<flags Existing,
+                 flags Other,
+                 bool AlreadyHasRef = (Existing & (lref_ | rref_)) != 0,
+                 bool AlreadyHasLRef = (Existing & lref_) == lref_,
+                 bool IsAddingLRef = (Other & lref_) == lref_
+        >
+        using collapse_flags = std::integral_constant<flags,
+            !AlreadyHasRef ? (Existing | Other)
+                : (AlreadyHasLRef ? (Existing | (Other & ~rref_))
+                    : (IsAddingLRef ? ((Existing & ~rref_) | Other )
+                        : (Existing | Other)))>;
 
         template<typename T>
         struct flag_map {
