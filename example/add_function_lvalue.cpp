@@ -42,11 +42,13 @@ int main() {
         using test = ct::add_function_lvalue<f>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
-        // add_function_lvalue has no affect on function pointers,
+        // add_function_lvalue does not compile with function pointers,
         // function references, function objects, or member data pointers.
-        using f = int foo::*;
-        using expect = int foo::*;
-        using test = ct::add_function_lvalue<f>;
+        // However, you can loosen this restriction somewhat by using the
+        // callable_traits::permissive namespace instead:
+        using f = void(*)();
+        using expect = f;
+        using test = ct::permissive::add_function_lvalue<f>;
         static_assert(std::is_same<test, expect>::value, "");
     }
 }

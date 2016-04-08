@@ -12,6 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/set_function_qualifiers.hpp>
 #include <callable_traits/detail/qualifiers.hpp>
+#include <callable_traits/detail/default_callable_traits.hpp>
 #include <callable_traits/detail/utility.hpp>
 #include <callable_traits/config.hpp>
 #include <tuple>
@@ -20,19 +21,12 @@ Distributed under the Boost Software License, Version 1.0.
                                                                                      \
 template<typename Return, typename T, typename... Args>                              \
 struct pmf<Return(T::*)(Args...) QUAL>                                               \
- : qualifier_traits<dummy QUAL> {                                                    \
+ : qualifier_traits<dummy QUAL>, default_callable_traits {                           \
                                                                                      \
     static constexpr bool value = true;                                              \
                                                                                      \
-    using has_varargs = std::false_type;                                             \
-    using is_ambiguous = std::false_type;                                            \
     using is_member_pointer = std::true_type;                                        \
-    using is_function_object = std::false_type;                                      \
     using is_member_function_pointer = std::true_type;                               \
-    using is_function_reference = std::false_type;                                   \
-    using is_function_pointer = std::false_type;                                     \
-    using is_function = std::false_type;                                             \
-    using is_function_general = std::false_type;                                     \
     using traits = pmf;                                                              \
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
@@ -56,12 +50,12 @@ struct pmf<Return(T::*)(Args...) QUAL>                                          
     template<flags Flags>                                                            \
     using set_qualifiers = set_function_qualifiers<Flags, Return, Args...> T::*;     \
                                                                                      \
-    using remove_reference = set_qualifiers<qualifiers::cv_flags>;                   \
+    using remove_function_reference = set_qualifiers<qualifiers::cv_flags>;          \
                                                                                      \
-    using add_lvalue_reference = set_qualifiers<                                     \
+    using add_function_lvalue = set_qualifiers<                                      \
         collapse_flags<qualifiers::q_flags, lref_>::value>;                          \
                                                                                      \
-    using add_rvalue_reference = set_qualifiers<                                     \
+    using add_function_rvalue = set_qualifiers<                                      \
         collapse_flags<qualifiers::q_flags, rref_>::value>;                          \
                                                                                      \
     using add_function_const = set_qualifiers<qualifiers::q_flags | const_>;         \
@@ -87,19 +81,13 @@ struct pmf<Return(T::*)(Args...) QUAL>                                          
                                                                                      \
 template<typename Return, typename T, typename... Args>                              \
 struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL>               \
- : qualifier_traits<dummy QUAL> {                                                    \
+ : qualifier_traits<dummy QUAL>, default_callable_traits {                           \
                                                                                      \
     static constexpr bool value = true;                                              \
                                                                                      \
     using has_varargs = std::true_type;                                              \
-    using is_ambiguous = std::false_type;                                            \
     using is_member_pointer = std::true_type;                                        \
-    using is_function_object = std::false_type;                                      \
     using is_member_function_pointer = std::true_type;                               \
-    using is_function_reference = std::false_type;                                   \
-    using is_function_pointer = std::false_type;                                     \
-    using is_function = std::false_type;                                             \
-    using is_function_general = std::false_type;                                     \
     using traits = pmf;                                                              \
     using return_type = Return;                                                      \
     using arg_types = std::tuple<Args...>;                                           \
@@ -125,12 +113,12 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL>          
     using set_qualifiers =                                                           \
         set_varargs_member_function_qualifiers<Flags, T, Return, Args...>;           \
                                                                                      \
-    using remove_reference = set_qualifiers<qualifiers::cv_flags>;                   \
+    using remove_function_reference = set_qualifiers<qualifiers::cv_flags>;          \
                                                                                      \
-    using add_lvalue_reference = set_qualifiers<                                     \
+    using add_function_lvalue = set_qualifiers<                                      \
         collapse_flags<qualifiers::q_flags, lref_>::value>;                          \
                                                                                      \
-    using add_rvalue_reference = set_qualifiers<                                     \
+    using add_function_rvalue = set_qualifiers<                                      \
         collapse_flags<qualifiers::q_flags, rref_>::value>;                          \
                                                                                      \
     using add_function_const = set_qualifiers<qualifiers::q_flags | const_>;         \
@@ -162,10 +150,7 @@ namespace callable_traits {
     namespace detail {
 
         template<typename T>
-        struct pmf {
-            static constexpr const bool value = false;
-            using traits = pmf;
-        };
+        struct pmf : default_callable_traits {};
 
         template<typename T, T Value>
         struct pmf <std::integral_constant<T, Value>> {

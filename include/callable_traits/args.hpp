@@ -10,17 +10,9 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_ARGS_HPP
 #define CALLABLE_TRAITS_ARGS_HPP
 
-#include <callable_traits/detail/traits.hpp>
-#include <callable_traits/detail/utility.hpp>
 #include <callable_traits/detail/required_definitions.hpp>
 
 namespace callable_traits {
-
-    namespace permissive {
-
-        template<typename T>
-        using args = typename detail::traits<T>::arg_types;
-    }
 
     namespace detail {
 
@@ -34,21 +26,28 @@ namespace callable_traits {
                 " overloaded/templated function object, "
                 "the arguments cannot be determined. ");
         };
+    }
 
-        template<typename T, bool Sfinae>
-        using args_t = fail_if_invalid<
-            permissive::args<T>,
-            args_error<Sfinae>>;
+    namespace permissive {
+
+        // returns callable_traits::invalid_type if argument types
+        // cannot be determined
+        template<typename T>
+        using args = typename detail::traits<T>::arg_types;
     }
 
     namespace verbose {
 
         template<typename T>
-        using args = detail::args_t<T, false>;
+        using args = detail::fail_if_invalid<
+            typename detail::traits<T>::arg_types,
+            detail::args_error<false>>;
     }
 
     template<typename T>
-    using args = detail::args_t<T, true>;
+    using args = detail::fail_if_invalid<
+        typename detail::traits<T>::arg_types,
+        detail::args_error<true>>;
 }
 
 #endif

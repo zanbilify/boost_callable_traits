@@ -15,6 +15,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/fwd/function_object_fwd.hpp>
 #include <callable_traits/detail/function.hpp>
 #include <callable_traits/detail/traits.hpp>
+#include <callable_traits/detail/default_callable_traits.hpp>
 #include <callable_traits/detail/utility.hpp>
 
 namespace callable_traits {
@@ -22,10 +23,7 @@ namespace callable_traits {
     namespace detail {
 
         template<typename T>
-        struct pmd : std::false_type {
-            using traits = pmd;
-            static constexpr const bool value = false;
-        };
+        struct pmd : default_callable_traits {};
 
         template<typename T, T Value>
         struct pmd <std::integral_constant<T, Value>> {
@@ -33,24 +31,12 @@ namespace callable_traits {
             static constexpr const bool value = traits::value;
         };
 
-        namespace msvc_workaround {
-            template<typename Traits, typename Ret>
-            using apply_return_helper =
-                typename Traits::template apply_return<Ret>;
-        }
-
         template<typename D, typename T>
-        struct pmd<D T::*> {
+        struct pmd<D T::*> : default_callable_traits {
                 
             static constexpr bool value = true;
 
             using is_member_pointer = std::true_type;
-            using is_function_object = std::false_type;
-            using is_member_function_pointer = typename detail::traits<D>::is_function;
-            using is_function_reference = std::false_type;
-            using is_function_pointer = std::false_type;
-            using is_function = std::false_type;
-            using is_function_general = std::false_type;
             using traits = pmd;   
             using class_type = T;
             using invoke_type = T const &;
@@ -60,17 +46,7 @@ namespace callable_traits {
             using arg_types = std::tuple<invoke_type>;
             using invoke_arg_types = arg_types;
             using return_type = typename std::add_lvalue_reference<D>::type;
-
             using remove_member_pointer = D;
-            using remove_reference = type;
-            using add_lvalue_reference = type;
-            using add_rvalue_reference = type;
-            using add_function_const = type;
-            using add_function_volatile = type;
-            using add_function_cv = type;
-            using remove_function_const = type;
-            using remove_function_volatile = type;
-            using remove_function_cv = type;
 
             template<typename C>
             using apply_member_pointer = D C::*;

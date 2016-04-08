@@ -10,18 +10,9 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_ADD_FUNCTION_CV_HPP
 #define CALLABLE_TRAITS_ADD_FUNCTION_CV_HPP
 
-#include <callable_traits/detail/traits.hpp>
-#include <callable_traits/detail/utility.hpp>
 #include <callable_traits/detail/required_definitions.hpp>
 
 namespace callable_traits {
-
-    namespace permissive {
-
-        template<typename T>
-        using add_function_cv =
-            typename detail::traits<T>::add_function_cv;
-    }
 
     namespace detail {
 
@@ -32,23 +23,28 @@ namespace callable_traits {
                 "callable_traits::add_function_cv<T> "
                 "is not a meaningful operation for this T.");
         };
+    }
 
-        template<typename T, bool Sfinae>
-        using add_function_cv_t = fail_if_invalid<
-            permissive::add_function_cv<T>,
-            add_function_cv_error<Sfinae>>;
+    namespace permissive {
+
+        template<typename T>
+        using add_function_cv = detail::fallback_if_invalid<
+            typename detail::traits<T>::add_function_cv,
+            T>;
     }
 
     namespace verbose {
 
         template<typename T>
-        using add_function_cv =
-            detail::add_function_cv_t<T, false>;
+        using add_function_cv = detail::fail_if_invalid<
+            typename detail::traits<T>::add_function_cv,
+            detail::add_function_cv_error<false>>;
     }
 
     template<typename T>
-    using add_function_cv =
-        detail::add_function_cv_t<T, true>;
+    using add_function_cv = detail::fail_if_invalid<
+        typename detail::traits<T>::add_function_cv,
+        detail::add_function_cv_error<true>>;
 }
 
 #endif

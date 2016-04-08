@@ -10,18 +10,9 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_APPLY_RETURN_HPP
 #define CALLABLE_TRAITS_APPLY_RETURN_HPP
 
-#include <callable_traits/detail/traits.hpp>
-#include <callable_traits/detail/utility.hpp>
 #include <callable_traits/detail/required_definitions.hpp>
 
 namespace callable_traits {
-
-    namespace permissive {
-
-        template<typename T, typename C>
-        using apply_return =
-            typename detail::traits<T>::template apply_return<C>;
-    }
 
     namespace detail {
 
@@ -32,23 +23,28 @@ namespace callable_traits {
                 "callable_traits::apply_return<T> is "
                 "not a meaningful operation for this T.");
         };
+    }
 
-        template<typename T, typename C, bool Sfinae>
-        using apply_return_t = fail_if_invalid<
-            typename permissive::apply_return<T, C>,
-            apply_return_error<Sfinae>>;
+    namespace permissive {
+
+        template<typename T, typename R>
+        using apply_return = detail::fallback_if_invalid<
+            typename detail::traits<T>::template apply_return<R>,
+            T>;
     }
 
     namespace verbose {
 
-        template<typename T, typename C>
-        using apply_return =
-            detail::apply_return_t<T, C, false>;
+        template<typename T, typename R>
+        using apply_return = detail::fail_if_invalid<
+            typename detail::traits<T>::template apply_return<R>,
+            detail::apply_return_error<false>>;
     }
 
-    template<typename T, typename C>
-    using apply_return =
-        detail::apply_return_t<T, C, true>;
+    template<typename T, typename R>
+    using apply_return = detail::fail_if_invalid<
+        typename detail::traits<T>::template apply_return<R>,
+        detail::apply_return_error<true>>;
 }
 
 #endif

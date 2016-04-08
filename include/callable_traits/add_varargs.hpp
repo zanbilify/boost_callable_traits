@@ -10,18 +10,9 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_ADD_VARARGS_HPP
 #define CALLABLE_TRAITS_ADD_VARARGS_HPP
 
-#include <callable_traits/detail/traits.hpp>
-#include <callable_traits/detail/utility.hpp>
 #include <callable_traits/detail/required_definitions.hpp>
 
 namespace callable_traits {
-
-    namespace permissive {
-
-        template<typename T>
-        using add_varargs =
-            typename detail::traits<T>::add_varargs;
-    }
 
     namespace detail {
 
@@ -34,23 +25,28 @@ namespace callable_traits {
                 "be a function, function pointer, function "
                 "reference, or member function pointer.");
         };
+    }
 
-        template<typename T, bool Sfinae>
-        using add_varargs_t = fail_if_invalid<
-            permissive::add_varargs<T>,
-            add_varargs_error<Sfinae>>;
+    namespace permissive {
+
+        template<typename T>
+        using add_varargs = detail::fallback_if_invalid<
+            typename detail::traits<T>::add_varargs,
+            T>;
     }
 
     namespace verbose {
 
         template<typename T>
-        using add_varargs =
-            detail::add_varargs_t<T, false>;
+        using add_varargs = detail::fail_if_invalid<
+            typename detail::traits<T>::add_varargs,
+            detail::add_varargs_error<false>>;
     }
 
     template<typename T>
-    using add_varargs =
-        detail::add_varargs_t<T, true>;
+    using add_varargs = detail::fail_if_invalid<
+        typename detail::traits<T>::add_varargs,
+        detail::add_varargs_error<true>>;
 }
 
 #endif

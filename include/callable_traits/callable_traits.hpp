@@ -10,6 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_CALLABLE_TRAITS_HPP
 #define CALLABLE_TRAITS_CALLABLE_TRAITS_HPP
 
+#include <callable_traits/detail/required_definitions.hpp>
 #include <callable_traits/add_function_const.hpp>
 #include <callable_traits/add_function_cv.hpp>
 #include <callable_traits/add_function_lvalue.hpp>
@@ -44,6 +45,5 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/remove_varargs.hpp>
 #include <callable_traits/remove_function_volatile.hpp>
 #include <callable_traits/result_of.hpp>
-#include <callable_traits/detail/required_definitions.hpp>
 
 #endif
