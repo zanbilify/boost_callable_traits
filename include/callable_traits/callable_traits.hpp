@@ -44,6 +44,8 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/remove_function_reference.hpp>
 #include <callable_traits/remove_varargs.hpp>
 #include <callable_traits/remove_function_volatile.hpp>
+#include <callable_traits/has_calling_convention.hpp>
+#include <callable_traits/add_calling_convention.hpp>
 #include <callable_traits/result_of.hpp>
 
 #endif

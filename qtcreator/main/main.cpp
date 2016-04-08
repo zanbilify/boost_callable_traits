@@ -7,30 +7,17 @@ Distributed under the Boost Software License, Version 1.0.
 
 //[ result_of
 #include <type_traits>
-#include <callable_traits/callable_traits.hpp>
+#define CALLABLE_TRAITS_ENABLE_CDECL
+#include <callable_traits/add_calling_convention.hpp>
 
 namespace ct = callable_traits;
 
-using expect = int;
-
 struct foo;
-
-template<typename T>
-void test() {
-    using result = ct::result_of<T>;
-    static_assert(std::is_same<expect, result>{}, "");
-}
 
 int main() {
 
-    test<int()>();
-    test<int(*)()>();
-    test<int(&)()>();
-    test<int() const>();
-    test<int(foo::*)() const>();
-
-    auto x = []() -> int { return 0; };
-
-    test<decltype(x)>();
+    using pmf = void(foo::*)();
+    using expect = void(__cdecl foo::*)();
+    static_assert(!std::is_same<pmf, expect>::value, "");
 }
 //]

@@ -129,6 +129,7 @@ struct function<Return (Args..., ...) QUAL>                                     
     using apply_return = NewReturn(Args..., ...) QUAL;                               \
 }                                                                                    \
 /**/
+
 namespace callable_traits {
 
     namespace detail {

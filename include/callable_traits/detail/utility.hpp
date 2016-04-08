@@ -24,6 +24,7 @@ struct constants {
 
 struct invalid_type { invalid_type() = delete; };
 
+
     namespace detail {
 
         // used to convey "this type doesn't matter" in code
