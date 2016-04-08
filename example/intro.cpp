@@ -1,9 +1,10 @@
-/*
+/*<-
 Copyright Barrett Adair 2016
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
-*/
+->*/
 
+//[ intro
 #include <type_traits>
 #include <functional>
 #include <tuple>
@@ -118,3 +119,4 @@ int main() {
     using pmf_constant = std::integral_constant<pmf, &foo::operator()>;
     static_assert(!ct::is_constexpr(pmf_constant{}), "");
 }
+//]

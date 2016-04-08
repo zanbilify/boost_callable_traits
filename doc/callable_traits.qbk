@@ -13,126 +13,13 @@
         [lang en]
 ]
 
+[template library_name[][^CallableTraits]]
+[template header_include_prefix[]callable_traits/]
 [section:introduction Introduction]
+[heading Quick Example]
+[import ../example/intro.cpp]
+[intro]
 
-[section:basic_example Basic Example]
-
-        #include <type_traits>
-        #include <functional>
-        #include <tuple>
-        #include <callable_traits/callable_traits.hpp>
-
-        struct foo {
-                void operator()(int, int&&, const int&, void* = nullptr) const {}
-        };
-
-        namespace ct = callable_traits;
-        using namespace std::placeholders;
-
-        int main() {
-
-                // indexed argument types
-                using second_arg = ct::arg_at<1, foo>;
-                static_assert(std::is_same<second_arg, int&&>::value, "");
-
-                // arg types are packaged into std::tuple, which serves as the default
-                // type list in CallableTraits (runtime capabilities are not used).
-                using args = ct::args<foo>;
-                using expected_args = std::tuple<int, int&&, const int&, void*>;
-                static_assert(std::is_same<args, expected_args>::value, "");
-
-                //callable_traits::result_of is a bit friendlier than std::result_of
-                using return_type = ct::result_of<foo>;
-                static_assert(std::is_same<return_type, void>::value, "");
-
-                //has_void_return is a quicker way to perform the check above
-                static_assert(ct::has_void_return(foo{}), "");
-
-                // callable_traits::function_type decays a callable type to
-                // a plain function type, which is structured in terms of INVOKE
-                using function_type = ct::function_type<foo>;
-                using expected_function_type = void(int, int&&, const int&, void*);
-                static_assert(std::is_same<function_type, expected_function_type>::value, "");
-
-                // when trait information can be conveyed in an std::integral_constant,
-                // callable_traits opts for constexpr functions instead of template aliases.
-                // This is done to encourage value semantics, and to simplify usage inside
-                // of forwarding functions.
-                static_assert(ct::arity(foo{}) == 4, "");
-                static_assert(ct::max_arity(foo{}) == 4, "");
-                static_assert(ct::min_arity(foo{}) == 3, "");
-
-                // CallableTraits provides constexpr functions so that the user doesn't
-                // need to worry about reference collapsing or decltype when dealing with
-                // universal references to callables. Still, you don't NEED an instance,
-                // because CallableTraits provides non-deduced function templates for
-                // all constexpr functions (except for can_invoke/can_invoke_constexpr and bind,
-                // which model std::invoke and std::bind, respectively -- more on these below).
-                // Here's an example of the non-deduced version of arity, which take an
-                // explicit type argument. We'll ignore these non-deduced overloads for the
-                // rest of this example.
-                static_assert(ct::arity<foo>() == 4, "");
-
-                // C-style variadics detection (ellipses in a signature)
-                static_assert(!ct::has_varargs(foo{}), "");
-
-                int i = 0;
-
-                // callable_traits::can_invoke allows us to preview whether std::invoke will
-                // compile with the given arguments.
-                static_assert(ct::can_invoke(foo{}, 0, 0, i), "");
-                // no error:     std::invoke(foo{}, 0, 0, i);
-
-                static_assert(!ct::can_invoke(foo{}, nullptr), "");
-                // error:         std::invoke(foo{}, nullptr);
-
-                // For function objects, the following checks are determined by the
-                // qualifiers on operator(), rather than the category of the passed value.
-                // For member function pointers and abominable function types, the
-                // qualifiers on the function type are used.
-                static_assert(ct::is_const_qualified(foo{}), "");
-                static_assert(!ct::is_volatile_qualified(foo{}), "");
-                static_assert(!ct::is_reference_qualified(foo{}), "");
-                static_assert(!ct::is_lvalue_qualified(foo{}), "");
-                static_assert(!ct::is_rvalue_qualified(foo{}), "");
-
-
-                // If you find yourself in the unfortunate situation of needing
-                // to manipulate member function pointer types, CallableTraits
-                // has all the tools you need to maintain your sanity.
-
-
-                using pmf = decltype(&foo::operator());
-
-                // So that you don't have to scroll back up to see, here's the type of pmf:
-                using with_const = void (foo::*)(int, int&&, const int&, void*) const;
-                static_assert(std::is_same<pmf, with_const>::value, "");
-
-                // Let's remove the const qualifier:
-                using mutable_pmf = ct::remove_const_qualifier<pmf>;
-                using without_const = void (foo::*)(int, int&&, const int&, void*) /*no const!*/;
-                static_assert(std::is_same<mutable_pmf, without_const>::value, "");
-
-                // Now let's add an rvalue qualifier (&&):
-                using rvalue_pmf = ct::add_rvalue_qualifier<pmf>;
-                using with_rvalue = void (foo::*)(int, int&&, const int&, void*) const &&;
-                static_assert(std::is_same<rvalue_pmf, with_rvalue>::value, "");
-
-                // You get the picture. CallableTraits lets you add and remove all PMF
-                // qualifiers (const, volatile, &, &&, and any combination thereof).
-                // These type operations can generally be performed on abominable function
-                // types as well.
-
-                // is_constexpr would return std::true_type if foo's operator() were constexpr.
-                static_assert(!ct::is_constexpr(foo{}), "");
-
-                // to check constexprness of a function or member function, you must use an
-                // std::integral_constant, like this:
-                using pmf_constant = std::integral_constant<pmf, &foo::operator()>;
-                static_assert(!ct::is_constexpr(pmf_constant{}), "");
-        }
-
-[endsect]
 [section:motivation Motivation]
 
 The complexity of callable types in C++ is extensive:
@@ -150,26 +37,26 @@ The complexity of callable types in C++ is extensive:
 *calling conventions (`__cdecl`, `__stdcall`, `__fastcall`, `pascal`, etc.)
 *`noexcept` ([@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html part of the function type system in C++17])
 
-CallableTraits provides a comprehensive, uniform, and modern type-level interface for the manipulation and inspection of callable types in C++. By filling the gaps where existing library solutions fall short, CallableTraits aims to provide such an exhaustive interface for the features listed above that library writers will *never again* need to specialize templates for callable types. CallableTraits eliminates the need for horrific template specializations like these:
+[library_name] provides a comprehensive, uniform, and modern type-level interface for the manipulation and inspection of callable types in C++. By filling the gaps where existing library solutions fall short, [library_name] aims to provide such an exhaustive interface for the features listed above that library writers will *never again* need to specialize templates for callable types. [library_name] eliminates the need for horrific template specializations like these:
 
     template<typename Ret, typename T, typename... Args>
-        struct foo<Ret(T::*)(Args..., ...) const volatile &&>{
-                        //...
-        };
+    struct foo<Ret(T::*)(Args..., ...) const volatile &&>{
+                    //...
+    };
 
-Several library solutions exist to manipulate these types, or to abstract away their complexities. However, these solutions are occasionally inflexible or lacking in features, especially regarding function objects/lambdas. In CallableTraits, function pointers, function references, function types, abominable function types, member function pointers, member data pointers, function objects/lambdas, and references/pointers/smart pointers thereof are generally interchangeable.
+Several library solutions exist to manipulate these types, or to abstract away their complexities. However, these solutions are occasionally inflexible or lacking in features, especially regarding function objects/lambdas. In [library_name], function pointers, function references, function types, abominable function types, member function pointers, member data pointers, function objects/lambdas, and references/pointers/smart pointers thereof are generally interchangeable.
 
-The use cases for CallableTraits are closely related to those of [@http://www.boost.org/doc/libs/1_60_0/libs/type_traits/doc/html/boost_typetraits/reference/function_traits.html function_traits] and [@http://www.boost.org/doc/libs/1_60_0/libs/function_types/doc/html/index.html FunctionTypes].
+The use cases for [library_name] are closely related to those of [@http://www.boost.org/doc/libs/1_60_0/libs/type_traits/doc/html/boost_typetraits/reference/function_traits.html function_traits] and [@http://www.boost.org/doc/libs/1_60_0/libs/function_types/doc/html/index.html FunctionTypes].
 
-[important CallableTraits currently offers no interface for the manipulation of calling conventions. Also, no features are currently implemented to account for C++17's `noexcept`. These features are planned for future versions on supported platforms.]
+[important [library_name] currently offers no interface for the manipulation of calling conventions. Also, no features are currently implemented to account for C++17's `noexcept`. These features are planned for future versions on supported platforms.]
 
 [endsect]
 
-[section:ten_reasons 10 reasons to use CallableTraits]
+[section:ten_reasons 10 reasons to use [library_name]]
 
-# CallableTraits' template aliases and `constexpr` `std::integral_constant` functions are preferable to `typename foo::type` and `foo::value`
+# [library_name]' template aliases and `constexpr` `std::integral_constant` functions are preferable to `typename foo::type` and `foo::value`
 
-# CallableTraits offers a familar, consistent interface for the synthesis and decomposition of callable types
+# [library_name] offers a familar, consistent interface for the synthesis and decomposition of callable types
         * e.g. `remove_const_qualifier` parallels `std::remove_const`
 
 # universal references are accepted everywhere, so you don't need to worry about using `std::remove_reference` first
@@ -178,7 +65,7 @@ The use cases for CallableTraits are closely related to those of [@http://www.bo
 
 # `arg_at<2, Callable>` is better than `typename function_traits<Callable>::arg2_type`
 
-# function objects are first-class citizens in CallableTraits
+# function objects are first-class citizens in [library_name]
         * e.g. `result_of` can accept a function object
 
 # `is_constexpr` lets you check whether a function, member function, or function object is `constexpr`
@@ -193,414 +80,346 @@ The use cases for CallableTraits are closely related to those of [@http://www.bo
 
 [section:function_sugar Use case: `std::function` sugar]
 
-At the time of this writing, there are 260 [@http://stackoverflow.com/search?q=convert+std%3A%3Abind+to+std%3A%3Afunction search results] on Stack Overflow concerning the conversion from `std::bind` to `std::function`. There are 336 [@http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction search results] concerning the conversion of lambdas to `std::function`. With this example, we'll kill both birds with the same stone. The `make_function` function defined below will leverage CallableTraits to...
+At the time of this writing, there are 260 [@http://stackoverflow.com/search?q=convert+std%3A%3Abind+to+std%3A%3Afunction search results] on Stack Overflow concerning the conversion from `std::bind` to `std::function`. There are 336 [@http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction search results] concerning the conversion of lambdas to `std::function`. With this example, we'll kill both birds with the same stone. The `make_function` function defined below will leverage [library_name] to...
 
 # Create an `std::function<T>` where T is not explicitly supplied by the user
 # Create an `std::function<T>` where T is the deduced "signature" of an `std::placeholders` expression.
 
 Without real-world context, `make_function` may seem rather silly to those who know the runtime costs of type erasure. However, whenever `std::function` is required by some 3rd party API, this example might make a bit more sense.
 
-        #include <functional>
-        #include <callable_traits/callable_traits.hpp>
-
-        namespace example_library {
-
-                namespace ct = callable_traits;
-
-                //`make_function` turns a non-overloaded callable into a type-erased std::function object
-                template<typename T>
-                inline decltype(auto) make_function(T&& t) {
-
-                        // callable_traits::function_type decays any non-overloaded callable type to
-                        // a plain function type, which is structured in terms of INVOKE.
-
-                        using signature = ct::function_type<T&&>;
-                        using result_type = std::function<signature>;
-                        return result_type{ std::forward<T>(t) };
-                }
-
-                //this `make_function` overload turns a bind expression into a type-erased std::function object
-                template<typename T, typename First, typename... Others>
-                inline decltype(auto) make_function(T&& t, First&& first, Others&&... others) {
-
-                        // callable_traits::bind is essentially a compile-time parser of placeholders
-                        // expressions, for the purpose of retaining more type information than
-            // std::bind normally allows - specifically, callable_traits::bind is used to
-            // determine the de-facto signature of the std::bind return type, with special
-                        // considerations for conversions between reused placeholders and nested
-                        // placeholder expressions. For the sake of convenience, callable_traits::bind
-                        // is also a thin forwarding wrapper around std::bind (which is the only true
-                        // runtime element in CallableTraits).
-
-                        using bind_expr = decltype(ct::bind(
-                                std::forward<T>(t),
-                                std::forward<First>(first),
-                                std::forward<Others>(others)...
-                        ));
-
-                        using signature = ct::function_type<bind_expr>;
-                        using result_type = std::function<signature>;
-
-                        return result_type{ std::bind(
-                                std::forward<T>(t),
-                                std::forward<First>(first),
-                                std::forward<Others>(others)...
-                        )};
-                }
-        }
-
-        //client code starts here
-        #include <cassert>
-
-        using namespace example_library;
-        using namespace std::placeholders;
-
-        int add(int i, int j) {
-                return i + j;
-        }
-
-        struct adder {
-
-                int eval(int i, int j) const {
-                        return i + j;
-                }
-        };
-
-        int main() {
-
-                //function pointer
-                auto f = make_function(&add);
-                assert(f(99, 1) == 100);
-
-                //function reference
-                f = make_function(add);
-                assert(f(99, 1) == 100);
-
-                //member function pointer (bound to object)
-                f = make_function(&adder::eval, adder{}, _1, _2);
-                assert(f(99, 1) == 100);
-
-                //lambda
-                f = make_function([](int i, int j) {
-                        return i + j;
-                });
-
-                assert(f(99, 1) == 100);
-        }
+[import ../example/make_function.cpp]
+[make_function]
 
 [endsect]
 
 [endsect]
 
-[section:reference Reference]
-
-CallableTraits contains the following type traits and metafunctions (psuedo-code):
-
-[*`std::integral_constant` constexpr functions]
-
-* `can_invoke(T&&, Args&&...)`
-* `can_invoke_constexpr(T&&, Args&&...)`
-* `is_constexpr(T&&)`
-* `is_constexpr<T>()`
-* `has_varargs(T&&)`
-* `has_varargs<T>()`
-* `has_void_return(T&&)`
-* `has_void_return<T>()`
-* `arity(T&&)`
-* `arity<T>()`
-* `min_arity(T&&)`
-* `min_arity<T>()`
-* `max_arity(T&&)`
-* `max_arity<T>()`
-* `is_unqualified(T&&)`
-* `is_unqualified<T>()`
-* `is_const_qualified(T&&)`
-* `is_const_qualified<T>()`
-* `is_volatile_qualified(T&&)`
-* `is_volatile_qualified<T>()`
-* `is_cv_qualified(T&&)`
-* `is_cv_qualified<T>()`
-* `is_reference_qualified(T&&)`
-* `is_reference_qualified<T>()`
-* `is_lvalue_qualified(T&&)`
-* `is_lvalue_qualified<T>()`
-* `is_rvalue_qualified(T&&)`
-* `is_rvalue_qualified<T>()`
-
-[*Template aliases]
-
-* `args<T>`
-* `arg_at<I, T>`
-* `function_type<T>`
-* `qualified_function_type<T>`
-* `result_of<T>`
-* `apply_return<T, R>`
-* `apply_member_pointer<T, C>`
-* `remove_member_pointer<T>`
-* `add_const_qualifier<T>`
-* `remove_const_qualifier<T>`
-* `add_volatile_qualifier<T>`
-* `remove_volatile_qualifier<T>`
-* `add_cv_qualifiers<T>`
-* `remove_cv_qualifiers<T>`
-* `add_lvalue_qualifier<T>`
-* `add_rvalue_qualifier<T>`
-* `remove_reference_qualifiers<T>`
-* `add_varargs<T>`
-* `remove_varargs<T>`
-
-[*Other]
-
-* `bind(T&&, Args&&...)`
-
+[template ct_open_include[]    `#include<`[^[header_include_prefix]]]
+[template ct_close_include[]`.hpp>`]
+[template include_header[name][ct_open_include][^[name]][ct_close_include][br]]
 [section:headers Headers]
 
-The simplest way to use CallableTraits is to include the main header file:
+The simplest way to use [library_name] is to include the main header file:
 
-    #include <callable_traits/callable_traits.hpp>
+[include_header callable_traits]
 
-CallableTraits interface is also broken down by trait into individual header files. To use only the traits you need, include one or more of the following headers, which are listed alphabetically:
+[library_name] interface is also broken down by trait into individual header files. To use only the traits you need, include one or more of the following headers, listed alphabetically:
 
-    #include <callable_traits/add_const_qualifier.hpp>
-    #include <callable_traits/add_cv_qualifiers.hpp>
-    #include <callable_traits/add_lvalue_qualifier.hpp>
-    #include <callable_traits/add_rvalue_qualifier.hpp>
-    #include <callable_traits/add_varargs.hpp>
-    #include <callable_traits/add_volatile_qualifier.hpp>
-    #include <callable_traits/apply_member_pointer.hpp>
-    #include <callable_traits/apply_return.hpp>
-    #include <callable_traits/arg_at.hpp>
-    #include <callable_traits/args.hpp>
-    #include <callable_traits/arity.hpp>
-    #include <callable_traits/bind.hpp>
-    #include <callable_traits/can_invoke.hpp>
-    #include <callable_traits/can_invoke_constexpr.hpp>
-    #include <callable_traits/function_type.hpp>
-    #include <callable_traits/has_varargs.hpp>
-    #include <callable_traits/has_void_return.hpp>
-    #include <callable_traits/is_const_qualified.hpp>
-    #include <callable_traits/is_constexpr.hpp>
-    #include <callable_traits/is_lvalue_qualified.hpp>
-    #include <callable_traits/is_reference_qualified.hpp>
-    #include <callable_traits/is_rvalue_qualified.hpp>
-    #include <callable_traits/is_unqualified.hpp>
-    #include <callable_traits/is_volatile_qualified.hpp>
-    #include <callable_traits/max_arity.hpp>
-    #include <callable_traits/min_arity.hpp>
-    #include <callable_traits/qualified_function_type.hpp>
-    #include <callable_traits/remove_const_qualifier.hpp>
-    #include <callable_traits/remove_cv_qualifiers.hpp>
-    #include <callable_traits/remove_member_pointer.hpp>
-    #include <callable_traits/remove_reference_qualifier.hpp>
-    #include <callable_traits/remove_varargs.hpp>
-    #include <callable_traits/remove_volatile_qualifier.hpp>
-    #include <callable_traits/result_of.hpp>
+[include_header [link callable_traits.ref_add_const_qualifier add_const_qualifier]]
+[include_header [link callable_traits.ref_add_cv_qualifiers add_cv_qualifiers]]
+[include_header [link callable_traits.ref_add_lvalue_qualifier add_lvalue_qualifier]]
+[include_header [link callable_traits.ref_add_rvalue_qualifier add_rvalue_qualifier]]
+[include_header [link callable_traits.ref_add_varargs add_varargs]]
+[include_header [link callable_traits.ref_add_volatile_qualifier add_volatile_qualifier]]
+[include_header [link callable_traits.ref_apply_member_pointer apply_member_pointer]]
+[include_header [link callable_traits.ref_apply_return apply_return]]
+[include_header [link callable_traits.ref_arg_at arg_at]]
+[include_header [link callable_traits.ref_args args]]
+[include_header [link callable_traits.ref_arity arity]]
+[include_header [link callable_traits.ref_bind bind]]
+[include_header [link callable_traits.ref_can_invoke can_invoke]]
+[include_header [link callable_traits.ref_can_invoke_constexpr can_invoke_constexpr]]
+[include_header [link callable_traits.ref_function_type function_type]]
+[include_header [link callable_traits.ref_has_varargs has_varargs]]
+[include_header [link callable_traits.ref_has_void_return has_void_return]]
+[include_header [link callable_traits.ref_is_const_qualified is_const_qualified]]
+[include_header [link callable_traits.ref_is_constexpr is_constexpr]]
+[include_header [link callable_traits.ref_is_lvalue_qualified is_lvalue_qualified]]
+[include_header [link callable_traits.ref_is_reference_qualified is_reference_qualified]]
+[include_header [link callable_traits.ref_is_rvalue_qualified is_rvalue_qualified]]
+[include_header [link callable_traits.ref_is_unqualified is_unqualified]]
+[include_header [link callable_traits.ref_is_volatile_qualified is_volatile_qualified]]
+[include_header [link callable_traits.ref_max_arity max_arity]]
+[include_header [link callable_traits.ref_min_arity min_arity]]
+[include_header [link callable_traits.ref_qualified_function_type qualified_function_type]]
+[include_header [link callable_traits.ref_remove_const_qualifier remove_const_qualifier]]
+[include_header [link callable_traits.ref_remove_cv_qualifiers remove_cv_qualifiers]]
+[include_header [link callable_traits.ref_remove_member_pointer remove_member_pointer]]
+[include_header [link callable_traits.ref_remove_reference_qualifier remove_reference_qualifier]]
+[include_header [link callable_traits.ref_remove_varargs remove_varargs]]
+[include_header [link callable_traits.ref_remove_volatile_qualifier remove_volatile_qualifier]]
+[include_header [link callable_traits.ref_result_of result_of]]
 
 [endsect]
 
-[section add_const_qualifier]
+
+
+[section:ref_add_const_qualifier add_const_qualifier]
+[include_header add_const_qualifier]
 TODO
-[endsect]
-
-[section add_cv_qualifiers]
-TODO
-[endsect]
-
-[section add_lvalue_qualifier]
-TODO
-[endsect]
-
-[section add_rvalue_qualifier]
-TODO
-[endsect]
-
-[section add_varargs]
-TODO
-[endsect]
-
-[section add_volatile_qualifier]
-TODO
-[endsect]
-
-[section apply_member_pointer]
 [heading Example]
-[import ../example/apply_member_pointer/example.cpp]
-[apply_member_pointer_example]
+[import ../example/add_const_qualifier.cpp]
+[add_const_qualifier]
 [endsect]
 
-[section apply_return]
+[section:ref_add_cv_qualifiers add_cv_qualifiers]
+[include_header add_cv_qualifiers]
 TODO
-[endsect]
-
-[section arg_at]
-TODO
-[endsect]
-
-[section args]
 [heading Example]
-[import ../example/args/args.cpp]
-[args_args]
+[import ../example/add_cv_qualifiers.cpp]
+[add_cv_qualifiers]
 [endsect]
 
-[section arity]
+[section:ref_add_lvalue_qualifier add_lvalue_qualifier]
+[include_header add_lvalue_qualifier]
 TODO
 [endsect]
 
-[section bind]
+[section:ref_add_rvalue_qualifier add_rvalue_qualifier]
+[include_header add_rvalue_qualifier]
+TODO
+[endsect]
+
+[section:ref_add_varargs add_varargs]
+[include_header add_varargs]
+TODO
+[endsect]
+
+[section:ref_add_volatile_qualifier add_volatile_qualifier]
+[include_header add_volatile_qualifier]
+TODO
+[endsect]
+
+[section:ref_apply_member_pointer apply_member_pointer]
+[include_header apply_member_pointer]
+TODO
+[heading Example]
+[import ../example/apply_member_pointer.cpp]
+[apply_member_pointer]
+[endsect]
+
+[section:ref_apply_return apply_return]
+[include_header apply_return]
+TODO
+[heading Example]
+[/import ../example/apply_return.cpp]
+[apply_return]
+[endsect]
+
+[section:ref_arg_at arg_at]
+[include_header arg_at]
+TODO
+[heading Example]
+[/import ../example/arg_at.cpp]
+[arg_at]
+[endsect]
+
+[section:ref_args args]
+[include_header args]
+TODO
+[heading Example]
+[import ../example/args.cpp]
+[args]
+[endsect]
+
+[section:ref_arity arity]
+[include_header arity]
+TODO
+[heading Example]
+[/import ../example/arity.cpp]
+[arity]
+[endsect]
+
+[section:ref_bind bind]
+[include_header bind]
+TODO
 [heading Example 1]
-[import ../example/bind/example1.cpp]
-[bind_example1]
-TODO
+[import ../example/bind_1.cpp]
+[bind_1]
+[heading Example 2]
+[import ../example/bind_2.cpp]
+[bind_2]
 [endsect]
 
-[section can_invoke]
+[section:ref_can_invoke can_invoke]
+[include_header can_invoke]
 TODO
+[heading Example - Function Object]
+[import ../example/can_invoke_function_object.cpp]
+[can_invoke_function_object]
+[heading Example - Member Function Pointer]
+[import ../example/can_invoke_member_function_pointer.cpp]
+[can_invoke_member_function_pointer]
+[heading Example - Function Pointer]
+[import ../example/can_invoke_function_pointer.cpp]
+[can_invoke_function_pointer]
+[heading Example - Function Reference]
+[import ../example/can_invoke_function_reference.cpp]
+[can_invoke_function_reference]
 [endsect]
 
-[section can_invoke_constexpr]
+[section:ref_can_invoke_constexpr can_invoke_constexpr]
+[include_header can_invoke_constexpr]
 TODO
+[heading Example - Function Object]
+[import ../example/can_invoke_constexpr_function_object.cpp]
+[can_invoke_constexpr_function_object]
+[heading Example - Member Function Pointer]
+[import ../example/can_invoke_constexpr_member_function_pointer.cpp]
+[can_invoke_constexpr_member_function_pointer]
+[heading Example - Function Pointer]
+[import ../example/can_invoke_constexpr_function_pointer.cpp]
+[can_invoke_constexpr_function_pointer]
 [endsect]
 
-[section function_type]
+[section:ref_function_type function_type]
+[include_header function_type]
 TODO
-[endsect]
-
-[section has_varargs]
-TODO
-[endsect]
-
-[section has_void_return]
-TODO
-[endsect]
-
-[section is_const_qualified]
-TODO
-[endsect]
-
-[section is_constexpr]
-TODO
-[endsect]
-
-[section is_lvalue_qualified]
-TODO
-[endsect]
-
-[section is_reference_qualified]
-TODO
-[endsect]
-
-[section is_rvalue_qualified]
-TODO
-[endsect]
-
-[section is_unqualified]
-TODO
-[endsect]
-
-[section is_volatile_qualified]
-TODO
-[endsect]
-
-[section max_arity]
-TODO
-[endsect]
-
-[section min_arity]
-TODO
-[endsect]
-
-[section qualified_function_type]
-TODO
-[endsect]
-
-[section remove_const_qualifier]
-TODO
-[endsect]
-
-[section remove_cv_qualifiers]
-TODO
-[endsect]
-
-[section remove_member_pointer]
 [heading Example]
-
-        #include <callable_traits/callable_traits.hpp>
-
-        namespace ct = callable_traits;
-
-        struct foo;
-
-        template<typename T, typename Expect>
-        void test() {
-                using U = ct::remove_member_pointer<T>;
-                static_assert(std::is_same<Expect, U>{}, "");
-        }
-
-        int main() {
-
-                {
-                        using T = int(foo::*)(int) const;
-                        using expect = int(int) const;
-                        test<T, expect>();
-                } {
-                        using T = int foo::*;
-                        using expect = int;
-                        test<T, expect>();
-                } {
-                        using T = int(int);
-                        test<T, T>();
-                } {
-                        using T = int(*)(int);
-                        test<T, T>();
-                } {
-                        using T = int(&)(int);
-                        test<T, T>();
-                }
-        }
-
+[import ../example/function_type.cpp]
+[function_type]
 [endsect]
 
-[section remove_reference_qualifier]
+[section:ref_has_varargs has_varargs]
+[include_header has_varargs]
 TODO
-[endsect]
-
-[section remove_varargs]
-TODO
-[endsect]
-
-[section remove_volatile_qualifier]
-TODO
-[endsect]
-
-[section result_of]
 [heading Example]
-
-        #include <callable_traits/callable_traits.hpp>
-
-        namespace ct = callable_traits;
-
-        using expect = int;
-
-        struct foo;
-
-        template<typename T>
-        void test() {
-                using result = ct::result_of<T>;
-                static_assert(std::is_same<expect, result>{}, "");
-        }
-
-        int main() {
-
-                test<int()>();
-                test<int(*)()>();
-                test<int(&)()>();
-                test<int() const>();
-                test<int(foo::*)() const>();
-
-                auto x = []() -> int { return 0; };
-
-                test<decltype(x)>();
-        }
+[/import ../example/has_varargs.cpp]
+[has_varargs]
 [endsect]
 
+[section:ref_has_void_return has_void_return]
+[include_header has_void_return]
+TODO
+[heading Example]
+[/import ../example/has_void_return.cpp]
+[has_void_return]
+[endsect]
+
+[section:ref_is_const_qualified is_const_qualified]
+[include_header is_const_qualified]
+TODO
+[heading Example]
+[/import ../example/is_const_qualified.cpp]
+[is_const_qualified]
+[endsect]
+
+[section:ref_is_constexpr is_constexpr]
+[include_header is_constexpr]
+TODO
+[heading Example - Function Object]
+[import ../example/is_constexpr_function_object.cpp]
+[is_constexpr_function_object]
+[heading Example - Function Pointer]
+[import ../example/is_constexpr_function_pointer.cpp]
+[is_constexpr_function_pointer]
+[endsect]
+
+[section:ref_is_lvalue_qualified is_lvalue_qualified]
+[include_header is_lvalue_qualified]
+TODO
+[heading Example]
+[/import ../example/is_lvalue_qualified.cpp]
+[is_lvalue_qualified]
+[endsect]
+
+[section:ref_is_reference_qualified is_reference_qualified]
+[include_header is_reference_qualified]
+TODO
+[heading Example]
+[/import ../example/is_reference_qualified.cpp]
+[is_reference_qualified]
+[endsect]
+
+[section:ref_is_rvalue_qualified is_rvalue_qualified]
+[include_header is_rvalue_qualified]
+TODO
+[heading Example]
+[/import ../example/is_rvalue_qualified.cpp]
+[is_rvalue_qualified]
+[endsect]
+
+[section:ref_is_unqualified is_unqualified]
+[include_header is_unqualified]
+TODO
+[heading Example]
+[/import ../example/is_unqualified.cpp]
+[is_unqualified]
+[endsect]
+
+[section:ref_is_volatile_qualified is_volatile_qualified]
+[include_header is_volatile_qualified]
+TODO
+[heading Example]
+[/import ../example/is_volatile_qualified.cpp]
+[is_volatile_qualified]
+[endsect]
+
+[section:ref_max_arity max_arity]
+[include_header max_arity]
+TODO
+[heading Example]
+[/import ../example/max_arity.cpp]
+[max_arity]
+[endsect]
+
+[section:ref_min_arity min_arity]
+[include_header min_arity]
+TODO
+[heading Example]
+[/import ../example/min_arity.cpp]
+[min_arity]
+[endsect]
+
+[section:ref_qualified_function_type qualified_function_type]
+[include_header qualified_function_type]
+TODO
+[heading Example]
+[/import ../example/qualified_function_type.cpp]
+[qualified_function_type]
+[endsect]
+
+[section:ref_remove_const_qualifier remove_const_qualifier]
+[include_header remove_const_qualifier]
+TODO
+[heading Example]
+[/import ../example/remove_const_qualifier.cpp]
+[remove_const_qualifier]
+[endsect]
+
+[section:ref_remove_cv_qualifiers remove_cv_qualifiers]
+[include_header remove_cv_qualifiers]
+TODO
+[heading Example]
+[/import ../example/remove_cv_qualifiers.cpp]
+[remove_cv_qualifiers]
+[endsect]
+
+[section:ref_remove_member_pointer remove_member_pointer]
+[include_header remove_member_pointer]
+TODO
+[heading Example]
+[import ../example/remove_member_pointer.cpp]
+[remove_member_pointer]
+[endsect]
+
+[section:ref_remove_reference_qualifier remove_reference_qualifier]
+[include_header remove_reference_qualifier]
+TODO
+[heading Example]
+[/import ../example/remove_reference_qualifier.cpp]
+[remove_reference_qualifier]
+[endsect]
+
+[section:ref_remove_varargs remove_varargs]
+[include_header remove_varargs]
+TODO
+[heading Example]
+[/import ../example/remove_varargs.cpp]
+[remove_varargs]
+[endsect]
+
+[section:ref_remove_volatile_qualifier remove_volatile_qualifier]
+[include_header remove_volatile_qualifier]
+TODO
+[heading Example]
+[/import ../example/remove_volatile_qualifier.cpp]
+[remove_volatile_qualifier]
+[endsect]
+
+[section:ref_result_of result_of]
+[include_header result_of]
+[heading Example]
+[import ../example/result_of.cpp]
+[result_of]
 [endsect]

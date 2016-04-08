@@ -1,5 +1,5 @@
 /*!
-@file
+@file add_const_qualifier
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.

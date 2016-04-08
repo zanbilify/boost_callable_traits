@@ -168,15 +168,15 @@ namespace callable_traits {
             using add_varargs = typename base::add_varargs*;
 
             using remove_reference = T*;
-            using add_lvalue_reference = T*&;
-            using add_rvalue_reference = T*&&;
+            using add_lvalue_reference = T*;
+            using add_rvalue_reference = T*;
 
-            using add_const =  T * const;
-            using add_volatile = T * volatile;
-            using add_cv = T * const volatile;
-            using remove_const = typename base::remove_cv *;
-            using remove_volatile = typename base::remove_cv *;
-            using remove_cv = typename base::remove_cv *;
+            using add_const =  T*;
+            using add_volatile = T*;
+            using add_cv = T*;
+            using remove_const = T*;
+            using remove_volatile = T*;
+            using remove_cv = T*;
 
             template<typename NewReturn>
             using apply_return = typename base::template apply_return<NewReturn>&;
@@ -192,16 +192,16 @@ namespace callable_traits {
             using remove_varargs = typename base::remove_varargs&;
             using add_varargs = typename base::add_varargs&;
 
-            using remove_reference = T;
+            using remove_reference = T&;
             using add_lvalue_reference = T&;
-            using add_rvalue_reference = T&&;
+            using add_rvalue_reference = T&;
 
-            using add_const =  typename base::add_const;
-            using add_volatile = typename base::add_volatile;
-            using add_cv = typename base::add_cv;
-            using remove_const = typename base::remove_const;
-            using remove_volatile = typename base::remove_volatile;
-            using remove_cv = typename base::remove_cv;
+            using add_const = T&;
+            using add_volatile = T&;
+            using add_cv = T&;
+            using remove_const = T&;
+            using remove_volatile = T&;
+            using remove_cv = T&;
 
             template<typename NewReturn>
             using apply_return = typename base::template apply_return<NewReturn>&;
