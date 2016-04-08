@@ -19,7 +19,7 @@ struct foo {};
 
 int main() {
 
-    //depending on your platform, pmf may alrady have an implicit __cdecl
+    //depending on your platform, pmf may already have an implicit __cdecl
     using pmf = void(foo::*)();
     using expect = void(__cdecl foo::*)();
     using test = ct::add_calling_convention<pmf, ct::cdecl_tag>;
