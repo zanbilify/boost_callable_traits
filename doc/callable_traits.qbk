@@ -94,9 +94,14 @@ Without real-world context, `make_function` may seem rather silly to those who k
 
 [endsect]
 
+
+
 [template ct_open_include[]    `#include<`[^[header_include_prefix]]]
 [template ct_close_include[]`.hpp>`]
 [template include_header[name][ct_open_include][^[name]][ct_close_include][br]]
+
+
+
 [section:headers Headers]
 
 The simplest way to use [library_name] is to include the main header file:
@@ -145,7 +150,6 @@ The simplest way to use [library_name] is to include the main header file:
 
 
 [section:ref_add_const_qualifier add_const_qualifier]
-[include_header add_const_qualifier]
 TODO
 [heading Example]
 [import ../example/add_const_qualifier.cpp]
@@ -153,7 +157,6 @@ TODO
 [endsect]
 
 [section:ref_add_cv_qualifiers add_cv_qualifiers]
-[include_header add_cv_qualifiers]
 TODO
 [heading Example]
 [import ../example/add_cv_qualifiers.cpp]
@@ -161,29 +164,28 @@ TODO
 [endsect]
 
 [section:ref_add_lvalue_qualifier add_lvalue_qualifier]
-[include_header add_lvalue_qualifier]
 TODO
 [import ../example/add_lvalue_qualifier.cpp]
 [add_lvalue_qualifier]
 [endsect]
 
 [section:ref_add_rvalue_qualifier add_rvalue_qualifier]
-[include_header add_rvalue_qualifier]
 TODO
+[import ../example/add_rvalue_qualifier.cpp]
+[add_rvalue_qualifier]
 [endsect]
 
 [section:ref_add_varargs add_varargs]
-[include_header add_varargs]
 TODO
+[import ../example/add_varargs.cpp]
+[add_varargs]
 [endsect]
 
 [section:ref_add_volatile_qualifier add_volatile_qualifier]
-[include_header add_volatile_qualifier]
 TODO
 [endsect]
 
 [section:ref_apply_member_pointer apply_member_pointer]
-[include_header apply_member_pointer]
 TODO
 [heading Example]
 [import ../example/apply_member_pointer.cpp]
@@ -191,7 +193,6 @@ TODO
 [endsect]
 
 [section:ref_apply_return apply_return]
-[include_header apply_return]
 TODO
 [heading Example]
 [/import ../example/apply_return.cpp]
@@ -199,7 +200,6 @@ TODO
 [endsect]
 
 [section:ref_arg_at arg_at]
-[include_header arg_at]
 TODO
 [heading Example]
 [/import ../example/arg_at.cpp]
@@ -207,7 +207,6 @@ TODO
 [endsect]
 
 [section:ref_args args]
-[include_header args]
 TODO
 [heading Example]
 [import ../example/args.cpp]
@@ -215,7 +214,6 @@ TODO
 [endsect]
 
 [section:ref_arity arity]
-[include_header arity]
 TODO
 [heading Example]
 [/import ../example/arity.cpp]
@@ -223,7 +221,6 @@ TODO
 [endsect]
 
 [section:ref_bind bind]
-[include_header bind]
 TODO
 [heading Example 1]
 [import ../example/bind_1.cpp]
@@ -234,7 +231,6 @@ TODO
 [endsect]
 
 [section:ref_can_invoke can_invoke]
-[include_header can_invoke]
 TODO
 [heading Example - Function Object]
 [import ../example/can_invoke_function_object.cpp]
@@ -251,7 +247,6 @@ TODO
 [endsect]
 
 [section:ref_can_invoke_constexpr can_invoke_constexpr]
-[include_header can_invoke_constexpr]
 TODO
 [heading Example - Function Object]
 [import ../example/can_invoke_constexpr_function_object.cpp]
@@ -265,7 +260,6 @@ TODO
 [endsect]
 
 [section:ref_function_type function_type]
-[include_header function_type]
 TODO
 [heading Example]
 [import ../example/function_type.cpp]
@@ -273,7 +267,6 @@ TODO
 [endsect]
 
 [section:ref_has_varargs has_varargs]
-[include_header has_varargs]
 TODO
 [heading Example]
 [/import ../example/has_varargs.cpp]
@@ -281,7 +274,6 @@ TODO
 [endsect]
 
 [section:ref_has_void_return has_void_return]
-[include_header has_void_return]
 TODO
 [heading Example]
 [/import ../example/has_void_return.cpp]
@@ -289,7 +281,6 @@ TODO
 [endsect]
 
 [section:ref_is_const_qualified is_const_qualified]
-[include_header is_const_qualified]
 TODO
 [heading Example]
 [/import ../example/is_const_qualified.cpp]
@@ -297,7 +288,6 @@ TODO
 [endsect]
 
 [section:ref_is_constexpr is_constexpr]
-[include_header is_constexpr]
 TODO
 [heading Example - Function Object]
 [import ../example/is_constexpr_function_object.cpp]
@@ -308,7 +298,6 @@ TODO
 [endsect]
 
 [section:ref_is_lvalue_qualified is_lvalue_qualified]
-[include_header is_lvalue_qualified]
 TODO
 [heading Example]
 [/import ../example/is_lvalue_qualified.cpp]
@@ -316,7 +305,6 @@ TODO
 [endsect]
 
 [section:ref_is_reference_qualified is_reference_qualified]
-[include_header is_reference_qualified]
 TODO
 [heading Example]
 [/import ../example/is_reference_qualified.cpp]
@@ -324,7 +312,6 @@ TODO
 [endsect]
 
 [section:ref_is_rvalue_qualified is_rvalue_qualified]
-[include_header is_rvalue_qualified]
 TODO
 [heading Example]
 [/import ../example/is_rvalue_qualified.cpp]
@@ -332,7 +319,6 @@ TODO
 [endsect]
 
 [section:ref_is_unqualified is_unqualified]
-[include_header is_unqualified]
 TODO
 [heading Example]
 [/import ../example/is_unqualified.cpp]
@@ -340,7 +326,6 @@ TODO
 [endsect]
 
 [section:ref_is_volatile_qualified is_volatile_qualified]
-[include_header is_volatile_qualified]
 TODO
 [heading Example]
 [/import ../example/is_volatile_qualified.cpp]
@@ -348,7 +333,6 @@ TODO
 [endsect]
 
 [section:ref_max_arity max_arity]
-[include_header max_arity]
 TODO
 [heading Example]
 [/import ../example/max_arity.cpp]
@@ -356,7 +340,6 @@ TODO
 [endsect]
 
 [section:ref_min_arity min_arity]
-[include_header min_arity]
 TODO
 [heading Example]
 [/import ../example/min_arity.cpp]
@@ -364,7 +347,6 @@ TODO
 [endsect]
 
 [section:ref_qualified_function_type qualified_function_type]
-[include_header qualified_function_type]
 TODO
 [heading Example]
 [/import ../example/qualified_function_type.cpp]
@@ -372,7 +354,6 @@ TODO
 [endsect]
 
 [section:ref_remove_const_qualifier remove_const_qualifier]
-[include_header remove_const_qualifier]
 TODO
 [heading Example]
 [/import ../example/remove_const_qualifier.cpp]
@@ -380,7 +361,6 @@ TODO
 [endsect]
 
 [section:ref_remove_cv_qualifiers remove_cv_qualifiers]
-[include_header remove_cv_qualifiers]
 TODO
 [heading Example]
 [/import ../example/remove_cv_qualifiers.cpp]
@@ -388,7 +368,6 @@ TODO
 [endsect]
 
 [section:ref_remove_member_pointer remove_member_pointer]
-[include_header remove_member_pointer]
 TODO
 [heading Example]
 [import ../example/remove_member_pointer.cpp]
@@ -396,7 +375,6 @@ TODO
 [endsect]
 
 [section:ref_remove_reference_qualifier remove_reference_qualifier]
-[include_header remove_reference_qualifier]
 TODO
 [heading Example]
 [/import ../example/remove_reference_qualifier.cpp]
@@ -404,7 +382,6 @@ TODO
 [endsect]
 
 [section:ref_remove_varargs remove_varargs]
-[include_header remove_varargs]
 TODO
 [heading Example]
 [/import ../example/remove_varargs.cpp]
@@ -412,7 +389,6 @@ TODO
 [endsect]
 
 [section:ref_remove_volatile_qualifier remove_volatile_qualifier]
-[include_header remove_volatile_qualifier]
 TODO
 [heading Example]
 [/import ../example/remove_volatile_qualifier.cpp]
@@ -420,7 +396,7 @@ TODO
 [endsect]
 
 [section:ref_result_of result_of]
-[include_header result_of]
+TODO
 [heading Example]
 [import ../example/result_of.cpp]
 [result_of]

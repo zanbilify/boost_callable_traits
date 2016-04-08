@@ -32,7 +32,7 @@ int main() {
         using test = ct::add_cv_qualifiers<pmf>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
-        // add_cv_qualifiers can also be used to create "abominable"
+        // add_cv_qualifiers can also be used with "abominable"
         // function types.
         using f = void();
         using expect = void() const volatile;

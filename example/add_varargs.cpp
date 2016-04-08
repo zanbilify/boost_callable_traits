@@ -20,18 +20,18 @@ int main() {
         using test = ct::add_varargs<f>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
-        using fp = void(*)(int);
-        using expect = void(*)(int, ...);
+        using fp = void(*)();
+        using expect = void(*)(...);
         using test = ct::add_varargs<fp>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
-        using fr = void(&)(int);
-        using expect = void(&)(int, ...);
+        using fr = void(&)(const char*);
+        using expect = void(&)(const char*, ...);
         using test = ct::add_varargs<fr>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
-        using pmf = void(foo::*)(int) const;
-        using expect = void(foo::*)(int, ...) const;
+        using pmf = void(foo::*)() const;
+        using expect = void(foo::*)(...) const;
         using test = ct::add_varargs<pmf>;
         static_assert(std::is_same<test, expect>::value, "");
 

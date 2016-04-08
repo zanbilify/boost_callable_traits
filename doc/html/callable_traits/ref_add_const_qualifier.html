@@ -27,7 +27,6 @@
 <a name="callable_traits.ref_add_const_qualifier"></a><a class="link" href="ref_add_const_qualifier.html" title="add_const_qualifier">add_const_qualifier</a>
 </h2></div></div></div>
 <p>
-      <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal">add_const_qualifier</code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code><br>
       TODO
     </p>
 <h4>
@@ -61,7 +60,7 @@
         <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_const_qualifier</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
         <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
     <span class="special">}</span> <span class="special">{</span>
-        <span class="comment">// add_const_qualifier can also be used to create "abominable"</span>
+        <span class="comment">// add_const_qualifier can also be used with "abominable"</span>
         <span class="comment">// function types.</span>
         <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">();</span>
         <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">()</span> <span class="keyword">const</span><span class="special">;</span>
