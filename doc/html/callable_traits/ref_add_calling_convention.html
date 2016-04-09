@@ -27,8 +27,71 @@
 <a name="callable_traits.ref_add_calling_convention"></a><a class="link" href="ref_add_calling_convention.html" title="add_calling_convention">add_calling_convention</a>
 </h2></div></div></div>
 <p>
-      TODO
+      <code class="computeroutput"><span class="identifier">add_calling_convention</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">CcTag</span></code>
+      will add a calling conventions to a type, where <code class="computeroutput"><span class="identifier">T</span></code>
+      is a <span class="green">FunctionPtr</span> or <span class="green">MemberFunctionPtr</span>,
+      and <code class="computeroutput"><span class="identifier">CcTag</span></code> is one of the following
+      types:
     </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">cdecl_tag</span></code>
+        </li>
+<li class="listitem">
+          <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">stdcall_tag</span></code>
+        </li>
+<li class="listitem">
+          <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">fastcall_tag</span></code>
+        </li>
+<li class="listitem">
+          <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">pascal_tag</span></code>
+        </li>
+</ul></div>
+<p>
+      For <code class="computeroutput"><span class="identifier">add_calling_convention</span></code>
+      to actually work, you must:
+    </p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem">
+          Be programming on a supported platform
+        </li>
+<li class="listitem">
+          Add the calling convention to a pointer type where the platform allows
+          you to do so
+        </li>
+<li class="listitem">
+          Before including any <code class="literal">CallableTraits</code> headers, you must
+          first define the appropriate macro(s) to enable the desired calling convention(s):
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">CALLABLE_TRAITS_ENABLE_CDECL</span></code>
+                for <code class="computeroutput"><span class="identifier">__cdecl</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">CALLABLE_TRAITS_ENABLE_STDCALL</span></code>
+                for <code class="computeroutput"><span class="identifier">__stdcall</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">CALLABLE_TRAITS_ENABLE_FASTCALL</span></code>
+                for <code class="computeroutput"><span class="identifier">__fastcall</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">CALLABLE_TRAITS_ENABLE_PASCAL</span></code>
+                for <code class="computeroutput"><span class="identifier">pascal</span></code>
+              </li>
+</ul></div>
+        </li>
+</ol></div>
+<div class="warning"><table border="0" summary="Warning">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Warning]" src="../../../../../doc/src/images/warning.png"></td>
+<th align="left">Warning</th>
+</tr>
+<tr><td align="left" valign="top"><p>
+        This feature is currently considered experimental. Your feedback and advice
+        is much appreciated!
+      </p></td></tr>
+</table></div>
 <h4>
 <a name="callable_traits.ref_add_calling_convention.h0"></a>
       <span class="phrase"><a name="callable_traits.ref_add_calling_convention.example_fastcall_to_stdcall"></a></span><a class="link" href="ref_add_calling_convention.html#callable_traits.ref_add_calling_convention.example_fastcall_to_stdcall">Example
@@ -68,28 +131,9 @@
       <span class="phrase"><a name="callable_traits.ref_add_calling_convention.example_cdecl"></a></span><a class="link" href="ref_add_calling_convention.html#callable_traits.ref_add_calling_convention.example_cdecl">Example
       - <code class="literal">__cdecl</code></a>
     </h4>
-<pre class="programlisting"><span class="preprocessor">#define</span> <span class="identifier">CALLABLE_TRAITS_ENABLE_CDECL</span>
-
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">has_calling_convention</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_calling_convention</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
-
-<span class="keyword">struct</span> <span class="identifier">foo</span> <span class="special">{};</span>
-
-<span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
-
-    <span class="comment">//depending on your platform, pmf may alrady have an implicit __cdecl</span>
-    <span class="keyword">using</span> <span class="identifier">pmf</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)();</span>
-    <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="identifier">__cdecl</span> <span class="identifier">foo</span><span class="special">::*)();</span>
-    <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_calling_convention</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">,</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">cdecl_tag</span><span class="special">&gt;;</span>
-
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_calling_convention</span><span class="special">&lt;</span><span class="identifier">expect</span><span class="special">,</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">cdecl_tag</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_calling_convention</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">cdecl_tag</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-<span class="special">}</span>
-</pre>
+<p>
+      [calling_convention_cdecl]
+    </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

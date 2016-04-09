@@ -13,7 +13,7 @@ namespace example_library {
 
     namespace ct = callable_traits;
 
-    //make_function turns a non-overloaded callable into a type-erased std::function object
+    // make_function turns a non-overloaded callable into a type-erased std::function object
     template<typename T>
     inline decltype(auto) make_function(T&& t) {
 
@@ -25,11 +25,11 @@ namespace example_library {
         return result_type{ std::forward<T>(t) };
     }
 
-    //this make_function overload turns a bind expression into a type-erased std::function object
+    // this make_function overload turns a bind expression into a type-erased std::function object
     template<typename T, typename First, typename... Others>
     inline decltype(auto) make_function(T&& t, First&& first, Others&&... others) {
 
-        // callable_traits::bind is essentially a compile-time parser of placeholders
+        // callable_traits::bind is essentially a compile-time parser of placeholder
         // expressions, for the purpose of retaining more type information than
         // std::bind normally allows - specifically, callable_traits::bind is used to
         // determine the de-facto signature of the std::bind return type, with special

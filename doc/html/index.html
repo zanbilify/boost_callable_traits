@@ -38,9 +38,11 @@
 <dl class="toc">
 <dt><span class="section"><a href="index.html#callable_traits.introduction">Introduction</a></span></dt>
 <dd><dl>
+<dt><span class="section"><a href="index.html#callable_traits.introduction.quick_example">Quick Example</a></span></dt>
 <dt><span class="section"><a href="index.html#callable_traits.introduction.motivation">Motivation</a></span></dt>
-<dt><span class="section"><a href="index.html#callable_traits.introduction.ten_reasons">10 reasons
-      to use <code class="literal">CallableTraits</code></a></span></dt>
+<dt><span class="section"><a href="index.html#callable_traits.introduction.basic_concepts">Concept
+      Definitions</a></span></dt>
+<dt><span class="section"><a href="index.html#callable_traits.introduction.reasons">Why use <code class="literal">CallableTraits</code>?</a></span></dt>
 <dt><span class="section"><a href="index.html#callable_traits.introduction.function_sugar">Use case:
       <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code> sugar</a></span></dt>
 </dl></dd>
@@ -89,28 +91,100 @@
 <a name="callable_traits.introduction"></a><a class="link" href="index.html#callable_traits.introduction" title="Introduction">Introduction</a>
 </h2></div></div></div>
 <div class="toc"><dl class="toc">
+<dt><span class="section"><a href="index.html#callable_traits.introduction.quick_example">Quick Example</a></span></dt>
 <dt><span class="section"><a href="index.html#callable_traits.introduction.motivation">Motivation</a></span></dt>
-<dt><span class="section"><a href="index.html#callable_traits.introduction.ten_reasons">10 reasons
-      to use <code class="literal">CallableTraits</code></a></span></dt>
+<dt><span class="section"><a href="index.html#callable_traits.introduction.basic_concepts">Concept
+      Definitions</a></span></dt>
+<dt><span class="section"><a href="index.html#callable_traits.introduction.reasons">Why use <code class="literal">CallableTraits</code>?</a></span></dt>
 <dt><span class="section"><a href="index.html#callable_traits.introduction.function_sugar">Use case:
       <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code> sugar</a></span></dt>
 </dl></div>
-<h4>
-<a name="callable_traits.introduction.h0"></a>
-      <span class="phrase"><a name="callable_traits.introduction.quick_example"></a></span><a class="link" href="index.html#callable_traits.introduction.quick_example">Quick
-      Example</a>
-    </h4>
+<p>
+      <code class="literal">CallableTraits</code> provides a comprehensive, uniform, and modern
+      type-level interface for the inspection, decomposition, and synthesis of C++
+      callable types. This documentation will be most beneficial to readers with
+      a basic understanding of the syntax and usage of the following C++ features:
+    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <a href="http://en.cppreference.com/w/cpp/language/partial_specialization" target="_top">template
+          specializations</a>
+        </li>
+<li class="listitem">
+          <a href="http://en.cppreference.com/w/cpp/language/sfinae" target="_top">SFINAE</a>
+        </li>
+<li class="listitem">
+          <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top">INVOKE</a>
+          rules
+        </li>
+<li class="listitem">
+          function types
+        </li>
+<li class="listitem">
+          <a href="http://en.cppreference.com/w/cpp/language/pointer#Pointers_to_functions" target="_top">function
+          pointers</a>
+        </li>
+<li class="listitem">
+          <a href="http://stackoverflow.com/questions/480248/function-references" target="_top">function
+          references</a>
+        </li>
+<li class="listitem">
+          <a href="http://en.cppreference.com/w/cpp/language/pointer#Pointers_to_member_functions" target="_top">pointers
+          to member functions</a>
+        </li>
+<li class="listitem">
+          <a href="http://en.cppreference.com/w/cpp/language/pointer#Pointers_to_data_members" target="_top">pointers
+          to data members</a>
+        </li>
+<li class="listitem">
+          <a href="http://en.cppreference.com/w/cpp/language/operators#Function_call_operator" target="_top">the
+          function call operator, <code class="literal">operator()</code></a>
+        </li>
+<li class="listitem">
+          <a href="https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers" target="_top">universal
+          references</a> and <a href="http://stackoverflow.com/questions/13725747/concise-explanation-of-reference-collapsing-rules-requested-1-a-a-2" target="_top">reference
+          collapsing rules</a>
+        </li>
+<li class="listitem">
+          <a href="http://en.cppreference.com/w/cpp/language/member_functions#const-.2C_volatile-.2C_and_ref-qualified_member_functions" target="_top">cv-qualified
+          and ref-qualified member functions</a>
+        </li>
+<li class="listitem">
+          <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0172r0.html" target="_top">"abominable"
+          function types</a>
+        </li>
+<li class="listitem">
+          <a href="http://en.cppreference.com/w/cpp/language/overloaded_address" target="_top">taking
+          the address of an overloaded function</a>
+        </li>
+<li class="listitem">
+          <a href="http://en.cppreference.com/w/c/language/variadic" target="_top">C-style variadics</a>,
+          a.k.a. <code class="computeroutput"><span class="identifier">varargs</span></code>
+        </li>
+<li class="listitem">
+          <a href="https://en.wikipedia.org/wiki/X86_calling_conventions" target="_top">calling
+          conventions</a>
+        </li>
+</ul></div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.introduction.quick_example"></a><a class="link" href="index.html#callable_traits.introduction.quick_example" title="Quick Example">Quick Example</a>
+</h3></div></div></div>
+<p>
+        This short program showcases some, but not all, of the features available
+        in <code class="literal">CallableTraits</code>.
+      </p>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">tuple</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+
+<span class="comment">// foo is an example of a function object</span>
 <span class="keyword">struct</span> <span class="identifier">foo</span> <span class="special">{</span>
     <span class="keyword">void</span> <span class="keyword">operator</span><span class="special">()(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*</span> <span class="special">=</span> <span class="keyword">nullptr</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{}</span>
 <span class="special">};</span>
-
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
-<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">;</span>
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
 
@@ -119,173 +193,154 @@
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">second_arg</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
     <span class="comment">// arg types are packaged into std::tuple, which serves as the default</span>
-    <span class="comment">// type list in CallableTraits (runtime capabilities are not used).</span>
+    <span class="comment">// type list in <code class="literal">CallableTraits</code> (runtime capabilities are not used).</span>
     <span class="keyword">using</span> <span class="identifier">args</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">args</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;;</span>
     <span class="keyword">using</span> <span class="identifier">expected_args</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*&gt;;</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">args</span><span class="special">,</span> <span class="identifier">expected_args</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
-    <span class="comment">//callable_traits::result_of is a bit friendlier than std::result_of</span>
-    <span class="keyword">using</span> <span class="identifier">return_type</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">result_of</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;;</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">return_type</span><span class="special">,</span> <span class="keyword">void</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">//has_void_return is a quicker way to perform the check above</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_void_return</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// callable_traits::function_type decays a callable type to</span>
-    <span class="comment">// a plain function type, which is structured in terms of INVOKE</span>
+    <span class="comment">// <code class="literal">callable_traits::</code>function_type "decays" a callable type to a plain</span>
+    <span class="comment">// function type, which is structured in terms of INVOKE.</span>
     <span class="keyword">using</span> <span class="identifier">function_type</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;;</span>
     <span class="keyword">using</span> <span class="identifier">expected_function_type</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*);</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">function_type</span><span class="special">,</span> <span class="identifier">expected_function_type</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
-    <span class="comment">// when trait information can be conveyed in an std::integral_constant,</span>
-    <span class="comment">// callable_traits opts for constexpr functions instead of template aliases.</span>
-    <span class="comment">// This is done to encourage value semantics, and to simplify usage inside</span>
-    <span class="comment">// of forwarding functions.</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">arity</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{})</span> <span class="special">==</span> <span class="number">4</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">max_arity</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{})</span> <span class="special">==</span> <span class="number">4</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">min_arity</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{})</span> <span class="special">==</span> <span class="number">3</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// CallableTraits provides constexpr functions so that the user doesn't</span>
-    <span class="comment">// need to worry about reference collapsing or decltype when dealing with</span>
-    <span class="comment">// universal references to callables. Still, you don't NEED an instance,</span>
-    <span class="comment">// because CallableTraits provides non-deduced function templates for</span>
-    <span class="comment">// all constexpr functions (except for can_invoke/can_invoke_constexpr and bind,</span>
-    <span class="comment">// which model std::invoke and std::bind, respectively -- more on these below).</span>
-    <span class="comment">// Here's an example of the non-deduced version of arity, which take an</span>
-    <span class="comment">// explicit type argument. We'll ignore these non-deduced overloads for the</span>
-    <span class="comment">// rest of this example.</span>
+    <span class="comment">// By design, the <code class="literal">CallableTraits</code> interface uses constexpr</span>
+    <span class="comment">// std::integral_constant functions (whenever sensible).</span>
+    <span class="comment">// By also defining the appropriate overloads, this gives</span>
+    <span class="comment">// users the option of using either type arguments or a value</span>
+    <span class="comment">// arguments, which often eliminates the need for decltype:</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">arity</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;()</span> <span class="special">==</span> <span class="number">4</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">arity</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{})</span> <span class="special">==</span> <span class="number">4</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
-    <span class="comment">// C-style variadics detection (ellipses in a signature)</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_varargs</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
+    <span class="comment">// Attentive readers might notice that the type of the foo{}</span>
+    <span class="comment">// expression above is foo&amp;&amp;, rather than foo. Indeed,</span>
+    <span class="comment">// libname is designed to also allow both ref-qualified</span>
+    <span class="comment">// and cv-qualified arguments across the board:</span>
+
+    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">arity</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&amp;&amp;&gt;()</span> <span class="special">==</span> <span class="number">4</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+
+    <span class="comment">// Now, if foo had an operator() overload with a &amp;&amp; qualifier, taking</span>
+    <span class="comment">// a different number of arguments, the above static assert would fail.</span>
+
+    <span class="comment">// For consistency, we'll avoid the value-style overloads</span>
+    <span class="comment">// for the remainder of this example (whenever possible).</span>
+
+    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">max_arity</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;()</span> <span class="special">==</span> <span class="number">4</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">min_arity</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;()</span> <span class="special">==</span> <span class="number">3</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+
+    <span class="comment">// a quick way to check for a void return type</span>
+    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_void_return</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
+
+    <span class="comment">// C-style variadics detection (e.g. an ellipses in a signature)</span>
+    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_varargs</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
 
     <span class="keyword">int</span> <span class="identifier">i</span> <span class="special">=</span> <span class="number">0</span><span class="special">;</span>
 
-    <span class="comment">// callable_traits::can_invoke allows us to preview whether std::invoke will</span>
-    <span class="comment">// compile with the given arguments.</span>
+    <span class="comment">// <code class="literal">callable_traits::</code>can_invoke allows us to preview whether</span>
+    <span class="comment">// std::invoke would compile with the given arguments.</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{},</span> <span class="number">0</span><span class="special">,</span> <span class="number">0</span><span class="special">,</span> <span class="identifier">i</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
     <span class="comment">// no error:     std::invoke(foo{}, 0, 0, i);</span>
 
+    <span class="comment">// This call returns std::false_type, because it's an illegal call.</span>
     <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{},</span> <span class="keyword">nullptr</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
     <span class="comment">// error:         std::invoke(foo{}, nullptr);</span>
 
+    <span class="comment">// Note that since can_invoke models std::invoke,</span>
+    <span class="comment">// only a value-style function is defined.</span>
+
     <span class="comment">// For function objects, the following checks are determined by the</span>
-    <span class="comment">// qualifiers on operator(), rather than the category of the passed value.</span>
-    <span class="comment">// For member function pointers and abominable function types, the</span>
-    <span class="comment">// qualifiers on the function type are used.</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_const_qualified</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_volatile_qualified</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_reference_qualified</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_lvalue_qualified</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_rvalue_qualified</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
+    <span class="comment">// function qualifiers on operator(), rather than the qualifiers on</span>
+    <span class="comment">// of the type passed. This is done for consistency with member function</span>
+    <span class="comment">// pointers, where the checks below would look at the function qualifiers</span>
+    <span class="comment">// (rather than qualifiers on the pointer itself).</span>
+    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_const_qualified</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
+    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_volatile_qualified</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
+    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_reference_qualified</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
+    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_lvalue_qualified</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
+    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_rvalue_qualified</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
 
+    <span class="comment">// is_constexpr would return std::true_type if foo's operator() were constexpr.</span>
+    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
 
-    <span class="comment">// If you find yourself in the unfortunate situation of needing</span>
-    <span class="comment">// to manipulate member function pointer types, CallableTraits</span>
-    <span class="comment">// has all the tools you need to maintain your sanity.</span>
-
-
+    <span class="comment">// The same check can be performed using std::integral_constant</span>
+    <span class="comment">// in conjunction with function addresses:</span>
     <span class="keyword">using</span> <span class="identifier">pmf</span> <span class="special">=</span> <span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">foo</span><span class="special">::</span><span class="keyword">operator</span><span class="special">());</span>
+    <span class="keyword">using</span> <span class="identifier">pmf_constant</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">,</span> <span class="special">&amp;</span><span class="identifier">foo</span><span class="special">::</span><span class="keyword">operator</span><span class="special">()&gt;;</span>
+    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">&lt;</span><span class="identifier">pmf_constant</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
 
-    <span class="comment">// So that you don't have to scroll back up to see, here's the type of pmf:</span>
+    <span class="comment">// So that you don't have to scroll to the top to check,</span>
+    <span class="comment">// here's the type of pmf for reference.</span>
     <span class="keyword">using</span> <span class="identifier">with_const</span> <span class="special">=</span> <span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*)</span> <span class="keyword">const</span><span class="special">;</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">,</span> <span class="identifier">with_const</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
-    <span class="comment">// Let's remove the const qualifier:</span>
+    <span class="comment">// If you find yourself in the unfortunate-and-probably-avoidable</span>
+    <span class="comment">// situation of needing to transform member function pointer</span>
+    <span class="comment">// types, <code class="literal">CallableTraits</code> has all the tools you need to prolong</span>
+    <span class="comment">// your sanity.</span>
+
+    <span class="comment">// <code class="literal">CallableTraits</code> lets you manipulate qualifiers on PMF types.</span>
+    <span class="comment">// To remove const:</span>
     <span class="keyword">using</span> <span class="identifier">mutable_pmf</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_function_const</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
     <span class="keyword">using</span> <span class="identifier">without_const</span> <span class="special">=</span> <span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*)</span> <span class="comment">/*no const!*/</span><span class="special">;</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">mutable_pmf</span><span class="special">,</span> <span class="identifier">without_const</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
-    <span class="comment">// Now let's add an rvalue qualifier (&amp;&amp;):</span>
+    <span class="comment">// To add an rvalue qualifier:</span>
     <span class="keyword">using</span> <span class="identifier">rvalue_pmf</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_function_rvalue</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
     <span class="keyword">using</span> <span class="identifier">with_rvalue</span> <span class="special">=</span> <span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*)</span> <span class="keyword">const</span> <span class="special">&amp;&amp;;</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">rvalue_pmf</span><span class="special">,</span> <span class="identifier">with_rvalue</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
-    <span class="comment">// You get the picture. CallableTraits lets you add and remove all PMF</span>
-    <span class="comment">// qualifiers (const, volatile, &amp;, &amp;&amp;, and any combination thereof).</span>
-    <span class="comment">// These type operations can generally be performed on abominable function</span>
-    <span class="comment">// types as well.</span>
+    <span class="comment">// Just like std::add_rvalue_reference, <code class="literal">callable_traits::</code>add_function_rvalue</span>
+    <span class="comment">// follows C++11 reference collapsing rules. While remove_function_const</span>
+    <span class="comment">// and add_function_rvalue are somewhat clumsy names, they are the best</span>
+    <span class="comment">// the best the author could provide while still allowing both terseness</span>
+    <span class="comment">// and grep-ability against std::remove_const, etc. in &lt;type_traits&gt;.</span>
+    <span class="comment">// Naturally, <code class="literal">CallableTraits</code> provides similar tools for the other C++</span>
+    <span class="comment">// function qualifiers. Head to the reference section of this documentation</span>
+    <span class="comment">// for more examples.</span>
 
-    <span class="comment">// is_constexpr would return std::true_type if foo's operator() were constexpr.</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
+    <span class="comment">// To remove a member pointer:</span>
+    <span class="keyword">using</span> <span class="identifier">fn</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_member_pointer</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
+    <span class="keyword">using</span> <span class="identifier">expected_fn</span> <span class="special">=</span> <span class="keyword">void</span> <span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*)</span> <span class="keyword">const</span><span class="special">;</span>
+    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">fn</span><span class="special">,</span> <span class="identifier">expected_fn</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
-    <span class="comment">// to check constexprness of a function or member function, you must use an</span>
-    <span class="comment">// std::integral_constant, like this:</span>
-    <span class="keyword">using</span> <span class="identifier">pmf_constant</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">,</span> <span class="special">&amp;</span><span class="identifier">foo</span><span class="special">::</span><span class="keyword">operator</span><span class="special">()&gt;;</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">(</span><span class="identifier">pmf_constant</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
+    <span class="comment">// We just created an abominable function type - notice the const</span>
+    <span class="comment">// qualifier! libnsremove_function_const accepts abominable</span>
+    <span class="comment">// types too (and so does any feature where it is legal to do so):</span>
+    <span class="keyword">using</span> <span class="identifier">not_abominable</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_function_const</span><span class="special">&lt;</span><span class="identifier">fn</span><span class="special">&gt;;</span>
+    <span class="keyword">using</span> <span class="identifier">expected_fn2</span> <span class="special">=</span> <span class="keyword">void</span> <span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*);</span>
+    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">not_abominable</span><span class="special">,</span> <span class="identifier">expected_fn2</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 <span class="special">}</span>
 </pre>
+</div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="callable_traits.introduction.motivation"></a><a class="link" href="index.html#callable_traits.introduction.motivation" title="Motivation">Motivation</a>
 </h3></div></div></div>
 <p>
-        The complexity of callable types in C++ is extensive:
+        Several library solutions exist to manipulate functions or callable types.
+        However, none of these are comprehensive, and many of them have not aged
+        well with the advent of modern C++. <code class="literal">CallableTraits</code> fills
+        the gaps found in existing solutions, and improves upon them wherever possible.
       </p>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
-<li class="listitem">
-            function types
-          </li>
-<li class="listitem">
-            function pointers
-          </li>
-<li class="listitem">
-            function references
-          </li>
-<li class="listitem">
-            objects with <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
-          </li>
-<li class="listitem">
-            objects with function pointer conversions
-          </li>
-<li class="listitem">
-            <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0172r0.html" target="_top">"abominable"</a>
-            function types
-          </li>
-<li class="listitem">
-            pointers to member data
-          </li>
-<li class="listitem">
-            pointers to member functions
-          </li>
-<li class="listitem">
-            qualified overloads of member functions: <code class="computeroutput"><span class="keyword">const</span></code>,
-            <code class="computeroutput"><span class="keyword">volatile</span></code>, <code class="computeroutput"><span class="special">&amp;</span></code>, <code class="computeroutput"><span class="special">&amp;&amp;</span></code>
-          </li>
-<li class="listitem">
-            C-style varargs (<code class="computeroutput"><span class="special">...</span></code>)
-          </li>
-<li class="listitem">
-            calling conventions/attributes (<code class="computeroutput"><span class="identifier">__cdecl</span></code>,
-            <code class="computeroutput"><span class="identifier">__stdcall</span></code>, <code class="computeroutput"><span class="identifier">__fastcall</span></code>, <code class="computeroutput"><span class="identifier">pascal</span></code>,
-            etc.)
-          </li>
-<li class="listitem">
-            <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html" target="_top"><code class="literal">noexcept</code></a>
-          </li>
-</ul></div>
 <p>
-        <code class="literal">CallableTraits</code> provides a comprehensive, uniform, and
-        modern type-level interface for the manipulation and inspection of callable
-        types in C++. By filling the gaps where existing library solutions fall short,
-        <code class="literal">CallableTraits</code> aims to provide such an exhaustive interface
-        for the features listed above that library writers will <span class="bold"><strong>never
-        again</strong></span> need to specialize templates for callable types. <code class="literal">CallableTraits</code>
-        eliminates the need for horrific template specializations like these:
+        Consider for a moment this rather hideous template specialization:
       </p>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Ret</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Ret</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;&gt;{</span>
-                <span class="comment">//...</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;&gt;</span> <span class="special">{</span>
+    <span class="comment">//...</span>
 <span class="special">};</span>
 </pre>
 <p>
-        Several library solutions exist to manipulate these types, or to abstract
-        away their complexities. However, these solutions are occasionally inflexible
-        or lacking in features, especially regarding function objects/lambdas. In
-        <code class="literal">CallableTraits</code>, function pointers, function references,
-        function types, abominable function types, member function pointers, member
-        data pointers, function objects/lambdas, and references/pointers/smart pointers
-        thereof are generally interchangeable.
+        Potential use cases for such obscure specializations are vitually nonexistent
+        in run-of-the-mill C++ application codebases. Even in library code, these
+        are exceedingly rare. However, there are a handful of specific problems in
+        C++ that cannot be solved by any other means. While rare, a correct and generic
+        implementation of these templates is tedious and time consuming. <code class="literal">CallableTraits</code>
+        premises that these rare cases necessitate a library solution. One goal of
+        <code class="literal">CallableTraits</code> is to <span class="bold"><strong>completely
+        and decisively eliminate the need for function signature template specializations</strong></span>.
+        To the knowledge of the author, <code class="literal">CallableTraits</code> is the
+        first and only library solution to attempt this.
       </p>
 <p>
         The use cases for <code class="literal">CallableTraits</code> are closely related to
@@ -298,69 +353,310 @@
 <th align="left">Important</th>
 </tr>
 <tr><td align="left" valign="top"><p>
-          The upcoming C++17 ISO standard brings a language change that adds <code class="computeroutput"><span class="keyword">noexcept</span></code> to signatures. Currently, this
-          is not handled in <code class="literal">CallableTraits</code>, but will be in the
-          future for platforms that support it.
+          The upcoming C++17 ISO standard includes a <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html" target="_top">change
+          to the core language</a> which adds <code class="literal">noexcept</code> to
+          function signatures. Currently, this is not handled in <code class="literal">CallableTraits</code>.
+          New features to account for this change are planned in <code class="literal">CallableTraits</code>,
+          which the author intends to add, with regard for backwards compatibility,
+          as soon as the language change is implemented in a major compiler.
         </p></td></tr>
 </table></div>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="callable_traits.introduction.ten_reasons"></a><a class="link" href="index.html#callable_traits.introduction.ten_reasons" title="10 reasons to use CallableTraits">10 reasons
-      to use <code class="literal">CallableTraits</code></a>
+<a name="callable_traits.introduction.basic_concepts"></a><a class="link" href="index.html#callable_traits.introduction.basic_concepts" title="Concept Definitions">Concept
+      Definitions</a>
 </h3></div></div></div>
-<div class="orderedlist"><ol class="orderedlist" type="1">
+<h5>
+<a name="callable_traits.introduction.basic_concepts.h0"></a>
+        <span class="phrase"><a name="callable_traits.introduction.basic_concepts.fn_ptr"></a></span><a class="link" href="index.html#callable_traits.introduction.basic_concepts.fn_ptr"><span class="green">FunctionPtr</span></a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-            <code class="literal">CallableTraits</code>' template aliases and <code class="computeroutput"><span class="keyword">constexpr</span></code> <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span></code>
-            functions are preferable to <code class="computeroutput"><span class="keyword">typename</span>
-            <span class="identifier">foo</span><span class="special">::</span><span class="identifier">type</span></code> and <code class="computeroutput"><span class="identifier">foo</span><span class="special">::</span><span class="identifier">value</span></code>
+            Any function pointer type
           </li>
 <li class="listitem">
-            <code class="literal">CallableTraits</code> offers a familar, consistent interface
-            for the synthesis and decomposition of callable types
-            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-                  e.g. <code class="computeroutput"><span class="identifier">remove_function_const</span></code>
-                  parallels <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">remove_const</span></code>
+            May be cv-qualified and/or ref-qualified
+          </li>
+<li class="listitem">
+            e.g. <code class="computeroutput"><span class="keyword">void</span><span class="special">(*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
+          </li>
+</ul></div>
+<h5>
+<a name="callable_traits.introduction.basic_concepts.h1"></a>
+        <span class="phrase"><a name="callable_traits.introduction.basic_concepts.fn_ref"></a></span><a class="link" href="index.html#callable_traits.introduction.basic_concepts.fn_ref"><span class="green">FunctionReference</span></a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            Any function reference type
+          </li>
+<li class="listitem">
+            e.g. <code class="computeroutput"><span class="keyword">void</span><span class="special">(&amp;)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
+          </li>
+</ul></div>
+<h5>
+<a name="callable_traits.introduction.basic_concepts.h2"></a>
+        <span class="phrase"><a name="callable_traits.introduction.basic_concepts.fn"></a></span><a class="link" href="index.html#callable_traits.introduction.basic_concepts.fn"><span class="green">Function</span></a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            Any unqualified function type
+          </li>
+<li class="listitem">
+            e.g. <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
+          </li>
+</ul></div>
+<h5>
+<a name="callable_traits.introduction.basic_concepts.h3"></a>
+        <span class="phrase"><a name="callable_traits.introduction.basic_concepts.abominable"></a></span><a class="link" href="index.html#callable_traits.introduction.basic_concepts.abominable"><span class="green">AbominableFunction</span></a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            Any qualified (a.k.a. <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0172r0.html" target="_top">"abominable"</a>)
+            function type
+          </li>
+<li class="listitem">
+            Not technically "callable", but still falls under the <code class="literal">CallableTraits</code>
+            umbrella
+          </li>
+<li class="listitem">
+            Mutually exclusive with <span class="green">Function</span>
+          </li>
+<li class="listitem">
+            e.g. <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span></code>
+          </li>
+</ul></div>
+<h5>
+<a name="callable_traits.introduction.basic_concepts.h4"></a>
+        <span class="phrase"><a name="callable_traits.introduction.basic_concepts.pmf"></a></span><a class="link" href="index.html#callable_traits.introduction.basic_concepts.pmf"><span class="green">MemberFunctionPtr</span></a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            Any pointer to member function type
+          </li>
+<li class="listitem">
+            The pointer type may be cv-qualified and/or ref-qualified
+          </li>
+<li class="listitem">
+            e.g. <code class="computeroutput"><span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
+          </li>
+</ul></div>
+<h5>
+<a name="callable_traits.introduction.basic_concepts.h5"></a>
+        <span class="phrase"><a name="callable_traits.introduction.basic_concepts.pmd"></a></span><a class="link" href="index.html#callable_traits.introduction.basic_concepts.pmd"><span class="green">MemberDataPtr</span></a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            Any pointer to data member type
+          </li>
+<li class="listitem">
+            The pointer type may be cv-qualified and/or ref-qualified
+          </li>
+<li class="listitem">
+            e.g. <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span></code>
+          </li>
+</ul></div>
+<h5>
+<a name="callable_traits.introduction.basic_concepts.h6"></a>
+        <span class="phrase"><a name="callable_traits.introduction.basic_concepts.simple_fn_obj"></a></span><a class="link" href="index.html#callable_traits.introduction.basic_concepts.simple_fn_obj"><span class="green">SimpleFunctionObject</span></a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            Any class/struct with a <span class="emphasis"><em>non-templated, non-overloaded</em></span>
+            function call operator
+          </li>
+<li class="listitem">
+            Includes non-generic lambda types
+          </li>
+<li class="listitem">
+            May be cv-qualified and/or ref-qualified.
+          </li>
+<li class="listitem">
+            Mutually exclusive with <span class="green">OverloadedFunctionObject</span>
+          </li>
+<li class="listitem">
+            e.g. the type of this lambda: <code class="computeroutput"><span class="special">[](</span><span class="keyword">int</span> <span class="identifier">x</span><span class="special">,</span> <span class="keyword">int</span> <span class="identifier">y</span><span class="special">)</span> <span class="special">{</span> <span class="keyword">return</span> <span class="identifier">x</span> <span class="special">+</span> <span class="identifier">y</span><span class="special">;</span> <span class="special">}</span></code>
+          </li>
+</ul></div>
+<h5>
+<a name="callable_traits.introduction.basic_concepts.h7"></a>
+        <span class="phrase"><a name="callable_traits.introduction.basic_concepts.overloaded_fn_obj"></a></span><a class="link" href="index.html#callable_traits.introduction.basic_concepts.overloaded_fn_obj"><span class="green">OverloadedFunctionObject</span></a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            Any class/struct with a <span class="emphasis"><em>templated or overloaded</em></span>
+            function call operator, with the following limitation for those with
+            templated function call operators (which includes generic lambdas):
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+                  If templated , all instantiations must be <a href="http://stackoverflow.com/questions/35033306/what-does-it-mean-when-one-says-something-is-sfinae-friendly" target="_top">SFINAE-friendly</a>,
+                  and must not use <a href="http://en.cppreference.com/w/cpp/language/dependent_name" target="_top">dependent
+                  names</a>, except where the dependent "names" are
+                  C++ operators.
                 </li></ul></div>
           </li>
 <li class="listitem">
-            universal references are accepted everywhere, so you don't need to worry
-            about using <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">remove_reference</span></code> first
+            May be cv-qualified and/or ref-qualified
           </li>
 <li class="listitem">
-            function object pointers/ pointers are accepted (when <code class="computeroutput"><span class="identifier">INVOKE</span></code>
-            is not an immediate concern)
+            e.g. the type of this generic lambda: <code class="computeroutput"><span class="special">[](</span><span class="keyword">auto</span> <span class="identifier">x</span><span class="special">,</span> <span class="keyword">auto</span> <span class="identifier">y</span><span class="special">)</span> <span class="special">{</span> <span class="keyword">return</span> <span class="identifier">x</span> <span class="special">+</span> <span class="identifier">y</span><span class="special">;</span> <span class="special">}</span></code>
           </li>
+</ul></div>
+<div class="warning"><table border="0" summary="Warning">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Warning]" src="../../../../doc/src/images/warning.png"></td>
+<th align="left">Warning</th>
+</tr>
+<tr><td align="left" valign="top"><p>
+          Generic lambdas or classes with templated function objects that are either
+          not SFINAE-friendly or rely on dependent names for template instantiations
+          are generally incompatible with <code class="literal">CallableTraits</code>.
+        </p></td></tr>
+</table></div>
+<h5>
+<a name="callable_traits.introduction.basic_concepts.h8"></a>
+        <span class="phrase"><a name="callable_traits.introduction.basic_concepts.fn_obj"></a></span><a class="link" href="index.html#callable_traits.introduction.basic_concepts.fn_obj"><span class="green">FunctionObject</span></a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            Any type that is either an <span class="green">OverloadedFunctionObject</span>
+            or a <span class="green">SimpleFunctionObject</span>
+          </li></ul></div>
+<h5>
+<a name="callable_traits.introduction.basic_concepts.h9"></a>
+        <span class="phrase"><a name="callable_traits.introduction.basic_concepts.callable"></a></span><a class="link" href="index.html#callable_traits.introduction.basic_concepts.callable"><span class="green">Callable</span></a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            The superset of the following:
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
-            <code class="computeroutput"><span class="identifier">arg_at</span><span class="special">&lt;</span><span class="number">2</span><span class="special">,</span> <span class="identifier">Callable</span><span class="special">&gt;</span></code> is better than <code class="computeroutput"><span class="keyword">typename</span>
-            <span class="identifier">function_traits</span><span class="special">&lt;</span><span class="identifier">Callable</span><span class="special">&gt;::</span><span class="identifier">arg2_type</span></code>
-          </li>
+                  <span class="green">FunctionPtr</span>
+                </li>
 <li class="listitem">
-            function objects are first-class citizens in <code class="literal">CallableTraits</code>
-            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-                  e.g. <code class="computeroutput"><span class="identifier">result_of</span></code>
-                  can accept a function object
-                </li></ul></div>
-          </li>
+                  <span class="green">FunctionReference</span>
+                </li>
 <li class="listitem">
-            <code class="computeroutput"><span class="identifier">is_constexpr</span></code> lets you
-            check whether a function, member function, or function object is <code class="computeroutput"><span class="keyword">constexpr</span></code>
-          </li>
+                  <span class="green">Function</span>
+                </li>
 <li class="listitem">
-            <code class="computeroutput"><span class="identifier">can_invoke</span></code> lets you test
-            <code class="computeroutput"><span class="identifier">INVOKE</span></code>-ability at compile-time
-            using value semantics
-          </li>
+                  <span class="green">AbominableFunction</span>
+                </li>
 <li class="listitem">
-            <code class="computeroutput"><span class="identifier">can_invoke_constexpr</span></code>
-            adds a <code class="computeroutput"><span class="keyword">constexpr</span></code>-ness check
-            to <code class="computeroutput"><span class="identifier">can_invoke</span></code>
-          </li>
+                  <span class="green">MemberFunctionPtr</span>
+                </li>
 <li class="listitem">
-            <code class="computeroutput"><span class="identifier">min_arity</span></code> can be used
-            to detect default arguments of a function object
-          </li>
-</ol></div>
+                  <span class="green">MemberDataPtr</span>
+                </li>
+<li class="listitem">
+                  <span class="green">FunctionObject</span>
+                </li>
+</ul></div>
+          </li></ul></div>
+<h5>
+<a name="callable_traits.introduction.basic_concepts.h10"></a>
+        <span class="phrase"><a name="callable_traits.introduction.basic_concepts.simple_callable"></a></span><a class="link" href="index.html#callable_traits.introduction.basic_concepts.simple_callable"><span class="green">SimpleCallable</span></a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            Includes all <span class="green">Callable</span> types, <span class="bold"><strong>except for <span class="green">OverloadedFunctionObject</span></strong></span>
+          </li></ul></div>
+<h5>
+<a name="callable_traits.introduction.basic_concepts.h11"></a>
+        <span class="phrase"><a name="callable_traits.introduction.basic_concepts.simple_invokable"></a></span><a class="link" href="index.html#callable_traits.introduction.basic_concepts.simple_invokable"><span class="green">SimpleInvokable</span></a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            Includes all <span class="green">Callable</span> types, <span class="bold"><strong>except for <span class="green">OverloadedFunctionObject</span>,
+            <span class="green">Function</span>, and <span class="green">AbominableFunction</span></strong></span>
+          </li></ul></div>
+<h5>
+<a name="callable_traits.introduction.basic_concepts.h12"></a>
+        <span class="phrase"><a name="callable_traits.introduction.basic_concepts.invokable"></a></span><a class="link" href="index.html#callable_traits.introduction.basic_concepts.invokable"><span class="green">Invokable</span></a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            Includes all <span class="green">Callable</span> types, <span class="bold"><strong>except for <span class="green">Function</span> and <span class="green">AbominableFunction</span></strong></span>
+          </li></ul></div>
+<h5>
+<a name="callable_traits.introduction.basic_concepts.h13"></a>
+        <span class="phrase"><a name="callable_traits.introduction.basic_concepts.constexpr_constructble"></a></span><a class="link" href="index.html#callable_traits.introduction.basic_concepts.constexpr_constructble">[constexpr_constructble]</a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            Any <a href="http://en.cppreference.com/w/cpp/concept/LiteralType" target="_top">LiteralType</a>
+            that is also default-constructible
+          </li></ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.introduction.reasons"></a><a class="link" href="index.html#callable_traits.introduction.reasons" title="Why use CallableTraits?">Why use <code class="literal">CallableTraits</code>?</a>
+</h3></div></div></div>
+<p>
+        <span class="bold"><strong>1.</strong></span> <code class="literal">CallableTraits</code> offers
+        template aliases such as <code class="computeroutput"><span class="identifier">remove_function_const</span></code>
+        for manipulating function qualifiers, designed to parallel the <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span></code> aliases such as <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">remove_const_t</span></code>.
+      </p>
+<p>
+        <span class="bold"><strong>2.</strong></span> <code class="literal">CallableTraits</code> is
+        designed to accept cv-qualified and ref-qualified types, which eliminates
+        the need to prepare template argument types with metafunctions such as <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">remove_reference</span></code>
+        and <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">decay</span></code>. This is especially useful when dealing
+        with perfectly-forwarded parameter types in function templates.
+      </p>
+<p>
+        <span class="bold"><strong>3.</strong></span> <code class="literal">CallableTraits</code> is
+        designed in terms of the <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top">INVOKE</a>
+        rules, with one unobtrusive and beneficial deviation: <span class="green">Function</span>
+        types and <span class="green">AbominableFunction</span> types are compatible
+        with all operations that do not specifically require an invocation.
+      </p>
+<p>
+        <span class="bold"><strong>4.</strong></span> <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">arg_at</span><span class="special">&lt;</span><span class="number">2</span><span class="special">,</span> <span class="identifier">Callable</span><span class="special">&gt;</span></code> is both more flexible and more readable
+        than <code class="computeroutput"><span class="keyword">typename</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">function_traits</span><span class="special">&lt;</span><span class="identifier">Callable</span><span class="special">&gt;::</span><span class="identifier">arg3_type</span></code>.
+      </p>
+<p>
+        <span class="bold"><strong>5.</strong></span> <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">can_invoke</span></code> can be used to test <code class="computeroutput"><span class="identifier">INVOKE</span></code>-ability at compile-time, with value
+        semantics. For the craziest metaprogrammers, <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">can_invoke_constexpr</span></code> does the same as
+        <code class="computeroutput"><span class="identifier">can_invoke</span></code> for <span class="green">ConstexprDefaultConstructible</span>
+        types, with an added check for <code class="computeroutput"><span class="keyword">constexpr</span></code>-ness
+        (Note: for <code class="computeroutput"><span class="identifier">can_invoke_constexpr</span></code>,
+        argument types must also be <span class="green">ConstexprDefaultConstructible</span>)
+      </p>
+<p>
+        <span class="bold"><strong>6.</strong></span> <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">is_constexpr</span></code> can be used to check whether
+        a <span class="green">ConstexprDefaultConstructible</span> type is a
+        <span class="green">Callable</span> type that yields a <code class="computeroutput"><span class="keyword">constexpr</span></code>
+        result -- no arguments necessary.
+      </p>
+<p>
+        <span class="bold"><strong>7.</strong></span> <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code> can be used by library writers to
+        easily accept <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">placeholder</span></code> expressions anywhere, without
+        requiring the user to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>
+        them first. Library writers can then decide to use <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>,
+        <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span></code>, or whatever implementation suits
+        their needs. Either way, it allows for the creation of more flexible APIs,
+        where a function template taking a "callable type" can be overloaded
+        to also accept placeholder expressions. It's perhaps a small improvement
+        from requiring <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code> first, but in API design, even the
+        smallest things count.
+      </p>
+<p>
+        <span class="bold"><strong>8.</strong></span> <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">min_arity</span></code> can be used to detect the presence
+        of default arguments on a <span class="green">SimpleFunctionObject</span>
+      </p>
+<p>
+        <span class="bold"><strong>9.</strong></span> The <code class="literal">CallableTraits</code>
+        interface mainly consists of template aliases and <code class="computeroutput"><span class="keyword">constexpr</span>
+        <span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span></code> functions, which are
+        arguably preferable to <code class="computeroutput"><span class="keyword">typename</span> <span class="identifier">foo</span><span class="special">::</span><span class="identifier">type</span></code>
+        and <code class="computeroutput"><span class="identifier">foo</span><span class="special">::</span><span class="identifier">value</span></code>. While the <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span></code>
+        functions in <code class="literal">CallableTraits</code> may be a deviation from traditional
+        type trait designs, they facilitate a metaprogramming style that uses value-semantics
+        (a la <a href="https://boostorg.github.io/hana/" target="_top"><code class="literal">Boost.Hana</code></a>).
+        The functions can generally be used with either types or values, which eliminates
+        unnecessary <code class="computeroutput"><span class="keyword">decltype</span></code> usage.
+      </p>
+<p>
+        <span class="bold"><strong>10.</strong></span> <code class="literal">CallableTraits</code> includes
+        optional features for the manipulation and inspection of calling conventions.
+        These features are currently deemed experimental, because they greatly increase
+        the test surface of <code class="literal">CallableTraits</code>, are platform-specific,
+        and are not yet fully tested on any platform.
+      </p>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
@@ -368,12 +664,12 @@
       <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code> sugar</a>
 </h3></div></div></div>
 <p>
-        At the time of this writing, there are 260 <a href="http://stackoverflow.com/search?q=convert+std%3A%3Abind+to+std%3A%3Afunction" target="_top">search
+        At the time of this writing, there are around 260 <a href="http://stackoverflow.com/search?q=convert+std%3A%3Abind+to+std%3A%3Afunction" target="_top">search
         results</a> on Stack Overflow concerning the conversion from <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>
-        to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code>. There are 336 <a href="http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction" target="_top">search
+        to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code>. There are roughly 340 <a href="http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction" target="_top">search
         results</a> concerning the conversion of lambdas to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code>.
-        With this example, we'll kill both birds with the same stone. The <code class="computeroutput"><span class="identifier">make_function</span></code> function defined below will
-        leverage <code class="literal">CallableTraits</code> to...
+        In the example below, we'll kill both birds with the same stone. The <code class="computeroutput"><span class="identifier">make_function</span></code> function will leverage <code class="literal">CallableTraits</code>
+        to...
       </p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -400,7 +696,7 @@
 
     <span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
 
-    <span class="comment">//make_function turns a non-overloaded callable into a type-erased std::function object</span>
+    <span class="comment">// make_function turns a non-overloaded callable into a type-erased std::function object</span>
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">inline</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span> <span class="identifier">make_function</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;</span> <span class="identifier">t</span><span class="special">)</span> <span class="special">{</span>
 
@@ -412,11 +708,11 @@
         <span class="keyword">return</span> <span class="identifier">result_type</span><span class="special">{</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">forward</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;(</span><span class="identifier">t</span><span class="special">)</span> <span class="special">};</span>
     <span class="special">}</span>
 
-    <span class="comment">//this make_function overload turns a bind expression into a type-erased std::function object</span>
+    <span class="comment">// this make_function overload turns a bind expression into a type-erased std::function object</span>
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">First</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Others</span><span class="special">&gt;</span>
     <span class="keyword">inline</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span> <span class="identifier">make_function</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;</span> <span class="identifier">t</span><span class="special">,</span> <span class="identifier">First</span><span class="special">&amp;&amp;</span> <span class="identifier">first</span><span class="special">,</span> <span class="identifier">Others</span><span class="special">&amp;&amp;...</span> <span class="identifier">others</span><span class="special">)</span> <span class="special">{</span>
 
-        <span class="comment">// callable_traits::bind is essentially a compile-time parser of placeholders</span>
+        <span class="comment">// callable_traits::bind is essentially a compile-time parser of placeholder</span>
         <span class="comment">// expressions, for the purpose of retaining more type information than</span>
         <span class="comment">// std::bind normally allows - specifically, callable_traits::bind is used to</span>
         <span class="comment">// determine the de-facto signature of the std::bind return type, with special</span>

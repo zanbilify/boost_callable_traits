@@ -5,7 +5,7 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 ->*/
 
-//[ changing_calling_conventions
+//[ experimental_changing_calling_conventions
 #define CALLABLE_TRAITS_ENABLE_STDCALL
 #define CALLABLE_TRAITS_ENABLE_FASTCALL
 

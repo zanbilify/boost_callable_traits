@@ -36,7 +36,7 @@ shift 2
 echo $@
 
 # run cmake, expanding the remaining arguments
-echo cmake ${project_dir}  "$@"
+echo cmake ${project_dir}  "$@" 
 cmake ${project_dir}  "$@"
 
 
