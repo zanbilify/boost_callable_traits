@@ -29,7 +29,6 @@ int main() {
     auto lamda = [](int, float&, const char*){};
     using lam = decltype(lamda);
     test<lam>();
-    test<lam*>();
     test<lam&>();
     test<lam&&>();
     test<lam const &>();

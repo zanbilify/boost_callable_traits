@@ -55,11 +55,11 @@ int main() {
 
     {
         auto b = ct::bind(
-            &foo,
-            ct::bind(&take_vampire, _1),
-            ct::bind(&take_robot, _1),
-            ct::bind(&take_dog, _1),
-            ct::bind(&take_vampire_robot_poodle, _1)
+            foo,
+            ct::bind(take_vampire, _1),
+            ct::bind(take_robot, _1),
+            ct::bind(take_dog, _1),
+            ct::bind(take_vampire_robot_poodle, _1)
         );
 
         using args = ct::args<decltype(b)>;
@@ -72,11 +72,11 @@ int main() {
 
     {
         auto b = ct::bind(
-            &foo,
-            ct::bind(&take_vampire_robot_poodle, _1),
-            ct::bind(&take_vampire, _1),
-            ct::bind(&take_robot, _1),
-            ct::bind(&take_dog, _1)
+            foo,
+            ct::bind(take_vampire_robot_poodle, _1),
+            ct::bind(take_vampire, _1),
+            ct::bind(take_robot, _1),
+            ct::bind(take_dog, _1)
         );
 
         using args = ct::args<decltype(b)>;

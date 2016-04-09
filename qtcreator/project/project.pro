@@ -1,4 +1,4 @@
 TEMPLATE = aux
 CONFIG -= qt
 
-OTHER_FILES += ../../doc/*
+OTHER_FILES += ../../*

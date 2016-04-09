@@ -5,7 +5,7 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 ->*/
 
-//[ calling_convention_cdecl
+//[ experimental_calling_convention_cdecl
 
 #define CALLABLE_TRAITS_ENABLE_CDECL
 

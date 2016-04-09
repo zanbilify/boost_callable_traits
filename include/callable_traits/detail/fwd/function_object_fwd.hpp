@@ -10,13 +10,49 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_FWD_FUNCTION_OBJECT_FWD_HPP
 #define CALLABLE_TRAITS_DETAIL_FWD_FUNCTION_OBJECT_FWD_HPP
 
+#include <callable_traits/detail/utility.hpp>
+#include <callable_traits/detail/pmf.hpp>
+
 namespace callable_traits {
 
     namespace detail {
 
         template<typename T>
-        struct function_object;
+        struct has_normal_call_operator
+        {
+            template<typename N, N Value> struct check { check(std::nullptr_t) {} };
 
+            template<typename U>
+            static std::int8_t test(check<decltype(&U::operator()), &U::operator()>);
+
+            template<typename>
+            static std::int16_t test(...);
+
+            static constexpr bool value = sizeof(test<T>(nullptr)) == sizeof(std::int8_t);
+
+        };
+
+        struct callable_dummy {
+            void operator()() {}
+        };
+
+        template<typename T>
+        using default_to_function_object = typename std::conditional<
+            has_normal_call_operator<T>::value,
+            T,
+            callable_dummy
+        >::type;
+
+        template<typename T>
+        using function_object_base = typename std::conditional<
+            has_normal_call_operator<T>::value,
+            pmf<decltype(&default_to_function_object<T>::operator())>,
+            default_callable_traits
+        >::type;
+
+        //Base is defaulted
+        template<typename T, typename Base = function_object_base<shallow_decay<T>>>
+        struct function_object;
     }
 }
 

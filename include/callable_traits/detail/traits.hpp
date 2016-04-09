@@ -10,8 +10,6 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_TRAITS_HPP
 #define CALLABLE_TRAITS_DETAIL_TRAITS_HPP
 
-
-#include <callable_traits/detail/generalized_class.hpp>
 #include <callable_traits/detail/utility.hpp>
 #include <callable_traits/detail/fwd/pmd_fwd.hpp>
 #include <callable_traits/detail/fwd/pmf_fwd.hpp>
@@ -32,14 +30,14 @@ namespace callable_traits {
             T
         >::type;
 
-        template<typename T>
+        template<typename T, typename Decayed = shallow_decay<T>>
         using traits = typename disjunction<
-            bind_expression_traits<shallow_decay<T>>,
-            function_object<generalized_class<T>>,
+            bind_expression_traits<Decayed>,
+            function_object<T>,
             function<decay_if_ptr_or_integral_constant<T>>,
-            pmf<shallow_decay<T>>,
-            pmd<shallow_decay<T>>,
-            function_object<generalized_class<T>>
+            pmf<Decayed>,
+            pmd<Decayed>,
+            function_object<Decayed>
         >::traits;
     }
 }
