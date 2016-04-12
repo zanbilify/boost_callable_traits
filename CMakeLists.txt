@@ -112,7 +112,6 @@ add_custom_target(check
 
 add_subdirectory(example)
 add_subdirectory(test)
-add_subdirectory(doc)
 
 ##############################################################################
 # Setup the 'install' target.
