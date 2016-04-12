@@ -207,7 +207,7 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
 [heading:ref_invokable [concept_invokable]]
 * Includes all [link_callable] types, [*except] for [link_fn] and [link_abominable]
 
-[heading:ref_constexpr_constructble [constexpr_constructble]]
+[heading:ref_constexpr_constructble [concept_constexpr_constructble]]
 * Any [@http://en.cppreference.com/w/cpp/concept/LiteralType LiteralType] that is also default-constructible
 
 [endsect]

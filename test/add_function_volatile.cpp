@@ -35,6 +35,8 @@ int main() {
 
 		CT_ASSERT(std::is_same<v,   ct::add_function_volatile<f>>{});
 		CT_ASSERT(std::is_same<v,   ct::add_function_volatile<v>>{});
+        CT_ASSERT(std::is_same<vl,   ct::add_function_volatile<l>>{});
+        CT_ASSERT(std::is_same<vl,   ct::add_function_volatile<vl>>{});
 		CT_ASSERT(std::is_same<vr,  ct::add_function_volatile<r>>{});
 		CT_ASSERT(std::is_same<vr,  ct::add_function_volatile<vr>>{});
 		CT_ASSERT(std::is_same<cv,  ct::add_function_volatile<c>>{});
@@ -59,15 +61,17 @@ int main() {
 		using cvl = foo() const volatile &;
 		using cvr = foo() const volatile &&;
 
-		CT_ASSERT(std::is_same<v,   ct::add_function_volatile<f>>{});
-		CT_ASSERT(std::is_same<v,   ct::add_function_volatile<v>>{});
-		CT_ASSERT(std::is_same<vr,  ct::add_function_volatile<r>>{});
-		CT_ASSERT(std::is_same<vr,  ct::add_function_volatile<vr>>{});
-		CT_ASSERT(std::is_same<cv,  ct::add_function_volatile<c>>{});
-		CT_ASSERT(std::is_same<cv,  ct::add_function_volatile<cv>>{});
-		CT_ASSERT(std::is_same<cvl, ct::add_function_volatile<cl>>{});
-		CT_ASSERT(std::is_same<cvl, ct::add_function_volatile<cvl>>{});
-		CT_ASSERT(std::is_same<cvr, ct::add_function_volatile<cr>>{});
-		CT_ASSERT(std::is_same<cvr, ct::add_function_volatile<cvr>>{});
+        CT_ASSERT(std::is_same<v,   ct::add_function_volatile<f>>{});
+        CT_ASSERT(std::is_same<v,   ct::add_function_volatile<v>>{});
+        CT_ASSERT(std::is_same<vl,   ct::add_function_volatile<l>>{});
+        CT_ASSERT(std::is_same<vl,   ct::add_function_volatile<vl>>{});
+        CT_ASSERT(std::is_same<vr,  ct::add_function_volatile<r>>{});
+        CT_ASSERT(std::is_same<vr,  ct::add_function_volatile<vr>>{});
+        CT_ASSERT(std::is_same<cv,  ct::add_function_volatile<c>>{});
+        CT_ASSERT(std::is_same<cv,  ct::add_function_volatile<cv>>{});
+        CT_ASSERT(std::is_same<cvl, ct::add_function_volatile<cl>>{});
+        CT_ASSERT(std::is_same<cvl, ct::add_function_volatile<cvl>>{});
+        CT_ASSERT(std::is_same<cvr, ct::add_function_volatile<cr>>{});
+        CT_ASSERT(std::is_same<cvr, ct::add_function_volatile<cvr>>{});
 	}
 }
