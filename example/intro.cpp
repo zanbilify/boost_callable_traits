@@ -47,7 +47,7 @@ int main() {
 
     // Attentive readers might notice that the type of the foo{}
     // expression above is foo&&, rather than foo. Indeed,
-    // ``libname`` is designed to also allow both ref-qualified
+    // ``[libname]`` is designed to also allow both ref-qualified
     // and cv-qualified arguments across the board:
 
     static_assert(ct::arity<foo&&>() == 4, "");

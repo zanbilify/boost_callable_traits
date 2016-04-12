@@ -45,6 +45,7 @@ goto main_logic
     )
 
     @echo on
+    make doc
     make check
     @echo off
 

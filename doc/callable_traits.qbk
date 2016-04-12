@@ -22,6 +22,34 @@
 [template detail_close_include[]`.hpp>`]
 [template include_header[name][detail_open_include][^[name]][detail_close_include][br]]
 [template invoke[][@http://en.cppreference.com/w/cpp/utility/functional/invoke INVOKE]]
+[template hana[][@https://boostorg.github.io/hana/ [^Boost.Hana]]]
+[template feedback[][link callable_traits.contact feedback]]
+[template repo[][@https://github.com/badair/callable_traits GitHub]]
+
+[template cc_warning_rationale[]
+The rationale for classifying the calling convention features as "experimental" is three-fold:
+
+1. Calling conventions are, by definition, highly platform-specific
+2. The inclusion of a single calling convention effectively doubles the test surface of [libname] ['on every platform]
+3. The author's current knowledge of calling conventions is admittedly limited
+
+It is the author's hope that future versions of [libname] will offer a stable, thoroughly-tested, and well-documented implementation of these features. If you have experience in this domain, your [feedback] is ['highly] appreciated.
+]
+
+[template cc_warning_full[]
+[warning Features for the manipulation and inspection of calling conventions are optional, which must be enabled with macro definitions. The features regarding them are currently classified as ['experimental], and are subject to breaking changes in future versions of [libname].
+
+[cc_warning_rationale]
+]
+]
+
+[template cc_warning_brief[]
+[warning Features for calling conventions are currently classified as ['experimental], and are subject to breaking changes in future versions of [libname].
+
+[cc_warning_rationale]
+]
+]
+
 
 [/ *** concepts *** ]
 
@@ -41,7 +69,6 @@
 [template invokable[][role green Invokable]]
 [template constexpr_constructible[][role green ConstexprDefaultConstructible]]
 
-
 [section:introduction Introduction]
 
 [libname] provides a comprehensive, uniform, and modern type-level interface for the inspection, decomposition, and synthesis of C++ callable types. This documentation will be most beneficial to readers with a basic understanding of the syntax and usage of the following C++ features:
@@ -59,38 +86,41 @@
 * [@http://en.cppreference.com/w/cpp/language/member_functions#const-.2C_volatile-.2C_and_ref-qualified_member_functions cv-qualified and ref-qualified member functions]
 * [@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0172r0.html "abominable" function types]
 * [@http://en.cppreference.com/w/cpp/language/overloaded_address taking the address of an overloaded function]
-* [@http://en.cppreference.com/w/c/language/variadic C-style variadics], a.k.a. `varargs`
+* [@http://en.cppreference.com/w/c/language/variadic C-style variadics], a.k.a. varargs
 * [@https://en.wikipedia.org/wiki/X86_calling_conventions calling conventions]
+
+The [libname] development repository is hosted at [repo].
+
+[section:motivation Motivation]
+
+Consider for a moment the class template below, which defines all [role red[*48]] template specializations necessary to account for all valid function types and member function pointer types in C++11 and C++14:
+
+[import ./hideous_template.snippet.cpp]
+[hideous_template]
+
+[note The upcoming ISO standard for C++17 includes a [@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html change to the core language] which adds the [^noexcept] qualifier to the type system. If the author's understanding is correct, this would increase the the count of necessary template specializations to [role red[*96]] ([feedback]?). Currently, C++17 `noexcept` qualifiers are not handled in [libname], because compiler vendors have not implemented support for this feature (to best of the author's knowledge). However, features to account for and manipulate `noexcept` qualifiers are planned in [libname], as soon as feature is implemented by a compiler vendor. Of course, the [libname] feature additions will be non-breaking for currently supported compiler versions.]
+
+Potential use cases for such obscure specializations are vitually nonexistent in run-of-the-mill C++ application codebases. Even in library code, these are exceedingly rare. However, there are a handful of very specific metaprogramming use cases in C++ that can only be solved with such template "spam". While these use cases are indeed rare, the writing and testing of these templates is incredibly tedious and time consuming. On this premise, [libname] offers a final and decisive library-level solution, so that the authors of generic code will *never again* need to write these specializations.
+
+Template specializations like those in the code snippet above ['still] do not account for function pointers, function references, function objects/lambdas, or calling conventions. [libname] goes the extra mile by accounting for all of them.
+
+[cc_warning_full]
+
+The use cases for [libname] are closely related to those of [@http://www.boost.org/doc/libs/1_60_0/libs/type_traits/doc/html/boost_typetraits/reference/function_traits.html function_traits] and [@http://www.boost.org/doc/libs/1_60_0/libs/function_types/doc/html/index.html FunctionTypes].
+
+[endsect]
 
 [section Quick Example]
 [import ../example/intro.cpp]
 [intro]
 [endsect]
 
-[section:motivation Motivation]
-
-Several library solutions exist to manipulate functions or callable types. However, none of these are comprehensive, and many of them have not aged well with the advent of modern C++. [libname] fills the gaps found in existing solutions, and improves upon them wherever possible.
-
-Consider for a moment this rather hideous template specialization:
-
-
-[import ./hideous_template.snippet.cpp]
-[hideous_template]
-
-Potential use cases for such obscure specializations are vitually nonexistent in run-of-the-mill C++ application codebases. Even in library code, these are exceedingly rare. However, there are a handful of  specific problems in C++ that cannot be solved by any other means. While rare, a correct and generic implementation of these templates is tedious and time consuming. [libname] premises that these rare cases necessitate a library solution. One goal of [libname] is to [*completely and decisively eliminate the need for function signature template specializations]. To the knowledge of the author, [libname] is the first and only library solution to attempt this.
-
-The use cases for [libname] are closely related to those of [@http://www.boost.org/doc/libs/1_60_0/libs/type_traits/doc/html/boost_typetraits/reference/function_traits.html function_traits] and [@http://www.boost.org/doc/libs/1_60_0/libs/function_types/doc/html/index.html FunctionTypes].
-
-[important The upcoming C++17 ISO standard includes a [@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html change to the core language] which adds [^noexcept] to function signatures. Currently, this is not handled in [libname]. New features to account for this change are planned in [libname], which the author intends to add, with regard for backwards compatibility, as soon as the language change is implemented in a major compiler. ]
-
-[endsect]
-
 [section:basic_concepts Concept Definitions]
 
 [heading [fn_ptr]]
 * Any function pointer type
-* May be cv-qualified and/or ref-qualified
-* e.g. `void(*)(int, int)`
+* the pointer may be cv-qualified and/or ref-qualified
+* e.g. `void(*)(int, int)` or `void(* const &)(int, int)`
 
 [heading [fn_ref]]
 * Any function reference type
@@ -125,7 +155,7 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
 
 [heading [overloaded_fn_obj]]
 * Any class/struct with a ['templated or overloaded] function call operator, with the following limitation for those with templated function call operators (which includes generic lambdas):
-  * If templated , all instantiations must be [@http://stackoverflow.com/questions/35033306/what-does-it-mean-when-one-says-something-is-sfinae-friendly SFINAE-friendly], and must not use [@http://en.cppreference.com/w/cpp/language/dependent_name dependent names], except where the dependent "names" are C++ operators.
+  * If templated , all instantiations must be [@http://stackoverflow.com/questions/35033306/what-does-it-mean-when-one-says-something-is-sfinae-friendly SFINAE-friendly], and must not use [@http://en.cppreference.com/w/cpp/language/indent_name dependent names], except where the dependent "names" are C++ operators.
 * May be cv-qualified and/or ref-qualified
 * e.g. the type of this generic lambda: `[](auto x, auto y) { return x + y; }`
 
@@ -172,11 +202,11 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
 
 [*6.] [libns]`is_constexpr` can be used to check whether a [constexpr_constructible] type is a [callable] type that yields a `constexpr` result -- no arguments necessary.
 
-[*7.] [libns]`bind` can be used by library writers to easily accept `std::placeholder` expressions anywhere, without requiring the user to `std::bind` them first. Library writers can then decide to use `std::bind`, `boost::bind`, or whatever implementation suits their needs. Either way, it allows for the creation of more flexible APIs, where a function template taking a "callable type" can be overloaded to also accept placeholder expressions. It's perhaps a small improvement from requiring `std::bind` first, but in API design, even the smallest things count.
+[*7.] [libns]`bind` can be used by library writers to easily accept `std::placeholder` expressions anywhere, and "intercept" the type information before forwarding to `std::bind` or `boost::bind`. This allows for more flexible APIs, where a function template taking a "callable type" can be overloaded to also accept placeholder expressions. It's perhaps a small improvement from requiring `std::bind` first, but in API design, even the smallest things count. See
 
 [*8.] [libns]`min_arity` can be used to detect the presence of default arguments on a [simple_fn_obj]
 
-[*9.] The [libname] interface mainly consists of template aliases and `constexpr std::integral_constant` functions, which are arguably preferable to `typename foo::type` and `foo::value`. While the `std::integral_constant` functions in [libname] may be a deviation from traditional type trait designs, they facilitate a metaprogramming style that uses value-semantics (a la [@https://boostorg.github.io/hana/ [^Boost.Hana]]). The functions can generally be used with either types or values, which eliminates unnecessary `decltype` usage.
+[*9.] The [libname] interface mainly consists of template aliases and `constexpr std::integral_constant` functions, which are arguably preferable to `typename foo::type` and `foo::value`. While the `std::integral_constant` functions in [libname] may be a deviation from traditional type trait designs, they facilitate a metaprogramming style that uses value-semantics (a la [hana]). The functions can generally be used with either types or values, which eliminates unnecessary `decltype` usage.
 
 [*10.] [libname] includes optional features for the manipulation and inspection of calling conventions. These features are currently deemed experimental, because they greatly increase the test surface of [libname], are platform-specific, and are not yet fully tested on any platform.
 
@@ -198,8 +228,36 @@ Without real-world context, `make_function` may seem rather silly to those who k
 
 [endsect]
 
-[section:headers Headers]
 
+[section:contact Contact]
+
+[libname] is authored and maintained by Barrett Adair
+
+Comments, feedback, and bug reports are ['highly] appreciated, and can be submitted in the following ways:
+
+# Open a new issue [@https://github.com/badair/callable_traits/issues/new here] on GitHub
+# Message the author [@https://gitter.im/badair/callable_traits here] on Gitter, an excellent chat service built around GitHub, with message persistence and Markdown support
+# Send the author an email at
+  * barrettellisadair
+  * at...
+  * gmail dot com
+  * (excuse the anti-spam measures)
+
+[endsect]
+
+[section:acknowledgements Acknowledgements]
+
+Special thanks go to Louis Dionne, whose massive [hana] project was the original source of inspiration for [libname]. Louis' occasional encouragement and advice have been invaluable throughout the development of this project.
+
+Robert Ramey's CppCon 2014 presentation [@https://www.youtube.com/watch?v=ACeNgqBKL7E "How you can make a Boost C++ Library"], along with the related material found at the [@http://rrsd.com/blincubator.com/ Boost Library Incubator] have been excellent resources for the development and documentation of [libname].
+
+Finally, I'd like to thank the faculty of the Harding University Computer Science Department for their mentorship and standards of excellence.
+
+[endsect]
+
+[section:ref Reference]
+
+[section:headers Headers]
 The simplest way to use [libname] is to include the main header file:
 
 [include_header callable_traits]
@@ -249,7 +307,7 @@ The simplest way to use [libname] is to include the main header file:
 
 
 [section:ref_add_calling_convention add_calling_convention]
-`add_calling_convention<T, CcTag` will add a calling conventions to a pointer type, where `T` is a [fn_ptr] or [pmf], and `CcTag` is one of the following types:
+`add_calling_convention<T, CcTag>` will add a calling conventions to a pointer type, where `T` is a [fn_ptr] or [pmf], and `CcTag` is one of the following types:
 
 *[libns]`cdecl_tag`
 *[libns]`stdcall_tag`
@@ -258,22 +316,21 @@ The simplest way to use [libname] is to include the main header file:
 
 For `add_calling_convention` to actually work, you must:
 
-
 # Be programming on a supported platform
 # Add the calling convention to a pointer type where the platform allows you to do so
-# Before including any [libname] headers, you must first define the appropriate macro(s) to enable the desired calling convention(s):
+# Define the appropriate macro(s) before including:
  * `CALLABLE_TRAITS_ENABLE_CDECL` for `__cdecl`
  * `CALLABLE_TRAITS_ENABLE_STDCALL` for `__stdcall`
  * `CALLABLE_TRAITS_ENABLE_FASTCALL` for `__fastcall`
  * `CALLABLE_TRAITS_ENABLE_PASCAL` for `pascal`
 
-[warning This feature is currently considered experimental. Your feedback and advice is much appreciated! ]
+[warning This feature is currently considered experimental. Your [feedback] is much appreciated! ]
 [heading Example - [^__fastcall] to [^__stdcall]]
 [import ../example/experimental_changing_calling_conventions.cpp]
 [experimental_changing_calling_conventions]
 [heading Example - [^__cdecl]]
 [import ../example/experimental_calling_convention_cdecl.cpp]
-[calling_convention_cdecl]
+[experimental_calling_convention_cdecl]
 
 [endsect]
 
@@ -540,5 +597,7 @@ TODO
 [heading Example]
 [import ../example/result_of.cpp]
 [result_of]
+[endsect]
+
 [endsect]
 
