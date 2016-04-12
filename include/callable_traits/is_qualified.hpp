@@ -7,8 +7,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_IS_UNQUALIFIED_HPP
-#define CALLABLE_TRAITS_IS_UNQUALIFIED_HPP
+#ifndef CALLABLE_TRAITS_IS_QUALIFIED_HPP
+#define CALLABLE_TRAITS_IS_QUALIFIED_HPP
 
 #include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/required_definitions.hpp>
@@ -17,15 +17,15 @@ namespace callable_traits {
 
     template<typename T>
     inline constexpr auto
-    is_unqualified() {
-        return typename detail::traits<T>::is_unqualified{};
+    is_qualified() {
+        return typename detail::traits<T>::is_qualified{};
     }
 	
 	template<typename T>
     inline constexpr auto
-    is_unqualified(T&&) {
-        return typename detail::traits<T&&>::is_unqualified{};
+    is_qualified(T&&) {
+        return typename detail::traits<T&&>::is_qualified{};
     }
 }
 
-#endif
+#endif //CALLABLE_TRAITS_IS_QUALIFIED_HPP

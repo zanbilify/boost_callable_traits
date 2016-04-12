@@ -9,10 +9,12 @@ add_dependencies(check examples)
 include_directories(${callable_traits_SOURCE_DIR}/include)
 
 file(GLOB_RECURSE EXAMPLES "*.cpp")
-
+file(GLOB_RECURSE EXPERIMENTAL_EXAMPLES "experimental*.cpp")
 
 if (NOT CALLABLE_TRAITS_BUILD_EXPERIMENTAL)
-    list(REMOVE_ITEM EXAMPLES "experimental*.cpp")
+	foreach(_experimental IN LISTS EXPERIMENTAL_EXAMPLES)
+		list(REMOVE_ITEM EXAMPLES ${_experimental})
+	endforeach()
 endif()
 
 foreach(_file IN LISTS EXAMPLES)

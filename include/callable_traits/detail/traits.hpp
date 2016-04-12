@@ -25,7 +25,7 @@ namespace callable_traits {
         template<typename T>
         using decay_if_ptr_or_integral_constant = typename std::conditional<
             std::is_pointer<typename std::remove_reference<T>::type>::value
-                || is_integral_constant<T>::value,
+            || is_integral_constant<T>::value,
             shallow_decay<T>,
             T
         >::type;
@@ -34,9 +34,9 @@ namespace callable_traits {
         using traits = typename disjunction<
             bind_expression_traits<Decayed>,
             function_object<T>,
-            function<decay_if_ptr_or_integral_constant<T>>,
-            pmf<Decayed>,
-            pmd<Decayed>,
+            function<T, decay_if_ptr_or_integral_constant<T>>,
+            pmf<T>,
+            pmd<T, shallow_decay<T>>,
             function_object<Decayed>
         >::traits;
     }

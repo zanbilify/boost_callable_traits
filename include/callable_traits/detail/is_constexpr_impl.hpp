@@ -92,8 +92,8 @@ namespace callable_traits {
         };
 
         // Since constexpr data members must be static, you cannot create PMDs to them
-        template<typename Pmd, std::size_t... I>
-        struct is_constexpr_t<pmd<Pmd>, std::index_sequence<I...>> {
+        template<typename OriginalType, typename Pmd, std::size_t... I>
+        struct is_constexpr_t<pmd<OriginalType, Pmd>, std::index_sequence<I...>> {
             auto operator()(...) const -> substitution_failure;
         };
 

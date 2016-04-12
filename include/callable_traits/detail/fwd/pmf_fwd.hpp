@@ -10,11 +10,13 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_FWD_PMF_FWD_HPP
 #define CALLABLE_TRAITS_DETAIL_FWD_PMF_FWD_HPP
 
+#include <callable_traits/detail/utility.hpp>
+
 namespace callable_traits {
 
     namespace detail {
 
-        template<typename T>
+        template<typename T, typename U = shallow_decay<T>>
         struct pmf;
 
     }

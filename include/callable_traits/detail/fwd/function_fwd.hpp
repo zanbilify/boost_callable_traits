@@ -10,13 +10,15 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_FWD_FUNCTION_FWD_HPP
 #define CALLABLE_TRAITS_DETAIL_FWD_FUNCTION_FWD_HPP
 
+#include <callable_traits/detail/utility.hpp>
+#include <type_traits>
+
 namespace callable_traits {
 
     namespace detail {
 
-        template<typename T>
+        template<typename OriginalType, typename U>
         struct function;
-
     }
 }
 

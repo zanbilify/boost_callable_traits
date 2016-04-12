@@ -42,10 +42,10 @@ namespace callable_traits {
             static constexpr int arg_count = sizeof...(Args) - 1;
         };
 
-        template<typename Pmd, typename... Args>
-        struct test_invoke<pmd<Pmd>, Args...> {
+        template<typename OriginalType, typename Pmd, typename... Args>
+        struct test_invoke<pmd<OriginalType, Pmd>, Args...> {
 
-            using class_t = typename pmd<Pmd>::class_type;
+            using class_t = typename pmd<OriginalType, Pmd>::class_type;
 
             template<typename P, typename U,
                 typename Obj = generalize_if_dissimilar<class_t, U&&>>

@@ -33,7 +33,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/is_lvalue_qualified.hpp>
 #include <callable_traits/is_reference_qualified.hpp>
 #include <callable_traits/is_rvalue_qualified.hpp>
-#include <callable_traits/is_unqualified.hpp>
+#include <callable_traits/is_qualified.hpp>
 #include <callable_traits/is_volatile_qualified.hpp>
 #include <callable_traits/max_arity.hpp>
 #include <callable_traits/min_arity.hpp>

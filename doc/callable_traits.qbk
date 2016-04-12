@@ -1,4 +1,4 @@
-[library CallableTraits
+[article CallableTraits
     [quickbook 1.6]
     [id callable_traits]
         [copyright 2016 Barrett Adair]
@@ -13,14 +13,14 @@
         [lang en]
 ]
 
-[/ Boost developer: you should enable word wrap before you read further]
+[/ developer: you should enable word wrap before you read further]
 
 [template libname[][^CallableTraits]]
 [template libns[][^callable_traits::]]
 [template header_include_prefix[]callable_traits/]
 [template detail_open_include[]    `#include<`[^[header_include_prefix]]]
 [template detail_close_include[]`.hpp>`]
-[template include_header[name][detail_open_include][^[name]][detail_close_include][br]]
+[template include_header[name][detail_open_include][^[name]][detail_close_include]]
 [template invoke[][@http://en.cppreference.com/w/cpp/utility/functional/invoke INVOKE]]
 [template hana[][@https://boostorg.github.io/hana/ [^Boost.Hana]]]
 [template feedback[][link callable_traits.contact feedback]]
@@ -29,9 +29,9 @@
 [template cc_warning_rationale[]
 The rationale for classifying the calling convention features as "experimental" is three-fold:
 
-1. Calling conventions are, by definition, highly platform-specific
-2. The inclusion of a single calling convention effectively doubles the test surface of [libname] ['on every platform]
-3. The author's current knowledge of calling conventions is admittedly limited
+# Calling conventions are, by definition, highly platform-specific.
+# The inclusion of a single calling convention effectively doubles the test surface of [libname] ['on every platform].
+# The author's current knowledge of calling conventions is admittedly limited.
 
 It is the author's hope that future versions of [libname] will offer a stable, thoroughly-tested, and well-documented implementation of these features. If you have experience in this domain, your [feedback] is ['highly] appreciated.
 ]
@@ -53,21 +53,39 @@ It is the author's hope that future versions of [libname] will offer a stable, t
 
 [/ *** concepts *** ]
 
-[template fn_obj[][role green FunctionObject]]
-[template overloaded_fn_obj[][role green OverloadedFunctionObject]]
-[template simple_fn_obj[][role green SimpleFunctionObject]]
-[template pmf[][role green MemberFunctionPtr]]
-[template pmd[][role green MemberDataPtr]]
-[template member_ptr[][role green MemberPtr]]
-[template fn[][role green Function]]
-[template abominable[][role green AbominableFunction]]
-[template fn_ptr[][role green FunctionPtr]]
-[template fn_ref[][role green FunctionReference]]
-[template simple_callable[][role green SimpleCallable]]
-[template simple_invokable[][role green SimpleInvokable]]
-[template callable[][role green Callable]]
-[template invokable[][role green Invokable]]
-[template constexpr_constructible[][role green ConstexprDefaultConstructible]]
+[template concept_fn_obj[][role green FunctionObject]]
+[template concept_overloaded_fn_obj[][role green OverloadedFunctionObject]]
+[template concept_simple_fn_obj[][role green SimpleFunctionObject]]
+[template concept_pmf[][role green MemberFunctionPtr]]
+[template concept_pmd[][role green MemberDataPtr]]
+[template concept_member_ptr[][role green MemberPtr]]
+[template concept_fn[][role green Function]]
+[template concept_abominable[][role green AbominableFunction]]
+[template concept_fn_ptr[][role green FunctionPtr]]
+[template concept_fn_ref[][role green FunctionReference]]
+[template concept_simple_callable[][role green SimpleCallable]]
+[template concept_simple_invokable[][role green SimpleInvokable]]
+[template concept_callable[][role green Callable]]
+[template concept_invokable[][role green Invokable]]
+[template concept_constexpr_constructible[][role green ConstexprDefaultConstructible]]
+
+[/ *** concept links *** ]
+
+[template link_fn_obj[][link ref_fn_obj [concept_fn_obj]]]
+[template link_overloaded_fn_obj[][link ref_overloaded_fn_obj [concept_overloaded_fn_obj]]]
+[template link_simple_fn_obj[][link ref_simple_fn_obj [concept_simple_fn_obj]]]
+[template link_pmf[][link ref_pmf [concept_pmf]]]
+[template link_pmd[][link ref_pmd [concept_pmd]]]
+[template link_member_ptr[][link ref_member_ptr [concept_member_ptr]]]
+[template link_fn[][link ref_fn [concept_fn]]]
+[template link_abominable[][link ref_abominable [concept_abominable]]]
+[template link_fn_ptr[][link ref_fn_ptr [concept_fn_ptr]]]
+[template link_fn_ref[][link ref_fn_ref [concept_fn_ref]]]
+[template link_simple_callable[][link ref_simple_callable [[concept_simple_callable]]]]
+[template link_simple_invokable[][link ref_simple_invokable [concept_simple_invokable]]]
+[template link_callable[][link ref_callable [concept_callable]]]
+[template link_invokable[][link ref_invokable [concept_invokable]]]
+[template link_constexpr_constructible[][link ref_constexpr_constructible [concept_constexpr_constructible]]]
 
 [section:introduction Introduction]
 
@@ -100,13 +118,13 @@ Consider for a moment the class template below, which defines all [role red[*48]
 
 [note The upcoming ISO standard for C++17 includes a [@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html change to the core language] which adds the [^noexcept] qualifier to the type system. If the author's understanding is correct, this would increase the the count of necessary template specializations to [role red[*96]] ([feedback]?). Currently, C++17 `noexcept` qualifiers are not handled in [libname], because compiler vendors have not implemented support for this feature (to best of the author's knowledge). However, features to account for and manipulate `noexcept` qualifiers are planned in [libname], as soon as feature is implemented by a compiler vendor. Of course, the [libname] feature additions will be non-breaking for currently supported compiler versions.]
 
-Potential use cases for such obscure specializations are vitually nonexistent in run-of-the-mill C++ application codebases. Even in library code, these are exceedingly rare. However, there are a handful of very specific metaprogramming use cases in C++ that can only be solved with such template "spam". While these use cases are indeed rare, the writing and testing of these templates is incredibly tedious and time consuming. On this premise, [libname] offers a final and decisive library-level solution, so that the authors of generic code will *never again* need to write these specializations.
+Potential use cases for such obscure specializations are vitually nonexistent in run-of-the-mill application codebases. Even in library code, these are exceedingly rare. However, there are a handful of very specific metaprogramming scenarios that can only be solved with such template "spam". While these use cases are indeed rare, the writing and testing of these templates is incredibly tedious and time consuming. On this premise, [libname] offers a final and decisive library-level solution, so that authors of generic code will *never again* need to write these specializations, for ['any] reason.
 
 Template specializations like those in the code snippet above ['still] do not account for function pointers, function references, function objects/lambdas, or calling conventions. [libname] goes the extra mile by accounting for all of them.
 
 [cc_warning_full]
 
-The use cases for [libname] are closely related to those of [@http://www.boost.org/doc/libs/1_60_0/libs/type_traits/doc/html/boost_typetraits/reference/function_traits.html function_traits] and [@http://www.boost.org/doc/libs/1_60_0/libs/function_types/doc/html/index.html FunctionTypes].
+The use cases for [libname] are closely related to those of [@http://www.boost.org/doc/libs/1_60_0/libs/type_traits/doc/html/boost_typetraits/reference/function_traits.html function_traits] and [@http://www.boost.org/doc/libs/1_60_0/libs/function_types/doc/html/index.html Boost.FunctionTypes].
 
 [endsect]
 
@@ -117,73 +135,75 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
 
 [section:basic_concepts Concept Definitions]
 
-[heading [fn_ptr]]
+[libname] relies on the following concepts, and will be referenced throughout this documentation:
+
+[heading:ref_fn_ptr [concept_fn_ptr]]
 * Any function pointer type
 * the pointer may be cv-qualified and/or ref-qualified
 * e.g. `void(*)(int, int)` or `void(* const &)(int, int)`
 
-[heading [fn_ref]]
+[heading:ref_fn_ref [concept_fn_ref]]
 * Any function reference type
 * e.g. `void(&)(int, int)`
 
-[heading [fn]]
+[heading:ref_fn [concept_fn]]
 * Any unqualified function type
 * e.g. `void(int, int)`
 
-[heading [abominable]]
+[heading:ref_abominable [concept_abominable]]
 * Any qualified (a.k.a. [@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0172r0.html "abominable"]) function type
 * Not technically "callable", but still falls under the [libname] umbrella
-* Mutually exclusive with [fn]
+* Mutually exclusive with [link_fn]
 * e.g. `void(int, int) const`
 
-[heading [pmf]]
+[heading:ref_pmf [concept_pmf]]
 * Any pointer to member function type
 * The pointer type may be cv-qualified and/or ref-qualified
 * e.g. `void (foo::*)(int, int)`
 
-[heading [pmd]]
+[heading:ref_pmd [concept_pmd]]
 * Any pointer to data member type
 * The pointer type may be cv-qualified and/or ref-qualified
 * e.g. `int foo::*`
 
-[heading [simple_fn_obj]]
+[heading:ref_simple_fn_obj [concept_simple_fn_obj]]
 * Any class/struct with a ['non-templated, non-overloaded] function call operator
 * Includes non-generic lambda types
 * May be cv-qualified and/or ref-qualified.
-* Mutually exclusive with [overloaded_fn_obj]
+* Mutually exclusive with [link_overloaded_fn_obj]
 * e.g. the type of this lambda: `[](int x, int y) { return x + y; }`
 
-[heading [overloaded_fn_obj]]
+[heading:ref_overloaded_fn_obj [concept_overloaded_fn_obj]]
 * Any class/struct with a ['templated or overloaded] function call operator, with the following limitation for those with templated function call operators (which includes generic lambdas):
   * If templated , all instantiations must be [@http://stackoverflow.com/questions/35033306/what-does-it-mean-when-one-says-something-is-sfinae-friendly SFINAE-friendly], and must not use [@http://en.cppreference.com/w/cpp/language/indent_name dependent names], except where the dependent "names" are C++ operators.
 * May be cv-qualified and/or ref-qualified
 * e.g. the type of this generic lambda: `[](auto x, auto y) { return x + y; }`
 
-[warning Generic lambdas or classes with templated function objects that are either not SFINAE-friendly or rely on dependent names for template instantiations are generally incompatible with [libname].]
+[tip Generic lambdas or classes with templated function objects that are either not SFINAE-friendly or rely on dependent names for template instantiations are generally incompatible with [libname].]
 
-[heading [fn_obj]]
-* Any type that is either an [overloaded_fn_obj] or a [simple_fn_obj]
+[heading:ref_fn_obj [concept_fn_obj]]
+* Any type that is either an [link_overloaded_fn_obj] or a [link_simple_fn_obj]
 
-[heading [callable]]
+[heading:ref_callable [concept_callable]]
 * The superset of the following:
-  * [fn_ptr]
-  * [fn_ref]
-  * [fn]
-  * [abominable]
-  * [pmf]
-  * [pmd]
-  * [fn_obj]
+  * [link_fn_ptr]
+  * [link_fn_ref]
+  * [link_fn]
+  * [link_abominable]
+  * [link_pmf]
+  * [link_pmd]
+  * [link_fn_obj]
 
-[heading [simple_callable]]
-* Includes all [callable] types, [*except for [overloaded_fn_obj]]
+[heading:ref_simple_callable [[concept_simple_callable]]]
+* Includes all [link_callable] types, [*except] for [link_overloaded_fn_obj]
 
-[heading [simple_invokable]]
-* Includes all [callable] types, [*except for [overloaded_fn_obj], [fn], and [abominable]]
+[heading:ref_simple_invokable [concept_simple_invokable]]
+* Includes all [link_callable] types, [*except] for [link_overloaded_fn_obj], [link_fn], and [link_abominable]
 
-[heading [invokable]]
-* Includes all [callable] types, [*except for [fn] and [abominable]]
+[heading:ref_invokable [concept_invokable]]
+* Includes all [link_callable] types, [*except] for [link_fn] and [link_abominable]
 
-[heading [constexpr_constructble]]
+[heading:ref_constexpr_constructble [constexpr_constructble]]
 * Any [@http://en.cppreference.com/w/cpp/concept/LiteralType LiteralType] that is also default-constructible
 
 [endsect]
@@ -194,17 +214,17 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
 
 [*2.] [libname] is designed to accept cv-qualified and ref-qualified types, which eliminates the need to prepare template argument types with metafunctions such as `std::remove_reference` and `std::decay`. This is especially useful when dealing with perfectly-forwarded parameter types in function templates.
 
-[*3.] [libname] is designed in terms of the [invoke] rules, with one unobtrusive and beneficial deviation: [fn] types and [abominable] types are compatible with all operations that do not specifically require an invocation.
+[*3.] [libname] is designed in terms of the [invoke] rules, with one unobtrusive and beneficial deviation: [concept_fn] types and [concept_abominable] types are compatible with all operations that do not specifically require an invocation.
 
 [*4.] [libns]`arg_at<2, Callable>` is both more flexible and more readable than `typename boost::function_traits<Callable>::arg3_type`.
 
-[*5.] [libns]`can_invoke` can be used to test `INVOKE`-ability at compile-time, with value semantics. For the craziest metaprogrammers, [libns]`can_invoke_constexpr` does the same as `can_invoke` for [constexpr_constructible] types, with an added check for `constexpr`-ness (Note: for `can_invoke_constexpr`, argument types must also be [constexpr_constructible])
+[*5.] [libns]`can_invoke` can be used to test `INVOKE`-ability at compile-time, with value semantics. For the craziest metaprogrammers, [libns]`can_invoke_constexpr` does the same as `can_invoke` for [concept_constexpr_constructible] types, with an added check for `constexpr`-ness (Note: for `can_invoke_constexpr`, argument types must also be [concept_constexpr_constructible])
 
-[*6.] [libns]`is_constexpr` can be used to check whether a [constexpr_constructible] type is a [callable] type that yields a `constexpr` result -- no arguments necessary.
+[*6.] [libns]`is_constexpr` can be used to check whether a [concept_constexpr_constructible] type is a [concept_callable] type that yields a `constexpr` result -- no arguments necessary.
 
 [*7.] [libns]`bind` can be used by library writers to easily accept `std::placeholder` expressions anywhere, and "intercept" the type information before forwarding to `std::bind` or `boost::bind`. This allows for more flexible APIs, where a function template taking a "callable type" can be overloaded to also accept placeholder expressions. It's perhaps a small improvement from requiring `std::bind` first, but in API design, even the smallest things count. See
 
-[*8.] [libns]`min_arity` can be used to detect the presence of default arguments on a [simple_fn_obj]
+[*8.] [libns]`min_arity` can be used to detect the presence of default arguments on a [concept_simple_fn_obj]
 
 [*9.] The [libname] interface mainly consists of template aliases and `constexpr std::integral_constant` functions, which are arguably preferable to `typename foo::type` and `foo::value`. While the `std::integral_constant` functions in [libname] may be a deviation from traditional type trait designs, they facilitate a metaprogramming style that uses value-semantics (a la [hana]). The functions can generally be used with either types or values, which eliminates unnecessary `decltype` usage.
 
@@ -212,7 +232,7 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
 
 [endsect]
 
-[section:function_sugar Use case: `std::function` sugar]
+[section:function_sugar Use case:[^ std::function] sugar]
 
 At the time of this writing, there are around 260 [@http://stackoverflow.com/search?q=convert+std%3A%3Abind+to+std%3A%3Afunction search results] on Stack Overflow concerning the conversion from `std::bind` to `std::function`. There are roughly 340 [@http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction search results] concerning the conversion of lambdas to `std::function`. In the example below, we'll kill both birds with the same stone. The `make_function` function will leverage [libname] to...
 
@@ -225,33 +245,6 @@ Without real-world context, `make_function` may seem rather silly to those who k
 [make_function]
 
 [endsect]
-
-[endsect]
-
-
-[section:contact Contact]
-
-[libname] is authored and maintained by Barrett Adair
-
-Comments, feedback, and bug reports are ['highly] appreciated, and can be submitted in the following ways:
-
-# Open a new issue [@https://github.com/badair/callable_traits/issues/new here] on GitHub
-# Message the author [@https://gitter.im/badair/callable_traits here] on Gitter, an excellent chat service built around GitHub, with message persistence and Markdown support
-# Send the author an email at
-  * barrettellisadair
-  * at...
-  * gmail dot com
-  * (excuse the anti-spam measures)
-
-[endsect]
-
-[section:acknowledgements Acknowledgements]
-
-Special thanks go to Louis Dionne, whose massive [hana] project was the original source of inspiration for [libname]. Louis' occasional encouragement and advice have been invaluable throughout the development of this project.
-
-Robert Ramey's CppCon 2014 presentation [@https://www.youtube.com/watch?v=ACeNgqBKL7E "How you can make a Boost C++ Library"], along with the related material found at the [@http://rrsd.com/blincubator.com/ Boost Library Incubator] have been excellent resources for the development and documentation of [libname].
-
-Finally, I'd like to thank the faculty of the Harding University Computer Science Department for their mentorship and standards of excellence.
 
 [endsect]
 
@@ -288,7 +281,7 @@ The simplest way to use [libname] is to include the main header file:
 [include_header [link callable_traits.ref_is_lvalue_qualified is_lvalue_qualified]]
 [include_header [link callable_traits.ref_is_reference_qualified is_reference_qualified]]
 [include_header [link callable_traits.ref_is_rvalue_qualified is_rvalue_qualified]]
-[include_header [link callable_traits.ref_is_unqualified is_unqualified]]
+[include_header [link callable_traits.ref_is_qualified is_qualified]]
 [include_header [link callable_traits.ref_is_volatile_qualified is_volatile_qualified]]
 [include_header [link callable_traits.ref_max_arity max_arity]]
 [include_header [link callable_traits.ref_min_arity min_arity]]
@@ -307,7 +300,7 @@ The simplest way to use [libname] is to include the main header file:
 
 
 [section:ref_add_calling_convention add_calling_convention]
-`add_calling_convention<T, CcTag>` will add a calling conventions to a pointer type, where `T` is a [fn_ptr] or [pmf], and `CcTag` is one of the following types:
+`add_calling_convention<T, CcTag>` will add a calling conventions to a pointer type, where `T` is a [concept_fn_ptr] or [concept_pmf], and `CcTag` is one of the following types:
 
 *[libns]`cdecl_tag`
 *[libns]`stdcall_tag`
@@ -509,11 +502,11 @@ TODO
 [is_rvalue_qualified]
 [endsect]
 
-[section:ref_is_unqualified is_unqualified]
+[section:ref_is_qualified is_qualified]
 TODO
 [heading Example]
-[/import ../example/is_unqualified.cpp]
-[is_unqualified]
+[/import ../example/is_qualified.cpp]
+[is_qualified]
 [endsect]
 
 [section:ref_is_volatile_qualified is_volatile_qualified]
@@ -598,6 +591,32 @@ TODO
 [import ../example/result_of.cpp]
 [result_of]
 [endsect]
+
+[endsect]
+
+[section:acknowledgements Acknowledgements]
+
+Special thanks go to Louis Dionne, whose massive [hana] project was the original source of inspiration for [libname]. Louis' occasional encouragement and advice have been invaluable throughout the development of this project.
+
+Robert Ramey's CppCon 2014 presentation [@https://www.youtube.com/watch?v=ACeNgqBKL7E "How you can make a Boost C++ Library"], along with the related material found at the [@http://rrsd.com/blincubator.com/ Boost Library Incubator] have been excellent resources for the development and documentation of [libname].
+
+Finally, I'd like to thank the faculty of the Harding University Computer Science Department for their mentorship and standards of excellence.
+
+[endsect]
+
+[section:contact Contact]
+
+[libname] is authored and maintained by Barrett Adair
+
+Comments, feedback, and bug reports are ['highly] appreciated, and can be submitted in the following ways:
+
+# Open a new issue [@https://github.com/badair/callable_traits/issues/new here] on GitHub
+# Message the author [@https://gitter.im/badair/callable_traits here] on Gitter, an excellent chat service built around GitHub, with message persistence and Markdown support
+# Send the author an email at
+  * barrettellisadair
+  * at...
+  * gmail dot com
+  * (excuse the anti-spam measures)
 
 [endsect]
 

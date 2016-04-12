@@ -16,20 +16,42 @@ struct bar;
 
 using expect = int(foo::*)(int);
 
-template<typename T>
-void test() {
-    using U = ct::apply_member_pointer<T, foo>;
-    static_assert(std::is_same<expect, U>{}, "");
-}
-
 int main() {
-    test<int(int)>();
-    test<int(*)(int)>();
-    test<int(*&)(int)>();
-    test<int(* const)(int)>();
-    test<int(&)(int)>();
-    test<int(foo::*)(int)>();
-    test<int(bar::*)(int)>();
+
+    {
+        using f = int(int);
+        using test = ct::apply_member_pointer<f, foo>;
+        using expect = int(foo::*)(int);
+        static_assert(std::is_same<test, expect>::value, "");
+    }
+
+    {
+        using f = int(* const &)(int);
+        using test = ct::apply_member_pointer<f, foo>;
+        using expect = int(foo::* const &)(int);
+        static_assert(std::is_same<test, expect>::value, "");
+    }
+
+    {
+        using f = int(&)(int);
+        using test = ct::apply_member_pointer<f, foo>;
+        using expect = int(foo::*)(int);
+        static_assert(std::is_same<test, expect>::value, "");
+    }
+
+    {
+        using f = int(foo::*)(int);
+        using test = ct::apply_member_pointer<f, foo>;
+        using expect = int(foo::*)(int);
+        static_assert(std::is_same<test, expect>::value, "");
+    }
+
+    {
+        using f = int(bar::* const)(int);
+        using test = ct::apply_member_pointer<f, foo>;
+        using expect = int(foo::* const)(int);
+        static_assert(std::is_same<test, expect>::value, "");
+    }
 }
 //]
 
