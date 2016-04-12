@@ -1,20 +1,23 @@
-# Copyright Peder Holt 2005. 
-# Copyright Modified Work Barrett Adair 2016.
-# Use, modification, and distribution are
-# subject to the Boost Software License, Version 1.0. (See accompanying
+# Copyright 2010 Tim Blechmann
+# Copyright 2016 Modified Work Barrett Adair
+# Distributed under the Boost Software License, Version 1.0. (See accompanying
 # file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
-using quickbook ;
+import quickbook ;
 
-xml callable_traits : callable_traits.qbk ;
+xml callable_traits : callable_traits.qbk : ;
+
 boostbook standalone
-    :
-        callable_traits
-    :
-        <xsl:param>boost.root=../../../..
-        <xsl:param>nav.layout=none
-        <xsl:param>navig.graphics=0
+    : callable_traits
+    : <xsl:param>html.stylesheet=boostbook.css
+#       <xsl:param>boost.root=./
+#       <xsl:param>boost.libraries=$BOOST_ROOT/libraries.htm
+      <format>pdf:<xsl:param>boost.url.prefix=http://www.boost.org/doc/libs/release/libs/callable_traits/doc/html
     ;
 
-install html : ../../../doc/src/boostbook.css ;
-install ../ : ../../../boost.png ;
+install css : [ glob src/css/*.css ]
+    : <location>html ;
+install images : [ glob src/images/*.png ]
+    : <location>html/images ;
+explicit css ;
+explicit images ;

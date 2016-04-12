@@ -1,0 +1,5 @@
+import option ; 
+ 
+using msvc ; 
+ 
+option.set keep-going : false ; 

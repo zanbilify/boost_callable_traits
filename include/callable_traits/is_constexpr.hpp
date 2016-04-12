@@ -12,6 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/is_constexpr_impl.hpp>
 #include <callable_traits/detail/utility.hpp>
+#include <callable_traits/detail/required_definitions.hpp>
 #include <utility>
 
 namespace callable_traits {
@@ -19,14 +20,21 @@ namespace callable_traits {
     template<typename T>
     inline constexpr auto
     is_constexpr(T&& t){
-        using can_construct = detail::is_constexpr_constructible<T>;
-        return detail::is_constexpr_impl(std::forward<T>(t), can_construct{});
+
+        return detail::is_constexpr_impl(
+            ::std::forward<T>(t),
+            detail::is_constexpr_constructible<T>{}
+        );
     }
 
     template<typename T>
     inline constexpr auto
     is_constexpr(){
-        return decltype(is_constexpr(std::declval<T>())){};
+
+        using result_type =
+            decltype(is_constexpr(std::declval<T>()));
+
+        return result_type{};
     }
 }
 

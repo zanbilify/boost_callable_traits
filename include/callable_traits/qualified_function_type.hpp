@@ -10,29 +10,41 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_QUALIFIED_FUNCTION_TYPE_HPP
 #define CALLABLE_TRAITS_QUALIFIED_FUNCTION_TYPE_HPP
 
-#include <callable_traits/detail/traits.hpp>
-#include <callable_traits/detail/utility.hpp>
-#include <callable_traits/no_sfinae/qualified_function_type.hpp>
+#include <callable_traits/detail/required_definitions.hpp>
 
 namespace callable_traits {
 
     namespace detail {
 
-        template<int i = 0>
+        template<bool Sfinae>
         struct qualified_function_type_error {
 
-#ifdef CALLABLE_TRAITS_DEBUG
-			static_assert(i != 0,
-				"Unable to determine the qualified function type for type T in callable_traits::qualified_function_type<T>.");
-#endif
+            static_assert(Sfinae,
+                "Unable to determine the qualified function type for "
+                "type T in callable_traits::qualified_function_type<T>.");
         };
+    }
+
+    namespace permissive {
+
+        template<typename T>
+        using qualified_function_type = detail::fallback_if_invalid<
+            typename detail::traits<T>::qualified_function_type,
+            T>;
+    }
+
+    namespace verbose {
+
+        template<typename T>
+        using qualified_function_type = detail::fail_if_invalid<
+            typename detail::traits<T>::qualified_function_type,
+            detail::qualified_function_type_error<false>>;
     }
 
     template<typename T>
     using qualified_function_type = detail::fail_if_invalid<
-		no_sfinae::qualified_function_type<T>,
-		detail::qualified_function_type_error<>
-	>;
+        typename detail::traits<T>::qualified_function_type,
+        detail::qualified_function_type_error<true>>;
 }
 
 #endif

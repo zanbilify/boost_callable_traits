@@ -67,7 +67,7 @@ namespace callable_traits {
         constexpr flags cv_ = 3;
 
         template<flags Flags>
-        using remove_const = std::integral_constant<flags, Flags & ~const_>;
+        using remove_const_flag = std::integral_constant<flags, Flags & ~const_>;
 
         template<flags Flags>
         using is_const = std::integral_constant<bool,
@@ -75,7 +75,7 @@ namespace callable_traits {
         >;
 
         template<flags Flags>
-        using remove_volatile = std::integral_constant<flags, Flags & ~volatile_>;
+        using remove_volatile_flag = std::integral_constant<flags, Flags & ~volatile_>;
 
         template<typename U, typename T = typename std::remove_reference<U>::type>
         using cv_of = std::integral_constant<flags,
@@ -83,12 +83,25 @@ namespace callable_traits {
             | (std::is_volatile<T>::value ? volatile_ : default_)
         >;
 
-        template<typename T, typename ForceRef = std::false_type>
+        template<typename T>
         using ref_of = std::integral_constant<flags,
             std::is_rvalue_reference<T>::value ? rref_
             : (std::is_lvalue_reference<T>::value ? lref_
-                : (ForceRef::value ? lref_ : default_))
+                : default_)
         >;
+
+        //bit-flag implementation of C++11 reference collapsing rules
+        template<flags Existing,
+                 flags Other,
+                 bool AlreadyHasRef = (Existing & (lref_ | rref_)) != 0,
+                 bool AlreadyHasLRef = (Existing & lref_) == lref_,
+                 bool IsAddingLRef = (Other & lref_) == lref_
+        >
+        using collapse_flags = std::integral_constant<flags,
+            !AlreadyHasRef ? (Existing | Other)
+                : (AlreadyHasLRef ? (Existing | (Other & ~rref_))
+                    : (IsAddingLRef ? ((Existing & ~rref_) | Other )
+                        : (Existing | Other)))>;
 
         template<typename T>
         struct flag_map {

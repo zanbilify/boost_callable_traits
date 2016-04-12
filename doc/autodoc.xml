@@ -1,0 +1,1283 @@
+<?xml version="1.0" standalone="yes"?>
+<library-reference><header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_function_const.hpp">
+<namespace name="callable_traits">
+<typedef name="add_function_const"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_function_cv.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="add_function_cv"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_function_lvalue.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="add_function_lvalue"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_function_rvalue.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="add_function_rvalue"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_varargs.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="add_varargs"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/add_function_volatile.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="add_function_volatile"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/apply_member_pointer.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="apply_member_pointer"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/apply_return.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="apply_return"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/arg_at.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="arg_at"><type>typename std::tuple_element&lt; I, args&lt; T &gt;&gt;::type</type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/args.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="args"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/arity.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<function name="arity"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template><parameter name=""><paramtype>T &amp;&amp;</paramtype></parameter></function>
+<function name="arity"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template></function>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/bind.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+
+
+<function name="bind"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+          <template-nontype-parameter name="Args"><type>typename...</type></template-nontype-parameter>
+        </template><parameter name="t"><paramtype>T &amp;&amp;</paramtype></parameter><parameter name="args"><paramtype>Args &amp;&amp;...</paramtype></parameter></function>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/callable_traits.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para></header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/can_invoke.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+
+
+
+<function name="can_invoke"><type>constexpr auto</type><template>
+          <template-nontype-parameter name="Args"><type>typename...</type></template-nontype-parameter>
+        </template><parameter name="args"><paramtype>Args &amp;&amp;...</paramtype></parameter></function>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/can_invoke_constexpr.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+
+
+
+
+<function name="can_invoke_constexpr"><type>constexpr auto</type><template>
+          <template-nontype-parameter name="Args"><type>typename...</type></template-nontype-parameter>
+        </template><parameter name="args"><paramtype>Args &amp;&amp;...</paramtype></parameter></function>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/config.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><macro name="CALLABLE_TRAITS_EMPTY_"/>
+<macro name="CALLABLE_TRAITS_EMPTY"/>
+<macro name="CALLABLE_TRAITS_VARARGS_CC"/>
+<macro name="CALLABLE_TRAITS_ARITY_SEARCH_LIMIT"/>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/function_type.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="function_type"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/has_varargs.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+
+
+
+
+
+<function name="has_varargs"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template><parameter name=""><paramtype>T &amp;&amp;</paramtype></parameter></function>
+<function name="has_varargs"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template></function>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/has_void_return.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+
+
+
+
+
+
+
+<function name="has_void_return"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template><parameter name=""><paramtype>T &amp;&amp;</paramtype></parameter></function>
+<function name="has_void_return"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template></function>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/is_const_qualified.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+
+
+
+
+
+
+
+
+
+
+
+<function name="is_const_qualified"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template></function>
+<function name="is_const_qualified"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template><parameter name=""><paramtype>T &amp;&amp;</paramtype></parameter></function>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/is_constexpr.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+
+
+
+
+
+
+
+
+
+<function name="is_constexpr"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template><parameter name="t"><paramtype>T &amp;&amp;</paramtype></parameter></function>
+<function name="is_constexpr"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template></function>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/is_cv_qualified.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<function name="is_cv_qualified"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template></function>
+<function name="is_cv_qualified"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template><parameter name=""><paramtype>T &amp;&amp;</paramtype></parameter></function>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/is_lvalue_qualified.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<function name="is_lvalue_qualified"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template></function>
+<function name="is_lvalue_qualified"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template><parameter name=""><paramtype>T &amp;&amp;</paramtype></parameter></function>
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/is_reference_qualified.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<function name="is_reference_qualified"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template></function>
+<function name="is_reference_qualified"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template><parameter name=""><paramtype>T &amp;&amp;</paramtype></parameter></function>
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/is_rvalue_qualified.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<function name="is_rvalue_qualified"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template></function>
+<function name="is_rvalue_qualified"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template><parameter name=""><paramtype>T &amp;&amp;</paramtype></parameter></function>
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/is_unqualified.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<function name="is_unqualified"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template></function>
+<function name="is_unqualified"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template><parameter name=""><paramtype>T &amp;&amp;</paramtype></parameter></function>
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/is_volatile_qualified.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<function name="is_volatile_qualified"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template></function>
+<function name="is_volatile_qualified"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+        </template><parameter name=""><paramtype>T &amp;&amp;</paramtype></parameter></function>
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/max_arity.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<function name="max_arity"><type>constexpr auto</type><template>
+          <template-nontype-parameter name="SearchLimit"><type>std::size_t</type><default>constants::arity_search_limit</default></template-nontype-parameter>
+          <template-type-parameter name="T"/>
+        </template><parameter name=""><paramtype>T &amp;&amp;</paramtype></parameter></function>
+<function name="max_arity"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+          <template-nontype-parameter name="SearchLimit"><type>std::size_t</type><default>constants::arity_search_limit</default></template-nontype-parameter>
+        </template></function>
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/min_arity.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<function name="min_arity"><type>constexpr auto</type><template>
+          <template-nontype-parameter name="SearchLimit"><type>std::size_t</type><default>constants::arity_search_limit</default></template-nontype-parameter>
+          <template-type-parameter name="T"/>
+        </template><parameter name=""><paramtype>T &amp;&amp;</paramtype></parameter></function>
+<function name="min_arity"><type>constexpr auto</type><template>
+          <template-type-parameter name="T"/>
+          <template-nontype-parameter name="SearchLimit"><type>std::size_t</type><default>constants::arity_search_limit</default></template-nontype-parameter>
+        </template></function>
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/qualified_function_type.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="qualified_function_type"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/remove_function_const.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="remove_function_const"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/remove_function_cv.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="remove_function_cv"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/remove_member_pointer.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="remove_member_pointer"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/remove_function_reference.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="remove_function_reference"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/remove_varargs.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="remove_varargs"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/remove_function_volatile.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="remove_function_volatile"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+<header name="C:/local/boost_1_59_0/libs/callable_traits/include/callable_traits/result_of.hpp">
+<para><para>Barrett Adair 2015 Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE.md or copy at <ulink url="http://boost.org/LICENSE_1_0.txt">http://boost.org/LICENSE_1_0.txt</ulink>) </para>
+</para><namespace name="callable_traits">
+<typedef name="result_of"><type><emphasis>unspecified</emphasis></type></typedef>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</namespace>
+</header>
+</library-reference>

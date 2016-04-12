@@ -24,7 +24,7 @@ namespace callable_traits {
             using invoke_arg_types = arg_types;
             using return_type = typename parser::return_type;
             using function_type = typename parser::function_type;
-            using abominable_type = typename parser::abominable_type;
+            using qualified_function_type = typename parser::qualified_function_type;
         };
     }
 }

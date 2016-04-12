@@ -1,2 +1,7 @@
 TEMPLATE = subdirs
-SUBDIRS += main tests_and_examples include doc
+
+SUBDIRS += main               \
+           tests_and_examples \
+           include            \
+           doc                \
+           project

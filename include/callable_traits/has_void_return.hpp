@@ -11,6 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_HAS_VOID_RETURN_HPP
 
 #include <callable_traits/result_of.hpp>
+#include <callable_traits/detail/required_definitions.hpp>
 #include <type_traits>
 
 namespace callable_traits {
@@ -18,13 +19,13 @@ namespace callable_traits {
     template<typename T>
     inline constexpr auto
     has_void_return(T&&) {
-        return typename std::is_same<result_of<T&&>, void>::type{};
+        return typename std::is_same<permissive::result_of<T&&>, void>::type{};
     }
 
     template<typename T>
     inline constexpr auto
     has_void_return() {
-        return typename std::is_same<result_of<T>, void>::type{};
+        return typename std::is_same<permissive::result_of<T>, void>::type{};
     }
 }
 
