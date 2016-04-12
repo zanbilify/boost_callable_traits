@@ -52,7 +52,7 @@
 <dt><span class="section"><a href="ref.html#callable_traits.ref.ref_is_lvalue_qualified">is_lvalue_qualified</a></span></dt>
 <dt><span class="section"><a href="ref.html#callable_traits.ref.ref_is_reference_qualified">is_reference_qualified</a></span></dt>
 <dt><span class="section"><a href="ref.html#callable_traits.ref.ref_is_rvalue_qualified">is_rvalue_qualified</a></span></dt>
-<dt><span class="section"><a href="ref.html#callable_traits.ref.ref_is_unqualified">is_unqualified</a></span></dt>
+<dt><span class="section"><a href="ref.html#callable_traits.ref.ref_is_qualified">is_qualified</a></span></dt>
 <dt><span class="section"><a href="ref.html#callable_traits.ref.ref_is_volatile_qualified">is_volatile_qualified</a></span></dt>
 <dt><span class="section"><a href="ref.html#callable_traits.ref.ref_max_arity">max_arity</a></span></dt>
 <dt><span class="section"><a href="ref.html#callable_traits.ref.ref_min_arity">min_arity</a></span></dt>
@@ -84,14 +84,8 @@
       </p>
 <p>
         <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="../">add_calling_convention</a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
-      </p>
-<p>
         <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="../">add_function_const</a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
-      </p>
-<p>
         <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="../">add_function_cv</a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
-      </p>
-<p>
         <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="../">add_function_lvalue</a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
         <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="../">add_function_rvalue</a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
         <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="../">add_varargs</a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
@@ -113,7 +107,7 @@
         <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="../">is_lvalue_qualified</a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
         <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="../">is_reference_qualified</a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
         <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="../">is_rvalue_qualified</a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
-        <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="../">is_unqualified</a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
+        <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="../">is_qualified</a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
         <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="../">is_volatile_qualified</a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
         <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="../">max_arity</a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
         <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="../">min_arity</a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
@@ -1458,17 +1452,17 @@ because ScaryMonster is the narrowest of all _1 parameters. */</span>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="callable_traits.ref.ref_is_unqualified"></a><a class="link" href="ref.html#callable_traits.ref.ref_is_unqualified" title="is_unqualified">is_unqualified</a>
+<a name="callable_traits.ref.ref_is_qualified"></a><a class="link" href="ref.html#callable_traits.ref.ref_is_qualified" title="is_qualified">is_qualified</a>
 </h3></div></div></div>
 <p>
         TODO
       </p>
 <h5>
-<a name="callable_traits.ref.ref_is_unqualified.h0"></a>
-        <span class="phrase"><a name="callable_traits.ref.ref_is_unqualified.example"></a></span><a class="link" href="ref.html#callable_traits.ref.ref_is_unqualified.example">Example</a>
+<a name="callable_traits.ref.ref_is_qualified.h0"></a>
+        <span class="phrase"><a name="callable_traits.ref.ref_is_qualified.example"></a></span><a class="link" href="ref.html#callable_traits.ref.ref_is_qualified.example">Example</a>
       </h5>
 <p>
-        [is_unqualified]
+        [is_qualified]
       </p>
 </div>
 <div class="section">
