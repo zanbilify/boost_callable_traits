@@ -34,6 +34,8 @@ int main() {
 		using cvr = char(foo::*)(foo*, int) const volatile &&;
 
 		CT_ASSERT(std::is_same<f,   ct::remove_function_volatile<f>>{});
+        CT_ASSERT(std::is_same<l,   ct::remove_function_volatile<vl>>{});
+        CT_ASSERT(std::is_same<l,   ct::remove_function_volatile<l>>{});
 		CT_ASSERT(std::is_same<f,   ct::remove_function_volatile<v>>{});
 		CT_ASSERT(std::is_same<r,  ct::remove_function_volatile<r>>{});
 		CT_ASSERT(std::is_same<r,  ct::remove_function_volatile<vr>>{});
@@ -61,6 +63,8 @@ int main() {
 
 		CT_ASSERT(std::is_same<f,  ct::remove_function_volatile<f>>{});
 		CT_ASSERT(std::is_same<f,  ct::remove_function_volatile<v>>{});
+        CT_ASSERT(std::is_same<l,   ct::remove_function_volatile<vl>>{});
+        CT_ASSERT(std::is_same<l,   ct::remove_function_volatile<l>>{});
 		CT_ASSERT(std::is_same<r,  ct::remove_function_volatile<r>>{});
 		CT_ASSERT(std::is_same<r,  ct::remove_function_volatile<vr>>{});
 		CT_ASSERT(std::is_same<c,  ct::remove_function_volatile<c>>{});
