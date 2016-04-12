@@ -198,7 +198,7 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
   * [link_pmd]
   * [link_fn_obj]
 
-[heading:ref_simple_callable [[concept_simple_callable]]]
+[heading:ref_simple_callable [concept_simple_callable]]
 * Includes all [link_callable] types, [*except] for [link_overloaded_fn_obj]
 
 [heading:ref_simple_invokable [concept_simple_invokable]]
@@ -207,7 +207,7 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
 [heading:ref_invokable [concept_invokable]]
 * Includes all [link_callable] types, [*except] for [link_fn] and [link_abominable]
 
-[heading:ref_constexpr_constructble [concept_constexpr_constructble]]
+[heading:ref_constexpr_constructible [concept_constexpr_constructible]]
 * Any [@http://en.cppreference.com/w/cpp/concept/LiteralType LiteralType] that is also default-constructible
 
 [endsect]
