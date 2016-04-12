@@ -89,7 +89,11 @@ It is the author's hope that future versions of [libname] will offer a stable, t
 
 [section:introduction Introduction]
 
-[libname] provides a comprehensive, uniform, and modern type-level interface for the inspection, decomposition, and synthesis of C++ callable types. This documentation will be most beneficial to readers with a basic understanding of the syntax and usage of the following C++ features:
+[important [libname] is not a Boost library.]
+
+[libname] is a cross-platform C++14 library for the inspection, decomposition, and synthesis of C++ callable types. [libname] is header-only, and does not depend on any non-standard headers.
+
+This documentation will be most beneficial to readers with a basic understanding of the syntax and usage of the following C++ features:
 
 * [@http://en.cppreference.com/w/cpp/language/partial_specialization template specializations]
 * [@http://en.cppreference.com/w/cpp/language/sfinae SFINAE]
