@@ -30,8 +30,8 @@ struct set_member_function_qualifiers_t<                                        
     using type = Return(CALLABLE_TRAITS_CC T::*)(Args...) QUAL;                      \
 };                                                                                   \
                                                                                      \
-template<typename Return, typename T, typename... Args>                              \
-struct pmf<Return(CALLABLE_TRAITS_CC T::*)(Args...) QUAL>                            \
+template<typename OriginalType, typename Return, typename T, typename... Args>       \
+struct pmf<OriginalType, Return(CALLABLE_TRAITS_CC T::*)(Args...) QUAL>              \
  : qualifier_traits<dummy QUAL>, default_callable_traits {                           \
                                                                                      \
     static constexpr bool value = true;                                              \
@@ -63,8 +63,11 @@ struct pmf<Return(CALLABLE_TRAITS_CC T::*)(Args...) QUAL>                       
     using qualifiers = qualifier_traits<dummy QUAL>;                                 \
                                                                                      \
     template<flags Flags>                                                            \
-    using set_qualifiers = set_member_function_qualifiers<                           \
-        Flags, CALLABLE_TRAITS_CC_TAG, T, Return, Args...>;                          \
+    using set_qualifiers = typename copy_cvr<                                        \
+        set_member_function_qualifiers<                                              \
+            Flags, CALLABLE_TRAITS_CC_TAG, T, Return, Args...>,                      \
+            OriginalType                                                             \
+        >::type;                                                                     \
                                                                                      \
     using remove_function_reference = set_qualifiers<qualifiers::cv_flags>;          \
                                                                                      \

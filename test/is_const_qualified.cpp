@@ -75,16 +75,16 @@ void assert_not_const_qualified() {
 int main() {
 
     {
-        using f = void(foo::*)();
-        using l = void(foo::*)() &;
-        using r = void(foo::*)() && ;
-        using c = void(foo::*)() const;
-        using cl = void(foo::*)() const &;
-        using cr = void(foo::*)() const &&;
-        using v = void(foo::*)() volatile;
-        using vl = void(foo::*)() volatile &;
-        using vr = void(foo::*)() volatile &&;
-        using cv = void(foo::*)() const volatile;
+        using f   = void(foo::*)();
+        using l   = void(foo::*)() &;
+        using r   = void(foo::*)() && ;
+        using c   = void(foo::*)() const;
+        using cl  = void(foo::*)() const &;
+        using cr  = void(foo::*)() const &&;
+        using v   = void(foo::*)() volatile;
+        using vl  = void(foo::*)() volatile &;
+        using vr  = void(foo::*)() volatile &&;
+        using cv  = void(foo::*)() const volatile;
         using cvl = void(foo::*)() const volatile &;
         using cvr = void(foo::*)() const volatile &&;
 
@@ -103,16 +103,16 @@ int main() {
     }
 
     {
-        struct f { int operator()() { return 0; } };
-        struct l { int operator()() & { return 0; } };
-        struct r { int operator()() && { return 0; } };
-        struct c { int operator()() const { return 0; } };
-        struct cl { int operator()() const & { return 0; } };
-        struct cr { int operator()() const && { return 0; } };
-        struct v { int operator()() volatile { return 0; } };
-        struct vl { int operator()() volatile & { return 0; } };
-        struct vr { int operator()() volatile && { return 0; } };
-        struct cv { int operator()() const volatile { return 0; } };
+        struct f   { int operator()() { return 0; } };
+        struct l   { int operator()() & { return 0; } };
+        struct r   { int operator()() && { return 0; } };
+        struct c   { int operator()() const { return 0; } };
+        struct cl  { int operator()() const & { return 0; } };
+        struct cr  { int operator()() const && { return 0; } };
+        struct v   { int operator()() volatile { return 0; } };
+        struct vl  { int operator()() volatile & { return 0; } };
+        struct vr  { int operator()() volatile && { return 0; } };
+        struct cv  { int operator()() const volatile { return 0; } };
         struct cvl { int operator()() const volatile & { return 0; } };
         struct cvr { int operator()() const volatile && { return 0; } };
 
@@ -131,16 +131,16 @@ int main() {
     }
 
     {
-        using f = void();
-        using l = void() &;
-        using r = void() && ;
-        using c = void() const;
-        using cl = void() const &;
-        using cr = void() const &&;
-        using v = void() volatile;
-        using vl = void() volatile &;
-        using vr = void() volatile &&;
-        using cv = void() const volatile;
+        using f   = void();
+        using l   = void() &;
+        using r   = void() && ;
+        using c   = void() const;
+        using cl  = void() const &;
+        using cr  = void() const &&;
+        using v   = void() volatile;
+        using vl  = void() volatile &;
+        using vr  = void() volatile &&;
+        using cv  = void() const volatile;
         using cvl = void() const volatile &;
         using cvr = void() const volatile &&;
 

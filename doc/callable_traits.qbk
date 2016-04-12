@@ -281,7 +281,7 @@ The simplest way to use [libname] is to include the main header file:
 [include_header [link callable_traits.ref_is_lvalue_qualified is_lvalue_qualified]]
 [include_header [link callable_traits.ref_is_reference_qualified is_reference_qualified]]
 [include_header [link callable_traits.ref_is_rvalue_qualified is_rvalue_qualified]]
-[include_header [link callable_traits.ref_is_unqualified is_unqualified]]
+[include_header [link callable_traits.ref_is_qualified is_qualified]]
 [include_header [link callable_traits.ref_is_volatile_qualified is_volatile_qualified]]
 [include_header [link callable_traits.ref_max_arity max_arity]]
 [include_header [link callable_traits.ref_min_arity min_arity]]
@@ -502,11 +502,11 @@ TODO
 [is_rvalue_qualified]
 [endsect]
 
-[section:ref_is_unqualified is_unqualified]
+[section:ref_is_qualified is_qualified]
 TODO
 [heading Example]
-[/import ../example/is_unqualified.cpp]
-[is_unqualified]
+[/import ../example/is_qualified.cpp]
+[is_qualified]
 [endsect]
 
 [section:ref_is_volatile_qualified is_volatile_qualified]

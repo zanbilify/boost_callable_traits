@@ -10,6 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_PMF_HPP
 #define CALLABLE_TRAITS_DETAIL_PMF_HPP
 
+#include <callable_traits/detail/fwd/pmf_fwd.hpp>
 #include <callable_traits/detail/calling_conventions.hpp>
 #include <callable_traits/detail/set_function_qualifiers.hpp>
 #include <callable_traits/detail/qualifiers.hpp>
@@ -38,11 +39,11 @@ namespace callable_traits {
         using set_varargs_member_function_qualifiers =
             typename set_varargs_member_function_qualifiers_t<Flags, Ts...>::type;
 
-        template<typename T>
+        template<typename T, typename U>
         struct pmf : default_callable_traits {};
 
-        template<typename T, T Value>
-        struct pmf <std::integral_constant<T, Value>> {
+        template<typename U, typename T, T Value>
+        struct pmf <U, std::integral_constant<T, Value>> {
             using traits = pmf<T>;
             static constexpr const bool value = traits::value;
         };
