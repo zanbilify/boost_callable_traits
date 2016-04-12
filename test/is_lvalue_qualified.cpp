@@ -160,6 +160,9 @@ int main() {
         CT_ASSERT(!ct::is_lvalue_qualified<cvr>());
     }
 
-    assert_not_lvalue_qualified<void(*)()>();
-    assert_not_lvalue_qualified<void(&)()>();
+	using f_ptr = void(*)();
+    assert_not_lvalue_qualified<f_ptr>();
+	assert_not_lvalue_qualified<f_ptr foo::*>();
+	assert_not_lvalue_qualified<int foo::*>();
+	assert_not_lvalue_qualified<void(&)()>();
 }

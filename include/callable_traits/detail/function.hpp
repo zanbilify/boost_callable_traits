@@ -10,6 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_FUNCTION_HPP
 #define CALLABLE_TRAITS_DETAIL_FUNCTION_HPP
 
+#include <callable_traits/detail/fwd/function_fwd.hpp>
 #include <callable_traits/detail/calling_conventions.hpp>
 #include <callable_traits/detail/set_function_qualifiers.hpp>
 #include <callable_traits/detail/qualifiers.hpp>
@@ -21,8 +22,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 #define CALLABLE_TRAITS_SPECIALIZE_FUNCTION(QUAL)                                    \
                                                                                      \
-template<typename Return, typename... Args>                                          \
-struct function<Return(Args...) QUAL>                                                \
+template<typename T, typename Return, typename... Args>                              \
+struct function<T, Return(Args...) QUAL>                                             \
  : qualifier_traits<dummy QUAL>, default_callable_traits {                           \
                                                                                      \
     static constexpr bool value = true;                                              \
@@ -76,8 +77,8 @@ struct function<Return(Args...) QUAL>                                           
                                                                                      \
 };                                                                                   \
                                                                                      \
-template<typename Return, typename... Args>                                          \
-struct function<Return (Args..., ...) QUAL>                                          \
+template<typename T, typename Return, typename... Args>                              \
+struct function<T, Return (Args..., ...) QUAL>                                       \
  : qualifier_traits<dummy QUAL>, default_callable_traits {                           \
                                                                                      \
     static constexpr bool value = true;                                              \
@@ -134,7 +135,7 @@ namespace callable_traits {
 
     namespace detail {
 
-        template<typename T>
+        template<typename U, typename T>
         struct function : default_callable_traits {};
 
         CALLABLE_TRAITS_SPECIALIZE_FUNCTION(CALLABLE_TRAITS_EMPTY);
@@ -165,7 +166,18 @@ namespace callable_traits {
         #undef CALLABLE_TRAITS_CC_TAG
         #undef CALLABLE_TRAITS_VARARGS_CC
 
-        //todo cdecl - need to split variadic and normal function pointers
+        /* ?
+        #ifdef CALLABLE_TRAITS_ENABLE_CDECL
+        #define CALLABLE_TRAITS_CC_TAG cdecl_tag
+        #define CALLABLE_TRAITS_VARARGS_CC __cdecl
+        #define CALLABLE_TRAITS_CC __cdecl
+        #define CALLABLE_TRAITS_ST
+        #include <callable_traits/detail/function_cc.hpp>
+        #undef CALLABLE_TRAITS_ST
+        #undef CALLABLE_TRAITS_CC
+        #undef CALLABLE_TRAITS_CC_TAG
+        #undef CALLABLE_TRAITS_VARARGS_CC
+        #endif*/
 
         #ifdef CALLABLE_TRAITS_ENABLE_STDCALL
         #define CALLABLE_TRAITS_CC_TAG stdcall_tag
@@ -203,10 +215,10 @@ namespace callable_traits {
         #undef CALLABLE_TRAITS_VARARGS_CC
         #endif
 
-        template<typename T>
-        struct function<T&> : function<T> {
+        template<typename U, typename T>
+        struct function<U, T&> : function<T, T> {
             using traits = function;
-            using base = function<T>;
+            using base = function<T, T>;
             using type = T&;
             using remove_varargs = typename base::remove_varargs&;
             using add_varargs = typename base::add_varargs&;
@@ -226,9 +238,9 @@ namespace callable_traits {
             using apply_return = typename base::template apply_return<NewReturn>&;
         };
 
-        template<typename T, T Value>
-        struct function<std::integral_constant<T, Value>> {
-            using traits = function<T>;
+        template<typename U, typename T, T Value>
+        struct function<U, std::integral_constant<T, Value>> {
+            using traits = function<T, T>;
             static constexpr const bool value = traits::value;
         };
     }

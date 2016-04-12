@@ -20,8 +20,8 @@ struct has_calling_convention_t<
     using type = std::true_type;
 };
 
-template<typename Return, typename... Args>
-struct function<CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC *)(Args..., ...)>
+template<typename OriginalType, typename Return, typename... Args>
+struct function<OriginalType, CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC *)(Args..., ...)>
  : qualifier_traits<dummy>, default_callable_traits {
 
     static constexpr bool value = true;
@@ -43,18 +43,24 @@ struct function<CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC *)(Args...,
     using function_type = Return(Args..., ...);
     using qualified_function_type = function_type;
 
-    using remove_varargs =
-        CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(Args...);
+    using remove_varargs = typename copy_cvr<
+        CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(Args...),
+        OriginalType
+    >::type;
 
-    using add_varargs = type;
-    using remove_member_pointer = type;
+    using add_varargs = OriginalType;
+    using remove_member_pointer = OriginalType;
 
     template<typename U>
-    using apply_member_pointer =
-        CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC U::*)(Args..., ...);
+    using apply_member_pointer = typename copy_cvr<
+        CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC U::*)(Args..., ...),
+        OriginalType
+    >::type;
 
     template<typename NewReturn>
-    using apply_return =
-        CALLABLE_TRAITS_ST NewReturn(CALLABLE_TRAITS_VARARGS_CC *)(Args..., ...);
+    using apply_return = typename copy_cvr<
+        CALLABLE_TRAITS_ST NewReturn(CALLABLE_TRAITS_VARARGS_CC *)(Args..., ...),
+        OriginalType
+    >::type;
 };
 

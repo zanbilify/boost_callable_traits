@@ -158,6 +158,9 @@ int main() {
         CT_ASSERT(ct::is_volatile_qualified<cvr>());
     }
 
-    assert_not_volatile_qualified<void(*)()>();
-    assert_not_volatile_qualified<void(&)()>();
+	using f_ptr = void(*)();
+    assert_not_volatile_qualified<f_ptr>();
+	assert_not_volatile_qualified<f_ptr foo::*>();
+	assert_not_volatile_qualified<int foo::*>();
+	assert_not_volatile_qualified<void(&)()>();
 }

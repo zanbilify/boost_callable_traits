@@ -44,7 +44,7 @@ namespace callable_traits {
 
         template<typename U, typename T, T Value>
         struct pmf <U, std::integral_constant<T, Value>> {
-            using traits = pmf<T>;
+            using traits = pmf<T, T>;
             static constexpr const bool value = traits::value;
         };
 

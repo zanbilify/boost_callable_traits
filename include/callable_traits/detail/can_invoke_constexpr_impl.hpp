@@ -58,8 +58,8 @@ namespace callable_traits {
             auto operator()(...) const -> substitution_failure;
         };
 
-        template<typename Pmd, typename... Args>
-        struct test_invoke_constexpr<pmd<Pmd>, Args...> {
+        template<typename OriginalType, typename Pmd, typename... Args>
+        struct test_invoke_constexpr<pmd<OriginalType, Pmd>, Args...> {
             auto operator()(...) const -> substitution_failure;
         };
 

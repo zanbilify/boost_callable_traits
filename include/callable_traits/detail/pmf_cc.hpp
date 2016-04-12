@@ -53,10 +53,12 @@ struct pmf<OriginalType, Return(CALLABLE_TRAITS_CC T::*)(Args...) QUAL>         
     using function_type = Return(invoke_type, Args...);                              \
     using invoke_arg_types = std::tuple<invoke_type, Args...>;                       \
     using qualified_function_type = Return(Args...) QUAL;                            \
-    using remove_varargs = type;                                                     \
+    using remove_varargs = OriginalType;                                             \
                                                                                      \
-    using add_varargs = Return(CALLABLE_TRAITS_VARARGS_CC                            \
-        T::*)(Args..., ...) QUAL;                                                    \
+    using add_varargs = typename copy_cvr<                                           \
+        Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL,                  \
+        OriginalType                                                                 \
+    >::type;                                                                         \
                                                                                      \
     using class_type = T;                                                            \
                                                                                      \
@@ -90,10 +92,12 @@ struct pmf<OriginalType, Return(CALLABLE_TRAITS_CC T::*)(Args...) QUAL>         
     using remove_function_cv = set_qualifiers<qualifiers::ref_flags>;                \
                                                                                      \
     template<typename U>                                                             \
-    using apply_member_pointer = Return(U::*)(Args...) QUAL;                         \
+    using apply_member_pointer = typename copy_cvr<                                  \
+        Return(U::*)(Args...) QUAL, OriginalType>::type;                             \
                                                                                      \
     template<typename NewReturn>                                                     \
-    using apply_return = NewReturn(T::*)(Args...) QUAL;                              \
+    using apply_return = typename copy_cvr<                                          \
+        NewReturn(T::*)(Args...) QUAL, OriginalType>::type;                          \
                                                                                      \
     using remove_member_pointer = qualified_function_type;                           \
 }                                                                                    \

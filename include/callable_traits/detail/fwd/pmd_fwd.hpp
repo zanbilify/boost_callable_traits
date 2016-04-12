@@ -14,9 +14,8 @@ namespace callable_traits {
 
     namespace detail {
 
-        template<typename T>
+        template<typename OriginalType, typename ShallowDecayed>
         struct pmd;
-
     }
 }
 

@@ -158,6 +158,9 @@ int main() {
         CT_ASSERT(ct::is_qualified<cvr>());
     }
 
-    assert_unqualified<void(*)()>();
-    assert_unqualified<void(&)()>();
+	using f_ptr = void(*)();
+    assert_unqualified<f_ptr>();
+	assert_unqualified<f_ptr foo::*>();
+	assert_unqualified<int foo::*>();
+	assert_unqualified<void(&)()>();
 }

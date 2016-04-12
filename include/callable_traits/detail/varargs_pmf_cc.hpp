@@ -57,8 +57,13 @@ struct pmf<OriginalType, Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) Q
     using function_type = Return(invoke_type, Args..., ...);                         \
     using invoke_arg_types = std::tuple<invoke_type, Args...>;                       \
     using qualified_function_type = Return(Args..., ...) QUAL;                       \
-    using remove_varargs = Return(CALLABLE_TRAITS_CC T::*)(Args...) QUAL;            \
-    using add_varargs = type;                                                        \
+                                                                                     \
+    using remove_varargs = typename copy_cvr<                                        \
+        Return(CALLABLE_TRAITS_CC T::*)(Args...) QUAL,                               \
+        OriginalType                                                                 \
+    >::type;                                                                         \
+                                                                                     \
+    using add_varargs = OriginalType;                                                \
     using class_type = T;                                                            \
                                                                                      \
     using qualifiers = qualifier_traits<dummy QUAL>;                                 \
@@ -91,12 +96,16 @@ struct pmf<OriginalType, Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) Q
     using remove_function_cv = set_qualifiers<qualifiers::ref_flags>;                \
                                                                                      \
     template<typename U>                                                             \
-    using apply_member_pointer =                                                     \
-        Return(CALLABLE_TRAITS_VARARGS_CC U::*)(Args..., ...) QUAL;                  \
+    using apply_member_pointer = typename copy_cvr<                                  \
+        Return(CALLABLE_TRAITS_VARARGS_CC U::*)(Args..., ...) QUAL,                  \
+        OriginalType                                                                 \
+    >::type;                                                                         \
                                                                                      \
     template<typename NewReturn>                                                     \
-    using apply_return =                                                             \
-        NewReturn(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL;               \
+    using apply_return = typename copy_cvr<                                          \
+        NewReturn(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) QUAL,               \
+        OriginalType                                                                 \
+    >::type;                                                                         \
                                                                                      \
     using remove_member_pointer = qualified_function_type;                           \
 }                                                                                    \
