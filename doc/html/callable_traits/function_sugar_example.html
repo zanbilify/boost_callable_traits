@@ -1,0 +1,172 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>Example:std::function sugar</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<link rel="home" href="../index.html" title="CallableTraits">
+<link rel="up" href="../index.html" title="CallableTraits">
+<link rel="prev" href="../index.html" title="CallableTraits">
+<link rel="next" href="compatibility.html" title="Compatibility">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%"><tr>
+<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../boost.png"></td>
+<td align="center"><a href="../../../index.html">Home</a></td>
+<td align="center"><a href="../../../libs/libraries.htm">Libraries</a></td>
+<td align="center"><a href="http://www.boost.org/users/people.html">People</a></td>
+<td align="center"><a href="http://www.boost.org/users/faq.html">FAQ</a></td>
+<td align="center"><a href="../../../more/index.htm">More</a></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="../index.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="compatibility.html"><img src="../../src/images/next.png" alt="Next"></a>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="callable_traits.function_sugar_example"></a><a class="link" href="function_sugar_example.html" title="Example:std::function sugar">Example:<code class="literal">std::function</code>
+    sugar</a>
+</h2></div></div></div>
+<p>
+      At a glance, there appear to be around 260 <a href="http://stackoverflow.com/search?q=convert+std%3A%3Abind+to+std%3A%3Afunction" target="_top">search
+      results</a> on Stack Overflow concerning the conversion from <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>
+      to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code>, and around 340 <a href="http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction" target="_top">search
+      results</a> concerning the conversion of lambdas to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code>.
+      However misguided these questions might be, we'll kill both birds with the
+      same stone with the <code class="computeroutput"><span class="identifier">make_function</span></code>
+      example below, which will leverage <code class="literal">CallableTraits</code> to...
+    </p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem">
+          Construct an <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+          where T is not explicitly supplied by the user
+        </li>
+<li class="listitem">
+          Construct an <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+          where T is the deduced "signature" of an <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">placeholders</span></code>
+          expression
+        </li>
+</ol></div>
+<p>
+      Without real-world context, <code class="computeroutput"><span class="identifier">make_function</span></code>
+      may seem rather silly, especially since we are needlessly incurring the runtime
+      cost of type erasure, which takes place inside the <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code>
+      implementation. However, this <code class="computeroutput"><span class="identifier">make_function</span></code>
+      might be useful in a situation where <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code>
+      would be required by some 3rd party API.
+    </p>
+<div class="note"><table border="0" summary="Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../../src/images/note.png"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>
+        Due to limitations in the Microsoft compiler, this example will not compile
+        with MSVC. For more information, refer to the <a class="link" href="compatibility.html#callable_traits.compatibility.msvc_issues" title="MSVC Issues">MSVC
+        Issues</a> section.
+      </p></td></tr>
+</table></div>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">function_type</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">bind</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+
+<span class="keyword">namespace</span> <span class="identifier">example_library</span> <span class="special">{</span>
+
+    <span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+
+    <span class="comment">// make_function turns a non-overloaded callable into a type-erased std::function object</span>
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+    <span class="keyword">inline</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span> <span class="identifier">make_function</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;</span> <span class="identifier">t</span><span class="special">)</span> <span class="special">{</span>
+
+        <span class="comment">// callable_traits::function_type decays any non-overloaded callable type to</span>
+        <span class="comment">// a plain function type, which is structured in terms of INVOKE.</span>
+
+        <span class="keyword">using</span> <span class="identifier">signature</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&amp;&amp;&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">result_type</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span><span class="special">&lt;</span><span class="identifier">signature</span><span class="special">&gt;;</span>
+        <span class="keyword">return</span> <span class="identifier">result_type</span><span class="special">{</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">forward</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;(</span><span class="identifier">t</span><span class="special">)</span> <span class="special">};</span>
+    <span class="special">}</span>
+
+    <span class="comment">// this make_function overload turns a bind expression into a type-erased std::function object</span>
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">First</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Others</span><span class="special">&gt;</span>
+    <span class="keyword">inline</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span> <span class="identifier">make_function</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;</span> <span class="identifier">t</span><span class="special">,</span> <span class="identifier">First</span><span class="special">&amp;&amp;</span> <span class="identifier">first</span><span class="special">,</span> <span class="identifier">Others</span><span class="special">&amp;&amp;...</span> <span class="identifier">others</span><span class="special">)</span> <span class="special">{</span>
+
+        <span class="comment">// callable_traits::bind is essentially a compile-time parser of placeholder</span>
+        <span class="comment">// expressions, for the purpose of retaining more type information than</span>
+        <span class="comment">// std::bind normally allows - specifically, callable_traits::bind is used to</span>
+        <span class="comment">// determine the de-facto signature of the std::bind return type, with special</span>
+        <span class="comment">// considerations for conversions between reused placeholders and nested</span>
+        <span class="comment">// placeholder expressions. For the sake of convenience, callable_traits::bind</span>
+        <span class="comment">// is also a thin forwarding wrapper around std::bind (which is the only true</span>
+        <span class="comment">// runtime element in CallableTraits).</span>
+
+        <span class="keyword">using</span> <span class="identifier">bind_expr</span> <span class="special">=</span> <span class="keyword">decltype</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(</span>
+                <span class="identifier">std</span><span class="special">::</span><span class="identifier">forward</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;(</span><span class="identifier">t</span><span class="special">),</span>
+                <span class="identifier">std</span><span class="special">::</span><span class="identifier">forward</span><span class="special">&lt;</span><span class="identifier">First</span><span class="special">&gt;(</span><span class="identifier">first</span><span class="special">),</span>
+                <span class="identifier">std</span><span class="special">::</span><span class="identifier">forward</span><span class="special">&lt;</span><span class="identifier">Others</span><span class="special">&gt;(</span><span class="identifier">others</span><span class="special">)...</span>
+        <span class="special">));</span>
+
+        <span class="keyword">using</span> <span class="identifier">signature</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">bind_expr</span><span class="special">&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">result_type</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span><span class="special">&lt;</span><span class="identifier">signature</span><span class="special">&gt;;</span>
+
+        <span class="keyword">return</span> <span class="identifier">result_type</span><span class="special">{</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(</span>
+                <span class="identifier">std</span><span class="special">::</span><span class="identifier">forward</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;(</span><span class="identifier">t</span><span class="special">),</span>
+                <span class="identifier">std</span><span class="special">::</span><span class="identifier">forward</span><span class="special">&lt;</span><span class="identifier">First</span><span class="special">&gt;(</span><span class="identifier">first</span><span class="special">),</span>
+                <span class="identifier">std</span><span class="special">::</span><span class="identifier">forward</span><span class="special">&lt;</span><span class="identifier">Others</span><span class="special">&gt;(</span><span class="identifier">others</span><span class="special">)...</span>
+        <span class="special">)};</span>
+    <span class="special">}</span>
+<span class="special">}</span>
+
+<span class="comment">// client code starts here</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">cassert</span><span class="special">&gt;</span>
+
+<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="identifier">example_library</span><span class="special">;</span>
+<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">;</span>
+
+<span class="keyword">int</span> <span class="identifier">add</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">i</span><span class="special">,</span> <span class="keyword">int</span> <span class="identifier">j</span><span class="special">)</span> <span class="special">{</span>
+    <span class="keyword">return</span> <span class="identifier">i</span> <span class="special">+</span> <span class="identifier">j</span><span class="special">;</span>
+<span class="special">}</span>
+
+<span class="keyword">struct</span> <span class="identifier">adder</span> <span class="special">{</span>
+
+    <span class="keyword">int</span> <span class="identifier">eval</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">i</span><span class="special">,</span> <span class="keyword">int</span> <span class="identifier">j</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span>
+        <span class="keyword">return</span> <span class="identifier">i</span> <span class="special">+</span> <span class="identifier">j</span><span class="special">;</span>
+    <span class="special">}</span>
+<span class="special">};</span>
+
+<span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
+
+    <span class="comment">// function pointer</span>
+    <span class="keyword">auto</span> <span class="identifier">f</span> <span class="special">=</span> <span class="identifier">make_function</span><span class="special">(&amp;</span><span class="identifier">add</span><span class="special">);</span>
+    <span class="identifier">assert</span><span class="special">(</span><span class="identifier">f</span><span class="special">(</span><span class="number">99</span><span class="special">,</span> <span class="number">1</span><span class="special">)</span> <span class="special">==</span> <span class="number">100</span><span class="special">);</span>
+
+    <span class="comment">// function reference</span>
+    <span class="identifier">f</span> <span class="special">=</span> <span class="identifier">make_function</span><span class="special">(</span><span class="identifier">add</span><span class="special">);</span>
+    <span class="identifier">assert</span><span class="special">(</span><span class="identifier">f</span><span class="special">(</span><span class="number">99</span><span class="special">,</span> <span class="number">1</span><span class="special">)</span> <span class="special">==</span> <span class="number">100</span><span class="special">);</span>
+
+    <span class="comment">// member function pointer (bound to object)</span>
+    <span class="identifier">f</span> <span class="special">=</span> <span class="identifier">make_function</span><span class="special">(&amp;</span><span class="identifier">adder</span><span class="special">::</span><span class="identifier">eval</span><span class="special">,</span> <span class="identifier">adder</span><span class="special">{},</span> <span class="identifier">_1</span><span class="special">,</span> <span class="identifier">_2</span><span class="special">);</span>
+    <span class="identifier">assert</span><span class="special">(</span><span class="identifier">f</span><span class="special">(</span><span class="number">99</span><span class="special">,</span> <span class="number">1</span><span class="special">)</span> <span class="special">==</span> <span class="number">100</span><span class="special">);</span>
+
+    <span class="comment">// lambda</span>
+    <span class="identifier">f</span> <span class="special">=</span> <span class="identifier">make_function</span><span class="special">([](</span><span class="keyword">int</span> <span class="identifier">i</span><span class="special">,</span> <span class="keyword">int</span> <span class="identifier">j</span><span class="special">)</span> <span class="special">{</span>
+        <span class="keyword">return</span> <span class="identifier">i</span> <span class="special">+</span> <span class="identifier">j</span><span class="special">;</span>
+    <span class="special">});</span>
+
+    <span class="identifier">assert</span><span class="special">(</span><span class="identifier">f</span><span class="special">(</span><span class="number">99</span><span class="special">,</span> <span class="number">1</span><span class="special">)</span> <span class="special">==</span> <span class="number">100</span><span class="special">);</span>
+<span class="special">}</span>
+</pre>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><div class="copyright-footer">Copyright &#169; 2016 Barrett Adair<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE.md or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="../index.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="compatibility.html"><img src="../../src/images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

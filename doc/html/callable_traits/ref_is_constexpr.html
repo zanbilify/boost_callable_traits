@@ -1,0 +1,173 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>is_constexpr</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<link rel="home" href="../index.html" title="CallableTraits">
+<link rel="up" href="../index.html" title="CallableTraits">
+<link rel="prev" href="ref_is_const_qualified.html" title="is_const_qualified">
+<link rel="next" href="ref_is_lvalue_qualified.html" title="is_lvalue_qualified">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%"><tr>
+<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../boost.png"></td>
+<td align="center"><a href="../../../index.html">Home</a></td>
+<td align="center"><a href="../../../libs/libraries.htm">Libraries</a></td>
+<td align="center"><a href="http://www.boost.org/users/people.html">People</a></td>
+<td align="center"><a href="http://www.boost.org/users/faq.html">FAQ</a></td>
+<td align="center"><a href="../../../more/index.htm">More</a></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="ref_is_const_qualified.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_is_lvalue_qualified.html"><img src="../../src/images/next.png" alt="Next"></a>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="callable_traits.ref_is_constexpr"></a><a class="link" href="ref_is_constexpr.html" title="is_constexpr">is_constexpr</a>
+</h2></div></div></div>
+<p>
+      TODO
+    </p>
+<h4>
+<a name="callable_traits.ref_is_constexpr.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_is_constexpr.example_function_object"></a></span><a class="link" href="ref_is_constexpr.html#callable_traits.ref_is_constexpr.example_function_object">Example
+      - Function Object</a>
+    </h4>
+<div class="warning"><table border="0" summary="Warning">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Warning]" src="../../src/images/warning.png"></td>
+<th align="left">Warning</th>
+</tr>
+<tr><td align="left" valign="top"><p>
+        When compiling in MSVC, <code class="computeroutput"><span class="identifier">is_constexpr</span></code>
+        always returns <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code>, because MSVC cannot compile
+        the logic that normally determines this.
+      </p></td></tr>
+</table></div>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+
+<span class="comment">//this is a constexpr function object (non-templated)</span>
+<span class="keyword">struct</span> <span class="identifier">zero</span> <span class="special">{</span>
+
+    <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="keyword">operator</span><span class="special">()()</span> <span class="keyword">const</span> <span class="special">{</span>
+        <span class="keyword">return</span> <span class="number">0</span><span class="special">;</span>
+    <span class="special">}</span>
+<span class="special">};</span>
+
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">&lt;</span><span class="identifier">zero</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">(</span><span class="identifier">zero</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
+
+
+
+<span class="comment">//this is a constexpr function object (templated)</span>
+<span class="keyword">struct</span> <span class="identifier">subtract</span> <span class="special">{</span>
+
+    <span class="comment">// For callable_traits::is_constexpr, generic function objects</span>
+    <span class="comment">// only need to be SFINAE-friendly if the body of the operator()</span>
+    <span class="comment">// function accesses member names besides "type" and "value".</span>
+    <span class="comment">// Unary/binary operators and constructor calls are okay to use.</span>
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T1</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T2</span><span class="special">&gt;</span>
+    <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="keyword">operator</span><span class="special">()(</span><span class="identifier">T1</span><span class="special">,</span> <span class="identifier">T2</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span>
+        <span class="keyword">return</span> <span class="identifier">T1</span><span class="special">{}</span> <span class="special">-</span> <span class="identifier">T2</span><span class="special">{};</span>
+    <span class="special">}</span>
+<span class="special">};</span>
+
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">&lt;</span><span class="identifier">subtract</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">(</span><span class="identifier">subtract</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
+
+
+
+<span class="comment">//this is NOT a constexpr function object</span>
+<span class="keyword">struct</span> <span class="identifier">add</span> <span class="special">{</span>
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T1</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T2</span><span class="special">&gt;</span>
+    <span class="keyword">auto</span> <span class="keyword">operator</span><span class="special">()(</span><span class="identifier">T1</span><span class="special">,</span> <span class="identifier">T2</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span>
+        <span class="keyword">return</span> <span class="identifier">T1</span><span class="special">{}</span> <span class="special">+</span> <span class="identifier">T2</span><span class="special">{};</span>
+    <span class="special">}</span>
+<span class="special">};</span>
+
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">&lt;</span><span class="identifier">add</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">(</span><span class="identifier">add</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
+
+<span class="keyword">auto</span> <span class="identifier">multiply</span> <span class="special">=</span> <span class="special">[](</span><span class="keyword">auto</span> <span class="identifier">t1</span><span class="special">,</span> <span class="keyword">auto</span> <span class="identifier">t2</span><span class="special">)</span> <span class="special">-&gt;</span> <span class="keyword">decltype</span><span class="special">(</span><span class="identifier">t1</span><span class="special">.</span><span class="identifier">value</span> <span class="special">*</span> <span class="identifier">t2</span><span class="special">.</span><span class="identifier">value</span><span class="special">)</span> <span class="special">{</span>
+    <span class="keyword">return</span> <span class="identifier">t1</span><span class="special">.</span><span class="identifier">value</span> <span class="special">*</span> <span class="identifier">t2</span><span class="special">.</span><span class="identifier">value</span><span class="special">;</span>
+<span class="special">};</span>
+
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">&lt;</span><span class="keyword">decltype</span><span class="special">(</span><span class="identifier">multiply</span><span class="special">)&gt;(),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">(</span><span class="identifier">multiply</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
+
+
+<span class="comment">// is_constexpr will always return std::false_type when the argument</span>
+<span class="comment">// is either not a literal type, or is not default constructible. Below,</span>
+<span class="comment">// divide is not default constructible, so is_constexpr returns</span>
+<span class="comment">// std::false_type. For literal types that are default constructible, a</span>
+<span class="comment">// constexpr default constructor is assumed.</span>
+
+<span class="keyword">struct</span> <span class="identifier">divide</span> <span class="special">{</span>
+
+    <span class="identifier">divide</span><span class="special">()</span> <span class="special">=</span> <span class="keyword">delete</span><span class="special">;</span>
+    <span class="keyword">constexpr</span> <span class="identifier">divide</span><span class="special">(</span><span class="keyword">int</span><span class="special">){};</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T1</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T2</span><span class="special">&gt;</span>
+    <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="keyword">operator</span><span class="special">()(</span><span class="identifier">T1</span><span class="special">,</span> <span class="identifier">T2</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span>
+        <span class="keyword">return</span> <span class="identifier">T1</span><span class="special">{}</span> <span class="special">/</span> <span class="identifier">T2</span><span class="special">{};</span>
+    <span class="special">}</span>
+<span class="special">};</span>
+
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">&lt;</span><span class="identifier">divide</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">(</span><span class="identifier">divide</span><span class="special">{</span><span class="number">0</span><span class="special">}),</span> <span class="string">""</span><span class="special">);</span>
+
+<span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
+</pre>
+<h4>
+<a name="callable_traits.ref_is_constexpr.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_is_constexpr.example_function_pointer"></a></span><a class="link" href="ref_is_constexpr.html#callable_traits.ref_is_constexpr.example_function_pointer">Example
+      - Function Pointer</a>
+    </h4>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+
+<span class="comment">// NOTE: Due to non-compliance in MSVC, is_constexpr always</span>
+<span class="comment">// returns std::false_type on that compiler, which causes</span>
+<span class="comment">// the static asserts below to fail.</span>
+
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+
+<span class="keyword">constexpr</span> <span class="keyword">int</span> <span class="identifier">foo</span><span class="special">(</span><span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;)</span> <span class="special">{</span>
+    <span class="keyword">return</span> <span class="number">1</span><span class="special">;</span>
+<span class="special">}</span>
+
+<span class="keyword">int</span> <span class="identifier">bar</span><span class="special">(</span><span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;)</span> <span class="special">{</span>
+    <span class="keyword">return</span> <span class="number">1</span><span class="special">;</span>
+<span class="special">}</span>
+
+<span class="comment">// for is_constexpr calls, function pointers must</span>
+<span class="comment">// be passed as std::integral_constants</span>
+<span class="keyword">using</span> <span class="identifier">F</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span><span class="special">&lt;</span><span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">foo</span><span class="special">),</span> <span class="special">&amp;</span><span class="identifier">foo</span><span class="special">&gt;;</span>
+<span class="keyword">using</span> <span class="identifier">B</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span><span class="special">&lt;</span><span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">bar</span><span class="special">),</span> <span class="special">&amp;</span><span class="identifier">bar</span><span class="special">&gt;;</span>
+
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">(</span><span class="identifier">F</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">&lt;</span><span class="identifier">F</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">(</span><span class="identifier">B</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">&lt;</span><span class="identifier">B</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
+
+<span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
+</pre>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><div class="copyright-footer">Copyright &#169; 2016 Barrett Adair<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE.md or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="ref_is_const_qualified.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_is_lvalue_qualified.html"><img src="../../src/images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

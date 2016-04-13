@@ -15,27 +15,27 @@ struct foo {};
 int main() {
 
     {
-        using pmf = void(foo::*)();
-        using expect = void(foo::*)() const;
+        using pmf = int(foo::*)();
+        using expect = int(foo::*)() const;
         using test = ct::add_function_const<pmf>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
         // add_function_const doesn't change anything when
         // the function type is already const.
-        using pmf = void(foo::*)() const &&;
-        using expect = void(foo::*)() const &&;
+        using pmf = int(foo::*)() const &&;
+        using expect = int(foo::*)() const &&;
         using test = ct::add_function_const<pmf>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
-        using pmf = void(foo::*)() volatile &;
-        using expect = void(foo::*)() const volatile &;
+        using pmf = int(foo::*)() volatile &;
+        using expect = int(foo::*)() const volatile &;
         using test = ct::add_function_const<pmf>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
         // add_function_const can also be used with "abominable"
         // function types.
-        using f = void();
-        using expect = void() const;
+        using f = int();
+        using expect = int() const;
         using test = ct::add_function_const<f>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
@@ -43,7 +43,7 @@ int main() {
         // function references, function objects, or member data pointers.
         // However, you can loosen this restriction somewhat by using the
         // callable_traits::permissive namespace instead:
-        using f = void(*)();
+        using f = int(*)();
         using expect = f;
         using test = ct::permissive::add_function_const<f>;
         static_assert(std::is_same<test, expect>::value, "");

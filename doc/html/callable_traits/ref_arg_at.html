@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>arg_at</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<link rel="home" href="../index.html" title="CallableTraits">
+<link rel="up" href="../index.html" title="CallableTraits">
+<link rel="prev" href="ref_apply_return.html" title="apply_return">
+<link rel="next" href="ref_args.html" title="args">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%"><tr>
+<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../boost.png"></td>
+<td align="center"><a href="../../../index.html">Home</a></td>
+<td align="center"><a href="../../../libs/libraries.htm">Libraries</a></td>
+<td align="center"><a href="http://www.boost.org/users/people.html">People</a></td>
+<td align="center"><a href="http://www.boost.org/users/faq.html">FAQ</a></td>
+<td align="center"><a href="../../../more/index.htm">More</a></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="ref_apply_return.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_args.html"><img src="../../src/images/next.png" alt="Next"></a>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="callable_traits.ref_arg_at"></a><a class="link" href="ref_arg_at.html" title="arg_at">arg_at</a>
+</h2></div></div></div>
+<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Index</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+    <span class="keyword">using</span> <span class="identifier">arg_at</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span><span class="special">;</span>
+
+<span class="special">}</span>
+</pre>
+<h4>
+<a name="callable_traits.ref_arg_at.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_arg_at.constraints"></a></span><a class="link" href="ref_arg_at.html#callable_traits.ref_arg_at.constraints">Constraints</a>
+    </h4>
+<p>
+      <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a>. <code class="computeroutput"><span class="identifier">Index</span></code>
+      must be less than <code class="computeroutput"><span class="identifier">ArgCount</span></code>
+      and greater than zero, where <code class="computeroutput"><span class="identifier">ArgCount</span></code>
+      is the number of arguments in the signature of <code class="computeroutput"><span class="identifier">T</span></code>
+      (the signature of <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
+      for <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>).
+    </p>
+<h4>
+<a name="callable_traits.ref_arg_at.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_arg_at.behavior"></a></span><a class="link" href="ref_arg_at.html#callable_traits.ref_arg_at.behavior">Behavior</a>
+    </h4>
+<p>
+      When <code class="computeroutput"><span class="identifier">Index</span></code> is outside the range
+      defined above, the substitution fails in a SFINAE-friendly manner. Otherwise,
+      the resulting type is the argument type at zero-based index <code class="computeroutput"><span class="identifier">Index</span></code>.
+      In other words, <code class="computeroutput"><span class="identifier">arg_at</span><span class="special">&lt;</span><span class="number">1</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">char</span><span class="special">,</span>
+      <span class="keyword">short</span><span class="special">,</span> <span class="keyword">long</span><span class="special">)&gt;</span></code> aliases
+      <code class="computeroutput"><span class="keyword">short</span></code>.
+    </p>
+<h4>
+<a name="callable_traits.ref_arg_at.h2"></a>
+      <span class="phrase"><a name="callable_traits.ref_arg_at.example"></a></span><a class="link" href="ref_arg_at.html#callable_traits.ref_arg_at.example">Example</a>
+    </h4>
+<p>
+      [arg_at]
+    </p>
+<h4>
+<a name="callable_traits.ref_arg_at.h3"></a>
+      <span class="phrase"><a name="callable_traits.ref_arg_at.see_also"></a></span><a class="link" href="ref_arg_at.html#callable_traits.ref_arg_at.see_also">See
+      Also</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+          <a class="link" href="ref_args.html" title="args"><code class="literal">args</code></a>
+        </li></ul></div>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><div class="copyright-footer">Copyright &#169; 2016 Barrett Adair<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE.md or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="ref_apply_return.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_args.html"><img src="../../src/images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

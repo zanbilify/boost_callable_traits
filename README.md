@@ -16,22 +16,6 @@ CallableTraits is a small, header-only library providing a uniform and comprehen
 
 ## Documentation [Here](http://badair.github.io/callable_traits/index.html)
 
-## Compatibility
-
-CallableTraits is currently tested and working on the following platforms, unless otherwise noted:
-- GNU/Linux
-  - clang 3.5 and later (both libc++ and libstdc++)
-  - gcc 5.2 and later
-- OSX
-  - Apple Xcode 6.3 and later
-  - open-source clang 3.5 and later should work, but is not tested
-- Windows
-  - Microsoft Visual Studio 2015 (native MSVC)
-  - MinGW32 gcc 5.3 (other versions not tested)
-  - clang-cl in Visual Studio's LLVM toolkit cannot build CallableTraits tests because of [this curious bug](http://stackoverflow.com/questions/36026352/compiler-attribute-stuck-on-a-function-type-is-there-a-workaround-for-this-cla). I filed a bug report, but I should be able to work around it when I find the time to do so.
-
-I do not know the compatibility of CallableTraits for other/older compilers, but the `stdlib` implementation must include `std::index_sequence` and friends.
-
 ## Building the tests and examples
 
 First, you'll need a recent version of [CMake](https://cmake.org/). These commands assume that `git` and `cmake` are available in your environment path. If you need help with this, [message me on Gitter](https://gitter.im/badair/callable_traits).

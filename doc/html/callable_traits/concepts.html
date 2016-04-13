@@ -1,0 +1,332 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>Concepts</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<link rel="home" href="../index.html" title="CallableTraits">
+<link rel="up" href="../index.html" title="CallableTraits">
+<link rel="prev" href="compatibility.html" title="Compatibility">
+<link rel="next" href="headers.html" title="Headers">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%"><tr>
+<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../boost.png"></td>
+<td align="center"><a href="../../../index.html">Home</a></td>
+<td align="center"><a href="../../../libs/libraries.htm">Libraries</a></td>
+<td align="center"><a href="http://www.boost.org/users/people.html">People</a></td>
+<td align="center"><a href="http://www.boost.org/users/faq.html">FAQ</a></td>
+<td align="center"><a href="../../../more/index.htm">More</a></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="compatibility.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="headers.html"><img src="../../src/images/next.png" alt="Next"></a>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="callable_traits.concepts"></a><a class="link" href="concepts.html" title="Concepts">Concepts</a>
+</h2></div></div></div>
+<div class="toc"><dl class="toc">
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_fn_ptr"><span class="green">FunctionPtr</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_fn_ref"><span class="green">FunctionReference</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_simple_fn"><span class="green">UnqualifiedFunction</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_abominable"><span class="green">AbominableFunction</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_fn"><span class="green">Function</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_pmf"><span class="green">MemberFunctionPtr</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_pmd"><span class="green">MemberDataPtr</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_member_ptr"><span class="green">MemberPtr</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_simple_fn_obj"><span class="green">SimpleFunctionObject</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_overloaded_fn_obj"><span class="green">OverloadedFunctionObject</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_fn_obj"><span class="green">FunctionObject</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_callable"><span class="green">Callable</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_simple_callable"><span class="green">SimpleCallable</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_simple_invokable"><span class="green">SimpleInvokable</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_invokable"><span class="green">Invokable</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_constexpr_constructible"><span class="green">ConstexprDefaultConstructible</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_cc_tag"><span class="green">CallingConventionTag</span></a></span></dt>
+</dl></div>
+<p>
+      <code class="literal">CallableTraits</code> relies on the following concepts, which will
+      be cross-referenced throughout the documentation. Concepts will always be formatted
+      with <span class="green">green</span> text.
+    </p>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_fn_ptr"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ptr" title="FunctionPtr"><span class="green">FunctionPtr</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            Any function pointer type
+          </li>
+<li class="listitem">
+            the pointer may be cv-qualified and/or ref-qualified
+          </li>
+<li class="listitem">
+            e.g. <code class="computeroutput"><span class="keyword">void</span><span class="special">(*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code> or
+            <code class="computeroutput"><span class="keyword">void</span><span class="special">(*</span>
+            <span class="keyword">const</span> <span class="special">&amp;)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
+          </li>
+</ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_fn_ref"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ref" title="FunctionReference"><span class="green">FunctionReference</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            Any function reference type
+          </li>
+<li class="listitem">
+            e.g. <code class="computeroutput"><span class="keyword">void</span><span class="special">(&amp;)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
+          </li>
+</ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_simple_fn"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn" title="UnqualifiedFunction"><span class="green">UnqualifiedFunction</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            Any unqualified function type
+          </li>
+<li class="listitem">
+            e.g. <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
+          </li>
+</ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_abominable"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_abominable" title="AbominableFunction"><span class="green">AbominableFunction</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            Any qualified (a.k.a. <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0172r0.html" target="_top">"abominable"</a>)
+            function type
+          </li>
+<li class="listitem">
+            Not technically "callable", but still falls under the <code class="literal">CallableTraits</code>
+            umbrella
+          </li>
+<li class="listitem">
+            Mutually exclusive with <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn" title="UnqualifiedFunction"><span class="green">UnqualifiedFunction</span></a>
+          </li>
+<li class="listitem">
+            e.g. <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span></code>
+          </li>
+</ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_fn"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_fn" title="Function"><span class="green">Function</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            The superset of <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn" title="UnqualifiedFunction"><span class="green">UnqualifiedFunction</span></a> and <a class="link" href="concepts.html#callable_traits.concepts.ref_abominable" title="AbominableFunction"><span class="green">AbominableFunction</span></a>
+          </li></ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_pmf"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            Any pointer to member function type
+          </li>
+<li class="listitem">
+            The pointer type may be cv-qualified and/or ref-qualified
+          </li>
+<li class="listitem">
+            e.g. <code class="computeroutput"><span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
+          </li>
+</ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_pmd"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_pmd" title="MemberDataPtr"><span class="green">MemberDataPtr</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            Any pointer to data member type
+          </li>
+<li class="listitem">
+            The pointer type may be cv-qualified and/or ref-qualified
+          </li>
+<li class="listitem">
+            e.g. <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span></code>
+          </li>
+</ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_member_ptr"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_member_ptr" title="MemberPtr"><span class="green">MemberPtr</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            The superset of <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a> and <a class="link" href="concepts.html#callable_traits.concepts.ref_pmd" title="MemberDataPtr"><span class="green">MemberDataPtr</span></a>
+          </li></ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_simple_fn_obj"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            Any class/struct with a <span class="emphasis"><em>non-templated, non-overloaded</em></span>
+            function call operator
+          </li>
+<li class="listitem">
+            Includes non-generic lambda types
+          </li>
+<li class="listitem">
+            May be cv-qualified and/or ref-qualified.
+          </li>
+<li class="listitem">
+            Mutually exclusive with <a class="link" href="concepts.html#callable_traits.concepts.ref_overloaded_fn_obj" title="OverloadedFunctionObject"><span class="green">OverloadedFunctionObject</span></a>
+          </li>
+<li class="listitem">
+            e.g. the type of this lambda: <code class="computeroutput"><span class="special">[](</span><span class="keyword">int</span> <span class="identifier">x</span><span class="special">,</span> <span class="keyword">int</span> <span class="identifier">y</span><span class="special">)</span> <span class="special">{</span> <span class="keyword">return</span> <span class="identifier">x</span> <span class="special">+</span> <span class="identifier">y</span><span class="special">;</span> <span class="special">}</span></code>
+          </li>
+</ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_overloaded_fn_obj"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_overloaded_fn_obj" title="OverloadedFunctionObject"><span class="green">OverloadedFunctionObject</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            Any class/struct with a <span class="emphasis"><em>templated or overloaded</em></span>
+            function call operator, with the following limitation for those with
+            templated function call operators (which includes generic lambdas):
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+                  If templated , all instantiations must be <a href="http://stackoverflow.com/questions/35033306/what-does-it-mean-when-one-says-something-is-sfinae-friendly" target="_top">SFINAE-friendly</a>,
+                  and must not use <a href="http://en.cppreference.com/w/cpp/language/indent_name" target="_top">dependent
+                  names</a>, except where the dependent "names" are
+                  C++ operators.
+                </li></ul></div>
+          </li>
+<li class="listitem">
+            May be cv-qualified and/or ref-qualified
+          </li>
+<li class="listitem">
+            e.g. the type of this generic lambda: <code class="computeroutput"><span class="special">[](</span><span class="keyword">auto</span> <span class="identifier">x</span><span class="special">,</span> <span class="keyword">auto</span> <span class="identifier">y</span><span class="special">)</span> <span class="special">{</span> <span class="keyword">return</span> <span class="identifier">x</span> <span class="special">+</span> <span class="identifier">y</span><span class="special">;</span> <span class="special">}</span></code>
+          </li>
+</ul></div>
+<div class="tip"><table border="0" summary="Tip">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="../../src/images/tip.png"></td>
+<th align="left">Tip</th>
+</tr>
+<tr><td align="left" valign="top"><p>
+          Generic lambdas or classes with templated function objects that are either
+          not SFINAE-friendly or rely on dependent names for template instantiations
+          are generally incompatible with <code class="literal">CallableTraits</code>.
+        </p></td></tr>
+</table></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_fn_obj"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_fn_obj" title="FunctionObject"><span class="green">FunctionObject</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            Any type that is either an <a class="link" href="concepts.html#callable_traits.concepts.ref_overloaded_fn_obj" title="OverloadedFunctionObject"><span class="green">OverloadedFunctionObject</span></a> or a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>
+          </li></ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_callable"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_callable" title="Callable"><span class="green">Callable</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            The superset of the following:
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                  <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ptr" title="FunctionPtr"><span class="green">FunctionPtr</span></a>
+                </li>
+<li class="listitem">
+                  <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ref" title="FunctionReference"><span class="green">FunctionReference</span></a>
+                </li>
+<li class="listitem">
+                  <a class="link" href="concepts.html#callable_traits.concepts.ref_fn" title="Function"><span class="green">Function</span></a>
+                </li>
+<li class="listitem">
+                  <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>
+                </li>
+<li class="listitem">
+                  <a class="link" href="concepts.html#callable_traits.concepts.ref_pmd" title="MemberDataPtr"><span class="green">MemberDataPtr</span></a>
+                </li>
+<li class="listitem">
+                  <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_obj" title="FunctionObject"><span class="green">FunctionObject</span></a>
+                </li>
+</ul></div>
+          </li></ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_simple_callable"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            Includes all <a class="link" href="concepts.html#callable_traits.concepts.ref_callable" title="Callable"><span class="green">Callable</span></a> types, <span class="bold"><strong>excluding</strong></span>
+            <a class="link" href="concepts.html#callable_traits.concepts.ref_overloaded_fn_obj" title="OverloadedFunctionObject"><span class="green">OverloadedFunctionObject</span></a>
+          </li></ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_simple_invokable"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_simple_invokable" title="SimpleInvokable"><span class="green">SimpleInvokable</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            Includes all <a class="link" href="concepts.html#callable_traits.concepts.ref_callable" title="Callable"><span class="green">Callable</span></a> types, <span class="bold"><strong>excluding</strong></span>
+            <a class="link" href="concepts.html#callable_traits.concepts.ref_overloaded_fn_obj" title="OverloadedFunctionObject"><span class="green">OverloadedFunctionObject</span></a> and <a class="link" href="concepts.html#callable_traits.concepts.ref_fn" title="Function"><span class="green">Function</span></a>
+          </li></ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_invokable"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_invokable" title="Invokable"><span class="green">Invokable</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            Includes all <a class="link" href="concepts.html#callable_traits.concepts.ref_callable" title="Callable"><span class="green">Callable</span></a> types, <span class="bold"><strong>excluding</strong></span>
+            <a class="link" href="concepts.html#callable_traits.concepts.ref_fn" title="Function"><span class="green">Function</span></a>
+          </li></ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_constexpr_constructible"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_constexpr_constructible" title="ConstexprDefaultConstructible"><span class="green">ConstexprDefaultConstructible</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            Any <a href="http://en.cppreference.com/w/cpp/concept/LiteralType" target="_top">LiteralType</a>
+            that is also default-constructible
+          </li></ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_cc_tag"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_cc_tag" title="CallingConventionTag"><span class="green">CallingConventionTag</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            One of the following types, used to manipulate calling conventions programmatically:
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                  <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">cdecl_tag</span></code>
+                </li>
+<li class="listitem">
+                  <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">stdcall_tag</span></code>
+                </li>
+<li class="listitem">
+                  <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">fastcall_tag</span></code>
+                </li>
+<li class="listitem">
+                  <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">pascal_tag</span></code>
+                </li>
+</ul></div>
+          </li></ul></div>
+</div>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><div class="copyright-footer">Copyright &#169; 2016 Barrett Adair<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE.md or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="compatibility.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="headers.html"><img src="../../src/images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>
