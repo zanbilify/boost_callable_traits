@@ -20,7 +20,7 @@ namespace callable_traits {
         struct apply_return_error {
 
             static_assert(Sfinae,
-                "callable_traits::apply_return<T> is "
+                "callable_traits::apply_return<T, R> is "
                 "not a meaningful operation for this T.");
         };
 

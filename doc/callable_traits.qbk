@@ -287,6 +287,70 @@ While most of the features in [libname] are tested and working in MSVC, the foll
 
 
 
+
+
+[/*********************************************************************]
+[/***************************** F A Q *********************************]
+[/*********************************************************************]
+
+
+[section:faq FAQ]
+
+[section:reasons What makes [libname] unique?]
+
+[*1.] [libname] offers template aliases such as [link_remove_member_const] for manipulating function qualifiers, designed to parallel the `<type_traits>` aliases such as `std::remove_const_t`.
+
+[*2.] [libname] is designed to accept cv-qualified and ref-qualified types, which eliminates the need to prepare template argument types with metafunctions such as `std::remove_reference` and `std::decay`. This is especially useful when dealing with perfectly-forwarded parameter types in function templates.
+
+[*3.] [libname] is designed to comply with [invoke] rules, with one unobtrusive and beneficial deviation: [link_fn] types are compatible with all relevant type operations that do not specifically require an invocation.
+
+[*4.] [namespace_scoped][link_arg_at]`<2, Callable>` is more flexible than `typename boost::function_traits<Callable>::arg3_type`.
+
+[*5.] [link_can_invoke] is used to test `INVOKE`-ability at compile-time, with value semantics. For the craziest metaprogrammers, [link_can_invoke_constexpr] does the same as `can_invoke` for [link_constexpr_constructible] types, with an added check for `constexpr`-ness
+
+[*6.] [link_is_constexpr] is used to check whether a [link_constexpr_constructible] type is a [link_callable] type that yields a `constexpr` result -- no arguments necessary.
+
+[*7.] [link_bind] is used to intercept the signature information from a `std::placeholder` expression before forwarding on to `std::bind` or `boost::bind`. This gives library writers the power to create more flexible template APIs for callable types.
+
+[*8.] [link_min_arity] can be used to detect the presence of default arguments on a [link_simple_fn_obj]
+
+[*9.] The [libname] interface mainly consists of template aliases and `constexpr std::integral_constant` functions, which are arguably preferable to `typename foo::type` and `foo::value`. While the `std::integral_constant` functions in [libname] may be a deviation from traditional type trait designs, they facilitate a metaprogramming style that uses value-semantics (a la [hana]). The functions can generally be used with either types or values, which eliminates unnecessary `decltype` usage.
+
+[*10.] [libname] includes optional features for the manipulation and inspection of calling conventions. These features are currently deemed experimental, because they greatly increase the test surface of [libname], are platform-specific, and are not yet fully tested on any platform.
+
+[endsect][/section:reasons]
+
+[section Why does [namespace_scoped][^args] alias a [^std::tuple]?]
+
+Boost contains a handful of excellent type containers. However, I wanted [libname] to only use the standard headers, so `<tuple>` was my only option under that limitation.
+
+[endsect]
+
+[endsect]
+
+
+[/*********************************************************************]
+[/************************* C O N T A C T *****************************]
+[/*********************************************************************]
+
+[section:contact Contact]
+
+[libname] is authored and maintained by Barrett Adair
+
+Comments, feedback, bug reports, and questions are appreciated, which can be submitted in the following ways:
+
+# Open a new issue [@https://github.com/badair/callable_traits/issues/new here] on GitHub
+# Message the author [@https://gitter.im/badair/callable_traits here] on Gitter, an excellent chat service built around GitHub, with message persistence and Markdown support
+# Send the author an email at
+  * barrettellisadair
+  * at...
+  * gmail dot com
+  * (please excuse the anti-spam formatting)
+
+[endsect][/section:contact]
+
+
+
 [/*********************************************************************]
 [/*********************** C O N C E P T S *****************************]
 [/*********************************************************************]
@@ -440,48 +504,108 @@ The simplest way to use [libname] is to include the main header file:
 
 [include_header callable_traits]
 
-[libname] interface is also broken down by trait into individual header files. To use only the traits you need, include one or more of the following headers, listed alphabetically:
+[libname] interface is also broken down by trait into individual header files. To use only the traits you need, include one or more of the following headers, grouped by category:
 
-* [include_header [link_add_calling_convention]]
-* [include_header [link_add_member_const]]
-* [include_header [link_add_member_cv]]
-* [include_header [link_add_member_lvalue_reference]]
-* [include_header [link_add_member_rvalue_reference]]
-* [include_header [link_add_member_volatile]]
-* [include_header [link_add_varargs]]
-* [include_header [link_apply_member_pointer]]
-* [include_header [link_apply_return]]
-* [include_header [link_arg_at]]
+
+[section Qualifiers]
+
+* `const`
+  * [include_header [link_add_member_const]]
+  * [include_header [link_remove_member_const]]
+  * [include_header [link_is_const_member]]
+
+* `volatile`
+  * [include_header [link_add_member_volatile]]
+  * [include_header [link_remove_member_volatile]]
+  * [include_header [link_is_volatile_member]]
+
+* `const volatile`
+  * [include_header [link_add_member_cv]]
+  * [include_header [link_remove_member_cv]]
+
+* `&`
+  * [include_header [link_add_member_lvalue_reference]]
+  * [include_header [link_is_lvalue_reference_member]]
+
+
+* `&&`
+  * [include_header [link_add_member_rvalue_reference]]
+  * [include_header [link_is_rvalue_reference_member]]
+
+* Other
+  * [include_header [link_remove_member_reference]]
+  * [include_header [link_is_reference_member]]
+  * [include_header [link_qualified_function_type]]
+  * [include_header [link_has_member_qualifiers]]
+
+[endsect]
+
+
+[section Parameters]
+
 * [include_header [link_args]]
-* [include_header [link_arity]]
-* [include_header [link_bind]]
-* [include_header [link_can_invoke]]
-* [include_header [link_can_invoke_constexpr]]
+* [include_header [link_arg_at]]
 * [include_header [link_clear_args]]
-* [include_header [link_function_type]]
-* [include_header [link_has_calling_convention]]
-* [include_header [link_has_member_qualifiers]]
-* [include_header [link_has_varargs]]
-* [include_header [link_has_void_return]]
-* [include_header [link_is_const_member]]
-* [include_header [link_is_constexpr]]
-* [include_header [link_is_lvalue_reference_member]]
-* [include_header [link_is_reference_member]]
-* [include_header [link_is_rvalue_reference_member]]
-* [include_header [link_is_volatile_member]]
-* [include_header [link_max_arity]]
-* [include_header [link_min_arity]]
-* [include_header [link_qualified_function_type]]
-* [include_header [link_remove_calling_convention]]
-* [include_header [link_remove_member_const]]
-* [include_header [link_remove_member_cv]]
-* [include_header [link_remove_member_pointer]]
-* [include_header [link_remove_member_reference]]
-* [include_header [link_remove_member_volatile]]
-* [include_header [link_remove_varargs]]
 * [include_header [link_push_args_back]]
 * [include_header [link_push_args_front]]
+* [include_header [link_arity]]
+* [include_header [link_min_arity]]
+* [include_header [link_max_arity]]
+
+[endsect]
+
+
+[section Return Types]
+
+* [include_header [link_apply_return]]
 * [include_header [link_result_of]]
+* [include_header [link_has_void_return]]
+
+[endsect]
+
+
+[section ['INVOKE]]
+
+* [include_header [link_can_invoke]]
+* [include_header [link_can_invoke_constexpr]]
+* [include_header [link_function_type]]
+* [include_header [link_bind]]
+
+[endsect]
+
+
+[section Member Pointers]
+
+* [include_header [link_apply_member_pointer]]
+* [include_header [link_remove_member_pointer]]
+
+[endsect]
+
+
+[section Constant Expressions]
+
+* [include_header [link_is_constexpr]]
+* [include_header [link_can_invoke_constexpr]]
+
+[endsect]
+
+
+[section Variadics]
+
+* [include_header [link_add_varargs]]
+* [include_header [link_remove_varargs]]
+* [include_header [link_has_varargs]]
+
+[endsect]
+
+
+[section Calling Conventions (experimental)]
+
+* [include_header [link_add_calling_convention]]
+* [include_header [link_remove_calling_convention]]
+* [include_header [link_has_calling_convention]]
+
+[endsect]
 
 [endsect][/section:headers]
 
@@ -1214,7 +1338,6 @@ TODO - PMD and PMF examples
 
 
 
-
 [section:ref_has_calling_convention has_calling_convention]
 
     namespace ``[lib_namespace]`` {
@@ -1446,44 +1569,6 @@ TODO
 [endsect]
 
 
-[/*********************************************************************]
-[/***************************** F A Q *********************************]
-[/*********************************************************************]
-
-
-[section:faq FAQ]
-
-[section:reasons What makes [libname] unique?]
-
-[*1.] [libname] offers template aliases such as [link_remove_member_const] for manipulating function qualifiers, designed to parallel the `<type_traits>` aliases such as `std::remove_const_t`.
-
-[*2.] [libname] is designed to accept cv-qualified and ref-qualified types, which eliminates the need to prepare template argument types with metafunctions such as `std::remove_reference` and `std::decay`. This is especially useful when dealing with perfectly-forwarded parameter types in function templates.
-
-[*3.] [libname] is designed to comply with [invoke] rules, with one unobtrusive and beneficial deviation: [link_fn] types are compatible with all relevant type operations that do not specifically require an invocation.
-
-[*4.] [namespace_scoped][link_arg_at]`<2, Callable>` is more flexible than `typename boost::function_traits<Callable>::arg3_type`.
-
-[*5.] [link_can_invoke] is used to test `INVOKE`-ability at compile-time, with value semantics. For the craziest metaprogrammers, [link_can_invoke_constexpr] does the same as `can_invoke` for [link_constexpr_constructible] types, with an added check for `constexpr`-ness
-
-[*6.] [link_is_constexpr] is used to check whether a [link_constexpr_constructible] type is a [link_callable] type that yields a `constexpr` result -- no arguments necessary.
-
-[*7.] [link_bind] is used to intercept the signature information from a `std::placeholder` expression before forwarding on to `std::bind` or `boost::bind`. This gives library writers the power to create more flexible template APIs for callable types.
-
-[*8.] [link_min_arity] can be used to detect the presence of default arguments on a [link_simple_fn_obj]
-
-[*9.] The [libname] interface mainly consists of template aliases and `constexpr std::integral_constant` functions, which are arguably preferable to `typename foo::type` and `foo::value`. While the `std::integral_constant` functions in [libname] may be a deviation from traditional type trait designs, they facilitate a metaprogramming style that uses value-semantics (a la [hana]). The functions can generally be used with either types or values, which eliminates unnecessary `decltype` usage.
-
-[*10.] [libname] includes optional features for the manipulation and inspection of calling conventions. These features are currently deemed experimental, because they greatly increase the test surface of [libname], are platform-specific, and are not yet fully tested on any platform.
-
-[endsect][/section:reasons]
-
-[section Why does [namespace_scoped][^args] alias a [^std::tuple]?]
-
-Boost contains a handful of excellent type containers. However, I wanted [libname] to only use the standard headers, so `<tuple>` was my only option under that limitation.
-
-[endsect]
-
-[endsect]
 
 
 [/*********************************************************************]
@@ -1495,7 +1580,7 @@ Boost contains a handful of excellent type containers. However, I wanted [libnam
 
 Special thanks to Louis Dionne, the author of the massive [hana] project. [^Boost.Hana] is an incredibly thorough, useful, ambitious, envelope-pushing metaprogramming library that turned traditional C++ metaprogramming on its head. This concept of pushing the limits of the language to create something useful was a huge source of inspiration for me. Template metaprogramming is, after all, a delightful excuse to write some clever and esoteric code, which would be otherwise unacceptable in most problem domains.
 
-Sometime in October of 2015, I expressed my admiration for Louis' work in a reply to one of his comments on [@https://www.reddit.com/r/cpp r/cpp]. To my surprise, Louis replied, and encouraged me to contribute to a library project. At this point, I had little experience with C++ templates - I don't think I even knew how to write a partial template specialization. After pushing a couple of tiny, confidence-building commits on [^Boost.Hana], I started working on the project that would eventually evolve into [libname]. If not for Louis' encouragement on Reddit, [libname] would likely not exist today. Louis' occasional suggestions have also been invaluable throughout the development of [libname]. Additionally, [libname] uses a slightly modified version of [^Boost.Hana]'s excellent tuple sorting algorithm, which is used by the [namespace_scoped][link_bind] compile-time expression parser.
+Sometime in October of 2015, I expressed my admiration for Louis' work in a reply to one of his comments on [@https://www.reddit.com/r/cpp r/cpp]. To my surprise, Louis replied, and encouraged me to contribute to a library project. At this point, I had little experience with C++ templates - I don't think I even knew how to write a partial template specialization. After pushing a couple of tiny, confidence-building commits on [^Boost.Hana], I started working on the project that would eventually evolve into [libname]. If not for Louis' encouragement on Reddit, [libname] would likely not exist today. Louis' occasional suggestions have also been valuable throughout the development of [libname]. Additionally, [libname] uses a slightly modified version of [^Boost.Hana]'s excellent type sorting algorithm, which is used by the [namespace_scoped][link_bind] compile-time expression parser.
 
 I'd also like to thank Alisdair Meredith, whose paper on [abominable_paper] served as the perfect launchpad for the interface design of [libname]. He also provided valuable feedback late in development.
 
@@ -1508,26 +1593,4 @@ Thanks to Matt, Ross, Ryan, Connie, Will, Melanie, Drew, Rob, and all of my form
 Finally, I'd like to thank the Harding University Computer Science faculty for their mentorship, friendship, and high standards of excellence.
 
 [endsect][/section:acknowledgements]
-
-
-
-[/*********************************************************************]
-[/************************* C O N T A C T *****************************]
-[/*********************************************************************]
-
-[section:contact Contact]
-
-[libname] is authored and maintained by Barrett Adair
-
-Comments, feedback, bug reports, and questions are appreciated, which can be submitted in the following ways:
-
-# Open a new issue [@https://github.com/badair/callable_traits/issues/new here] on GitHub
-# Message the author [@https://gitter.im/badair/callable_traits here] on Gitter, an excellent chat service built around GitHub, with message persistence and Markdown support
-# Send the author an email at
-  * barrettellisadair
-  * at...
-  * gmail dot com
-  * (please excuse the anti-spam formatting)
-
-[endsect][/section:contact]
 
