@@ -134,13 +134,13 @@ namespace callable_traits {
             static constexpr flags q_flags = cv_flags | ref_flags;
 
         public:
-            using is_qualified = std::integral_constant<bool, q_flags != default_>;
-            using is_reference_qualified = std::integral_constant<bool, 0 < ref_flags>;
+            using has_member_qualifiers = std::integral_constant<bool, q_flags != default_>;
+            using is_reference_member = std::integral_constant<bool, 0 < ref_flags>;
             using is_lvalue_reference_qualified = std::integral_constant<bool, ref_flags == lref_>;
             using is_rvalue_reference_qualified = std::integral_constant<bool, ref_flags == rref_>;
-            using is_const_qualified = std::integral_constant<bool, 0 < (cv_flags & const_)>;
-            using is_volatile_qualified = std::integral_constant<bool, 0 < (cv_flags & volatile_)>;
-            using is_cv_qualified = std::integral_constant<bool, cv_flags == (const_ | volatile_)>;
+            using is_const_member = std::integral_constant<bool, 0 < (cv_flags & const_)>;
+            using is_volatile_member = std::integral_constant<bool, 0 < (cv_flags & volatile_)>;
+            using is_cv_member = std::integral_constant<bool, cv_flags == (const_ | volatile_)>;
         };
     }
 }

@@ -86,11 +86,11 @@ int main() {
     // of the type passed. This is done for consistency with member function
     // pointers, where the checks below would look at the function qualifiers
     // (rather than qualifiers on the pointer itself).
-    static_assert(ct::is_const_qualified<foo>(), "");
-    static_assert(!ct::is_volatile_qualified<foo>(), "");
-    static_assert(!ct::is_reference_qualified<foo>(), "");
-    static_assert(!ct::is_lvalue_qualified<foo>(), "");
-    static_assert(!ct::is_rvalue_qualified<foo>(), "");
+    static_assert(ct::is_const_member<foo>(), "");
+    static_assert(!ct::is_volatile_member<foo>(), "");
+    static_assert(!ct::is_reference_member<foo>(), "");
+    static_assert(!ct::is_lvalue_reference_member<foo>(), "");
+    static_assert(!ct::is_rvalue_reference_member<foo>(), "");
 
     // is_constexpr would return std::true_type if foo's operator() were constexpr.
     static_assert(!ct::is_constexpr<foo>(), "");
@@ -113,18 +113,18 @@ int main() {
 
     // ``[libname]`` lets you manipulate qualifiers on PMF types.
     // To remove const:
-    using mutable_pmf = ct::remove_function_const<pmf>;
+    using mutable_pmf = ct::remove_member_const<pmf>;
     using without_const = void (foo::*)(int, int&&, const int&, void*) /*no const!*/;
     static_assert(std::is_same<mutable_pmf, without_const>::value, "");
 
     // To add an rvalue qualifier:
-    using rvalue_pmf = ct::add_function_rvalue<pmf>;
+    using rvalue_pmf = ct::add_member_rvalue_reference<pmf>;
     using with_rvalue = void (foo::*)(int, int&&, const int&, void*) const &&;
     static_assert(std::is_same<rvalue_pmf, with_rvalue>::value, "");
 
-    // Just like std::add_rvalue_reference, ``[namespace_scoped]``add_function_rvalue
-    // follows C++11 reference collapsing rules. While remove_function_const
-    // and add_function_rvalue are somewhat clumsy names, they are the best
+    // Just like std::add_rvalue_reference, ``[namespace_scoped]``add_member_rvalue_reference
+    // follows C++11 reference collapsing rules. While remove_member_const
+    // and add_member_rvalue_reference are somewhat clumsy names, they are the best
     // the best the author could provide while still allowing both terseness
     // and grep-ability against std::remove_const, etc. in <type_traits>.
     // Naturally, ``[libname]`` provides similar tools for the other C++
@@ -137,9 +137,9 @@ int main() {
     static_assert(std::is_same<fn, expected_fn>::value, "");
 
     // We just created an abominable function type - notice the const
-    // qualifier! ``namespace_scoped``remove_function_const accepts abominable
+    // qualifier! ``namespace_scoped``remove_member_const accepts abominable
     // types too (and so does any feature where it is legal to do so):
-    using not_abominable = ct::remove_function_const<fn>;
+    using not_abominable = ct::remove_member_const<fn>;
     using expected_fn2 = void (int, int&&, const int&, void*);
     static_assert(std::is_same<not_abominable, expected_fn2>::value, "");
 }
