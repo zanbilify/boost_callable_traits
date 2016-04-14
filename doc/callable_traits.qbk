@@ -31,6 +31,7 @@
 [template hana[][@https://boostorg.github.io/hana/ [^Boost.Hana]]]
 [template feedback[][link callable_traits.contact feedback]]
 [template repo[][@https://github.com/badair/callable_traits GitHub]]
+[template abominable_paper[][@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0172r0.html "abominable" function types]]
 
 [template link_msvc_issues[][link callable_traits.compatibility.msvc_issues MSVC Issues]]
 
@@ -92,6 +93,7 @@
 [template link_bind[][link callable_traits.ref_bind [^bind]]]
 [template link_can_invoke[][link callable_traits.ref_can_invoke [^can_invoke]]]
 [template link_can_invoke_constexpr[][link callable_traits.ref_can_invoke_constexpr [^can_invoke_constexpr]]]
+[template link_expand_args[][link callable_traits.ref_expand_args [^expand_args]]]
 [template link_function_type[][link callable_traits.ref_function_type [^function_type]]]
 [template link_has_calling_convention[][link callable_traits.ref_has_calling_convention [^has_calling_convention]]]
 [template link_has_varargs[][link callable_traits.ref_has_varargs [^has_varargs]]]
@@ -160,7 +162,7 @@ This documentation will be most beneficial to readers who posess a basic underst
 * [@http://en.cppreference.com/w/cpp/language/operators#Function_call_operator the function call operator, [^operator()]]
 * [@https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers universal references] and [@http://stackoverflow.com/questions/13725747/concise-explanation-of-reference-collapsing-rules-requested-1-a-a-2 reference collapsing rules]
 * [@http://en.cppreference.com/w/cpp/language/member_functions#const-.2C_volatile-.2C_and_ref-qualified_member_functions cv-qualified and ref-qualified member functions]
-* [@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0172r0.html "abominable" function types]
+* [abominable_paper]
 * [@http://en.cppreference.com/w/cpp/language/overloaded_address taking the address of overloaded functions]
 * [@http://en.cppreference.com/w/c/language/variadic C-style variadics], a.k.a. varargs
 * [@https://en.wikipedia.org/wiki/X86_calling_conventions calling conventions]
@@ -872,6 +874,7 @@ For `add_calling_convention` to work as-intended, you must:
 
 [heading See Also]
 * [link_args]
+* [link_expand_args]
 
 [endsect][/section:ref_arg_at]
 
@@ -915,6 +918,7 @@ For `add_calling_convention` to work as-intended, you must:
 
 [heading See Also]
 * [link_arg_at]
+* [link_expand_args]
 
 [endsect][/secttion:ref_args]
 
@@ -1075,7 +1079,39 @@ For `add_calling_convention` to work as-intended, you must:
 [endsect]
 
 
+[section:ref_expand_args expand_args]
 
+    namespace ``[lib_namespace]`` {
+
+            template<typename T, template<class...> class Container>
+                using expand_args = /* implementation-defined */;
+        }
+
+[heading Constraints]
+# `T` must be one of the following:
+  * [link_signature]
+  * [link_simple_fn_obj]
+  * [link_bind_expression]
+# Let `std::tuple<Args...>` represent [namespace_scoped][link_args]`<T>`
+  * `Container<Args...>` must be a legal template instantiation.
+
+[heading Behavior]
+* When the first constraint is violated, a substitution failure occurs
+* When the second constraint is violated, the behavior is undefined
+* When both constraints are satisfied, then:
+  * Let `std::tuple<Args...>` represent [namespace_scoped][link_args]`<T>`
+  * `expand_args<T, Container>` aliases `Container<Args...>`
+
+
+[heading Example]
+[import ../example/expand_args.cpp]
+[expand_args]
+
+[heading See Also]
+* [link_args]
+* [link_arg_at]
+
+[endsect]
 
 
 [section:ref_function_type function_type]
@@ -1359,6 +1395,20 @@ TODO
 [endsect]
 
 
+[/*********************************************************************]
+[/***************************** F A Q *********************************]
+[/*********************************************************************]
+
+
+[section:faq FAQ]
+
+[section Why does [namespace_scoped][^args] alias a [^std::tuple]?]
+
+Boost contains a handful of excellent type containers. However, I wanted [libname] to only use the standard headers, so `<tuple>` was my only option under that limitation.
+
+[endsect]
+
+[endsect]
 
 
 [/*********************************************************************]
@@ -1368,11 +1418,19 @@ TODO
 
 [section:acknowledgements Acknowledgements]
 
-Special thanks to Louis Dionne, whose massive [hana] project was the original source of inspiration for [libname]. Louis' occasional suggestions have been invaluable throughout the development of [libname].
+Special thanks to Louis Dionne, the author of the massive [hana] project. [^Boost.Hana] is an incredibly thorough, useful, ambitious, envelope-pushing metaprogramming library that turned traditional C++ metaprogramming on its head. This concept of pushing the limits of the language to create something useful was a huge source of inspiration for me. Template metaprogramming is, after all, a delightful excuse to write some clever and esoteric code, which would be otherwise unacceptable in most problem domains.
 
-Robert Ramey's CppCon 2014 presentation [@https://www.youtube.com/watch?v=ACeNgqBKL7E "How you can make a Boost C++ Library"], along with the related material found at the [@http://rrsd.com/blincubator.com/ Boost Library Incubator] have been excellent resources for the development and documentation of [libname].
+Sometime in October of 2015, I expressed my admiration for Louis' work in a reply to one of his comments on [@https://www.reddit.com/r/cpp r/cpp]. To my surprise, Louis replied, and encouraged me to contribute to a library project. At this point, I had little experience with C++ templates - I don't think I even knew how to write a partial template specialization. After pushing a couple of tiny, confidence-building commits on [^Boost.Hana], I started working on the project that would eventually evolve into [libname]. If not for Louis' encouragement on Reddit, [libname] would likely not exist today. Louis' occasional suggestions have also been invaluable throughout the development of [libname]. Additionally, [libname] uses a slightly modified version of [^Boost.Hana]'s excellent tuple sorting algorithm, which is used by the [namespace_scoped][link_bind] compile-time expression parser.
 
-Finally, I'd like to thank the faculty of the Harding University Computer Science Department for their mentorship and standards of excellence.
+I'd also like to thank Alisdair Meredith, whose paper on [abominable_paper] served as the perfect launchpad for the interface design of [libname]. He also provided valuable feedback late in development.
+
+Thanks to Jason Rice, who also provided valuable feedback.
+
+Thanks to Robert Ramey, whose CppCon 2014 presentation [@https://www.youtube.com/watch?v=ACeNgqBKL7E "How you can make a Boost C++ Library"], along with the related material found at the [@http://rrsd.com/blincubator.com/ Boost Library Incubator] have been excellent resources for the development and documentation of [libname].
+
+Thanks to Matt, Ross, Ryan, Connie, Will, Melanie, Drew, Rob, and all of my former colleagues at ArcBest Technologies, for teaching me, encouraging me, and just being generally awesome people.
+
+Finally, I'd like to thank the Harding University Computer Science faculty for their mentorship, friendship, and high standards of excellence.
 
 [endsect][/section:acknowledgements]
 

@@ -18,6 +18,7 @@ callable_traits/ref_arity.html
 callable_traits/ref_bind.html
 callable_traits/ref_can_invoke.html
 callable_traits/ref_can_invoke_constexpr.html
+callable_traits/ref_expand_args.html
 callable_traits/ref_function_type.html
 callable_traits/ref_has_calling_convention.html
 callable_traits/ref_has_varargs.html
@@ -40,5 +41,6 @@ callable_traits/ref_remove_member_reference.html
 callable_traits/ref_remove_varargs.html
 callable_traits/ref_remove_member_volatile.html
 callable_traits/ref_result_of.html
+callable_traits/faq.html
 callable_traits/acknowledgements.html
 callable_traits/contact.html

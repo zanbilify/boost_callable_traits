@@ -150,6 +150,10 @@ namespace callable_traits {
 			// the data type of PMDs. invalid_type for function objects.
 			template<typename>
 			using apply_return = invalid_type;
+
+            // Expands the argument types into a template
+            template<template<class...> class Container>
+            using expand_args = invalid_type;
 		};
 	}
 }
