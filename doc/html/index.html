@@ -297,12 +297,12 @@
         </p></td></tr>
 </table></div>
 <p>
-        Potential use cases for such obscure specializations are vitually nonexistent
-        in run-of-the-mill application codebases. Even in library code, these are
-        exceedingly rare. However, there are a handful of very specific metaprogramming
-        scenarios that can only be solved with such template "spam". While
-        these use cases are indeed rare, the writing and testing of these templates
-        is incredibly tedious and time consuming. On this premise, <code class="literal">CallableTraits</code>
+        Use cases for such obscure specializations are vitually nonexistent in run-of-the-mill
+        application codebases. Even in library code, these are exceedingly rare.
+        However, there are a handful of very specific metaprogramming scenarios that
+        can only be solved with such template "spam". While these use cases
+        are indeed rare, the writing and testing of these templates is incredibly
+        tedious and time consuming. On this premise, <code class="literal">CallableTraits</code>
         offers a final and decisive library-level solution, so that authors of generic
         code will <span class="bold"><strong>never again</strong></span> need to write these
         specializations, for <span class="emphasis"><em>any</em></span> reason.
@@ -551,14 +551,14 @@
       </p>
 <p>
         <span class="bold"><strong>7.</strong></span> <a class="link" href="callable_traits/ref_bind.html" title="bind"><code class="literal">bind</code></a>
-        is used by library writers to easily accept <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">placeholder</span></code>
-        expressions anywhere, and intercept the type information for processing before
-        forwarding on to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code> or <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span></code>.
-        This gives library writers the power to create more flexible templated APIs.
+        is used to intercept the signature information from a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">placeholder</span></code>
+        expression before forwarding on to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>
+        or <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span></code>. This gives library writers the power
+        to create more flexible template APIs for callable types.
       </p>
 <p>
         <span class="bold"><strong>8.</strong></span> <a class="link" href="callable_traits/ref_min_arity.html" title="min_arity"><code class="literal">min_arity</code></a>
-        is used to detect the presence of default arguments on a <a class="link" href="callable_traits/concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>
+        can be used to detect the presence of default arguments on a <a class="link" href="callable_traits/concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>
       </p>
 <p>
         <span class="bold"><strong>9.</strong></span> The <code class="literal">CallableTraits</code>
