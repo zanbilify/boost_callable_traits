@@ -46,17 +46,54 @@
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-          When <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a>, the return type of the result type
-          will be the same as <code class="computeroutput"><span class="identifier">T</span></code>,
-          except that the return type is changed to <code class="computeroutput"><span class="identifier">Return</span></code>.
-          In other words, <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="keyword">void</span><span class="special">(),</span> <span class="keyword">int</span><span class="special">&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span></code>.
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a>, the aliased type will be identical
+          to <code class="computeroutput"><span class="identifier">T</span></code>, except that the aliased
+          type will now return <code class="computeroutput"><span class="identifier">Return</span></code>,
+          such that:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="keyword">void</span><span class="special">(),</span>
+                <span class="keyword">int</span><span class="special">&gt;</span></code>
+                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(*</span> <span class="keyword">const</span><span class="special">)(</span><span class="keyword">char</span><span class="special">),</span> <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">const</span>
+                <span class="keyword">char</span><span class="special">*(*</span>
+                <span class="keyword">const</span><span class="special">)(</span><span class="keyword">char</span><span class="special">)</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(&amp;)(),</span>
+                <span class="keyword">void</span><span class="special">&gt;</span></code>
+                aliases <code class="computeroutput"><span class="keyword">void</span><span class="special">(&amp;)()</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*&amp;)()</span>
+                <span class="keyword">const</span> <span class="keyword">volatile</span>
+                <span class="special">&amp;&amp;,</span> <span class="keyword">short</span><span class="special">&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">short</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*&amp;)()</span> <span class="keyword">const</span>
+                <span class="keyword">volatile</span> <span class="special">&amp;&amp;</span></code>
+              </li>
+</ul></div>
         </li>
 <li class="listitem">
-          When <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_pmd" title="MemberDataPtr"><span class="green">MemberDataPtr</span></a>, the resulting type points to
-          a data member of type <code class="computeroutput"><span class="identifier">Return</span></code>,
-          with the same parent class as <code class="computeroutput"><span class="identifier">T</span></code>.
-          In other words, <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*,</span> <span class="keyword">char</span><span class="special">&gt;</span></code>
-          becomes <code class="computeroutput"><span class="keyword">char</span> <span class="identifier">foo</span><span class="special">::*</span></code>.
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_pmd" title="MemberDataPtr"><span class="green">MemberDataPtr</span></a>,
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">Class</span></code> represent
+                the parent class of <code class="computeroutput"><span class="identifier">T</span></code>
+              </li>
+<li class="listitem">
+                the aliased type is <code class="computeroutput"><span class="identifier">Return</span>
+                <span class="identifier">Class</span><span class="special">::*</span>
+                <span class="comment">/* any qualifiers on T */</span></code>,
+                such that:
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span> <span class="keyword">const</span>
+                <span class="special">&amp;,</span> <span class="keyword">char</span><span class="special">&gt;</span></code> becomes <code class="computeroutput"><span class="keyword">char</span>
+                <span class="identifier">foo</span><span class="special">::*</span>
+                <span class="keyword">const</span> <span class="special">&amp;</span></code>
+              </li>
+</ul></div>
         </li>
 </ul></div>
 <h4>

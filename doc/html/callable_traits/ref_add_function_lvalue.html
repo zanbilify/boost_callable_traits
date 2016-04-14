@@ -44,12 +44,39 @@
 <a name="callable_traits.ref_add_function_lvalue.h1"></a>
       <span class="phrase"><a name="callable_traits.ref_add_function_lvalue.behavior"></a></span><a class="link" href="ref_add_function_lvalue.html#callable_traits.ref_add_function_lvalue.behavior">Behavior</a>
     </h4>
-<p>
-      Adds an lvalue reference qualifier (<code class="computeroutput"><span class="special">&amp;</span></code>)
-      to the signature of <code class="computeroutput"><span class="identifier">T</span></code>, if not
-      already present. In other words, <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span></code>
-      becomes <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="special">&amp;</span></code>.
-    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          Adds an lvalue reference qualifier (<code class="computeroutput"><span class="special">&amp;</span></code>)
+          qualifier to the signature of <code class="computeroutput"><span class="identifier">T</span></code>
+          (if not already present)
+        </li>
+<li class="listitem">
+          If an rvalue reference qualifier is present, the lvalue reference qualifier
+          replaces it (in arbitrary accordance with reference collapsing rules)
+        </li>
+<li class="listitem">
+          Any pointer qualifiers are preserved
+        </li>
+<li class="listitem">
+          Such that:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">add_function_lvalue</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">()&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span> <span class="special">&amp;</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">add_function_lvalue</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">const</span>
+                <span class="special">&amp;&amp;&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="keyword">const</span> <span class="special">&amp;</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">add_function_lvalue</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*</span> <span class="keyword">const</span>
+                <span class="special">&amp;)()&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*</span>
+                <span class="keyword">const</span> <span class="special">&amp;)()</span>
+                <span class="special">&amp;</span></code>
+              </li>
+</ul></div>
+        </li>
+</ul></div>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_function_lvalue</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 

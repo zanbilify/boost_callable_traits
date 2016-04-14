@@ -26,11 +26,45 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_can_invoke"></a><a class="link" href="ref_can_invoke.html" title="can_invoke">can_invoke</a>
 </h2></div></div></div>
-<p>
-      TODO
-    </p>
+<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
+    <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="identifier">can_invoke</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;,</span> <span class="identifier">Args</span><span class="special">&amp;&amp;...);</span>
+
+<span class="special">}</span>
+</pre>
 <h4>
 <a name="callable_traits.ref_can_invoke.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_can_invoke.constraints"></a></span><a class="link" href="ref_can_invoke.html#callable_traits.ref_can_invoke.constraints">Constraints</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          When <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">decay_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+          is a class/struct with a templated <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>, it's invocation must be SFINAE-friendly
+          with respect to <code class="computeroutput"><span class="identifier">Args</span><span class="special">&amp;&amp;...</span></code>
+        </li>
+<li class="listitem">
+          No other constraints
+        </li>
+</ul></div>
+<h4>
+<a name="callable_traits.ref_can_invoke.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_can_invoke.behavior"></a></span><a class="link" href="ref_can_invoke.html#callable_traits.ref_can_invoke.behavior">Behavior</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          If all arguments to <code class="computeroutput"><span class="identifier">can_invoke</span></code>
+          can legally be forwarded to <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>,
+          then an instance of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">true_type</span></code>
+          is returned
+        </li>
+<li class="listitem">
+          Otherwise, an instance of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code>
+          is returned
+        </li>
+</ul></div>
+<h4>
+<a name="callable_traits.ref_can_invoke.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_can_invoke.example_function_object"></a></span><a class="link" href="ref_can_invoke.html#callable_traits.ref_can_invoke.example_function_object">Example -
       Function Object</a>
     </h4>
@@ -99,7 +133,7 @@
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_can_invoke.h1"></a>
+<a name="callable_traits.ref_can_invoke.h3"></a>
       <span class="phrase"><a name="callable_traits.ref_can_invoke.example_member_function_pointer"></a></span><a class="link" href="ref_can_invoke.html#callable_traits.ref_can_invoke.example_member_function_pointer">Example
       - Member Function Pointer</a>
     </h4>
@@ -125,7 +159,7 @@
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_can_invoke.h2"></a>
+<a name="callable_traits.ref_can_invoke.h4"></a>
       <span class="phrase"><a name="callable_traits.ref_can_invoke.example_function_pointer"></a></span><a class="link" href="ref_can_invoke.html#callable_traits.ref_can_invoke.example_function_pointer">Example -
       Function Pointer</a>
     </h4>
@@ -151,7 +185,7 @@
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_can_invoke.h3"></a>
+<a name="callable_traits.ref_can_invoke.h5"></a>
       <span class="phrase"><a name="callable_traits.ref_can_invoke.example_function_reference"></a></span><a class="link" href="ref_can_invoke.html#callable_traits.ref_can_invoke.example_function_reference">Example
       - Function Reference</a>
     </h4>
@@ -176,6 +210,14 @@
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
 </pre>
+<h4>
+<a name="callable_traits.ref_can_invoke.h6"></a>
+      <span class="phrase"><a name="callable_traits.ref_can_invoke.see_also"></a></span><a class="link" href="ref_can_invoke.html#callable_traits.ref_can_invoke.see_also">See
+      Also</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+          <a class="link" href="ref_can_invoke_constexpr.html" title="can_invoke_constexpr"><code class="literal">can_invoke_constexpr</code></a>
+        </li></ul></div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

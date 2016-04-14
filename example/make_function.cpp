@@ -20,8 +20,8 @@ namespace example_library {
         // callable_traits::function_type decays any non-overloaded callable type to
         // a plain function type, which is structured in terms of INVOKE.
 
-        using signature = ct::function_type<T&&>;
-        using result_type = std::function<signature>;
+        using f = ct::function_type<T&&>;
+        using result_type = std::function<f>;
         return result_type{ std::forward<T>(t) };
     }
 
@@ -44,8 +44,8 @@ namespace example_library {
                 std::forward<Others>(others)...
         ));
 
-        using signature = ct::function_type<bind_expr>;
-        using result_type = std::function<signature>;
+        using f = ct::function_type<bind_expr>;
+        using result_type = std::function<f>;
 
         return result_type{ std::bind(
                 std::forward<T>(t),

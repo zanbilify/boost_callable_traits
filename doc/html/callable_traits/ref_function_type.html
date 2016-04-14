@@ -44,7 +44,7 @@
       <span class="phrase"><a name="callable_traits.ref_function_type.behavior"></a></span><a class="link" href="ref_function_type.html#callable_traits.ref_function_type.behavior">Behavior</a>
     </h4>
 <p>
-      <code class="computeroutput"><span class="identifier">function_type</span></code> "decays"
+      <code class="computeroutput"><span class="identifier">function_type</span></code> is used to "decay"
       a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a>
       into an <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>-aware
       <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn" title="UnqualifiedFunction"><span class="green">UnqualifiedFunction</span></a>.
@@ -55,7 +55,9 @@
           manner.
         </li>
 <li class="listitem">
-          Otherwise, if <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>:
+          Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
+          <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>,
+          then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                 Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
@@ -76,10 +78,31 @@
                 aliases <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">ClassRef</span><span class="special">,</span>
                 <span class="identifier">Args</span><span class="special">...)</span></code>
               </li>
+<li class="listitem">
+                such that:
+                <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; ">
+<li class="listitem">
+                      <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">char</span><span class="special">)&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span> <span class="special">&amp;,</span>
+                      <span class="keyword">char</span><span class="special">)</span></code>
+                    </li>
+<li class="listitem">
+                      <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">char</span><span class="special">)</span> <span class="special">&amp;&amp;&gt;</span></code>
+                      aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span> <span class="special">&amp;&amp;,</span>
+                      <span class="keyword">char</span><span class="special">)</span></code>
+                    </li>
+<li class="listitem">
+                      <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">char</span><span class="special">)</span> <span class="keyword">const</span><span class="special">&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span>
+                      <span class="keyword">const</span> <span class="special">&amp;,</span>
+                      <span class="keyword">char</span><span class="special">)</span></code>
+                    </li>
+</ul></div>
+              </li>
 </ul></div>
         </li>
 <li class="listitem">
-          Otherwise, if <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_pmd" title="MemberDataPtr"><span class="green">MemberDataPtr</span></a>:
+          Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
+          <a class="link" href="concepts.html#callable_traits.concepts.ref_pmd" title="MemberDataPtr"><span class="green">MemberDataPtr</span></a>,
+          then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                 Let <code class="computeroutput"><span class="identifier">ClassRef</span></code> represent
@@ -94,10 +117,29 @@
                 <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
                 aliases <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">ClassRef</span><span class="special">)</span></code>
               </li>
+<li class="listitem">
+                such that:
+                <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; ">
+<li class="listitem">
+                      <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="keyword">int</span>
+                      <span class="identifier">foo</span><span class="special">::*&gt;</span></code>
+                      aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span> <span class="keyword">const</span>
+                      <span class="special">&amp;)</span></code>
+                    </li>
+<li class="listitem">
+                      <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="keyword">int</span>
+                      <span class="identifier">foo</span><span class="special">::*</span>
+                      <span class="keyword">const</span> <span class="special">&amp;&gt;</span></code>
+                      also aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span>
+                      <span class="keyword">const</span> <span class="special">&amp;)</span></code>
+                    </li>
+</ul></div>
+              </li>
 </ul></div>
         </li>
 <li class="listitem">
-          Otherwise, if <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a>:
+          Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
+          <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a>:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                 Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
@@ -114,15 +156,45 @@
 </ul></div>
         </li>
 <li class="listitem">
-          Otherwise, if <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>:
+          Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
+          <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>,
+          then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                 Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
-                represent the parameter types in the signature of T's <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
+                represent the parameter types in the signature of <code class="computeroutput"><span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">decay_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="keyword">operator</span><span class="special">())</span></code>
               </li>
 <li class="listitem">
                 Let <code class="computeroutput"><span class="identifier">Return</span></code> represent
-                the return type of T's <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
+                the return type of <code class="computeroutput"><span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">decay_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="keyword">operator</span><span class="special">())</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+                aliases <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)</span></code>
+              </li>
+</ul></div>
+        </li>
+<li class="listitem">
+          Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
+          <a class="link" href="concepts.html#callable_traits.concepts.ref_bind_expression" title="BindExpression"><span class="green">BindExpression</span></a>,
+          then:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">...&gt;</span></code>
+                represent <code class="literal">callable_traits::</code><code class="literal"><a class="link" href="ref_args.html" title="args"><code class="literal">args</code></a></code><code class="computeroutput"><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+              </li>
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">bind_args</span><span class="special">...</span></code>
+                represent the argument values that were passed to [namespace]<code class="computeroutput"><span class="identifier">bind</span></code> which returned an instance
+                of <code class="computeroutput"><span class="identifier">T</span></code>
+              </li>
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">bind_result</span></code> represent
+                the return value of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(</span><span class="identifier">bind_args</span><span class="special">...)</span></code>
+              </li>
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">Return</span></code> represent
+                <code class="computeroutput"><span class="keyword">decltype</span><span class="special">(</span><span class="identifier">bind_result</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">declval</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;()...))</span></code>
               </li>
 <li class="listitem">
                 <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
@@ -178,6 +250,22 @@
 <p>
       TODO - PMD and PMF examples
     </p>
+<h4>
+<a name="callable_traits.ref_function_type.h3"></a>
+      <span class="phrase"><a name="callable_traits.ref_function_type.see_also"></a></span><a class="link" href="ref_function_type.html#callable_traits.ref_function_type.see_also">See
+      Also</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <a class="link" href="ref_args.html" title="args"><code class="literal">args</code></a>
+        </li>
+<li class="listitem">
+          <a class="link" href="ref_result_of.html" title="result_of"><code class="literal">result_of</code></a>
+        </li>
+<li class="listitem">
+          <a class="link" href="ref_qualified_function_type.html" title="qualified_function_type"><code class="literal">qualified_function_type</code></a>
+        </li>
+</ul></div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

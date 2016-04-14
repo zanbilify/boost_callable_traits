@@ -26,16 +26,89 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_has_varargs"></a><a class="link" href="ref_has_varargs.html" title="has_varargs">has_varargs</a>
 </h2></div></div></div>
-<p>
-      TODO
-    </p>
+<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+    <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="identifier">has_varargs</span><span class="special">()</span> <span class="special">{</span>
+        <span class="comment">/* implementation-defined */</span>
+    <span class="special">}</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">U</span><span class="special">&gt;</span>
+    <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="identifier">has_varargs</span><span class="special">(</span><span class="identifier">U</span><span class="special">&amp;&amp;)</span> <span class="special">{</span>
+        <span class="keyword">return</span> <span class="identifier">has_varargs</span><span class="special">&lt;</span><span class="identifier">U</span><span class="special">&amp;&amp;&gt;();</span>
+    <span class="special">}</span>
+<span class="special">}</span>
+</pre>
 <h4>
 <a name="callable_traits.ref_has_varargs.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_has_varargs.constraints"></a></span><a class="link" href="ref_has_varargs.html#callable_traits.ref_has_varargs.constraints">Constraints</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+          <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a>
+        </li></ul></div>
+<h4>
+<a name="callable_traits.ref_has_varargs.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_has_varargs.behavior"></a></span><a class="link" href="ref_has_varargs.html#callable_traits.ref_has_varargs.behavior">Behavior</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          If the constraints are violated, a substitution failure occurs
+        </li>
+<li class="listitem">
+          Otherwise, if <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a>,
+          then:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                If <code class="computeroutput"><span class="identifier">T</span></code> uses C-style
+                variadics, an instance of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">true_type</span></code>
+                is returned
+              </li>
+<li class="listitem">
+                Otherwise, an instance of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code>
+                is returned
+              </li>
+</ul></div>
+        </li>
+<li class="listitem">
+          Otherwise, if <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>,
+          then:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                If <code class="computeroutput"><span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">decay_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="keyword">operator</span><span class="special">())</span></code>
+                uses C-style variadics, then an instance of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">true_type</span></code>
+                is returned
+              </li>
+<li class="listitem">
+                Otherwise, an instance of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code>
+                is returned
+              </li>
+</ul></div>
+        </li>
+<li class="listitem">
+          Otherwise, an instance of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code>
+          is returned
+        </li>
+</ul></div>
+<h4>
+<a name="callable_traits.ref_has_varargs.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_has_varargs.example"></a></span><a class="link" href="ref_has_varargs.html#callable_traits.ref_has_varargs.example">Example</a>
     </h4>
 <p>
       [has_varargs]
     </p>
+<h4>
+<a name="callable_traits.ref_has_varargs.h3"></a>
+      <span class="phrase"><a name="callable_traits.ref_has_varargs.see_also"></a></span><a class="link" href="ref_has_varargs.html#callable_traits.ref_has_varargs.see_also">See
+      Also</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <a class="link" href="ref_add_varargs.html" title="add_varargs"><code class="literal">add_varargs</code></a>
+        </li>
+<li class="listitem">
+          <a class="link" href="ref_remove_varargs.html" title="remove_varargs"><code class="literal">remove_varargs</code></a>
+        </li>
+</ul></div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

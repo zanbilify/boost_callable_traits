@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="CallableTraits">
-<link rel="next" href="callable_traits/function_sugar_example.html" title="Example:std::function sugar">
+<link rel="next" href="callable_traits/function_sugar_example.html" title="Example: std::function sugar">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -47,7 +47,7 @@
 <dt><span class="section"><a href="index.html#callable_traits.introduction.reasons">What makes <code class="literal">CallableTraits</code>
       unique?</a></span></dt>
 </dl></dd>
-<dt><span class="section"><a href="callable_traits/function_sugar_example.html">Example:<code class="literal">std::function</code>
+<dt><span class="section"><a href="callable_traits/function_sugar_example.html">Example: <code class="literal">std::function</code>
     sugar</a></span></dt>
 <dt><span class="section"><a href="callable_traits/compatibility.html">Compatibility</a></span></dt>
 <dd><dl><dt><span class="section"><a href="callable_traits/compatibility.html#callable_traits.compatibility.msvc_issues">MSVC Issues</a></span></dt></dl></dd>
@@ -69,6 +69,7 @@
 <dt><span class="section"><a href="callable_traits/concepts.html#callable_traits.concepts.ref_simple_callable"><span class="green">SimpleCallable</span></a></span></dt>
 <dt><span class="section"><a href="callable_traits/concepts.html#callable_traits.concepts.ref_simple_invokable"><span class="green">SimpleInvokable</span></a></span></dt>
 <dt><span class="section"><a href="callable_traits/concepts.html#callable_traits.concepts.ref_invokable"><span class="green">Invokable</span></a></span></dt>
+<dt><span class="section"><a href="callable_traits/concepts.html#callable_traits.concepts.ref_bind_expression"><span class="green">BindExpression</span></a></span></dt>
 <dt><span class="section"><a href="callable_traits/concepts.html#callable_traits.concepts.ref_constexpr_constructible"><span class="green">ConstexprDefaultConstructible</span></a></span></dt>
 <dt><span class="section"><a href="callable_traits/concepts.html#callable_traits.concepts.ref_cc_tag"><span class="green">CallingConventionTag</span></a></span></dt>
 </dl></dd>
@@ -207,6 +208,10 @@
 <li class="listitem">
             <a href="https://en.wikipedia.org/wiki/X86_calling_conventions" target="_top">calling
             conventions</a>
+          </li>
+<li class="listitem">
+            <a href="http://en.cppreference.com/w/cpp/utility/functional/bind" target="_top">std::bind
+            expressions</a> with <a href="http://en.cppreference.com/w/cpp/utility/functional/placeholders" target="_top">std::placeholders</a>
           </li>
 </ul></div>
 </div>
@@ -541,8 +546,6 @@
         does the same as <code class="computeroutput"><span class="identifier">can_invoke</span></code>
         for <a class="link" href="callable_traits/concepts.html#callable_traits.concepts.ref_constexpr_constructible" title="ConstexprDefaultConstructible"><span class="green">ConstexprDefaultConstructible</span></a> types, with an
         added check for <code class="computeroutput"><span class="keyword">constexpr</span></code>-ness
-        (Note: for <code class="computeroutput"><span class="identifier">can_invoke_constexpr</span></code>,
-        argument types must also be <a class="link" href="callable_traits/concepts.html#callable_traits.concepts.ref_constexpr_constructible" title="ConstexprDefaultConstructible"><span class="green">ConstexprDefaultConstructible</span></a>)
       </p>
 <p>
         <span class="bold"><strong>6.</strong></span> <a class="link" href="callable_traits/ref_is_constexpr.html" title="is_constexpr"><code class="literal">is_constexpr</code></a>

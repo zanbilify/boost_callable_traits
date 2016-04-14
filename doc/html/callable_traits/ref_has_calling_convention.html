@@ -26,11 +26,83 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_has_calling_convention"></a><a class="link" href="ref_has_calling_convention.html" title="has_calling_convention">has_calling_convention</a>
 </h2></div></div></div>
-<p>
-      TODO
-    </p>
+<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">CcTag</span><span class="special">&gt;</span>
+    <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="identifier">has_calling_convention</span><span class="special">()</span> <span class="special">{</span>
+        <span class="comment">/* implementation-defined */</span>
+    <span class="special">}</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">U</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">CcTag</span><span class="special">&gt;</span>
+    <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="identifier">has_calling_convention</span><span class="special">(</span><span class="identifier">U</span><span class="special">&amp;&amp;)</span> <span class="special">{</span>
+        <span class="keyword">return</span> <span class="identifier">has_calling_convention</span><span class="special">&lt;</span><span class="identifier">U</span><span class="special">,</span> <span class="identifier">CcTag</span><span class="special">&gt;();</span>
+    <span class="special">}</span>
+<span class="special">}</span>
+</pre>
 <h4>
 <a name="callable_traits.ref_has_calling_convention.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_has_calling_convention.constraints"></a></span><a class="link" href="ref_has_calling_convention.html#callable_traits.ref_has_calling_convention.constraints">Constraints</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ptr" title="FunctionPtr"><span class="green">FunctionPtr</span></a> or <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">CcTag</span></code> must be a <a class="link" href="concepts.html#callable_traits.concepts.ref_cc_tag" title="CallingConventionTag"><span class="green">CallingConventionTag</span></a>
+        </li>
+</ul></div>
+<h4>
+<a name="callable_traits.ref_has_calling_convention.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_has_calling_convention.behavior"></a></span><a class="link" href="ref_has_calling_convention.html#callable_traits.ref_has_calling_convention.behavior">Behavior</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          If <code class="computeroutput"><span class="identifier">T</span></code> uses the calling convention
+          specified by <code class="computeroutput"><span class="identifier">CcTag</span></code>, then
+          an instance of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">true_type</span></code> is returned.
+        </li>
+<li class="listitem">
+          Otherwise, an instance of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code>
+          is returned.
+        </li>
+</ul></div>
+<h4>
+<a name="callable_traits.ref_has_calling_convention.h2"></a>
+      <span class="phrase"><a name="callable_traits.ref_has_calling_convention.notes"></a></span><a class="link" href="ref_has_calling_convention.html#callable_traits.ref_has_calling_convention.notes">Notes</a>
+    </h4>
+<p>
+      For <code class="computeroutput"><span class="identifier">has_calling_convention</span></code>
+      to work as-intended, you must:
+    </p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem">
+          Be programming on a platform that supports the desired calling convention
+        </li>
+<li class="listitem">
+          Define one or more of the following macros before including any <code class="literal">CallableTraits</code>
+          headers:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">CALLABLE_TRAITS_ENABLE_CDECL</span></code>
+                for <code class="computeroutput"><span class="identifier">__cdecl</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">CALLABLE_TRAITS_ENABLE_STDCALL</span></code>
+                for <code class="computeroutput"><span class="identifier">__stdcall</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">CALLABLE_TRAITS_ENABLE_FASTCALL</span></code>
+                for <code class="computeroutput"><span class="identifier">__fastcall</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">CALLABLE_TRAITS_ENABLE_PASCAL</span></code>
+                for <code class="computeroutput"><span class="identifier">pascal</span></code>
+              </li>
+</ul></div>
+        </li>
+</ol></div>
+<h4>
+<a name="callable_traits.ref_has_calling_convention.h3"></a>
       <span class="phrase"><a name="callable_traits.ref_has_calling_convention.example_fastcall_to_stdcall"></a></span><a class="link" href="ref_has_calling_convention.html#callable_traits.ref_has_calling_convention.example_fastcall_to_stdcall">Example
       - <code class="literal">__fastcall</code> to <code class="literal">__stdcall</code></a>
     </h4>
@@ -63,6 +135,19 @@
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 <span class="special">}</span>
 </pre>
+<h4>
+<a name="callable_traits.ref_has_calling_convention.h4"></a>
+      <span class="phrase"><a name="callable_traits.ref_has_calling_convention.see_also"></a></span><a class="link" href="ref_has_calling_convention.html#callable_traits.ref_has_calling_convention.see_also">See
+      Also</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <a class="link" href="ref_add_calling_convention.html" title="add_calling_convention"><code class="literal">add_calling_convention</code></a>
+        </li>
+<li class="listitem">
+          <a class="link" href="ref_remove_calling_convention.html" title="remove_calling_convention"><code class="literal">remove_calling_convention</code></a>
+        </li>
+</ul></div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

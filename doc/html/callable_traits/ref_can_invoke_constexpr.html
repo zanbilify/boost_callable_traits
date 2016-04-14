@@ -26,11 +26,67 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_can_invoke_constexpr"></a><a class="link" href="ref_can_invoke_constexpr.html" title="can_invoke_constexpr">can_invoke_constexpr</a>
 </h2></div></div></div>
-<p>
-      TODO
-    </p>
+<div class="note"><table border="0" summary="Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../../src/images/note.png"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>
+        <code class="computeroutput"><span class="identifier">can_invoke_constexpr</span></code> is not
+        compatible with the Microsoft Visual C++ compiler in Visual Studio (a.k.a.
+        MSVC). Accordingly, the example(s) below will not compile in MSVC. However,
+        Windows users can still use clang-cl. Refer to the <a class="link" href="compatibility.html#callable_traits.compatibility.msvc_issues" title="MSVC Issues">MSVC
+        Issues</a> section for more information.
+      </p></td></tr>
+</table></div>
+<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
+    <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="identifier">can_invoke_constexpr</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;</span> <span class="identifier">t</span><span class="special">,</span> <span class="identifier">Args</span><span class="special">&amp;&amp;...</span> <span class="identifier">args</span><span class="special">);</span>
+
+<span class="special">}</span>
+</pre>
 <h4>
 <a name="callable_traits.ref_can_invoke_constexpr.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_can_invoke_constexpr.constraints"></a></span><a class="link" href="ref_can_invoke_constexpr.html#callable_traits.ref_can_invoke_constexpr.constraints">Constraints</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+          None, except when <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">decay_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+          is a class/struct with a templated <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>, it's invocation must be SFINAE-friendly
+          with respect to <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
+        </li></ul></div>
+<h4>
+<a name="callable_traits.ref_can_invoke_constexpr.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_can_invoke_constexpr.behavior"></a></span><a class="link" href="ref_can_invoke_constexpr.html#callable_traits.ref_can_invoke_constexpr.behavior">Behavior</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+          An instance of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code> is returned, except when:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                arguments to <code class="computeroutput"><span class="identifier">can_invoke_constexpr</span></code>
+                can legally be forwarded to <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>,
+                <span class="bold"><strong>and</strong></span>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">decay_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+                is <a class="link" href="concepts.html#callable_traits.concepts.ref_constexpr_constructible" title="ConstexprDefaultConstructible"><span class="green">ConstexprDefaultConstructible</span></a>, <span class="bold"><strong>and</strong></span>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">decay_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span></code>
+                are also all <a class="link" href="concepts.html#callable_traits.concepts.ref_constexpr_constructible" title="ConstexprDefaultConstructible"><span class="green">ConstexprDefaultConstructible</span></a>, <span class="bold"><strong>and</strong></span>
+              </li>
+<li class="listitem">
+                an invocation of the arguments following <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>
+                semantics is a constant expression, then:
+                <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; "><li class="listitem">
+                      an instance of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">true_type</span></code>
+                      is returned
+                    </li></ul></div>
+              </li>
+</ul></div>
+        </li></ul></div>
+<h4>
+<a name="callable_traits.ref_can_invoke_constexpr.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_can_invoke_constexpr.example_function_object"></a></span><a class="link" href="ref_can_invoke_constexpr.html#callable_traits.ref_can_invoke_constexpr.example_function_object">Example
       - Function Object</a>
     </h4>
@@ -101,7 +157,7 @@
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_can_invoke_constexpr.h1"></a>
+<a name="callable_traits.ref_can_invoke_constexpr.h3"></a>
       <span class="phrase"><a name="callable_traits.ref_can_invoke_constexpr.example_member_function_pointer"></a></span><a class="link" href="ref_can_invoke_constexpr.html#callable_traits.ref_can_invoke_constexpr.example_member_function_pointer">Example
       - Member Function Pointer</a>
     </h4>
@@ -133,7 +189,7 @@
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_can_invoke_constexpr.h2"></a>
+<a name="callable_traits.ref_can_invoke_constexpr.h4"></a>
       <span class="phrase"><a name="callable_traits.ref_can_invoke_constexpr.example_function_pointer"></a></span><a class="link" href="ref_can_invoke_constexpr.html#callable_traits.ref_can_invoke_constexpr.example_function_pointer">Example
       - Function Pointer</a>
     </h4>
@@ -168,6 +224,19 @@
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
 </pre>
+<h4>
+<a name="callable_traits.ref_can_invoke_constexpr.h5"></a>
+      <span class="phrase"><a name="callable_traits.ref_can_invoke_constexpr.see_also"></a></span><a class="link" href="ref_can_invoke_constexpr.html#callable_traits.ref_can_invoke_constexpr.see_also">See
+      Also</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <a class="link" href="ref_can_invoke.html" title="can_invoke"><code class="literal">can_invoke</code></a>
+        </li>
+<li class="listitem">
+          <a class="link" href="ref_is_constexpr.html" title="is_constexpr"><code class="literal">is_constexpr</code></a>
+        </li>
+</ul></div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

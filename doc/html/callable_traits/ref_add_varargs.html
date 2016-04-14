@@ -58,12 +58,34 @@
 <a name="callable_traits.ref_add_varargs.h1"></a>
       <span class="phrase"><a name="callable_traits.ref_add_varargs.behavior"></a></span><a class="link" href="ref_add_varargs.html#callable_traits.ref_add_varargs.behavior">Behavior</a>
     </h4>
-<p>
-      Adds C-style variadics (<code class="computeroutput"><span class="special">...</span></code>) to
-      the signature of <code class="computeroutput"><span class="identifier">T</span></code>, if not
-      already present. In other words, <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span></code>
-      becomes <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="special">...)</span></code>.
-    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+          Adds C-style variadics (<code class="computeroutput"><span class="special">...</span></code>)
+          to the signature of <code class="computeroutput"><span class="identifier">T</span></code> (if
+          not already present), preserving any pointer qualifiers, such that:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">()&gt;</span></code>
+                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(...)</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(*</span> <span class="keyword">const</span><span class="special">)()&gt;</span></code>
+                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(*</span>
+                <span class="keyword">const</span><span class="special">)(</span><span class="keyword">int</span><span class="special">,</span> <span class="special">...)</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(&amp;)()&gt;</span></code>
+                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="keyword">int</span><span class="special">,</span> <span class="special">...)</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*</span>
+                <span class="keyword">volatile</span> <span class="special">&amp;)()</span>
+                <span class="keyword">const</span><span class="special">&gt;</span></code>
+                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*</span>
+                <span class="keyword">volatile</span> <span class="special">&amp;)(...)</span>
+                <span class="keyword">const</span></code>
+              </li>
+</ul></div>
+        </li></ul></div>
 <h4>
 <a name="callable_traits.ref_add_varargs.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_add_varargs.example"></a></span><a class="link" href="ref_add_varargs.html#callable_traits.ref_add_varargs.example">Example</a>

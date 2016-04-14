@@ -26,11 +26,105 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_bind"></a><a class="link" href="ref_bind.html" title="bind">bind</a>
 </h2></div></div></div>
+<div class="note"><table border="0" summary="Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../../src/images/note.png"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>
+        <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code>
+        is not compatible with the Microsoft Visual C++ compiler in Visual Studio
+        (a.k.a. MSVC). Accordingly, the example(s) below will not compile in MSVC.
+        However, Windows users can still use clang-cl. Refer to the <a class="link" href="compatibility.html#callable_traits.compatibility.msvc_issues" title="MSVC Issues">MSVC
+        Issues</a> section for more information.
+      </p></td></tr>
+</table></div>
+<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Ts</span><span class="special">&gt;</span>
+    <span class="keyword">inline</span> <code class="literal"><a class="link" href="concepts.html#callable_traits.concepts.ref_bind_expression" title="BindExpression"><span class="green">BindExpression</span></a></code> <span class="identifier">bind</span><span class="special">(</span><span class="identifier">Ts</span><span class="special">&amp;&amp;...</span> <span class="identifier">ts</span><span class="special">);</span>
+
+<span class="special">}</span>
+</pre>
 <p>
-      TODO
+      <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code>
+      is used to parse type information from potentially complex <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">placeholders</span></code>
+      expressions. The type information in <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code> cannot legally/portably be extracted
+      from <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>, because <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>'s
+      implementation is opaque.
     </p>
 <h4>
 <a name="callable_traits.ref_bind.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_bind.constraints"></a></span><a class="link" href="ref_bind.html#callable_traits.ref_bind.constraints">Constraints</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          The arguments to <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code>
+          must be legal arguments to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>,
+          substituting <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code> for <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code> in nested sub-expressions where
+          necessary to meet this constraint
+        </li>
+<li class="listitem">
+          All nested sub-expressions must be a call to <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code> instead of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>
+        </li>
+<li class="listitem">
+          If a call to <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code>
+          passes an <a class="link" href="concepts.html#callable_traits.concepts.ref_overloaded_fn_obj" title="OverloadedFunctionObject"><span class="green">OverloadedFunctionObject</span></a> instance as its first
+          argument, then:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+                any placeholder objects passed in this call must be re-used somewhere
+                else in the expression tree, bing passed in another call to <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code> where a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a> as its first argument
+                (otherwise, no inference could be made about the parameter type being
+                "place-held")
+              </li></ul></div>
+        </li>
+</ul></div>
+<h4>
+<a name="callable_traits.ref_bind.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_bind.behavior"></a></span><a class="link" href="ref_bind.html#callable_traits.ref_bind.behavior">Behavior</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          If any constraints are violated, the result is undefined
+        </li>
+<li class="listitem">
+          The return type of <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code>
+          can be passed to any of the following:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                <code class="literal">callable_traits::</code><code class="literal"><a class="link" href="ref_args.html" title="args"><code class="literal">args</code></a></code>
+              </li>
+<li class="listitem">
+                <code class="literal">callable_traits::</code><code class="literal"><a class="link" href="ref_arg_at.html" title="arg_at"><code class="literal">arg_at</code></a></code>
+              </li>
+<li class="listitem">
+                <code class="literal">callable_traits::</code><code class="literal">[function_type]</code>
+              </li>
+<li class="listitem">
+                <code class="literal">callable_traits::</code><code class="literal">[result_of]</code>
+              </li>
+</ul></div>
+        </li>
+<li class="listitem">
+          For convenience, the object returned by <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code> serves as a wrapper around <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>, forwarding from its <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
+          to a private member object constructed from <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>
+          in the original <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code>
+        </li>
+</ul></div>
+<h4>
+<a name="callable_traits.ref_bind.h2"></a>
+      <span class="phrase"><a name="callable_traits.ref_bind.notes"></a></span><a class="link" href="ref_bind.html#callable_traits.ref_bind.notes">Notes</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+          <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code>
+          is the only feature of <code class="literal">CallableTraits</code> with non-constexpr
+          behavior. However, the runtime behavior is only provided for convenience
+          -- <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code>
+          is designed to be a metaprogramming tool, and may be used in unevaluated
+          contexts.
+        </li></ul></div>
+<h4>
+<a name="callable_traits.ref_bind.h3"></a>
       <span class="phrase"><a name="callable_traits.ref_bind.example_1"></a></span><a class="link" href="ref_bind.html#callable_traits.ref_bind.example_1">Example
       1</a>
     </h4>
@@ -105,7 +199,7 @@ because ScaryMonster is the narrowest of all _1 parameters. */</span>
 <span class="special">}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_bind.h1"></a>
+<a name="callable_traits.ref_bind.h4"></a>
       <span class="phrase"><a name="callable_traits.ref_bind.example_2"></a></span><a class="link" href="ref_bind.html#callable_traits.ref_bind.example_2">Example
       2</a>
     </h4>
@@ -158,6 +252,16 @@ because ScaryMonster is the narrowest of all _1 parameters. */</span>
 
     <span class="keyword">return</span> <span class="number">0</span><span class="special">;</span>
 <span class="special">}</span>
+</pre>
+<h4>
+<a name="callable_traits.ref_bind.h5"></a>
+      <span class="phrase"><a name="callable_traits.ref_bind.see_also"></a></span><a class="link" href="ref_bind.html#callable_traits.ref_bind.see_also">See
+      Also</a>
+    </h4>
+<pre class="programlisting"><span class="special">*</span> <span class="special">[</span><span class="identifier">link_args</span><span class="special">]</span>
+<span class="special">*</span> <span class="special">[</span><span class="identifier">link_arg_at</span><span class="special">]</span>
+<span class="special">*</span> <span class="special">[</span><span class="identifier">function_type</span><span class="special">]</span>
+<span class="special">*</span> <span class="special">[</span><span class="identifier">result_of</span><span class="special">]</span>
 </pre>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
