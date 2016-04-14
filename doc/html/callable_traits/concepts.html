@@ -38,6 +38,7 @@
 <dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_simple_fn_obj"><span class="green">SimpleFunctionObject</span></a></span></dt>
 <dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_overloaded_fn_obj"><span class="green">OverloadedFunctionObject</span></a></span></dt>
 <dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_fn_obj"><span class="green">FunctionObject</span></a></span></dt>
+<dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_signature"><span class="green">Signature</span></a></span></dt>
 <dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_callable"><span class="green">Callable</span></a></span></dt>
 <dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_simple_callable"><span class="green">SimpleCallable</span></a></span></dt>
 <dt><span class="section"><a href="concepts.html#callable_traits.concepts.ref_simple_invokable"><span class="green">SimpleInvokable</span></a></span></dt>
@@ -176,7 +177,7 @@
             Includes non-generic lambda types
           </li>
 <li class="listitem">
-            May be cv-qualified and/or ref-qualified.
+            May be cv-qualified and/or ref-qualified
           </li>
 <li class="listitem">
             Mutually exclusive with <a class="link" href="concepts.html#callable_traits.concepts.ref_overloaded_fn_obj" title="OverloadedFunctionObject"><span class="green">OverloadedFunctionObject</span></a>
@@ -227,6 +228,28 @@
 </h3></div></div></div>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
             Any type that is either an <a class="link" href="concepts.html#callable_traits.concepts.ref_overloaded_fn_obj" title="OverloadedFunctionObject"><span class="green">OverloadedFunctionObject</span></a> or a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>
+          </li></ul></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.concepts.ref_signature"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a>
+</h3></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            The superset of the following:
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                  <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ptr" title="FunctionPtr"><span class="green">FunctionPtr</span></a>
+                </li>
+<li class="listitem">
+                  <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ref" title="FunctionReference"><span class="green">FunctionReference</span></a>
+                </li>
+<li class="listitem">
+                  <a class="link" href="concepts.html#callable_traits.concepts.ref_fn" title="Function"><span class="green">Function</span></a>
+                </li>
+<li class="listitem">
+                  <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>
+                </li>
+</ul></div>
           </li></ul></div>
 </div>
 <div class="section">

@@ -26,11 +26,113 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_function_type"></a><a class="link" href="ref_function_type.html" title="function_type">function_type</a>
 </h2></div></div></div>
-<p>
-      TODO
-    </p>
+<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+    <span class="keyword">using</span> <span class="identifier">function_type</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span><span class="special">;</span>
+<span class="special">}</span>
+</pre>
 <h4>
 <a name="callable_traits.ref_function_type.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_function_type.constraints"></a></span><a class="link" href="ref_function_type.html#callable_traits.ref_function_type.constraints">Constraints</a>
+    </h4>
+<p>
+      <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a>.
+    </p>
+<h4>
+<a name="callable_traits.ref_function_type.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_function_type.behavior"></a></span><a class="link" href="ref_function_type.html#callable_traits.ref_function_type.behavior">Behavior</a>
+    </h4>
+<p>
+      <code class="computeroutput"><span class="identifier">function_type</span></code> "decays"
+      a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a>
+      into an <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>-aware
+      <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn" title="UnqualifiedFunction"><span class="green">UnqualifiedFunction</span></a>.
+    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          When the constraints are violated, the substitution fails in a SFINAE-friendly
+          manner.
+        </li>
+<li class="listitem">
+          Otherwise, if <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
+                represent the parameter types in the signature of <code class="computeroutput"><span class="identifier">T</span></code>
+              </li>
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">ClassRef</span></code> represent
+                a reference of the parent class/struct of <code class="computeroutput"><span class="identifier">T</span></code>,
+                applying any qualifiers necessary to match the member function qualifiers
+                on <code class="computeroutput"><span class="identifier">T</span></code>
+              </li>
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">Return</span></code> represent
+                the return type of <code class="computeroutput"><span class="identifier">T</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+                aliases <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">ClassRef</span><span class="special">,</span>
+                <span class="identifier">Args</span><span class="special">...)</span></code>
+              </li>
+</ul></div>
+        </li>
+<li class="listitem">
+          Otherwise, if <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_pmd" title="MemberDataPtr"><span class="green">MemberDataPtr</span></a>:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">ClassRef</span></code> represent
+                a <code class="computeroutput"><span class="keyword">const</span></code> reference of
+                the parent class/struct of <code class="computeroutput"><span class="identifier">T</span></code>
+              </li>
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">Return</span></code> represent
+                the pointed-to data member type of <code class="computeroutput"><span class="identifier">T</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+                aliases <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">ClassRef</span><span class="special">)</span></code>
+              </li>
+</ul></div>
+        </li>
+<li class="listitem">
+          Otherwise, if <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a>:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
+                represent the parameter types in the signature of <code class="computeroutput"><span class="identifier">T</span></code>
+              </li>
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">Return</span></code> represent
+                the return type of <code class="computeroutput"><span class="identifier">T</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+                aliases <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)</span></code>
+              </li>
+</ul></div>
+        </li>
+<li class="listitem">
+          Otherwise, if <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
+                represent the parameter types in the signature of T's <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
+              </li>
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">Return</span></code> represent
+                the return type of T's <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+                aliases <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)</span></code>
+              </li>
+</ul></div>
+        </li>
+</ul></div>
+<h4>
+<a name="callable_traits.ref_function_type.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_function_type.example"></a></span><a class="link" href="ref_function_type.html#callable_traits.ref_function_type.example">Example</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
@@ -73,6 +175,9 @@
     <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">abominable</span><span class="special">&gt;();</span>
 <span class="special">}</span>
 </pre>
+<p>
+      TODO - PMD and PMF examples
+    </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>
