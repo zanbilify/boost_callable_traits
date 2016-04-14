@@ -58,14 +58,52 @@
 <a name="callable_traits.ref_apply_member_pointer.h1"></a>
       <span class="phrase"><a name="callable_traits.ref_apply_member_pointer.behavior"></a></span><a class="link" href="ref_apply_member_pointer.html#callable_traits.ref_apply_member_pointer.behavior">Behavior</a>
     </h4>
-<p>
-      When <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_fn" title="Function"><span class="green">Function</span></a>, <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ptr" title="FunctionPtr"><span class="green">FunctionPtr</span></a>, or <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ref" title="FunctionReference"><span class="green">FunctionReference</span></a>, the resulting type is a member
-      function pointer of class/struct <code class="computeroutput"><span class="identifier">Class</span></code>,
-      with matching parameters and return type. When <code class="computeroutput"><span class="identifier">T</span></code>
-      is a <a class="link" href="concepts.html#callable_traits.concepts.ref_member_ptr" title="MemberPtr"><span class="green">MemberPtr</span></a>,
-      the resulting type is a member pointer of class/struct <code class="computeroutput"><span class="identifier">Class</span></code>,
-      pointing to the same type as the original <a class="link" href="concepts.html#callable_traits.concepts.ref_member_ptr" title="MemberPtr"><span class="green">MemberPtr</span></a>.
-    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          When the constraints are violated, a substitution failure occurs.
+        </li>
+<li class="listitem">
+          Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
+          <a class="link" href="concepts.html#callable_traits.concepts.ref_fn" title="Function"><span class="green">Function</span></a>,
+          <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ptr" title="FunctionPtr"><span class="green">FunctionPtr</span></a>,
+          or <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ref" title="FunctionReference"><span class="green">FunctionReference</span></a>:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
+                represent the parameter types in the signature of <code class="computeroutput"><span class="identifier">T</span></code>
+              </li>
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">Return</span></code> represent
+                the return type of <code class="computeroutput"><span class="identifier">T</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">apply_member_pointer</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">Class</span><span class="special">&gt;</span></code> aliases <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Class</span><span class="special">::*</span> <span class="comment">/* any pointer
+                qualifiers on T */</span> <span class="special">)(</span><span class="identifier">Args</span><span class="special">...)</span></code>
+              </li>
+</ul></div>
+        </li>
+<li class="listitem">
+          Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
+          <a class="link" href="concepts.html#callable_traits.concepts.ref_member_ptr" title="MemberPtr"><span class="green">MemberPtr</span></a>,
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">CurrentClass</span></code>
+                represent the parent class of <code class="computeroutput"><span class="identifier">T</span></code>
+              </li>
+<li class="listitem">
+                Let <code class="computeroutput"><span class="identifier">MemberType</span></code> represent
+                the type pointed to by <code class="computeroutput"><span class="identifier">T</span></code>,
+                such that <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">MemberType</span> <span class="identifier">CurrentClass</span><span class="special">::*,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">decay_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;&gt;::</span><span class="identifier">value</span></code>
+                is true
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">apply_member_pointer</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">Class</span><span class="special">&gt;</span></code> aliases <code class="computeroutput"><span class="identifier">MemberType</span>
+                <span class="identifier">Class</span><span class="special">::*</span>
+                <span class="comment">/* any pointer qualifiers on T */</span></code>
+              </li>
+</ul></div>
+        </li>
+</ul></div>
 <h4>
 <a name="callable_traits.ref_apply_member_pointer.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_apply_member_pointer.example"></a></span><a class="link" href="ref_apply_member_pointer.html#callable_traits.ref_apply_member_pointer.example">Example</a>

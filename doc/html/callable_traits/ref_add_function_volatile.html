@@ -44,12 +44,26 @@
 <a name="callable_traits.ref_add_function_volatile.h1"></a>
       <span class="phrase"><a name="callable_traits.ref_add_function_volatile.behavior"></a></span><a class="link" href="ref_add_function_volatile.html#callable_traits.ref_add_function_volatile.behavior">Behavior</a>
     </h4>
-<p>
-      Adds a <code class="computeroutput"><span class="keyword">volatile</span></code> qualifier to the
-      signature of <code class="computeroutput"><span class="identifier">T</span></code>, if not already
-      present. In other words, <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">char</span><span class="special">)</span></code> becomes
-      <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">char</span><span class="special">)</span> <span class="keyword">volatile</span></code>.
-    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+          Adds a <code class="computeroutput"><span class="keyword">volatile</span></code> qualifier
+          to the signature of <code class="computeroutput"><span class="identifier">T</span></code> (if
+          not already present), preserving any pointer qualifiers, such that:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">add_function_volatile</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">()&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span> <span class="keyword">volatile</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">add_function_volatile</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">const</span><span class="special">&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">const</span>
+                <span class="keyword">volatile</span></code>
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">add_function_volatile</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*</span> <span class="keyword">const</span>
+                <span class="special">&amp;)()&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*</span>
+                <span class="keyword">const</span> <span class="special">&amp;)()</span>
+                <span class="keyword">volatile</span></code>
+              </li>
+</ul></div>
+        </li></ul></div>
 <h4>
 <a name="callable_traits.ref_add_function_volatile.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_add_function_volatile.example"></a></span><a class="link" href="ref_add_function_volatile.html#callable_traits.ref_add_function_volatile.example">Example</a>

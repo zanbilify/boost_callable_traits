@@ -50,7 +50,7 @@
 [template concept_simple_invokable[][role green SimpleInvokable]]
 [template concept_callable[][role green Callable]]
 [template concept_invokable[][role green Invokable]]
-[template concept_basic_signature[][role green BasicSignature]]
+[template concept_bind_expression[][role green BindExpression]]
 [template concept_signature[][role green Signature]]
 [template concept_constexpr_constructible[][role green ConstexprDefaultConstructible]]
 [template concept_cc_tag[][role green CallingConventionTag]]
@@ -71,7 +71,7 @@
 [template link_simple_invokable[][link callable_traits.concepts.ref_simple_invokable [concept_simple_invokable]]]
 [template link_callable[][link callable_traits.concepts.ref_callable [concept_callable]]]
 [template link_invokable[][link callable_traits.concepts.ref_invokable [concept_invokable]]]
-[template link_basic_signature[][link callable_traits.concepts.ref_basic_signature [concept_basic_signature]]]
+[template link_bind_expression[][link callable_traits.concepts.ref_bind_expression [concept_bind_expression]]]
 [template link_signature[][link callable_traits.concepts.ref_signature [concept_signature]]]
 [template link_constexpr_constructible[][link callable_traits.concepts.ref_constexpr_constructible [concept_constexpr_constructible]]]
 [template link_cc_tag[][link callable_traits.concepts.ref_cc_tag [concept_cc_tag]]]
@@ -164,6 +164,7 @@ This documentation will be most beneficial to readers who posess a basic underst
 * [@http://en.cppreference.com/w/cpp/language/overloaded_address taking the address of overloaded functions]
 * [@http://en.cppreference.com/w/c/language/variadic C-style variadics], a.k.a. varargs
 * [@https://en.wikipedia.org/wiki/X86_calling_conventions calling conventions]
+* [@http://en.cppreference.com/w/cpp/utility/functional/bind std::bind expressions] with [@http://en.cppreference.com/w/cpp/utility/functional/placeholders std::placeholders]
 
 [endsect][/section:prereqs]
 
@@ -201,7 +202,7 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
 
 [*4.] [namespace_scoped][link_arg_at]`<2, Callable>` is more flexible (arguable more readable) than `typename boost::function_traits<Callable>::arg3_type`.
 
-[*5.] [link_can_invoke] is used to test `INVOKE`-ability at compile-time, with value semantics. For the craziest metaprogrammers, [link_can_invoke_constexpr] does the same as `can_invoke` for [link_constexpr_constructible] types, with an added check for `constexpr`-ness (Note: for `can_invoke_constexpr`, argument types must also be [link_constexpr_constructible])
+[*5.] [link_can_invoke] is used to test `INVOKE`-ability at compile-time, with value semantics. For the craziest metaprogrammers, [link_can_invoke_constexpr] does the same as `can_invoke` for [link_constexpr_constructible] types, with an added check for `constexpr`-ness
 
 [*6.] [link_is_constexpr] is used to check whether a [link_constexpr_constructible] type is a [link_callable] type that yields a `constexpr` result -- no arguments necessary.
 
@@ -223,14 +224,14 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
 [/**************** U S E   C A S E   E X A M P L E ********************]
 [/*********************************************************************]
 
-[section:function_sugar_example Example:[^ std::function] sugar]
+[section:function_sugar_example Example: [^ std::function] sugar]
 
-At a glance, there appear to be around 260 [@http://stackoverflow.com/search?q=convert+std%3A%3Abind+to+std%3A%3Afunction search results] on Stack Overflow concerning the conversion from `std::bind` to `std::function`, and around 340 [@http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction search results] concerning the conversion of lambdas to `std::function`. However misguided these questions might be, we'll kill both birds with the same stone in the `make_function` example below, which will leverage [libname] to...
+At a glance, there appear to be around 260 [@http://stackoverflow.com/search?q=convert+std%3A%3Abind+to+std%3A%3Afunction search results] on Stack Overflow concerning the conversion from `std::bind` results to `std::function`, and around 340 [@http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction search results] concerning the conversion of lambdas to `std::function`. There are few good reasons for converting `std::bind` result objects into `std::function` objects, and fewer still for creating `std::function` objects without explicitly specifying the function type. Regardless, here's a `make_function` function, which can...
 
 # Construct an `std::function<T>` where T is not explicitly supplied by the user
-# Construct an `std::function<T>` where T is the deduced "signature" of an `std::placeholders` expression
+# Construct an `std::function<T>` where T is the implied "signature" of an `std::placeholders` expression
 
-Without real-world context, `make_function` may seem rather silly, especially since we are needlessly incurring the runtime cost of type erasure, which takes place inside the `std::function` implementation. However, this `make_function` might be useful in a situation where `std::function` would be required by some 3rd party API.
+`make_function` is rather silly, especially since we have no contextual reason for incurring the costs of type erasure. Still, it's a lightweight example of the kind of metaprogramming you can do with [libname].
 
 [note Due to limitations in the Microsoft compiler, this example will not compile with MSVC. For more information, refer to the [link_msvc_issues] section.]
 
@@ -328,6 +329,7 @@ While most of the features in [libname] are tested and working in MSVC, the foll
 
 [section:ref_simple_fn [concept_simple_fn]]
 * Any unqualified function type
+* Mutually exclusive with [link_abominable]
 * e.g. `void(int, int)`
 
 [endsect]
@@ -377,6 +379,7 @@ While most of the features in [libname] are tested and working in MSVC, the foll
 * Any class/struct with a ['templated or overloaded] function call operator, with the following limitation for those with templated function call operators (which includes generic lambdas):
   * If templated , all instantiations must be [@http://stackoverflow.com/questions/35033306/what-does-it-mean-when-one-says-something-is-sfinae-friendly SFINAE-friendly], and must not use [@http://en.cppreference.com/w/cpp/language/indent_name dependent names], except where the dependent "names" are C++ operators.
 * May be cv-qualified and/or ref-qualified
+* Mutually exclusive with [link_simple_fn_obj]
 * e.g. the type of this generic lambda: `[](auto x, auto y) { return x + y; }`
 
 [tip Generic lambdas or classes with templated function objects that are either not SFINAE-friendly or rely on dependent names for template instantiations are generally incompatible with [libname].]
@@ -384,7 +387,7 @@ While most of the features in [libname] are tested and working in MSVC, the foll
 [endsect]
 
 [section:ref_fn_obj [concept_fn_obj]]
-* Any type that is either an [link_overloaded_fn_obj] or a [link_simple_fn_obj]
+* The superset of [link_overloaded_fn_obj] and [link_simple_fn_obj]
 
 [endsect]
 
@@ -409,17 +412,22 @@ While most of the features in [libname] are tested and working in MSVC, the foll
 [endsect]
   
 [section:ref_simple_callable [concept_simple_callable]]
-* Includes all [link_callable] types, [*excluding] [link_overloaded_fn_obj]
+* Includes all [link_callable] types, [*except] [link_overloaded_fn_obj]
 
 [endsect]
 
 [section:ref_simple_invokable [concept_simple_invokable]]
-* Includes all [link_callable] types, [*excluding] [link_overloaded_fn_obj] and [link_fn]
+* Includes all [link_callable] types, [*except] [link_overloaded_fn_obj] and [link_fn]
 
 [endsect]
 
 [section:ref_invokable [concept_invokable]]
-* Includes all [link_callable] types, [*excluding] [link_fn]
+* Includes all [link_callable] types, [*except] [link_fn]
+
+[endsect]
+
+[section:ref_bind_expression [concept_bind_expression]]
+* The return type of a call to [namespace_scoped]`bind`
 
 [endsect]
 
@@ -494,12 +502,14 @@ The simplest way to use [libname] is to include the main header file:
 [endsect][/section:headers]
 
 
-[template msvc_incompatible[] is not compatible with the Microsoft Visual C++ compiler in Visual Studio (a.k.a. MSVC). Accordingly, the example(s) below will not compile in MSVC. However, Windows users can still use clang-cl. Refer to the [link callable_traits.compatibility Compatibility page] for more information.]
+[template msvc_incompatible[] is not compatible with the Microsoft Visual C++ compiler in Visual Studio (a.k.a. MSVC). Accordingly, the example(s) below will not compile in MSVC. However, Windows users can still use clang-cl. Refer to the [link_msvc_issues] section for more information.]
 
 
 
 
 [section:ref_add_calling_convention add_calling_convention]
+
+[warning This feature is currently considered experimental. Your [feedback] is much appreciated! ]
 
     namespace ``[lib_namespace]`` {
 	
@@ -526,7 +536,6 @@ For `add_calling_convention` to work as-intended, you must:
  * `CALLABLE_TRAITS_ENABLE_FASTCALL` for `__fastcall`
  * `CALLABLE_TRAITS_ENABLE_PASCAL` for `pascal`
 
-[warning This feature is currently considered experimental. Your [feedback] is much appreciated! ]
 [heading Example - [^__fastcall] to [^__stdcall]]
 [import ../example/experimental_changing_calling_conventions.cpp]
 [experimental_changing_calling_conventions]
@@ -557,7 +566,10 @@ For `add_calling_convention` to work as-intended, you must:
 `T` must be a [link_fn] or [link_pmf].
 
 [heading Behavior]
-Adds a `const` qualifier to the signature of `T`, if not already present. In other words, `int(foo::*)()` becomes `int(foo::*)() const`.
+* Adds a `const` qualifier to the signature of `T` (if not already present), preserving any pointer qualifiers, such that:
+  * `add_function_const<int()>` aliases `int() const`
+  * `add_function_const<int(foo::*)() volatile>` aliases `int(foo::*)() const volatile`
+  * `add_function_const<int(foo::* const &)()>` aliases `int(foo::* const &)() const`
 
 [heading Example]
 [import ../example/add_function_const.cpp]
@@ -586,7 +598,10 @@ Adds a `const` qualifier to the signature of `T`, if not already present. In oth
 `T` must be a [link_fn] or [link_pmf].
 
 [heading Behavior]
-Adds both `const` and `volatile` qualifiers to the signature of `T`, if not already present. In other words, `int(foo::*)()` becomes `int(foo::*)() const volatile`.
+* Adds both `const` and `volatile` qualifiers to the signature of `T` (if not already present), preserving any pointer qualifiers, such that:
+  * `add_function_cv<int()>` aliases `int() const volatile`
+  * `add_function_cv<int(foo::*)() volatile>` aliases `int(foo::*)() const volatile`
+  * `add_function_cv<int(foo::* const &)()>` aliases `int(foo::* const &)() const volatile`
 
 [heading Example]
 [import ../example/add_function_cv.cpp]
@@ -617,8 +632,14 @@ Adds both `const` and `volatile` qualifiers to the signature of `T`, if not alre
 `T` must be a [link_fn] or [link_pmf].
 
 [heading Behavior]
-Adds an lvalue reference qualifier (`&`) to the signature of `T`, if not already present. In other words, `void(foo::*)()` becomes `void(foo::*)() &`.
-
+* Adds an lvalue reference qualifier (`&`) qualifier to the signature of `T` (if not already present)
+* If an rvalue reference qualifier is present, the lvalue reference qualifier replaces it (in arbitrary accordance with reference collapsing rules)
+* Any pointer qualifiers are preserved
+* Such that:
+  * `add_function_lvalue<int()>` aliases `int() &`
+  * `add_function_lvalue<int(foo::*)() const &&>` aliases `int(foo::*)() const &`
+  * `add_function_lvalue<int(foo::* const &)()>` aliases `int(foo::* const &)() &`
+  
 [import ../example/add_function_lvalue.cpp]
 [add_function_lvalue]
 
@@ -645,8 +666,14 @@ Adds an lvalue reference qualifier (`&`) to the signature of `T`, if not already
 `T` must be a [link_fn] or [link_pmf].
 
 [heading Behavior]
-Adds an rvalue reference qualifier (`&&`) to the signature of `T`, if not already present. In other words, `void(foo::*)()` becomes `void(foo::*)() &&`.
-
+* Adds an rvalue reference qualifier (`&&`) qualifier to the signature of `T` (if not already present)
+* If an lvalue reference qualifier is present, the lvalue reference qualifier remains (in arbitrary accordance with reference collapsing rules)
+* Any pointer qualifiers are preserved
+* Such that:
+  * `add_function_rvalue<int()>` aliases `int() &&`
+  * `add_function_rvalue<int(foo::*)() const &>` aliases `int(foo::*)() const &`
+  * `add_function_rvalue<int(foo::* const &)()>` aliases `int(foo::* const &)() &&`
+  
 [heading Example]
 [import ../example/add_function_rvalue.cpp]
 [add_function_rvalue]
@@ -680,8 +707,12 @@ Adds an rvalue reference qualifier (`&&`) to the signature of `T`, if not alread
 * [link_pmf]
 
 [heading Behavior]
-Adds C-style variadics (`...`) to the signature of `T`, if not already present. In other words, `int(int)` becomes `int(int, ...)`.
-
+* Adds C-style variadics (`...`) to the signature of `T` (if not already present), preserving any pointer qualifiers, such that:
+  * `add_varargs<int()>` aliases `int(...)`
+  * `add_varargs<int(* const)()>` aliases `int(* const)(int, ...)`
+  * `add_varargs<int(&)()>` aliases `int(&)(int, ...)`
+  * `add_varargs<int(foo::* volatile &)() const>` aliases `int(foo::* volatile &)(...) const`
+	
 [heading Example]
 [import ../example/add_varargs.cpp]
 [add_varargs]
@@ -710,7 +741,10 @@ Adds C-style variadics (`...`) to the signature of `T`, if not already present. 
 `T` must be a [link_fn] or [link_pmf].
 
 [heading Behavior]
-Adds a `volatile` qualifier to the signature of `T`, if not already present. In other words, `void(foo::*)(char)` becomes `void(foo::*)(char) volatile`.
+* Adds a `volatile` qualifier to the signature of `T` (if not already present), preserving any pointer qualifiers, such that:
+  * `add_function_volatile<int()>` aliases `int() volatile`
+  * `add_function_volatile<int(foo::*)() const>` aliases `int(foo::*)() const volatile`
+  * `add_function_volatile<int(foo::* const &)()>` aliases `int(foo::* const &)() volatile`
 
 [heading Example]
 [import ../example/add_function_volatile.cpp]
@@ -744,7 +778,15 @@ Adds a `volatile` qualifier to the signature of `T`, if not already present. In 
 * [link_member_ptr]
 
 [heading Behavior]
-When `T` is a [link_fn], [link_fn_ptr], or [link_fn_ref], the resulting type is a member function pointer of class/struct `Class`, with matching parameters and return type. When `T` is a [link_member_ptr], the resulting type is a member pointer of class/struct `Class`, pointing to the same type as the original [link_member_ptr].
+* When the constraints are violated, a substitution failure occurs.
+* Otherwise, when `T` is a [link_fn], [link_fn_ptr], or [link_fn_ref]:
+  * Let `Args...` represent the parameter types in the signature of `T`
+  * Let `Return` represent the return type of `T`
+  * `apply_member_pointer<T, Class>` aliases `Return(Class::* /* any pointer qualifiers on T */ )(Args...)`
+* Otherwise, when `T` is a [link_member_ptr],
+  * Let `CurrentClass` represent the parent class of `T`
+  * Let `MemberType` represent the type pointed to by `T`, such that `std::is_same<MemberType CurrentClass::*, std::decay_t<T>>::value` is true
+  * `apply_member_pointer<T, Class>` aliases `MemberType Class::* /* any pointer qualifiers on T */`
 
 [heading Example]
 [import ../example/apply_member_pointer.cpp]
@@ -773,8 +815,15 @@ When `T` is a [link_fn], [link_fn_ptr], or [link_fn_ref], the resulting type is 
 `T` must be a [link_signature] or a [link_pmd].
 
 [heading Behavior]
-* When `T` is a [link_signature], the return type of the result type will be the same as `T`, except that the return type is changed to `Return`. In other words, `apply_return<void(), int>` aliases `int()`.
-* When `T` is a [link_pmd], the resulting type points to a data member of type `Return`, with the same parent class as `T`. In other words, `apply_return<int foo::*, char>` becomes `char foo::*`.
+* When `T` is a [link_signature], the aliased type will be identical to `T`, except that the aliased type will now return `Return`, such that:
+  * `apply_return<void(), int>` aliases `int()`
+  * `apply_return<int(* const)(char), const char*>` aliases `const char*(* const)(char)`
+  * `apply_return<int(&)(), void>` aliases `void(&)()`
+  * `apply_return<int(foo::*&)() const volatile &&, short>` aliases `short(foo::*&)() const volatile &&`
+* When `T` is a [link_pmd],
+  * Let `Class` represent the parent class of `T`
+  * the aliased type is `Return Class::* /* any qualifiers on T */`, such that:
+  * `apply_return<int foo::* const &, char>` becomes `char foo::* const &`
 
 [heading Example]
 [/import ../example/apply_return.cpp]
@@ -795,11 +844,28 @@ When `T` is a [link_fn], [link_fn_ptr], or [link_fn_ref], the resulting type is 
 	}
 	
 [heading Constraints]
-`T` must be a [link_signature] or a [link_simple_fn_obj]. `Index` must be less than `ArgCount` and greater than zero, where `ArgCount` is the number of arguments in the signature of `T` (or the signature of `operator()` for [link_simple_fn_obj]).
-
+* `T` must be one of the following:
+  * [link_signature]
+  * [link_simple_fn_obj]
+  * [link_bind_expression]
+* When `T` is a [link_signature], then:
+  * Let `ArgCount` represent the number of arguments in the signature of `T`
+  * `Index` must be less than `ArgCount` and greater than zero
+* Otherwise, when `T` is a [link_simple_fn_obj], then:
+  * Let `ArgCount` represent the number of arguments in `decltype(&std::decay_t<T>::operator())`
+  * `Index` must be less than `ArgCount` and greater than zero
+* Otherwise, when `T` is a [link_bind_expression], then:
+  * Let `MaxPlaceholder` represent the type of the largest `std::placeholders` object in the bind expression tree
+  * `Index` must be less than `std::is_placeholder<MaxPlaceholder>::value` and greater than zero
+  
 [heading Behavior]
-When `Index` is outside the range defined above, the substitution fails in a SFINAE-friendly manner. Otherwise, the resulting type is the argument type at zero-based index `Index`. In other words, `arg_at<1, void(char, short, long)>` aliases `short`.
-
+* If any constraints are violated, a substitution failure occurs
+* Otherwise, `arg_at<Index, T>` aliases `std::tuple_element_t<Index, `[namespace_scoped][link_args]`<T>>`, such that:
+  * `arg_at<0, void(char, short, long, int*)>` aliases `char`
+  * `arg_at<1, void(* volatile)(char, short, long, int*)>` aliases `short`
+  * `arg_at<2, void(&)(char, short, long, int*)>` aliases `long`
+  * `arg_at<3, void(foo::* const &)(char, short, long, int*)>` aliases `int*`
+  
 [heading Example]
 [/import ../example/arg_at.cpp]
 [arg_at]
@@ -823,11 +889,25 @@ When `Index` is outside the range defined above, the substitution fails in a SFI
 	}
 	
 [heading Constraints]
-`T` must be a [link_signature] or a [link_simple_fn_obj].
+`T` must be one of the following:
+* [link_signature]
+* [link_simple_fn_obj]
+* [link_bind_expression]
 
 [heading Behavior]
-* When the constraints above are violated, the substitution fails in a SFINAE-friendly manner.
-* Where `Args...` are defined as the parameter types in the signature of `T` (or the signature of `operator()` for [link_simple_fn_obj]), the aliased type of `args<T>` is `std::tuple<Args...>`.
+* When the constraints are violated, a substitution failure occurs
+* Otherwise, when `T` is a [link_signature], then:
+  * Let `Args...` represent the parameter types in the signature of `T`
+  * `args<T>` aliases `std::tuple<Args...>`
+* Otherwise, when `T` is a [link_simple_fn_obj], then:
+  * Let `Args...` represent the parameter types in the signature of `decltype(&std::decay_t<T>::operator())`
+  * `args<T>` aliases `std::tuple<Args...>`
+* Otherwise, when `T` is a [link_bind_expression], then:
+  * Let `bind_args...` represent the argument values that were passed to [namespace]`bind` which returned an instance of `T`
+  * Let `bind_result` represent the return value of `std::bind(bind_args...)`
+  * Let `Args...` represent the "valid argument types" to `bind_result`'s `operator()`
+    * Note: the "valid argument types" are implied by the position of the `std::placeholders` objects
+  * `args<T>` aliases `std::tuple<Args...>`
 
 [heading Example]
 [import ../example/args.cpp]
@@ -845,11 +925,15 @@ When `Index` is outside the range defined above, the substitution fails in a SFI
 
     namespace ``[lib_namespace]`` {
 	
-	    template<typename T>
-		inline constexpr auto arity(T&&);
-		
 		template<typename T>
-		inline constexpr auto arity();
+		inline constexpr auto arity() {
+		   /* implementation defined */
+		}
+		
+	    template<typename U>
+		inline constexpr auto arity(U&&) {
+			return arity<U&&>();
+		}
 	}
 	
 [heading Constraints]
@@ -857,7 +941,12 @@ When `Index` is outside the range defined above, the substitution fails in a SFI
 
 [heading Behavior]
 * When the constraints are violated, an instance of type `std::integral_constant<int, -1>` is returned.
-* Otherwise, where `ArgCount` is defined as the number of parameters in the signature of `T` (or the signature of `operator()` for [simple_fn_obj]), `arity` returns an instance of type `std::integral_constant<int, ArgCount>`.
+* Otherwise, when `T` is a [link_signature]
+  * let `ArgCount` represent the number of parameter types in the signature of `T`
+  * `arity<T>()` returns an instance of type `std::integral_constant<int, ArgCount>`
+* Otherwise, when `T` is a [link_simple_fn_obj]
+  * Let `ArgCount` represent the number of parameter types in the signature of `decltype(&std::decay_t<T>::operator())`
+  * `arity<T>()` returns an instance of type `std::integral_constant<int, ArgCount>`
 
 [heading Example]
 [/import ../example/arity.cpp]
@@ -865,17 +954,67 @@ When `Index` is outside the range defined above, the substitution fails in a SFI
 [endsect]
 
 [section:ref_bind bind]
-TODO
+
+[note [namespace_scoped]`bind` [msvc_incompatible]]
+
+    namespace ``[lib_namespace]`` {
+	
+		template<typename... Ts>
+		inline ``[^[link_bind_expression]]`` bind(Ts&&... ts);
+		
+	}
+	
+[namespace_scoped]`bind` is used to parse type information from potentially complex `std::placeholders` expressions. The type information in [namespace_scoped]`bind` cannot legally/portably be extracted from `std::bind`, because `std::bind`'s implementation is opaque.
+
+[heading Constraints]
+* The arguments to [namespace_scoped]`bind` must be legal arguments to `std::bind`, substituting `std::bind` for [namespace_scoped]`bind` in nested sub-expressions where necessary to meet this constraint
+* All nested sub-expressions must be a call to [namespace_scoped]`bind` instead of `std::bind`
+* If a call to [namespace_scoped]`bind` passes an [link_overloaded_fn_obj] instance as its first argument, then:
+  * any placeholder objects passed in this call must be re-used somewhere else in the expression tree, bing passed in another call to [namespace_scoped]`bind` where a [link_simple_callable] as its first argument (otherwise, no inference could be made about the parameter type being "place-held")
+
+[heading Behavior]
+* If any constraints are violated, the result is undefined
+* The return type of [namespace_scoped]`bind` can be passed to any of the following:
+  * [namespace_scoped][^[link_args]]
+  * [namespace_scoped][^[link_arg_at]]
+  * [namespace_scoped][^[function_type]]
+  * [namespace_scoped][^[result_of]]
+* For convenience, the object returned by [namespace_scoped]`bind` serves as a wrapper around `std::bind`, forwarding from its `operator()` to a private member object constructed from `std::bind` in the original [namespace_scoped]`bind`
+
+[heading Notes]
+* [namespace_scoped]`bind` is the only feature of [libname] with non-constexpr behavior. However, the runtime behavior is only provided for convenience -- [namespace_scoped]`bind` is designed to be a metaprogramming tool, and may be used in unevaluated contexts.
 [heading Example 1]
 [import ../example/bind_1.cpp]
 [bind_1]
 [heading Example 2]
 [import ../example/bind_2.cpp]
 [bind_2]
+
+[heading See Also]
+  * [link_args]
+  * [link_arg_at]
+  * [function_type]
+  * [result_of]
+  
 [endsect]
 
 [section:ref_can_invoke can_invoke]
-TODO
+
+    namespace ``[lib_namespace]`` {
+	
+		template<typename T, typename... Args>
+		inline constexpr auto can_invoke(T&&, Args&&...);
+		
+	}
+
+[heading Constraints]
+* When `std::decay_t<T>` is a class/struct with a templated `operator()`, it's invocation must be SFINAE-friendly with respect to `Args&&...`
+* No other constraints
+
+[heading Behavior]
+* If all arguments to `can_invoke` can legally be forwarded to [invoke], then an instance of `std::true_type` is returned
+* Otherwise, an instance of `std::false_type` is returned
+
 [heading Example - Function Object]
 [import ../example/can_invoke_function_object.cpp]
 [can_invoke_function_object]
@@ -888,10 +1027,37 @@ TODO
 [heading Example - Function Reference]
 [import ../example/can_invoke_function_reference.cpp]
 [can_invoke_function_reference]
+
+[heading See Also]
+* [link_can_invoke_constexpr]
+
 [endsect]
 
+
+
+
 [section:ref_can_invoke_constexpr can_invoke_constexpr]
-TODO
+
+[note `can_invoke_constexpr` [msvc_incompatible]]
+
+    namespace ``[lib_namespace]`` {
+	
+		template<typename T, typename... Args>
+		inline constexpr auto can_invoke_constexpr(T&& t, Args&&... args);
+		
+	}
+
+[heading Constraints]
+* None, except when `std::decay_t<T>` is a class/struct with a templated `operator()`, it's invocation must be SFINAE-friendly with respect to `Args...`
+
+[heading Behavior]
+* An instance of `std::false_type` is returned, except when:
+  * arguments to `can_invoke_constexpr` can legally be forwarded to [invoke], *and*
+  * `std::decay_t<T>` is [link_constexpr_constructible], *and*
+  * `std::decay_t<Args>...` are also all [link_constexpr_constructible], *and*
+  * an invocation of the arguments following [invoke] semantics is a constant expression, then:
+    * an instance of `std::true_type` is returned
+
 [heading Example - Function Object]
 [import ../example/can_invoke_constexpr_function_object.cpp]
 [can_invoke_constexpr_function_object]
@@ -901,7 +1067,16 @@ TODO
 [heading Example - Function Pointer]
 [import ../example/can_invoke_constexpr_function_pointer.cpp]
 [can_invoke_constexpr_function_pointer]
+
+[heading See Also]
+* [link_can_invoke]
+* [link_is_constexpr]
+
 [endsect]
+
+
+
+
 
 [section:ref_function_type function_type]
 
@@ -916,32 +1091,50 @@ TODO
 
 [heading Behavior]
 
-`function_type` "decays" a [link_simple_callable] into an [invoke]-aware [link_simple_fn].
+`function_type` is used to "decay" a [link_simple_callable] into an [invoke]-aware [link_simple_fn].
 
 * When the constraints are violated, the substitution fails in a SFINAE-friendly manner.
-* Otherwise, if `T` is a [link_pmf]:
+* Otherwise, when `T` is a [link_pmf], then:
   * Let `Args...` represent the parameter types in the signature of `T`
   * Let `ClassRef` represent a reference of the parent class/struct of `T`, applying any qualifiers necessary to match the member function qualifiers on `T`
   * Let `Return` represent the return type of `T`
   * `function_type<T>` aliases `Return(ClassRef, Args...)`
-* Otherwise, if `T` is a [link_pmd]:
+  * such that:
+    * `function_type<int(foo::*)(char)>` aliases `int(foo &, char)`
+    * `function_type<int(foo::*)(char) &&>` aliases `int(foo &&, char)`
+	* `function_type<int(foo::*)(char) const>` aliases `int(foo const &, char)`
+* Otherwise, when `T` is a [link_pmd], then:
   * Let `ClassRef` represent a `const` reference of the parent class/struct of `T`
   * Let `Return` represent the pointed-to data member type of `T`
   * `function_type<T>` aliases `Return(ClassRef)`
-* Otherwise, if `T` is a [link_signature]:
+  * such that:
+    * `function_type<int foo::*>` aliases `int(foo const &)`
+	* `function_type<int foo::* const &>` also aliases `int(foo const &)`
+* Otherwise, when `T` is a [link_signature]:
   * Let `Args...` represent the parameter types in the signature of `T`
   * Let `Return` represent the return type of `T`
   * `function_type<T>` aliases `Return(Args...)`
-*Otherwise, if `T` is a [link_simple_fn_obj]:
-  * Let `Args...` represent the parameter types in the signature of T's `operator()`
-  * Let `Return` represent the return type of T's `operator()`
+*Otherwise, when `T` is a [link_simple_fn_obj], then:
+  * Let `Args...` represent the parameter types in the signature of `decltype(&std::decay_t<T>::operator())`
+  * Let `Return` represent the return type of `decltype(&std::decay_t<T>::operator())`
   * `function_type<T>` aliases `Return(Args...)`
-
+*Otherwise, when `T` is a [link_bind_expression], then:
+  * Let `std::tuple<Args...>` represent [namespace_scoped][^[link_args]]`<T>`
+  * Let `bind_args...` represent the argument values that were passed to [namespace]`bind` which returned an instance of `T`
+  * Let `bind_result` represent the return value of `std::bind(bind_args...)`
+  * Let `Return` represent `decltype(bind_result(std::declval<Args>()...))`
+  * `function_type<T>` aliases `Return(Args...)`
+  
 [heading Example]
 [import ../example/function_type.cpp]
 [function_type]
 
 TODO - PMD and PMF examples
+
+[heading See Also]
+* [link_args]
+* [link_result_of]
+* [link_qualified_function_type]
 
 [endsect][/section:ref_function_type]
 
@@ -950,16 +1143,84 @@ TODO - PMD and PMF examples
 
 
 [section:ref_has_calling_convention has_calling_convention]
-TODO
+
+    namespace ``[lib_namespace]`` {
+	
+	    template<typename T, typename CcTag>
+		inline constexpr auto has_calling_convention() {
+			/* implementation-defined */
+		}
+		
+		template<typename U, typename CcTag>
+		inline constexpr auto has_calling_convention(U&&) {
+			return has_calling_convention<U, CcTag>();
+		}
+	}
+	
+[heading Constraints]
+* `T` must be a [link_fn_ptr] or [link_pmf]
+* `CcTag` must be a [link_cc_tag]
+
+[heading Behavior]
+* If `T` uses the calling convention specified by `CcTag`, then an instance of `std::true_type` is returned.
+* Otherwise, an instance of `std::false_type` is returned.
+
+[heading Notes]
+
+For `has_calling_convention` to work as-intended, you must:
+
+# Be programming on a platform that supports the desired calling convention
+# Define one or more of the following macros before including any [libname] headers:
+ * `CALLABLE_TRAITS_ENABLE_CDECL` for `__cdecl`
+ * `CALLABLE_TRAITS_ENABLE_STDCALL` for `__stdcall`
+ * `CALLABLE_TRAITS_ENABLE_FASTCALL` for `__fastcall`
+ * `CALLABLE_TRAITS_ENABLE_PASCAL` for `pascal`
+	
 [heading Example - [^__fastcall] to [^__stdcall]]
 [experimental_changing_calling_conventions]
+
+[heading See Also]
+* [link_add_calling_convention]
+* [link_remove_calling_convention]
+
 [endsect]
 
 [section:ref_has_varargs has_varargs]
-TODO
+
+    namespace ``[lib_namespace]`` {
+	
+	    template<typename T>
+		inline constexpr auto has_varargs() {
+			/* implementation-defined */
+		}
+		
+		template<typename U>
+		inline constexpr auto has_varargs(U&&) {
+			return has_varargs<U&&>();
+		}
+	}
+	
+[heading Constraints]
+* `T` must be a [link_simple_callable]
+
+[heading Behavior]
+* If the constraints are violated, a substitution failure occurs
+* Otherwise, if `T` is a [link_signature], then:
+  * If `T` uses C-style variadics, an instance of `std::true_type` is returned
+  * Otherwise, an instance of `std::false_type` is returned
+* Otherwise, if `T` is a [link_simple_fn_obj], then:
+  * If `decltype(&std::decay_t<T>::operator())` uses C-style variadics, then an instance of `std::true_type` is returned
+  * Otherwise, an instance of `std::false_type` is returned
+* Otherwise, an instance of `std::false_type` is returned
+  
 [heading Example]
 [/import ../example/has_varargs.cpp]
 [has_varargs]
+
+[heading See Also]
+* [link_add_varargs]
+* [link_remove_varargs]
+
 [endsect]
 
 [section:ref_has_void_return has_void_return]
@@ -1107,7 +1368,7 @@ TODO
 
 [section:acknowledgements Acknowledgements]
 
-Special thanks go to Louis Dionne, whose massive [hana] project was the original source of inspiration for [libname]. Louis' occasional encouragement and advice have been invaluable throughout the development of this project.
+Special thanks to Louis Dionne, whose massive [hana] project was the original source of inspiration for [libname]. Louis' occasional suggestions have been invaluable throughout the development of [libname].
 
 Robert Ramey's CppCon 2014 presentation [@https://www.youtube.com/watch?v=ACeNgqBKL7E "How you can make a Boost C++ Library"], along with the related material found at the [@http://rrsd.com/blincubator.com/ Boost Library Incubator] have been excellent resources for the development and documentation of [libname].
 

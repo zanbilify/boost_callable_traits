@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>Example:std::function sugar</title>
+<title>Example: std::function sugar</title>
 <link rel="stylesheet" href="../boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="CallableTraits">
@@ -24,17 +24,19 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="callable_traits.function_sugar_example"></a><a class="link" href="function_sugar_example.html" title="Example:std::function sugar">Example:<code class="literal">std::function</code>
+<a name="callable_traits.function_sugar_example"></a><a class="link" href="function_sugar_example.html" title="Example: std::function sugar">Example: <code class="literal">std::function</code>
     sugar</a>
 </h2></div></div></div>
 <p>
       At a glance, there appear to be around 260 <a href="http://stackoverflow.com/search?q=convert+std%3A%3Abind+to+std%3A%3Afunction" target="_top">search
       results</a> on Stack Overflow concerning the conversion from <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>
-      to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code>, and around 340 <a href="http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction" target="_top">search
+      results to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code>, and around 340 <a href="http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction" target="_top">search
       results</a> concerning the conversion of lambdas to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code>.
-      However misguided these questions might be, we'll kill both birds with the
-      same stone in the <code class="computeroutput"><span class="identifier">make_function</span></code>
-      example below, which will leverage <code class="literal">CallableTraits</code> to...
+      There are few good reasons for converting <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code> result
+      objects into <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code> objects, and fewer still for creating
+      <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code> objects without explicitly specifying
+      the function type. Regardless, here's a <code class="computeroutput"><span class="identifier">make_function</span></code>
+      function, which can...
     </p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -43,17 +45,15 @@
         </li>
 <li class="listitem">
           Construct an <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-          where T is the deduced "signature" of an <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">placeholders</span></code>
+          where T is the implied "signature" of an <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">placeholders</span></code>
           expression
         </li>
 </ol></div>
 <p>
-      Without real-world context, <code class="computeroutput"><span class="identifier">make_function</span></code>
-      may seem rather silly, especially since we are needlessly incurring the runtime
-      cost of type erasure, which takes place inside the <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code>
-      implementation. However, this <code class="computeroutput"><span class="identifier">make_function</span></code>
-      might be useful in a situation where <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span></code>
-      would be required by some 3rd party API.
+      <code class="computeroutput"><span class="identifier">make_function</span></code> is rather silly,
+      especially since we have no contextual reason for incurring the costs of type
+      erasure. Still, it's a lightweight example of the kind of metaprogramming you
+      can do with <code class="literal">CallableTraits</code>.
     </p>
 <div class="note"><table border="0" summary="Note">
 <tr>
@@ -81,8 +81,8 @@
         <span class="comment">// callable_traits::function_type decays any non-overloaded callable type to</span>
         <span class="comment">// a plain function type, which is structured in terms of INVOKE.</span>
 
-        <span class="keyword">using</span> <span class="identifier">signature</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&amp;&amp;&gt;;</span>
-        <span class="keyword">using</span> <span class="identifier">result_type</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span><span class="special">&lt;</span><span class="identifier">signature</span><span class="special">&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&amp;&amp;&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">result_type</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">&gt;;</span>
         <span class="keyword">return</span> <span class="identifier">result_type</span><span class="special">{</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">forward</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;(</span><span class="identifier">t</span><span class="special">)</span> <span class="special">};</span>
     <span class="special">}</span>
 
@@ -105,8 +105,8 @@
                 <span class="identifier">std</span><span class="special">::</span><span class="identifier">forward</span><span class="special">&lt;</span><span class="identifier">Others</span><span class="special">&gt;(</span><span class="identifier">others</span><span class="special">)...</span>
         <span class="special">));</span>
 
-        <span class="keyword">using</span> <span class="identifier">signature</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">bind_expr</span><span class="special">&gt;;</span>
-        <span class="keyword">using</span> <span class="identifier">result_type</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span><span class="special">&lt;</span><span class="identifier">signature</span><span class="special">&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">bind_expr</span><span class="special">&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">result_type</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">function</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">&gt;;</span>
 
         <span class="keyword">return</span> <span class="identifier">result_type</span><span class="special">{</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(</span>
                 <span class="identifier">std</span><span class="special">::</span><span class="identifier">forward</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;(</span><span class="identifier">t</span><span class="special">),</span>
