@@ -200,7 +200,7 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
 
 [*3.] [libname] is designed to comply with [invoke] rules, with one unobtrusive and beneficial deviation: [link_fn] types types are compatible with all relevant type operations that do not specifically require an invocation.
 
-[*4.] [namespace_scoped][link_arg_at]`<2, Callable>` is more flexible (arguable more readable) than `typename boost::function_traits<Callable>::arg3_type`.
+[*4.] [namespace_scoped][link_arg_at]`<2, Callable>` is more flexible than `typename boost::function_traits<Callable>::arg3_type`.
 
 [*5.] [link_can_invoke] is used to test `INVOKE`-ability at compile-time, with value semantics. For the craziest metaprogrammers, [link_can_invoke_constexpr] does the same as `can_invoke` for [link_constexpr_constructible] types, with an added check for `constexpr`-ness
 
@@ -502,7 +502,7 @@ The simplest way to use [libname] is to include the main header file:
 [endsect][/section:headers]
 
 
-[template msvc_incompatible[] is not compatible with the Microsoft Visual C++ compiler in Visual Studio (a.k.a. MSVC). Accordingly, the example(s) below will not compile in MSVC. However, Windows users can still use clang-cl. Refer to the [link_msvc_issues] section for more information.]
+[template msvc_incompatible[] is not compatible with the Microsoft Visual C++ compiler in Visual Studio (a.k.a. MSVC). Accordingly, the example(s) below will not compile in MSVC. However, Visual Studio users can still use Clang-cl. Refer to the [link_msvc_issues] section for more information.]
 
 
 
