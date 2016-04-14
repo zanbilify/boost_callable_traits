@@ -154,6 +154,23 @@ namespace callable_traits {
             // Expands the argument types into a template
             template<template<class...> class Container>
             using expand_args = invalid_type;
+			
+			using clear_args = invalid_type;
+			
+			template<typename... NewArgs>
+			using push_args_front = invalid_type;
+
+			template<typename... NewArgs>
+			using push_args_back = invalid_type;
+			
+			template<std::size_t ElementCount>
+			using pop_args_front = invalid_type;
+
+			template<std::size_t ElementCount>
+			using pop_args_back = invalid_type;
+			
+			template<std::size_t Index, typename... NewArgs>
+			using insert_args = invalid_type;
 		};
 	}
 }

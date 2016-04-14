@@ -44,8 +44,6 @@
 <dt><span class="section"><a href="index.html#callable_traits.introduction.prereqs">Prerequisite Topics</a></span></dt>
 <dt><span class="section"><a href="index.html#callable_traits.introduction.motivation">Motivation</a></span></dt>
 <dt><span class="section"><a href="index.html#callable_traits.introduction.quick_example">Quick Example</a></span></dt>
-<dt><span class="section"><a href="index.html#callable_traits.introduction.reasons">What makes <code class="literal">CallableTraits</code>
-      unique?</a></span></dt>
 </dl></dd>
 <dt><span class="section"><a href="callable_traits/function_sugar_example.html">Example: <code class="literal">std::function</code>
     sugar</a></span></dt>
@@ -89,6 +87,7 @@
 <dt><span class="section"><a href="callable_traits/ref_bind.html">bind</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_can_invoke.html">can_invoke</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_can_invoke_constexpr.html">can_invoke_constexpr</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_clear_args.html">clear_args</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_expand_args.html">expand_args</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_function_type.html">function_type</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_has_calling_convention.html">has_calling_convention</a></span></dt>
@@ -111,10 +110,16 @@
 <dt><span class="section"><a href="callable_traits/ref_remove_member_reference.html">remove_member_reference</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_remove_varargs.html">remove_varargs</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_remove_member_volatile.html">remove_member_volatile</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_push_args_back.html">push_args_back</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_push_args_front.html">push_args_front</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_result_of.html">result_of</a></span></dt>
 <dt><span class="section"><a href="callable_traits/faq.html">FAQ</a></span></dt>
-<dd><dl><dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.why_does_namespace_scoped_args_a">Why
-      does <code class="literal">callable_traits::</code><code class="literal">args</code> alias a <code class="literal">std::tuple</code>?</a></span></dt></dl></dd>
+<dd><dl>
+<dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.reasons">What makes <code class="literal">CallableTraits</code>
+      unique?</a></span></dt>
+<dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.why_does_namespace_scoped_args_a">Why
+      does <code class="literal">callable_traits::</code><code class="literal">args</code> alias a <code class="literal">std::tuple</code>?</a></span></dt>
+</dl></dd>
 <dt><span class="section"><a href="callable_traits/acknowledgements.html">Acknowledgements</a></span></dt>
 <dt><span class="section"><a href="callable_traits/contact.html">Contact</a></span></dt>
 </dl>
@@ -127,8 +132,6 @@
 <dt><span class="section"><a href="index.html#callable_traits.introduction.prereqs">Prerequisite Topics</a></span></dt>
 <dt><span class="section"><a href="index.html#callable_traits.introduction.motivation">Motivation</a></span></dt>
 <dt><span class="section"><a href="index.html#callable_traits.introduction.quick_example">Quick Example</a></span></dt>
-<dt><span class="section"><a href="index.html#callable_traits.introduction.reasons">What makes <code class="literal">CallableTraits</code>
-      unique?</a></span></dt>
 </dl></div>
 <p>
       <code class="literal">CallableTraits</code> is a cross-platform C++14 library for the
@@ -512,80 +515,6 @@
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">not_abominable</span><span class="special">,</span> <span class="identifier">expected_fn2</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 <span class="special">}</span>
 </pre>
-</div>
-<div class="section">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="callable_traits.introduction.reasons"></a><a class="link" href="index.html#callable_traits.introduction.reasons" title="What makes CallableTraits unique?">What makes <code class="literal">CallableTraits</code>
-      unique?</a>
-</h3></div></div></div>
-<p>
-        <span class="bold"><strong>1.</strong></span> <code class="literal">CallableTraits</code> offers
-        template aliases such as <a class="link" href="callable_traits/ref_remove_member_const.html" title="remove_member_const"><code class="literal">remove_member_const</code></a>
-        for manipulating function qualifiers, designed to parallel the <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span></code> aliases such as <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">remove_const_t</span></code>.
-      </p>
-<p>
-        <span class="bold"><strong>2.</strong></span> <code class="literal">CallableTraits</code> is
-        designed to accept cv-qualified and ref-qualified types, which eliminates
-        the need to prepare template argument types with metafunctions such as <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">remove_reference</span></code>
-        and <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">decay</span></code>. This is especially useful when dealing
-        with perfectly-forwarded parameter types in function templates.
-      </p>
-<p>
-        <span class="bold"><strong>3.</strong></span> <code class="literal">CallableTraits</code> is
-        designed to comply with <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>
-        rules, with one unobtrusive and beneficial deviation: <a class="link" href="callable_traits/concepts.html#callable_traits.concepts.ref_fn" title="Function"><span class="green">Function</span></a> types are compatible with all relevant
-        type operations that do not specifically require an invocation.
-      </p>
-<p>
-        <span class="bold"><strong>4.</strong></span> <code class="literal">callable_traits::</code><a class="link" href="callable_traits/ref_arg_at.html" title="arg_at"><code class="literal">arg_at</code></a><code class="computeroutput"><span class="special">&lt;</span><span class="number">2</span><span class="special">,</span>
-        <span class="identifier">Callable</span><span class="special">&gt;</span></code>
-        is more flexible than <code class="computeroutput"><span class="keyword">typename</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">function_traits</span><span class="special">&lt;</span><span class="identifier">Callable</span><span class="special">&gt;::</span><span class="identifier">arg3_type</span></code>.
-      </p>
-<p>
-        <span class="bold"><strong>5.</strong></span> <a class="link" href="callable_traits/ref_can_invoke.html" title="can_invoke"><code class="literal">can_invoke</code></a>
-        is used to test <code class="computeroutput"><span class="identifier">INVOKE</span></code>-ability
-        at compile-time, with value semantics. For the craziest metaprogrammers,
-        <a class="link" href="callable_traits/ref_can_invoke_constexpr.html" title="can_invoke_constexpr"><code class="literal">can_invoke_constexpr</code></a>
-        does the same as <code class="computeroutput"><span class="identifier">can_invoke</span></code>
-        for <a class="link" href="callable_traits/concepts.html#callable_traits.concepts.ref_constexpr_constructible" title="ConstexprDefaultConstructible"><span class="green">ConstexprDefaultConstructible</span></a> types, with an
-        added check for <code class="computeroutput"><span class="keyword">constexpr</span></code>-ness
-      </p>
-<p>
-        <span class="bold"><strong>6.</strong></span> <a class="link" href="callable_traits/ref_is_constexpr.html" title="is_constexpr"><code class="literal">is_constexpr</code></a>
-        is used to check whether a <a class="link" href="callable_traits/concepts.html#callable_traits.concepts.ref_constexpr_constructible" title="ConstexprDefaultConstructible"><span class="green">ConstexprDefaultConstructible</span></a> type is a <a class="link" href="callable_traits/concepts.html#callable_traits.concepts.ref_callable" title="Callable"><span class="green">Callable</span></a>
-        type that yields a <code class="computeroutput"><span class="keyword">constexpr</span></code>
-        result -- no arguments necessary.
-      </p>
-<p>
-        <span class="bold"><strong>7.</strong></span> <a class="link" href="callable_traits/ref_bind.html" title="bind"><code class="literal">bind</code></a>
-        is used to intercept the signature information from a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">placeholder</span></code>
-        expression before forwarding on to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span></code>
-        or <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span></code>. This gives library writers the power
-        to create more flexible template APIs for callable types.
-      </p>
-<p>
-        <span class="bold"><strong>8.</strong></span> <a class="link" href="callable_traits/ref_min_arity.html" title="min_arity"><code class="literal">min_arity</code></a>
-        can be used to detect the presence of default arguments on a <a class="link" href="callable_traits/concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>
-      </p>
-<p>
-        <span class="bold"><strong>9.</strong></span> The <code class="literal">CallableTraits</code>
-        interface mainly consists of template aliases and <code class="computeroutput"><span class="keyword">constexpr</span>
-        <span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span></code> functions, which are
-        arguably preferable to <code class="computeroutput"><span class="keyword">typename</span> <span class="identifier">foo</span><span class="special">::</span><span class="identifier">type</span></code>
-        and <code class="computeroutput"><span class="identifier">foo</span><span class="special">::</span><span class="identifier">value</span></code>. While the <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span></code>
-        functions in <code class="literal">CallableTraits</code> may be a deviation from traditional
-        type trait designs, they facilitate a metaprogramming style that uses value-semantics
-        (a la <a href="https://boostorg.github.io/hana/" target="_top"><code class="literal">Boost.Hana</code></a>).
-        The functions can generally be used with either types or values, which eliminates
-        unnecessary <code class="computeroutput"><span class="keyword">decltype</span></code> usage.
-      </p>
-<p>
-        <span class="bold"><strong>10.</strong></span> <code class="literal">CallableTraits</code> includes
-        optional features for the manipulation and inspection of calling conventions.
-        These features are currently deemed experimental, because they greatly increase
-        the test surface of <code class="literal">CallableTraits</code>, are platform-specific,
-        and are not yet fully tested on any platform.
-      </p>
 </div>
 </div>
 </div>

@@ -77,6 +77,14 @@ struct function<T, Return(Args...) QUAL>                                        
                                                                                      \
     template<template<class...> class Container>                                     \
     using expand_args = Container<Args...>;                                          \
+                                                                                     \
+    using clear_args = Return() QUAL;  			                         	     	 \
+                                                                                     \
+    template<typename... NewArgs>                                                    \
+    using push_args_front = Return(NewArgs..., Args...) QUAL;                        \
+                                                                                     \
+	template<typename... NewArgs>                                                    \
+	using push_args_back = Return(Args..., NewArgs...) QUAL;                         \
 };                                                                                   \
                                                                                      \
 template<typename T, typename Return, typename... Args>                              \
@@ -133,6 +141,14 @@ struct function<T, Return (Args..., ...) QUAL>                                  
                                                                                      \
     template<template<class...> class Container>                                     \
     using expand_args = Container<Args...>;                                          \
+                                                                                     \
+    using clear_args = Return() QUAL;  			                         	     	 \
+                                                                                     \
+    template<typename... NewArgs>                                                    \
+    using push_args_front = Return(NewArgs..., Args..., ...) QUAL;                   \
+                                                                                     \
+	template<typename... NewArgs>                                                    \
+	using push_args_back = Return(Args..., NewArgs..., ...) QUAL;                    \
 }                                                                                    \
 /**/
 
@@ -241,6 +257,14 @@ namespace callable_traits {
 
             template<typename NewReturn>
             using apply_return = typename base::template apply_return<NewReturn>&;
+			
+            using clear_args = typename base::clear_args&;
+			
+			template<typename... NewArgs>
+			using push_args_front = typename base::template push_args_front<NewArgs...>&;
+
+			template<typename... NewArgs>
+			using push_args_back = typename base::template push_args_back<NewArgs...>&;
         };
 
         template<typename U, typename T, T Value>
