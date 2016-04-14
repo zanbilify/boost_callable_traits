@@ -64,6 +64,7 @@
 <dt><span class="section"><a href="callable_traits/concepts.html#callable_traits.concepts.ref_simple_fn_obj"><span class="green">SimpleFunctionObject</span></a></span></dt>
 <dt><span class="section"><a href="callable_traits/concepts.html#callable_traits.concepts.ref_overloaded_fn_obj"><span class="green">OverloadedFunctionObject</span></a></span></dt>
 <dt><span class="section"><a href="callable_traits/concepts.html#callable_traits.concepts.ref_fn_obj"><span class="green">FunctionObject</span></a></span></dt>
+<dt><span class="section"><a href="callable_traits/concepts.html#callable_traits.concepts.ref_signature"><span class="green">Signature</span></a></span></dt>
 <dt><span class="section"><a href="callable_traits/concepts.html#callable_traits.concepts.ref_callable"><span class="green">Callable</span></a></span></dt>
 <dt><span class="section"><a href="callable_traits/concepts.html#callable_traits.concepts.ref_simple_callable"><span class="green">SimpleCallable</span></a></span></dt>
 <dt><span class="section"><a href="callable_traits/concepts.html#callable_traits.concepts.ref_simple_invokable"><span class="green">SimpleInvokable</span></a></span></dt>
@@ -156,7 +157,7 @@
             <a href="http://en.cppreference.com/w/cpp/language/sfinae" target="_top">SFINAE</a>
           </li>
 <li class="listitem">
-            <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top">INVOKE</a>
+            <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>
             rules
           </li>
 <li class="listitem">
@@ -389,7 +390,7 @@
     <span class="keyword">using</span> <span class="identifier">expected_args</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*&gt;;</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">args</span><span class="special">,</span> <span class="identifier">expected_args</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
-    <span class="comment">// [libns]function_type "decays" a callable type to a plain</span>
+    <span class="comment">// <code class="literal">callable_traits::</code>function_type "decays" a callable type to a plain</span>
     <span class="comment">// function type, which is structured in terms of INVOKE.</span>
     <span class="keyword">using</span> <span class="identifier">function_type</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;;</span>
     <span class="keyword">using</span> <span class="identifier">expected_function_type</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*);</span>
@@ -427,7 +428,7 @@
 
     <span class="keyword">int</span> <span class="identifier">i</span> <span class="special">=</span> <span class="number">0</span><span class="special">;</span>
 
-    <span class="comment">// [libns]can_invoke allows us to preview whether</span>
+    <span class="comment">// <code class="literal">callable_traits::</code>can_invoke allows us to preview whether</span>
     <span class="comment">// std::invoke would compile with the given arguments.</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{},</span> <span class="number">0</span><span class="special">,</span> <span class="number">0</span><span class="special">,</span> <span class="identifier">i</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
     <span class="comment">// no error:     std::invoke(foo{}, 0, 0, i);</span>
@@ -480,7 +481,7 @@
     <span class="keyword">using</span> <span class="identifier">with_rvalue</span> <span class="special">=</span> <span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*)</span> <span class="keyword">const</span> <span class="special">&amp;&amp;;</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">rvalue_pmf</span><span class="special">,</span> <span class="identifier">with_rvalue</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
-    <span class="comment">// Just like std::add_rvalue_reference, [libns]add_function_rvalue</span>
+    <span class="comment">// Just like std::add_rvalue_reference, <code class="literal">callable_traits::</code>add_function_rvalue</span>
     <span class="comment">// follows C++11 reference collapsing rules. While remove_function_const</span>
     <span class="comment">// and add_function_rvalue are somewhat clumsy names, they are the best</span>
     <span class="comment">// the best the author could provide while still allowing both terseness</span>
@@ -495,7 +496,7 @@
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">fn</span><span class="special">,</span> <span class="identifier">expected_fn</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
     <span class="comment">// We just created an abominable function type - notice the const</span>
-    <span class="comment">// qualifier! libnsremove_function_const accepts abominable</span>
+    <span class="comment">// qualifier! namespace_scopedremove_function_const accepts abominable</span>
     <span class="comment">// types too (and so does any feature where it is legal to do so):</span>
     <span class="keyword">using</span> <span class="identifier">not_abominable</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_function_const</span><span class="special">&lt;</span><span class="identifier">fn</span><span class="special">&gt;;</span>
     <span class="keyword">using</span> <span class="identifier">expected_fn2</span> <span class="special">=</span> <span class="keyword">void</span> <span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*);</span>
@@ -522,7 +523,7 @@
       </p>
 <p>
         <span class="bold"><strong>3.</strong></span> <code class="literal">CallableTraits</code> is
-        designed to comply with <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top">INVOKE</a>
+        designed to comply with <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>
         rules, with one unobtrusive and beneficial deviation: <a class="link" href="callable_traits/concepts.html#callable_traits.concepts.ref_fn" title="Function"><span class="green">Function</span></a> types types are compatible with all
         relevant type operations that do not specifically require an invocation.
       </p>

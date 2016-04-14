@@ -26,11 +26,39 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_args"></a><a class="link" href="ref_args.html" title="args">args</a>
 </h2></div></div></div>
-<p>
-      TODO
-    </p>
+<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+    <span class="keyword">using</span> <span class="identifier">args</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span><span class="special">;</span>
+
+<span class="special">}</span>
+</pre>
 <h4>
 <a name="callable_traits.ref_args.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_args.constraints"></a></span><a class="link" href="ref_args.html#callable_traits.ref_args.constraints">Constraints</a>
+    </h4>
+<p>
+      <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a> or a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>.
+    </p>
+<h4>
+<a name="callable_traits.ref_args.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_args.behavior"></a></span><a class="link" href="ref_args.html#callable_traits.ref_args.behavior">Behavior</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          When the constraints above are violated, the substitution fails in a SFINAE-friendly
+          manner.
+        </li>
+<li class="listitem">
+          Where <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
+          are defined as the parameter types in the signature of <code class="computeroutput"><span class="identifier">T</span></code>
+          (or the signature of <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code> for <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>), the aliased type of
+          <code class="computeroutput"><span class="identifier">args</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+          is <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">...&gt;</span></code>.
+        </li>
+</ul></div>
+<h4>
+<a name="callable_traits.ref_args.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_args.example"></a></span><a class="link" href="ref_args.html#callable_traits.ref_args.example">Example</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
@@ -83,6 +111,14 @@
     <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">abominable</span><span class="special">&gt;();</span>
 <span class="special">}</span>
 </pre>
+<h4>
+<a name="callable_traits.ref_args.h3"></a>
+      <span class="phrase"><a name="callable_traits.ref_args.see_also"></a></span><a class="link" href="ref_args.html#callable_traits.ref_args.see_also">See
+      Also</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+          <a class="link" href="ref_arg_at.html" title="arg_at"><code class="literal">arg_at</code></a>
+        </li></ul></div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

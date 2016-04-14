@@ -38,12 +38,11 @@
       <span class="phrase"><a name="callable_traits.ref_arg_at.constraints"></a></span><a class="link" href="ref_arg_at.html#callable_traits.ref_arg_at.constraints">Constraints</a>
     </h4>
 <p>
-      <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a>. <code class="computeroutput"><span class="identifier">Index</span></code>
+      <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a> or a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>. <code class="computeroutput"><span class="identifier">Index</span></code>
       must be less than <code class="computeroutput"><span class="identifier">ArgCount</span></code>
       and greater than zero, where <code class="computeroutput"><span class="identifier">ArgCount</span></code>
       is the number of arguments in the signature of <code class="computeroutput"><span class="identifier">T</span></code>
-      (the signature of <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
-      for <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>).
+      (or the signature of <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code> for <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>).
     </p>
 <h4>
 <a name="callable_traits.ref_arg_at.h1"></a>

@@ -31,7 +31,7 @@ int main() {
     using expected_args = std::tuple<int, int&&, const int&, void*>;
     static_assert(std::is_same<args, expected_args>::value, "");
 
-    // ``[libns]``function_type "decays" a callable type to a plain
+    // ``[namespace_scoped]``function_type "decays" a callable type to a plain
     // function type, which is structured in terms of INVOKE.
     using function_type = ct::function_type<foo>;
     using expected_function_type = void(int, int&&, const int&, void*);
@@ -69,7 +69,7 @@ int main() {
 
     int i = 0;
 
-    // ``[libns]``can_invoke allows us to preview whether
+    // ``[namespace_scoped]``can_invoke allows us to preview whether
     // std::invoke would compile with the given arguments.
     static_assert(ct::can_invoke(foo{}, 0, 0, i), "");
     // no error:     std::invoke(foo{}, 0, 0, i);
@@ -122,7 +122,7 @@ int main() {
     using with_rvalue = void (foo::*)(int, int&&, const int&, void*) const &&;
     static_assert(std::is_same<rvalue_pmf, with_rvalue>::value, "");
 
-    // Just like std::add_rvalue_reference, ``[libns]``add_function_rvalue
+    // Just like std::add_rvalue_reference, ``[namespace_scoped]``add_function_rvalue
     // follows C++11 reference collapsing rules. While remove_function_const
     // and add_function_rvalue are somewhat clumsy names, they are the best
     // the best the author could provide while still allowing both terseness
@@ -137,7 +137,7 @@ int main() {
     static_assert(std::is_same<fn, expected_fn>::value, "");
 
     // We just created an abominable function type - notice the const
-    // qualifier! ``libns``remove_function_const accepts abominable
+    // qualifier! ``namespace_scoped``remove_function_const accepts abominable
     // types too (and so does any feature where it is legal to do so):
     using not_abominable = ct::remove_function_const<fn>;
     using expected_fn2 = void (int, int&&, const int&, void*);

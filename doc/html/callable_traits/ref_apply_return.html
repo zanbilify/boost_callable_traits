@@ -38,34 +38,27 @@
       <span class="phrase"><a name="callable_traits.ref_apply_return.constraints"></a></span><a class="link" href="ref_apply_return.html#callable_traits.ref_apply_return.constraints">Constraints</a>
     </h4>
 <p>
-      <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
+      <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a> or a <a class="link" href="concepts.html#callable_traits.concepts.ref_pmd" title="MemberDataPtr"><span class="green">MemberDataPtr</span></a>.
     </p>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
-<li class="listitem">
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_fn" title="Function"><span class="green">Function</span></a>
-        </li>
-<li class="listitem">
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ptr" title="FunctionPtr"><span class="green">FunctionPtr</span></a>
-        </li>
-<li class="listitem">
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ref" title="FunctionReference"><span class="green">FunctionReference</span></a>
-        </li>
-<li class="listitem">
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_member_ptr" title="MemberPtr"><span class="green">MemberPtr</span></a>
-        </li>
-</ul></div>
 <h4>
 <a name="callable_traits.ref_apply_return.h1"></a>
       <span class="phrase"><a name="callable_traits.ref_apply_return.behavior"></a></span><a class="link" href="ref_apply_return.html#callable_traits.ref_apply_return.behavior">Behavior</a>
     </h4>
-<p>
-      When <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_fn" title="Function"><span class="green">Function</span></a>, <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ptr" title="FunctionPtr"><span class="green">FunctionPtr</span></a>, <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ref" title="FunctionReference"><span class="green">FunctionReference</span></a>, or <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>, the resulting type's signature's
-      return type will be of type <code class="computeroutput"><span class="identifier">Return</span></code>,
-      and the rest of the signature will be identical. When <code class="computeroutput"><span class="identifier">T</span></code>
-      is a <a class="link" href="concepts.html#callable_traits.concepts.ref_pmd" title="MemberDataPtr"><span class="green">MemberDataPtr</span></a>,
-      the resulting type points to a data member of type <code class="computeroutput"><span class="identifier">Return</span></code>,
-      with the same parent class as <code class="computeroutput"><span class="identifier">T</span></code>.
-    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a>, the return type of the result type
+          will be the same as <code class="computeroutput"><span class="identifier">T</span></code>,
+          except that the return type is changed to <code class="computeroutput"><span class="identifier">Return</span></code>.
+          In other words, <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="keyword">void</span><span class="special">(),</span> <span class="keyword">int</span><span class="special">&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span></code>.
+        </li>
+<li class="listitem">
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_pmd" title="MemberDataPtr"><span class="green">MemberDataPtr</span></a>, the resulting type points to
+          a data member of type <code class="computeroutput"><span class="identifier">Return</span></code>,
+          with the same parent class as <code class="computeroutput"><span class="identifier">T</span></code>.
+          In other words, <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*,</span> <span class="keyword">char</span><span class="special">&gt;</span></code>
+          becomes <code class="computeroutput"><span class="keyword">char</span> <span class="identifier">foo</span><span class="special">::*</span></code>.
+        </li>
+</ul></div>
 <h4>
 <a name="callable_traits.ref_apply_return.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_apply_return.example"></a></span><a class="link" href="ref_apply_return.html#callable_traits.ref_apply_return.example">Example</a>

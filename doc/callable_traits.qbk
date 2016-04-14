@@ -27,7 +27,7 @@
 [template detail_open_include[]    `#include<`[^[header_include_prefix]]]
 [template detail_close_include[]`.hpp>`]
 [template include_header[name][detail_open_include][^[name]][detail_close_include]]
-[template invoke[][@http://en.cppreference.com/w/cpp/utility/functional/invoke INVOKE]]
+[template invoke[][@http://en.cppreference.com/w/cpp/utility/functional/invoke [^['INVOKE]]]]
 [template hana[][@https://boostorg.github.io/hana/ [^Boost.Hana]]]
 [template feedback[][link callable_traits.contact feedback]]
 [template repo[][@https://github.com/badair/callable_traits GitHub]]
@@ -50,6 +50,8 @@
 [template concept_simple_invokable[][role green SimpleInvokable]]
 [template concept_callable[][role green Callable]]
 [template concept_invokable[][role green Invokable]]
+[template concept_basic_signature[][role green BasicSignature]]
+[template concept_signature[][role green Signature]]
 [template concept_constexpr_constructible[][role green ConstexprDefaultConstructible]]
 [template concept_cc_tag[][role green CallingConventionTag]]
 
@@ -69,6 +71,8 @@
 [template link_simple_invokable[][link callable_traits.concepts.ref_simple_invokable [concept_simple_invokable]]]
 [template link_callable[][link callable_traits.concepts.ref_callable [concept_callable]]]
 [template link_invokable[][link callable_traits.concepts.ref_invokable [concept_invokable]]]
+[template link_basic_signature[][link callable_traits.concepts.ref_basic_signature [concept_basic_signature]]]
+[template link_signature[][link callable_traits.concepts.ref_signature [concept_signature]]]
 [template link_constexpr_constructible[][link callable_traits.concepts.ref_constexpr_constructible [concept_constexpr_constructible]]]
 [template link_cc_tag[][link callable_traits.concepts.ref_cc_tag [concept_cc_tag]]]
 
@@ -363,7 +367,7 @@ While most of the features in [libname] are tested and working in MSVC, the foll
 [section:ref_simple_fn_obj [concept_simple_fn_obj]]
 * Any class/struct with a ['non-templated, non-overloaded] function call operator
 * Includes non-generic lambda types
-* May be cv-qualified and/or ref-qualified.
+* May be cv-qualified and/or ref-qualified
 * Mutually exclusive with [link_overloaded_fn_obj]
 * e.g. the type of this lambda: `[](int x, int y) { return x + y; }`
 
@@ -381,6 +385,15 @@ While most of the features in [libname] are tested and working in MSVC, the foll
 
 [section:ref_fn_obj [concept_fn_obj]]
 * Any type that is either an [link_overloaded_fn_obj] or a [link_simple_fn_obj]
+
+[endsect]
+
+[section:ref_signature [concept_signature]]
+* The superset of the following:
+  * [link_fn_ptr]
+  * [link_fn_ref]
+  * [link_fn]
+  * [link_pmf]
 
 [endsect]
 
@@ -757,15 +770,11 @@ When `T` is a [link_fn], [link_fn_ptr], or [link_fn_ref], the resulting type is 
 	
 [heading Constraints]
 
-`T` must be one of the following:
-
-* [link_fn]
-* [link_fn_ptr]
-* [link_fn_ref]
-* [link_member_ptr]
+`T` must be a [link_signature] or a [link_pmd].
 
 [heading Behavior]
-When `T` is a [link_fn], [link_fn_ptr], [link_fn_ref], or [link_pmf], the resulting type's signature's return type will be of type `Return`, and the rest of the signature will be identical. When `T` is a [link_pmd], the resulting type points to a data member of type `Return`, with the same parent class as `T`.
+* When `T` is a [link_signature], the return type of the result type will be the same as `T`, except that the return type is changed to `Return`. In other words, `apply_return<void(), int>` aliases `int()`.
+* When `T` is a [link_pmd], the resulting type points to a data member of type `Return`, with the same parent class as `T`. In other words, `apply_return<int foo::*, char>` becomes `char foo::*`.
 
 [heading Example]
 [/import ../example/apply_return.cpp]
@@ -786,7 +795,7 @@ When `T` is a [link_fn], [link_fn_ptr], [link_fn_ref], or [link_pmf], the result
 	}
 	
 [heading Constraints]
-`T` must be a [link_simple_callable]. `Index` must be less than `ArgCount` and greater than zero, where `ArgCount` is the number of arguments in the signature of `T` (the signature of `operator()` for [link_simple_fn_obj]).
+`T` must be a [link_signature] or a [link_simple_fn_obj]. `Index` must be less than `ArgCount` and greater than zero, where `ArgCount` is the number of arguments in the signature of `T` (or the signature of `operator()` for [link_simple_fn_obj]).
 
 [heading Behavior]
 When `Index` is outside the range defined above, the substitution fails in a SFINAE-friendly manner. Otherwise, the resulting type is the argument type at zero-based index `Index`. In other words, `arg_at<1, void(char, short, long)>` aliases `short`.
@@ -805,15 +814,51 @@ When `Index` is outside the range defined above, the substitution fails in a SFI
 
 
 [section:ref_args args]
-TODO
+
+    namespace ``[lib_namespace]`` {
+	
+	    template<typename T>
+		using args = /* implementation-defined */;
+		
+	}
+	
+[heading Constraints]
+`T` must be a [link_signature] or a [link_simple_fn_obj].
+
+[heading Behavior]
+* When the constraints above are violated, the substitution fails in a SFINAE-friendly manner.
+* Where `Args...` are defined as the parameter types in the signature of `T` (or the signature of `operator()` for [link_simple_fn_obj]), the aliased type of `args<T>` is `std::tuple<Args...>`.
+
 [heading Example]
 [import ../example/args.cpp]
 [args]
 
-[endsect]
+[heading See Also]
+* [link_arg_at]
+
+[endsect][/secttion:ref_args]
+
+
+
 
 [section:ref_arity arity]
-TODO
+
+    namespace ``[lib_namespace]`` {
+	
+	    template<typename T>
+		inline constexpr auto arity(T&&);
+		
+		template<typename T>
+		inline constexpr auto arity();
+	}
+	
+[heading Constraints]
+`T` must be a [link_signature] or a [link_simple_fn_obj].
+
+[heading Behavior]
+* When the constraints are violated, an instance of type `std::integral_constant<int, -1>` is returned.
+* Otherwise, where `ArgCount` is defined as the number of parameters in the signature of `T` (or the signature of `operator()` for [simple_fn_obj]), `arity` returns an instance of type `std::integral_constant<int, ArgCount>`.
+
 [heading Example]
 [/import ../example/arity.cpp]
 [arity]
@@ -859,11 +904,50 @@ TODO
 [endsect]
 
 [section:ref_function_type function_type]
-TODO
+
+    namespace ``[lib_namespace]`` {
+	
+	    template<typename T>
+		using function_type = /* implementation-defined */;
+	}
+		
+[heading Constraints]
+`T` must be a [link_simple_callable].
+
+[heading Behavior]
+
+`function_type` "decays" a [link_simple_callable] into an [invoke]-aware [link_simple_fn].
+
+* When the constraints are violated, the substitution fails in a SFINAE-friendly manner.
+* Otherwise, if `T` is a [link_pmf]:
+  * Let `Args...` represent the parameter types in the signature of `T`
+  * Let `ClassRef` represent a reference of the parent class/struct of `T`, applying any qualifiers necessary to match the member function qualifiers on `T`
+  * Let `Return` represent the return type of `T`
+  * `function_type<T>` aliases `Return(ClassRef, Args...)`
+* Otherwise, if `T` is a [link_pmd]:
+  * Let `ClassRef` represent a `const` reference of the parent class/struct of `T`
+  * Let `Return` represent the pointed-to data member type of `T`
+  * `function_type<T>` aliases `Return(ClassRef)`
+* Otherwise, if `T` is a [link_signature]:
+  * Let `Args...` represent the parameter types in the signature of `T`
+  * Let `Return` represent the return type of `T`
+  * `function_type<T>` aliases `Return(Args...)`
+*Otherwise, if `T` is a [link_simple_fn_obj]:
+  * Let `Args...` represent the parameter types in the signature of T's `operator()`
+  * Let `Return` represent the return type of T's `operator()`
+  * `function_type<T>` aliases `Return(Args...)`
+
 [heading Example]
 [import ../example/function_type.cpp]
 [function_type]
-[endsect]
+
+TODO - PMD and PMF examples
+
+[endsect][/section:ref_function_type]
+
+
+
+
 
 [section:ref_has_calling_convention has_calling_convention]
 TODO
