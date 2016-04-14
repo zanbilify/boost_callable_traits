@@ -198,7 +198,7 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
 
 [*2.] [libname] is designed to accept cv-qualified and ref-qualified types, which eliminates the need to prepare template argument types with metafunctions such as `std::remove_reference` and `std::decay`. This is especially useful when dealing with perfectly-forwarded parameter types in function templates.
 
-[*3.] [libname] is designed to comply with [invoke] rules, with one unobtrusive and beneficial deviation: [link_fn] types types are compatible with all relevant type operations that do not specifically require an invocation.
+[*3.] [libname] is designed to comply with [invoke] rules, with one unobtrusive and beneficial deviation: [link_fn] types are compatible with all relevant type operations that do not specifically require an invocation.
 
 [*4.] [namespace_scoped][link_arg_at]`<2, Callable>` is more flexible than `typename boost::function_traits<Callable>::arg3_type`.
 
