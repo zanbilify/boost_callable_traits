@@ -111,6 +111,23 @@ struct pmf<OriginalType, Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) Q
                                                                                      \
     template<template<class...> class Container>                                     \
     using expand_args = Container<Args...>;                                          \
+                                                                                     \
+    using clear_args = typename copy_cvr<                                            \
+        Return(CALLABLE_TRAITS_VARARGS_CC T::*)() QUAL,                              \
+        OriginalType                                                                 \
+	>::type;                                                                         \
+                                                                                     \
+    template<typename... NewArgs>                                                    \
+    using push_args_front = typename copy_cvr<                                       \
+	    Return(CALLABLE_TRAITS_VARARGS_CC T::*)(NewArgs..., Args..., ...) QUAL,      \
+		OriginalType                                                                 \
+	>::type;                                                                         \
+                                                                                     \
+	template<typename... NewArgs>                                                    \
+	using push_args_back = typename copy_cvr<                                        \
+		Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., NewArgs..., ...) QUAL,      \
+		OriginalType                                                                 \
+	>::type;                                                                         \
 }                                                                                    \
 /**/
 

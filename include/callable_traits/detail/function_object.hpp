@@ -50,6 +50,23 @@ namespace callable_traits {
             template<typename>
             using apply_return = invalid_type;
 
+            using clear_args = invalid_type;
+			
+			template<typename...>
+            using push_args_front = invalid_type;
+			
+			template<typename...>
+            using push_args_back = invalid_type;
+			
+			template<std::size_t ElementCount>
+			using pop_args_front = invalid_type;
+
+			template<std::size_t ElementCount>
+			using pop_args_back = invalid_type;
+			
+			template<std::size_t Index, typename... NewArgs>
+			using insert_args = invalid_type;
+			
             using remove_member_reference = invalid_type;
             using add_member_lvalue_reference = invalid_type;
             using add_member_rvalue_reference = invalid_type;

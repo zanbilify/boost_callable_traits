@@ -23,13 +23,24 @@ namespace callable_traits {
                 "callable_traits::apply_return<T> is "
                 "not a meaningful operation for this T.");
         };
+
+        template<typename T, typename R>
+        struct apply_return_t {
+            using type = typename detail::traits<T>::template apply_return<R>;
+        };
+
+        //special case
+        template<typename... Args, typename R>
+        struct apply_return_t<std::tuple<Args...>, R> {
+            using type = R(Args...);
+        };
     }
 
     namespace permissive {
 
         template<typename T, typename R>
         using apply_return = detail::fallback_if_invalid<
-            typename detail::traits<T>::template apply_return<R>,
+            typename detail::apply_return_t<T, R>::type,
             T>;
     }
 
@@ -37,13 +48,13 @@ namespace callable_traits {
 
         template<typename T, typename R>
         using apply_return = detail::fail_if_invalid<
-            typename detail::traits<T>::template apply_return<R>,
+            typename detail::apply_return_t<T, R>::type,
             detail::apply_return_error<false>>;
     }
 
     template<typename T, typename R>
     using apply_return = detail::fail_if_invalid<
-        typename detail::traits<T>::template apply_return<R>,
+        typename detail::apply_return_t<T, R>::type,
         detail::apply_return_error<true>>;
 }
 

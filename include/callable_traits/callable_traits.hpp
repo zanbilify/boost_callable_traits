@@ -25,6 +25,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/bind.hpp>
 #include <callable_traits/can_invoke.hpp>
 #include <callable_traits/can_invoke_constexpr.hpp>
+#include <callable_traits/clear_args.hpp>
 #include <callable_traits/expand_args.hpp>
 #include <callable_traits/function_type.hpp>
 #include <callable_traits/has_varargs.hpp>
@@ -47,6 +48,8 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/remove_member_volatile.hpp>
 #include <callable_traits/has_calling_convention.hpp>
 #include <callable_traits/add_calling_convention.hpp>
+#include <callable_traits/push_args_back.hpp>
+#include <callable_traits/push_args_front.hpp>
 #include <callable_traits/result_of.hpp>
 
 #endif

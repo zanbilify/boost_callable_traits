@@ -60,7 +60,21 @@ struct function<OriginalType, CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(Ar
         OriginalType
     >::type;
 
-    template<template<class...> class Container>
-    using expand_args = Container<Args...>;
+	using clear_args = typename copy_cvr<
+		CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(),
+		OriginalType
+	>::type;
+	
+    template<typename... NewArgs>
+    using push_args_front = typename copy_cvr<
+		CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(NewArgs..., Args...),
+		OriginalType
+	>::type;
+
+	template<typename... NewArgs>
+	using push_args_back = typename copy_cvr<
+		CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(Args..., NewArgs...),
+        OriginalType
+	>::type;
 };
 

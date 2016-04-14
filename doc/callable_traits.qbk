@@ -93,6 +93,7 @@
 [template link_bind[][link callable_traits.ref_bind [^bind]]]
 [template link_can_invoke[][link callable_traits.ref_can_invoke [^can_invoke]]]
 [template link_can_invoke_constexpr[][link callable_traits.ref_can_invoke_constexpr [^can_invoke_constexpr]]]
+[template link_clear_args[][link callable_traits.ref_clear_args [^clear_args]]]
 [template link_expand_args[][link callable_traits.ref_expand_args [^expand_args]]]
 [template link_function_type[][link callable_traits.ref_function_type [^function_type]]]
 [template link_has_calling_convention[][link callable_traits.ref_has_calling_convention [^has_calling_convention]]]
@@ -115,6 +116,8 @@
 [template link_remove_member_reference[][link callable_traits.ref_remove_member_reference [^remove_member_reference]]]
 [template link_remove_varargs[][link callable_traits.ref_remove_varargs [^remove_varargs]]]
 [template link_remove_member_volatile[][link callable_traits.ref_remove_member_volatile [^remove_member_volatile]]]
+[template link_push_args_back[][link callable_traits.ref_push_args_back [^push_args_back]]]
+[template link_push_args_front[][link callable_traits.ref_push_args_front [^push_args_front]]]
 [template link_result_of[][link callable_traits.ref_result_of [^result_of]]]
 
 [template cc_warning_rationale[]
@@ -193,30 +196,6 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
 [import ../example/intro.cpp]
 [intro]
 [endsect][/section:quick_example]
-
-[section:reasons What makes [libname] unique?]
-
-[*1.] [libname] offers template aliases such as [link_remove_member_const] for manipulating function qualifiers, designed to parallel the `<type_traits>` aliases such as `std::remove_const_t`.
-
-[*2.] [libname] is designed to accept cv-qualified and ref-qualified types, which eliminates the need to prepare template argument types with metafunctions such as `std::remove_reference` and `std::decay`. This is especially useful when dealing with perfectly-forwarded parameter types in function templates.
-
-[*3.] [libname] is designed to comply with [invoke] rules, with one unobtrusive and beneficial deviation: [link_fn] types are compatible with all relevant type operations that do not specifically require an invocation.
-
-[*4.] [namespace_scoped][link_arg_at]`<2, Callable>` is more flexible than `typename boost::function_traits<Callable>::arg3_type`.
-
-[*5.] [link_can_invoke] is used to test `INVOKE`-ability at compile-time, with value semantics. For the craziest metaprogrammers, [link_can_invoke_constexpr] does the same as `can_invoke` for [link_constexpr_constructible] types, with an added check for `constexpr`-ness
-
-[*6.] [link_is_constexpr] is used to check whether a [link_constexpr_constructible] type is a [link_callable] type that yields a `constexpr` result -- no arguments necessary.
-
-[*7.] [link_bind] is used to intercept the signature information from a `std::placeholder` expression before forwarding on to `std::bind` or `boost::bind`. This gives library writers the power to create more flexible template APIs for callable types.
-
-[*8.] [link_min_arity] can be used to detect the presence of default arguments on a [link_simple_fn_obj]
-
-[*9.] The [libname] interface mainly consists of template aliases and `constexpr std::integral_constant` functions, which are arguably preferable to `typename foo::type` and `foo::value`. While the `std::integral_constant` functions in [libname] may be a deviation from traditional type trait designs, they facilitate a metaprogramming style that uses value-semantics (a la [hana]). The functions can generally be used with either types or values, which eliminates unnecessary `decltype` usage.
-
-[*10.] [libname] includes optional features for the manipulation and inspection of calling conventions. These features are currently deemed experimental, because they greatly increase the test surface of [libname], are platform-specific, and are not yet fully tested on any platform.
-
-[endsect][/section:reasons]
 
 [endsect][/section:introduction]
 
@@ -478,6 +457,7 @@ The simplest way to use [libname] is to include the main header file:
 * [include_header [link_bind]]
 * [include_header [link_can_invoke]]
 * [include_header [link_can_invoke_constexpr]]
+* [include_header [link_clear_args]]
 * [include_header [link_function_type]]
 * [include_header [link_has_calling_convention]]
 * [include_header [link_has_member_qualifiers]]
@@ -499,6 +479,8 @@ The simplest way to use [libname] is to include the main header file:
 * [include_header [link_remove_member_reference]]
 * [include_header [link_remove_member_volatile]]
 * [include_header [link_remove_varargs]]
+* [include_header [link_push_args_back]]
+* [include_header [link_push_args_front]]
 * [include_header [link_result_of]]
 
 [endsect][/section:headers]
@@ -573,6 +555,9 @@ For `add_calling_convention` to work as-intended, you must:
   * `add_member_const<int(foo::*)() volatile>` aliases `int(foo::*)() const volatile`
   * `add_member_const<int(foo::* const &)()>` aliases `int(foo::* const &)() const`
 
+[heading Notes]
+* Any enabled calling conventions are preserved on [link_pmf] types
+
 [heading Example]
 [import ../example/add_member_const.cpp]
 [add_member_const]
@@ -604,6 +589,9 @@ For `add_calling_convention` to work as-intended, you must:
   * `add_member_cv<int()>` aliases `int() const volatile`
   * `add_member_cv<int(foo::*)() volatile>` aliases `int(foo::*)() const volatile`
   * `add_member_cv<int(foo::* const &)()>` aliases `int(foo::* const &)() const volatile`
+
+[heading Notes]
+* Any enabled calling conventions are preserved on [link_pmf] types
 
 [heading Example]
 [import ../example/add_member_cv.cpp]
@@ -642,6 +630,10 @@ For `add_calling_convention` to work as-intended, you must:
   * `add_member_lvalue_reference<int(foo::*)() const &&>` aliases `int(foo::*)() const &`
   * `add_member_lvalue_reference<int(foo::* const &)()>` aliases `int(foo::* const &)() &`
   
+[heading Notes]
+* Any enabled calling conventions are preserved on [link_pmf] types
+
+[heading Example]
 [import ../example/add_member_lvalue_reference.cpp]
 [add_member_lvalue_reference]
 
@@ -676,6 +668,9 @@ For `add_calling_convention` to work as-intended, you must:
   * `add_member_rvalue_reference<int(foo::*)() const &>` aliases `int(foo::*)() const &`
   * `add_member_rvalue_reference<int(foo::* const &)()>` aliases `int(foo::* const &)() &&`
   
+[heading Notes]
+* Any enabled calling conventions are preserved on [link_pmf] types
+
 [heading Example]
 [import ../example/add_member_rvalue_reference.cpp]
 [add_member_rvalue_reference]
@@ -714,7 +709,10 @@ For `add_calling_convention` to work as-intended, you must:
   * `add_varargs<int(* const)()>` aliases `int(* const)(int, ...)`
   * `add_varargs<int(&)()>` aliases `int(&)(int, ...)`
   * `add_varargs<int(foo::* volatile &)() const>` aliases `int(foo::* volatile &)(...) const`
-	
+ 
+[heading Notes]
+* Any enabled calling conventions are preserved on [link_fn_ptr] and [link_pmf] types
+
 [heading Example]
 [import ../example/add_varargs.cpp]
 [add_varargs]
@@ -747,6 +745,9 @@ For `add_calling_convention` to work as-intended, you must:
   * `add_member_volatile<int()>` aliases `int() volatile`
   * `add_member_volatile<int(foo::*)() const>` aliases `int(foo::*)() const volatile`
   * `add_member_volatile<int(foo::* const &)()>` aliases `int(foo::* const &)() volatile`
+
+[heading Notes]
+* Any enabled calling conventions are preserved on [link_pmf] types
 
 [heading Example]
 [import ../example/add_member_volatile.cpp]
@@ -790,6 +791,10 @@ For `add_calling_convention` to work as-intended, you must:
   * Let `MemberType` represent the type pointed to by `T`, such that `std::is_same<MemberType CurrentClass::*, std::decay_t<T>>::value` is true
   * `apply_member_pointer<T, Class>` aliases `MemberType Class::* /* any pointer qualifiers on T */`
 
+[heading Notes]
+* Any enabled calling conventions are preserved on [link_pmf] types.
+* Any enabled calling conventions on [link_fn] types are transferred to the aliased [link_pmf] type ([feedback]?)
+
 [heading Example]
 [import ../example/apply_member_pointer.cpp]
 [apply_member_pointer]
@@ -826,6 +831,9 @@ For `add_calling_convention` to work as-intended, you must:
   * Let `Class` represent the parent class of `T`
   * the aliased type is `Return Class::* /* any qualifiers on T */`, such that:
   * `apply_return<int foo::* const &, char>` becomes `char foo::* const &`
+
+[heading Notes]
+* Any enabled calling conventions are preserved on [link_fn_ptr] and [link_pmf] types.
 
 [heading Example]
 [/import ../example/apply_return.cpp]
@@ -1079,12 +1087,41 @@ For `add_calling_convention` to work as-intended, you must:
 [endsect]
 
 
+
+[section:ref_clear_args clear_args]
+
+    namespace ``[lib_namespace]`` {
+
+            template<typename T>
+			using clear_args = /* implementation-defined */;
+        }
+
+[heading Constraints]
+* `T` must be a [link_signature]
+
+[heading Behavior]
+* When the constraints are violated, a substitution failure occurs
+* Otherwise, `clear_args<T>` is identical to `T`, except that the aliased type's parameter list is reduced to `void`
+
+[heading Notes]
+* Any C-style variadics on `T` are removed by `clear_args<T>`
+* Any enabled calling conventions are preserved on pointer types
+
+[heading Example]
+[import ../example/clear_args.cpp]
+[clear_args]
+
+[endsect]
+
+
+
+
 [section:ref_expand_args expand_args]
 
     namespace ``[lib_namespace]`` {
 
             template<typename T, template<class...> class Container>
-                using expand_args = /* implementation-defined */;
+			using expand_args = /* implementation-defined */;
         }
 
 [heading Constraints]
@@ -1387,6 +1424,20 @@ TODO
 [remove_member_volatile]
 [endsect]
 
+[section:ref_push_args_back push_args_back]
+TODO
+[heading Example]
+[import ../example/push_args_back.cpp]
+[push_args_back]
+[endsect]
+
+[section:ref_push_args_front push_args_front]
+TODO
+[heading Example]
+[import ../example/push_args_front.cpp]
+[push_args_front]
+[endsect]
+
 [section:ref_result_of result_of]
 TODO
 [heading Example]
@@ -1401,6 +1452,30 @@ TODO
 
 
 [section:faq FAQ]
+
+[section:reasons What makes [libname] unique?]
+
+[*1.] [libname] offers template aliases such as [link_remove_member_const] for manipulating function qualifiers, designed to parallel the `<type_traits>` aliases such as `std::remove_const_t`.
+
+[*2.] [libname] is designed to accept cv-qualified and ref-qualified types, which eliminates the need to prepare template argument types with metafunctions such as `std::remove_reference` and `std::decay`. This is especially useful when dealing with perfectly-forwarded parameter types in function templates.
+
+[*3.] [libname] is designed to comply with [invoke] rules, with one unobtrusive and beneficial deviation: [link_fn] types are compatible with all relevant type operations that do not specifically require an invocation.
+
+[*4.] [namespace_scoped][link_arg_at]`<2, Callable>` is more flexible than `typename boost::function_traits<Callable>::arg3_type`.
+
+[*5.] [link_can_invoke] is used to test `INVOKE`-ability at compile-time, with value semantics. For the craziest metaprogrammers, [link_can_invoke_constexpr] does the same as `can_invoke` for [link_constexpr_constructible] types, with an added check for `constexpr`-ness
+
+[*6.] [link_is_constexpr] is used to check whether a [link_constexpr_constructible] type is a [link_callable] type that yields a `constexpr` result -- no arguments necessary.
+
+[*7.] [link_bind] is used to intercept the signature information from a `std::placeholder` expression before forwarding on to `std::bind` or `boost::bind`. This gives library writers the power to create more flexible template APIs for callable types.
+
+[*8.] [link_min_arity] can be used to detect the presence of default arguments on a [link_simple_fn_obj]
+
+[*9.] The [libname] interface mainly consists of template aliases and `constexpr std::integral_constant` functions, which are arguably preferable to `typename foo::type` and `foo::value`. While the `std::integral_constant` functions in [libname] may be a deviation from traditional type trait designs, they facilitate a metaprogramming style that uses value-semantics (a la [hana]). The functions can generally be used with either types or values, which eliminates unnecessary `decltype` usage.
+
+[*10.] [libname] includes optional features for the manipulation and inspection of calling conventions. These features are currently deemed experimental, because they greatly increase the test surface of [libname], are platform-specific, and are not yet fully tested on any platform.
+
+[endsect][/section:reasons]
 
 [section Why does [namespace_scoped][^args] alias a [^std::tuple]?]
 

@@ -106,6 +106,20 @@
 </ul></div>
 <h4>
 <a name="callable_traits.ref_apply_member_pointer.h2"></a>
+      <span class="phrase"><a name="callable_traits.ref_apply_member_pointer.notes"></a></span><a class="link" href="ref_apply_member_pointer.html#callable_traits.ref_apply_member_pointer.notes">Notes</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          Any enabled calling conventions are preserved on <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a> types.
+        </li>
+<li class="listitem">
+          Any enabled calling conventions on <a class="link" href="concepts.html#callable_traits.concepts.ref_fn" title="Function"><span class="green">Function</span></a> types are transferred to the aliased
+          <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>
+          type (<a class="link" href="contact.html" title="Contact">feedback</a>?)
+        </li>
+</ul></div>
+<h4>
+<a name="callable_traits.ref_apply_member_pointer.h3"></a>
       <span class="phrase"><a name="callable_traits.ref_apply_member_pointer.example"></a></span><a class="link" href="ref_apply_member_pointer.html#callable_traits.ref_apply_member_pointer.example">Example</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
@@ -157,7 +171,7 @@
 <span class="special">}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_apply_member_pointer.h3"></a>
+<a name="callable_traits.ref_apply_member_pointer.h4"></a>
       <span class="phrase"><a name="callable_traits.ref_apply_member_pointer.see_also"></a></span><a class="link" href="ref_apply_member_pointer.html#callable_traits.ref_apply_member_pointer.see_also">See
       Also</a>
     </h4>
