@@ -39,7 +39,7 @@ struct function<T, Return(Args...) QUAL>                                        
     using qualified_function_type = Return(Args...) QUAL;                            \
     using remove_varargs = type;                                                     \
     using add_varargs = Return (Args..., ...) QUAL;                                  \
-    using has_member_qualifiers_function = std::integral_constant<bool,                       \
+    using has_member_qualifiers_function = std::integral_constant<bool,              \
         !std::is_same<qualified_function_type, function_type>::value>;               \
                                                                                      \
     using qualifiers = qualifier_traits<dummy QUAL>;                                 \
@@ -47,25 +47,25 @@ struct function<T, Return(Args...) QUAL>                                        
     template<flags Flags>                                                            \
     using set_qualifiers = set_function_qualifiers<Flags, Return, Args...>;          \
                                                                                      \
-    using remove_member_reference = set_qualifiers<qualifiers::cv_flags>;          \
+    using remove_member_reference = set_qualifiers<qualifiers::cv_flags>;            \
                                                                                      \
-    using add_member_lvalue_reference = set_qualifiers<                                      \
+    using add_member_lvalue_reference = set_qualifiers<                              \
         collapse_flags<qualifiers::q_flags, lref_>::value>;                          \
                                                                                      \
-    using add_member_rvalue_reference = set_qualifiers<                                      \
+    using add_member_rvalue_reference = set_qualifiers<                              \
         collapse_flags<qualifiers::q_flags, rref_>::value>;                          \
                                                                                      \
-    using add_member_const = set_qualifiers<qualifiers::q_flags | const_>;         \
-    using add_member_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;   \
-    using add_member_cv = set_qualifiers<qualifiers::q_flags | cv_>;               \
+    using add_member_const = set_qualifiers<qualifiers::q_flags | const_>;           \
+    using add_member_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;     \
+    using add_member_cv = set_qualifiers<qualifiers::q_flags | cv_>;                 \
                                                                                      \
-    using remove_member_const = set_qualifiers<                                    \
+    using remove_member_const = set_qualifiers<                                      \
         qualifiers::ref_flags | remove_const_flag<qualifiers::cv_flags>::value>;     \
                                                                                      \
-    using remove_member_volatile = set_qualifiers<                                 \
+    using remove_member_volatile = set_qualifiers<                                   \
         qualifiers::ref_flags | remove_volatile_flag<qualifiers::cv_flags>::value>;  \
                                                                                      \
-    using remove_member_cv = set_qualifiers<qualifiers::ref_flags>;                \
+    using remove_member_cv = set_qualifiers<qualifiers::ref_flags>;                  \
                                                                                      \
     template<typename U>                                                             \
     using apply_member_pointer = add_member_pointer<type, U>;                        \
@@ -75,6 +75,8 @@ struct function<T, Return(Args...) QUAL>                                        
     template<typename NewReturn>                                                     \
     using apply_return = NewReturn(Args...) QUAL;                                    \
                                                                                      \
+    template<template<class...> class Container>                                     \
+    using expand_args = Container<Args...>;                                          \
 };                                                                                   \
                                                                                      \
 template<typename T, typename Return, typename... Args>                              \
@@ -100,25 +102,25 @@ struct function<T, Return (Args..., ...) QUAL>                                  
     template<flags Flags>                                                            \
     using set_qualifiers = set_varargs_function_qualifiers<Flags, Return, Args...>;  \
                                                                                      \
-    using remove_member_reference = set_qualifiers<qualifiers::cv_flags>;          \
+    using remove_member_reference = set_qualifiers<qualifiers::cv_flags>;            \
                                                                                      \
-    using add_member_lvalue_reference = set_qualifiers<                                      \
+    using add_member_lvalue_reference = set_qualifiers<                              \
         collapse_flags<qualifiers::q_flags, lref_>::value>;                          \
                                                                                      \
-    using add_member_rvalue_reference = set_qualifiers<                                      \
+    using add_member_rvalue_reference = set_qualifiers<                              \
         collapse_flags<qualifiers::q_flags, rref_>::value>;                          \
                                                                                      \
-    using add_member_const = set_qualifiers<qualifiers::q_flags | const_>;         \
-    using add_member_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;   \
-    using add_member_cv = set_qualifiers<qualifiers::q_flags | cv_>;               \
+    using add_member_const = set_qualifiers<qualifiers::q_flags | const_>;           \
+    using add_member_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;     \
+    using add_member_cv = set_qualifiers<qualifiers::q_flags | cv_>;                 \
                                                                                      \
-    using remove_member_const = set_qualifiers<                                    \
+    using remove_member_const = set_qualifiers<                                      \
         qualifiers::ref_flags | remove_const_flag<qualifiers::cv_flags>::value>;     \
                                                                                      \
-    using remove_member_volatile = set_qualifiers<                                 \
+    using remove_member_volatile = set_qualifiers<                                   \
         qualifiers::ref_flags | remove_volatile_flag<qualifiers::cv_flags>::value>;  \
                                                                                      \
-    using remove_member_cv = set_qualifiers<qualifiers::ref_flags>;                \
+    using remove_member_cv = set_qualifiers<qualifiers::ref_flags>;                  \
                                                                                      \
     template<typename U>                                                             \
     using apply_member_pointer =                                                     \
@@ -128,6 +130,9 @@ struct function<T, Return (Args..., ...) QUAL>                                  
                                                                                      \
     template<typename NewReturn>                                                     \
     using apply_return = NewReturn(Args..., ...) QUAL;                               \
+                                                                                     \
+    template<template<class...> class Container>                                     \
+    using expand_args = Container<Args...>;                                          \
 }                                                                                    \
 /**/
 

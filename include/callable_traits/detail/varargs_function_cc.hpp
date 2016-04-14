@@ -62,5 +62,8 @@ struct function<OriginalType, CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_
         CALLABLE_TRAITS_ST NewReturn(CALLABLE_TRAITS_VARARGS_CC *)(Args..., ...),
         OriginalType
     >::type;
+
+    template<template<class...> class Container>
+    using expand_args = Container<Args...>;
 };
 

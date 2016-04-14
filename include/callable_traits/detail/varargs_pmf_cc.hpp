@@ -75,25 +75,25 @@ struct pmf<OriginalType, Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) Q
             OriginalType                                                             \
         >::type;                                                                     \
                                                                                      \
-    using remove_member_reference = set_qualifiers<qualifiers::cv_flags>;          \
+    using remove_member_reference = set_qualifiers<qualifiers::cv_flags>;            \
                                                                                      \
-    using add_member_lvalue_reference = set_qualifiers<                                      \
+    using add_member_lvalue_reference = set_qualifiers<                              \
         collapse_flags<qualifiers::q_flags, lref_>::value>;                          \
                                                                                      \
-    using add_member_rvalue_reference = set_qualifiers<                                      \
+    using add_member_rvalue_reference = set_qualifiers<                              \
         collapse_flags<qualifiers::q_flags, rref_>::value>;                          \
                                                                                      \
-    using add_member_const = set_qualifiers<qualifiers::q_flags | const_>;         \
-    using add_member_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;   \
-    using add_member_cv = set_qualifiers<qualifiers::q_flags | cv_>;               \
+    using add_member_const = set_qualifiers<qualifiers::q_flags | const_>;           \
+    using add_member_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;     \
+    using add_member_cv = set_qualifiers<qualifiers::q_flags | cv_>;                 \
                                                                                      \
-    using remove_member_const = set_qualifiers<                                    \
+    using remove_member_const = set_qualifiers<                                      \
         qualifiers::ref_flags | remove_const_flag<qualifiers::cv_flags>::value>;     \
                                                                                      \
-    using remove_member_volatile = set_qualifiers<                                 \
+    using remove_member_volatile = set_qualifiers<                                   \
         qualifiers::ref_flags | remove_volatile_flag<qualifiers::cv_flags>::value>;  \
                                                                                      \
-    using remove_member_cv = set_qualifiers<qualifiers::ref_flags>;                \
+    using remove_member_cv = set_qualifiers<qualifiers::ref_flags>;                  \
                                                                                      \
     template<typename U>                                                             \
     using apply_member_pointer = typename copy_cvr<                                  \
@@ -108,6 +108,9 @@ struct pmf<OriginalType, Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) Q
     >::type;                                                                         \
                                                                                      \
     using remove_member_pointer = qualified_function_type;                           \
+                                                                                     \
+    template<template<class...> class Container>                                     \
+    using expand_args = Container<Args...>;                                          \
 }                                                                                    \
 /**/
 
