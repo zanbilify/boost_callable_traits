@@ -50,15 +50,15 @@ namespace callable_traits {
             template<typename>
             using apply_return = invalid_type;
 
-            using remove_function_reference = invalid_type;
-            using add_function_lvalue = invalid_type;
-            using add_function_rvalue = invalid_type;
-            using add_function_const = invalid_type;
-            using add_function_volatile = invalid_type;
-            using add_function_cv = invalid_type;
-            using remove_function_const = invalid_type;
-            using remove_function_volatile = invalid_type;
-            using remove_function_cv = invalid_type;
+            using remove_member_reference = invalid_type;
+            using add_member_lvalue_reference = invalid_type;
+            using add_member_rvalue_reference = invalid_type;
+            using add_member_const = invalid_type;
+            using add_member_volatile = invalid_type;
+            using add_member_cv = invalid_type;
+            using remove_member_const = invalid_type;
+            using remove_member_volatile = invalid_type;
+            using remove_member_cv = invalid_type;
         };
 
         template<typename T, typename U, typename Base>

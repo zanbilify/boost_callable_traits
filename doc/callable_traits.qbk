@@ -78,12 +78,12 @@
 
 [/ *** reference links *** ]
 [template link_add_calling_convention[][link callable_traits.ref_add_calling_convention [^add_calling_convention]]]
-[template link_add_function_const[][link callable_traits.ref_add_function_const [^add_function_const]]]
-[template link_add_function_cv[][link callable_traits.ref_add_function_cv [^add_function_cv]]]
-[template link_add_function_lvalue[][link callable_traits.ref_add_function_lvalue [^add_function_lvalue]]]
-[template link_add_function_rvalue[][link callable_traits.ref_add_function_rvalue [^add_function_rvalue]]]
+[template link_add_member_const[][link callable_traits.ref_add_member_const [^add_member_const]]]
+[template link_add_member_cv[][link callable_traits.ref_add_member_cv [^add_member_cv]]]
+[template link_add_member_lvalue_reference[][link callable_traits.ref_add_member_lvalue_reference [^add_member_lvalue_reference]]]
+[template link_add_member_rvalue_reference[][link callable_traits.ref_add_member_rvalue_reference [^add_member_rvalue_reference]]]
 [template link_add_varargs[][link callable_traits.ref_add_varargs [^add_varargs]]]
-[template link_add_function_volatile[][link callable_traits.ref_add_function_volatile [^add_function_volatile]]]
+[template link_add_member_volatile[][link callable_traits.ref_add_member_volatile [^add_member_volatile]]]
 [template link_apply_member_pointer[][link callable_traits.ref_apply_member_pointer [^apply_member_pointer]]]
 [template link_apply_return[][link callable_traits.ref_apply_return [^apply_return]]]
 [template link_arg_at[][link callable_traits.ref_arg_at [^arg_at]]]
@@ -96,23 +96,23 @@
 [template link_has_calling_convention[][link callable_traits.ref_has_calling_convention [^has_calling_convention]]]
 [template link_has_varargs[][link callable_traits.ref_has_varargs [^has_varargs]]]
 [template link_has_void_return[][link callable_traits.ref_has_void_return [^has_void_return]]]
-[template link_is_const_qualified[][link callable_traits.ref_is_const_qualified [^is_const_qualified]]]
+[template link_is_const_member[][link callable_traits.ref_is_const_member [^is_const_member]]]
 [template link_is_constexpr[][link callable_traits.ref_is_constexpr [^is_constexpr]]]
-[template link_is_lvalue_qualified[][link callable_traits.ref_is_lvalue_qualified [^is_lvalue_qualified]]]
-[template link_is_reference_qualified[][link callable_traits.ref_is_reference_qualified [^is_reference_qualified]]]
-[template link_is_rvalue_qualified[][link callable_traits.ref_is_rvalue_qualified [^is_rvalue_qualified]]]
-[template link_is_qualified[][link callable_traits.ref_is_qualified [^is_qualified]]]
-[template link_is_volatile_qualified[][link callable_traits.ref_is_volatile_qualified [^is_volatile_qualified]]]
+[template link_is_lvalue_reference_member[][link callable_traits.ref_is_lvalue_reference_member [^is_lvalue_reference_member]]]
+[template link_is_reference_member[][link callable_traits.ref_is_reference_member [^is_reference_member]]]
+[template link_is_rvalue_reference_member[][link callable_traits.ref_is_rvalue_reference_member [^is_rvalue_reference_member]]]
+[template link_has_member_qualifiers[][link callable_traits.ref_has_member_qualifiers [^has_member_qualifiers]]]
+[template link_is_volatile_member[][link callable_traits.ref_is_volatile_member [^is_volatile_member]]]
 [template link_max_arity[][link callable_traits.ref_max_arity [^max_arity]]]
 [template link_min_arity[][link callable_traits.ref_min_arity [^min_arity]]]
 [template link_qualified_function_type[][link callable_traits.ref_qualified_function_type [^qualified_function_type]]]
 [template link_remove_calling_convention[][link callable_traits.ref_remove_calling_convention [^remove_calling_convention]]]
-[template link_remove_function_const[][link callable_traits.ref_remove_function_const [^remove_function_const]]]
-[template link_remove_function_cv[][link callable_traits.ref_remove_function_cv [^remove_function_cv]]]
+[template link_remove_member_const[][link callable_traits.ref_remove_member_const [^remove_member_const]]]
+[template link_remove_member_cv[][link callable_traits.ref_remove_member_cv [^remove_member_cv]]]
 [template link_remove_member_pointer[][link callable_traits.ref_remove_member_pointer [^remove_member_pointer]]]
-[template link_remove_function_reference[][link callable_traits.ref_remove_function_reference [^remove_function_reference]]]
+[template link_remove_member_reference[][link callable_traits.ref_remove_member_reference [^remove_member_reference]]]
 [template link_remove_varargs[][link callable_traits.ref_remove_varargs [^remove_varargs]]]
-[template link_remove_function_volatile[][link callable_traits.ref_remove_function_volatile [^remove_function_volatile]]]
+[template link_remove_member_volatile[][link callable_traits.ref_remove_member_volatile [^remove_member_volatile]]]
 [template link_result_of[][link callable_traits.ref_result_of [^result_of]]]
 
 [template cc_warning_rationale[]
@@ -194,7 +194,7 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
 
 [section:reasons What makes [libname] unique?]
 
-[*1.] [libname] offers template aliases such as [link_remove_function_const] for manipulating function qualifiers, designed to parallel the `<type_traits>` aliases such as `std::remove_const_t`.
+[*1.] [libname] offers template aliases such as [link_remove_member_const] for manipulating function qualifiers, designed to parallel the `<type_traits>` aliases such as `std::remove_const_t`.
 
 [*2.] [libname] is designed to accept cv-qualified and ref-qualified types, which eliminates the need to prepare template argument types with metafunctions such as `std::remove_reference` and `std::decay`. This is especially useful when dealing with perfectly-forwarded parameter types in function templates.
 
@@ -462,12 +462,12 @@ The simplest way to use [libname] is to include the main header file:
 [libname] interface is also broken down by trait into individual header files. To use only the traits you need, include one or more of the following headers, listed alphabetically:
 
 * [include_header [link_add_calling_convention]]
-* [include_header [link_add_function_const]]
-* [include_header [link_add_function_cv]]
-* [include_header [link_add_function_lvalue]]
-* [include_header [link_add_function_rvalue]]
+* [include_header [link_add_member_const]]
+* [include_header [link_add_member_cv]]
+* [include_header [link_add_member_lvalue_reference]]
+* [include_header [link_add_member_rvalue_reference]]
+* [include_header [link_add_member_volatile]]
 * [include_header [link_add_varargs]]
-* [include_header [link_add_function_volatile]]
 * [include_header [link_apply_member_pointer]]
 * [include_header [link_apply_return]]
 * [include_header [link_arg_at]]
@@ -478,25 +478,25 @@ The simplest way to use [libname] is to include the main header file:
 * [include_header [link_can_invoke_constexpr]]
 * [include_header [link_function_type]]
 * [include_header [link_has_calling_convention]]
+* [include_header [link_has_member_qualifiers]]
 * [include_header [link_has_varargs]]
 * [include_header [link_has_void_return]]
-* [include_header [link_is_const_qualified]]
+* [include_header [link_is_const_member]]
 * [include_header [link_is_constexpr]]
-* [include_header [link_is_lvalue_qualified]]
-* [include_header [link_is_reference_qualified]]
-* [include_header [link_is_rvalue_qualified]]
-* [include_header [link_is_qualified]]
-* [include_header [link_is_volatile_qualified]]
+* [include_header [link_is_lvalue_reference_member]]
+* [include_header [link_is_reference_member]]
+* [include_header [link_is_rvalue_reference_member]]
+* [include_header [link_is_volatile_member]]
 * [include_header [link_max_arity]]
 * [include_header [link_min_arity]]
 * [include_header [link_qualified_function_type]]
 * [include_header [link_remove_calling_convention]]
-* [include_header [link_remove_function_const]]
-* [include_header [link_remove_function_cv]]
+* [include_header [link_remove_member_const]]
+* [include_header [link_remove_member_cv]]
 * [include_header [link_remove_member_pointer]]
-* [include_header [link_remove_function_reference]]
+* [include_header [link_remove_member_reference]]
+* [include_header [link_remove_member_volatile]]
 * [include_header [link_remove_varargs]]
-* [include_header [link_remove_function_volatile]]
 * [include_header [link_result_of]]
 
 [endsect][/section:headers]
@@ -553,12 +553,12 @@ For `add_calling_convention` to work as-intended, you must:
 
 
 
-[section:ref_add_function_const add_function_const]
+[section:ref_add_member_const add_member_const]
     
     namespace ``[lib_namespace]`` {
 	
 	    template<typename T>
-		using add_function_const = /* implementation-defined */;
+		using add_member_const = /* implementation-defined */;
 		
 	}
 	
@@ -567,30 +567,30 @@ For `add_calling_convention` to work as-intended, you must:
 
 [heading Behavior]
 * Adds a `const` qualifier to the signature of `T` (if not already present), preserving any pointer qualifiers, such that:
-  * `add_function_const<int()>` aliases `int() const`
-  * `add_function_const<int(foo::*)() volatile>` aliases `int(foo::*)() const volatile`
-  * `add_function_const<int(foo::* const &)()>` aliases `int(foo::* const &)() const`
+  * `add_member_const<int()>` aliases `int() const`
+  * `add_member_const<int(foo::*)() volatile>` aliases `int(foo::*)() const volatile`
+  * `add_member_const<int(foo::* const &)()>` aliases `int(foo::* const &)() const`
 
 [heading Example]
-[import ../example/add_function_const.cpp]
-[add_function_const]
+[import ../example/add_member_const.cpp]
+[add_member_const]
 
 [heading See Also]
-* [link_remove_function_const]
-* [link_is_const_qualified]
+* [link_remove_member_const]
+* [link_is_const_member]
 
-[endsect][/section:ref_add_function_const]
-
-
+[endsect][/section:ref_add_member_const]
 
 
 
-[section:ref_add_function_cv add_function_cv]
+
+
+[section:ref_add_member_cv add_member_cv]
 
     namespace ``[lib_namespace]`` {
 	
 	    template<typename T>
-		using add_function_cv = /* implementation-defined */;
+		using add_member_cv = /* implementation-defined */;
 		
 	}
 	
@@ -599,32 +599,32 @@ For `add_calling_convention` to work as-intended, you must:
 
 [heading Behavior]
 * Adds both `const` and `volatile` qualifiers to the signature of `T` (if not already present), preserving any pointer qualifiers, such that:
-  * `add_function_cv<int()>` aliases `int() const volatile`
-  * `add_function_cv<int(foo::*)() volatile>` aliases `int(foo::*)() const volatile`
-  * `add_function_cv<int(foo::* const &)()>` aliases `int(foo::* const &)() const volatile`
+  * `add_member_cv<int()>` aliases `int() const volatile`
+  * `add_member_cv<int(foo::*)() volatile>` aliases `int(foo::*)() const volatile`
+  * `add_member_cv<int(foo::* const &)()>` aliases `int(foo::* const &)() const volatile`
 
 [heading Example]
-[import ../example/add_function_cv.cpp]
-[add_function_cv]
+[import ../example/add_member_cv.cpp]
+[add_member_cv]
 
 [heading See Also]
-* [link_add_function_const]
-* [link_add_function_volatile]
-* [link_remove_function_cv]
-* [link_is_cv_qualified]
+* [link_add_member_const]
+* [link_add_member_volatile]
+* [link_remove_member_cv]
+* [link_is_cv_member]
 
-[endsect][/section:ref_add_function_cv]
-
-
+[endsect][/section:ref_add_member_cv]
 
 
 
-[section:ref_add_function_lvalue add_function_lvalue]
+
+
+[section:ref_add_member_lvalue_reference add_member_lvalue_reference]
 
     namespace ``[lib_namespace]`` {
 	
 	    template<typename T>
-		using add_function_lvalue = /* implementation-defined */;
+		using add_member_lvalue_reference = /* implementation-defined */;
 		
 	}
 	
@@ -636,29 +636,29 @@ For `add_calling_convention` to work as-intended, you must:
 * If an rvalue reference qualifier is present, the lvalue reference qualifier replaces it (in arbitrary accordance with reference collapsing rules)
 * Any pointer qualifiers are preserved
 * Such that:
-  * `add_function_lvalue<int()>` aliases `int() &`
-  * `add_function_lvalue<int(foo::*)() const &&>` aliases `int(foo::*)() const &`
-  * `add_function_lvalue<int(foo::* const &)()>` aliases `int(foo::* const &)() &`
+  * `add_member_lvalue_reference<int()>` aliases `int() &`
+  * `add_member_lvalue_reference<int(foo::*)() const &&>` aliases `int(foo::*)() const &`
+  * `add_member_lvalue_reference<int(foo::* const &)()>` aliases `int(foo::* const &)() &`
   
-[import ../example/add_function_lvalue.cpp]
-[add_function_lvalue]
+[import ../example/add_member_lvalue_reference.cpp]
+[add_member_lvalue_reference]
 
 [heading See Also]
-* [link_is_lvalue_qualified]
-* [link_add_function_rvalue]
-* [link_remove_function_reference]
+* [link_is_lvalue_reference_member]
+* [link_add_member_rvalue_reference]
+* [link_remove_member_reference]
 
-[endsect][/section:ref_add_function_lvalue]
-
-
+[endsect][/section:ref_add_member_lvalue_reference]
 
 
-[section:ref_add_function_rvalue add_function_rvalue]
+
+
+[section:ref_add_member_rvalue_reference add_member_rvalue_reference]
 
     namespace ``[lib_namespace]`` {
 	
 	    template<typename T>
-		using add_function_rvalue = /* implementation-defined */;
+		using add_member_rvalue_reference = /* implementation-defined */;
 		
 	}
 	
@@ -670,19 +670,19 @@ For `add_calling_convention` to work as-intended, you must:
 * If an lvalue reference qualifier is present, the lvalue reference qualifier remains (in arbitrary accordance with reference collapsing rules)
 * Any pointer qualifiers are preserved
 * Such that:
-  * `add_function_rvalue<int()>` aliases `int() &&`
-  * `add_function_rvalue<int(foo::*)() const &>` aliases `int(foo::*)() const &`
-  * `add_function_rvalue<int(foo::* const &)()>` aliases `int(foo::* const &)() &&`
+  * `add_member_rvalue_reference<int()>` aliases `int() &&`
+  * `add_member_rvalue_reference<int(foo::*)() const &>` aliases `int(foo::*)() const &`
+  * `add_member_rvalue_reference<int(foo::* const &)()>` aliases `int(foo::* const &)() &&`
   
 [heading Example]
-[import ../example/add_function_rvalue.cpp]
-[add_function_rvalue]
+[import ../example/add_member_rvalue_reference.cpp]
+[add_member_rvalue_reference]
 
 [heading See Also]
-* [link_add_function_lvalue]
-* [link_remove_function_reference]
+* [link_add_member_lvalue_reference]
+* [link_remove_member_reference]
 
-[endsect][/section:ref_add_function_rvalue]
+[endsect][/section:ref_add_member_rvalue_reference]
 
 
 
@@ -720,7 +720,7 @@ For `add_calling_convention` to work as-intended, you must:
 [heading See Also]
 * [link_remove_varargs]
 * [link_has_varargs]
-* [link_remove_function_reference]
+* [link_remove_member_reference]
 
 [endsect][/section:ref_add_varargs]
 
@@ -728,12 +728,12 @@ For `add_calling_convention` to work as-intended, you must:
 
 
 
-[section:ref_add_function_volatile add_function_volatile]
+[section:ref_add_member_volatile add_member_volatile]
 
     namespace ``[lib_namespace]`` {
 	
 	    template<typename T>
-		using add_function_volatile = /* implementation-defined */;
+		using add_member_volatile = /* implementation-defined */;
 		
 	}
 	
@@ -742,19 +742,19 @@ For `add_calling_convention` to work as-intended, you must:
 
 [heading Behavior]
 * Adds a `volatile` qualifier to the signature of `T` (if not already present), preserving any pointer qualifiers, such that:
-  * `add_function_volatile<int()>` aliases `int() volatile`
-  * `add_function_volatile<int(foo::*)() const>` aliases `int(foo::*)() const volatile`
-  * `add_function_volatile<int(foo::* const &)()>` aliases `int(foo::* const &)() volatile`
+  * `add_member_volatile<int()>` aliases `int() volatile`
+  * `add_member_volatile<int(foo::*)() const>` aliases `int(foo::*)() const volatile`
+  * `add_member_volatile<int(foo::* const &)()>` aliases `int(foo::* const &)() volatile`
 
 [heading Example]
-[import ../example/add_function_volatile.cpp]
-[add_function_volatile]
+[import ../example/add_member_volatile.cpp]
+[add_member_volatile]
 
 [heading See Also]
-* [link_remove_function_volatile]
-* [link_is_volatile_qualified]
+* [link_remove_member_volatile]
+* [link_is_volatile_member]
 
-[endsect][/section:ref_add_function_volatile]
+[endsect][/section:ref_add_member_volatile]
 
 
 
@@ -1230,11 +1230,11 @@ TODO
 [has_void_return]
 [endsect]
 
-[section:ref_is_const_qualified is_const_qualified]
+[section:ref_is_const_member is_const_member]
 TODO
 [heading Example]
-[/import ../example/is_const_qualified.cpp]
-[is_const_qualified]
+[/import ../example/is_const_member.cpp]
+[is_const_member]
 [endsect]
 
 [section:ref_is_constexpr is_constexpr]
@@ -1247,39 +1247,39 @@ TODO
 [is_constexpr_function_pointer]
 [endsect]
 
-[section:ref_is_lvalue_qualified is_lvalue_qualified]
+[section:ref_is_lvalue_reference_member is_lvalue_reference_member]
 TODO
 [heading Example]
-[/import ../example/is_lvalue_qualified.cpp]
-[is_lvalue_qualified]
+[/import ../example/is_lvalue_reference_member.cpp]
+[is_lvalue_reference_member]
 [endsect]
 
-[section:ref_is_reference_qualified is_reference_qualified]
+[section:ref_is_reference_member is_reference_member]
 TODO
 [heading Example]
-[/import ../example/is_reference_qualified.cpp]
-[is_reference_qualified]
+[/import ../example/is_reference_member.cpp]
+[is_reference_member]
 [endsect]
 
-[section:ref_is_rvalue_qualified is_rvalue_qualified]
+[section:ref_is_rvalue_reference_member is_rvalue_reference_member]
 TODO
 [heading Example]
-[/import ../example/is_rvalue_qualified.cpp]
-[is_rvalue_qualified]
+[/import ../example/is_rvalue_reference_member.cpp]
+[is_rvalue_reference_member]
 [endsect]
 
-[section:ref_is_qualified is_qualified]
+[section:ref_has_member_qualifiers has_member_qualifiers]
 TODO
 [heading Example]
-[/import ../example/is_qualified.cpp]
-[is_qualified]
+[/import ../example/has_member_qualifiers.cpp]
+[has_member_qualifiers]
 [endsect]
 
-[section:ref_is_volatile_qualified is_volatile_qualified]
+[section:ref_is_volatile_member is_volatile_member]
 TODO
 [heading Example]
-[/import ../example/is_volatile_qualified.cpp]
-[is_volatile_qualified]
+[/import ../example/is_volatile_member.cpp]
+[is_volatile_member]
 [endsect]
 
 [section:ref_max_arity max_arity]
@@ -1309,18 +1309,18 @@ TODO
 [experimental_changing_calling_conventions]
 [endsect]
 
-[section:ref_remove_function_const remove_function_const]
+[section:ref_remove_member_const remove_member_const]
 TODO
 [heading Example]
-[/import ../example/remove_function_const.cpp]
-[remove_function_const]
+[/import ../example/remove_member_const.cpp]
+[remove_member_const]
 [endsect]
 
-[section:ref_remove_function_cv remove_function_cv]
+[section:ref_remove_member_cv remove_member_cv]
 TODO
 [heading Example]
-[/import ../example/remove_function_cv.cpp]
-[remove_function_cv]
+[/import ../example/remove_member_cv.cpp]
+[remove_member_cv]
 [endsect]
 
 [section:ref_remove_member_pointer remove_member_pointer]
@@ -1330,11 +1330,11 @@ TODO
 [remove_member_pointer]
 [endsect]
 
-[section:ref_remove_function_reference remove_function_reference]
+[section:ref_remove_member_reference remove_member_reference]
 TODO
 [heading Example]
-[/import ../example/remove_function_reference.cpp]
-[remove_function_reference]
+[/import ../example/remove_member_reference.cpp]
+[remove_member_reference]
 [endsect]
 
 [section:ref_remove_varargs remove_varargs]
@@ -1344,11 +1344,11 @@ TODO
 [remove_varargs]
 [endsect]
 
-[section:ref_remove_function_volatile remove_function_volatile]
+[section:ref_remove_member_volatile remove_member_volatile]
 TODO
 [heading Example]
-[/import ../example/remove_function_volatile.cpp]
-[remove_function_volatile]
+[/import ../example/remove_member_volatile.cpp]
+[remove_member_volatile]
 [endsect]
 
 [section:ref_result_of result_of]

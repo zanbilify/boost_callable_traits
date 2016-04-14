@@ -49,7 +49,7 @@ namespace callable_traits {
 			using is_function = std::false_type;
 			
 			// std::true_type for plain function types with qualifiers
-			using is_qualified_function = std::false_type;
+			using has_member_qualifiers_function = std::false_type;
 			
 			// std::true_type for function pointers, function references
 			// and plain function types
@@ -109,30 +109,30 @@ namespace callable_traits {
 			
 			// Adds an lvalue qualifier to a signature, in arbitrary
 			// accordance with C++11 reference collapsing rules.
-            using add_function_lvalue = invalid_type;
+            using add_member_lvalue_reference = invalid_type;
 			
 			// Adds an rvalue qualifier to a signature, in arbitrary
 			// accordance with C++11 reference collapsing rules.
-            using add_function_rvalue = invalid_type;
+            using add_member_rvalue_reference = invalid_type;
 			
 			// Adds a const qualifier to a signature.
-			using add_function_const = invalid_type;
+			using add_member_const = invalid_type;
 			
 			// Adds a volatile qualifier to a signature.
-			using add_function_volatile = invalid_type;
+			using add_member_volatile = invalid_type;
 			
 			// Adds both const and volatile qualifiers to a signature.
-			using add_function_cv = invalid_type;
+			using add_member_cv = invalid_type;
 			
 			// Removes a const qualifier from a signature, if present.
-			using remove_function_const = invalid_type;
+			using remove_member_const = invalid_type;
 			
 			// Removes a volatile qualifier from a signature, if present.
-			using remove_function_volatile = invalid_type;
+			using remove_member_volatile = invalid_type;
 			
 			// Removes both const and volatile qualifiers from a
 			// signature, if any.
-			using remove_function_cv = invalid_type;
+			using remove_member_cv = invalid_type;
 			
 			// Removes the member pointer from PMDs and PMFs. An identity
 			// alias for other callable types.
