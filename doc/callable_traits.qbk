@@ -172,7 +172,7 @@ Consider for a moment the class template below, which defines all [role red[*48]
 
 [note The upcoming ISO standard for C++17 includes a [@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html change to the core language] which adds the [^noexcept] qualifier to the type system. If the author's understanding is correct, this would increase the the count of necessary template specializations to [role red[*96]] ([feedback]?). Currently, C++17 `noexcept` qualifiers are not handled in [libname], because compiler vendors have not implemented support for this feature (to best of the author's knowledge). However, features to account for and manipulate `noexcept` qualifiers are planned in [libname], as soon as feature is implemented by a compiler vendor. Of course, the [libname] feature additions will be non-breaking for currently supported compiler versions.]
 
-Potential use cases for such obscure specializations are vitually nonexistent in run-of-the-mill application codebases. Even in library code, these are exceedingly rare. However, there are a handful of very specific metaprogramming scenarios that can only be solved with such template "spam". While these use cases are indeed rare, the writing and testing of these templates is incredibly tedious and time consuming. On this premise, [libname] offers a final and decisive library-level solution, so that authors of generic code will *never again* need to write these specializations, for ['any] reason.
+Use cases for such obscure specializations are vitually nonexistent in run-of-the-mill application codebases. Even in library code, these are exceedingly rare. However, there are a handful of very specific metaprogramming scenarios that can only be solved with such template "spam". While these use cases are indeed rare, the writing and testing of these templates is incredibly tedious and time consuming. On this premise, [libname] offers a final and decisive library-level solution, so that authors of generic code will *never again* need to write these specializations, for ['any] reason.
 
 Template specializations like those in the code snippet above ['still] do not account for function pointers, function references, function objects/lambdas, or calling conventions. [libname] goes the extra mile by accounting for all of them.
 
@@ -201,9 +201,9 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
 
 [*6.] [link_is_constexpr] is used to check whether a [link_constexpr_constructible] type is a [link_callable] type that yields a `constexpr` result -- no arguments necessary.
 
-[*7.] [link_bind] is used by library writers to easily accept `std::placeholder` expressions anywhere, and intercept the type information for processing before forwarding on to `std::bind` or `boost::bind`. This gives library writers the power to create more flexible templated APIs.
+[*7.] [link_bind] is used to intercept the signature information from a `std::placeholder` expression before forwarding on to `std::bind` or `boost::bind`. This gives library writers the power to create more flexible template APIs for callable types.
 
-[*8.] [link_min_arity] is used to detect the presence of default arguments on a [link_simple_fn_obj]
+[*8.] [link_min_arity] can be used to detect the presence of default arguments on a [link_simple_fn_obj]
 
 [*9.] The [libname] interface mainly consists of template aliases and `constexpr std::integral_constant` functions, which are arguably preferable to `typename foo::type` and `foo::value`. While the `std::integral_constant` functions in [libname] may be a deviation from traditional type trait designs, they facilitate a metaprogramming style that uses value-semantics (a la [hana]). The functions can generally be used with either types or values, which eliminates unnecessary `decltype` usage.
 
@@ -221,7 +221,7 @@ The use cases for [libname] are closely related to those of [@http://www.boost.o
 
 [section:function_sugar_example Example:[^ std::function] sugar]
 
-At a glance, there appear to be around 260 [@http://stackoverflow.com/search?q=convert+std%3A%3Abind+to+std%3A%3Afunction search results] on Stack Overflow concerning the conversion from `std::bind` to `std::function`, and around 340 [@http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction search results] concerning the conversion of lambdas to `std::function`. However misguided these questions might be, we'll kill both birds with the same stone with the `make_function` example below, which will leverage [libname] to...
+At a glance, there appear to be around 260 [@http://stackoverflow.com/search?q=convert+std%3A%3Abind+to+std%3A%3Afunction search results] on Stack Overflow concerning the conversion from `std::bind` to `std::function`, and around 340 [@http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction search results] concerning the conversion of lambdas to `std::function`. However misguided these questions might be, we'll kill both birds with the same stone in the `make_function` example below, which will leverage [libname] to...
 
 # Construct an `std::function<T>` where T is not explicitly supplied by the user
 # Construct an `std::function<T>` where T is the deduced "signature" of an `std::placeholders` expression
@@ -283,8 +283,6 @@ Without real-world context, `make_function` may seem rather silly, especially si
 * [link_bind]
 ]
 
-[note ]
-
 See the most recent cross-platform integration test results [@https://travis-ci.org/badair/callable_traits here] at Travis CI. Currently, Travis CI does not support Windows -- all Windows testing is performed locally on the author's Windows 10 machine.
 
 CallableTraits has not been tested on every platform under the sun. If you find CallableTraits to work with another toolchain, [link callable_traits.contact let us know!]
@@ -295,7 +293,7 @@ While most of the features in [libname] are tested and working in MSVC, the foll
 
 * [link_is_constexpr] - always returns an instance of `std::false_type` in MSVC
 * [link_can_invoke_constexpr] - always returns an instance of `std::false_type` in MSVC
-* [link_bind] - the aliased types inside the return type of this function are bugged. A static_assert will trigger if this function is used in MSVC.
+* [link_bind] - a static_assert will fail when this function is used in MSVC
 
 [endsect][/section:msvc_issues]
 
@@ -660,7 +658,9 @@ Adds an rvalue reference qualifier (`&&`) to the signature of `T`, if not alread
 	}
 	
 [heading Constraints]
+
 `T` must be one of the following:
+
 * [link_fn]
 * [link_fn_ptr]
 * [link_fn_ref]
@@ -722,7 +722,9 @@ Adds a `volatile` qualifier to the signature of `T`, if not already present. In 
 	}
 	
 [heading Constraints]
+
 `T` must be one of the following:
+
 * [link_fn]
 * [link_fn_ptr]
 * [link_fn_ref]
@@ -754,7 +756,9 @@ When `T` is a [link_fn], [link_fn_ptr], or [link_fn_ref], the resulting type is 
 	}
 	
 [heading Constraints]
+
 `T` must be one of the following:
+
 * [link_fn]
 * [link_fn_ptr]
 * [link_fn_ref]
