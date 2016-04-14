@@ -35,7 +35,7 @@
         <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code>
         is not compatible with the Microsoft Visual C++ compiler in Visual Studio
         (a.k.a. MSVC). Accordingly, the example(s) below will not compile in MSVC.
-        However, Windows users can still use clang-cl. Refer to the <a class="link" href="compatibility.html#callable_traits.compatibility.msvc_issues" title="MSVC Issues">MSVC
+        However, Visual Studio users can still use Clang-cl. Refer to the <a class="link" href="compatibility.html#callable_traits.compatibility.msvc_issues" title="MSVC Issues">MSVC
         Issues</a> section for more information.
       </p></td></tr>
 </table></div>
@@ -116,18 +116,19 @@
       <span class="phrase"><a name="callable_traits.ref_bind.notes"></a></span><a class="link" href="ref_bind.html#callable_traits.ref_bind.notes">Notes</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<p class="simpara">
           <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code>
           is the only feature of <code class="literal">CallableTraits</code> with non-constexpr
           behavior. However, the runtime behavior is only provided for convenience
           -- <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code>
           is designed to be a metaprogramming tool, and may be used in unevaluated
           contexts.
-        </li></ul></div>
+        </p>
 <h4>
 <a name="callable_traits.ref_bind.h3"></a>
-      <span class="phrase"><a name="callable_traits.ref_bind.example_1"></a></span><a class="link" href="ref_bind.html#callable_traits.ref_bind.example_1">Example
-      1</a>
-    </h4>
+          <span class="phrase"><a name="callable_traits.ref_bind.example_1"></a></span><a class="link" href="ref_bind.html#callable_traits.ref_bind.example_1">Example
+          1</a>
+        </h4>
 <pre class="programlisting"><span class="comment">/* In this example, the last _1 placeholder in the bind
 expression forces all other _1 slots to accept ScaryMonster,
 because ScaryMonster is the narrowest of all _1 parameters. */</span>
@@ -200,9 +201,9 @@ because ScaryMonster is the narrowest of all _1 parameters. */</span>
 </pre>
 <h4>
 <a name="callable_traits.ref_bind.h4"></a>
-      <span class="phrase"><a name="callable_traits.ref_bind.example_2"></a></span><a class="link" href="ref_bind.html#callable_traits.ref_bind.example_2">Example
-      2</a>
-    </h4>
+          <span class="phrase"><a name="callable_traits.ref_bind.example_2"></a></span><a class="link" href="ref_bind.html#callable_traits.ref_bind.example_2">Example
+          2</a>
+        </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">cassert</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span>
@@ -253,6 +254,7 @@ because ScaryMonster is the narrowest of all _1 parameters. */</span>
     <span class="keyword">return</span> <span class="number">0</span><span class="special">;</span>
 <span class="special">}</span>
 </pre>
+</li></ul></div>
 <h4>
 <a name="callable_traits.ref_bind.h5"></a>
       <span class="phrase"><a name="callable_traits.ref_bind.see_also"></a></span><a class="link" href="ref_bind.html#callable_traits.ref_bind.see_also">See
