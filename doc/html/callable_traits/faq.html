@@ -27,14 +27,96 @@
 <a name="callable_traits.faq"></a><a class="link" href="faq.html" title="FAQ">FAQ</a>
 </h2></div></div></div>
 <div class="toc"><dl class="toc">
-<dt><span class="section"><a href="faq.html#callable_traits.faq.reasons">What makes <code class="literal">CallableTraits</code>
+<dt><span class="section"><a href="faq.html#callable_traits.faq.reasons">Why should I use <code class="literal">CallableTraits</code>?</a></span></dt>
+<dt><span class="section"><a href="faq.html#callable_traits.faq.reasons0">What makes <code class="literal">CallableTraits</code>
       unique?</a></span></dt>
 <dt><span class="section"><a href="faq.html#callable_traits.faq.why_does_namespace_scoped_args_a">Why
       does <code class="literal">callable_traits::</code><code class="literal">args</code> alias a <code class="literal">std::tuple</code>?</a></span></dt>
+<dt><span class="section"><a href="faq.html#callable_traits.faq.why_are_the_libname_alias_templa">Why
+      are the <code class="literal">CallableTraits</code> alias templates not suffixed with
+      <code class="computeroutput"><span class="identifier">_t</span></code>, as in <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">add_lvalue_reference_t</span></code>?</a></span></dt>
+<dt><span class="section"><a href="faq.html#callable_traits.faq.why_use_constexpr_function_templ">Why
+      use constexpr function templates? Why not use something like <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span></code>
+      or even <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same_v</span></code>?</a></span></dt>
+<dt><span class="section"><a href="faq.html#callable_traits.faq.why_use_reference_collapsing_rul">Why
+      use reference collapsing rules when adding member function ref-qualifiers?</a></span></dt>
 </dl></div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="callable_traits.faq.reasons"></a><a class="link" href="faq.html#callable_traits.faq.reasons" title="What makes CallableTraits unique?">What makes <code class="literal">CallableTraits</code>
+<a name="callable_traits.faq.reasons"></a><a class="link" href="faq.html#callable_traits.faq.reasons" title="Why should I use CallableTraits?">Why should I use <code class="literal">CallableTraits</code>?</a>
+</h3></div></div></div>
+<p>
+        If you are not writing generic code, you simply shouldn't.
+      </p>
+<p>
+        If you <span class="emphasis"><em>are</em></span> writing generic code, take a moment to skim
+        your header files, looking for code like this:
+      </p>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">First</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">Second</span><span class="special">&gt;</span>
+<span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">First</span><span class="special">,</span> <span class="identifier">Second</span><span class="special">)&gt;</span> <span class="special">{</span>
+    <span class="comment">//     ^^^^^^^^^^^^^^^^^^^^^</span>
+<span class="special">};</span>
+</pre>
+<p>
+        or like this...
+      </p>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span>
+<span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)&gt;</span> <span class="special">{</span>
+    <span class="comment">//     ^^^^^^^^^^^^^^^</span>
+<span class="special">};</span>
+</pre>
+<p>
+        or maybe something like this...
+      </p>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span>
+<span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(*)(</span><span class="identifier">Args</span><span class="special">...)&gt;</span> <span class="special">{</span>
+    <span class="comment">//     ^^^^^^^^^^^^^^^^^^</span>
+<span class="special">};</span>
+</pre>
+<p>
+        perhaps...
+      </p>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span>
+<span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(&amp;)(</span><span class="identifier">Args</span><span class="special">...)&gt;</span> <span class="special">{</span>
+    <span class="comment">//    ^^^^^^^^^^^^^^^^^^</span>
+<span class="special">};</span>
+</pre>
+<p>
+        Does this rings a bell?
+      </p>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span>
+<span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)&gt;</span> <span class="special">{</span>
+    <span class="comment">//    ^^^^^^^^^^^^^^^^^^^^^</span>
+<span class="special">};</span>
+</pre>
+<p>
+        Do you hate your job?
+      </p>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span>
+<span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span> <span class="identifier">__cdecl</span> <span class="identifier">T</span><span class="special">::*</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;&gt;</span> <span class="special">{</span>
+    <span class="comment">//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+<span class="special">};</span>
+</pre>
+<p>
+        Do you seek revenge against your coworkers?
+      </p>
+<pre class="programlisting"><span class="preprocessor">#define</span> <span class="identifier">EXPAND_LIKE_THE_DICKENS</span><span class="special">(</span><span class="identifier">QUALIFIERS</span><span class="special">)</span>    <span class="special">\</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span> <span class="special">\</span>
+<span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)</span> <span class="identifier">QUALIFIERS</span><span class="special">&gt;</span> <span class="special">{</span>  <span class="special">\</span>
+    <span class="comment">/* ... */</span>                                  <span class="special">\</span>
+<span class="special">};</span>
+</pre>
+<p>
+        There are real reasons to write code like this, but they are few and far
+        between. <code class="literal">CallableTraits</code>'s mission is to rid the world
+        of this code forever. If you have code like this, you can absolutely refactor
+        it into something much smaller, much more readable, and much more maintainable.
+        <code class="literal">CallableTraits</code>
+      </p>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.faq.reasons0"></a><a class="link" href="faq.html#callable_traits.faq.reasons0" title="What makes CallableTraits unique?">What makes <code class="literal">CallableTraits</code>
       unique?</a>
 </h3></div></div></div>
 <p>
@@ -112,8 +194,56 @@
       does <code class="literal">callable_traits::</code><code class="literal">args</code> alias a <code class="literal">std::tuple</code>?</a>
 </h3></div></div></div>
 <p>
-        Boost contains a handful of excellent type containers. However, I wanted
-        <code class="literal">CallableTraits</code> to only use the standard headers, so <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">tuple</span><span class="special">&gt;</span></code> was my only option under that limitation.
+        Boost contains a handful of excellent type containers. However, <code class="literal">CallableTraits</code>
+        is designed to only use the standard headers, so <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">tuple</span><span class="special">&gt;</span></code>
+        was the only option under this limitation.
+      </p>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.faq.why_are_the_libname_alias_templa"></a><a class="link" href="faq.html#callable_traits.faq.why_are_the_libname_alias_templa" title="Why are the CallableTraits alias templates not suffixed with _t, as in std::add_lvalue_reference_t?">Why
+      are the <code class="literal">CallableTraits</code> alias templates not suffixed with
+      <code class="computeroutput"><span class="identifier">_t</span></code>, as in <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">add_lvalue_reference_t</span></code>?</a>
+</h3></div></div></div>
+<p>
+        The <code class="computeroutput"><span class="identifier">_t</span></code> alias templates in
+        <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span></code> should be appreciated, but not imitated.
+        These alias templates were a belated addition to the standard library. They
+        use a cleaner syntax, so that users can forgo the <code class="computeroutput"><span class="keyword">typename</span>
+        <span class="comment">/*...*/</span><span class="special">::</span><span class="identifier">type</span></code> dance. However, it is both ironic
+        and unfortunate that a pair of unnecessary characters (<code class="computeroutput"><span class="identifier">_t</span></code>)
+        are used for the sole purpose of removing some <span class="emphasis"><em>other</em></span>
+        decidedly unnecessary characters (<code class="computeroutput"><span class="keyword">typename</span></code>
+        and <code class="computeroutput"><span class="special">::</span><span class="identifier">type</span></code>).
+        It's time to stop the bleeding, cut our losses, and start giving things sensible
+        names.
+      </p>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.faq.why_use_constexpr_function_templ"></a><a class="link" href="faq.html#callable_traits.faq.why_use_constexpr_function_templ" title="Why use constexpr function templates? Why not use something like std::is_same or even std::is_same_v?">Why
+      use constexpr function templates? Why not use something like <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span></code>
+      or even <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same_v</span></code>?</a>
+</h3></div></div></div>
+<p>
+        Function templates, especially when augmented by overloading them, are the
+        only constructs in C++ that can unequivocally accept <span class="emphasis"><em>either</em></span>
+        a type <span class="emphasis"><em>or</em></span> a value argument. Even if variable template
+        support were commonplace among production compilers, function templates would
+        still have the upper hand in this regard. The same argument applies to alias
+        templates and class templates. Since <code class="literal">CallableTraits</code> supports
+        all value categories and qualifiers, using these function templates really
+        couldn't be any easier.
+      </p>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.faq.why_use_reference_collapsing_rul"></a><a class="link" href="faq.html#callable_traits.faq.why_use_reference_collapsing_rul" title="Why use reference collapsing rules when adding member function ref-qualifiers?">Why
+      use reference collapsing rules when adding member function ref-qualifiers?</a>
+</h3></div></div></div>
+<p>
+        Although arbitrary, the reference collapsing rules are well-defined and already
+        known to template metaprogrammers. Anything else would be a burden to memorize.
       </p>
 </div>
 </div>

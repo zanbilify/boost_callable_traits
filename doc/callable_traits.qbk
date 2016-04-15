@@ -160,8 +160,8 @@ This documentation will be most beneficial to readers who posess a basic underst
 * function types
 * [@http://en.cppreference.com/w/cpp/language/pointer#Pointers_to_functions function pointers]
 * [@http://stackoverflow.com/questions/480248/function-references function references]
-* [@http://en.cppreference.com/w/cpp/language/pointer#Pointers_to_member_functions pointers to member functions]
-* [@http://en.cppreference.com/w/cpp/language/pointer#Pointers_to_data_members pointers to data members]
+* [@http://en.cppreference.com/w/cpp/language/pointer#Pointers_to_member_functions pointers to member functions] (a.k.a. PMFs)
+* [@http://en.cppreference.com/w/cpp/language/pointer#Pointers_to_data_members pointers to data members] (a.k.a. PMDs)
 * [@http://en.cppreference.com/w/cpp/language/operators#Function_call_operator the function call operator, [^operator()]]
 * [@https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers universal references] and [@http://stackoverflow.com/questions/13725747/concise-explanation-of-reference-collapsing-rules-requested-1-a-a-2 reference collapsing rules]
 * [@http://en.cppreference.com/w/cpp/language/member_functions#const-.2C_volatile-.2C_and_ref-qualified_member_functions cv-qualified and ref-qualified member functions]
@@ -174,6 +174,11 @@ This documentation will be most beneficial to readers who posess a basic underst
 [endsect][/section:prereqs]
 
 [section:motivation Motivation]
+
+[:[*['["Don't try to write helper code to detect PMFs/PMDs and dispatch on them -- it is an [_absolute nightmare]. PMF types are the worst types by far in the core language.]]]
+
+-- Stephan T. Lavavej, CppCon 2015, [@https://www.youtube.com/watch?v=zt7ThwVfap0&t=11m40s "functional: What's New, And Proper Usage"]
+]
 
 Consider for a moment the class template below, which defines all [role red[*48]] template specializations necessary to account for all valid function types and member function pointer types in C++11 and C++14:
 
@@ -296,6 +301,66 @@ While most of the features in [libname] are tested and working in MSVC, the foll
 
 [section:faq FAQ]
 
+
+[section:reasons Why should I use [libname]?]
+
+If you are not writing generic code, you simply shouldn't.
+
+If you ['are] writing generic code, take a moment to skim your header files, looking for code like this:
+
+    template<class Return, class First, class Second>
+	class foo<Return(First, Second)> {
+	    //     ^^^^^^^^^^^^^^^^^^^^^
+	};
+
+or like this...
+
+    template<class Return, class ...Args>
+	class foo<Return(Args...)> {
+	    //     ^^^^^^^^^^^^^^^
+	};
+
+or maybe something like this...
+	
+    template<class Return, class ...Args>
+	class foo<Return(*)(Args...)> {
+	    //     ^^^^^^^^^^^^^^^^^^
+	};
+
+perhaps...
+	
+    template<class Return, class ...Args>
+	class foo<Return(&)(Args...)> {
+	    //    ^^^^^^^^^^^^^^^^^^
+	};
+	
+Does this rings a bell?
+
+	template<class Return, class T, class ...Args>
+	class foo<Return(T::*)(Args...)> {
+	    //    ^^^^^^^^^^^^^^^^^^^^^
+	};
+	
+Do you hate your job?
+
+    template<class Return, class T, class ...Args>
+	class foo<Return( __cdecl T::* const volatile &)(Args..., ...) const volatile &&> {
+	    //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	};
+	
+Do you seek revenge against your coworkers?
+
+    #define EXPAND_LIKE_THE_DICKENS(QUALIFIERS)    \
+    template<class Return, class T, class ...Args> \
+	class foo<Return(T::*)(Args...) QUALIFIERS> {  \ 
+        /* ... */                                  \
+	};
+
+Implementers of the `<functional>` header have been trudging through code like this for years. The solution can absolutely refactor it into something much smaller, much more readable, and much more maintainable.
+There are real reasons to write code like this, but they are few and far between. [libname]'s mission is to rid the world of code like this, [*forever].  [libname]
+
+[endsect]
+
 [section:reasons What makes [libname] unique?]
 
 [*1.] [libname] offers template aliases such as [link_remove_member_const] for manipulating function qualifiers, designed to parallel the `<type_traits>` aliases such as `std::remove_const_t`.
@@ -322,9 +387,28 @@ While most of the features in [libname] are tested and working in MSVC, the foll
 
 [section Why does [namespace_scoped][^args] alias a [^std::tuple]?]
 
-Boost contains a handful of excellent type containers. However, I wanted [libname] to only use the standard headers, so `<tuple>` was my only option under that limitation.
+Boost contains a handful of excellent type containers. However, [libname] is designed to only use the standard headers, so `<tuple>` was the only option under this limitation.
 
 [endsect]
+
+[section Why are the [libname] alias templates not suffixed with `_t`, as in `std::add_lvalue_reference_t`?]
+
+The `_t` alias templates in `<type_traits>` should be appreciated, but not imitated. These alias templates were a belated addition to the standard library. They use a cleaner syntax, so that users can forgo the `typename /*...*/::type` dance. However, it is both ironic and unfortunate that a pair of unnecessary characters (`_t`) are used for the sole purpose of removing some ['other] decidedly unnecessary characters (`typename` and `::type`). It's time to stop the bleeding, cut our losses, and start giving things sensible names.
+
+[endsect]
+
+[section Why use constexpr function templates? Why not use something like `std::is_same` or even `std::is_same_v`?]
+
+Function templates, especially when augmented by overloading them, are the only constructs in C++ that can unequivocally accept ['either] a type ['or] a value argument. Even if variable template support were commonplace among production compilers, function templates would still have the upper hand in this regard. The same argument applies to alias templates and class templates. Since [libname] supports all value categories and qualifiers, using these function templates really couldn't be any easier.
+
+[endsect]
+
+[section Why use reference collapsing rules when adding member function ref-qualifiers?]
+
+Although arbitrary, the reference collapsing rules are well-defined and already known to template metaprogrammers. Anything else would be a burden to memorize.
+
+[endsect]
+
 
 [endsect]
 

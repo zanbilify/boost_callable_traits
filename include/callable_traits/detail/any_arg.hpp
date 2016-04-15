@@ -11,6 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_DETAIL_ANY_ARG_HPP
 
 #include <utility>
+#include <type_traits>
 #include <callable_traits/detail/make_constexpr.hpp>
 #include <callable_traits/config.hpp>
 
@@ -47,7 +48,7 @@ namespace callable_traits {
 #if !defined(CALLABLE_TRAITS_MSVC)
             //MSVC doesn't like this because it can deduce 'void'
             template<typename... T>
-            any_arg_evaluated(T&&...);
+            any_arg_evaluated(T&&...){}
 #endif //!defined(CALLABLE_TRAITS_MSVC)
 
             inline constexpr auto operator+() const { return type{}; }
