@@ -37,22 +37,20 @@ callable_traits_append_flag(callable_traits_HAS_QUNUSED_ARGUMENTS          -Qunu
 callable_traits_append_flag(callable_traits_HAS_WNO_UNUSED_LOCAL_TYPEDEFS  -Wno-unused-local-typedefs)
 callable_traits_append_flag(callable_traits_HAS_WWRITE_STRINGS             -Wwrite-strings)
 
-if(${CMAKE_CXX_COMPILER_ID} STREQUAL "MSVC")
+if(MSVC AND NOT ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
     #disable warning about symbol truncation. Doesn't matter, affected types are not linked
     callable_traits_append_flag(callable_traits_HAS_WD4503                     -wd4503)
     callable_traits_append_flag(callable_traits_HAS_W3                         -W3)
 else()
-
-    #if not using clang-cl
-    if(NOT MSVC)
-        callable_traits_append_flag(callable_traits_HAS_FTEMPLATE_BACKTRACE_LIMIT  -ftemplate-backtrace-limit=0)
-        callable_traits_append_flag(callable_traits_HAS_PEDANTIC                   -pedantic)
-        callable_traits_append_flag(callable_traits_HAS_STDCXX1Y                   -std=c++1y)
-    endif()
-
     callable_traits_append_flag(callable_traits_HAS_W                          -W)
     callable_traits_append_flag(callable_traits_HAS_WALL                       -Wall)
     callable_traits_append_flag(callable_traits_HAS_WEXTRA                     -Wextra)
+endif()
+
+if(NOT MSVC)
+    callable_traits_append_flag(callable_traits_HAS_FTEMPLATE_BACKTRACE_LIMIT  -ftemplate-backtrace-limit=0)
+    callable_traits_append_flag(callable_traits_HAS_PEDANTIC                   -pedantic)
+    callable_traits_append_flag(callable_traits_HAS_STDCXX1Y                   -std=c++1y)
 endif()
 
 #find_package(Boost)

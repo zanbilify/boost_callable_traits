@@ -10,22 +10,41 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_CONFIG_HPP
 #define CALLABLE_TRAITS_CONFIG_HPP
 
+#define CALLABLE_TRAITS_IX_SEQ(...) ::std::index_sequence< __VA_ARGS__ >
+#define CALLABLE_TRAITS_MAKE_IX_SEQ(...) ::std::make_index_sequence< __VA_ARGS__ >
+#define CALLABLE_TRAITS_DISJUNCTION(...) ::std::disjunction< __VA_ARGS__ >
+#define CALLABLE_TRAITS_CONJUNCTION(...) ::std::conjunction< __VA_ARGS__ >
+
+#ifndef __cpp_lib_logical_traits
+#include <callable_traits/detail/polyfills/conjunction.hpp>
+#include <callable_traits/detail/polyfills/disjunction.hpp>
+#endif //__cpp_lib_logical_traits
+
+#ifndef __cpp_lib_integer_sequence
+#include <callable_traits/detail/polyfills/make_index_sequence.hpp>
+#endif // __cpp_lib_integer_sequence
+
 #define CALLABLE_TRAITS_EMPTY_
 #define CALLABLE_TRAITS_EMPTY CALLABLE_TRAITS_EMPTY_
-
 #define CALLABLE_TRAITS_DEFAULT_VARARGS_CC
+
+
 
 #ifdef _MSC_VER
 
-    #ifndef __clang__
+#ifndef __clang__
 
-    #undef CALLABLE_TRAITS_DEFAULT_VARARGS_CC
-    #define CALLABLE_TRAITS_DEFAULT_VARARGS_CC __cdecl
-    #define CALLABLE_TRAITS_PMF_VARGARGS_CDECL_DEFAULT
-    #define CALLABLE_TRAITS_CONSTEXPR_CHECKS_DISABLED
-    #define CALLABLE_TRAITS_MSVC
+#undef CALLABLE_TRAITS_DEFAULT_VARARGS_CC
+#define CALLABLE_TRAITS_DEFAULT_VARARGS_CC __cdecl
+#define CALLABLE_TRAITS_PMF_VARGARGS_CDECL_DEFAULT
+#define CALLABLE_TRAITS_CONSTEXPR_CHECKS_DISABLED
+#define CALLABLE_TRAITS_MSVC
 
-    #endif //ifndef __clang__
+#if _MSC_FULL_VER == 190023918
+#include <callable_traits/detail/polyfills/make_index_sequence.hpp>
+#endif //#if _MSC_FULL_VER == 190023918
+
+#endif //ifndef __clang__
 
 #endif //_MSC_VER
 

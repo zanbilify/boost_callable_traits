@@ -84,7 +84,7 @@ namespace callable_traits {
         struct group_by_impl;
 
         template<typename Tup, typename DistinctGroupByValues, template<class> class Pred, std::size_t... I>
-        struct group_by_impl<Tup, DistinctGroupByValues, Pred, std::index_sequence<I...>> {
+        struct group_by_impl<Tup, DistinctGroupByValues, Pred, CALLABLE_TRAITS_IX_SEQ(I...)> {
 
             using type = std::tuple<
                 typename group_by_filter<
@@ -110,7 +110,7 @@ namespace callable_traits {
                 tuple_sort<Tup, sort_predicate>,
                 group_by_values,
                 Pred,
-                std::make_index_sequence<std::tuple_size<group_by_values>::value>
+                CALLABLE_TRAITS_MAKE_IX_SEQ(std::tuple_size<group_by_values>::value)
             >::type;
         };
 

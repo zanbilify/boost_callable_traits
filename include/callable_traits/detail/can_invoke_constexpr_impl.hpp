@@ -80,9 +80,9 @@ namespace callable_traits {
         };
 
         template<typename... Ts>
-        using are_all_constexpr_constructible = conjunction<
+        using are_all_constexpr_constructible = CALLABLE_TRAITS_CONJUNCTION(
             is_constexpr_constructible<Ts>...
-        >;
+        );
 
         template<typename T, typename... Args, typename std::enable_if<
             negate<are_all_constexpr_constructible<T, Args...>>::value, int>::type = 0>

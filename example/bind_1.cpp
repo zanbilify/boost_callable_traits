@@ -23,6 +23,8 @@ because ScaryMonster is the narrowest of all _1 parameters. */
 #include <functional>
 #include <tuple>
 #include <callable_traits/bind.hpp>
+#include <callable_traits/args.hpp>
+#include <callable_traits/function_type.hpp>
 
 struct Vampire {};
 struct Robot {};

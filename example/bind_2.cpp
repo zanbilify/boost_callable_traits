@@ -18,6 +18,8 @@ int main(){ return 0; };
 #include <functional>
 #include <tuple>
 #include <callable_traits/bind.hpp>
+#include <callable_traits/args.hpp>
+#include <callable_traits/function_type.hpp>
 
 struct Vampire {};
 struct Robot {};

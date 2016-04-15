@@ -70,7 +70,7 @@ auto ordered_letters(A a, B b, C c, D d, E e, F f, G g) {
 
 template <typename F, typename Tuple, std::size_t... I>
 constexpr decltype(auto)
-apply_helper(F&& f, Tuple&& t, std::index_sequence<I...>) {
+apply_helper(F&& f, Tuple&& t, CALLABLE_TRAITS_IX_SEQ(I...)) {
     return std::forward<F>(f)(std::get<I>(std::forward<Tuple>(t))...);
 }
 
@@ -80,9 +80,9 @@ apply(F&& f, Tuple&& t) {
     return apply_helper(
         std::forward<F>(f),
         std::forward<Tuple>(t),
-        std::make_index_sequence<
-        std::tuple_size<std::remove_reference_t<Tuple>>::value
-        >{}
+        CALLABLE_TRAITS_MAKE_IX_SEQ(
+            std::tuple_size<std::remove_reference_t<Tuple>>::value
+        ){}
     );
 }
 

@@ -13,6 +13,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/test_invoke.hpp>
 #include <callable_traits/detail/utility.hpp>
 #include <callable_traits/detail/any_arg.hpp>
+#include <callable_traits/config.hpp>
 #include <cstdint>
 #include <type_traits>
 
@@ -27,7 +28,7 @@ namespace callable_traits {
         };
 
         template<typename U>
-        struct max_args<U, std::index_sequence<0>> {
+        struct max_args<U, CALLABLE_TRAITS_IX_SEQ(0)> {
             static constexpr bool value = true;
             static constexpr int arg_count =
                 is_invokable<U, const any_arg<0> &>::value ? 1 : (
@@ -36,12 +37,12 @@ namespace callable_traits {
         };
 
         template<typename U, std::size_t... I>
-        struct max_args<U, std::index_sequence<I...>> {
+        struct max_args<U, CALLABLE_TRAITS_IX_SEQ(I...)> {
 
-            using result_type = disjunction<
+            using result_type = CALLABLE_TRAITS_DISJUNCTION(
                 is_invokable<U, const any_arg<I>&...>,
-                max_args<U, std::make_index_sequence<sizeof...(I)-1> >
-            >;
+                max_args<U, CALLABLE_TRAITS_MAKE_IX_SEQ(sizeof...(I)-1) >
+            );
 
             static constexpr bool value = result_type::value;
             static constexpr int arg_count = result_type::arg_count;
@@ -59,18 +60,18 @@ namespace callable_traits {
         };
 
         template<typename U, std::size_t Max, std::size_t... I>
-        struct min_args<U, Max, std::index_sequence<I...>> {
+        struct min_args<U, Max, CALLABLE_TRAITS_IX_SEQ(I...)> {
 
             using next = typename std::conditional<
                 sizeof...(I)+1 <= Max,
-                std::make_index_sequence<sizeof...(I)+1>,
+                CALLABLE_TRAITS_MAKE_IX_SEQ(sizeof...(I)+1),
                 sentinel
             >::type;
 
-            using result_type = disjunction<
+            using result_type = CALLABLE_TRAITS_DISJUNCTION(
                 is_invokable<U, const any_arg<I>&...>,
                 min_args<U, Max, next>
-            >;
+            );
 
             static constexpr bool value = result_type::value;
             static constexpr int arg_count = result_type::arg_count;
@@ -79,10 +80,10 @@ namespace callable_traits {
         template<typename U, std::size_t Max>
         struct min_args<U, Max, void> {
 
-            using result_type = disjunction<
+            using result_type = CALLABLE_TRAITS_DISJUNCTION(
                 is_invokable<U, void>,
-                min_args<U, Max, std::make_index_sequence<1>>
-            >;
+                min_args<U, Max, CALLABLE_TRAITS_MAKE_IX_SEQ(1)>
+            );
 
             static constexpr int arg_count = result_type::arg_count;
             static constexpr bool value = result_type::value;
@@ -123,7 +124,7 @@ namespace callable_traits {
             >::value;
 
             static constexpr int tentative_max_arity = max_args<
-                T, std::make_index_sequence<SearchLimit>
+                T, CALLABLE_TRAITS_MAKE_IX_SEQ(SearchLimit)
             >::arg_count;
 
             static constexpr int value =

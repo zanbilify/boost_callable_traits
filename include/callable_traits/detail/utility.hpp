@@ -56,43 +56,14 @@ struct invalid_type { invalid_type() = delete; };
         template<std::size_t I, typename Tup>
         using weak_at = typename util_detail::weak_at_t<I, Tup>::type;
 
-
         // a faster version of std::decay_t
         template<typename T>
         using shallow_decay = typename std::remove_cv<
             typename std::remove_reference<T>::type
         >::type;
 
-
-        //polyfill for C++17 std::conjunction
-        template<typename...>
-        struct conjunction
-            : std::true_type {};
-
-        template<typename T>
-        struct conjunction<T>
-            : T {};
-
-        template<typename T, typename... Ts>
-        struct conjunction<T, Ts...>
-            : std::conditional<T::value != false, T, conjunction<Ts...>>::type { };
-
-
-        //polyfill for C++17 std::disjunction
-        template<typename...>
-        struct disjunction
-            : std::false_type {};
-
-        template<typename T>
-        struct disjunction<T>
-            : T {};
-
-        template<typename T, typename... Ts>
-        struct disjunction<T, Ts...>
-            : std::conditional<T::value != false, T, disjunction<Ts...>>::type { };
-
-
         //polyfill for C++17 negation
+		//TODO rename and move to polyfills folder
         template<typename BoolType>
         using negate = std::integral_constant<bool, !BoolType::value>;
 
@@ -273,10 +244,10 @@ struct invalid_type { invalid_type() = delete; };
         }
 
         template<typename T, typename FailType>
-        using fail_if_invalid = typename disjunction<
+        using fail_if_invalid = typename CALLABLE_TRAITS_DISJUNCTION(
             util_detail::type_value<T, !std::is_same<T, invalid_type>::value>,
             FailType
-        >::type;
+        )::type;
 
         template<typename T, typename Fallback>
         using fallback_if_invalid = typename std::conditional<

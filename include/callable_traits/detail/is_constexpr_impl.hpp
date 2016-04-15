@@ -41,7 +41,7 @@ namespace callable_traits {
         };
 
         template<typename F, std::size_t... I>
-        struct is_constexpr_t<F, std::index_sequence<I...>> {
+        struct is_constexpr_t<F, CALLABLE_TRAITS_IX_SEQ(I...)> {
 
             // An arbitrary expression as the left-hand argument to a non-overloaded
             // comma operator expression that is passed as a template value argument
@@ -75,7 +75,7 @@ namespace callable_traits {
         };
 
         template<typename Pmf, std::size_t... I>
-        struct is_constexpr_t<pmf<Pmf>, std::index_sequence<I...>> {
+        struct is_constexpr_t<pmf<Pmf>, CALLABLE_TRAITS_IX_SEQ(I...)> {
 
             // When `Pmf` is `int(foo::*)() const &&`, invoke_type is `foo const &&`
             using invoke_type = typename pmf<Pmf>::invoke_type;
@@ -93,7 +93,7 @@ namespace callable_traits {
 
         // Since constexpr data members must be static, you cannot create PMDs to them
         template<typename OriginalType, typename Pmd, std::size_t... I>
-        struct is_constexpr_t<pmd<OriginalType, Pmd>, std::index_sequence<I...>> {
+        struct is_constexpr_t<pmd<OriginalType, Pmd>, CALLABLE_TRAITS_IX_SEQ(I...)> {
             auto operator()(...) const -> substitution_failure;
         };
 
@@ -108,7 +108,7 @@ namespace callable_traits {
         is_constexpr_impl(T&& t, std::true_type){
             using traits = traits<T&&>;
             using min_args = min_arity_t<traits, constants::arity_search_limit>;
-            using seq = std::make_index_sequence<min_args::value < 0 ? 0 : min_args::value>;
+            using seq = CALLABLE_TRAITS_MAKE_IX_SEQ(min_args::value < 0 ? 0 : min_args::value);
             using test = is_constexpr_t<traits, seq>;
             using result = decltype(test{}(::std::forward<T>(t)));
             using failure = substitution_failure;
