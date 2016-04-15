@@ -8,6 +8,11 @@ Distributed under the Boost Software License, Version 1.0.
 #include <type_traits>
 #include <callable_traits/callable_traits.hpp>
 
+#ifdef CALLABLE_TRAITS_MSVC
+//feature is unsupported in MSVC
+int main(){ return 0; };
+#else
+
 #ifndef CT_ASSERT
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
@@ -59,4 +64,6 @@ CT_ASSERT(!ct::can_invoke_constexpr(foo1_pmf{}, foo1{}, 0));
 CT_ASSERT(!ct::can_invoke_constexpr(foo3_pmf{}, foo3{}));
 CT_ASSERT( ct::can_invoke_constexpr(foo3_pmf{}, foo3{}, 0));
 
-int main() { return 0; }
+int main() {}
+
+#endif

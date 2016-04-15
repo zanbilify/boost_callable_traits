@@ -15,6 +15,11 @@ Distributed under the Boost Software License, Version 1.0.
 #include <cstdint>
 #include <callable_traits/callable_traits.hpp>
 
+#ifdef CALLABLE_TRAITS_MSVC
+//feature is unsupported in MSVC
+int main(){ return 0; };
+#else
+
 #ifndef CT_ASSERT
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
@@ -138,6 +143,6 @@ int main() {
     CT_ASSERT(std::is_same<args, expected_args>::value);
     CT_RUNTIME_ASSERT(apply(ct_bind, expected_args{}) == "ABCDEFG");
     CT_RUNTIME_ASSERT(apply(std_bind, expected_args{}) == "ABCDEFG");
-
-    return 0;
 }
+
+#endif

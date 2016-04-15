@@ -1,4 +1,3 @@
-
 /*!<-
 Copyright (c) 2016 Barrett Adair
 
@@ -6,9 +5,15 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 ->*/
 
+#include <callable_traits/is_constexpr.hpp>
+#ifdef CALLABLE_TRAITS_MSVC
+//feature is unsupported in MSVC
+int main(){ return 0; };
+#else
+
 //[ is_constexpr_function_pointer
 #include <type_traits>
-#include <callable_traits/callable_traits.hpp>
+#include <callable_traits/is_constexpr.hpp>
 
 // NOTE: Due to non-compliance in MSVC, is_constexpr always
 // returns std::false_type on that compiler, which causes
@@ -36,3 +41,4 @@ static_assert(!ct::is_constexpr<B>(), "");
 
 int main() {}
 //]
+#endif

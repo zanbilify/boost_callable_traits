@@ -14,6 +14,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/utility.hpp>
 #include <callable_traits/detail/any_arg.hpp>
 #include <cstdint>
+#include <type_traits>
 
 namespace callable_traits {
 
