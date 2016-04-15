@@ -51,10 +51,19 @@
 <dd><dl><dt><span class="section"><a href="callable_traits/compatibility.html#callable_traits.compatibility.msvc_issues">MSVC Issues</a></span></dt></dl></dd>
 <dt><span class="section"><a href="callable_traits/faq.html">FAQ</a></span></dt>
 <dd><dl>
-<dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.reasons">What makes <code class="literal">CallableTraits</code>
+<dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.reasons">Why should I use <code class="literal">CallableTraits</code>?</a></span></dt>
+<dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.reasons0">What makes <code class="literal">CallableTraits</code>
       unique?</a></span></dt>
 <dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.why_does_namespace_scoped_args_a">Why
       does <code class="literal">callable_traits::</code><code class="literal">args</code> alias a <code class="literal">std::tuple</code>?</a></span></dt>
+<dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.why_are_the_libname_alias_templa">Why
+      are the <code class="literal">CallableTraits</code> alias templates not suffixed with
+      <code class="computeroutput"><span class="identifier">_t</span></code>, as in <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">add_lvalue_reference_t</span></code>?</a></span></dt>
+<dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.why_use_constexpr_function_templ">Why
+      use constexpr function templates? Why not use something like <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span></code>
+      or even <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same_v</span></code>?</a></span></dt>
+<dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.why_use_reference_collapsing_rul">Why
+      use reference collapsing rules when adding member function ref-qualifiers?</a></span></dt>
 </dl></dd>
 <dt><span class="section"><a href="callable_traits/contact.html">Contact</a></span></dt>
 <dt><span class="section"><a href="callable_traits/concepts.html">Concepts</a></span></dt>
@@ -193,11 +202,11 @@
           </li>
 <li class="listitem">
             <a href="http://en.cppreference.com/w/cpp/language/pointer#Pointers_to_member_functions" target="_top">pointers
-            to member functions</a>
+            to member functions</a> (a.k.a. PMFs)
           </li>
 <li class="listitem">
             <a href="http://en.cppreference.com/w/cpp/language/pointer#Pointers_to_data_members" target="_top">pointers
-            to data members</a>
+            to data members</a> (a.k.a. PMDs)
           </li>
 <li class="listitem">
             <a href="http://en.cppreference.com/w/cpp/language/operators#Function_call_operator" target="_top">the
@@ -238,6 +247,18 @@
 <div class="titlepage"><div><div><h3 class="title">
 <a name="callable_traits.introduction.motivation"></a><a class="link" href="index.html#callable_traits.introduction.motivation" title="Motivation">Motivation</a>
 </h3></div></div></div>
+<div class="blockquote"><blockquote class="blockquote">
+<p>
+          <span class="bold"><strong><span class="emphasis"><em><span class="quote">&#8220;<span class="quote">Don't try to write helper code to
+          detect PMFs/PMDs and dispatch on them -- it is an <span class="underline">absolute
+          nightmare</span>. PMF types are the worst types by far in the core
+          language.</span>&#8221;</span></em></span></strong></span>
+        </p>
+<p>
+          -- Stephan T. Lavavej, CppCon 2015, <a href="https://www.youtube.com/watch?v=zt7ThwVfap0&amp;t=11m40s" target="_top">"functional:
+          What's New, And Proper Usage"</a>
+        </p>
+</blockquote></div>
 <p>
         Consider for a moment the class template below, which defines all <span class="red"><span class="bold"><strong>48</strong></span></span> template specializations
         necessary to account for all valid function types and member function pointer
