@@ -10,8 +10,7 @@ CallableTraits is a C++11/C++14/C++17 header-only library for the inspection, sy
 
 ## [Documentation](http://badair.github.io/callable_traits/index.html)
 
-## License
-Please see [LICENSE.md](LICENSE.md).
+## [License](LICENSE.md)
 
 <!-- Links -->
 [badge.Appveyor]: https://ci.appveyor.com/api/projects/status/uf0l91v7l4wc4kw6/branch/master?svg=true
