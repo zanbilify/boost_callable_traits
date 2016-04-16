@@ -57,11 +57,14 @@ Distributed under the Boost Software License, Version 1.0.
 
 
 #if defined __GNUC__ && __GNUC__ < 5
+
 #define CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
 
 #if __GNUC_MINOR__ < 9 || (__GNUC_MINOR__ == 9 && __GNUC_PATCHLEVEL__ < 2)
 #define CALLABLE_TRAITS_DISABLE_BIND
-#endif
+#endif //#if __GNUC_MINOR__ < 9 || (__GNUC_MINOR__ == 9 && __GNUC_PATCHLEVEL__ < 2)
+
+#endif //#if defined __GNUC__ && __GNUC__ < 5
 
 
 #ifndef CALLABLE_TRAITS_ARITY_SEARCH_LIMIT
