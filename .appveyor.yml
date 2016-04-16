@@ -30,7 +30,7 @@ build_script:
 
     cd build
 
-    echo . | cmake .. -G"Visual Studio 2015"
+    echo . | cmake .. -G"Visual Studio 14 2015"
 
     set msbuild_exe="%ProgramFiles%\MSBuild\14.0\Bin\MSBuild.exe"
 
