@@ -13,6 +13,10 @@ Distributed under the Boost Software License, Version 1.0.
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
 
+#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+int main(){ return 0; }
+#else
+
 struct foo {};
 
 namespace ct = callable_traits;
@@ -166,3 +170,5 @@ int main() {
 	assert_not_rvalue_qualified<int foo::*>();
 	assert_not_rvalue_qualified<void(&)()>();
 }
+
+#endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS

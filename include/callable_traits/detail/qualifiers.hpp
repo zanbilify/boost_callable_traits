@@ -54,6 +54,12 @@ namespace callable_traits {
         //! or member function overload.
         constexpr flags volatile_ = 2;
 
+#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+
+        constexpr flags lref_ = default_;
+        constexpr flags rref_ = default_;
+#else
+
         //! Flag representing an lvalue reference type, or
         //! an lvalue-reference-qualified member function
         //! overload.
@@ -63,6 +69,8 @@ namespace callable_traits {
         //! an rvalue-reference-qualified member function
         //! overload.
         constexpr flags rref_ = 8;
+
+#endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
 
         constexpr flags cv_ = 3;
 
@@ -134,13 +142,24 @@ namespace callable_traits {
             static constexpr flags q_flags = cv_flags | ref_flags;
 
         public:
+
             using has_member_qualifiers = std::integral_constant<bool, q_flags != default_>;
-            using is_reference_member = std::integral_constant<bool, 0 < ref_flags>;
-            using is_lvalue_reference_qualified = std::integral_constant<bool, ref_flags == lref_>;
-            using is_rvalue_reference_qualified = std::integral_constant<bool, ref_flags == rref_>;
             using is_const_member = std::integral_constant<bool, 0 < (cv_flags & const_)>;
             using is_volatile_member = std::integral_constant<bool, 0 < (cv_flags & volatile_)>;
             using is_cv_member = std::integral_constant<bool, cv_flags == (const_ | volatile_)>;
+
+#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+
+            using is_reference_member = std::false_type;
+            using is_lvalue_reference_qualified = std::false_type;
+            using is_rvalue_reference_qualified = std::false_type;
+#else
+            using is_reference_member = std::integral_constant<bool, 0 < ref_flags>;
+            using is_lvalue_reference_member = std::integral_constant<bool, ref_flags == lref_>;
+            using is_rvalue_reference_member = std::integral_constant<bool, ref_flags == rref_>;
+
+#endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+
         };
     }
 }

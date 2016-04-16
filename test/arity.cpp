@@ -64,6 +64,8 @@ struct simple_overloaded_function_object {
     void operator()(int, int, int, int, int) {}
 };
 
+#ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+
 struct overloaded_function_object {
     void operator()(int) & {}
     void operator()(int, int) && {}
@@ -74,6 +76,8 @@ struct overloaded_function_object {
     void operator()(int, int, int, int, int, int, int) const volatile & {}
     void operator()(int, int, int, int, int, int, int, int) const volatile && {}
 };
+
+#endif //#ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
 
 void three_arg_function(char&&, float&, int = 0) {}
 void three_arg_function_with_varargs(char&&, float&, int = 0, ...) {}
@@ -93,8 +97,11 @@ template<
 >
 void test_arity() {
     CT_ASSERT(ct::arity<T>() == ExpectedArity);
+
+#ifndef CALLABLE_TRAITS_DISABLE_ARITY_RANGE
     CT_ASSERT(ct::min_arity<T, SearchLimit>() == ExpectedMinArity);
     CT_ASSERT(ct::max_arity<T, SearchLimit>() == ExpectedMaxArity);
+#endif //#ifndef CALLABLE_TRAITS_DISABLE_ARITY_RANGE
 }
 
 template<
@@ -109,11 +116,16 @@ void test_arity(T&& t) {
     using arity_result = decltype(ct::arity(t));
     CT_ASSERT(arity_result{} == ExpectedArity);
 
+#ifndef CALLABLE_TRAITS_DISABLE_ARITY_RANGE
+
     using min_arity_result = decltype(ct::min_arity<SearchLimit>(t));
     CT_ASSERT(min_arity_result{} == ExpectedMinArity);
 
     using max_arity_result = decltype(ct::max_arity<SearchLimit>(t));
     CT_ASSERT(max_arity_result{}  == ExpectedMaxArity);
+
+#endif //#ifndef CALLABLE_TRAITS_DISABLE_ARITY_RANGE
+
 }
 
 constexpr const auto limit = ct::constants::arity_search_limit;
@@ -134,7 +146,7 @@ int main() {
         test_arity<T, 3, 3, 3, limit_plus>();
         test_arity<T, 3, 3, 3, limit_minus>();
         test_arity<3, 3, 3, limit>(&F::operator());
-        test_arity<3, 3, 3, limit_plus>(&F::operator());        
+        test_arity<3, 3, 3, limit_plus>(&F::operator());
         test_arity<3, 3, 3, limit_minus>(&F::operator());
     } {
         //testing pmf with varargs
@@ -243,7 +255,11 @@ int main() {
         test_arity<-1, 2, 5, limit>(T{});
         test_arity<-1, 2, 5, limit_plus>(T{});
         test_arity<-1, 2, 5, limit_minus>(T{});
-    } {
+    }
+
+#ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+
+    {
         //testing cv/ref qualified overloads
         using T = overloaded_function_object;
         test_arity<T&, -1, 1, 7, limit>();
@@ -258,7 +274,11 @@ int main() {
         test_arity<T const volatile &, -1, 7, 7, limit>();
         test_arity<T const volatile &&, -1, 8, 8, limit>();
 #endif
+
     }
+
+#endif //#ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+
     {
         //testing function without varargs
         using T = decltype(three_arg_function);

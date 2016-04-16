@@ -4,6 +4,11 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
 ->*/
 
+#include <callable_traits/config.hpp>
+#ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+int main(){ return 0; }
+#else
+
 //[ intro
 //` This short program showcases some, but not all, of the features available in [libname].
 
@@ -144,3 +149,5 @@ int main() {
     static_assert(std::is_same<not_abominable, expected_fn2>::value, "");
 }
 //]
+
+#endif

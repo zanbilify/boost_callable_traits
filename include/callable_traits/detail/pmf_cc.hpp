@@ -10,7 +10,7 @@ DO NOT INCLUDE THIS HEADER DIRECTLY
 
 */
 
-#define CALLABLE_TRAITS_SPECIALIZE_PMF(QUAL)                                         \
+#define CALLABLE_TRAITS_SPECIALIZE_PMF(QUAL, ABOM_QUAL)                              \
                                                                                      \
 template<typename Ret, typename T, typename... Args>                                 \
 struct add_calling_convention_t<                                                     \
@@ -52,7 +52,7 @@ struct pmf<OriginalType, Return(CALLABLE_TRAITS_CC T::*)(Args...) QUAL>         
     using function_object_type = Return(Args...);                                    \
     using function_type = Return(invoke_type, Args...);                              \
     using invoke_arg_types = std::tuple<invoke_type, Args...>;                       \
-    using qualified_function_type = Return(Args...) QUAL;                            \
+    using qualified_function_type = Return(Args...) ABOM_QUAL;                       \
     using remove_varargs = OriginalType;                                             \
                                                                                      \
     using add_varargs = typename copy_cvr<                                           \
@@ -106,17 +106,22 @@ struct pmf<OriginalType, Return(CALLABLE_TRAITS_CC T::*)(Args...) QUAL>         
 }                                                                                    \
 /**/
 
-CALLABLE_TRAITS_SPECIALIZE_PMF(CALLABLE_TRAITS_EMPTY);
-CALLABLE_TRAITS_SPECIALIZE_PMF(&);
-CALLABLE_TRAITS_SPECIALIZE_PMF(&&);
-CALLABLE_TRAITS_SPECIALIZE_PMF(const);
-CALLABLE_TRAITS_SPECIALIZE_PMF(volatile);
-CALLABLE_TRAITS_SPECIALIZE_PMF(const volatile);
-CALLABLE_TRAITS_SPECIALIZE_PMF(const &);
-CALLABLE_TRAITS_SPECIALIZE_PMF(volatile &);
-CALLABLE_TRAITS_SPECIALIZE_PMF(const volatile &);
-CALLABLE_TRAITS_SPECIALIZE_PMF(const &&);
-CALLABLE_TRAITS_SPECIALIZE_PMF(volatile &&);
-CALLABLE_TRAITS_SPECIALIZE_PMF(const volatile &&);
+CALLABLE_TRAITS_SPECIALIZE_PMF(CALLABLE_TRAITS_EMPTY, CALLABLE_TRAITS_EMPTY);
+CALLABLE_TRAITS_SPECIALIZE_PMF(const, CALLABLE_TRAITS_ABOMINABLE_CONST);
+CALLABLE_TRAITS_SPECIALIZE_PMF(volatile, CALLABLE_TRAITS_ABOMINABLE_VOLATILE);
+CALLABLE_TRAITS_SPECIALIZE_PMF(const volatile, CALLABLE_TRAITS_ABOMINABLE_CONST CALLABLE_TRAITS_ABOMINABLE_VOLATILE);
+
+#ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+
+CALLABLE_TRAITS_SPECIALIZE_PMF(&, &);
+CALLABLE_TRAITS_SPECIALIZE_PMF(&&, &&);
+CALLABLE_TRAITS_SPECIALIZE_PMF(const &, const &);
+CALLABLE_TRAITS_SPECIALIZE_PMF(volatile &, volatile &);
+CALLABLE_TRAITS_SPECIALIZE_PMF(const volatile &, const volatile &);
+CALLABLE_TRAITS_SPECIALIZE_PMF(const &&, const &&);
+CALLABLE_TRAITS_SPECIALIZE_PMF(volatile &&, volatile &&);
+CALLABLE_TRAITS_SPECIALIZE_PMF(const volatile &&, const volatile &&);
+
+#endif //#ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
 
 #undef CALLABLE_TRAITS_SPECIALIZE_PMF

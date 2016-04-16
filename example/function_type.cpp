@@ -5,6 +5,11 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 ->*/
 
+#include <callable_traits/config.hpp>
+#ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+int main(){ return 0; }
+#else
+
 //[ function_type
 #include <type_traits>
 #include <callable_traits/callable_traits.hpp>
@@ -46,3 +51,4 @@ int main() {
     test<abominable>();
 }
 //]
+#endif //#ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS

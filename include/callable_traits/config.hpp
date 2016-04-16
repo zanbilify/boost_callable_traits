@@ -10,6 +10,28 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_CONFIG_HPP
 #define CALLABLE_TRAITS_CONFIG_HPP
 
+#define CALLABLE_TRAITS_EMPTY_
+#define CALLABLE_TRAITS_EMPTY CALLABLE_TRAITS_EMPTY_
+
+#if defined __GNUC__
+#if __GNUC__ >= 5
+#define CALLABLE_TRAITS_GCC_AT_LEAST_5_0_0
+#define CALLABLE_TRAITS_GCC_AT_LEAST_4_9_2
+#elif __GNUC__ == 4 && __GNUC_MINOR__ == 9 && __GNUC_PATCHLEVEL__ >= 2
+#define CALLABLE_TRAITS_GCC_AT_LEAST_4_9_2
+#else
+#define CALLABLE_TRAITS_GCC_OLDER_THAN_4_9_2
+#endif //#if __GNUC__ >= 5
+#endif //#if defined __GNUC__
+
+#ifdef _MSC_VER
+#ifdef __clang__
+#define CALLABLE_TRAITS_CLANG_C2
+#else
+#define CALLABLE_TRAITS_MSVC
+#endif //#ifdef __clang__
+#endif //#ifdef _MSC_VER
+
 #define CALLABLE_TRAITS_IX_SEQ(...) ::std::index_sequence< __VA_ARGS__ >
 #define CALLABLE_TRAITS_MAKE_IX_SEQ(...) ::std::make_index_sequence< __VA_ARGS__ >
 #define CALLABLE_TRAITS_DISJUNCTION(...) ::std::disjunction< __VA_ARGS__ >
@@ -30,42 +52,47 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/polyfills/make_index_sequence.hpp>
 #endif // __cpp_lib_integer_sequence
 
-#define CALLABLE_TRAITS_EMPTY_
-#define CALLABLE_TRAITS_EMPTY CALLABLE_TRAITS_EMPTY_
-#define CALLABLE_TRAITS_DEFAULT_VARARGS_CC
+#ifdef CALLABLE_TRAITS_MSVC
+
+    #define CALLABLE_TRAITS_DEFAULT_VARARGS_CC __cdecl
+    #define CALLABLE_TRAITS_PMF_VARGARGS_CDECL_DEFAULT
+    #define CALLABLE_TRAITS_DISABLE_BIND
+    #define CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
+
+    //Visual Studio 2015 Update 2 broke std::make_index_sequence
+    #if _MSC_FULL_VER == 190023918
+    #include <callable_traits/detail/polyfills/make_index_sequence.hpp>
+    #endif //#if _MSC_FULL_VER == 190023918
+
+#else ////#ifdef CALLABLE_TRAITS_MSVC
+    #define CALLABLE_TRAITS_DEFAULT_VARARGS_CC
+#endif //#ifdef CALLABLE_TRAITS_MSVC
 
 
+#ifdef __GNUC__
 
-#ifdef _MSC_VER
-
-#ifndef __clang__
-
-#undef CALLABLE_TRAITS_DEFAULT_VARARGS_CC
-#define CALLABLE_TRAITS_DEFAULT_VARARGS_CC __cdecl
-#define CALLABLE_TRAITS_PMF_VARGARGS_CDECL_DEFAULT
-#define CALLABLE_TRAITS_DISABLE_BIND
+#ifndef CALLABLE_TRAITS_GCC_AT_LEAST_5_0_0
 #define CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
-#define CALLABLE_TRAITS_MSVC
+#endif //#ifndef CALLABLE_TRAITS_GCC_AT_LEAST_5_0_0
 
-#if _MSC_FULL_VER == 190023918
-#include <callable_traits/detail/polyfills/make_index_sequence.hpp>
-#endif //#if _MSC_FULL_VER == 190023918
-
-#endif //ifndef __clang__
-
-#endif //_MSC_VER
-
-
-#if defined __GNUC__ && __GNUC__ < 5
-
-#define CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
-
-#if __GNUC_MINOR__ < 9 || (__GNUC_MINOR__ == 9 && __GNUC_PATCHLEVEL__ < 2)
+#ifndef CALLABLE_TRAITS_GCC_AT_LEAST_4_9_2
 #define CALLABLE_TRAITS_DISABLE_BIND
-#endif //#if __GNUC_MINOR__ < 9 || (__GNUC_MINOR__ == 9 && __GNUC_PATCHLEVEL__ < 2)
+#define CALLABLE_TRAITS_DISABLE_ARITY_RANGE
+#define CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#define CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#endif //#ifndef CALLABLE_TRAITS_GCC_AT_LEAST_4_9_2
 
-#endif //#if defined __GNUC__ && __GNUC__ < 5
+#endif //#ifdef __GNUC__
 
+
+#ifdef CALLABLE_TRAITS_GCC_OLDER_THAN_4_9_2
+#define CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#define CALLABLE_TRAITS_ABOMINABLE_CONST CALLABLE_TRAITS_EMPTY
+#define CALLABLE_TRAITS_ABOMINABLE_VOLATILE CALLABLE_TRAITS_EMPTY
+#else
+#define CALLABLE_TRAITS_ABOMINABLE_CONST const
+#define CALLABLE_TRAITS_ABOMINABLE_VOLATILE volatile
+#endif //#ifdef CALLABLE_TRAITS_GCC_OLDER_THAN_4_9_2
 
 #ifndef CALLABLE_TRAITS_ARITY_SEARCH_LIMIT
 #define CALLABLE_TRAITS_ARITY_SEARCH_LIMIT 10

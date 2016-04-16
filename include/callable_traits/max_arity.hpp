@@ -18,16 +18,22 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    template<std::size_t SearchLimit = constants::arity_search_limit, typename T>
-    inline constexpr auto
-    max_arity(T&&) {
-        return detail::max_arity_t<detail::traits<T&&>, SearchLimit>{};
-    }
-
     template<typename T, std::size_t SearchLimit = constants::arity_search_limit>
     inline constexpr auto
     max_arity() {
+
+#ifdef CALLABLE_TRAITS_DISABLE_ARITY_RANGE
+        return detail::arity_t<detail::traits<T>>{};
+#else
         return detail::max_arity_t<detail::traits<T>, SearchLimit>{};
+#endif
+
+    }
+
+    template<std::size_t SearchLimit = constants::arity_search_limit, typename T>
+    inline constexpr auto
+    max_arity(T&&) {
+        return max_arity<T&&, SearchLimit>();
     }
 }
 
