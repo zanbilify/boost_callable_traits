@@ -1,48 +1,28 @@
-# Copyright Louis Dionne 2013-2016
-# Copyright Modified Work Barrett Adair 2016
-# Distributed under the Boost Software License, Version 1.0.
-# (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
-
-shallow_clone: true
-
-os:
-  - Visual Studio 2015
-  # - Visual Studio 2015 CTP
-  # - Visual Studio 2015 CTP 6
-  # - Visual Studio 2015 Preview
-  # - Visual Studio 2015 RC
-  # - MinGW
-
-build:
-  verbosity: detailed
-
-configuration:
-  - Debug
-
+version: 1.0.{build}
 branches:
-  except:
-    - /pr\/.+/
+  only:
+  - master
+clone_folder: c:\projects\callable_traits
+
+clone_script:
+- cmd: >-
+    cd c:\projects
+    git clone https://github.com/badair/callable_traits.git
 
 install:
-  # External dependencies folder
-  - mkdir C:\projects\deps
-  - cd C:\projects\deps
-
-  # Installing a recent CMake
-  - set CMAKE_URL="https://cmake.org/files/v3.5/cmake-3.5.0-win32-x86.zip"
-  - appveyor DownloadFile %CMAKE_URL% -FileName cmake.zip
-  - 7z x cmake.zip -oC:\projects\deps\cmake > nul
-  - set PATH=C:\projects\deps\cmake\bin;%PATH%
-  - cmake --version
-
-before_build:
-  - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
-  - cd C:\projects\callable_traits
-
+- cmd: >-
+    mkdir C:\projects\deps
+    cd C:\projects\deps
+    set CMAKE_URL="https://cmake.org/files/v3.5/cmake-3.5.0-win32-x86.zip"
+    appveyor DownloadFile %CMAKE_URL% -FileName cmake.zip
+    7z x cmake.zip -oC:\projects\deps\cmake > nul
+    set PATH=C:\projects\deps\cmake\bin;%PATH%
+    cmake --version
 
 build_script:
-  - mkdir build
-  - cd build
-  - echo . | cmake .. -G"Visual Studio 2015"
-  - set msbuild_exe="%ProgramFiles%\MSBuild\14.0\Bin\MSBuild.exe"
-  - echo . | %msbuild_exe% callable_traits.sln /t:clean /p:Configuration=Debug /p:Platform=Win32 /v:m /m /nologo
+- cmd: >-
+    mkdir build
+    cd build
+    echo . | cmake .. -G"Visual Studio 2015"
+    set msbuild_exe="%ProgramFiles%\MSBuild\14.0\Bin\MSBuild.exe"
+    echo . | %msbuild_exe% callable_traits.sln /t:clean /p:Configuration=Debug /p:Platform=Win32 /v:m /m /nologo
