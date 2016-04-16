@@ -26,6 +26,8 @@ install:
     cmake --version
 build_script:
 - cmd: >-
+    cd c:\projects\callable_traits
+
     mkdir build
 
     cd build
