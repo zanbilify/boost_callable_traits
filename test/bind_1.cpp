@@ -68,13 +68,13 @@ auto ordered_letters(A a, B b, C c, D d, E e, F f, G g) {
 }
 
 template <typename F, typename Tuple, std::size_t... I>
-constexpr decltype(auto)
+constexpr auto
 apply_helper(F&& f, Tuple&& t, CALLABLE_TRAITS_IX_SEQ(I...)) {
     return std::forward<F>(f)(std::get<I>(std::forward<Tuple>(t))...);
 }
 
 template <typename F, typename Tuple>
-constexpr decltype(auto)
+constexpr auto
 apply(F&& f, Tuple&& t) {
     return apply_helper(
         std::forward<F>(f),

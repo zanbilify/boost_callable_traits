@@ -70,14 +70,14 @@ auto BEEF_returns_B(B, E, E, F) {
 }
 
 template <typename F, typename Tuple, std::size_t... I>
-constexpr decltype(auto)
+constexpr auto
 apply_helper(F&& f, Tuple&& t, CALLABLE_TRAITS_IX_SEQ(I...)) {
     return std::forward<F>(f)(std::get<I>(std::forward<Tuple>(t))...);
 }
 
 //used to apply the expected_args tuple to std::bind
 template <typename F, typename Tuple>
-constexpr decltype(auto)
+constexpr auto
 apply(F&& f, Tuple&& t) {
     return apply_helper(
         std::forward<F>(f),

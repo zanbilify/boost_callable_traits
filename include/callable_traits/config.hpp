@@ -14,6 +14,12 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_MAKE_IX_SEQ(...) ::std::make_index_sequence< __VA_ARGS__ >
 #define CALLABLE_TRAITS_DISJUNCTION(...) ::std::disjunction< __VA_ARGS__ >
 #define CALLABLE_TRAITS_CONJUNCTION(...) ::std::conjunction< __VA_ARGS__ >
+#define CALLALBLE_TRAITS_DECLTYPE_AUTO decltype(auto)
+
+#ifndef __cpp_decltype_auto
+#undef CALLALBLE_TRAITS_DECLTYPE_AUTO
+#define CALLALBLE_TRAITS_DECLTYPE_AUTO auto
+#endif
 
 #ifndef __cpp_lib_logical_traits
 #include <callable_traits/detail/polyfills/conjunction.hpp>

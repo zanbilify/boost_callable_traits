@@ -85,13 +85,13 @@ matrix:
           sources: *sources
 
     # GCC 4.8
-    #- env: UNIT_TESTS=true CPP=1y COMPILER=g++-4.8 STDLIB=libstdc++
-    #  os: linux
-    #  compiler: g++
-    #  addons:
-    #    apt:
-    #      packages: ["g++-4.8"]
-    #      sources: *sources
+    - env: UNIT_TESTS=true CPP=1y COMPILER=g++-4.8 STDLIB=libstdc++
+      os: linux
+      compiler: g++
+      addons:
+        apt:
+          packages: ["g++-4.8"]
+          sources: *sources
 
 before_install:
 

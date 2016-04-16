@@ -11,7 +11,7 @@ namespace callable_traits {
     namespace detail {
 
         template<typename T, typename... Args>
-        inline constexpr decltype(auto)
+        inline constexpr auto
         can_invoke_impl(T&& t, Args&&... args) {
             using traits = detail::traits<T&&>;
             using test = detail::test_invoke<traits, Args&&...>;

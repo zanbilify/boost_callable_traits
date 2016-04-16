@@ -112,7 +112,8 @@ namespace callable_traits {
 
         template<typename T, typename std::enable_if<
             is_callable_traits_bind<shallow_decay<T>>::value, int>::type = 0>
-        inline constexpr decltype(auto) unwrap_std_bind(T&& t){
+        inline constexpr CALLALBLE_TRAITS_DECLTYPE_AUTO
+        unwrap_std_bind(T&& t){
             return t.get_std_bind();
         }
 
@@ -174,7 +175,7 @@ namespace callable_traits {
                         unwrap_std_bind(static_cast<Args>(args))...)) {}
 
             template<typename... Rgs>
-            inline decltype(auto)
+            inline CALLALBLE_TRAITS_DECLTYPE_AUTO
             operator()(Rgs&&... args) {
                 return std_bind(std::forward<Rgs>(args)...);
             }
