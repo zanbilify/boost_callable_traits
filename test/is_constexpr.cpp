@@ -8,8 +8,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <type_traits>
 #include <callable_traits/callable_traits.hpp>
 
-#ifdef CALLABLE_TRAITS_MSVC
-//feature is unsupported in MSVC
+#ifdef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
 int main(){ return 0; };
 #else
 
@@ -164,7 +163,7 @@ namespace test7 {
     CT_ASSERT(ct::is_constexpr<G2>());
 
     // we can't resolve the overload in G3, due to the way
-    // callable_traits::detail::any_arg_evaluated works
+    // callable_traits::detail::constexpr_template_worm works
     CT_ASSERT(!ct::is_constexpr(G3{}));
     CT_ASSERT(!ct::is_constexpr<G3>());
 }

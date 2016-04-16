@@ -6,8 +6,7 @@ Distributed under the Boost Software License, Version 1.0.
 ->*/
 
 #include <callable_traits/is_constexpr.hpp>
-#ifdef CALLABLE_TRAITS_MSVC
-//feature is unsupported in MSVC
+#ifdef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
 int main(){ return 0; };
 #else
 

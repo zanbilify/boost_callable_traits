@@ -12,7 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/test_invoke.hpp>
 #include <callable_traits/detail/utility.hpp>
-#include <callable_traits/detail/any_arg.hpp>
+#include <callable_traits/detail/template_worm.hpp>
 #include <callable_traits/config.hpp>
 #include <cstdint>
 #include <type_traits>
@@ -31,7 +31,7 @@ namespace callable_traits {
         struct max_args<U, CALLABLE_TRAITS_IX_SEQ(0)> {
             static constexpr bool value = true;
             static constexpr int arg_count =
-                is_invokable<U, const any_arg<0> &>::value ? 1 : (
+                is_invokable<U, const template_worm<0> &>::value ? 1 : (
                     is_invokable<U, void>::value ? 0 : -1
                 );
         };
@@ -40,7 +40,7 @@ namespace callable_traits {
         struct max_args<U, CALLABLE_TRAITS_IX_SEQ(I...)> {
 
             using result_type = CALLABLE_TRAITS_DISJUNCTION(
-                is_invokable<U, const any_arg<I>&...>,
+                is_invokable<U, const template_worm<I>&...>,
                 max_args<U, CALLABLE_TRAITS_MAKE_IX_SEQ(sizeof...(I)-1) >
             );
 
@@ -69,7 +69,7 @@ namespace callable_traits {
             >::type;
 
             using result_type = CALLABLE_TRAITS_DISJUNCTION(
-                is_invokable<U, const any_arg<I>&...>,
+                is_invokable<U, const template_worm<I>&...>,
                 min_args<U, Max, next>
             );
 

@@ -17,16 +17,17 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-#ifdef CALLABLE_TRAITS_MSVC
+#ifdef CALLABLE_TRAITS_DISABLE_BIND
 
-template<bool MsvcAllowed = false, typename... T>
+template<bool Allowed = false, typename... T>
 inline constexpr int
 bind(T&&...) {
 
-    static_assert(MsvcAllowed,
-        "The native Microsoft Visual C++ compiler cannot "
-        "compile callable_traits::bind. To use this feature "
-        "in Windows, compile with Clang-cl or MinGW instead.");
+    static_assert(Allowed,
+        "callable_traits::bind is not supported on "
+        "your compiler. Refer to the Compatibility "
+        "section of the CallableTraits documentation "
+        "for more information.");
 
     return -1;
 }
@@ -44,7 +45,7 @@ bind(T&&...) {
         };
     }
 
-#endif //#ifdef CALLABLE_TRAITS_MSVC
+#endif //#ifdef CALLABLE_TRAITS_DISABLE_BIND
 
 }
 
