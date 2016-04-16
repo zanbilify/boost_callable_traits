@@ -16,8 +16,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/callable_traits.hpp>
 
 #ifdef CALLABLE_TRAITS_DISABLE_BIND
-//feature is unsupported in MSVC
-int main(){ return 0; };
+int main(){ return 0; }
 #else
 
 #ifndef CT_ASSERT

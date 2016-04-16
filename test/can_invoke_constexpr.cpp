@@ -9,7 +9,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/can_invoke_constexpr.hpp>
 
 #ifdef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
-int main(){ return 0; };
+int main(){ return 0; }
 #else
 
 #ifndef CT_ASSERT

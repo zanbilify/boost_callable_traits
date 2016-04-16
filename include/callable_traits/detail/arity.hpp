@@ -132,26 +132,26 @@ namespace callable_traits {
                 ? tentative_max_arity : precient_arity;
         };
 
-        template<typename Dispatch>
+        template<typename Traits>
         using arity_t = std::integral_constant<int,
-            arg_tuple_size<typename Dispatch::arg_types>::value
+            arg_tuple_size<typename Traits::arg_types>::value
         >;
 
-        template<typename Dispatch, std::size_t SearchLimit>
+        template<typename Traits, std::size_t SearchLimit>
         using min_arity_t = std::integral_constant<int,
             std::conditional<
-                Dispatch::is_function_object::value,
-                function_object_min_arity<Dispatch, SearchLimit>,
-                arity_t<Dispatch>
+                Traits::is_function_object::value,
+                function_object_min_arity<Traits, SearchLimit>,
+                arg_tuple_size<typename Traits::arg_types>
             >::type::value
         >;
 
-        template<typename Dispatch, std::size_t SearchLimit>
+        template<typename Traits, std::size_t SearchLimit>
         using max_arity_t = std::integral_constant<int,
             std::conditional<
-                Dispatch::is_function_object::value,
-                function_object_max_arity<Dispatch, SearchLimit>,
-                arity_t<Dispatch>
+                Traits::is_function_object::value,
+                function_object_max_arity<Traits, SearchLimit>,
+                arg_tuple_size<typename Traits::arg_types>
             >::type::value
         >;
     }

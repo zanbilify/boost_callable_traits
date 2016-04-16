@@ -252,6 +252,7 @@ int main() {
         test_arity<T const &&, -1, 3, 8, limit>();
         test_arity<T volatile &, -1, 5, 7, limit>();
 
+// MSVC doesn't know what to do with these
 #ifndef CALLABLE_TRAITS_MSVC
         test_arity<T volatile &&, -1, 6, 8, limit>();
         test_arity<T const volatile &, -1, 7, 7, limit>();

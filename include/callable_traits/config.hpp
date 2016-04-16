@@ -49,6 +49,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 #endif //_MSC_VER
 
+
+#if defined __GNUC__ && __GNUC__ < 5
+#define CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
+#endif
+
+
 #ifndef CALLABLE_TRAITS_ARITY_SEARCH_LIMIT
 #define CALLABLE_TRAITS_ARITY_SEARCH_LIMIT 10
 #endif //CALLABLE_TRAITS_ARITY_SEARCH_LIMIT

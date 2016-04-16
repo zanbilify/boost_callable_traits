@@ -38,6 +38,10 @@ namespace callable_traits {
             using is_function_object = std::integral_constant<bool,
                 std::is_class<shallow_decay<T>>::value>;
 
+            using is_overloaded_function_object = std::integral_constant<bool,
+                is_function_object::value
+                && !has_normal_call_operator<shallow_decay<T>>::value>;
+
             using is_member_pointer = std::false_type;
             using is_member_function_pointer = std::false_type;
             using remove_member_pointer = type;

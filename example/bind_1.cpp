@@ -8,7 +8,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/config.hpp>
 #ifdef CALLABLE_TRAITS_DISABLE_BIND
-int main(){ return 0; };
+int main(){ return 0; }
 #else
 
 //[ bind_1

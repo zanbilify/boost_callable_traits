@@ -39,6 +39,10 @@ namespace callable_traits {
 			// is always std::true_type for classes.
 			using is_function_object = std::false_type;
 			
+            // std::true_type when it's a function object, AND
+            // we can't take the address of operator() without casting
+            using is_overloaded_function_object = std::false_type;
+
 			// std::true_type for function references
 			using is_function_reference = std::false_type;
 			
