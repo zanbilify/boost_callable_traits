@@ -43,7 +43,7 @@ callable_traits/ref_remove_member_pointer.html
 callable_traits/ref_remove_member_reference.html
 callable_traits/ref_remove_varargs.html
 callable_traits/ref_remove_member_volatile.html
-callable_traits/ref_push_args_back.html
-callable_traits/ref_push_args_front.html
+callable_traits/ref_push_back.html
+callable_traits/ref_push_front.html
 callable_traits/ref_result_of.html
 callable_traits/acknowledgements.html

@@ -48,8 +48,8 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/remove_member_volatile.hpp>
 #include <callable_traits/has_calling_convention.hpp>
 #include <callable_traits/add_calling_convention.hpp>
-#include <callable_traits/push_args_back.hpp>
-#include <callable_traits/push_args_front.hpp>
+#include <callable_traits/push_back.hpp>
+#include <callable_traits/push_front.hpp>
 #include <callable_traits/result_of.hpp>
 
 #endif

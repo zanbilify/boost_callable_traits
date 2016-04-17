@@ -116,8 +116,8 @@
 [template link_remove_member_reference[][link callable_traits.ref_remove_member_reference [^remove_member_reference]]]
 [template link_remove_varargs[][link callable_traits.ref_remove_varargs [^remove_varargs]]]
 [template link_remove_member_volatile[][link callable_traits.ref_remove_member_volatile [^remove_member_volatile]]]
-[template link_push_args_back[][link callable_traits.ref_push_args_back [^push_args_back]]]
-[template link_push_args_front[][link callable_traits.ref_push_args_front [^push_args_front]]]
+[template link_push_back[][link callable_traits.ref_push_back [^push_back]]]
+[template link_push_front[][link callable_traits.ref_push_front [^push_front]]]
 [template link_result_of[][link callable_traits.ref_result_of [^result_of]]]
 
 [template cc_warning_rationale[]
@@ -630,8 +630,8 @@ The simplest way to use [libname] is to include the main header file:
 * [include_header [link_args]]
 * [include_header [link_arg_at]]
 * [include_header [link_clear_args]]
-* [include_header [link_push_args_back]]
-* [include_header [link_push_args_front]]
+* [include_header [link_push_back]]
+* [include_header [link_push_front]]
 * [include_header [link_arity]]
 * [include_header [link_min_arity]]
 * [include_header [link_max_arity]]
@@ -1631,18 +1631,18 @@ TODO
 [remove_member_volatile]
 [endsect]
 
-[section:ref_push_args_back push_args_back]
+[section:ref_push_back push_back]
 TODO
 [heading Example]
-[import ../example/push_args_back.cpp]
-[push_args_back]
+[import ../example/push_back.cpp]
+[push_back]
 [endsect]
 
-[section:ref_push_args_front push_args_front]
+[section:ref_push_front push_front]
 TODO
 [heading Example]
-[import ../example/push_args_front.cpp]
-[push_args_front]
+[import ../example/push_front.cpp]
+[push_front]
 [endsect]
 
 [section:ref_result_of result_of]
