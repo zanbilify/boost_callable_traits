@@ -48,7 +48,12 @@
 <dt><span class="section"><a href="callable_traits/function_sugar_example.html">Example: <code class="literal">std::function</code>
     sugar</a></span></dt>
 <dt><span class="section"><a href="callable_traits/compatibility.html">Compatibility</a></span></dt>
-<dd><dl><dt><span class="section"><a href="callable_traits/compatibility.html#callable_traits.compatibility.msvc_issues">MSVC Issues</a></span></dt></dl></dd>
+<dd><dl>
+<dt><span class="section"><a href="callable_traits/compatibility.html#callable_traits.compatibility.platforms">Supported Platforms
+      </a></span></dt>
+<dt><span class="section"><a href="callable_traits/compatibility.html#callable_traits.compatibility.compatibility_issues">Known
+      Issues</a></span></dt>
+</dl></dd>
 <dt><span class="section"><a href="callable_traits/faq.html">FAQ</a></span></dt>
 <dd><dl>
 <dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.reasons">Why should I use <code class="literal">CallableTraits</code>?</a></span></dt>
@@ -65,7 +70,6 @@
 <dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.why_use_reference_collapsing_rul">Why
       use reference collapsing rules when adding member function ref-qualifiers?</a></span></dt>
 </dl></dd>
-<dt><span class="section"><a href="callable_traits/contact.html">Contact</a></span></dt>
 <dt><span class="section"><a href="callable_traits/concepts.html">Concepts</a></span></dt>
 <dd><dl>
 <dt><span class="section"><a href="callable_traits/concepts.html#callable_traits.concepts.ref_fn_ptr"><span class="green">FunctionPtr</span></a></span></dt>
@@ -131,7 +135,9 @@
 <dt><span class="section"><a href="callable_traits/ref_is_volatile_member.html">is_volatile_member</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_max_arity.html">max_arity</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_min_arity.html">min_arity</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_qualified_function_type.html">qualified_function_type</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_insert_at.html">insert_at</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_overwrite_at.html">overwrite_at</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_remove_at.html">remove_at</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_remove_calling_convention.html">remove_calling_convention</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_remove_member_const.html">remove_member_const</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_remove_member_cv.html">remove_member_cv</a></span></dt>
@@ -141,8 +147,11 @@
 <dt><span class="section"><a href="callable_traits/ref_remove_member_volatile.html">remove_member_volatile</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_push_back.html">push_back</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_push_front.html">push_front</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_pop_back.html">pop_back</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_push_front0.html">pop_front</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_result_of.html">result_of</a></span></dt>
 <dt><span class="section"><a href="callable_traits/acknowledgements.html">Acknowledgements</a></span></dt>
+<dt><span class="section"><a href="callable_traits/contact.html">Contact</a></span></dt>
 </dl>
 </div>
 <div class="section">
@@ -380,20 +389,19 @@
               Calling conventions are, by definition, highly platform-specific.
             </li>
 <li class="listitem">
-              The inclusion of a single calling convention effectively doubles the
-              test surface of <code class="literal">CallableTraits</code> <span class="emphasis"><em>on every
-              platform</em></span>.
+              Each calling convention effectively doubles the test surface of <code class="literal">CallableTraits</code>
+              on every supported platform. Tests have not yet been written to account
+              for this.
             </li>
 <li class="listitem">
-              The author's current knowledge of calling conventions is admittedly
-              limited.
+              The author's knowledge of cross-platform behavior of calling conventions
+              in C++ is limited.
             </li>
 </ol></div>
 <p>
           It is the author's hope that future versions of <code class="literal">CallableTraits</code>
           will offer a stable, thoroughly-tested, and well-documented implementation
-          of these features. If you have experience in this domain, your <a class="link" href="callable_traits/contact.html" title="Contact">feedback</a>
-          would be highly appreciated.
+          of these features. If you have experience in this domain, please <a class="link" href="callable_traits/contact.html" title="Contact">contact the author</a>.
         </p>
 </td></tr>
 </table></div>
