@@ -39,7 +39,7 @@ static_assert(ct::is_callable<void(int)>(), "");
 static_assert(ct::is_callable<void(...)>(), "");
 static_assert(ct::is_callable<void(bar::*)()>(), "");
 
-#ifndef CALLABLE_TRAITS_DISABLE_ARITY_RANGES
+#ifndef CALLABLE_TRAITS_DISABLE_ARITY_RANGE
 static_assert(ct::is_callable(bar{}), "");
 #endif //#ifndef CALLABLE_TRAITS_DISABLE_ARITY_RANGES
 

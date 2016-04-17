@@ -36,4 +36,4 @@ build_script:
 
     set msbuild_exe="%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe"
 
-    echo . | "%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" check.vcxproj /t:build /p:Configuration=Debug /p:Platform=Win32 /v:d /nologo
+    echo . | "%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" check.vcxproj /t:build /p:Configuration=Debug /p:Platform=Win32 /v:n /nologo
