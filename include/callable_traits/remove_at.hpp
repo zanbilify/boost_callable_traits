@@ -27,20 +27,20 @@ namespace callable_traits {
 
     namespace permissive {
 
-        template<typename T, std::size_t Index, std::size_t Count = 1>
+        template<std::size_t Index, typename T, std::size_t Count = 1>
         using remove_at = detail::fallback_if_invalid<
             typename detail::traits<T>::template remove_at<Index, Count>, T>;
     }
 
     namespace verbose {
 
-        template<typename T, std::size_t Index, std::size_t Count = 1>
+        template<std::size_t Index, typename T, std::size_t Count = 1>
         using remove_at = detail::fail_if_invalid<
             typename detail::traits<T>::template remove_at<Index, Count>,
             detail::remove_at_error<false>>;
     }
 
-    template<std::size_t Index = 0, typename T, typename... Args>
+    template<std::size_t Index, typename T, std::size_t Count = 1>
     using remove_at = detail::fail_if_invalid<
         typename detail::traits<T>::template remove_at<Index, Count>,
         detail::remove_at_error<true>>;

@@ -186,6 +186,15 @@ namespace callable_traits {
 
             template<std::size_t Count>
             using pop_front = typename base::template pop_front<Count>&;
+
+            template<std::size_t Index, typename... NewArgs>
+            using insert_at = typename base::template insert_at<Index, NewArgs...>&;
+
+            template<std::size_t Index, std::size_t Count>
+            using remove_at = typename base::template remove_at<Index, Count>&;
+
+            template<std::size_t Index, typename... NewArgs>
+            using overwrite_at = typename base::template overwrite_at<Index, NewArgs...>&;
         };
 
         template<typename U, typename T, T Value>
