@@ -52,6 +52,12 @@
       be cross-referenced throughout the documentation. Concepts will always be formatted
       with <span class="green">green</span> text.
     </p>
+<p>
+      In order to avoid significant standardese in the reference sections, we need
+      to syntactically decompose these types. Some concepts define "elements"
+      to achieve this. This allows us to address multiple concepts with the same
+      terminology and structure later.
+    </p>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="callable_traits.concepts.ref_fn_ptr"></a><a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ptr" title="FunctionPtr"><span class="green">FunctionPtr</span></a>
@@ -68,6 +74,27 @@
             <code class="computeroutput"><span class="keyword">void</span><span class="special">(*</span>
             <span class="keyword">const</span> <span class="special">&amp;)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
           </li>
+<li class="listitem">
+            Elements
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                  <code class="literal"><code class="literal"><span class="emphasis"><em>[Return]</em></span></code> <span class="red">( <code class="literal"><span class="emphasis"><em>[CallingConvention]</em></span></code>
+                  * <code class="literal"><span class="emphasis"><em>[PtrQualifiers]</em></span></code> )</span>
+                  ( <code class="literal"><span class="emphasis"><em>[Args...]</em></span></code> <code class="literal"><span class="emphasis"><em>[VarArgs]</em></span></code>
+                  )</code>
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[Category]</em></span></code> - in red above
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[MemberQualifiers]</em></span></code> - not
+                  applicable
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[ParentClass]</em></span></code> - not applicable
+                </li>
+</ul></div>
+          </li>
 </ul></div>
 </div>
 <div class="section">
@@ -81,6 +108,32 @@
 <li class="listitem">
             e.g. <code class="computeroutput"><span class="keyword">void</span><span class="special">(&amp;)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
           </li>
+<li class="listitem">
+            Elements
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                  <code class="literal"><code class="literal"><span class="emphasis"><em>[Return]</em></span></code> <span class="red">( &amp; )</span> ( <code class="literal"><span class="emphasis"><em>[Args...]</em></span></code>
+                  <code class="literal"><span class="emphasis"><em>[VarArgs]</em></span></code> )</code>
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[Category]</em></span></code> - in red above
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[CallingConvention]</em></span></code> - not
+                  applicable
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[PtrQualifiers]</em></span></code> - not applicable
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[MemberQualifiers]</em></span></code> - not
+                  applicable
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[ParentClass]</em></span></code> - not applicable
+                </li>
+</ul></div>
+          </li>
 </ul></div>
 </div>
 <div class="section">
@@ -92,10 +145,40 @@
             Any unqualified function type
           </li>
 <li class="listitem">
+            Not technically "callable", but still falls under the <code class="literal">CallableTraits</code>
+            umbrella
+          </li>
+<li class="listitem">
             Mutually exclusive with <a class="link" href="concepts.html#callable_traits.concepts.ref_abominable" title="AbominableFunction"><span class="green">AbominableFunction</span></a>
           </li>
 <li class="listitem">
             e.g. <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
+          </li>
+<li class="listitem">
+            Elements
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                  <code class="literal"><code class="literal"><span class="emphasis"><em>[Return]</em></span></code> ( <code class="literal"><span class="emphasis"><em>[Args...]</em></span></code>
+                  <code class="literal"><span class="emphasis"><em>[VarArgs]</em></span></code> )</code>
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[Category]</em></span></code> - not applicable
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[CallingConvention]</em></span></code> - not
+                  applicable
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[PtrQualifiers]</em></span></code> - not applicable
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[MemberQualifiers]</em></span></code> - not
+                  applicable
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[ParentClass]</em></span></code> - not applicable
+                </li>
+</ul></div>
           </li>
 </ul></div>
 </div>
@@ -117,6 +200,28 @@
           </li>
 <li class="listitem">
             e.g. <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span></code>
+          </li>
+<li class="listitem">
+            Elements
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                  <code class="literal"><code class="literal"><span class="emphasis"><em>[Return]</em></span></code> ( <code class="literal"><span class="emphasis"><em>[Args...]</em></span></code>
+                  <code class="literal"><span class="emphasis"><em>[VarArgs]</em></span></code>) <code class="literal"><span class="emphasis"><em>[MemberQualifiers]</em></span></code></code>
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[Category]</em></span></code> - not applicable
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[CallingConvention]</em></span></code> - not
+                  applicable
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[PtrQualifiers]</em></span></code> - not applicable
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[ParentClass]</em></span></code> - not applicable
+                </li>
+</ul></div>
           </li>
 </ul></div>
 </div>
@@ -142,6 +247,20 @@
 <li class="listitem">
             e.g. <code class="computeroutput"><span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
           </li>
+<li class="listitem">
+            Elements
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                  <code class="literal"><code class="literal"><span class="emphasis"><em>[Return]</em></span></code> <span class="red">( <code class="literal"><span class="emphasis"><em>[CallingConvention]</em></span></code>
+                  <code class="literal"><span class="emphasis"><em>[ParentClass]</em></span></code>::* <code class="literal"><span class="emphasis"><em>[PtrQualifiers]</em></span></code>
+                  )</span> ( <code class="literal"><span class="emphasis"><em>[Args...]</em></span></code>
+                  <code class="literal"><span class="emphasis"><em>[VarArgs]</em></span></code>) <code class="literal"><span class="emphasis"><em>[MemberQualifiers]</em></span></code></code>
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[Category]</em></span></code> - in red above
+                </li>
+</ul></div>
+          </li>
 </ul></div>
 </div>
 <div class="section">
@@ -157,6 +276,29 @@
           </li>
 <li class="listitem">
             e.g. <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span></code>
+          </li>
+<li class="listitem">
+            Elements
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                  <code class="literal"><code class="literal"><span class="emphasis"><em>[Return]</em></span></code> <span class="red"><code class="literal"><span class="emphasis"><em>[ParentClass]</em></span></code>::*
+                  <code class="literal"><span class="emphasis"><em>[PtrQualifiers]</em></span></code></span></code>
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[Category]</em></span></code> - in red above
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[CallingConvention]</em></span></code> - not
+                  applicable
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[MemberQualifiers]</em></span></code> - not
+                  applicable
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[Args...]</em></span></code> - not applicable
+                </li>
+</ul></div>
           </li>
 </ul></div>
 </div>
@@ -188,6 +330,36 @@
           </li>
 <li class="listitem">
             e.g. the type of this lambda: <code class="computeroutput"><span class="special">[](</span><span class="keyword">int</span> <span class="identifier">x</span><span class="special">,</span> <span class="keyword">int</span> <span class="identifier">y</span><span class="special">)</span> <span class="special">{</span> <span class="keyword">return</span> <span class="identifier">x</span> <span class="special">+</span> <span class="identifier">y</span><span class="special">;</span> <span class="special">}</span></code>
+          </li>
+<li class="listitem">
+            Elements
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[Return]</em></span></code> - the return type
+                  of member <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[Args...]</em></span></code> - the parameter
+                  list of member <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[MemberQualifiers]</em></span></code> - any
+                  member qualifiers on <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[CallingConvention]</em></span></code> - the
+                  calling convention used by member on <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[PtrQualifiers]</em></span></code> - not applicable
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[ParentClass]</em></span></code> - not applicable
+                </li>
+<li class="listitem">
+                  <code class="literal"><span class="emphasis"><em>[Category]</em></span></code> - not applicable
+                </li>
+</ul></div>
           </li>
 </ul></div>
 </div>
@@ -340,15 +512,31 @@
             <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                   <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">cdecl_tag</span></code>
+                  <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; "><li class="listitem">
+                        <code class="literal"><span class="emphasis"><em>[CallingConvention]</em></span></code>
+                        - <code class="computeroutput"><span class="identifier">__cdecl</span></code>
+                      </li></ul></div>
                 </li>
 <li class="listitem">
                   <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">stdcall_tag</span></code>
+                  <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; "><li class="listitem">
+                        <code class="literal"><span class="emphasis"><em>[CallingConvention]</em></span></code>
+                        - <code class="computeroutput"><span class="identifier">__stdcall</span></code>
+                      </li></ul></div>
                 </li>
 <li class="listitem">
                   <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">fastcall_tag</span></code>
+                  <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; "><li class="listitem">
+                        <code class="literal"><span class="emphasis"><em>[CallingConvention]</em></span></code>
+                        - <code class="computeroutput"><span class="identifier">__fastcall</span></code>
+                      </li></ul></div>
                 </li>
 <li class="listitem">
                   <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">pascal_tag</span></code>
+                  <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; "><li class="listitem">
+                        <code class="literal"><span class="emphasis"><em>[CallingConvention]</em></span></code>
+                        - <code class="computeroutput"><span class="identifier">pascal</span></code>
+                      </li></ul></div>
                 </li>
 </ul></div>
           </li></ul></div>

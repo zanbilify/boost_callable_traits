@@ -37,6 +37,9 @@
 <colgroup>
 <col>
 <col>
+<col>
+<col>
+<col>
 </colgroup>
 <thead><tr>
 <th>
@@ -49,6 +52,21 @@
                 Compilers
               </p>
             </th>
+<th>
+              <p>
+                Support
+              </p>
+            </th>
+<th>
+              <p>
+                stdlib
+              </p>
+            </th>
+<th>
+              <p>
+                Continuous Integration
+              </p>
+            </th>
 </tr></thead>
 <tbody>
 <tr>
@@ -59,10 +77,157 @@
             </td>
 <td>
               <p>
-                - Clang 3.5 and later (both libc++ and libstdc++)
+                Clang 3.5+
               </p>
+            </td>
+<td>
               <p>
-                - GCC 5.2 and later
+                <span class="green">Yes</span>
+              </p>
+            </td>
+<td>
+              <p>
+                libc++
+              </p>
+            </td>
+<td>
+              <p>
+                <a href="https://travis-ci.org/badair/callable_traits/builds" target="_top">Travis</a>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                Linux
+              </p>
+            </td>
+<td>
+              <p>
+                Clang 3.5+
+              </p>
+            </td>
+<td>
+              <p>
+                <span class="green">Yes</span>
+              </p>
+            </td>
+<td>
+              <p>
+                libstdc++
+              </p>
+            </td>
+<td>
+              <p>
+                <a href="https://travis-ci.org/badair/callable_traits/builds" target="_top">Travis</a>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                Linux
+              </p>
+            </td>
+<td>
+              <p>
+                Clang (other)
+              </p>
+            </td>
+<td>
+              <p>
+                <span class="gray">No/Unknown</span>
+              </p>
+            </td>
+<td>
+              <p>
+                libstdc++
+              </p>
+            </td>
+<td>
+              <p>
+                -
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                Linux
+              </p>
+            </td>
+<td>
+              <p>
+                GCC 5.2.1 +
+              </p>
+            </td>
+<td>
+              <p>
+                <span class="green">Yes</span>
+              </p>
+            </td>
+<td>
+              <p>
+                libstdc++
+              </p>
+            </td>
+<td>
+              <p>
+                <a href="https://travis-ci.org/badair/callable_traits/builds" target="_top">Travis</a>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                Linux
+              </p>
+            </td>
+<td>
+              <p>
+                GCC [4.8, ~ 5.2.1)
+              </p>
+            </td>
+<td>
+              <p>
+                <span class="green">Yes (basic)</span>
+              </p>
+            </td>
+<td>
+              <p>
+                libstdc++
+              </p>
+            </td>
+<td>
+              <p>
+                <a href="https://travis-ci.org/badair/callable_traits/builds" target="_top">Travis</a>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                Linux
+              </p>
+            </td>
+<td>
+              <p>
+                GCC(other)
+              </p>
+            </td>
+<td>
+              <p>
+                <span class="green">Yes (basic)</span>
+              </p>
+            </td>
+<td>
+              <p>
+                libstdc++
+              </p>
+            </td>
+<td>
+              <p>
+                <a href="https://travis-ci.org/badair/callable_traits/builds" target="_top">Travis</a>
               </p>
             </td>
 </tr>
@@ -74,10 +239,76 @@
             </td>
 <td>
               <p>
-                - Apple Clang in Xcode 6.3 and later
+                AppleClang / XCode 6.3+
               </p>
+            </td>
+<td>
               <p>
-                - open-source Clang 3.5 and later should work, but is not yet tested
+                <span class="green">Yes</span>
+              </p>
+            </td>
+<td>
+              <p>
+                libc++
+              </p>
+            </td>
+<td>
+              <p>
+                <a href="https://travis-ci.org/badair/callable_traits/builds" target="_top">Travis</a>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                OSX
+              </p>
+            </td>
+<td>
+              <p>
+                Clang 3.5+
+              </p>
+            </td>
+<td>
+              <p>
+                <span class="black">Untested - likely</span>
+              </p>
+            </td>
+<td>
+              <p>
+                libc++
+              </p>
+            </td>
+<td>
+              <p>
+                -
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                OSX
+              </p>
+            </td>
+<td>
+              <p>
+                Clang 3.4 and below
+              </p>
+            </td>
+<td>
+              <p>
+                <span class="gray">No/Unknown</span>
+              </p>
+            </td>
+<td>
+              <p>
+                libc++
+              </p>
+            </td>
+<td>
+              <p>
+                -
               </p>
             </td>
 </tr>
@@ -89,14 +320,157 @@
             </td>
 <td>
               <p>
-                - Microsoft Visual Studio 2015 - Clang-cl
+                MSVC 19
               </p>
+            </td>
+<td>
               <p>
-                - Microsoft Visual Studio 2015 - native MSVC - partial support (see
-                below)
+                <span class="green">Yes (basic)</span>
               </p>
+            </td>
+<td>
               <p>
-                - MinGW GCC 5.3 (other versions not tested)
+                Dinkumware (<a class="link" href="contact.html" title="Contact">?</a>)
+              </p>
+            </td>
+<td>
+              <p>
+                <a href="https://ci.appveyor.com/project/badair/callable-traits" target="_top">Appveyor</a>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                Windows
+              </p>
+            </td>
+<td>
+              <p>
+                MSVC (other)
+              </p>
+            </td>
+<td>
+              <p>
+                <span class="gray">No/Unknown</span>
+              </p>
+            </td>
+<td>
+              <p>
+                Dinkumware (<a class="link" href="contact.html" title="Contact">?</a>)
+              </p>
+            </td>
+<td>
+              <p>
+                -
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                Windows
+              </p>
+            </td>
+<td>
+              <p>
+                Clang-cl 3.7+
+              </p>
+            </td>
+<td>
+              <p>
+                <span class="green">Yes</span>
+              </p>
+            </td>
+<td>
+              <p>
+                <a class="link" href="contact.html" title="Contact">?</a>
+              </p>
+            </td>
+<td>
+              <p>
+                -
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                Windows
+              </p>
+            </td>
+<td>
+              <p>
+                Clang-cl (other)
+              </p>
+            </td>
+<td>
+              <p>
+                <span class="gray">No/Unknown</span>
+              </p>
+            </td>
+<td>
+              <p>
+                <a class="link" href="contact.html" title="Contact">?</a>
+              </p>
+            </td>
+<td>
+              <p>
+                -
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                Windows
+              </p>
+            </td>
+<td>
+              <p>
+                MinGW GCC 5.3
+              </p>
+            </td>
+<td>
+              <p>
+                <span class="green">Yes</span>
+              </p>
+            </td>
+<td>
+              <p>
+                libstdc++
+              </p>
+            </td>
+<td>
+              <p>
+                -
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                Windows
+              </p>
+            </td>
+<td>
+              <p>
+                MinGW GCC [4.8, ~ 5.2.1)
+              </p>
+            </td>
+<td>
+              <p>
+                <span class="green">Yes (basic)</span>
+              </p>
+            </td>
+<td>
+              <p>
+                libstdc++
+              </p>
+            </td>
+<td>
+              <p>
+                -
               </p>
             </td>
 </tr>

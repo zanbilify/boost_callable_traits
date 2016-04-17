@@ -50,7 +50,7 @@
       </p>
 <p>
         If you <span class="emphasis"><em>are</em></span> writing generic code, take a moment to skim
-        your header files, looking for code like this:
+        your header files, and see if you can find code that looks like this:
       </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">First</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">Second</span><span class="special">&gt;</span>
 <span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">First</span><span class="special">,</span> <span class="identifier">Second</span><span class="special">)&gt;</span> <span class="special">{</span>
@@ -62,7 +62,7 @@
       </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span>
 <span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)&gt;</span> <span class="special">{</span>
-    <span class="comment">//     ^^^^^^^^^^^^^^^</span>
+    <span class="comment">//   ^^^^^^^^^^^^^^^^</span>
 <span class="special">};</span>
 </pre>
 <p>
@@ -107,12 +107,15 @@
 <span class="special">};</span>
 </pre>
 <p>
-        Implementers of the <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span></code> header have been trudging through code
-        like this for years. The solution can absolutely refactor it into something
-        much smaller, much more readable, and much more maintainable. There are real
-        reasons to write code like this, but they are few and far between. <code class="literal">CallableTraits</code>'s
-        mission is to rid the world of code like this, <span class="bold"><strong>forever</strong></span>.
-        <code class="literal">CallableTraits</code>
+        There are real reasons to write code like this, but they are few and far
+        between. Implementers of the <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span></code>
+        header and signal libraries have been trudging through these template tarpits
+        for years now. With <code class="literal">CallableTraits</code>, you can get rid of
+        every line of code related to these techniques. <code class="literal">CallableTraits</code>'s
+        mission is to rid the world of this code <span class="bold"><strong>forever</strong></span>.
+        Even if you are only specializing a simple function type like <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)</span></code>,
+        <code class="literal">CallableTraits</code> can make your code more readable, more
+        maintainable, and less error-prone.
       </p>
 </div>
 <div class="section">
