@@ -39,16 +39,16 @@
       Conventions (experimental)</a></span></dt>
 </dl></div>
 <p>
-      The simplest way to use <code class="literal">CallableTraits</code> is to include the
-      main header file:
+      The easiest way to get started using <code class="literal">CallableTraits</code> is to
+      include the main header file, which includes all public header files in <code class="literal">CallableTraits</code>:
     </p>
 <p>
       <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal">callable_traits</code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
     </p>
 <p>
-      <code class="literal">CallableTraits</code> interface is also broken down by trait into
-      individual header files. To use only the traits you need, include one or more
-      of the following headers, grouped by category:
+      The <code class="literal">CallableTraits</code> interface is also broken down by trait
+      into individual header files. To use only the traits you need, include one
+      or more of the following headers, grouped by category:
     </p>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
@@ -126,9 +126,6 @@
                   <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="ref_is_reference_member.html" title="is_reference_member"><code class="literal">is_reference_member</code></a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
                 </li>
 <li class="listitem">
-                  <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="ref_qualified_function_type.html" title="qualified_function_type"><code class="literal">qualified_function_type</code></a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
-                </li>
-<li class="listitem">
                   <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="ref_has_member_qualifiers.html" title="has_member_qualifiers"><code class="literal">has_member_qualifiers</code></a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
                 </li>
 </ul></div>
@@ -147,13 +144,22 @@
             <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="ref_arg_at.html" title="arg_at"><code class="literal">arg_at</code></a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
           </li>
 <li class="listitem">
+            <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="ref_insert_at.html" title="insert_at"><code class="literal">insert_at</code></a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
+          </li>
+<li class="listitem">
+            <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="ref_overwrite_at.html" title="overwrite_at"><code class="literal">overwrite_at</code></a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
+          </li>
+<li class="listitem">
+            <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="ref_remove_at.html" title="remove_at"><code class="literal">remove_at</code></a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
+          </li>
+<li class="listitem">
             <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="ref_clear_args.html" title="clear_args"><code class="literal">clear_args</code></a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
           </li>
 <li class="listitem">
-            <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="ref_push_args_back.html" title="push_args_back"><code class="literal">push_args_back</code></a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
+            <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="ref_push_back.html" title="push_back"><code class="literal">push_back</code></a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
           </li>
 <li class="listitem">
-            <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="ref_push_args_front.html" title="push_args_front"><code class="literal">push_args_front</code></a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
+            <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="ref_push_front.html" title="push_front"><code class="literal">push_front</code></a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>
           </li>
 <li class="listitem">
             <code class="computeroutput"><span class="preprocessor">#include</span><span class="special">&lt;</span></code><code class="literal">callable_traits/</code><code class="literal"><a class="link" href="ref_arity.html" title="arity"><code class="literal">arity</code></a></code><code class="computeroutput"><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></code>

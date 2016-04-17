@@ -7,7 +7,7 @@
 <link rel="home" href="../index.html" title="CallableTraits">
 <link rel="up" href="../index.html" title="CallableTraits">
 <link rel="prev" href="compatibility.html" title="Compatibility">
-<link rel="next" href="contact.html" title="Contact">
+<link rel="next" href="concepts.html" title="Concepts">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -20,7 +20,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="compatibility.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="contact.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="compatibility.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="concepts.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
@@ -50,7 +50,7 @@
       </p>
 <p>
         If you <span class="emphasis"><em>are</em></span> writing generic code, take a moment to skim
-        your header files, looking for code like this:
+        your header files, and see if you can find code that looks like this:
       </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">First</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">Second</span><span class="special">&gt;</span>
 <span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">First</span><span class="special">,</span> <span class="identifier">Second</span><span class="special">)&gt;</span> <span class="special">{</span>
@@ -62,7 +62,7 @@
       </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span>
 <span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)&gt;</span> <span class="special">{</span>
-    <span class="comment">//     ^^^^^^^^^^^^^^^</span>
+    <span class="comment">//   ^^^^^^^^^^^^^^^^</span>
 <span class="special">};</span>
 </pre>
 <p>
@@ -108,10 +108,14 @@
 </pre>
 <p>
         There are real reasons to write code like this, but they are few and far
-        between. <code class="literal">CallableTraits</code>'s mission is to rid the world
-        of this code forever. If you have code like this, you can absolutely refactor
-        it into something much smaller, much more readable, and much more maintainable.
-        <code class="literal">CallableTraits</code>
+        between. Implementers of the <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span></code>
+        header and signal libraries have been trudging through these template tarpits
+        for years now. With <code class="literal">CallableTraits</code>, you can get rid of
+        every line of code related to these techniques. <code class="literal">CallableTraits</code>'s
+        mission is to rid the world of this code <span class="bold"><strong>forever</strong></span>.
+        Even if you are only specializing a simple function type like <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)</span></code>,
+        <code class="literal">CallableTraits</code> can make your code more readable, more
+        maintainable, and less error-prone.
       </p>
 </div>
 <div class="section">
@@ -257,7 +261,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="compatibility.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="contact.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="compatibility.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="concepts.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

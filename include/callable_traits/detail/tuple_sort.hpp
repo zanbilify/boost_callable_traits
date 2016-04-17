@@ -11,7 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_DETAIL_TUPLE_SORT_HPP
 
 
-
+#include <callable_traits/config.hpp>
 #include <tuple>
 #include <type_traits>
 
@@ -20,7 +20,7 @@ namespace callable_traits {
 
     namespace detail {
 
-        using empty_seq = std::index_sequence<>;
+        using empty_seq = CALLABLE_TRAITS_IX_SEQ(CALLABLE_TRAITS_EMPTY);
 
         template <typename Pred, std::size_t Insert, bool IsInsertionPoint,
             typename Left, std::size_t ...Right>
@@ -30,11 +30,11 @@ namespace callable_traits {
         // recursively.
         template <typename Pred, std::size_t Insert, std::size_t ...Left,
             std::size_t Right1, std::size_t Right2, std::size_t ...Right>
-        struct insert<Pred, Insert, false, std::index_sequence<Left...>,
+        struct insert<Pred, Insert, false, CALLABLE_TRAITS_IX_SEQ(Left...),
             Right1, Right2, Right...> {
             using type = typename insert<
                 Pred, Insert, Pred::template apply<Insert, Right2>::value,
-                std::index_sequence<Left..., Right1>,
+                CALLABLE_TRAITS_IX_SEQ(Left..., Right1),
                 Right2, Right...
             >::type;
         };
@@ -42,14 +42,14 @@ namespace callable_traits {
         // We did not find the insertion point, but there is only one element
         // left. We insert at the end of the list, and we're done.
         template <typename Pred, std::size_t Insert, std::size_t ...Left, std::size_t Last>
-        struct insert<Pred, Insert, false, std::index_sequence<Left...>, Last> {
-            using type = std::index_sequence<Left..., Last, Insert>;
+        struct insert<Pred, Insert, false, CALLABLE_TRAITS_IX_SEQ(Left...), Last> {
+            using type = CALLABLE_TRAITS_IX_SEQ(Left..., Last, Insert);
         };
 
         // We found the insertion point, we're done.
         template <typename Pred, std::size_t Insert, std::size_t ...Left, std::size_t ...Right>
-        struct insert<Pred, Insert, true, std::index_sequence<Left...>, Right...> {
-            using type = std::index_sequence<Left..., Insert, Right...>;
+        struct insert<Pred, Insert, true, CALLABLE_TRAITS_IX_SEQ(Left...), Right...> {
+            using type = CALLABLE_TRAITS_IX_SEQ(Left..., Insert, Right...);
         };
 
         template <typename Pred, typename Result, std::size_t ...T>
@@ -57,7 +57,7 @@ namespace callable_traits {
 
         template <typename Pred, std::size_t Result1, std::size_t ...Results,
             std::size_t T, std::size_t ...Ts>
-        struct insertion_sort<Pred, std::index_sequence<Result1, Results...>, T, Ts...> {
+        struct insertion_sort<Pred, CALLABLE_TRAITS_IX_SEQ(Result1, Results...), T, Ts...> {
             static constexpr bool pred_result = Pred::template apply<T, Result1>::value;
             using insert_result = typename insert<
                 Pred, T, pred_result, empty_seq, Result1, Results...
@@ -68,7 +68,7 @@ namespace callable_traits {
         template <typename Pred, std::size_t T, std::size_t ...Ts>
         struct insertion_sort<Pred, empty_seq, T, Ts...> {
             using type = typename insertion_sort<
-                Pred, std::index_sequence<T>, Ts...
+                Pred, CALLABLE_TRAITS_IX_SEQ(T), Ts...
             >::type;
         };
 
@@ -81,19 +81,19 @@ namespace callable_traits {
         struct sort_indices;
 
         template <typename Pred, std::size_t ...i>
-        struct sort_indices<Pred, std::index_sequence<i...>> {
+        struct sort_indices<Pred, CALLABLE_TRAITS_IX_SEQ(i...)> {
             using type = typename insertion_sort<Pred, empty_seq, i...>::type;
         };
 
         template<typename Tup, typename Pred>
         struct sort_impl {
             static constexpr std::size_t len = std::tuple_size<Tup>::value;
-            using indices = typename sort_indices<Pred, std::make_index_sequence<len>>::type;
+            using indices = typename sort_indices<Pred, CALLABLE_TRAITS_MAKE_IX_SEQ(len)>::type;
             using type = typename sort_impl<Tup, indices>::type;
         };
 
         template <typename Tup, std::size_t ...I>
-        struct sort_impl<Tup, std::index_sequence<I...>> {
+        struct sort_impl<Tup, CALLABLE_TRAITS_IX_SEQ(I...)> {
             using type = std::tuple<at<I, Tup>...>;
         };
 

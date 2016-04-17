@@ -4,6 +4,11 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
 ->*/
 
+#include <callable_traits/bind.hpp>
+#ifdef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
+int main(){ return 0; }
+#else
+
 //[ make_function
 #include <functional>
 #include <callable_traits/function_type.hpp>
@@ -94,3 +99,4 @@ int main() {
     assert(f(99, 1) == 100);
 }
 //]
+#endif

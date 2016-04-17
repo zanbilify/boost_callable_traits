@@ -31,14 +31,14 @@ namespace callable_traits {
         >::type;
 
         template<typename T, typename Decayed = shallow_decay<T>>
-        using traits = typename disjunction<
+        using traits = typename CALLABLE_TRAITS_DISJUNCTION(
             bind_expression_traits<Decayed>,
             function_object<T>,
             function<T, decay_if_ptr_or_integral_constant<T>>,
             pmf<T>,
             pmd<T, shallow_decay<T>>,
             function_object<Decayed>
-        >::traits;
+        )::traits;
     }
 }
 

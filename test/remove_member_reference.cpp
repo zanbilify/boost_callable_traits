@@ -9,6 +9,10 @@ Distributed under the Boost Software License, Version 1.0.
 #include <tuple>
 #include <callable_traits/remove_member_reference.hpp>
 
+#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+int main(){ return 0; }
+#else
+
 #ifndef CT_ASSERT
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
@@ -73,8 +77,8 @@ int main() {
         CT_ASSERT(std::is_same<v,   ct::remove_member_reference<vr>>{});
         CT_ASSERT(std::is_same<cv,  ct::remove_member_reference<cvr>>{});
     }
-	
-	{
+
+    {
         using f   = void(foo::* const)();
         using l   = void(foo::* const)() &;
         using r   = void(foo::* const)() &&;
@@ -101,7 +105,7 @@ int main() {
         CT_ASSERT(std::is_same<v,   ct::remove_member_reference<vr>>{});
         CT_ASSERT(std::is_same<cv,  ct::remove_member_reference<cvr>>{});
     }
-	
+
     {
         using f   = void();
         using l   = void() &;
@@ -130,3 +134,5 @@ int main() {
         CT_ASSERT(std::is_same<cv,  ct::remove_member_reference<cvr>>{});
     }
 }
+
+#endif //#ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS

@@ -13,6 +13,10 @@ Distributed under the Boost Software License, Version 1.0.
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
 
+#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+int main() { return 0; }
+#else
+
 struct foo {};
 
 namespace ct = callable_traits;
@@ -130,6 +134,8 @@ int main() {
         assert_qualified<cvr>();
     }
 
+#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+
     {
         using f   = void();
         using l   = void() &;
@@ -158,9 +164,13 @@ int main() {
         CT_ASSERT(ct::has_member_qualifiers<cvr>());
     }
 
-	using f_ptr = void(*)();
+#endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+
+    using f_ptr = void(*)();
     assert_unqualified<f_ptr>();
-	assert_unqualified<f_ptr foo::*>();
-	assert_unqualified<int foo::*>();
-	assert_unqualified<void(&)()>();
+    assert_unqualified<f_ptr foo::*>();
+    assert_unqualified<int foo::*>();
+    assert_unqualified<void(&)()>();
 }
+
+#endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS

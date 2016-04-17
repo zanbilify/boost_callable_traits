@@ -4,93 +4,55 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
 ->*/
 
-//[ make_function
-#include <functional>
-#include <callable_traits/function_type.hpp>
-#include <callable_traits/bind.hpp>
+#include <callable_traits/config.hpp>
+#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+int main(){ return 0; }
+#else
 
-namespace example_library {
+//[ add_member_const
+#include <type_traits>
+#include <callable_traits/add_member_const.hpp>
 
-    namespace ct = callable_traits;
+namespace ct = callable_traits;
 
-    // make_function turns a non-overloaded callable into a type-erased std::function object
-    template<typename T>
-    inline decltype(auto) make_function(T&& t) {
-
-        // callable_traits::function_type decays any non-overloaded callable type to
-        // a plain function type, which is structured in terms of INVOKE.
-
-        using f = ct::function_type<T&&>;
-        using result_type = std::function<f>;
-        return result_type{ std::forward<T>(t) };
-    }
-
-    // this make_function overload turns a bind expression into a type-erased std::function object
-    template<typename T, typename First, typename... Others>
-    inline decltype(auto) make_function(T&& t, First&& first, Others&&... others) {
-
-        // callable_traits::bind is essentially a compile-time parser of placeholder
-        // expressions, for the purpose of retaining more type information than
-        // std::bind normally allows - specifically, callable_traits::bind is used to
-        // determine the de-facto signature of the std::bind return type, with special
-        // considerations for conversions between reused placeholders and nested
-        // placeholder expressions. For the sake of convenience, callable_traits::bind
-        // is also a thin forwarding wrapper around std::bind (which is the only true
-        // runtime element in CallableTraits).
-
-        using bind_expr = decltype(ct::bind(
-                std::forward<T>(t),
-                std::forward<First>(first),
-                std::forward<Others>(others)...
-        ));
-
-        using f = ct::function_type<bind_expr>;
-        using result_type = std::function<f>;
-
-        return result_type{ std::bind(
-            std::forward<T>(t),
-            std::forward<First>(first),
-            std::forward<Others>(others)...
-        )};
-    }
-}
-
-// client code starts here
-#include <cassert>
-
-using namespace example_library;
-using namespace std::placeholders;
-
-int add(int i, int j) {
-    return i + j;
-}
-
-struct adder {
-
-    int eval(int i, int j) const {
-        return i + j;
-    }
-};
+struct foo {};
 
 int main() {
 
-    // function pointer
-    auto f = make_function(&add);
-    assert(f(99, 1) == 100);
-
-    // function reference
-    f = make_function(add);
-    assert(f(99, 1) == 100);
-
-    // member function pointer (bound to object)
-    f = make_function(&adder::eval, adder{}, _1, _2);
-    assert(f(99, 1) == 100);
-
-    // lambda
-    f = make_function([](int i, int j) {
-        return i + j;
-    });
-
-    assert(f(99, 1) == 100);
+    {
+        using pmf = int(foo::*)();
+        using expect = int(foo::*)() const;
+        using test = ct::add_member_const<pmf>;
+        static_assert(std::is_same<test, expect>::value, "");
+    } {
+        // add_member_const doesn't change anything when
+        // the function type is already const.
+        using pmf = int(foo::*)() const &&;
+        using expect = int(foo::*)() const &&;
+        using test = ct::add_member_const<pmf>;
+        static_assert(std::is_same<test, expect>::value, "");
+    } {
+        using pmf = int(foo::*)() volatile &;
+        using expect = int(foo::*)() const volatile &;
+        using test = ct::add_member_const<pmf>;
+        static_assert(std::is_same<test, expect>::value, "");
+    } {
+        // add_member_const can also be used with "abominable"
+        // function types.
+        using f = int();
+        using expect = int() const;
+        using test = ct::add_member_const<f>;
+        static_assert(std::is_same<test, expect>::value, "");
+    } {
+        // add_member_const does not compile with function pointers,
+        // function references, function objects, or member data pointers.
+        // However, you can loosen this restriction somewhat by using the
+        // callable_traits::permissive namespace instead:
+        using f = int(*)();
+        using expect = f;
+        using test = ct::permissive::add_member_const<f>;
+        static_assert(std::is_same<test, expect>::value, "");
+    }
 }
 //]
+#endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS

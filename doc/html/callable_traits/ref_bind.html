@@ -35,7 +35,7 @@
         <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code>
         is not compatible with the Microsoft Visual C++ compiler in Visual Studio
         (a.k.a. MSVC). Accordingly, the example(s) below will not compile in MSVC.
-        However, Visual Studio users can still use Clang-cl. Refer to the <a class="link" href="compatibility.html#callable_traits.compatibility.msvc_issues" title="MSVC Issues">MSVC
+        However, Visual Studio users can still use Clang-cl. Refer to the <a class="link" href="compatibility.html#callable_traits.compatibility.compatibility_issues" title="Known Issues">Compatibility
         Issues</a> section for more information.
       </p></td></tr>
 </table></div>
@@ -137,7 +137,9 @@ because ScaryMonster is the narrowest of all _1 parameters. */</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">tuple</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">bind</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">function_type</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">struct</span> <span class="identifier">Vampire</span> <span class="special">{};</span>
 <span class="keyword">struct</span> <span class="identifier">Robot</span> <span class="special">{};</span>
@@ -208,7 +210,9 @@ because ScaryMonster is the narrowest of all _1 parameters. */</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">tuple</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">bind</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">function_type</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">struct</span> <span class="identifier">Vampire</span> <span class="special">{};</span>
 <span class="keyword">struct</span> <span class="identifier">Robot</span> <span class="special">{};</span>

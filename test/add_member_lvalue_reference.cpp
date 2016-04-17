@@ -9,6 +9,10 @@ Distributed under the Boost Software License, Version 1.0.
 #include <tuple>
 #include <callable_traits/add_member_lvalue_reference.hpp>
 
+#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+int main(){ return 0; }
+#else
+
 #ifndef CT_ASSERT
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
@@ -106,3 +110,6 @@ int main() {
 		CT_ASSERT(!std::is_same<cvr, ct::add_member_lvalue_reference<cvr>>{});
 	}
 }
+
+#endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+

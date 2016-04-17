@@ -13,7 +13,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/placeholder.hpp>
 #include <callable_traits/detail/fwd/bind_expression_fwd.hpp>
-#include <callable_traits/detail/any_arg.hpp>
+#include <callable_traits/detail/template_worm.hpp>
 #include <functional>
 
 namespace callable_traits {
@@ -54,7 +54,7 @@ namespace callable_traits {
 
             using type = typename std::conditional<
                 std::is_same<return_type, invalid_type>::value,
-                any_arg<>,
+                template_worm<>,
                 return_type
             >::type;
         };

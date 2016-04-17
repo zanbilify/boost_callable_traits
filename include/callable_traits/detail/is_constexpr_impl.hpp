@@ -13,7 +13,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/arity.hpp>
 #include <callable_traits/detail/utility.hpp>
 #include <callable_traits/detail/make_constexpr.hpp>
-#include <callable_traits/detail/any_arg.hpp>
+#include <callable_traits/detail/template_worm.hpp>
 #include <callable_traits/detail/pmd.hpp>
 #include <callable_traits/detail/pmf.hpp>
 #include <callable_traits/config.hpp>
@@ -26,7 +26,7 @@ namespace callable_traits {
 
     namespace detail {
 
-#ifdef CALLABLE_TRAITS_CONSTEXPR_CHECKS_DISABLED
+#ifdef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
 
         inline constexpr auto
         is_constexpr_impl(...) {
@@ -41,7 +41,7 @@ namespace callable_traits {
         };
 
         template<typename F, std::size_t... I>
-        struct is_constexpr_t<F, std::index_sequence<I...>> {
+        struct is_constexpr_t<F, CALLABLE_TRAITS_IX_SEQ(I...)> {
 
             // An arbitrary expression as the left-hand argument to a non-overloaded
             // comma operator expression that is passed as a template value argument
@@ -52,16 +52,16 @@ namespace callable_traits {
 
             // Where U = std::remove_reference_t<T>, CALLABLE_TRAITS_MAKE_CONSTEXPR(T&&)
             // resolves to a matching reference to a constexpr U object. Hence, U must be
-            // a literal type with a constexpr default constructor. any_arg_evaluated<I>
+            // a literal type with a constexpr default constructor. constexpr_template_worm<I>
             // is a "chameleon" type that tries to pass as anything. Generally, if U is
             // templated and uses dependent names, this will fail. However, There are a few
             // exceptions: Unary/binary operators, value member `value`, and member alias
-            // `type` are all defined in terms of any_arg_evaluated<I>, so usage of these
-            // will succeed in U.
+            // `type` are all defined in terms of constexpr_template_worm<I>, so usage of
+            // these will succeed in U.
 
                     (
                         CALLABLE_TRAITS_MAKE_CONSTEXPR(T&&)(
-                            ::callable_traits::detail::any_arg_evaluated<I>{}...
+                            ::callable_traits::detail::constexpr_template_worm<I>{}...
                         ),
                         0
                     )
@@ -69,13 +69,13 @@ namespace callable_traits {
 
             template<typename T, typename U = typename std::remove_reference<T>::type>
             auto operator()(T&& t) const -> if_integral_constant<T,
-                std::integral_constant<int, (U::value(::callable_traits::detail::any_arg_evaluated<I>{}...), 0)>>;
+                std::integral_constant<int, (U::value(::callable_traits::detail::constexpr_template_worm<I>{}...), 0)>>;
 
             auto operator()(...) const -> substitution_failure;
         };
 
         template<typename Pmf, std::size_t... I>
-        struct is_constexpr_t<pmf<Pmf>, std::index_sequence<I...>> {
+        struct is_constexpr_t<pmf<Pmf>, CALLABLE_TRAITS_IX_SEQ(I...)> {
 
             // When `Pmf` is `int(foo::*)() const &&`, invoke_type is `foo const &&`
             using invoke_type = typename pmf<Pmf>::invoke_type;
@@ -85,7 +85,7 @@ namespace callable_traits {
             auto operator()(P&&) const -> if_integral_constant<P,
                 std::integral_constant<int,
                     ((CALLABLE_TRAITS_MAKE_CONSTEXPR(invoke_type).* ::std::remove_reference<P>::type::value)(
-                        ::callable_traits::detail::any_arg_evaluated<I>{}...
+                        ::callable_traits::detail::constexpr_template_worm<I>{}...
                     ), 0)>>;
 
             auto operator()(...) const -> substitution_failure;
@@ -93,7 +93,7 @@ namespace callable_traits {
 
         // Since constexpr data members must be static, you cannot create PMDs to them
         template<typename OriginalType, typename Pmd, std::size_t... I>
-        struct is_constexpr_t<pmd<OriginalType, Pmd>, std::index_sequence<I...>> {
+        struct is_constexpr_t<pmd<OriginalType, Pmd>, CALLABLE_TRAITS_IX_SEQ(I...)> {
             auto operator()(...) const -> substitution_failure;
         };
 
@@ -108,7 +108,7 @@ namespace callable_traits {
         is_constexpr_impl(T&& t, std::true_type){
             using traits = traits<T&&>;
             using min_args = min_arity_t<traits, constants::arity_search_limit>;
-            using seq = std::make_index_sequence<min_args::value < 0 ? 0 : min_args::value>;
+            using seq = CALLABLE_TRAITS_MAKE_IX_SEQ(min_args::value < 0 ? 0 : min_args::value);
             using test = is_constexpr_t<traits, seq>;
             using result = decltype(test{}(::std::forward<T>(t)));
             using failure = substitution_failure;
@@ -116,7 +116,7 @@ namespace callable_traits {
             return std::integral_constant<bool, !is_not_constexpr::value>{};
         }
 
-#endif //ifdef CALLABLE_TRAITS_CONSTEXPR_CHECKS_DISABLED
+#endif //ifdef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
 
     }
 }

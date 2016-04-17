@@ -8,6 +8,10 @@ Distributed under the Boost Software License, Version 1.0.
 #include <type_traits>
 #include <callable_traits/callable_traits.hpp>
 
+#ifdef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
+int main(){ return 0; }
+#else
+
 #ifndef CT_ASSERT
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
@@ -159,9 +163,11 @@ namespace test7 {
     CT_ASSERT(ct::is_constexpr<G2>());
 
     // we can't resolve the overload in G3, due to the way
-    // callable_traits::detail::any_arg_evaluated works
+    // callable_traits::detail::constexpr_template_worm works
     CT_ASSERT(!ct::is_constexpr(G3{}));
     CT_ASSERT(!ct::is_constexpr<G3>());
 }
 
-int main() { return 0; }
+int main() {}
+
+#endif

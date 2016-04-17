@@ -46,6 +46,9 @@
 #include <utility>
 #include <callable_traits/callable_traits.hpp>
 
+#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+int main(){ return 0; }
+#else
 
 #ifndef CT_ASSERT
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
@@ -250,3 +253,5 @@ int main() {
     bullet_three_four_tests();
     bullet_five_tests();
 }
+
+#endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS

@@ -17,6 +17,23 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
+#ifdef CALLABLE_TRAITS_DISABLE_BIND
+
+template<bool Allowed = false, typename... T>
+inline constexpr int
+bind(T&&...) {
+
+    static_assert(Allowed,
+        "callable_traits::bind is not supported on "
+        "your compiler. Refer to the Compatibility "
+        "section of the CallableTraits documentation "
+        "for more information.");
+
+    return -1;
+}
+
+#else
+
     template<typename T, typename... Args>
     inline constexpr auto
     bind(T&& t, Args&&... args) ->
@@ -27,6 +44,9 @@ namespace callable_traits {
             ::std::forward<Args>(args)...
         };
     }
+
+#endif //#ifdef CALLABLE_TRAITS_DISABLE_BIND
+
 }
 
 #endif

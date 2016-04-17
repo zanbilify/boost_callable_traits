@@ -38,6 +38,10 @@ namespace callable_traits {
             using is_function_object = std::integral_constant<bool,
                 std::is_class<shallow_decay<T>>::value>;
 
+            using is_overloaded_function_object = std::integral_constant<bool,
+                is_function_object::value
+                && !has_normal_call_operator<shallow_decay<T>>::value>;
+
             using is_member_pointer = std::false_type;
             using is_member_function_pointer = std::false_type;
             using remove_member_pointer = type;
@@ -53,10 +57,10 @@ namespace callable_traits {
             using clear_args = invalid_type;
 			
 			template<typename...>
-            using push_args_front = invalid_type;
+            using push_front = invalid_type;
 			
 			template<typename...>
-            using push_args_back = invalid_type;
+            using push_back = invalid_type;
 			
 			template<std::size_t ElementCount>
 			using pop_args_front = invalid_type;
@@ -65,8 +69,20 @@ namespace callable_traits {
 			using pop_args_back = invalid_type;
 			
 			template<std::size_t Index, typename... NewArgs>
-			using insert_args = invalid_type;
+            using insert_at = invalid_type;
 			
+            template<std::size_t Index, std::size_t Count>
+            using remove_at = invalid_type;
+
+            template<std::size_t Index, typename... NewArgs>
+            using overwrite_at = invalid_type;
+
+            template<std::size_t Count>
+            using pop_front = invalid_type;
+
+            template<std::size_t Count>
+            using pop_back = invalid_type;
+
             using remove_member_reference = invalid_type;
             using add_member_lvalue_reference = invalid_type;
             using add_member_rvalue_reference = invalid_type;

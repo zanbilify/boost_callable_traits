@@ -1,4 +1,3 @@
-
 /*!<-
 Copyright (c) 2016 Barrett Adair
 
@@ -6,9 +5,14 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 ->*/
 
+#include <callable_traits/config.hpp>
+#ifdef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
+int main(){ return 0; }
+#else
+
 //[ can_invoke_constexpr_member_function_pointer
 #include <type_traits>
-#include <callable_traits/callable_traits.hpp>
+#include <callable_traits/can_invoke_constexpr.hpp>
 
 // NOTE: Due to non-compliance in MSVC, can_invoke_constexpr
 // always returns std::false_type on that compiler, which
@@ -34,3 +38,4 @@ static_assert(!ct::can_invoke_constexpr(pmf_constant{}, foo{}), "");
 
 int main() {}
 //]
+#endif

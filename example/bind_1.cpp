@@ -6,6 +6,11 @@ Distributed under the Boost Software License, Version 1.0.
 
 ->*/
 
+#include <callable_traits/config.hpp>
+#ifdef CALLABLE_TRAITS_DISABLE_BIND
+int main(){ return 0; }
+#else
+
 //[ bind_1
 
 /* In this example, the last _1 placeholder in the bind
@@ -16,7 +21,9 @@ because ScaryMonster is the narrowest of all _1 parameters. */
 #include <type_traits>
 #include <functional>
 #include <tuple>
-#include <callable_traits/callable_traits.hpp>
+#include <callable_traits/bind.hpp>
+#include <callable_traits/args.hpp>
+#include <callable_traits/function_type.hpp>
 
 struct Vampire {};
 struct Robot {};
@@ -78,3 +85,4 @@ int main() {
     return 0;
 }
 //]
+#endif

@@ -51,7 +51,7 @@ namespace callable_traits {
         #define CALLABLE_TRAITS_CC_TAG dummy
         #define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
         #define CALLABLE_TRAITS_CC
-        #include <callable_traits/detail/pmf_cc.hpp>
+        #include <callable_traits/detail/unguarded/pmf.hpp>
         #undef CALLABLE_TRAITS_CC
         #undef CALLABLE_TRAITS_CC_TAG
         #undef CALLABLE_TRAITS_VARARGS_CC
@@ -60,7 +60,7 @@ namespace callable_traits {
         #define CALLABLE_TRAITS_CC_TAG dummy
         #define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
         #define CALLABLE_TRAITS_CC
-        #include <callable_traits/detail/varargs_pmf_cc.hpp>
+        #include <callable_traits/detail/unguarded/pmf_varargs.hpp>
         #undef CALLABLE_TRAITS_CC
         #undef CALLABLE_TRAITS_CC_TAG
         #undef CALLABLE_TRAITS_VARARGS_CC
@@ -69,7 +69,7 @@ namespace callable_traits {
         #define CALLABLE_TRAITS_CC_TAG cdecl_tag
         #define CALLABLE_TRAITS_VARARGS_CC __cdecl
         #define CALLABLE_TRAITS_CC __cdecl
-        #include <callable_traits/detail/pmf_cc.hpp>
+        #include <callable_traits/detail/unguarded/pmf.hpp>
         #undef CALLABLE_TRAITS_CC
         #undef CALLABLE_TRAITS_CC_TAG
         #undef CALLABLE_TRAITS_VARARGS_CC
@@ -83,7 +83,7 @@ namespace callable_traits {
         #define CALLABLE_TRAITS_CC_TAG stdcall_tag
         #define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
         #define CALLABLE_TRAITS_CC __stdcall
-        #include <callable_traits/detail/pmf_cc.hpp>
+        #include <callable_traits/detail/unguarded/pmf.hpp>
         #undef CALLABLE_TRAITS_CC
         #undef CALLABLE_TRAITS_CC_TAG
         #undef CALLABLE_TRAITS_VARARGS_CC
@@ -93,7 +93,7 @@ namespace callable_traits {
         #define CALLABLE_TRAITS_CC_TAG fastcall_tag
         #define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
         #define CALLABLE_TRAITS_CC __fastcall
-        #include <callable_traits/detail/pmf_cc.hpp>
+        #include <callable_traits/detail/unguarded/pmf.hpp>
         #undef CALLABLE_TRAITS_CC
         #undef CALLABLE_TRAITS_CC_TAG
         #undef CALLABLE_TRAITS_VARARGS_CC

@@ -13,7 +13,7 @@ namespace callable_traits {
 
     namespace detail {
 
-#ifdef CALLABLE_TRAITS_CONSTEXPR_CHECKS_DISABLED
+#ifdef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
 
         inline constexpr auto
         can_invoke_constexpr_impl(...) {
@@ -43,12 +43,12 @@ namespace callable_traits {
 
             // Where K = std::remove_reference_t<Obj>, CALLABLE_TRAITS_MAKE_CONSTEXPR(U&&)
             // resolves to a matching reference to a constexpr K object. Hence, K must be
-            // a literal type with a constexpr default constructor. any_arg_evaluated<I>
+            // a literal type with a constexpr default constructor. constexpr_template_worm<I>
             // is a "chameleon" type that tries to pass as anything. Generally, if K is
             // templated and uses dependent names, this will fail. However, There are a few
             // exceptions: Unary/binary operators, value member `value`, and member alias
-            // `type` are all defined in terms of any_arg_evaluated<I>, so usage of these
-            // will succeed in K.
+            // `type` are all defined in terms of constexpr_template_worm<I>, so usage of
+            // these will succeed in K.
 
 
                     ((CALLABLE_TRAITS_MAKE_CONSTEXPR(Obj).*std::remove_reference<P>::type::value)(
@@ -80,9 +80,9 @@ namespace callable_traits {
         };
 
         template<typename... Ts>
-        using are_all_constexpr_constructible = conjunction<
+        using are_all_constexpr_constructible = CALLABLE_TRAITS_CONJUNCTION(
             is_constexpr_constructible<Ts>...
-        >;
+        );
 
         template<typename T, typename... Args, typename std::enable_if<
             negate<are_all_constexpr_constructible<T, Args...>>::value, int>::type = 0>
@@ -103,7 +103,7 @@ namespace callable_traits {
             return std::integral_constant<bool, !is_invalid_invoke::value>{};
         }
 
-#endif //ifndef CALLABLE_TRAITS_CONSTEXPR_CHECKS_DISABLED
+#endif //ifndef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
     }
 }
 #endif // CALLABLE_TRAITS_DETAIL_CAN_INVOKE_CONSTEXPR_T_HPP

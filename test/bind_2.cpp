@@ -15,6 +15,10 @@ Distributed under the Boost Software License, Version 1.0.
 #include <cstdint>
 #include <callable_traits/callable_traits.hpp>
 
+#ifdef CALLABLE_TRAITS_DISABLE_BIND
+int main(){ return 0; }
+#else
+
 #ifndef CT_ASSERT
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
@@ -66,21 +70,21 @@ auto BEEF_returns_B(B, E, E, F) {
 }
 
 template <typename F, typename Tuple, std::size_t... I>
-constexpr decltype(auto)
-apply_helper(F&& f, Tuple&& t, std::index_sequence<I...>) {
+constexpr auto
+apply_helper(F&& f, Tuple&& t, CALLABLE_TRAITS_IX_SEQ(I...)) {
     return std::forward<F>(f)(std::get<I>(std::forward<Tuple>(t))...);
 }
 
 //used to apply the expected_args tuple to std::bind
 template <typename F, typename Tuple>
-constexpr decltype(auto)
+constexpr auto
 apply(F&& f, Tuple&& t) {
     return apply_helper(
         std::forward<F>(f),
         std::forward<Tuple>(t),
-        std::make_index_sequence<
-        std::tuple_size<typename std::remove_reference<Tuple>::type>::value
-        >{}
+        CALLABLE_TRAITS_MAKE_IX_SEQ(
+            std::tuple_size<std::remove_reference_t<Tuple>>::value
+        ){}
     );
 }
 
@@ -138,6 +142,6 @@ int main() {
     CT_ASSERT(std::is_same<args, expected_args>::value);
     CT_RUNTIME_ASSERT(apply(ct_bind, expected_args{}) == "ABCDEFG");
     CT_RUNTIME_ASSERT(apply(std_bind, expected_args{}) == "ABCDEFG");
-
-    return 0;
 }
+
+#endif

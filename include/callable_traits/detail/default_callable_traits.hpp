@@ -39,6 +39,10 @@ namespace callable_traits {
 			// is always std::true_type for classes.
 			using is_function_object = std::false_type;
 			
+            // std::true_type when it's a function object, AND
+            // we can't take the address of operator() without casting
+            using is_overloaded_function_object = std::false_type;
+
 			// std::true_type for function references
 			using is_function_reference = std::false_type;
 			
@@ -158,19 +162,25 @@ namespace callable_traits {
 			using clear_args = invalid_type;
 			
 			template<typename... NewArgs>
-			using push_args_front = invalid_type;
+			using push_front = invalid_type;
 
 			template<typename... NewArgs>
-			using push_args_back = invalid_type;
+			using push_back = invalid_type;
 			
 			template<std::size_t ElementCount>
-			using pop_args_front = invalid_type;
+            using pop_front = invalid_type;
 
 			template<std::size_t ElementCount>
-			using pop_args_back = invalid_type;
+            using pop_back = invalid_type;
 			
 			template<std::size_t Index, typename... NewArgs>
-			using insert_args = invalid_type;
+            using insert_at = invalid_type;
+
+            template<std::size_t Index, std::size_t Count>
+            using remove_at = invalid_type;
+
+            template<std::size_t Index, typename... NewArgs>
+            using overwrite_at = invalid_type;
 		};
 	}
 }

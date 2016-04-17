@@ -64,17 +64,21 @@ struct function<OriginalType, CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(Ar
 		CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(),
 		OriginalType
 	>::type;
-	
-    template<typename... NewArgs>
-    using push_args_front = typename copy_cvr<
-		CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(NewArgs..., Args...),
-		OriginalType
-	>::type;
 
-	template<typename... NewArgs>
-	using push_args_back = typename copy_cvr<
-		CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(Args..., NewArgs...),
-        OriginalType
-	>::type;
+#undef CALLABLE_TRAITS_BEGIN_PACK_MANIP
+#undef CALLABLE_TRAITS_ARGS_PACK
+#undef CALLABLE_TRAITS_END_PACK_MANIP
+
+#define CALLABLE_TRAITS_BEGIN_PACK_MANIP \
+    typename copy_cvr< Return(CALLABLE_TRAITS_CC *)(
+
+#define CALLABLE_TRAITS_ARGS_PACK Args
+
+#define CALLABLE_TRAITS_END_PACK_MANIP ), OriginalType>::type
+
+#include <callable_traits/detail/unguarded/args_pack_manipulations.hpp>
+#undef CALLABLE_TRAITS_BEGIN_PACK_MANIP
+#undef CALLABLE_TRAITS_ARGS_PACK
+#undef CALLABLE_TRAITS_END_PACK_MANIP
 };
 

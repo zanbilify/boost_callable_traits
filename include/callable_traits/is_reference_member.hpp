@@ -24,7 +24,7 @@ namespace callable_traits {
     template<typename T>
     inline constexpr auto
     is_reference_member(T&&) {
-        return typename detail::traits<T&&>::is_reference_member{};
+        return is_reference_member<T&&>();
     }
 }
 

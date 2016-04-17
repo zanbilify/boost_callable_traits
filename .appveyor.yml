@@ -1,0 +1,39 @@
+version: 1.0.{build}
+branches:
+  only:
+  - master
+clone_folder: c:\projects\callable_traits
+clone_script:
+- cmd: >-
+    cd c:\projects
+
+    git clone https://github.com/badair/callable_traits.git
+install:
+- cmd: >-
+    mkdir C:\projects\deps
+
+    cd C:\projects\deps
+
+
+    set CMAKE_URL="https://cmake.org/files/v3.5/cmake-3.5.0-win32-x86.zip"
+
+    appveyor DownloadFile %CMAKE_URL% -FileName cmake.zip
+
+    7z x cmake.zip -oC:\projects\deps\cmake > nul
+
+    set PATH=C:\projects\deps\cmake\bin;%PATH%
+
+    cmake --version
+build_script:
+- cmd: >-
+    cd c:\projects\callable_traits
+
+    mkdir build
+
+    cd build
+
+    echo . | cmake .. -G"Visual Studio 14 2015"
+
+    set msbuild_exe="%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe"
+
+    echo . | "%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" check.vcxproj /t:build /p:Configuration=Debug /p:Platform=Win32 /v:n /nologo

@@ -15,6 +15,10 @@ Distributed under the Boost Software License, Version 1.0.
 #include <cstdint>
 #include <callable_traits/callable_traits.hpp>
 
+#ifdef CALLABLE_TRAITS_DISABLE_BIND
+int main(){ return 0; }
+#else
+
 #ifndef CT_ASSERT
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
@@ -71,3 +75,5 @@ int main() {
 
     return 0;
 }
+
+#endif

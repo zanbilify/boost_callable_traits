@@ -28,7 +28,7 @@
 </h2></div></div></div>
 <pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">Return</span><span class="special">&gt;</span>
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">NewReturn</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">apply_return</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span><span class="special">;</span>
 
 <span class="special">}</span>
@@ -44,67 +44,13 @@
 <a name="callable_traits.ref_apply_return.h1"></a>
       <span class="phrase"><a name="callable_traits.ref_apply_return.behavior"></a></span><a class="link" href="ref_apply_return.html#callable_traits.ref_apply_return.behavior">Behavior</a>
     </h4>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
-<li class="listitem">
-          When <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a>, the aliased type will be identical
-          to <code class="computeroutput"><span class="identifier">T</span></code>, except that the aliased
-          type will now return <code class="computeroutput"><span class="identifier">Return</span></code>,
-          such that:
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="keyword">void</span><span class="special">(),</span>
-                <span class="keyword">int</span><span class="special">&gt;</span></code>
-                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(*</span> <span class="keyword">const</span><span class="special">)(</span><span class="keyword">char</span><span class="special">),</span> <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">const</span>
-                <span class="keyword">char</span><span class="special">*(*</span>
-                <span class="keyword">const</span><span class="special">)(</span><span class="keyword">char</span><span class="special">)</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(&amp;)(),</span>
-                <span class="keyword">void</span><span class="special">&gt;</span></code>
-                aliases <code class="computeroutput"><span class="keyword">void</span><span class="special">(&amp;)()</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*&amp;)()</span>
-                <span class="keyword">const</span> <span class="keyword">volatile</span>
-                <span class="special">&amp;&amp;,</span> <span class="keyword">short</span><span class="special">&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">short</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*&amp;)()</span> <span class="keyword">const</span>
-                <span class="keyword">volatile</span> <span class="special">&amp;&amp;</span></code>
-              </li>
-</ul></div>
-        </li>
-<li class="listitem">
-          When <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="concepts.html#callable_traits.concepts.ref_pmd" title="MemberDataPtr"><span class="green">MemberDataPtr</span></a>,
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
-<li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">Class</span></code> represent
-                the parent class of <code class="computeroutput"><span class="identifier">T</span></code>
-              </li>
-<li class="listitem">
-                the aliased type is <code class="computeroutput"><span class="identifier">Return</span>
-                <span class="identifier">Class</span><span class="special">::*</span>
-                <span class="comment">/* any qualifiers on T */</span></code>,
-                such that:
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span> <span class="keyword">const</span>
-                <span class="special">&amp;,</span> <span class="keyword">char</span><span class="special">&gt;</span></code> becomes <code class="computeroutput"><span class="keyword">char</span>
-                <span class="identifier">foo</span><span class="special">::*</span>
-                <span class="keyword">const</span> <span class="special">&amp;</span></code>
-              </li>
-</ul></div>
-        </li>
-</ul></div>
-<h4>
-<a name="callable_traits.ref_apply_return.h2"></a>
-      <span class="phrase"><a name="callable_traits.ref_apply_return.notes"></a></span><a class="link" href="ref_apply_return.html#callable_traits.ref_apply_return.notes">Notes</a>
-    </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-          Any enabled calling conventions are preserved on <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ptr" title="FunctionPtr"><span class="green">FunctionPtr</span></a> and <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a> types.
+          <code class="computeroutput"><span class="identifier">apply_return</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">NewReturn</span><span class="special">&gt;</span></code> aliases <code class="literal"><span class="bold"><strong>NewReturn</strong></span>
+          <code class="literal"><span class="emphasis"><em>[Category]</em></span></code> ( <code class="literal"><span class="emphasis"><em>[Args...]</em></span></code>
+          <code class="literal"><span class="emphasis"><em>[VarArgs]</em></span></code> ) <code class="literal"><span class="emphasis"><em>[MemberQualifiers]</em></span></code></code>
         </li></ul></div>
 <h4>
-<a name="callable_traits.ref_apply_return.h3"></a>
+<a name="callable_traits.ref_apply_return.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_apply_return.example"></a></span><a class="link" href="ref_apply_return.html#callable_traits.ref_apply_return.example">Example</a>
     </h4>
 <p>

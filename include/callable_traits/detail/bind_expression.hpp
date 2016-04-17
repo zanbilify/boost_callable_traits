@@ -8,8 +8,8 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 */
 
-#ifndef CALLABLE_TRAITS__DETAIL_BIND_EXPRESSION_HPP
-#define CALLABLE_TRAITS__DETAIL_BIND_EXPRESSION_HPP
+#ifndef CALLABLE_TRAITS_DETAIL_BIND_EXPRESSION_HPP
+#define CALLABLE_TRAITS_DETAIL_BIND_EXPRESSION_HPP
 
 #include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/categorize_bind_arg.hpp>
@@ -112,7 +112,8 @@ namespace callable_traits {
 
         template<typename T, typename std::enable_if<
             is_callable_traits_bind<shallow_decay<T>>::value, int>::type = 0>
-        inline constexpr decltype(auto) unwrap_std_bind(T&& t){
+        inline constexpr CALLALBLE_TRAITS_DECLTYPE_AUTO
+        unwrap_std_bind(T&& t){
             return t.get_std_bind();
         }
 
@@ -157,6 +158,8 @@ namespace callable_traits {
             using return_type = typename traits<Callable>::return_type;
             using result_type = return_type;
 
+#ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+
             inline bind_type&
             get_std_bind() & {
                 return std_bind;
@@ -167,6 +170,8 @@ namespace callable_traits {
                 return std::move(std_bind);
             }
 
+#endif //#ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+
             inline constexpr
             bind_expression(Callable c, Args... args)
                 : std_bind(
@@ -174,7 +179,7 @@ namespace callable_traits {
                         unwrap_std_bind(static_cast<Args>(args))...)) {}
 
             template<typename... Rgs>
-            inline decltype(auto)
+            inline CALLALBLE_TRAITS_DECLTYPE_AUTO
             operator()(Rgs&&... args) {
                 return std_bind(std::forward<Rgs>(args)...);
             }

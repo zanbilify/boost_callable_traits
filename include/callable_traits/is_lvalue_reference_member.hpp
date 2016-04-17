@@ -18,13 +18,13 @@ namespace callable_traits {
     template<typename T>
     inline constexpr auto
     is_lvalue_reference_member() {
-        return typename detail::traits<T>::is_lvalue_reference_qualified{};
+        return typename detail::traits<T>::is_lvalue_reference_member{};
     }
 
     template<typename T>
     inline constexpr auto
     is_lvalue_reference_member(T&&) {
-        return typename detail::traits<T&&>::is_lvalue_reference_qualified{};
+        return is_lvalue_reference_member<T&&>();
     }
 }
 

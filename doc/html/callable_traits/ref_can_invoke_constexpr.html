@@ -35,7 +35,7 @@
         <code class="computeroutput"><span class="identifier">can_invoke_constexpr</span></code> is not
         compatible with the Microsoft Visual C++ compiler in Visual Studio (a.k.a.
         MSVC). Accordingly, the example(s) below will not compile in MSVC. However,
-        Visual Studio users can still use Clang-cl. Refer to the <a class="link" href="compatibility.html#callable_traits.compatibility.msvc_issues" title="MSVC Issues">MSVC
+        Visual Studio users can still use Clang-cl. Refer to the <a class="link" href="compatibility.html#callable_traits.compatibility.compatibility_issues" title="Known Issues">Compatibility
         Issues</a> section for more information.
       </p></td></tr>
 </table></div>
@@ -91,7 +91,7 @@
       - Function Object</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">can_invoke_constexpr</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="comment">// NOTE: Due to non-compliance in MSVC, can_invoke_constexpr</span>
 <span class="comment">// always return std::false_type on that compiler, which causes</span>
@@ -162,7 +162,7 @@
       - Member Function Pointer</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">can_invoke_constexpr</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="comment">// NOTE: Due to non-compliance in MSVC, can_invoke_constexpr</span>
 <span class="comment">// always returns std::false_type on that compiler, which</span>
@@ -194,7 +194,7 @@
       - Function Pointer</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">can_invoke_constexpr</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
 

@@ -2,7 +2,6 @@ index.html
 callable_traits/function_sugar_example.html
 callable_traits/compatibility.html
 callable_traits/faq.html
-callable_traits/contact.html
 callable_traits/concepts.html
 callable_traits/headers.html
 callable_traits/ref_add_calling_convention.html
@@ -35,7 +34,9 @@ callable_traits/ref_has_member_qualifiers.html
 callable_traits/ref_is_volatile_member.html
 callable_traits/ref_max_arity.html
 callable_traits/ref_min_arity.html
-callable_traits/ref_qualified_function_type.html
+callable_traits/ref_insert_at.html
+callable_traits/ref_overwrite_at.html
+callable_traits/ref_remove_at.html
 callable_traits/ref_remove_calling_convention.html
 callable_traits/ref_remove_member_const.html
 callable_traits/ref_remove_member_cv.html
@@ -43,7 +44,10 @@ callable_traits/ref_remove_member_pointer.html
 callable_traits/ref_remove_member_reference.html
 callable_traits/ref_remove_varargs.html
 callable_traits/ref_remove_member_volatile.html
-callable_traits/ref_push_args_back.html
-callable_traits/ref_push_args_front.html
+callable_traits/ref_push_back.html
+callable_traits/ref_push_front.html
+callable_traits/ref_pop_back.html
+callable_traits/ref_push_front0.html
 callable_traits/ref_result_of.html
 callable_traits/acknowledgements.html
+callable_traits/contact.html

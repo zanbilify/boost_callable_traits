@@ -13,6 +13,14 @@ Distributed under the Boost Software License, Version 1.0.
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
 
+#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#define LREF
+#define RREF
+#else
+#define LREF &
+#define RREF &&
+#endif
+
 struct foo {};
 
 namespace ct = callable_traits;
@@ -76,17 +84,17 @@ int main() {
 
     {
         using f   = void(foo::*)();
-        using l   = void(foo::*)() &;
-        using r   = void(foo::*)() && ;
+        using l   = void(foo::*)() LREF;
+        using r   = void(foo::*)() RREF ;
         using c   = void(foo::*)() const;
-        using cl  = void(foo::*)() const &;
-        using cr  = void(foo::*)() const &&;
+        using cl  = void(foo::*)() const LREF;
+        using cr  = void(foo::*)() const RREF;
         using v   = void(foo::*)() volatile;
-        using vl  = void(foo::*)() volatile &;
-        using vr  = void(foo::*)() volatile &&;
+        using vl  = void(foo::*)() volatile LREF;
+        using vr  = void(foo::*)() volatile RREF;
         using cv  = void(foo::*)() const volatile;
-        using cvl = void(foo::*)() const volatile &;
-        using cvr = void(foo::*)() const volatile &&;
+        using cvl = void(foo::*)() const volatile LREF;
+        using cvr = void(foo::*)() const volatile RREF;
 
         assert_not_const_qualified<f>();
         assert_not_const_qualified<l>();
@@ -104,17 +112,17 @@ int main() {
 
     {
         struct f   { int operator()() { return 0; } };
-        struct l   { int operator()() & { return 0; } };
-        struct r   { int operator()() && { return 0; } };
+        struct l   { int operator()() LREF { return 0; } };
+        struct r   { int operator()() RREF { return 0; } };
         struct c   { int operator()() const { return 0; } };
-        struct cl  { int operator()() const & { return 0; } };
-        struct cr  { int operator()() const && { return 0; } };
+        struct cl  { int operator()() const LREF { return 0; } };
+        struct cr  { int operator()() const RREF { return 0; } };
         struct v   { int operator()() volatile { return 0; } };
-        struct vl  { int operator()() volatile & { return 0; } };
-        struct vr  { int operator()() volatile && { return 0; } };
+        struct vl  { int operator()() volatile LREF { return 0; } };
+        struct vr  { int operator()() volatile RREF { return 0; } };
         struct cv  { int operator()() const volatile { return 0; } };
-        struct cvl { int operator()() const volatile & { return 0; } };
-        struct cvr { int operator()() const volatile && { return 0; } };
+        struct cvl { int operator()() const volatile LREF { return 0; } };
+        struct cvr { int operator()() const volatile RREF { return 0; } };
 
         assert_not_const_qualified<f>();
         assert_not_const_qualified<l>();
@@ -130,19 +138,21 @@ int main() {
         assert_const_qualified<cvr>();
     }
 
+#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+
     {
         using f   = void();
-        using l   = void() &;
-        using r   = void() && ;
+        using l   = void() LREF;
+        using r   = void() RREF ;
         using c   = void() const;
-        using cl  = void() const &;
-        using cr  = void() const &&;
+        using cl  = void() const LREF;
+        using cr  = void() const RREF;
         using v   = void() volatile;
-        using vl  = void() volatile &;
-        using vr  = void() volatile &&;
+        using vl  = void() volatile LREF;
+        using vr  = void() volatile RREF;
         using cv  = void() const volatile;
-        using cvl = void() const volatile &;
-        using cvr = void() const volatile &&;
+        using cvl = void() const volatile LREF;
+        using cvr = void() const volatile RREF;
 
         CT_ASSERT(!ct::is_const_member<f>());
         CT_ASSERT(!ct::is_const_member<l>());
@@ -158,9 +168,11 @@ int main() {
         CT_ASSERT(ct::is_const_member<cvr>());
     }
 
-	using f_ptr = void(*)();
+#endif
+
+    using f_ptr = void(*)();
     assert_not_const_qualified<f_ptr>();
-	assert_not_const_qualified<f_ptr foo::*>();
-	assert_not_const_qualified<int foo::*>();
-	assert_not_const_qualified<void(&)()>();
+    assert_not_const_qualified<f_ptr foo::*>();
+    assert_not_const_qualified<int foo::*>();
+    assert_not_const_qualified<void(&)()>();
 }

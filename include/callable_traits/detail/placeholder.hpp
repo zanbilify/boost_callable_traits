@@ -52,7 +52,7 @@ namespace callable_traits {
         template<typename Expression, typename, typename> struct argument_routing {};
 
         template<typename Expression, std::size_t... I, typename Tuple>
-        struct argument_routing<Expression, std::index_sequence<I...>, Tuple> {
+        struct argument_routing<Expression, CALLABLE_TRAITS_IX_SEQ(I...), Tuple> {
             using type =
                 std::tuple<
                     ph_route<
@@ -102,7 +102,7 @@ namespace callable_traits {
             using routed_placeholders = typename placeholder_routes_detail<
                 typename argument_routing<
                     Expression,
-                    std::make_index_sequence<sizeof...(Args)>,
+                    CALLABLE_TRAITS_MAKE_IX_SEQ(sizeof...(Args)),
                     std::tuple<Args...>
                 >::type
             >::type;

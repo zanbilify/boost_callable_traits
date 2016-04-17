@@ -4,6 +4,10 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
 ->*/
 
+#ifndef __cpp_generic_lambdas
+int main(){ return 0; }
+#else
+
 //[ can_invoke_function_object
 #include <type_traits>
 #include <callable_traits/callable_traits.hpp>
@@ -69,3 +73,4 @@ static_assert(!ct::can_invoke(multiply, 1, 2, 3), "");
 
 int main() {}
 //]
+#endif //#ifndef __cpp_generic_lambdas

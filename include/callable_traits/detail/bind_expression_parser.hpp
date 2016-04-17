@@ -10,6 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/tuple_group_by.hpp>
+#include <callable_traits/detail/template_worm.hpp>
 #include <callable_traits/detail/tuple_sort.hpp>
 #include <callable_traits/detail/bind_expression.hpp>
 #include <callable_traits/detail/fwd/bind_expression_parser_fwd.hpp>
@@ -55,7 +56,7 @@ namespace callable_traits {
         struct filter_invalid_args<Head, Tail...> {
 
             static constexpr const auto is_legal_arg =
-                !std::is_same<Head, any_arg<>>{}
+                !std::is_same<Head, template_worm<>>{}
                 && !std::is_same<Head, invalid_type>{};
 
             using type = typename std::conditional<

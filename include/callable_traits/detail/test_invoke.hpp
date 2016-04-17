@@ -10,6 +10,8 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_TEST_INVOKE_HPP
 #define CALLABLE_TRAITS_DETAIL_TEST_INVOKE_HPP
 
+#include <callable_traits/detail/fwd/pmf_fwd.hpp>
+#include <callable_traits/detail/fwd/pmd_fwd.hpp>
 #include <callable_traits/detail/utility.hpp>
 #include <callable_traits/detail/make_constexpr.hpp>
 #include <callable_traits/config.hpp>
