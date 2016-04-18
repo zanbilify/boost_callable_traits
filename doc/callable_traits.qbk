@@ -1355,7 +1355,65 @@ For `add_calling_convention` to work as-intended, you must:
 [endsect]
 
 
+[section:ref_insert_at insert_at]
 
+    namespace ``[lib_namespace]`` {
+	
+	    template<std::size_t InsertIndex, typename T, typename... NewArgs>
+		using insert_at = /* implementation-defined */ ;
+	}
+	
+[heading Constraints]
+* `T` must be a [link_signature]
+
+[heading Behavior]
+* `insert_at<Index, T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` will be inserted into the [Args] parameter list at the 0-based `InsertIndex`. TODO document out-of-bounds behavior
+* [VarArgs] remain if present in `T`.
+
+[heading Example]
+[import ../example/insert_at.cpp]
+[insert_at]
+[endsect]
+
+[section:ref_overwrite_at overwrite_at]
+
+    namespace ``[lib_namespace]`` {
+	
+	    template<std::size_t StartIndex, typename T, typename... NewArgs>
+		using overwrite_at = /* implementation-defined */ ;
+	}
+	
+[heading Constraints]
+* `T` must be a [link_signature]
+
+[heading Behavior]
+* `overwrite_at<Index, T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` will begin overwriting the [Args] parameter list at the 0-based `InsertIndex`, extending the parameter list as necessary.
+* [VarArgs] remain if present in `T`.
+
+[heading Example]
+[import ../example/overwrite_at.cpp]
+[overwrite_at]
+[endsect]
+
+[section:ref_remove_at remove_at]
+
+    namespace ``[lib_namespace]`` {
+	
+	    template<std::size_t StartIndex, typename T, std::size_t Count = 1>
+		using remove_at = /* implementation-defined */ ;
+	}
+	
+[heading Constraints]
+* `T` must be a [link_signature]
+
+[heading Behavior]
+* `remove_at<Index, Callable, Count>` aliases a type identical to `T`, except that all parameter types in the parameter list will be removed from 0-based `Index` to `Index + Count`. TODO document out-of-bounds behavior
+* [VarArgs] remain if present in `T`.
+
+[heading Example]
+[import ../example/remove_at.cpp]
+[remove_at]
+[endsect]
 
 [section:ref_expand_args expand_args]
 
@@ -1606,66 +1664,6 @@ TODO
 [heading Example]
 [/import ../example/min_arity.cpp]
 [min_arity]
-[endsect]
-
-[section:ref_insert_at insert_at]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<std::size_t InsertIndex, typename T, typename... NewArgs>
-		using insert_at = /* implementation-defined */ ;
-	}
-	
-[heading Constraints]
-* `T` must be a [link_signature]
-
-[heading Behavior]
-* `insert_at<Index, T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` will be inserted into the [Args] parameter list at the 0-based `InsertIndex`. TODO document out-of-bounds behavior
-* [VarArgs] remain if present in `T`.
-
-[heading Example]
-[/import ../example/insert_at.cpp]
-[insert_at]
-[endsect]
-
-[section:ref_overwrite_at overwrite_at]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<std::size_t StartIndex, typename T, typename... NewArgs>
-		using overwrite_at = /* implementation-defined */ ;
-	}
-	
-[heading Constraints]
-* `T` must be a [link_signature]
-
-[heading Behavior]
-* `overwrite_at<Index, T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` will begin overwriting the [Args] parameter list at the 0-based `InsertIndex`, extending the parameter list as necessary.
-* [VarArgs] remain if present in `T`.
-
-[heading Example]
-[/import ../example/overwrite_at.cpp]
-[overwrite_at]
-[endsect]
-
-[section:ref_remove_at remove_at]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<std::size_t StartIndex, typename T, std::size_t Count = 1>
-		using remove_at = /* implementation-defined */ ;
-	}
-	
-[heading Constraints]
-* `T` must be a [link_signature]
-
-[heading Behavior]
-* `remove_at<Index, Callable, Count>` aliases a type identical to `T`, except that all parameter types in the parameter list will be removed from 0-based `Index` to `Index + Count`. TODO document out-of-bounds behavior
-* [VarArgs] remain if present in `T`.
-
-[heading Example]
-[/import ../example/remove_at.cpp]
-[remove_at]
 [endsect]
 
 [section:ref_remove_calling_convention remove_calling_convention]
