@@ -27,8 +27,10 @@ callable_traits/ref_expand_args.html
 callable_traits/ref_function_type.html
 callable_traits/ref_has_calling_convention.html
 callable_traits/ref_has_varargs.html
+callable_traits/ref_is_callable.html
 callable_traits/ref_has_void_return.html
 callable_traits/ref_is_const_member.html
+callable_traits/ref_is_cv_member.html
 callable_traits/ref_is_constexpr.html
 callable_traits/ref_is_lvalue_reference_member.html
 callable_traits/ref_is_reference_member.html
