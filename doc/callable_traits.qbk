@@ -102,6 +102,7 @@
 [template link_has_varargs[][link callable_traits.ref_has_varargs [^has_varargs]]]
 [template link_has_void_return[][link callable_traits.ref_has_void_return [^has_void_return]]]
 [template link_is_const_member[][link callable_traits.ref_is_const_member [^is_const_member]]]
+[template link_is_cv_member[][link callable_traits.ref_is_cv_member [^is_cv_member]]]
 [template link_is_constexpr[][link callable_traits.ref_is_constexpr [^is_constexpr]]]
 [template link_is_lvalue_reference_member[][link callable_traits.ref_is_lvalue_reference_member [^is_lvalue_reference_member]]]
 [template link_is_reference_member[][link callable_traits.ref_is_reference_member [^is_reference_member]]]
@@ -1594,6 +1595,13 @@ For `has_calling_convention` to work as-intended, you must:
 
 [endsect]
 
+[section:ref_is_callable is_callable]
+TODO
+[heading Example]
+[/import ../example/is_callable.cpp]
+[is_callable]
+[endsect]
+
 [section:ref_has_void_return has_void_return]
 TODO
 [heading Example]
@@ -1606,6 +1614,13 @@ TODO
 [heading Example]
 [/import ../example/is_const_member.cpp]
 [is_const_member]
+[endsect]
+
+[section:ref_is_cv_member is_cv_member]
+TODO
+[heading Example]
+[/import ../example/is_cv_member.cpp]
+[is_cv_member]
 [endsect]
 
 [section:ref_is_constexpr is_constexpr]
