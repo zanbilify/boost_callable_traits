@@ -7,10 +7,10 @@ set project_name=%4
 
 ::process 1st argument
 if "%~1"=="x64" (
-  set cmake_cmd=cmake .. -G"Visual Studio 14 2015 Win64" -TLLVM-vs2014 -DCMAKE_CXX_FLAGS="-Qunused-arguments" -DCALLABLE_TRAITS_BUILD_EXPERIMENTAL
+  set cmake_cmd=cmake .. -G"Visual Studio 14 2015 Win64" -DCALLABLE_TRAITS_BUILD_EXPERIMENTAL=ON
 ) else (
   if "%~1"=="Win32" (
-    set cmake_cmd=cmake .. -G"Visual Studio 14 2015" -TLLVM-vs2014 -DCALLABLE_TRAITS_BUILD_EXPERIMENTAL=ON
+    set cmake_cmd=cmake .. -G"Visual Studio 14 2015" -DCALLABLE_TRAITS_BUILD_EXPERIMENTAL=ON
   )
 )
 if not defined cmake_cmd (
@@ -65,7 +65,7 @@ if not defined msbuild_cmd (
 )
 
 cd %project_root%
-set build_dir= "build_LLVM_vs2014_%1_%2"
+set build_dir= "build_MSVC_%1_%2"
 
 echo BUILD SCRIPT: Building at %build_dir%...
 
