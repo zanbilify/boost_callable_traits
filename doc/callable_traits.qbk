@@ -244,8 +244,6 @@ At a glance, there appear to be around 260 [@http://stackoverflow.com/search?q=c
 
 [section:compatibility Compatibility]
 
-[section:platforms Supported Platforms ]
-
 [template full_support[][role green Yes] ]
 [template partial_support[][role green Yes (basic)] ]
 [template unknown_support[][role gray No/Unknown] ]
@@ -260,7 +258,7 @@ At a glance, there appear to be around 260 [@http://stackoverflow.com/search?q=c
 [ [Linux]            [Clang (other)]             [[unknown_support]] [libstdc++]              [-]                      ]
 [ [Linux]            [GCC 5.2.1 +]               [[full_support]]    [libstdc++]              [[link_travis_ci]]       ]
 [ [Linux]            [GCC \[4.8, ~ 5.2.1)]       [[partial_support]] [libstdc++]              [[link_travis_ci]]       ]
-[ [Linux]            [GCC(other)]                [[unknown_support]] [libstdc++]              [[link_travis_ci]]       ]
+[ [Linux]            [GCC(other)]                [[unknown_support]] [libstdc++]              [-]       ]
 [ [OSX]              [AppleClang / XCode 6.3+]   [[full_support]]    [libc++]                 [[link_travis_ci]]       ]
 [ [OSX]              [Clang 3.5+]                [[likely_support]]  [libc++]                 [-]                      ]
 [ [OSX]              [Clang 3.4 and below]       [[unknown_support]] [libc++]                 [-]                      ]
@@ -279,8 +277,6 @@ At a glance, there appear to be around 260 [@http://stackoverflow.com/search?q=c
 ]
 
 CallableTraits has not been tested on every platform under the sun. If you find CallableTraits to work with another toolchain, [link callable_traits.contact let us know!]
-
-[endsect][/section:compatibility]
 
 [section:compatibility_issues Known Issues]
 
