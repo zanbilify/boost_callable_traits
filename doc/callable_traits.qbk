@@ -155,10 +155,10 @@ It is the author's hope that future versions of [libname] will offer a stable, t
 
 [section:introduction Introduction]
 
-[libname] is a C++11/14/17 header-only library for the inspection, synthesis, and decomposition of callable types. Whether it's calling conventions, `const volatile &&`, or container-like manipulation of parameter lists, [libname] provides all the tools you need to *completely rid your codebase of function type specializations*. While not for everyone, [libname] offers a comprehensive, fine-grained assortment of traits and metafunctions for building and ripping apart C++'s most complicated and obscure types with ease. [libname] fills the gaps where existing library solutions fall short, aiming to be the "complete type manipulation facility for function types" mentioned in the last section of the C++17 proposal [p0172](http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html). [libname] currently supports GCC 4.8 and later, Clang 3.5 and later, and MSVC 19.
-[libname] is header-only, and does not depend on any non-standard headers. [libname] is currently hosted at [repo].
+[libname] is a C++11/14/17 header-only library for the inspection, synthesis, and decomposition of callable types. Whether it's calling conventions, `const volatile &&`, or container-like manipulation of parameter lists, [libname] provides all the tools you need to *completely rid your codebase of function type specializations*. While not for everyone, [libname] offers a comprehensive, fine-grained assortment of traits and metafunctions for building and ripping apart C++'s most complicated and obscure types with ease. [libname] fills the gaps where existing library solutions fall short, aiming to be the "complete type manipulation facility for function types" mentioned in the last section of [@http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html p0172], the C++17 proposal regarding "abominable function types". [libname] currently supports GCC 4.8 and later, Clang 3.5 and later, and MSVC 19.
+[libname] is header-only, and does not depend on any non-standard headers.
 
-[note [libname] is not a Boost library.]
+[libname] is currently hosted at [repo]. [*[libname] is not a Boost library.]
 
 [section:prereqs Prerequisite Topics]
 
