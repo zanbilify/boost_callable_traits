@@ -20,6 +20,9 @@ callable_traits/ref_bind.html
 callable_traits/ref_can_invoke.html
 callable_traits/ref_can_invoke_constexpr.html
 callable_traits/ref_clear_args.html
+callable_traits/ref_insert_at.html
+callable_traits/ref_overwrite_at.html
+callable_traits/ref_remove_at.html
 callable_traits/ref_expand_args.html
 callable_traits/ref_function_type.html
 callable_traits/ref_has_calling_convention.html
@@ -34,9 +37,6 @@ callable_traits/ref_has_member_qualifiers.html
 callable_traits/ref_is_volatile_member.html
 callable_traits/ref_max_arity.html
 callable_traits/ref_min_arity.html
-callable_traits/ref_insert_at.html
-callable_traits/ref_overwrite_at.html
-callable_traits/ref_remove_at.html
 callable_traits/ref_remove_calling_convention.html
 callable_traits/ref_remove_member_const.html
 callable_traits/ref_remove_member_cv.html
