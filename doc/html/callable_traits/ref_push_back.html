@@ -26,11 +26,34 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_push_back"></a><a class="link" href="ref_push_back.html" title="push_back">push_back</a>
 </h2></div></div></div>
-<p>
-      TODO
-    </p>
+<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">NewArgs</span><span class="special">&gt;</span>
+    <span class="keyword">using</span> <span class="identifier">push_back</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span><span class="special">;</span>
+<span class="special">}</span>
+</pre>
 <h4>
 <a name="callable_traits.ref_push_back.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_push_back.constraints"></a></span><a class="link" href="ref_push_back.html#callable_traits.ref_push_back.constraints">Constraints</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+          <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a>
+        </li></ul></div>
+<h4>
+<a name="callable_traits.ref_push_back.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_push_back.behavior"></a></span><a class="link" href="ref_push_back.html#callable_traits.ref_push_back.behavior">Behavior</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <code class="computeroutput"><span class="identifier">push_back</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">NewArgs</span><span class="special">...&gt;</span></code> aliases a type identical to <code class="computeroutput"><span class="identifier">T</span></code>, except that <code class="computeroutput"><span class="identifier">NewArgs</span><span class="special">...</span></code> have been appended to the back of <code class="computeroutput"><span class="identifier">T</span></code>'s parameter list <code class="literal"><span class="emphasis"><em>[Args...]</em></span></code>.
+        </li>
+<li class="listitem">
+          <code class="literal"><span class="emphasis"><em>[VarArgs]</em></span></code> remain if present in
+          <code class="computeroutput"><span class="identifier">T</span></code>.
+        </li>
+</ul></div>
+<h4>
+<a name="callable_traits.ref_push_back.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_push_back.example"></a></span><a class="link" href="ref_push_back.html#callable_traits.ref_push_back.example">Example</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">push_back</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
