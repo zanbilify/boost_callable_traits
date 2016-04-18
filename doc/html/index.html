@@ -70,6 +70,9 @@
 <dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.why_use_reference_collapsing_rul">Why
       use reference collapsing rules when adding member function ref-qualifiers?</a></span></dt>
 </dl></dd>
+<dt><span class="section"><a href="callable_traits/development.html">Development</a></span></dt>
+<dd><dl><dt><span class="section"><a href="callable_traits/development.html#callable_traits.development.building">Building the test
+      suite</a></span></dt></dl></dd>
 <dt><span class="section"><a href="callable_traits/concepts.html">Concepts</a></span></dt>
 <dd><dl>
 <dt><span class="section"><a href="callable_traits/concepts.html#callable_traits.concepts.ref_fn_ptr"><span class="green">FunctionPtr</span></a></span></dt>
@@ -128,8 +131,10 @@
 <dt><span class="section"><a href="callable_traits/ref_function_type.html">function_type</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_has_calling_convention.html">has_calling_convention</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_has_varargs.html">has_varargs</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_is_callable.html">is_callable</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_has_void_return.html">has_void_return</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_is_const_member.html">is_const_member</a></span></dt>
+<dt><span class="section"><a href="callable_traits/ref_is_cv_member.html">is_cv_member</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_is_constexpr.html">is_constexpr</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_is_lvalue_reference_member.html">is_lvalue_reference_member</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_is_reference_member.html">is_reference_member</a></span></dt>
@@ -164,20 +169,26 @@
 <dt><span class="section"><a href="index.html#callable_traits.introduction.quick_example">Quick Example</a></span></dt>
 </dl></div>
 <p>
-      <code class="literal">CallableTraits</code> is a cross-platform C++14 library for the
-      inspection, decomposition, and synthesis of C++ callable types. <code class="literal">CallableTraits</code>
-      is header-only, and does not depend on any non-standard headers. <code class="literal">CallableTraits</code>
-      is currently hosted at <a href="https://github.com/badair/callable_traits" target="_top">GitHub</a>.
+      <code class="literal">CallableTraits</code> is a C++11/14/17 header-only library for
+      the inspection, synthesis, and decomposition of callable types. Whether it's
+      calling conventions, <code class="computeroutput"><span class="keyword">const</span> <span class="keyword">volatile</span>
+      <span class="special">&amp;&amp;</span></code>, or container-like manipulation
+      of parameter lists, <code class="literal">CallableTraits</code> provides all the tools
+      you need to <span class="bold"><strong>completely rid your codebase of function
+      type specializations</strong></span>. While not for everyone, <code class="literal">CallableTraits</code>
+      offers a comprehensive, fine-grained assortment of traits and metafunctions
+      for building and ripping apart C++'s most complicated and obscure types with
+      ease. <code class="literal">CallableTraits</code> fills the gaps where existing library
+      solutions fall short, aiming to be the "complete type manipulation facility
+      for function types" mentioned in the last section of <a href="http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html" target="_top">p0172</a>,
+      the C++17 proposal regarding "abominable function types". <code class="literal">CallableTraits</code>
+      currently supports GCC 4.8 and later, Clang 3.5 and later, and MSVC 19. <code class="literal">CallableTraits</code>
+      is header-only, and does not depend on any non-standard headers.
     </p>
-<div class="note"><table border="0" summary="Note">
-<tr>
-<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../src/images/note.png"></td>
-<th align="left">Note</th>
-</tr>
-<tr><td align="left" valign="top"><p>
-        <code class="literal">CallableTraits</code> is not a Boost library.
-      </p></td></tr>
-</table></div>
+<p>
+      <code class="literal">CallableTraits</code> is currently hosted at <a href="https://github.com/badair/callable_traits" target="_top">GitHub</a>.
+      <span class="bold"><strong><code class="literal">CallableTraits</code> is not a Boost library.</strong></span>
+    </p>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="callable_traits.introduction.prereqs"></a><a class="link" href="index.html#callable_traits.introduction.prereqs" title="Prerequisite Topics">Prerequisite Topics</a>

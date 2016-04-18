@@ -34,7 +34,7 @@
 [template link_contact_the_author[][link callable_traits.contact contact the author]]
 [template repo[][@https://github.com/badair/callable_traits GitHub]]
 [template abominable_paper[][@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0172r0.html "abominable" function types]]
-
+[template link_compatibility[][link callable_traits.compatibility Compatibility]]
 [template link_compatibility_issues[][link callable_traits.compatibility.compatibility_issues Compatibility Issues]]
 
 [/ *** these templates are used to turn concept names green ***]
@@ -102,6 +102,7 @@
 [template link_has_varargs[][link callable_traits.ref_has_varargs [^has_varargs]]]
 [template link_has_void_return[][link callable_traits.ref_has_void_return [^has_void_return]]]
 [template link_is_const_member[][link callable_traits.ref_is_const_member [^is_const_member]]]
+[template link_is_cv_member[][link callable_traits.ref_is_cv_member [^is_cv_member]]]
 [template link_is_constexpr[][link callable_traits.ref_is_constexpr [^is_constexpr]]]
 [template link_is_lvalue_reference_member[][link callable_traits.ref_is_lvalue_reference_member [^is_lvalue_reference_member]]]
 [template link_is_reference_member[][link callable_traits.ref_is_reference_member [^is_reference_member]]]
@@ -154,9 +155,10 @@ It is the author's hope that future versions of [libname] will offer a stable, t
 
 [section:introduction Introduction]
 
-[libname] is a cross-platform C++14 library for the inspection, decomposition, and synthesis of C++ callable types. [libname] is header-only, and does not depend on any non-standard headers. [libname] is currently hosted at [repo].
+[libname] is a C++11/14/17 header-only library for the inspection, synthesis, and decomposition of callable types. Whether it's calling conventions, `const volatile &&`, or container-like manipulation of parameter lists, [libname] provides all the tools you need to *completely rid your codebase of function type specializations*. While not for everyone, [libname] offers a comprehensive, fine-grained assortment of traits and metafunctions for building and ripping apart C++'s most complicated and obscure types with ease. [libname] fills the gaps where existing library solutions fall short, aiming to be the "complete type manipulation facility for function types" mentioned in the last section of [@http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html p0172], the C++17 proposal regarding "abominable function types". [libname] currently supports GCC 4.8 and later, Clang 3.5 and later, and MSVC 19.
+[libname] is header-only, and does not depend on any non-standard headers.
 
-[note [libname] is not a Boost library.]
+[libname] is currently hosted at [repo]. [*[libname] is not a Boost library.]
 
 [section:prereqs Prerequisite Topics]
 
@@ -421,6 +423,94 @@ Although arbitrary, the reference collapsing rules are well-defined and already 
 
 [endsect]
 
+[section:development Development]
+
+[note Boost.Build configuration files have not yet been written for building the tests and examples. The `Boost.Build` configuration files are currently only used by the author to build this documentation (along with a hacky batch script, which is unpublished).]
+
+[section:building Building the test suite]
+
+This section contains the instructions for building and running the test cases and documentatation examples that are packaged with [libname].
+
+[note For compilers with "basic" support in [libname], test cases for unsupported features are replaced with `int main(){}` via conditional compilation. For more information about compiler versions and supported features, refer to the [link_compatibility] section.]
+
+[heading Dependencies]
+
+Even though the [libname] headers do not rely on external dependencies, you'll need to install [@https://cmake.org/ CMake] version 3.0 or higher to use the test suite. For Windows users who wish to build the test suite with Visual Studio 2015 Update 2, it appears that CMake version 3.5 or higher is required. The build instructions assume that both CMake and Git executables exist in your environment PATH. 
+
+[heading One-click scripts]
+ 
+For convenience, one-click testing scripts for Linux and Windows are packaged with [libname], which can be run from any directory. Running one of these scripts will create a `build-xxx` subdirectory in the [libname] root directory, and perform all testing there. Even though these scripts were designed to be as generic as possible, issues may exist because they have not seen widespread use. Refer to the console instructions below if the provided testing scripts do not work for you.
+
+First, clone the repository:
+
+ git clone http://github.com/badair/callable_traits
+
+* Linux (possibly OSX - untested)
+  * Examples related to calling conventions are ['excluded] from these build scripts
+  * script directory: `[CallableTraits root]/scripts/posix`
+    * `gcc-libcstdxx.sh`
+	  * compiles with the g++ version found in the PATH
+	  * This is the script most likely to work out-of-the-box, since GCC 4.8 comes pre-installed on many Linux distributions
+    * `clang-libcxx.sh`
+	  * compiles with the clang++ executable in the PATH
+	  * uses libc++ for the standard library implementation
+    * `clang-libcstdxx.sh`
+	  * compiles with the clang++ executable in the PATH
+	  * uses libstdc++ for the standard library implementation
+
+* Windows
+  * Examples related to calling conventions are ['included] in these build scripts
+  * script directory: `[CallableTraits root]\scripts\windows`
+    * `MSVC-Win32-Debug.bat`
+	  * compiles with MSVC 19
+	  * Visual Studio 2015 must be installed in the default install directory
+    * `LLVM-vs2014-Win32-Debug.bat`
+	  * compiles with clang/c2
+	  * Visual Studio 2015 must be installed in the default install directory
+	  * This script assumes that the Windows Installer found on [@http://llvm.org/builds/ this page] was used to install LLVM, which is integrated with Visual Studio
+	* `MinGW-Win32-Release.bat`
+	  * compiles with a MinGW-based GCC build
+	  * [*requires a [@http://gnuwin32.sourceforge.net/packages/make.htm Windows build of GNU Make] to be installed and present in the PATH]
+	  * Expects to find the MinGW root directory at `C:\\MinGW*`
+	  
+
+[heading Console instructions - Linux/OSX]
+
+Open a shell and enter the following commands:
+
+```
+git clone http://github.com/badair/callable_traits
+cd callable_traits
+mkdir build
+cd build
+cmake .. -DCMAKE_CXX_COMPILER=/path/to/compiler
+make check
+```
+
+[heading Console instructions - Windows]
+
+Cygwin and MSYS users should refer to the Linux section (you know who you are).
+
+Fire up `cmd.exe` and enter the following commands:
+
+[note These commands assume that Visual Studio 2015 was installed in the default directory. git and CMake executables are expected to be present in the evironment PATH. A 64 bit Windows install is assumed.]
+
+```
+git clone http://github.com/badair/callable_traits
+cd callable_traits
+mkdir build
+cd build
+cmake .. -G"Visual Studio 14 2015"
+"%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" check.vcxproj /t:build /p:Configuration=Debug /p:Platform=Win32 /v:n /nologo
+```
+
+To include the experimental examples for calling conventions in the build, append `-DCALLABLE_TRAITS_BUILD_EXPERIMENTAL=ON` to the CMake arguments. To build with Clang/C2 instead of MSVC, append `-TLLVM-vs2014` to the CMake arguments. This will only work if you have [@http://llvm.org/builds/ Clang/C2] installed.
+
+[tip If you need additional help building the test suite, [link_contact_the_author].]
+
+[endsect][/section:building]
+
+[endsect][/section:development]
 
 [/*********************************************************************]
 [/*********************** C O N C E P T S *****************************]
@@ -428,7 +518,7 @@ Although arbitrary, the reference collapsing rules are well-defined and already 
 
 [section:concepts Concepts]
 
-[libname] relies on the following concepts, which will be cross-referenced throughout the documentation. Concepts will always be formatted with [role green green] text.
+[libname] relies on the following "concepts", which will be referenced throughout the documentation. Concepts will always be formatted with [role green green] text. These concepts are not part of the C++ code, but instead are used for the purpose of documenting correct usage of [CallableTraits] templates.
 
 In order to avoid significant standardese in the reference sections, we need to syntactically decompose these types. Some concepts define "elements" to achieve this. This allows us to address multiple concepts with the same terminology and structure later.
 
@@ -1593,6 +1683,13 @@ For `has_calling_convention` to work as-intended, you must:
 
 [endsect]
 
+[section:ref_is_callable is_callable]
+TODO
+[heading Example]
+[/import ../example/is_callable.cpp]
+[is_callable]
+[endsect]
+
 [section:ref_has_void_return has_void_return]
 TODO
 [heading Example]
@@ -1605,6 +1702,13 @@ TODO
 [heading Example]
 [/import ../example/is_const_member.cpp]
 [is_const_member]
+[endsect]
+
+[section:ref_is_cv_member is_cv_member]
+TODO
+[heading Example]
+[/import ../example/is_cv_member.cpp]
+[is_cv_member]
 [endsect]
 
 [section:ref_is_constexpr is_constexpr]
