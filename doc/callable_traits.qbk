@@ -1419,9 +1419,9 @@ For `add_calling_convention` to work as-intended, you must:
 
     namespace ``[lib_namespace]`` {
 
-            template<typename T, template<class...> class Container>
-			using expand_args = /* implementation-defined */;
-        }
+		template<typename T, template<class...> class Container>
+		using expand_args = /* implementation-defined */;
+	}
 
 [heading Constraints]
 # `T` must be one of the following:
@@ -1715,14 +1715,40 @@ TODO
 [endsect]
 
 [section:ref_push_back push_back]
-TODO
+
+    namespace ``[lib_namespace]`` {
+
+		template<typename T, typename... NewArgs>
+		using push_back = /* implementation-defined */;
+	}
+	
+[heading Constraints]
+* `T` must be a [link_signature]
+
+[heading Behavior]
+* `push_back<T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` have been appended to the back of `T`'s parameter list [Args].
+* [VarArgs] remain if present in `T`.
+	
 [heading Example]
 [import ../example/push_back.cpp]
 [push_back]
 [endsect]
 
 [section:ref_push_front push_front]
-TODO
+
+    namespace ``[lib_namespace]`` {
+
+		template<typename T, typename... NewArgs>
+		using push_front = /* implementation-defined */;
+	}
+	
+[heading Constraints]
+* `T` must be a [link_signature]
+
+[heading Behavior]
+* `push_back<T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` have been appended to the front of `T`'s parameter list [Args].
+* [VarArgs] remain if present in `T`.
+
 [heading Example]
 [import ../example/push_front.cpp]
 [push_front]
@@ -1731,14 +1757,14 @@ TODO
 [section:ref_pop_back pop_back]
 TODO
 [heading Example]
-[/import ../example/pop_back.cpp]
+[import ../example/pop_back.cpp]
 [pop_back]
 [endsect]
 
 [section:ref_push_front pop_front]
 TODO
 [heading Example]
-[/import ../example/pop_front.cpp]
+[import ../example/pop_front.cpp]
 [pop_front]
 [endsect]
 
