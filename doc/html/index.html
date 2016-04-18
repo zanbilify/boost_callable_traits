@@ -164,9 +164,22 @@
 <dt><span class="section"><a href="index.html#callable_traits.introduction.quick_example">Quick Example</a></span></dt>
 </dl></div>
 <p>
-      <code class="literal">CallableTraits</code> is a cross-platform C++14 library for the
-      inspection, decomposition, and synthesis of C++ callable types. <code class="literal">CallableTraits</code>
-      is header-only, and does not depend on any non-standard headers. <code class="literal">CallableTraits</code>
+      <code class="literal">CallableTraits</code> is a C++11/14/17 header-only library for
+      the inspection, synthesis, and decomposition of callable types. Whether it's
+      calling conventions, <code class="computeroutput"><span class="keyword">const</span> <span class="keyword">volatile</span>
+      <span class="special">&amp;&amp;</span></code>, or container-like manipulation
+      of parameter lists, <code class="literal">CallableTraits</code> provides all the tools
+      you need to <span class="bold"><strong>completely rid your codebase of function
+      type specializations</strong></span>. While not for everyone, <code class="literal">CallableTraits</code>
+      offers a comprehensive, fine-grained assortment of traits and metafunctions
+      for building and ripping apart C++'s most complicated and obscure types with
+      ease. <code class="literal">CallableTraits</code> fills the gaps where existing library
+      solutions fall short, aiming to be the "complete type manipulation facility
+      for function types" mentioned in the last section of the C++17 proposal
+      [p0172](http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html).
+      <code class="literal">CallableTraits</code> currently supports GCC 4.8 and later, Clang
+      3.5 and later, and MSVC 19. <code class="literal">CallableTraits</code> is header-only,
+      and does not depend on any non-standard headers. <code class="literal">CallableTraits</code>
       is currently hosted at <a href="https://github.com/badair/callable_traits" target="_top">GitHub</a>.
     </p>
 <div class="note"><table border="0" summary="Note">
