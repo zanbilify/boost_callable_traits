@@ -7,10 +7,10 @@ set project_name=%4
 
 ::process 1st argument
 if "%~1"=="x64" (
-  set cmake_cmd=cmake .. -TLLVM-vs2014 -G"Visual Studio 14 2015 Win64"  -DCMAKE_CXX_FLAGS="-Qunused-arguments" -DCALLABLE_TRAITS_BUILD_EXPERIMENTAL
+  set cmake_cmd=cmake .. -G"Visual Studio 14 2015 Win64" -TLLVM-vs2014 -DCMAKE_CXX_FLAGS="-Qunused-arguments" -DCALLABLE_TRAITS_BUILD_EXPERIMENTAL
 ) else (
   if "%~1"=="Win32" (
-    set cmake_cmd=cmake .. -TLLVM-vs2014 -G"Visual Studio 14 2015" -DCALLABLE_TRAITS_BUILD_EXPERIMENTAL=ON
+    set cmake_cmd=cmake .. -G"Visual Studio 14 2015" -TLLVM-vs2014 -DCALLABLE_TRAITS_BUILD_EXPERIMENTAL=ON
   )
 )
 if not defined cmake_cmd (
