@@ -245,7 +245,6 @@ At a glance, there appear to be around 260 [@http://stackoverflow.com/search?q=c
 [section:compatibility Compatibility]
 
 [section:platforms Supported Platforms ]
-[libname] is currently tested and working on the following platforms, unless otherwise noted:
 
 [template full_support[][role green Yes] ]
 [template partial_support[][role green Yes (basic)] ]
