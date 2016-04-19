@@ -10,8 +10,7 @@
 #
 # To know how to use this script: ./wandbox.py --help
 #
-# Copyright Louis Dionne 2015
-# Modified Work Copyright Barrett Adair 2015
+# Copyright Louis Dionne 2013-2016
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 
@@ -22,8 +21,6 @@ import os
 import re
 import urllib2
 
-main = '..\\example\\intro.cpp'
-directory = '..\\include\\'
 
 # Strips C and C++ comments from the given string.
 #
@@ -62,18 +59,61 @@ def headers(path):
                 for file in fnmatch.filter(files, "*.hpp")
     ]
 
-cpp = os.path.abspath(main)
-	
-print upload({
-    'code': open(cpp).read(),
-    'codes': [{
-        'file': os.path.relpath(header, directory).replace('\\','/'),
-        'code': strip_comments(open(header).read())
-    } for header in headers(directory)],
-    'options': 'warning,c++14',
-    'compiler': 'clang-3.6',
-    'save': True,
-    'compiler-option-raw': '-I.'
-})
 
-raw_input('Press <ENTER> to continue')
+def main():
+    parser = argparse.ArgumentParser(description=
+        """Upload a directory to Wandbox (http://melpon.org/wandbox).
+
+           On success, the program prints a permalink to the uploaded
+           directory on Wandbox and returns 0. On error, it prints the
+           response from the Wandbox API and returns 1.
+
+           Note that the comments are stripped from all the headers in the
+           uploaded directory.
+        """
+    )
+    parser.add_argument('directory', type=str, help=
+        """A directory to upload to Wandbox.
+
+           The path may be either absolute or relative to the current directory.
+           However, the names of the files uploaded to Wandbox will all be
+           relative to this directory. This way, one can easily specify the
+           directory to be '/some/project/include', and the uploaded files
+           will be uploaded as-if they were rooted at '/some/project/include'
+        """)
+    parser.add_argument('main', type=str, help=
+        """The main source file.
+
+           The path may be either absolute or relative to the current directory.
+        """
+    )
+    args = parser.parse_args()
+    directory = os.path.abspath(args.directory)
+    if not os.path.exists(directory):
+        raise Exception("'%s' is not a valid directory" % args.directory)
+
+    cpp = os.path.abspath(args.main)
+    if not os.path.exists(cpp):
+        raise Exception("'%s' is not a valid file name" % args.main)
+
+    response = upload({
+        'code': open(cpp).read(),
+        'codes': [{
+            'file': os.path.relpath(header, directory).replace('\\', '/'),
+            'code': strip_comments(open(header).read())
+        } for header in headers(directory)],
+        'options': 'warning,c++14',
+        'compiler': 'clang-3.6',
+        'save': True,
+        'compiler-option-raw': '-I.'
+    })
+
+    if response['status'] == '0':
+        print response['url']
+        return 0
+    else:
+        print response
+        return 1
+
+
+exit(main())
