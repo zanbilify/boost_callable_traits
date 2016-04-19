@@ -160,6 +160,8 @@ It is the author's hope that future versions of [libname] will offer a stable, t
 
 [libname] is currently hosted at [repo]. [*[libname] is not a Boost library.]
 
+[note A few features are disabled for older/non-compliant compilers. See the [link_compatibility_issues] section for more details. ]
+
 [section:prereqs Prerequisite Topics]
 
 This documentation will be most beneficial to readers who posess a basic understanding of the following C++ features:
@@ -280,10 +282,6 @@ CallableTraits has not been tested on every platform under the sun. If you find 
 
 [section:compatibility_issues Known Issues]
 
-* Documentation, test coverage, and API tweaks are currently the primary focus of development
-* Check out the [@https://github.com/badair/callable_traits/issues page] for more information.
-* [libname] has ['not] yet been tested on all minor/patch versions of the supported compilers. If you experience problems on a supported platform, [link_contact_the_author].
-* Calling convention support is largely untested. Please [link_contact_the_author] if you have experience in this domain.
 * [link_is_constexpr] and [link_can_invoke_constexpr] always `std::false_type` on the following platforms:
   * MSVC
   * GCC < 5
@@ -296,7 +294,10 @@ CallableTraits has not been tested on every platform under the sun. If you find 
   * GCC < 4.9.2
 * [link_abominable] reference-qualified member functions are not compatible with some older compilers. Attempts to create a pointer to a reference-qualified member function using [libname] metafunctions will have no effect on the following platforms:
   * GCC < 4.9.2
-  
+* [libname] has ['not] yet been tested on all minor/patch versions of the supported compilers. If you experience problems on a supported platform, [link_contact_the_author].
+* Calling convention support is largely untested. Please [link_contact_the_author] if you have experience in this domain.
+* Documentation, test coverage, and API tweaks are currently the primary focus of development. Check out the [@https://github.com/badair/callable_traits/issues Issues page] for more information about progress on this front.
+
 [endsect][/section:compatibility_issues]
 
 [endsect][/section:compatibility]
