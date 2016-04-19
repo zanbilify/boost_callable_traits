@@ -434,7 +434,7 @@ Even though the [libname] headers do not rely on external dependencies, you'll n
 
 [heading One-click scripts]
  
-For convenience, one-click testing scripts for Linux and Windows are packaged with [libname], which can be run from any directory. Running one of these scripts will create a `build-xxx` subdirectory in the [libname] root directory, and perform all testing there. Even though these scripts were designed to be as generic as possible, issues may exist because they have not seen widespread use. Refer to the console instructions below if the provided testing scripts do not work for you.
+For convenience, one-click testing scripts for Linux and Windows are packaged with [libname], which must be run from the directory in which the script resides. Running one of these scripts will create a `build-xxx` subdirectory in the [libname] root directory, and perform all testing there. Even though these scripts were designed to be as generic as possible, issues may exist because they have not seen widespread use. Refer to the console instructions below if the provided testing scripts do not work for you.
 
 First, clone the repository:
 
