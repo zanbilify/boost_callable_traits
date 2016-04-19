@@ -13,7 +13,11 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_EMPTY_
 #define CALLABLE_TRAITS_EMPTY CALLABLE_TRAITS_EMPTY_
 
+#ifndef __clang__
 #if defined __GNUC__
+
+#define CALLABLE_TRAITS_GCC
+
 #if __GNUC__ >= 5
 #define CALLABLE_TRAITS_GCC_AT_LEAST_5_0_0
 #define CALLABLE_TRAITS_GCC_AT_LEAST_4_9_2
@@ -22,7 +26,11 @@ Distributed under the Boost Software License, Version 1.0.
 #else
 #define CALLABLE_TRAITS_GCC_OLDER_THAN_4_9_2
 #endif //#if __GNUC__ >= 5
+
 #endif //#if defined __GNUC__
+#endif //#ifndef __clang__
+
+
 
 #ifdef _MSC_VER
 #ifdef __clang__
@@ -69,7 +77,7 @@ Distributed under the Boost Software License, Version 1.0.
 #endif //#ifdef CALLABLE_TRAITS_MSVC
 
 
-#ifdef __GNUC__
+#ifdef CALLABLE_TRAITS_GCC
 
 #ifndef CALLABLE_TRAITS_GCC_AT_LEAST_5_0_0
 #define CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
@@ -82,7 +90,7 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
 #endif //#ifndef CALLABLE_TRAITS_GCC_AT_LEAST_4_9_2
 
-#endif //#ifdef __GNUC__
+#endif//#ifdef CALLABLE_TRAITS_GCC
 
 
 #ifdef CALLABLE_TRAITS_GCC_OLDER_THAN_4_9_2
