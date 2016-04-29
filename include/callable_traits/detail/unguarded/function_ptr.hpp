@@ -27,7 +27,6 @@ struct function<OriginalType, CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(Ar
     static constexpr bool value = true;
 
     using is_function = std::true_type;
-    using is_functionish = std::true_type;
     using traits = function;
     using return_type = Return;
     using arg_types = std::tuple<Args...>;

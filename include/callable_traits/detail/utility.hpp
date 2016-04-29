@@ -18,11 +18,11 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-struct constants {
-    static constexpr std::size_t arity_search_limit = CALLABLE_TRAITS_ARITY_SEARCH_LIMIT;
-};
+    struct constants {
+        static constexpr std::size_t arity_search_limit = CALLABLE_TRAITS_ARITY_SEARCH_LIMIT;
+    };
 
-struct invalid_type { invalid_type() = delete; };
+    struct invalid_type { invalid_type() = delete; };
 
 
     namespace detail {
@@ -131,7 +131,10 @@ struct invalid_type { invalid_type() = delete; };
         template<typename T, typename Class>
         using add_member_pointer = T Class::*;
 
-
+		template<typename Traits>
+        using can_accept_member_qualifiers = std::integral_constant<bool,
+			Traits::is_function::value || Traits::has_member_qualifiers_function::value>;
+		
         namespace util_detail {
 
             template<typename T>

@@ -16,16 +16,23 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS(QUAL)              \
 template<typename Return, typename... Args>                        \
 struct set_function_qualifiers_t <                                 \
-    flag_map<int QUAL>::value, Return, Args...                     \
-> {                                                                \
+    flag_map<int QUAL>::value, Return, Args...> {                  \
+                                                                   \
     using type = Return(Args...) QUAL;                             \
 };                                                                 \
                                                                    \
 template<typename Return, typename... Args>                        \
 struct set_varargs_function_qualifiers_t <                         \
-    flag_map<int QUAL>::value, Return, Args...                     \
-> {                                                                \
+    flag_map<int QUAL>::value, Return, Args...> {                  \
+                                                                   \
     using type = Return(Args..., ...) QUAL;                        \
+};                                                                 \
+                                                                   \
+template<typename T>                                               \
+struct set_other_qualifiers_t <                                    \
+    flag_map<int QUAL>::value, T> {                                \
+                                                                   \
+    using type = T QUAL;                                           \
 }                                                                  \
 /**/
 
@@ -41,6 +48,11 @@ namespace callable_traits {
         template<flags Applied, typename Return, typename... Args>
         struct set_varargs_function_qualifiers_t {
             using type = Return(Args..., ...);
+        };
+
+        template<flags Applied, typename T>
+        struct set_other_qualifiers_t {
+            using type = T;
         };
 
 #ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
@@ -70,6 +82,10 @@ namespace callable_traits {
         template<flags Flags, typename... Ts>
         using set_varargs_function_qualifiers =
             typename set_varargs_function_qualifiers_t<Flags, Ts...>::type;
+
+        template<flags Flags, typename T>
+        using set_other_qualifiers =
+            typename set_other_qualifiers_t<Flags, T>::type;
     }
 }
 

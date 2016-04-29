@@ -133,15 +133,11 @@ namespace callable_traits {
         template<> struct flag_map<int const volatile &&> { static constexpr flags value = const_ | volatile_ | rref_; };
 
         template<typename T>
-        class qualifier_traits {
-
-        protected:
+        struct qualifier_traits {
 
             static constexpr flags cv_flags = cv_of<T>::value;
             static constexpr flags ref_flags = ref_of<T>::value;
             static constexpr flags q_flags = cv_flags | ref_flags;
-
-        public:
 
             using has_member_qualifiers = std::integral_constant<bool, q_flags != default_>;
             using is_const_member = std::integral_constant<bool, 0 < (cv_flags & const_)>;

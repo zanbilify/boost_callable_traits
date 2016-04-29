@@ -109,6 +109,9 @@ struct pmf<OriginalType, Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) C
     template<template<class...> class Container>
     using expand_args = Container<Args...>;
 
+    template<template<class...> class Container>
+    using expand_invoke_args = Container<invoke_type, Args...>;
+
     using clear_args = typename copy_cvr<
         Return(CALLABLE_TRAITS_VARARGS_CC T::*)() CALLABLE_TRAITS_INCLUDE_QUALIFIERS,
         OriginalType

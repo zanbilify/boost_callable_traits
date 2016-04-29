@@ -105,6 +105,9 @@ struct pmf<OriginalType,
     template<template<class...> class Container>
     using expand_args = Container<Args...>;
 
+    template<template<class...> class Container>
+    using expand_invoke_args = Container<invoke_type, Args...>;
+
 #undef CALLABLE_TRAITS_BEGIN_PACK_MANIP
 #undef CALLABLE_TRAITS_ARGS_PACK
 #undef CALLABLE_TRAITS_END_PACK_MANIP

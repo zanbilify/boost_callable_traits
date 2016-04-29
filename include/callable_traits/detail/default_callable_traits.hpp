@@ -52,12 +52,8 @@ namespace callable_traits {
 			// std::true_type for plain function types only
 			using is_function = std::false_type;
 			
-			// std::true_type for plain function types with qualifiers
+            // std::true_type for function types with qualifiers
 			using has_member_qualifiers_function = std::false_type;
-			
-			// std::true_type for function pointers, function references
-			// and plain function types
-			using is_functionish = std::false_type;
 			
 			// std::true_type for callables with C-style variadics
 			using has_varargs = std::false_type;
@@ -159,6 +155,9 @@ namespace callable_traits {
             template<template<class...> class Container>
             using expand_args = invalid_type;
 			
+            template<template<class...> class Container>
+            using expand_invoke_args = invalid_type;
+
 			using clear_args = invalid_type;
 			
 			template<typename... NewArgs>
