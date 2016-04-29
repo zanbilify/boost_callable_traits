@@ -38,13 +38,13 @@ namespace callable_traits {
         template<typename T>
         using qualified_parent_class_of = detail::fail_if_invalid<
             typename detail::traits<T>::invoke_type,
-            detail::invoke_args_error<false>>;
+            detail::qualified_parent_class_of_error<false>>;
     }
 
     template<typename T>
     using qualified_parent_class_of = detail::fail_if_invalid<
         typename detail::traits<T>::invoke_type,
-        detail::invoke_args_error<true>>;
+        detail::qualified_parent_class_of_error<true>>;
 }
 
 #endif //#ifndef CALLABLE_TRAITS_QUALIFIED_PARENT_CLASS_OF_HPP

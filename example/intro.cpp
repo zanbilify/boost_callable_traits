@@ -141,7 +141,7 @@ int main() {
     static_assert(std::is_same<fn, expected_fn>::value, "");
 
     // We just created an abominable function type - notice the const
-    // qualifier! ``namespace_scoped``remove_member_const accepts abominable
+    // qualifier. ``namespace_scoped``remove_member_const accepts abominable
     // types too (and so does any feature where it is legal to do so):
     using not_abominable = ct::remove_member_const<fn>;
     using expected_fn2 = void (int, int&&, const int&, void*);
