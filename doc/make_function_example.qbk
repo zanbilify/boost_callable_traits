@@ -1,0 +1,20 @@
+[section Example: std::function sugar]
+
+[heading Explanation]
+
+At a glance, there appear to be around 260 [@http://stackoverflow.com/search?q=convert+std%3A%3Abind+to+std%3A%3Afunction search results] on Stack Overflow concerning the conversion from `std::bind` results to `std::function`, and around 340 [@http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction search results] concerning the conversion of lambdas to `std::function`. There are few good reasons for converting `std::bind` result objects into `std::function` objects, and fewer still for creating `std::function` objects without explicitly specifying the function type. Regardless, here's a `make_function` function, which can...
+
+# Construct an `std::function<T>` where T is not explicitly supplied by the user
+# Construct an `std::function<T>` where T is the implied "signature" of an `std::placeholders` expression
+
+`make_function` is rather silly, especially since we have no contextual reason for incurring the costs of type erasure. Still, it's a lightweight example of the kind of metaprogramming you can do with [libname].
+
+[heading Usage]
+[note Due to limitations in the Microsoft compiler, this example will not compile with MSVC. For more information, refer to the [link_compatibility_issues] section.]
+[import ../example/make_function_example.cpp]
+[make_function_example]
+
+[heading Implementation]
+[import ../example/make_function.hpp]
+[make_function_header]
+[endsect]

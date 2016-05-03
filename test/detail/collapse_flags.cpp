@@ -13,6 +13,7 @@ Distributed under the Boost Software License, Version 1.0.
 #endif //CT_ASSERT
 
 using namespace callable_traits;
+using callable_traits::detail::collapse_flags;
 
 int main() {
 

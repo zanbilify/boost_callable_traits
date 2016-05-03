@@ -19,9 +19,9 @@ namespace callable_traits {
 
     namespace detail {
 
-		namespace polyfills {
-			
-		//polyfill for C++17 std::conjunction
+        namespace polyfills {
+            
+        //polyfill for C++17 std::conjunction
         template<typename...>
         struct conjunction
             : std::true_type {};
@@ -33,8 +33,8 @@ namespace callable_traits {
         template<typename T, typename... Ts>
         struct conjunction<T, Ts...>
             : std::conditional<T::value != false, T, conjunction<Ts...>>::type {};
-			
-		}
+            
+        }
     }
 }
 

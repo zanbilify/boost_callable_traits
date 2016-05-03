@@ -53,14 +53,15 @@ if(NOT MSVC)
     callable_traits_append_flag(callable_traits_HAS_STDCXX1Y                   -std=c++1y)
 endif()
 
-#find_package(Boost)
-#if (Boost_FOUND)
-#    include_directories(${Boost_INCLUDE_DIRS})
-#else()
-#    message(WARNING
-#        "The Boost library headers were not found; targets depending "
-#        "on Boost won't be available.")
-#endif()
+find_package(Boost 1.59)
+if (Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+else()
+    message(WARNING
+        "The Boost library headers were not found; targets depending "
+        "on Boost won't be available.")
+endif()
+
 #
 #find_package(Doxygen)
 ##find_package(Meta)
@@ -106,6 +107,7 @@ endfunction()
 ##############################################################################
 # Setup the `check` target to build and then run all the tests and examples.
 ##############################################################################
+
 
 add_custom_target(check
     COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure

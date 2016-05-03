@@ -30,8 +30,9 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/can_invoke_constexpr.hpp>
 #include <callable_traits/clear_args.hpp>
 #include <callable_traits/expand_args.hpp>
-#include <callable_traits/expand_invoke_args.hpp>
 #include <callable_traits/function_type.hpp>
+#include <callable_traits/get_member_qualifier_flags.hpp>
+#include <callable_traits/get_qualifier_flags.hpp>
 #include <callable_traits/has_calling_convention.hpp>
 #include <callable_traits/has_member_qualifiers.hpp>
 #include <callable_traits/has_same_qualifiers.hpp>
@@ -40,6 +41,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/insert_at.hpp>
 #include <callable_traits/is_const_member.hpp>
 #include <callable_traits/is_constexpr.hpp>
+#include <callable_traits/is_like_function.hpp>
 #include <callable_traits/is_lvalue_reference_member.hpp>
 #include <callable_traits/is_reference_member.hpp>
 #include <callable_traits/is_rvalue_reference_member.hpp>
@@ -61,5 +63,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/remove_member_volatile.hpp>
 #include <callable_traits/remove_varargs.hpp>
 #include <callable_traits/result_of.hpp>
-
+#include <callable_traits/set_member_qualifiers.hpp>
+#include <callable_traits/set_qualifiers.hpp>
 #endif

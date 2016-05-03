@@ -18,19 +18,24 @@ Distributed under the Boost Software License, Version 1.0.
 
 #define CALLABLE_TRAITS_GCC
 
-#if __GNUC__ >= 5
+#if __GNUC__ >= 6
+#define CALLABLE_TRAITS_GCC_AT_LEAST_6_0_0
 #define CALLABLE_TRAITS_GCC_AT_LEAST_5_0_0
 #define CALLABLE_TRAITS_GCC_AT_LEAST_4_9_2
+
+#elif __GNUC__ >= 5
+#define CALLABLE_TRAITS_GCC_AT_LEAST_5_0_0
+#define CALLABLE_TRAITS_GCC_AT_LEAST_4_9_2
+
 #elif __GNUC__ == 4 && __GNUC_MINOR__ == 9 && __GNUC_PATCHLEVEL__ >= 2
 #define CALLABLE_TRAITS_GCC_AT_LEAST_4_9_2
+
 #else
 #define CALLABLE_TRAITS_GCC_OLDER_THAN_4_9_2
-#endif //#if __GNUC__ >= 5
+#endif //#if __GNUC__ >= 6
 
 #endif //#if defined __GNUC__
 #endif //#ifndef __clang__
-
-
 
 #ifdef _MSC_VER
 #ifdef __clang__

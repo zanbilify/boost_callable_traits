@@ -23,7 +23,7 @@ namespace ct = callable_traits;
 
 template<typename T>
 void assert_rvalue_qualified() {
-	
+    
     CT_ASSERT(ct::is_rvalue_reference_member<T>());
     CT_ASSERT(ct::is_rvalue_reference_member<T&>());
     CT_ASSERT(ct::is_rvalue_reference_member<T &&>());
@@ -52,7 +52,7 @@ void assert_rvalue_qualified() {
 
 template<typename T>
 void assert_not_rvalue_qualified() {
-	
+    
     CT_ASSERT(!ct::is_rvalue_reference_member<T>());
     CT_ASSERT(!ct::is_rvalue_reference_member<T&>());
     CT_ASSERT(!ct::is_rvalue_reference_member<T &&>());
@@ -164,11 +164,11 @@ int main() {
         CT_ASSERT(ct::is_rvalue_reference_member<cvr>());
     }
 
-	using f_ptr = void(*)();
+    using f_ptr = void(*)();
     assert_not_rvalue_qualified<f_ptr>();
-	assert_not_rvalue_qualified<f_ptr foo::*>();
-	assert_not_rvalue_qualified<int foo::*>();
-	assert_not_rvalue_qualified<void(&)()>();
+    assert_not_rvalue_qualified<f_ptr foo::*>();
+    assert_not_rvalue_qualified<int foo::*>();
+    assert_not_rvalue_qualified<void(&)()>();
 }
 
 #endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS

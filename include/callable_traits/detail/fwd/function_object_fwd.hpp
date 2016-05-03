@@ -37,6 +37,10 @@ namespace callable_traits {
         };
 
         template<typename T>
+        struct ambiguous_function_object_traits
+            : qualifier_traits<T>, default_callable_traits {};
+
+        template<typename T>
         using default_to_function_object = typename std::conditional<
             has_normal_call_operator<T>::value,
             T,
@@ -47,10 +51,9 @@ namespace callable_traits {
         using function_object_base = typename std::conditional<
             has_normal_call_operator<T>::value,
             pmf<decltype(&default_to_function_object<T>::operator())>,
-            default_callable_traits
+            ambiguous_function_object_traits<T>
         >::type;
 
-        //Base is defaulted
         template<typename T, typename Base = function_object_base<shallow_decay<T>>>
         struct function_object;
     }

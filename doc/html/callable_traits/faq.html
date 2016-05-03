@@ -30,6 +30,8 @@
 <dt><span class="section"><a href="faq.html#callable_traits.faq.reasons">Why should I use <code class="literal">CallableTraits</code>?</a></span></dt>
 <dt><span class="section"><a href="faq.html#callable_traits.faq.reasons0">What makes <code class="literal">CallableTraits</code>
       unique?</a></span></dt>
+<dt><span class="section"><a href="faq.html#callable_traits.faq.faq_function_types">Why not update
+      and extend <code class="literal">Boost.FunctionTypes</code> instead?</a></span></dt>
 <dt><span class="section"><a href="faq.html#callable_traits.faq.why_does_namespace_scoped_args_a">Why
       does <code class="literal">callable_traits::</code><code class="literal">args</code> alias a <code class="literal">std::tuple</code>?</a></span></dt>
 <dt><span class="section"><a href="faq.html#callable_traits.faq.why_are_the_libname_alias_templa">Why
@@ -190,6 +192,26 @@
         These features are currently deemed experimental, because they greatly increase
         the test surface of <code class="literal">CallableTraits</code>, are platform-specific,
         and are not yet fully tested on any platform.
+      </p>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.faq.faq_function_types"></a><a class="link" href="faq.html#callable_traits.faq.faq_function_types" title="Why not update and extend Boost.FunctionTypes instead?">Why not update
+      and extend <code class="literal">Boost.FunctionTypes</code> instead?</a>
+</h3></div></div></div>
+<p>
+        As discussed in the introduction, <code class="literal">Boost.FunctionTypes</code>
+        is a good tool for many situations. However, the interface is unpleasant.
+        It which relies heavily on both the MPL and tag types, for problems that
+        are more simply solved with neither. Using <code class="literal">Boost.FunctionTypes</code>
+        requires an understanding of MPL sequences, as well as an understanding of
+        the <code class="literal">Boost.FunctionTypes</code> "big picture." <code class="literal">Boost.FunctionTypes</code>
+        is more complicated than is necessary, and takes longer to grok. In the C++
+        of today, <code class="literal">Boost.FunctionTypes</code> is also sorely lacking in
+        features. Retrofitting <code class="literal">Boost.FunctionTypes</code> with the features
+        found in <code class="literal">CallableTraits</code> would mean adding many more tag
+        types, supporting old compilers with too much conditional compilation, and
+        continuing to work around an unnecessary MPL dependency.
       </p>
 </div>
 <div class="section">
