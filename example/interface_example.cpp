@@ -19,18 +19,20 @@ int main(){ return 0; }
 //[ interface_example
 
 #include <iostream>
+#include <typeinfo>
 
 #include "interface.hpp"
 
-DEFINE_INTERFACE(interface_x,
-    (( a_func, void(int) const ))
-    (( a_func, void(long) const ))
-    (( another_func, int() ))
-    (( some_data, const char* ))
+DEFINE_INTERFACE( interface_x,
+    (( a_func,       void(int) const  ))
+    (( a_func,       void(long) const ))
+    (( another_func, int()            ))
+    (( some_data,    const char*      ))
 );
 
 // two classes that implement interface_x
 struct a_class {
+	
     void a_func(int v) const {
         std::cout << "a_class::void a_func(int v = " << v << ")" << std::endl;
     }
@@ -66,6 +68,7 @@ struct another_class {
 };
 
 void print_data(interface_x obj) {
+	
     std::cout << obj.some_data() << std::endl;
 }
 
