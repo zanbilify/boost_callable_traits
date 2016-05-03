@@ -190,18 +190,20 @@
       macro. The implementation can be found in the following section.
     </p>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">typeinfo</span><span class="special">&gt;</span>
 
 <span class="preprocessor">#include</span> <span class="string">"interface.hpp"</span>
 
-<span class="identifier">DEFINE_INTERFACE</span><span class="special">(</span><span class="identifier">interface_x</span><span class="special">,</span>
-    <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
-    <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">long</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
-    <span class="special">((</span> <span class="identifier">another_func</span><span class="special">,</span> <span class="keyword">int</span><span class="special">()</span> <span class="special">))</span>
-    <span class="special">((</span> <span class="identifier">some_data</span><span class="special">,</span> <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*</span> <span class="special">))</span>
+<span class="identifier">DEFINE_INTERFACE</span><span class="special">(</span> <span class="identifier">interface_x</span><span class="special">,</span>
+    <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span>       <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span>  <span class="special">))</span>
+    <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span>       <span class="keyword">void</span><span class="special">(</span><span class="keyword">long</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
+    <span class="special">((</span> <span class="identifier">another_func</span><span class="special">,</span> <span class="keyword">int</span><span class="special">()</span>            <span class="special">))</span>
+    <span class="special">((</span> <span class="identifier">some_data</span><span class="special">,</span>    <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*</span>      <span class="special">))</span>
 <span class="special">);</span>
 
 <span class="comment">// two classes that implement interface_x</span>
 <span class="keyword">struct</span> <span class="identifier">a_class</span> <span class="special">{</span>
+	
     <span class="keyword">void</span> <span class="identifier">a_func</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">v</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span>
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"a_class::void a_func(int v = "</span> <span class="special">&lt;&lt;</span> <span class="identifier">v</span> <span class="special">&lt;&lt;</span> <span class="string">")"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
     <span class="special">}</span>
@@ -237,6 +239,7 @@
 <span class="special">};</span>
 
 <span class="keyword">void</span> <span class="identifier">print_data</span><span class="special">(</span><span class="identifier">interface_x</span> <span class="identifier">obj</span><span class="special">)</span> <span class="special">{</span>
+	
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">obj</span><span class="special">.</span><span class="identifier">some_data</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
 <span class="special">}</span>
 
