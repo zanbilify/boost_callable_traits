@@ -10,10 +10,11 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_FUNCTION_HPP
 #define CALLABLE_TRAITS_DETAIL_FUNCTION_HPP
 
+#include <callable_traits/qualifier_flags.hpp>
+#include <callable_traits/detail/qualifier_traits.hpp>
 #include <callable_traits/detail/fwd/function_fwd.hpp>
 #include <callable_traits/detail/calling_conventions.hpp>
 #include <callable_traits/detail/set_function_qualifiers.hpp>
-#include <callable_traits/detail/qualifiers.hpp>
 #include <callable_traits/detail/default_callable_traits.hpp>
 #include <callable_traits/config.hpp>
 
@@ -172,14 +173,14 @@ namespace callable_traits {
 
             template<typename NewReturn>
             using apply_return = typename base::template apply_return<NewReturn>&;
-			
+            
             using clear_args = typename base::clear_args&;
-			
-			template<typename... NewArgs>
-			using push_front = typename base::template push_front<NewArgs...>&;
+            
+            template<typename... NewArgs>
+            using push_front = typename base::template push_front<NewArgs...>&;
 
-			template<typename... NewArgs>
-			using push_back = typename base::template push_back<NewArgs...>&;
+            template<typename... NewArgs>
+            using push_back = typename base::template push_back<NewArgs...>&;
 
             template<std::size_t Count>
             using pop_back = typename base::template pop_back<Count>&;

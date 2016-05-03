@@ -23,64 +23,64 @@ namespace callable_traits {
             static_assert(Sfinae,
                 "Unknown calling convention. Expected a calling convention tag.");
         };
-		
-		template<bool Sfinae>
+        
+        template<bool Sfinae>
         struct add_calling_convention_error<Sfinae, stdcall_tag> {
 
-			#ifdef CALLABLE_TRAITS_ENABLE_STDCALL
+            #ifdef CALLABLE_TRAITS_ENABLE_STDCALL
             static_assert(Sfinae,
-				"Unable to add __stdcall to type T in "
-				"callable_traits::add_calling_convention<T, "
+                "Unable to add __stdcall to type T in "
+                "callable_traits::add_calling_convention<T, "
                 "callable_traits::stdcall_tag>.");
-			#else
+            #else
             static_assert(Sfinae,
-				"__stdcall functionality not enabled. Define "
-				"CALLABLE_TRAITS_ENABLE_STDCALL to enable.");	
-			#endif
+                "__stdcall functionality not enabled. Define "
+                "CALLABLE_TRAITS_ENABLE_STDCALL to enable.");    
+            #endif
         };
-		
-		template<bool Sfinae>
+        
+        template<bool Sfinae>
         struct add_calling_convention_error<Sfinae, fastcall_tag> {
 
-			#ifdef CALLABLE_TRAITS_ENABLE_FASTCALL
+            #ifdef CALLABLE_TRAITS_ENABLE_FASTCALL
             static_assert(Sfinae,
-				"Unable to add __fastcall to type T in "
-				"callable_traits::add_calling_convention<T, "
+                "Unable to add __fastcall to type T in "
+                "callable_traits::add_calling_convention<T, "
                 "callable_traits::fastcall_tag>.");
-			#else
+            #else
             static_assert(Sfinae,
-				"__fastcall functionality not enabled. Define "
-				"CALLABLE_TRAITS_ENABLE_FASTCALL to enable.");	
-			#endif
+                "__fastcall functionality not enabled. Define "
+                "CALLABLE_TRAITS_ENABLE_FASTCALL to enable.");    
+            #endif
         };
-		
-		template<bool Sfinae>
+        
+        template<bool Sfinae>
         struct add_calling_convention_error<Sfinae, cdecl_tag> {
 
-			#ifdef CALLABLE_TRAITS_ENABLE_CDECL
+            #ifdef CALLABLE_TRAITS_ENABLE_CDECL
             static_assert(Sfinae,
-				"Unable to add __cdecl to type T in "
-				"callable_traits::add_calling_convention<T, "
+                "Unable to add __cdecl to type T in "
+                "callable_traits::add_calling_convention<T, "
                 "callable_traits::cdecl_tag>.");
-			#else
+            #else
             static_assert(Sfinae,
-				"__cdecl functionality not enabled. Define "
-				"CALLABLE_TRAITS_ENABLE_CDECL to enable.");	
-			#endif
+                "__cdecl functionality not enabled. Define "
+                "CALLABLE_TRAITS_ENABLE_CDECL to enable.");    
+            #endif
         };
-		
-		template<bool Sfinae>
+        
+        template<bool Sfinae>
         struct add_calling_convention_error<Sfinae, pascal_tag> {
 
 #ifdef CALLABLE_TRAITS_ENABLE_PASCAL
             static_assert(Sfinae,
-				"Unable to add pascal to type T in "
-				"callable_traits::add_calling_convention<T, "
+                "Unable to add pascal to type T in "
+                "callable_traits::add_calling_convention<T, "
                 "callable_traits::pascal_tag>.");
 #else
             static_assert(Sfinae,
-				"pascal functionality not enabled. Define "
-				"CALLABLE_TRAITS_ENABLE_PASCAL to enable.");	
+                "pascal functionality not enabled. Define "
+                "CALLABLE_TRAITS_ENABLE_PASCAL to enable.");    
 #endif
         };
     }

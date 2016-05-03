@@ -27,7 +27,6 @@ struct function<OriginalType, CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(Ar
     static constexpr bool value = true;
 
     using is_function = std::true_type;
-    using is_functionish = std::true_type;
     using traits = function;
     using return_type = Return;
     using arg_types = std::tuple<Args...>;
@@ -60,10 +59,10 @@ struct function<OriginalType, CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(Ar
         OriginalType
     >::type;
 
-	using clear_args = typename copy_cvr<
-		CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(),
-		OriginalType
-	>::type;
+    using clear_args = typename copy_cvr<
+        CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(),
+        OriginalType
+    >::type;
 
 #undef CALLABLE_TRAITS_BEGIN_PACK_MANIP
 #undef CALLABLE_TRAITS_ARGS_PACK

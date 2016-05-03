@@ -1,0 +1,83 @@
+[article Example: Java-style interfaces without inheritance
+    [quickbook 1.6]
+    [id callable_traits_interface_example]
+        [copyright 2016 (Modified Work) Barrett Adair, 2007 Tobias Schwinger]
+    [authors [Adair, Barrett], [Schwinger, Tobias]]
+        [license
+        Distributed under the Boost Software License, Version 1.0.
+        (See accompanying file LICENSE.md or copy at
+        [@http://www.boost.org/LICENSE_1_0.txt http://www.boost.org/LICENSE_1_0.txt])
+    ]
+    [source-mode c++]
+        [last-revision $Date$]
+        [lang en]
+]
+
+[heading Explanation]
+
+[note This example is based on the [@http://www.boost.org/doc/libs/1_60_0/libs/function_types/example/interface.hpp Boost.FunctionTypes interface example.]]
+
+An interface is a collection of member function prototypes that may be implemented by classes. Objects of classes that implement the interface can then be assigned to an interface variable through which the interface's functions can be called.
+
+Interfaces are a [@https://en.wikipedia.org/wiki/Interface_(Java) feature of the Java programming language]. The most obvious way to model an interface in C++ is to define a pure abstract base class. However, the inheritance approach is neither the most efficient, nor the most flexible solution. Inheritance-based interfaces have the following drawbacks:
+
+# All functions must be virtual
+  * a function that calls another function of the interface must do so via virtual dispatch (as opposed to inlining)
+  * a class can not implement an interface's (overloaded) function via a function template
+  
+# Inheritance is intrusive
+  * object size increases
+  * clients are always polymorphic
+  * dependencies cause tighter coupling
+
+Fortunately, it is possible to eliminate all the drawbacks mentioned above based on an alternative implementation using template metaprogramming, preprocessor metaprogramming, and type erasure techniques. In this example, we will use `CallableTraits` and the [@http://www.boost.org/doc/libs/1_60_0/libs/preprocessor/doc/index.html Boost.Preprocessor library] to create a macro which is used to define Java-style interfaces [*that can be retroactively applied to any object, with no performance lost versus inheritance polymorphism]. The macro is used like this: 
+
+ DEFINE_INTERFACE( interface_x,
+   (( a_func, void(int) const ))
+   (( a_func, void(long) const ))
+   (( another_func, int() ))
+ );
+ 
+This loosely corresponds to the following Java code:
+
+ public interface interface_x {
+    void a_func(int x);
+	void a_func(long x);
+    int another_func();
+ }
+
+The `DEFINE_INTERFACE` macro is applied to object instances, rather than class definitions. This allows the interfacing of objects whose definitions are not accessible to the programmer. All constraints are still checked at compile time. This example implementation even accounts for member data, such as `some_data` below:
+
+ DEFINE_INTERFACE( interface_y,
+   (( a_func, void(int) const ))
+   (( some_data, int ))
+ );
+
+A more fleshed-out implementation of this would be very useful to anyone using OOP design patterns in C++, or to developers of generic APIs. Arguably, the `DEFINE_INTERFACE` macro is easier than writing pure abstract base classes. However, this implementation is not  without drawbacks. To name a few:
+
+* This example implementation lacks features for memory management and move semantics
+* No custom error messages
+* No comparison operators are overloaded
+* Suboptimal compile-time performance
+* Inherited members cannot be used to implement the interface
+* This example implementation has not been thoroughly tested
+* This example does not build in on the following platforms:
+  * MSVC
+  * GCC < 4.9.2
+  * Clang < 3.7
+
+[heading Usage]
+
+This short program shows how to use the example `DEFINE_INTERFACE` macro. The implementation can be found in the following section.
+
+[import ../example/interface_example.cpp]
+[interface_example]
+
+[heading Implementation]
+
+If you are unfamiliar with type erasure techniques, you may want to go learn about them before reading the implementation header.
+
+[import ../example/interface.hpp]
+[interface_header]
+
+See also: [@http://www.coderage.com/interfaces/ Boost.Interfaces (sic)]

@@ -170,9 +170,9 @@ int main() {
 
 #endif
 
-	using f_ptr = void(*)();
+    using f_ptr = void(*)();
     assert_not_cv_qualified<f_ptr>();
-	assert_not_cv_qualified<f_ptr foo::*>();
-	assert_not_cv_qualified<int foo::*>();
-	assert_not_cv_qualified<void(&)()>();
+    assert_not_cv_qualified<f_ptr foo::*>();
+    assert_not_cv_qualified<int foo::*>();
+    assert_not_cv_qualified<void(&)()>();
 }

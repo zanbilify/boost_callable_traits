@@ -42,13 +42,12 @@ int main() {
     using expected_function_type = void(int, int&&, const int&, void*);
     static_assert(std::is_same<function_type, expected_function_type>::value, "");
 
-    // By design, the ``[libname]`` interface uses constexpr
-    // std::integral_constant functions (whenever sensible).
-    // By also defining the appropriate overloads, this gives
-    // users the option of using either type arguments or a value
-    // arguments, which often eliminates the need for decltype:
-    static_assert(ct::arity<foo>() == 4, "");
-    static_assert(ct::arity(foo{}) == 4, "");
+    // By design, the ``[libname]`` interface uses constexpr functions accepting
+    // objects and returning std::integral_constants (whenever sensible). However,
+    // for those times where you don't have an object at hand, you can also pass 
+    // the type of that object only:
+    static_assert(ct::arity(foo{}) == 4, ""); // with object
+    static_assert(ct::arity<foo>() == 4, ""); // with type
 
     // Attentive readers might notice that the type of the foo{}
     // expression above is foo&&, rather than foo. Indeed,
@@ -142,7 +141,7 @@ int main() {
     static_assert(std::is_same<fn, expected_fn>::value, "");
 
     // We just created an abominable function type - notice the const
-    // qualifier! ``namespace_scoped``remove_member_const accepts abominable
+    // qualifier. ``namespace_scoped``remove_member_const accepts abominable
     // types too (and so does any feature where it is legal to do so):
     using not_abominable = ct::remove_member_const<fn>;
     using expected_fn2 = void (int, int&&, const int&, void*);

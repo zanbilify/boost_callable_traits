@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="CallableTraits">
-<link rel="next" href="callable_traits/function_sugar_example.html" title="Example: std::function sugar">
+<link rel="next" href="callable_traits/quick_example.html" title="Example: Overview">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -17,7 +17,7 @@
 <td align="center"><a href="../../more/index.htm">More</a></td>
 </tr></table>
 <hr>
-<div class="spirit-nav"><a accesskey="n" href="callable_traits/function_sugar_example.html"><img src="../src/images/next.png" alt="Next"></a></div>
+<div class="spirit-nav"><a accesskey="n" href="callable_traits/quick_example.html"><img src="../src/images/next.png" alt="Next"></a></div>
 <div lang="en" class="article">
 <div class="titlepage">
 <div>
@@ -43,10 +43,13 @@
 <dd><dl>
 <dt><span class="section"><a href="index.html#callable_traits.introduction.prereqs">Prerequisite Topics</a></span></dt>
 <dt><span class="section"><a href="index.html#callable_traits.introduction.motivation">Motivation</a></span></dt>
-<dt><span class="section"><a href="index.html#callable_traits.introduction.quick_example">Quick Example</a></span></dt>
+<dt><span class="section"><a href="index.html#callable_traits.introduction.boost_function_types">Regarding
+      <code class="literal">Boost.FunctionTypes</code></a></span></dt>
 </dl></dd>
-<dt><span class="section"><a href="callable_traits/function_sugar_example.html">Example: <code class="literal">std::function</code>
+<dt><span class="section"><a href="callable_traits/quick_example.html">Example: Overview</a></span></dt>
+<dt><span class="section"><a href="callable_traits/example_std_function_sugar.html">Example: std::function
     sugar</a></span></dt>
+<dt><span class="article"><a href="callable_traits_interface_example.html">Example: Java-style interfaces without inheritance</a></span></dt>
 <dt><span class="section"><a href="callable_traits/compatibility.html">Compatibility</a></span></dt>
 <dd><dl><dt><span class="section"><a href="callable_traits/compatibility.html#callable_traits.compatibility.compatibility_issues">Known
       Issues</a></span></dt></dl></dd>
@@ -55,6 +58,8 @@
 <dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.reasons">Why should I use <code class="literal">CallableTraits</code>?</a></span></dt>
 <dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.reasons0">What makes <code class="literal">CallableTraits</code>
       unique?</a></span></dt>
+<dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.faq_function_types">Why not update
+      and extend <code class="literal">Boost.FunctionTypes</code> instead?</a></span></dt>
 <dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.why_does_namespace_scoped_args_a">Why
       does <code class="literal">callable_traits::</code><code class="literal">args</code> alias a <code class="literal">std::tuple</code>?</a></span></dt>
 <dt><span class="section"><a href="callable_traits/faq.html#callable_traits.faq.why_are_the_libname_alias_templa">Why
@@ -162,7 +167,8 @@
 <div class="toc"><dl class="toc">
 <dt><span class="section"><a href="index.html#callable_traits.introduction.prereqs">Prerequisite Topics</a></span></dt>
 <dt><span class="section"><a href="index.html#callable_traits.introduction.motivation">Motivation</a></span></dt>
-<dt><span class="section"><a href="index.html#callable_traits.introduction.quick_example">Quick Example</a></span></dt>
+<dt><span class="section"><a href="index.html#callable_traits.introduction.boost_function_types">Regarding
+      <code class="literal">Boost.FunctionTypes</code></a></span></dt>
 </dl></div>
 <p>
       <code class="literal">CallableTraits</code> is a C++11/14/17 header-only library for
@@ -349,6 +355,23 @@
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&gt;</span> <span class="special">{};</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;&gt;</span> <span class="special">{};</span>
 </pre>
+<p>
+        Use cases for such obscure specializations are vitually nonexistent in run-of-the-mill
+        application codebases. Even in library code, these are exceedingly rare.
+        However, there are a handful of very specific metaprogramming scenarios that
+        can only be solved with such template "spam". While these use cases
+        are indeed rare, the writing and testing of these templates is incredibly
+        tedious and time consuming. On this premise, <code class="literal">CallableTraits</code>
+        offers a final and decisive library-level solution, so that authors of generic
+        code will <span class="bold"><strong>never again</strong></span> need to write these
+        specializations, for <span class="emphasis"><em>any</em></span> reason.
+      </p>
+<p>
+        Template specializations like those in the code snippet above <span class="emphasis"><em>still</em></span>
+        do not account for function pointers, function references, function objects/lambdas,
+        or calling conventions. <code class="literal">CallableTraits</code> goes the extra
+        mile by accounting for all of them.
+      </p>
 <div class="note"><table border="0" summary="Note">
 <tr>
 <td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../src/images/note.png"></td>
@@ -369,23 +392,16 @@
           versions.
         </p></td></tr>
 </table></div>
-<p>
-        Use cases for such obscure specializations are vitually nonexistent in run-of-the-mill
-        application codebases. Even in library code, these are exceedingly rare.
-        However, there are a handful of very specific metaprogramming scenarios that
-        can only be solved with such template "spam". While these use cases
-        are indeed rare, the writing and testing of these templates is incredibly
-        tedious and time consuming. On this premise, <code class="literal">CallableTraits</code>
-        offers a final and decisive library-level solution, so that authors of generic
-        code will <span class="bold"><strong>never again</strong></span> need to write these
-        specializations, for <span class="emphasis"><em>any</em></span> reason.
-      </p>
-<p>
-        Template specializations like those in the code snippet above <span class="emphasis"><em>still</em></span>
-        do not account for function pointers, function references, function objects/lambdas,
-        or calling conventions. <code class="literal">CallableTraits</code> goes the extra
-        mile by accounting for all of them.
-      </p>
+<div class="note"><table border="0" summary="Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../src/images/note.png"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>
+          features for <a href="https://isocpp.org/files/papers/n4000.pdf" target="_top"><code class="literal">transaction_safe</code></a>
+          are planned, but not yet implemented.
+        </p></td></tr>
+</table></div>
 <div class="warning"><table border="0" summary="Warning">
 <tr>
 <td rowspan="2" align="center" valign="top" width="25"><img alt="[Warning]" src="../src/images/warning.png"></td>
@@ -423,157 +439,58 @@
         </p>
 </td></tr>
 </table></div>
-<p>
-        The use cases for <code class="literal">CallableTraits</code> are closely related to
-        those of <a href="http://www.boost.org/doc/libs/1_60_0/libs/type_traits/doc/html/boost_typetraits/reference/function_traits.html" target="_top">function_traits</a>
-        and <a href="http://www.boost.org/doc/libs/1_60_0/libs/function_types/doc/html/index.html" target="_top">Boost.FunctionTypes</a>.
-      </p>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="callable_traits.introduction.quick_example"></a><a class="link" href="index.html#callable_traits.introduction.quick_example" title="Quick Example">Quick Example</a>
+<a name="callable_traits.introduction.boost_function_types"></a><a class="link" href="index.html#callable_traits.introduction.boost_function_types" title="Regarding Boost.FunctionTypes">Regarding
+      <code class="literal">Boost.FunctionTypes</code></a>
 </h3></div></div></div>
 <p>
-        This short program showcases some, but not all, of the features available
-        in <code class="literal">CallableTraits</code>.
+        The use cases for <code class="literal">CallableTraits</code> are closely related to
+        those of <a href="http://www.boost.org/doc/libs/1_60_0/libs/function_types/doc/html/index.html" target="_top"><code class="literal">Boost.FunctionTypes</code></a>.
+        Here are some reasons why you might prefer <code class="literal">CallableTraits</code>:
       </p>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">tuple</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
-
-<span class="comment">// foo is an example of a function object</span>
-<span class="keyword">struct</span> <span class="identifier">foo</span> <span class="special">{</span>
-    <span class="keyword">void</span> <span class="keyword">operator</span><span class="special">()(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*</span> <span class="special">=</span> <span class="keyword">nullptr</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{}</span>
-<span class="special">};</span>
-
-<span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
-
-    <span class="comment">// indexed argument types</span>
-    <span class="keyword">using</span> <span class="identifier">second_arg</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">arg_at</span><span class="special">&lt;</span><span class="number">1</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;;</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">second_arg</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// arg types are packaged into std::tuple, which serves as the default</span>
-    <span class="comment">// type list in <code class="literal">CallableTraits</code> (runtime capabilities are not used).</span>
-    <span class="keyword">using</span> <span class="identifier">args</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">args</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;;</span>
-    <span class="keyword">using</span> <span class="identifier">expected_args</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*&gt;;</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">args</span><span class="special">,</span> <span class="identifier">expected_args</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// <code class="literal">callable_traits::</code>function_type "decays" a callable type to a plain</span>
-    <span class="comment">// function type, which is structured in terms of INVOKE.</span>
-    <span class="keyword">using</span> <span class="identifier">function_type</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;;</span>
-    <span class="keyword">using</span> <span class="identifier">expected_function_type</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*);</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">function_type</span><span class="special">,</span> <span class="identifier">expected_function_type</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// By design, the <code class="literal">CallableTraits</code> interface uses constexpr</span>
-    <span class="comment">// std::integral_constant functions (whenever sensible).</span>
-    <span class="comment">// By also defining the appropriate overloads, this gives</span>
-    <span class="comment">// users the option of using either type arguments or a value</span>
-    <span class="comment">// arguments, which often eliminates the need for decltype:</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">arity</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;()</span> <span class="special">==</span> <span class="number">4</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">arity</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{})</span> <span class="special">==</span> <span class="number">4</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// Attentive readers might notice that the type of the foo{}</span>
-    <span class="comment">// expression above is foo&amp;&amp;, rather than foo. Indeed,</span>
-    <span class="comment">// <code class="literal">CallableTraits</code> is designed to also allow both ref-qualified</span>
-    <span class="comment">// and cv-qualified arguments across the board:</span>
-
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">arity</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&amp;&amp;&gt;()</span> <span class="special">==</span> <span class="number">4</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// Now, if foo had an operator() overload with a &amp;&amp; qualifier, taking</span>
-    <span class="comment">// a different number of arguments, the above static assert would fail.</span>
-
-    <span class="comment">// For consistency, we'll avoid the value-style overloads</span>
-    <span class="comment">// for the remainder of this example (whenever possible).</span>
-
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">max_arity</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;()</span> <span class="special">==</span> <span class="number">4</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">min_arity</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;()</span> <span class="special">==</span> <span class="number">3</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// a quick way to check for a void return type</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_void_return</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// C-style variadics detection (e.g. an ellipses in a signature)</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_varargs</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="keyword">int</span> <span class="identifier">i</span> <span class="special">=</span> <span class="number">0</span><span class="special">;</span>
-
-    <span class="comment">// <code class="literal">callable_traits::</code>can_invoke allows us to preview whether</span>
-    <span class="comment">// std::invoke would compile with the given arguments.</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{},</span> <span class="number">0</span><span class="special">,</span> <span class="number">0</span><span class="special">,</span> <span class="identifier">i</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
-    <span class="comment">// no error:     std::invoke(foo{}, 0, 0, i);</span>
-
-    <span class="comment">// This call returns std::false_type, because it's an illegal call.</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke</span><span class="special">(</span><span class="identifier">foo</span><span class="special">{},</span> <span class="keyword">nullptr</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
-    <span class="comment">// error:         std::invoke(foo{}, nullptr);</span>
-
-    <span class="comment">// Note that since can_invoke models std::invoke,</span>
-    <span class="comment">// only a value-style function is defined.</span>
-
-    <span class="comment">// For function objects, the following checks are determined by the</span>
-    <span class="comment">// function qualifiers on operator(), rather than the qualifiers on</span>
-    <span class="comment">// of the type passed. This is done for consistency with member function</span>
-    <span class="comment">// pointers, where the checks below would look at the function qualifiers</span>
-    <span class="comment">// (rather than qualifiers on the pointer itself).</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_const_member</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_volatile_member</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_reference_member</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_lvalue_reference_member</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_rvalue_reference_member</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// is_constexpr would return std::true_type if foo's operator() were constexpr.</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// The same check can be performed using std::integral_constant</span>
-    <span class="comment">// in conjunction with function addresses:</span>
-    <span class="keyword">using</span> <span class="identifier">pmf</span> <span class="special">=</span> <span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">foo</span><span class="special">::</span><span class="keyword">operator</span><span class="special">());</span>
-    <span class="keyword">using</span> <span class="identifier">pmf_constant</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">,</span> <span class="special">&amp;</span><span class="identifier">foo</span><span class="special">::</span><span class="keyword">operator</span><span class="special">()&gt;;</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_constexpr</span><span class="special">&lt;</span><span class="identifier">pmf_constant</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// So that you don't have to scroll to the top to check,</span>
-    <span class="comment">// here's the type of pmf for reference.</span>
-    <span class="keyword">using</span> <span class="identifier">with_const</span> <span class="special">=</span> <span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*)</span> <span class="keyword">const</span><span class="special">;</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">,</span> <span class="identifier">with_const</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// If you find yourself in the unfortunate-and-probably-avoidable</span>
-    <span class="comment">// situation of needing to transform member function pointer</span>
-    <span class="comment">// types, <code class="literal">CallableTraits</code> has all the tools you need to prolong</span>
-    <span class="comment">// your sanity.</span>
-
-    <span class="comment">// <code class="literal">CallableTraits</code> lets you manipulate qualifiers on PMF types.</span>
-    <span class="comment">// To remove const:</span>
-    <span class="keyword">using</span> <span class="identifier">mutable_pmf</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_member_const</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
-    <span class="keyword">using</span> <span class="identifier">without_const</span> <span class="special">=</span> <span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*)</span> <span class="comment">/*no const!*/</span><span class="special">;</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">mutable_pmf</span><span class="special">,</span> <span class="identifier">without_const</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// To add an rvalue qualifier:</span>
-    <span class="keyword">using</span> <span class="identifier">rvalue_pmf</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_member_rvalue_reference</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
-    <span class="keyword">using</span> <span class="identifier">with_rvalue</span> <span class="special">=</span> <span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*)</span> <span class="keyword">const</span> <span class="special">&amp;&amp;;</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">rvalue_pmf</span><span class="special">,</span> <span class="identifier">with_rvalue</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// Just like std::add_rvalue_reference, <code class="literal">callable_traits::</code>add_member_rvalue_reference</span>
-    <span class="comment">// follows C++11 reference collapsing rules. While remove_member_const</span>
-    <span class="comment">// and add_member_rvalue_reference are somewhat clumsy names, they are the best</span>
-    <span class="comment">// the best the author could provide while still allowing both terseness</span>
-    <span class="comment">// and grep-ability against std::remove_const, etc. in &lt;type_traits&gt;.</span>
-    <span class="comment">// Naturally, <code class="literal">CallableTraits</code> provides similar tools for the other C++</span>
-    <span class="comment">// function qualifiers. Head to the reference section of this documentation</span>
-    <span class="comment">// for more examples.</span>
-
-    <span class="comment">// To remove a member pointer:</span>
-    <span class="keyword">using</span> <span class="identifier">fn</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_member_pointer</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
-    <span class="keyword">using</span> <span class="identifier">expected_fn</span> <span class="special">=</span> <span class="keyword">void</span> <span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*)</span> <span class="keyword">const</span><span class="special">;</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">fn</span><span class="special">,</span> <span class="identifier">expected_fn</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="comment">// We just created an abominable function type - notice the const</span>
-    <span class="comment">// qualifier! namespace_scopedremove_member_const accepts abominable</span>
-    <span class="comment">// types too (and so does any feature where it is legal to do so):</span>
-    <span class="keyword">using</span> <span class="identifier">not_abominable</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_member_const</span><span class="special">&lt;</span><span class="identifier">fn</span><span class="special">&gt;;</span>
-    <span class="keyword">using</span> <span class="identifier">expected_fn2</span> <span class="special">=</span> <span class="keyword">void</span> <span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&amp;&amp;,</span> <span class="keyword">const</span> <span class="keyword">int</span><span class="special">&amp;,</span> <span class="keyword">void</span><span class="special">*);</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">not_abominable</span><span class="special">,</span> <span class="identifier">expected_fn2</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-<span class="special">}</span>
-</pre>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem">
+            <code class="literal">Boost.FunctionTypes</code> is tightly coupled to <a href="http://www.boost.org/doc/libs/1_60_0/libs/mpl/doc/index.html" target="_top"><code class="literal">Boost.MPL</code></a>
+            sequences, while <code class="literal">CallableTraits</code> generally takes a
+            lower-level approach. No knowledge of MPL terminology is needed to use
+            <code class="literal">CallableTraits</code>.
+          </li>
+<li class="listitem">
+            Other types in C++ receive fine-grained, low-level attention in <code class="literal">Boost.TypeTraits</code>
+            and <code class="literal">&lt;type_traits&gt;</code>. <code class="literal">CallableTraits</code>
+            gives callable types similar attention, without additional metaprogramming
+            dependencies.
+          </li>
+<li class="listitem">
+            <code class="literal">CallableTraits</code> aims to eliminate function type template
+            specializations. <code class="literal">Boost.FunctionTypes</code> does not.
+          </li>
+<li class="listitem">
+            <code class="literal">CallableTraits</code> targets C++11/14/17 features. <code class="literal">Boost.FunctionTypes</code>
+            does not.
+          </li>
+<li class="listitem">
+            The <code class="literal">Boost.FunctionTypes</code> interface relies heavily on
+            tag types. <code class="literal">CallableTraits</code> does not (except for platform-specific
+            calling conventions).
+          </li>
+</ol></div>
+<p>
+        By building on the achievements of others, <code class="literal">CallableTraits</code>
+        borrows and extends much of the functionality found in <code class="literal">Boost.FunctionTypes</code>,
+        re-packaging it in a more accessible <code class="computeroutput"><span class="identifier">type_traits</span></code>-style
+        interface. There is nothing inherently wrong with <code class="literal">Boost.FunctionTypes</code>,
+        which is a great choice for projects already using the MPL, and for metaprogramming
+        on older compilers. However, an MPL sequence-based solution with no C++11
+        support should not be the only option for inspecting and manipulating callable
+        types.
+      </p>
+<p>
+        See Also: <a class="link" href="callable_traits/faq.html#callable_traits.faq.faq_function_types" title="Why not update and extend Boost.FunctionTypes instead?">Why not
+        update and extend <code class="literal">Boost.FunctionTypes</code> instead?</a>
+      </p>
 </div>
 </div>
 </div>
@@ -582,6 +499,6 @@
 <td align="right"><div class="copyright-footer"></div></td>
 </tr></table>
 <hr>
-<div class="spirit-nav"><a accesskey="n" href="callable_traits/function_sugar_example.html"><img src="../src/images/next.png" alt="Next"></a></div>
+<div class="spirit-nav"><a accesskey="n" href="callable_traits/quick_example.html"><img src="../src/images/next.png" alt="Next"></a></div>
 </body>
 </html>

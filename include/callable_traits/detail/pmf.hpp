@@ -13,7 +13,8 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/fwd/pmf_fwd.hpp>
 #include <callable_traits/detail/calling_conventions.hpp>
 #include <callable_traits/detail/set_function_qualifiers.hpp>
-#include <callable_traits/detail/qualifiers.hpp>
+#include <callable_traits/qualifier_flags.hpp>
+#include <callable_traits/detail/qualifier_traits.hpp>
 #include <callable_traits/detail/default_callable_traits.hpp>
 #include <callable_traits/detail/utility.hpp>
 #include <callable_traits/config.hpp>

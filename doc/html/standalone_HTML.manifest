@@ -1,5 +1,7 @@
 index.html
-callable_traits/function_sugar_example.html
+callable_traits/quick_example.html
+callable_traits/example_std_function_sugar.html
+callable_traits_interface_example.html
 callable_traits/compatibility.html
 callable_traits/faq.html
 callable_traits/development.html
