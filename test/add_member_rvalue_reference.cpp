@@ -80,7 +80,7 @@ int main() {
         CT_ASSERT(std::is_same<cvr, ct::add_member_rvalue_reference<cvr>>{});
     }
 
-	{
+    {
         using f   = void(foo::*&&)(...);
         using l   = void(foo::*&&)(...) &;
         using r   = void(foo::*&&)(...) &&;
@@ -108,8 +108,8 @@ int main() {
         CT_ASSERT(std::is_same<vr,  ct::add_member_rvalue_reference<vr>>{});
         CT_ASSERT(std::is_same<cvr, ct::add_member_rvalue_reference<cvr>>{});
     }
-	
-	{
+    
+    {
         using f   = void(foo::* const)();
         using l   = void(foo::* const)() &;
         using r   = void(foo::* const)() &&;
@@ -137,7 +137,7 @@ int main() {
         CT_ASSERT(std::is_same<vr,  ct::add_member_rvalue_reference<vr>>{});
         CT_ASSERT(std::is_same<cvr, ct::add_member_rvalue_reference<cvr>>{});
     }
-	
+    
     {
         using f   = void();
         using l   = void() &;

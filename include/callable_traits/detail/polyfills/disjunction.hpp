@@ -19,22 +19,22 @@ namespace callable_traits {
 
     namespace detail {
 
-		namespace polyfills {
-			
-			//polyfill for C++17 std::disjunction
-			template<typename...>
-			struct disjunction
-				: std::false_type {};
+        namespace polyfills {
+            
+            //polyfill for C++17 std::disjunction
+            template<typename...>
+            struct disjunction
+                : std::false_type {};
 
-			template<typename T>
-			struct disjunction<T>
-				: T {};
+            template<typename T>
+            struct disjunction<T>
+                : T {};
 
-			template<typename T, typename... Ts>
-			struct disjunction<T, Ts...>
-				: std::conditional<T::value != false, T, disjunction<Ts...>>::type {};
-			
-		}
+            template<typename T, typename... Ts>
+            struct disjunction<T, Ts...>
+                : std::conditional<T::value != false, T, disjunction<Ts...>>::type {};
+            
+        }
     }
 }
 

@@ -27,7 +27,6 @@ struct function<OriginalType, CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_
     static constexpr bool value = true;
 
     using is_function = std::true_type;
-    using is_functionish = std::true_type;
     using has_varargs = std::true_type;
     using traits = function;
     using return_type = Return;
@@ -65,11 +64,14 @@ struct function<OriginalType, CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_
 
     template<template<class...> class Container>
     using expand_args = Container<Args...>;
-	
-	using clear_args = typename copy_cvr<
-		CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC *)(),
-		OriginalType
-	>::type;
+    
+    template<template<class...> class Container>
+    using expand_invoke_args = Container<Args...>;
+
+    using clear_args = typename copy_cvr<
+        CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC *)(),
+        OriginalType
+    >::type;
 
 #undef CALLABLE_TRAITS_BEGIN_PACK_MANIP
 #undef CALLABLE_TRAITS_ARGS_PACK

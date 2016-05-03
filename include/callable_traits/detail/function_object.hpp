@@ -11,6 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_DETAIL_FUNCTION_OBJECT_HPP
 
 #include <callable_traits/detail/pmf.hpp>
+#include <callable_traits/detail/qualifier_traits.hpp>
 #include <callable_traits/detail/default_callable_traits.hpp>
 #include <callable_traits/detail/fwd/function_object_fwd.hpp>
 #include <callable_traits/detail/utility.hpp>
@@ -55,22 +56,22 @@ namespace callable_traits {
             using apply_return = invalid_type;
 
             using clear_args = invalid_type;
-			
-			template<typename...>
+            
+            template<typename...>
             using push_front = invalid_type;
-			
-			template<typename...>
+            
+            template<typename...>
             using push_back = invalid_type;
-			
-			template<std::size_t ElementCount>
-			using pop_args_front = invalid_type;
+            
+            template<std::size_t ElementCount>
+            using pop_args_front = invalid_type;
 
-			template<std::size_t ElementCount>
-			using pop_args_back = invalid_type;
-			
-			template<std::size_t Index, typename... NewArgs>
+            template<std::size_t ElementCount>
+            using pop_args_back = invalid_type;
+            
+            template<std::size_t Index, typename... NewArgs>
             using insert_at = invalid_type;
-			
+            
             template<std::size_t Index, std::size_t Count>
             using remove_at = invalid_type;
 

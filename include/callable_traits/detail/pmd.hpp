@@ -42,7 +42,7 @@ namespace callable_traits {
             using class_type = T;
             using invoke_type = T const &;
             using type = D T::*;
-            using function_type = D(invoke_type);
+            using function_type = typename std::add_lvalue_reference<D>::type(invoke_type);
             using qualified_function_type = D(invoke_type);
             using arg_types = invalid_type;
             using invoke_arg_types = std::tuple<invoke_type>;
@@ -60,6 +60,9 @@ namespace callable_traits {
                 R T::*,
                 OriginalType
             >::type;
+
+            template<template<class...> class Container>
+            using expand_args = Container<>;
         };
     }
 }

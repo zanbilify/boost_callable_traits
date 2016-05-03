@@ -40,8 +40,8 @@ namespace callable_traits {
             template<std::size_t N>
             struct make_index_sequence_t
                 : concat< 
-					typename make_index_sequence_t<N/2>::type,
-					typename make_index_sequence_t<N - N/2>::type >::type {};
+                    typename make_index_sequence_t<N/2>::type,
+                    typename make_index_sequence_t<N - N/2>::type >::type {};
 
             template<>
             struct make_index_sequence_t<0>

@@ -43,6 +43,10 @@ namespace callable_traits {
             template<template<class...> class Container>
             using expand_args =
                 typename bind_expr_detail::expand_bind_args<arg_types, Container>::type;
+
+            template<template<class...> class Container>
+            using expand_invoke_args =
+                typename bind_expr_detail::expand_bind_args<arg_types, Container>::type;
         };
     }
 }

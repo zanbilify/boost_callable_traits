@@ -20,18 +20,18 @@ namespace callable_traits {
     struct fastcall_tag{};
     struct pascal_tag{};
 
-	namespace detail {
+    namespace detail {
 
         template<typename T, typename Tag>
-		struct add_calling_convention_t {
-			using type = invalid_type;
-		};
+        struct add_calling_convention_t {
+            using type = invalid_type;
+        };
 
         template<typename T, typename Tag>
-		struct has_calling_convention_t {
-			using type = std::false_type;
-		};
-	}
+        struct has_calling_convention_t {
+            using type = std::false_type;
+        };
+    }
 }
 
 #endif

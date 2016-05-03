@@ -36,6 +36,8 @@
 [template abominable_paper[][@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0172r0.html "abominable" function types]]
 [template link_compatibility[][link callable_traits.compatibility Compatibility]]
 [template link_compatibility_issues[][link callable_traits.compatibility.compatibility_issues Compatibility Issues]]
+[template function_types_link[][@http://www.boost.org/doc/libs/1_60_0/libs/function_types/doc/html/index.html [^Boost.FunctionTypes]]]
+[template function_types[][^Boost.FunctionTypes]]
 
 [/ *** these templates are used to turn concept names green ***]
 [template concept_fn_ptr[][role green FunctionPtr]]
@@ -197,48 +199,43 @@ Consider for a moment the class template below, which defines all [role red[*48]
 [import ./hideous_template.snippet.cpp]
 [hideous_template]
 
-[note The upcoming ISO standard for C++17 includes a [@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html change to the core language] which adds the [^noexcept] qualifier to the type system. If the author's understanding is correct, this would increase the the count of necessary template specializations to [role red[*96]] ([unsure]). Currently, C++17 `noexcept` qualifiers are not handled in [libname], because compiler vendors have not implemented support for this feature (to best of the author's knowledge). However, features to account for and manipulate `noexcept` qualifiers are planned in [libname], as soon as feature is implemented by a compiler vendor. Of course, the [libname] feature additions will be non-breaking for currently supported compiler versions.]
-
 Use cases for such obscure specializations are vitually nonexistent in run-of-the-mill application codebases. Even in library code, these are exceedingly rare. However, there are a handful of very specific metaprogramming scenarios that can only be solved with such template "spam". While these use cases are indeed rare, the writing and testing of these templates is incredibly tedious and time consuming. On this premise, [libname] offers a final and decisive library-level solution, so that authors of generic code will *never again* need to write these specializations, for ['any] reason.
 
 Template specializations like those in the code snippet above ['still] do not account for function pointers, function references, function objects/lambdas, or calling conventions. [libname] goes the extra mile by accounting for all of them.
 
-[cc_warning_full]
+[note The upcoming ISO standard for C++17 includes a [@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html change to the core language] which adds the [^noexcept] qualifier to the type system. If the author's understanding is correct, this would increase the the count of necessary template specializations to [role red[*96]] ([unsure]). Currently, C++17 `noexcept` qualifiers are not handled in [libname], because compiler vendors have not implemented support for this feature (to best of the author's knowledge). However, features to account for and manipulate `noexcept` qualifiers are planned in [libname], as soon as feature is implemented by a compiler vendor. Of course, the [libname] feature additions will be non-breaking for currently supported compiler versions.]
 
-The use cases for [libname] are closely related to those of [@http://www.boost.org/doc/libs/1_60_0/libs/type_traits/doc/html/boost_typetraits/reference/function_traits.html function_traits] and [@http://www.boost.org/doc/libs/1_60_0/libs/function_types/doc/html/index.html Boost.FunctionTypes].
+[note features for [@https://isocpp.org/files/papers/n4000.pdf [^transaction_safe]] are planned, but not yet implemented.]
+
+[cc_warning_full]
 
 [endsect][/section:motivation]
 
-[section:quick_example Quick Example]
+[section:boost_function_types Regarding [^Boost.FunctionTypes]]
+
+The use cases for [libname] are closely related to those of [function_types_link]. Here are some reasons why you might prefer [libname]:
+
+# [function_types] is tightly coupled to [@http://www.boost.org/doc/libs/1_60_0/libs/mpl/doc/index.html [^Boost.MPL]] sequences, while [libname] generally takes a lower-level approach. No knowledge of MPL terminology is needed to use [libname].
+# Other types in C++ receive fine-grained, low-level attention in [^Boost.TypeTraits] and [^<type_traits>]. [libname] gives callable types similar attention, without additional metaprogramming dependencies.
+# [libname] aims to eliminate function type template specializations. [function_types] does not.
+# [libname] targets C++11/14/17 features. [function_types] does not.
+# The [function_types] interface relies heavily on tag types. [libname] does not (except for platform-specific calling conventions).
+
+By building on the achievements of others, [libname] borrows and extends much of the functionality found in [function_types], re-packaging it in a more accessible `type_traits`-style interface. There is nothing inherently wrong with [function_types], which is a great choice for projects already using the MPL, and for metaprogramming on older compilers. However, an MPL sequence-based solution with no C++11 support should not be the only option for inspecting and manipulating callable types.
+
+See Also: [link callable_traits.faq.faq_function_types Why not update and extend [function_types] instead?]
+
+[endsect][/section:boost_function_types]
+[endsect][/section:introduction]
+
+
+[section:quick_example Example: Overview]
 [import ../example/intro.cpp]
 [intro]
 [endsect][/section:quick_example]
 
-[endsect][/section:introduction]
-
-
-
-[/*********************************************************************]
-[/**************** U S E   C A S E   E X A M P L E ********************]
-[/*********************************************************************]
-
-[section:function_sugar_example Example: [^ std::function] sugar]
-
-At a glance, there appear to be around 260 [@http://stackoverflow.com/search?q=convert+std%3A%3Abind+to+std%3A%3Afunction search results] on Stack Overflow concerning the conversion from `std::bind` results to `std::function`, and around 340 [@http://stackoverflow.com/search?q=convert+lambda+to+std%3A%3Afunction search results] concerning the conversion of lambdas to `std::function`. There are few good reasons for converting `std::bind` result objects into `std::function` objects, and fewer still for creating `std::function` objects without explicitly specifying the function type. Regardless, here's a `make_function` function, which can...
-
-# Construct an `std::function<T>` where T is not explicitly supplied by the user
-# Construct an `std::function<T>` where T is the implied "signature" of an `std::placeholders` expression
-
-`make_function` is rather silly, especially since we have no contextual reason for incurring the costs of type erasure. Still, it's a lightweight example of the kind of metaprogramming you can do with [libname].
-
-[note Due to limitations in the Microsoft compiler, this example will not compile with MSVC. For more information, refer to the [link_compatibility_issues] section.]
-
-[import ../example/make_function.cpp]
-[make_function]
-
-[endsect][/section:function_sugar_example]
-
-
+[include make_function_example.qbk]
+[include interface_example.qbk]
 
 [/*********************************************************************]
 [/******************* C O M P A T I B I L I T Y ***********************]
@@ -260,7 +257,7 @@ At a glance, there appear to be around 260 [@http://stackoverflow.com/search?q=c
 [ [Linux]            [Clang (other)]             [[unknown_support]] [libstdc++]              [-]                      ]
 [ [Linux]            [GCC 5.2.1 +]               [[full_support]]    [libstdc++]              [[link_travis_ci]]       ]
 [ [Linux]            [GCC \[4.8, ~ 5.2.1)]       [[partial_support]] [libstdc++]              [[link_travis_ci]]       ]
-[ [Linux]            [GCC(other)]                [[unknown_support]] [libstdc++]              [-]       ]
+[ [Linux]            [GCC(other)]                [[unknown_support]] [libstdc++]              [-]                      ]
 [ [OSX]              [AppleClang / XCode 6.3+]   [[full_support]]    [libc++]                 [[link_travis_ci]]       ]
 [ [OSX]              [Clang 3.5+]                [[likely_support]]  [libc++]                 [-]                      ]
 [ [OSX]              [Clang 3.4 and below]       [[unknown_support]] [libc++]                 [-]                      ]
@@ -392,6 +389,12 @@ There are real reasons to write code like this, but they are few and far between
 [*10.] [libname] includes optional features for the manipulation and inspection of calling conventions. These features are currently deemed experimental, because they greatly increase the test surface of [libname], are platform-specific, and are not yet fully tested on any platform.
 
 [endsect][/section:reasons]
+
+[section:faq_function_types Why not update and extend [function_types] instead?]
+
+As discussed in the introduction, [function_types] is a good tool for many situations. However, the interface is unpleasant. It which relies heavily on both the MPL and tag types, for problems that are more simply solved with neither. Using [function_types] requires an understanding of MPL sequences, as well as an understanding of the [function_types] "big picture." [function_types] is more complicated than is necessary, and takes longer to grok. In the C++ of today, [function_types] is also sorely lacking in features. Retrofitting [function_types] with the features found in [libname] would mean adding many more tag types, supporting old compilers with too much conditional compilation, and continuing to work around an unnecessary MPL dependency.
+
+[endsect]
 
 [section Why does [namespace_scoped][^args] alias a [^std::tuple]?]
 

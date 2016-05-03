@@ -20,8 +20,8 @@ namespace callable_traits {
     has_member_qualifiers() {
         return typename detail::traits<T>::has_member_qualifiers{};
     }
-	
-	template<typename T>
+    
+    template<typename T>
     inline constexpr auto
     has_member_qualifiers(T&&) {
         return typename detail::traits<T&&>::has_member_qualifiers{};

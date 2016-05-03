@@ -7,8 +7,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_ARGS_HPP
-#define CALLABLE_TRAITS_ARGS_HPP
+#ifndef CALLABLE_TRAITS_INVOKE_ARGS_HPP
+#define CALLABLE_TRAITS_INVOKE_ARGS_HPP
 
 #include <callable_traits/detail/required_definitions.hpp>
 
@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct args_error {
+        struct invoke_args_error {
 
             static_assert(Sfinae,
                 "Could not determine the parameters for "
@@ -33,21 +33,21 @@ namespace callable_traits {
         // returns callable_traits::invalid_type if parameter types
         // cannot be determined
         template<typename T>
-        using args = typename detail::traits<T>::arg_types;
+        using invoke_args = typename detail::traits<T>::invoke_arg_types;
     }
 
     namespace verbose {
 
         template<typename T>
-        using args = detail::fail_if_invalid<
-            typename detail::traits<T>::arg_types,
-            detail::args_error<false>>;
+        using invoke_args = detail::fail_if_invalid<
+            typename detail::traits<T>::invoke_arg_types,
+            detail::invoke_args_error<false>>;
     }
 
     template<typename T>
-    using args = detail::fail_if_invalid<
-        typename detail::traits<T>::arg_types,
-        detail::args_error<true>>;
+    using invoke_args = detail::fail_if_invalid<
+        typename detail::traits<T>::invoke_arg_types,
+        detail::invoke_args_error<true>>;
 }
 
-#endif //#ifndef CALLABLE_TRAITS_ARGS_HPP
+#endif //#ifndef CALLABLE_TRAITS_INVOKE_ARGS_HPP

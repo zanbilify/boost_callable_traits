@@ -8,15 +8,13 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_DETAIL_QUALIFIERS_HPP
-#define CALLABLE_TRAITS_DETAIL_QUALIFIERS_HPP
+#ifndef CALLABLE_TRAITS_QUALIFIER_FLAGS_HPP
+#define CALLABLE_TRAITS_QUALIFIER_FLAGS_HPP
 
 #include <type_traits>
 #include <cstdint>
 
 namespace callable_traits {
-
-    namespace detail {
 
         //bit flags used to signify cv/ref qualifiers
         using flags = std::uint32_t;
@@ -41,6 +39,8 @@ namespace callable_traits {
         11  | 1  0  1  1 | const volatile &&
 
         */
+
+    inline namespace qualifier_flags {
 
         //! Flag representing the default qualifiers on a type 
         //! or member function overload.
@@ -73,6 +73,9 @@ namespace callable_traits {
 #endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
 
         constexpr flags cv_ = 3;
+    }
+
+    namespace detail {
 
         template<flags Flags>
         using remove_const_flag = std::integral_constant<flags, Flags & ~const_>;
@@ -111,56 +114,21 @@ namespace callable_traits {
                     : (IsAddingLRef ? ((Existing & ~rref_) | Other )
                         : (Existing | Other)))>;
 
-        template<typename T>
-        struct flag_map {
-            static_assert(sizeof(T) < 0,
-                "Invalid argument passed to flag_map template.");
+        //todo change int to flags here
+        template<typename T> struct flag_map { static constexpr flags value = default_; };
+        template<typename T> struct flag_map<T &> { static constexpr flags value = lref_; };
+        template<typename T> struct flag_map<T &&> { static constexpr flags value = rref_; };
+        template<typename T> struct flag_map<T const> { static constexpr flags value = const_; };
+        template<typename T> struct flag_map<T const &> { static constexpr flags value = const_ | lref_; };
+        template<typename T> struct flag_map<T const &&> { static constexpr flags value = const_ | rref_; };
+        template<typename T> struct flag_map<T volatile> { static constexpr flags value = volatile_; };
+        template<typename T> struct flag_map<T volatile &> { static constexpr flags value = volatile_ | lref_; };
+        template<typename T> struct flag_map<T volatile &&> { static constexpr flags value = volatile_ | rref_; };
+        template<typename T> struct flag_map<T const volatile> { static constexpr flags value = const_ | volatile_; };
+        template<typename T> struct flag_map<T const volatile &> { static constexpr flags value = const_ | volatile_ | lref_; };
+        template<typename T> struct flag_map<T const volatile &&> { static constexpr flags value = const_ | volatile_ | rref_; };
 
-            static constexpr flags value = default_;
-        };
-
-        template<> struct flag_map<int> { static constexpr flags value = default_; };
-        template<> struct flag_map<int &> { static constexpr flags value = lref_; };
-        template<> struct flag_map<int &&> { static constexpr flags value = rref_; };
-        template<> struct flag_map<int const> { static constexpr flags value = const_; };
-        template<> struct flag_map<int const &> { static constexpr flags value = const_ | lref_; };
-        template<> struct flag_map<int const &&> { static constexpr flags value = const_ | rref_; };
-        template<> struct flag_map<int volatile> { static constexpr flags value = volatile_; };
-        template<> struct flag_map<int volatile &> { static constexpr flags value = volatile_ | lref_; };
-        template<> struct flag_map<int volatile &&> { static constexpr flags value = volatile_ | rref_; };
-        template<> struct flag_map<int const volatile> { static constexpr flags value = const_ | volatile_; };
-        template<> struct flag_map<int const volatile &> { static constexpr flags value = const_ | volatile_ | lref_; };
-        template<> struct flag_map<int const volatile &&> { static constexpr flags value = const_ | volatile_ | rref_; };
-
-        template<typename T>
-        class qualifier_traits {
-
-        protected:
-
-            static constexpr flags cv_flags = cv_of<T>::value;
-            static constexpr flags ref_flags = ref_of<T>::value;
-            static constexpr flags q_flags = cv_flags | ref_flags;
-
-        public:
-
-            using has_member_qualifiers = std::integral_constant<bool, q_flags != default_>;
-            using is_const_member = std::integral_constant<bool, 0 < (cv_flags & const_)>;
-            using is_volatile_member = std::integral_constant<bool, 0 < (cv_flags & volatile_)>;
-            using is_cv_member = std::integral_constant<bool, cv_flags == (const_ | volatile_)>;
-
-#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
-
-            using is_reference_member = std::false_type;
-            using is_lvalue_reference_qualified = std::false_type;
-            using is_rvalue_reference_qualified = std::false_type;
-#else
-            using is_reference_member = std::integral_constant<bool, 0 < ref_flags>;
-            using is_lvalue_reference_member = std::integral_constant<bool, ref_flags == lref_>;
-            using is_rvalue_reference_member = std::integral_constant<bool, ref_flags == rref_>;
-
-#endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
-
-        };
     }
 }
-#endif
+
+#endif //#ifndef CALLABLE_TRAITS_QUALIFIER_FLAGS_HPP
