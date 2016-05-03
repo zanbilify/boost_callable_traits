@@ -209,14 +209,17 @@
 <span class="keyword">struct</span> <span class="identifier">a_class</span> <span class="special">{</span>
 	
     <span class="keyword">void</span> <span class="identifier">a_func</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">v</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span>
+		
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"a_class::void a_func(int v = "</span> <span class="special">&lt;&lt;</span> <span class="identifier">v</span> <span class="special">&lt;&lt;</span> <span class="string">")"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
     <span class="special">}</span>
 
     <span class="keyword">void</span> <span class="identifier">a_func</span><span class="special">(</span><span class="keyword">long</span> <span class="identifier">v</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span>
+		
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"a_class::void a_func(long v = "</span> <span class="special">&lt;&lt;</span> <span class="identifier">v</span> <span class="special">&lt;&lt;</span> <span class="string">")"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
     <span class="special">}</span>
 
     <span class="keyword">int</span> <span class="identifier">another_func</span><span class="special">()</span> <span class="special">{</span>
+		
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"a_class::another_func() = 3"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
         <span class="keyword">return</span> <span class="number">3</span><span class="special">;</span>
     <span class="special">}</span>
@@ -229,12 +232,13 @@
     <span class="comment">// Notice a_func is implemented as a function template? No problem for our interface.</span>
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">void</span> <span class="identifier">a_func</span><span class="special">(</span><span class="identifier">T</span> <span class="identifier">v</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span>
-        <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span>
-            <span class="string">"another_class::void a_func(T v = "</span> <span class="special">&lt;&lt;</span> <span class="identifier">v</span> <span class="special">&lt;&lt;</span> <span class="string">")"</span>
-            <span class="string">"  [ T = "</span> <span class="special">&lt;&lt;</span> <span class="keyword">typeid</span><span class="special">(</span><span class="identifier">T</span><span class="special">).</span><span class="identifier">name</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="string">" ]"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+		
+        <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"another_class::void a_func(T v = "</span> <span class="special">&lt;&lt;</span> <span class="identifier">v</span>
+				  <span class="special">&lt;&lt;</span> <span class="string">")  [ T = "</span> <span class="special">&lt;&lt;</span> <span class="keyword">typeid</span><span class="special">(</span><span class="identifier">T</span><span class="special">).</span><span class="identifier">name</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="string">" ]"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
     <span class="special">}</span>
 
     <span class="keyword">int</span> <span class="identifier">another_func</span><span class="special">()</span> <span class="special">{</span>
+		
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"another_class::another_func() = 5"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
         <span class="keyword">return</span> <span class="number">5</span><span class="special">;</span>
     <span class="special">}</span>
@@ -242,6 +246,10 @@
     <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*</span> <span class="identifier">some_data</span> <span class="special">=</span> <span class="string">"another_class's data"</span><span class="special">;</span>
 <span class="special">};</span>
 
+<span class="comment">// using an interface as a function parameter enforces compile-time</span>
+<span class="comment">// constraints without needing to deal with templates. This can be especially</span>
+<span class="comment">// useful for designing linked-library APIs, where exposing proprietary logic</span>
+<span class="comment">// in template headers would be undesirable.</span>
 <span class="keyword">void</span> <span class="identifier">print_data</span><span class="special">(</span><span class="identifier">interface_x</span> <span class="identifier">obj</span><span class="special">)</span> <span class="special">{</span>
 	
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">obj</span><span class="special">.</span><span class="identifier">some_data</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
