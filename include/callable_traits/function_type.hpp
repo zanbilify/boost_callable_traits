@@ -16,36 +16,21 @@ namespace callable_traits {
 
     namespace detail {
 
-        template<bool Sfinae>
-        struct function_type_error {
-
-            static_assert(Sfinae,
-                "Unable to determine a function type from "
-                "T in callable_traits::function_type<T>.");
+        template<typename T, bool IsValid = traits<T>::value>
+        struct make_function {
+            using type = T;
         };
-    }
-	
-    namespace permissive {
 
         template<typename T>
-        using function_type = detail::fallback_if_invalid<
-            typename detail::traits<T>::function_type,
-            T
-        >;
-    }
-
-    namespace verbose {
-
-        template<typename T>
-        using function_type = detail::fail_if_invalid<
-            typename detail::traits<T>::function_type,
-            detail::function_type_error<false>>;
+        struct make_function<T, false> {
+            using type = T();
+        };
     }
 
     template<typename T>
-    using function_type = detail::fail_if_invalid<
+    using function_type = detail::fallback_if_invalid<
         typename detail::traits<T>::function_type,
-        detail::function_type_error<true>>;
+        typename detail::make_function<T>::type>;
 }
 
 #endif

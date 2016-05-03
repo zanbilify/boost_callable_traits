@@ -170,9 +170,9 @@ int main() {
 
 #endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
 
-	using f_ptr = void(*)();
+    using f_ptr = void(*)();
     assert_not_volatile_qualified<f_ptr>();
-	assert_not_volatile_qualified<f_ptr foo::*>();
-	assert_not_volatile_qualified<int foo::*>();
+    assert_not_volatile_qualified<f_ptr foo::*>();
+    assert_not_volatile_qualified<int foo::*>();
     assert_not_volatile_qualified<void(&)()>();
 }

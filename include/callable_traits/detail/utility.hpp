@@ -63,7 +63,7 @@ namespace callable_traits {
         >::type;
 
         //polyfill for C++17 negation
-		//TODO rename and move to polyfills folder
+        //TODO rename and move to polyfills folder
         template<typename BoolType>
         using negate = std::integral_constant<bool, !BoolType::value>;
 
@@ -131,10 +131,10 @@ namespace callable_traits {
         template<typename T, typename Class>
         using add_member_pointer = T Class::*;
 
-		template<typename Traits>
+        template<typename Traits>
         using can_accept_member_qualifiers = std::integral_constant<bool,
-			Traits::is_function::value || Traits::has_member_qualifiers_function::value>;
-		
+            Traits::is_function::value || Traits::has_member_qualifiers_function::value>;
+        
         namespace util_detail {
 
             template<typename T>
@@ -259,38 +259,38 @@ namespace callable_traits {
             T
         >::type;
 
-		template<class T, class U>
-		struct copy_cvr {
-			
-		private:
+        template<class T, class U>
+        struct copy_cvr {
+            
+        private:
 
-			using no_ref_U = typename std::remove_reference<U>::type;
-			using no_ref_T = typename std::remove_reference<T>::type;
-			
+            using no_ref_U = typename std::remove_reference<U>::type;
+            using no_ref_T = typename std::remove_reference<T>::type;
+            
             using C = typename std::conditional<
-				std::is_const<no_ref_U>::value,
-				typename std::add_const<no_ref_T>::type,
-				no_ref_T
-			>::type;
-			
+                std::is_const<no_ref_U>::value,
+                typename std::add_const<no_ref_T>::type,
+                no_ref_T
+            >::type;
+            
             using V = typename std::conditional<
-				std::is_volatile<no_ref_U>::value,
+                std::is_volatile<no_ref_U>::value,
                 typename std::add_volatile<C>::type,
                 C
-			>::type;
+            >::type;
 
-		public:
+        public:
 
-			using type = typename std::conditional<
-				std::is_lvalue_reference<U>::value,
+            using type = typename std::conditional<
+                std::is_lvalue_reference<U>::value,
                 V &,
-				typename std::conditional<
-					std::is_rvalue_reference<U>::value,
+                typename std::conditional<
+                    std::is_rvalue_reference<U>::value,
                     V &&,
                     V
-				>::type
-			>::type;
-		};
+                >::type
+            >::type;
+        };
 
         //used to prepend a type to a tuple
         template <typename...> struct prepend;

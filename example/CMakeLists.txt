@@ -12,9 +12,9 @@ file(GLOB_RECURSE EXAMPLES "*.cpp")
 file(GLOB_RECURSE EXPERIMENTAL_EXAMPLES "experimental*.cpp")
 
 if (NOT CALLABLE_TRAITS_BUILD_EXPERIMENTAL)
-	foreach(_experimental IN LISTS EXPERIMENTAL_EXAMPLES)
-		list(REMOVE_ITEM EXAMPLES ${_experimental})
-	endforeach()
+    foreach(_experimental IN LISTS EXPERIMENTAL_EXAMPLES)
+        list(REMOVE_ITEM EXAMPLES ${_experimental})
+    endforeach()
 endif()
 
 foreach(_file IN LISTS EXAMPLES)

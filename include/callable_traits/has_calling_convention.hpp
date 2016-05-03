@@ -18,9 +18,9 @@ namespace callable_traits {
 
     template<typename T, typename Tag>
     inline constexpr auto
-	has_calling_convention() {
+    has_calling_convention() {
         return typename detail::has_calling_convention_t<detail::shallow_decay<T>, Tag>::type{};
-	}
+    }
 
     template<typename T, typename Tag>
     inline constexpr auto

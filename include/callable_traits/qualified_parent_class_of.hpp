@@ -30,7 +30,7 @@ namespace callable_traits {
         // cannot be determined
         template<typename T>
         using qualified_parent_class_of =
-			typename detail::traits<T>::invoke_type;
+            typename detail::traits<T>::invoke_type;
     }
 
     namespace verbose {

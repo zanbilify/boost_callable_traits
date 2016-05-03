@@ -18,7 +18,7 @@ struct add_calling_convention_t<
 template<typename Ret, typename T, typename... Args>
 struct has_calling_convention_t<
     Ret(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS,
-	CALLABLE_TRAITS_CC_TAG> {
+    CALLABLE_TRAITS_CC_TAG> {
     using type = std::true_type;
 };
 
@@ -115,8 +115,8 @@ struct pmf<OriginalType, Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) C
     using clear_args = typename copy_cvr<
         Return(CALLABLE_TRAITS_VARARGS_CC T::*)() CALLABLE_TRAITS_INCLUDE_QUALIFIERS,
         OriginalType
-	>::type;
-	
+    >::type;
+    
 #undef CALLABLE_TRAITS_BEGIN_PACK_MANIP
 #undef CALLABLE_TRAITS_ARGS_PACK
 #undef CALLABLE_TRAITS_END_PACK_MANIP

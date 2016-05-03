@@ -173,14 +173,14 @@ namespace callable_traits {
 
             template<typename NewReturn>
             using apply_return = typename base::template apply_return<NewReturn>&;
-			
+            
             using clear_args = typename base::clear_args&;
-			
-			template<typename... NewArgs>
-			using push_front = typename base::template push_front<NewArgs...>&;
+            
+            template<typename... NewArgs>
+            using push_front = typename base::template push_front<NewArgs...>&;
 
-			template<typename... NewArgs>
-			using push_back = typename base::template push_back<NewArgs...>&;
+            template<typename... NewArgs>
+            using push_back = typename base::template push_back<NewArgs...>&;
 
             template<std::size_t Count>
             using pop_back = typename base::template pop_back<Count>&;

@@ -27,7 +27,7 @@ namespace callable_traits {
     has_same_qualifiers(T&&, Callable&&) {
         return has_same_qualifiers<T&&, Callable&&>();
     }
-	
+    
 }
 
 #endif //#ifndef CALLABLE_TRAITS_COPY_QUALIFIERS_HPP

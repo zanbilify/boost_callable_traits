@@ -40,7 +40,7 @@ namespace callable_traits {
 
         */
 
-inline namespace qualifier_flags {
+    inline namespace qualifier_flags {
 
         //! Flag representing the default qualifiers on a type 
         //! or member function overload.
@@ -73,7 +73,9 @@ inline namespace qualifier_flags {
 #endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
 
         constexpr flags cv_ = 3;
-}
+    }
+
+    namespace detail {
 
         template<flags Flags>
         using remove_const_flag = std::integral_constant<flags, Flags & ~const_>;
@@ -112,27 +114,21 @@ inline namespace qualifier_flags {
                     : (IsAddingLRef ? ((Existing & ~rref_) | Other )
                         : (Existing | Other)))>;
 
-        template<typename T>
-        struct flag_map {
-            static_assert(sizeof(T) < 0,
-                "Invalid argument passed to flag_map template.");
-
-            static constexpr flags value = default_;
-        };
-
         //todo change int to flags here
-        template<> struct flag_map<int> { static constexpr flags value = default_; };
-        template<> struct flag_map<int &> { static constexpr flags value = lref_; };
-        template<> struct flag_map<int &&> { static constexpr flags value = rref_; };
-        template<> struct flag_map<int const> { static constexpr flags value = const_; };
-        template<> struct flag_map<int const &> { static constexpr flags value = const_ | lref_; };
-        template<> struct flag_map<int const &&> { static constexpr flags value = const_ | rref_; };
-        template<> struct flag_map<int volatile> { static constexpr flags value = volatile_; };
-        template<> struct flag_map<int volatile &> { static constexpr flags value = volatile_ | lref_; };
-        template<> struct flag_map<int volatile &&> { static constexpr flags value = volatile_ | rref_; };
-        template<> struct flag_map<int const volatile> { static constexpr flags value = const_ | volatile_; };
-        template<> struct flag_map<int const volatile &> { static constexpr flags value = const_ | volatile_ | lref_; };
-        template<> struct flag_map<int const volatile &&> { static constexpr flags value = const_ | volatile_ | rref_; };
+        template<typename T> struct flag_map { static constexpr flags value = default_; };
+        template<typename T> struct flag_map<T &> { static constexpr flags value = lref_; };
+        template<typename T> struct flag_map<T &&> { static constexpr flags value = rref_; };
+        template<typename T> struct flag_map<T const> { static constexpr flags value = const_; };
+        template<typename T> struct flag_map<T const &> { static constexpr flags value = const_ | lref_; };
+        template<typename T> struct flag_map<T const &&> { static constexpr flags value = const_ | rref_; };
+        template<typename T> struct flag_map<T volatile> { static constexpr flags value = volatile_; };
+        template<typename T> struct flag_map<T volatile &> { static constexpr flags value = volatile_ | lref_; };
+        template<typename T> struct flag_map<T volatile &&> { static constexpr flags value = volatile_ | rref_; };
+        template<typename T> struct flag_map<T const volatile> { static constexpr flags value = const_ | volatile_; };
+        template<typename T> struct flag_map<T const volatile &> { static constexpr flags value = const_ | volatile_ | lref_; };
+        template<typename T> struct flag_map<T const volatile &&> { static constexpr flags value = const_ | volatile_ | rref_; };
+
+    }
 }
 
 #endif //#ifndef CALLABLE_TRAITS_QUALIFIER_FLAGS_HPP

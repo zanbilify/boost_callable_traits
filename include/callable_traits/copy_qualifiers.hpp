@@ -31,7 +31,7 @@ namespace callable_traits {
         // cannot be determined
         template<typename To, typename From>
         using copy_qualifiers =
-			typename detail::copy_qualifiers_impl<detail::traits<To>, detail::traits<From>>::type;
+            typename detail::copy_qualifiers_impl<detail::traits<To>, detail::traits<From>>::type;
     }
 
     namespace verbose {
@@ -39,13 +39,13 @@ namespace callable_traits {
         template<typename To, typename From>
         using copy_qualifiers = detail::fail_if_invalid<
             typename detail::copy_qualifiers_impl<detail::traits<To>, detail::traits<From>>::type,
-            detail::invoke_args_error<false>>;
+            detail::copy_qualifiers_error<false>>;
     }
 
     template<typename To, typename From>
     using copy_qualifiers = detail::fail_if_invalid<
         typename detail::copy_qualifiers_impl<detail::traits<To>, detail::traits<From>>::type,
-        detail::invoke_args_error<true>>;
+        detail::copy_qualifiers_error<true>>;
 }
 
 #endif //#ifndef CALLABLE_TRAITS_COPY_QUALIFIERS_HPP
