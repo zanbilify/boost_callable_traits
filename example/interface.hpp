@@ -43,14 +43,8 @@ namespace intrfc {
 
     // used to forward a parameter without copying it
     template<typename T>
-    using forward_t = std::conditional_t< sizeof(void*) < sizeof(T)
-        , std::add_lvalue_reference_t< std::add_const_t<T> >, T>;
-
-    // The member struct erases the object reference type that is supplied by
-    // function_type, which aliases an INVOKE-aware function type when
-    // a pmf is passed to it. We overwrite the first argument (which is
-    // a reference to an object of the member ptr's parent class, as required
-    // by INVOKE) with void*.
+    using forward_t = std::conditional_t< sizeof(void*) < sizeof(T),
+        std::add_lvalue_reference_t< std::add_const_t<T> >, T>;
 
     template<typename Ptr, Ptr Value, bool IsPmf = std::is_member_function_pointer<Ptr>::value>
     struct member;
