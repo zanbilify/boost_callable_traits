@@ -68,9 +68,9 @@
 <p>
       Interfaces are a <a href="https://en.wikipedia.org/wiki/Interface_(Java)" target="_top">feature
       of the Java programming language</a>. The most obvious way to model an
-      interface in C++ is to define a pure abstract base class. However, the inheritance
-      approach is neither the most efficient, nor the most flexible solution. Inheritance-based
-      interfaces have the following drawbacks:
+      interface in C++ is by defining and inheriting pure abstract base classes.
+      However, the inheritance approach is neither the most efficient, nor the most
+      flexible solution. Inheritance-based interfaces have the following drawbacks:
     </p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -112,13 +112,14 @@
       used like this:
     </p>
 <pre class="programlisting"><span class="identifier">DEFINE_INTERFACE</span><span class="special">(</span> <span class="identifier">interface_x</span><span class="special">,</span>
-  <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
-  <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">long</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
-  <span class="special">((</span> <span class="identifier">another_func</span><span class="special">,</span> <span class="keyword">int</span><span class="special">()</span> <span class="special">))</span>
+  <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span>       <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span>  <span class="special">))</span>
+  <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span>       <span class="keyword">void</span><span class="special">(</span><span class="keyword">long</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
+  <span class="special">((</span> <span class="identifier">another_func</span><span class="special">,</span> <span class="keyword">int</span><span class="special">()</span>            <span class="special">))</span>
 <span class="special">);</span>
 </pre>
 <p>
-      This loosely corresponds to the following Java code:
+      This loosely corresponds to the following Java code (note that Java doesn't
+      have const methods):
     </p>
 <pre class="programlisting"><span class="keyword">public</span> <span class="identifier">interface</span> <span class="identifier">interface_x</span> <span class="special">{</span>
    <span class="keyword">void</span> <span class="identifier">a_func</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">x</span><span class="special">);</span>
@@ -128,23 +129,26 @@
 </pre>
 <p>
       The <code class="computeroutput"><span class="identifier">DEFINE_INTERFACE</span></code> macro
-      is applied to object instances, rather than class definitions. This allows
-      the interfacing of objects whose definitions are not accessible to the programmer.
-      All constraints are still checked at compile time. This example implementation
-      even accounts for member data, such as <code class="computeroutput"><span class="identifier">some_data</span></code>
+      generates a type-erased class that can be applied to any object instance that
+      matches the interface definition. The macro can be invoked at either namespace
+      or class scope. Implementation classes do not inherit the interface, which
+      allows the interfacing of classes whose definitions are inaccessible. All constraints
+      are still checked at compile time, provided the members are actually accessed.
+      <code class="computeroutput"><span class="identifier">DEFINE_INTERFACE</span></code> even accounts
+      for member data, such as <code class="computeroutput"><span class="identifier">some_data</span></code>
       below:
     </p>
 <pre class="programlisting"><span class="identifier">DEFINE_INTERFACE</span><span class="special">(</span> <span class="identifier">interface_y</span><span class="special">,</span>
-  <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
-  <span class="special">((</span> <span class="identifier">some_data</span><span class="special">,</span> <span class="keyword">int</span> <span class="special">))</span>
+  <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span>    <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
+  <span class="special">((</span> <span class="identifier">some_data</span><span class="special">,</span> <span class="keyword">int</span>             <span class="special">))</span>
 <span class="special">);</span>
 </pre>
 <p>
       A more fleshed-out implementation of this would be very useful to anyone using
-      OOP design patterns in C++, or to developers of generic APIs. Arguably, the
-      <code class="computeroutput"><span class="identifier">DEFINE_INTERFACE</span></code> macro is easier
-      than writing pure abstract base classes. However, this implementation is not
-      without drawbacks. To name a few:
+      OOP design patterns in C++, or to developers of generic APIs. Arguably, using
+      the <code class="computeroutput"><span class="identifier">DEFINE_INTERFACE</span></code> macro
+      is easier than writing a pure abstract base class. However, this implementation
+      is not without drawbacks:
     </p>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
