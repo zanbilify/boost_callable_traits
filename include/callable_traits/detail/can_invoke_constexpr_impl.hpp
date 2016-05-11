@@ -43,11 +43,11 @@ namespace callable_traits {
 
             // Where K = std::remove_reference_t<Obj>, CALLABLE_TRAITS_MAKE_CONSTEXPR(U&&)
             // resolves to a matching reference to a constexpr K object. Hence, K must be
-            // a literal type with a constexpr default constructor. constexpr_template_worm<I>
+            // a literal type with a constexpr default constructor. constexpr_template_worm
             // is a "chameleon" type that tries to pass as anything. Generally, if K is
             // templated and uses dependent names, this will fail. However, There are a few
             // exceptions: Unary/binary operators, value member `value`, and member alias
-            // `type` are all defined in terms of constexpr_template_worm<I>, so usage of
+            // `type` are all defined in terms of constexpr_template_worm, so usage of
             // these will succeed in K.
 
 

@@ -23,15 +23,13 @@ namespace callable_traits {
         using int_if_literal =
             typename std::enable_if<is_constexpr_constructible<U>::value, T>::type;
 
-        template<std::size_t I = 0>
         struct constexpr_template_worm;
 
-        template<std::size_t I>
         struct constexpr_template_worm {
 
-            using type = constexpr_template_worm<I>;
+            using type = constexpr_template_worm;
 
-            static const constexpr_template_worm<I> value;
+            static const constexpr_template_worm value;
 
             template<typename T, int_if_literal<T> = 0>
             inline constexpr operator T& () const {
@@ -60,16 +58,14 @@ namespace callable_traits {
             inline constexpr auto operator()(...) const { return type{}; }
         };
 
-        template<std::size_t I>
-        const constexpr_template_worm<I> constexpr_template_worm<I>::value = {};
+        const constexpr_template_worm constexpr_template_worm::value = {};
 
         //template_worm is only used in unevaluated contexts
-        template<std::size_t I = 0>
-        struct template_worm : constexpr_template_worm<I> {
+        struct template_worm : constexpr_template_worm {
             
 #if !defined(CALLABLE_TRAITS_MSVC)
             //msvc doesn't like this
-            static constexpr const auto value = constexpr_template_worm<I>{};
+            static constexpr const auto value = constexpr_template_worm{};
 #endif //!defined(CALLABLE_TRAITS_MSVC)
 
             template<typename T>
@@ -86,55 +82,53 @@ namespace callable_traits {
             template_worm(T&&...);
 #endif //!defined(CALLABLE_TRAITS_MSVC)
             
-            template_worm<I> operator+() const;
-            template_worm<I> operator-() const;
-            template_worm<I> operator*() const;
-            template_worm<I> operator&() const;
-            template_worm<I> operator!() const;
-            template_worm<I> operator~() const;
-            template_worm<I> operator()(...) const;
+            template_worm operator+() const;
+            template_worm operator-() const;
+            template_worm operator*() const;
+            template_worm operator&() const;
+            template_worm operator!() const;
+            template_worm operator~() const;
+            template_worm operator()(...) const;
         };
 
 #define CALLABLE_TRAITS_TEMPLATE_WORM_BINARY_OPERATOR(...) \
-template<std::size_t I, typename T>                        \
+template<typename T>                                       \
 constexpr inline auto                                      \
-__VA_ARGS__ (constexpr_template_worm<I>, T&&)              \
-    -> constexpr_template_worm<I> {                        \
-        return constexpr_template_worm<I>{};               \
+__VA_ARGS__ (constexpr_template_worm, T&&)                 \
+    -> constexpr_template_worm {                           \
+        return constexpr_template_worm{};                  \
 }                                                          \
                                                            \
-template<std::size_t I, typename T>                        \
+template<typename T>                                       \
 constexpr inline auto                                      \
-__VA_ARGS__ (template_worm<I>, T&&) -> template_worm<I> {  \
-    return template_worm<I>{};                             \
+__VA_ARGS__ (template_worm, T&&) -> template_worm {        \
+    return template_worm{};                                \
 }                                                          \
                                                            \
-template<std::size_t I, typename T>                        \
+template<typename T>                                       \
 constexpr inline auto                                      \
-__VA_ARGS__ (T&&, constexpr_template_worm<I>)              \
-    -> constexpr_template_worm<I> {                        \
-        return constexpr_template_worm<I>{};               \
+__VA_ARGS__ (T&&, constexpr_template_worm)                 \
+    -> constexpr_template_worm {                           \
+        return constexpr_template_worm{};                  \
 }                                                          \
                                                            \
-template<std::size_t I, typename T>                        \
+template<typename T>                                       \
 constexpr inline auto                                      \
-__VA_ARGS__ (T&&, template_worm<I>) -> template_worm<I> {  \
-    return template_worm<I>{};                             \
+__VA_ARGS__ (T&&, template_worm) -> template_worm {        \
+    return template_worm{};                                \
 }                                                          \
                                                            \
-template<std::size_t I, std::size_t J>                     \
 constexpr inline auto                                      \
-__VA_ARGS__ (constexpr_template_worm<I>,                   \
-             constexpr_template_worm<J>)                   \
-    -> constexpr_template_worm<I> {                        \
-        return constexpr_template_worm<I>{};               \
+__VA_ARGS__ (constexpr_template_worm,                      \
+             constexpr_template_worm)                      \
+    -> constexpr_template_worm {                           \
+        return constexpr_template_worm{};                  \
 }                                                          \
                                                            \
-template<std::size_t I, std::size_t J>                     \
 constexpr inline auto                                      \
-__VA_ARGS__ (template_worm<I>, template_worm<J>)           \
-    -> template_worm<I> {                                  \
-    return template_worm<I>{};                             \
+__VA_ARGS__ (template_worm, template_worm)                 \
+    -> template_worm {                                     \
+    return template_worm{};                                \
 }                                                          \
 /**/
 

@@ -26,6 +26,9 @@ namespace callable_traits {
 
     namespace detail {
 
+    template<std::size_t>
+    using make_constexpr_worm = constexpr_template_worm;
+
 #ifdef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
 
         inline constexpr auto
@@ -52,16 +55,16 @@ namespace callable_traits {
 
             // Where U = std::remove_reference_t<T>, CALLABLE_TRAITS_MAKE_CONSTEXPR(T&&)
             // resolves to a matching reference to a constexpr U object. Hence, U must be
-            // a literal type with a constexpr default constructor. constexpr_template_worm<I>
+            // a literal type with a constexpr default constructor. constexpr_template_worm
             // is a "chameleon" type that tries to pass as anything. Generally, if U is
             // templated and uses dependent names, this will fail. However, There are a few
             // exceptions: Unary/binary operators, value member `value`, and member alias
-            // `type` are all defined in terms of constexpr_template_worm<I>, so usage of
+            // `type` are all defined in terms of constexpr_template_worm, so usage of
             // these will succeed in U.
 
                     (
                         CALLABLE_TRAITS_MAKE_CONSTEXPR(T&&)(
-                            ::callable_traits::detail::constexpr_template_worm<I>{}...
+                            ::callable_traits::detail::make_constexpr_worm<I>{}...
                         ),
                         0
                     )
@@ -69,7 +72,7 @@ namespace callable_traits {
 
             template<typename T, typename U = typename std::remove_reference<T>::type>
             auto operator()(T&& t) const -> if_integral_constant<T,
-                std::integral_constant<int, (U::value(::callable_traits::detail::constexpr_template_worm<I>{}...), 0)>>;
+                std::integral_constant<int, (U::value(::callable_traits::detail::make_constexpr_worm<I>{}...), 0)>>;
 
             auto operator()(...) const -> substitution_failure;
         };
@@ -85,7 +88,7 @@ namespace callable_traits {
             auto operator()(P&&) const -> if_integral_constant<P,
                 std::integral_constant<int,
                     ((CALLABLE_TRAITS_MAKE_CONSTEXPR(invoke_type).* ::std::remove_reference<P>::type::value)(
-                        ::callable_traits::detail::constexpr_template_worm<I>{}...
+                        ::callable_traits::detail::make_constexpr_worm<I>{}...
                     ), 0)>>;
 
             auto operator()(...) const -> substitution_failure;
