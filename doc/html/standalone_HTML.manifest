@@ -23,9 +23,9 @@ callable_traits/ref_bind.html
 callable_traits/ref_can_invoke.html
 callable_traits/ref_can_invoke_constexpr.html
 callable_traits/ref_clear_args.html
-callable_traits/ref_insert_at.html
-callable_traits/ref_replace_arg.html
-callable_traits/ref_remove_at.html
+callable_traits/ref_insert_args.html
+callable_traits/ref_replace_args.html
+callable_traits/ref_remove_args.html
 callable_traits/ref_expand_args.html
 callable_traits/ref_function_type.html
 callable_traits/ref_has_calling_convention.html
