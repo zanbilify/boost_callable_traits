@@ -111,7 +111,7 @@ struct overwrite_impl<CALLABLE_TRAITS_IX_SEQ(I...), std::tuple<U...>, StartTo> {
 };
 
 template<std::size_t StartIndex, typename... U>
-using overwrite_at = typename overwrite_impl<
+using replace_arg = typename overwrite_impl<
     CALLABLE_TRAITS_MAKE_IX_SEQ(arg_count <= StartIndex + sizeof...(U) ? StartIndex + sizeof...(U) : arg_count),
     std::tuple<U...>, StartIndex>::type;
 

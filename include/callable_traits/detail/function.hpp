@@ -195,7 +195,7 @@ namespace callable_traits {
             using remove_at = typename base::template remove_at<Index, Count>&;
 
             template<std::size_t Index, typename... NewArgs>
-            using overwrite_at = typename base::template overwrite_at<Index, NewArgs...>&;
+            using replace_arg = typename base::template replace_arg<Index, NewArgs...>&;
         };
 
         template<typename U, typename T, T Value>

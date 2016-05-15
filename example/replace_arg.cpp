@@ -4,9 +4,9 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
 ->*/
 
-//[ overwrite_at
+//[ replace_arg
 #include <type_traits>
-#include <callable_traits/overwrite_at.hpp>
+#include <callable_traits/replace_arg.hpp>
 
 namespace ct = callable_traits;
 
@@ -18,7 +18,7 @@ struct foo {};
 int main() {
 
     using f = int(&)(N<0>, N<1>, N<2>, N<3>);
-    using test = ct::overwrite_at<2, f, int>;
+    using test = ct::replace_arg<2, f, int>;
     using expect = int(&)(N<0>, N<1>, int, N<3>);
     static_assert(std::is_same<test, expect>::value, "");
 }

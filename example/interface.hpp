@@ -10,7 +10,7 @@
 #include <callable_traits/result_of.hpp>
 #include <callable_traits/push_front.hpp>
 #include <callable_traits/expand_args.hpp>
-#include <callable_traits/overwrite_at.hpp>
+#include <callable_traits/replace_arg.hpp>
 #include <callable_traits/function_type.hpp>
 #include <callable_traits/set_qualifiers.hpp>
 #include <callable_traits/qualifier_flags.hpp>
@@ -165,7 +165,7 @@ struct interface_x_detail {
                     // overwriting the first argument with void*, "erasing" the
                     // qualified U reference. We then make it a function pointer.
                     using type_erased_ptr =
-                        ::intrfc::ct::overwrite_at<0, function_type, void*> *;
+                        ::intrfc::ct::replace_arg<0, function_type, void*> *;
                 };
 
                 // these aliases simply make later code easier to follow
@@ -212,7 +212,7 @@ struct interface_x_detail {
                         decltype(::intrfc::ct::get_member_qualifier_flags<ptr_type>());
 
                     using type_erased_ptr =
-                        ::intrfc::ct::overwrite_at<0, function_type, void *> *;
+                        ::intrfc::ct::replace_arg<0, function_type, void *> *;
                 };
 
                 using info = member_info<T>;
@@ -569,7 +569,7 @@ struct BOOST_PP_CAT(member_info, i) {                                  \
             ::intrfc::ct::get_member_qualifier_flags<ptr_type>());     \
                                                                        \
         using type_erased_ptr =                                        \
-            ::intrfc::ct::overwrite_at<0, function_type, void*> *;     \
+            ::intrfc::ct::replace_arg<0, function_type, void*> *;     \
     };                                                                 \
                                                                        \
     using info = member_info<T>;                                       \

@@ -137,35 +137,35 @@ int main() {
 
     {
         using p = pack<N<0>, N<1>, N<2>, N<3>, N<4>>;
-        using test = typename p::template overwrite_at<0, int, char>;
+        using test = typename p::template replace_arg<0, int, char>;
         using expect = void(int, char, N<2>, N<3>, N<4>, ...);
         CT_ASSERT(std::is_same<test, expect>::value);
     }
 
     {
         using p = pack<N<0>, N<1>, N<2>, N<3>, N<4>>;
-        using test = typename p::template overwrite_at<1, int, char>;
+        using test = typename p::template replace_arg<1, int, char>;
         using expect = void(N<0>, int, char, N<3>, N<4>, ...);
         CT_ASSERT(std::is_same<test, expect>::value);
     }
 
     {
         using p = pack<N<0>, N<1>, N<2>, N<3>, N<4>>;
-        using test = typename p::template overwrite_at<2, int, char>;
+        using test = typename p::template replace_arg<2, int, char>;
         using expect = void(N<0>, N<1>, int, char, N<4>, ...);
         CT_ASSERT(std::is_same<test, expect>::value);
     }
 
     {
         using p = pack<N<0>, N<1>, N<2>, N<3>, N<4>>;
-        using test = typename p::template overwrite_at<3, int, char>;
+        using test = typename p::template replace_arg<3, int, char>;
         using expect = void(N<0>, N<1>, N<2>, int, char, ...);
         CT_ASSERT(std::is_same<test, expect>::value);
     }
 
     {
         using p = pack<N<0>, N<1>, N<2>, N<3>, N<4>>;
-        using test = typename p::template overwrite_at<4, int, char, short, void*>;
+        using test = typename p::template replace_arg<4, int, char, short, void*>;
         using expect = void(N<0>, N<1>, N<2>, N<3>, int, char, short, void*, ...);
         CT_ASSERT(std::is_same<test, expect>::value);
     }

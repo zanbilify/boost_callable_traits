@@ -179,7 +179,7 @@ namespace callable_traits {
             using remove_at = invalid_type;
 
             template<std::size_t Index, typename... NewArgs>
-            using overwrite_at = invalid_type;
+            using replace_arg = invalid_type;
         };
     }
 }

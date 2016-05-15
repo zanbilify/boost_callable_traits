@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>overwrite_at</title>
+<title>replace_arg</title>
 <link rel="stylesheet" href="../boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="CallableTraits">
@@ -24,28 +24,28 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="callable_traits.ref_overwrite_at"></a><a class="link" href="ref_overwrite_at.html" title="overwrite_at">overwrite_at</a>
+<a name="callable_traits.ref_replace_arg"></a><a class="link" href="ref_replace_arg.html" title="replace_arg">replace_arg</a>
 </h2></div></div></div>
 <pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">StartIndex</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">NewArgs</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">overwrite_at</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span> <span class="special">;</span>
+    <span class="keyword">using</span> <span class="identifier">replace_arg</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span> <span class="special">;</span>
 <span class="special">}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_overwrite_at.h0"></a>
-      <span class="phrase"><a name="callable_traits.ref_overwrite_at.constraints"></a></span><a class="link" href="ref_overwrite_at.html#callable_traits.ref_overwrite_at.constraints">Constraints</a>
+<a name="callable_traits.ref_replace_arg.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_replace_arg.constraints"></a></span><a class="link" href="ref_replace_arg.html#callable_traits.ref_replace_arg.constraints">Constraints</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
           <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a>
         </li></ul></div>
 <h4>
-<a name="callable_traits.ref_overwrite_at.h1"></a>
-      <span class="phrase"><a name="callable_traits.ref_overwrite_at.behavior"></a></span><a class="link" href="ref_overwrite_at.html#callable_traits.ref_overwrite_at.behavior">Behavior</a>
+<a name="callable_traits.ref_replace_arg.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_replace_arg.behavior"></a></span><a class="link" href="ref_replace_arg.html#callable_traits.ref_replace_arg.behavior">Behavior</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-          <code class="computeroutput"><span class="identifier">overwrite_at</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">NewArgs</span><span class="special">...&gt;</span></code> aliases a type identical to <code class="computeroutput"><span class="identifier">T</span></code>, except that <code class="computeroutput"><span class="identifier">NewArgs</span><span class="special">...</span></code> will begin overwriting the <code class="literal"><span class="emphasis"><em>[Args...]</em></span></code>
+          <code class="computeroutput"><span class="identifier">replace_arg</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">NewArgs</span><span class="special">...&gt;</span></code> aliases a type identical to <code class="computeroutput"><span class="identifier">T</span></code>, except that <code class="computeroutput"><span class="identifier">NewArgs</span><span class="special">...</span></code> will begin overwriting the <code class="literal"><span class="emphasis"><em>[Args...]</em></span></code>
           parameter list at the 0-based <code class="computeroutput"><span class="identifier">InsertIndex</span></code>,
           extending the parameter list as necessary.
         </li>
@@ -55,11 +55,11 @@
         </li>
 </ul></div>
 <h4>
-<a name="callable_traits.ref_overwrite_at.h2"></a>
-      <span class="phrase"><a name="callable_traits.ref_overwrite_at.example"></a></span><a class="link" href="ref_overwrite_at.html#callable_traits.ref_overwrite_at.example">Example</a>
+<a name="callable_traits.ref_replace_arg.h2"></a>
+      <span class="phrase"><a name="callable_traits.ref_replace_arg.example"></a></span><a class="link" href="ref_replace_arg.html#callable_traits.ref_replace_arg.example">Example</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">overwrite_at</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">replace_arg</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
 
@@ -71,7 +71,7 @@
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
 
     <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(&amp;)(</span><span class="identifier">N</span><span class="special">&lt;</span><span class="number">0</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">2</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">3</span><span class="special">&gt;);</span>
-    <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">overwrite_at</span><span class="special">&lt;</span><span class="number">2</span><span class="special">,</span> <span class="identifier">f</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&gt;;</span>
+    <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">replace_arg</span><span class="special">&lt;</span><span class="number">2</span><span class="special">,</span> <span class="identifier">f</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&gt;;</span>
     <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(&amp;)(</span><span class="identifier">N</span><span class="special">&lt;</span><span class="number">0</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;,</span> <span class="keyword">int</span><span class="special">,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">3</span><span class="special">&gt;);</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 <span class="special">}</span>

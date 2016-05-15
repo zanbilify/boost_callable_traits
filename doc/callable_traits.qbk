@@ -127,7 +127,7 @@
 [template link_pop_front[][link callable_traits.ref_pop_front [^pop_front]]]
 [template link_insert_at[][link callable_traits.ref_insert_at [^insert_at]]]
 [template link_remove_at[][link callable_traits.ref_remove_at [^remove_at]]]
-[template link_overwrite_at[][link callable_traits.ref_overwrite_at [^overwrite_at]]]
+[template link_replace_arg[][link callable_traits.ref_replace_arg [^replace_arg]]]
 [template link_is_callable[][link callable_traits.ref_is_callable [^is_callable]]]
 [template link_result_of[][link callable_traits.ref_result_of [^result_of]]]
 
@@ -770,7 +770,7 @@ The [libname] interface is also broken down by trait into individual header file
 * [include_header [link_args]]
 * [include_header [link_arg_at]]
 * [include_header [link_insert_at]]
-* [include_header [link_overwrite_at]]
+* [include_header [link_replace_arg]]
 * [include_header [link_remove_at]]
 * [include_header [link_clear_args]]
 * [include_header [link_push_back]]
@@ -1464,24 +1464,24 @@ For `add_calling_convention` to work as-intended, you must:
 [insert_at]
 [endsect]
 
-[section:ref_overwrite_at overwrite_at]
+[section:ref_replace_arg replace_arg]
 
     namespace ``[lib_namespace]`` {
 	
 	    template<std::size_t StartIndex, typename T, typename... NewArgs>
-		using overwrite_at = /* implementation-defined */ ;
+		using replace_arg = /* implementation-defined */ ;
 	}
 	
 [heading Constraints]
 * `T` must be a [link_signature]
 
 [heading Behavior]
-* `overwrite_at<Index, T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` will begin overwriting the [Args] parameter list at the 0-based `InsertIndex`, extending the parameter list as necessary.
+* `replace_arg<Index, T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` will begin overwriting the [Args] parameter list at the 0-based `InsertIndex`, extending the parameter list as necessary.
 * [VarArgs] remain if present in `T`.
 
 [heading Example]
-[import ../example/overwrite_at.cpp]
-[overwrite_at]
+[import ../example/replace_arg.cpp]
+[replace_arg]
 [endsect]
 
 [section:ref_remove_at remove_at]
