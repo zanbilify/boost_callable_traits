@@ -31,7 +31,7 @@ namespace callable_traits {
         struct dummy {};
 
         // used as return type in failed SFINAE tests
-        struct substitution_failure{};
+        struct substitution_failure : std::false_type{};
 
 
         // shorthand for std::tuple_element
@@ -308,6 +308,11 @@ namespace callable_traits {
         struct prepend<T, private_tuple<Args...> > {
             using type = private_tuple<T, Args...>;
         };*/
+
+        template<typename... Ts>
+        using are_all_constexpr_constructible = CALLABLE_TRAITS_CONJUNCTION(
+            is_constexpr_constructible<Ts>...
+        );
     }
 }
 

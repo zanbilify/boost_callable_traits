@@ -124,16 +124,11 @@
         <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">()</span> <span class="special">&amp;;</span>
         <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_member_lvalue_reference</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">&gt;;</span>
         <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-    <span class="special">}</span> <span class="special">{</span>
-        <span class="comment">// add_member_lvalue_reference does not compile with function pointers,</span>
-        <span class="comment">// function references, function objects, or member data pointers.</span>
-        <span class="comment">// However, you can loosen this restriction somewhat by using the</span>
-        <span class="comment">// callable_traits::permissive namespace instead:</span>
-        <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(*)();</span>
-        <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="identifier">f</span><span class="special">;</span>
-        <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">permissive</span><span class="special">::</span><span class="identifier">add_member_lvalue_reference</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">&gt;;</span>
-        <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
     <span class="special">}</span>
+
+    <span class="comment">// A substitution failure will occur if add_member_lvalue_reference</span>
+    <span class="comment">// is used with function pointers, function references, function objects,</span>
+    <span class="comment">// or member data pointers.</span>
 <span class="special">}</span>
 </pre>
 <h4>

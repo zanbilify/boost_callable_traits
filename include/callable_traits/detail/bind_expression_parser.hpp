@@ -56,7 +56,7 @@ namespace callable_traits {
         struct filter_invalid_args<Head, Tail...> {
 
             static constexpr const auto is_legal_arg =
-                !std::is_same<Head, template_worm<>>{}
+                !std::is_same<Head, template_worm>{}
                 && !std::is_same<Head, invalid_type>{};
 
             using type = typename std::conditional<

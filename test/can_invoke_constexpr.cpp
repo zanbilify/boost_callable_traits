@@ -48,6 +48,7 @@ using foo3_pmf = std::integral_constant<decltype(&foo3::bar), &foo3::bar>;
 
 namespace ct = callable_traits;
 
+// value syntax
 CT_ASSERT(!ct::can_invoke_constexpr(foo1{}));
 CT_ASSERT(!ct::can_invoke_constexpr(foo1{}, 0));
 
@@ -62,6 +63,24 @@ CT_ASSERT(!ct::can_invoke_constexpr(foo1_pmf{}, foo1{}, 0));
 
 CT_ASSERT(!ct::can_invoke_constexpr(foo3_pmf{}, foo3{}));
 CT_ASSERT( ct::can_invoke_constexpr(foo3_pmf{}, foo3{}, 0));
+
+
+
+// type syntax
+CT_ASSERT(!ct::can_invoke_constexpr<foo1>());
+CT_ASSERT(!ct::can_invoke_constexpr<foo1, int>());
+
+CT_ASSERT( ct::can_invoke_constexpr<foo2>());
+CT_ASSERT( ct::can_invoke_constexpr<foo2, int>());
+
+CT_ASSERT(!ct::can_invoke_constexpr<foo4>());
+CT_ASSERT( ct::can_invoke_constexpr<foo4, int>());
+
+CT_ASSERT(!ct::can_invoke_constexpr<foo1_pmf, foo1&>());
+CT_ASSERT(!ct::can_invoke_constexpr<foo1_pmf, foo1&, int>());
+
+CT_ASSERT(!ct::can_invoke_constexpr<foo3_pmf, foo3&>());
+CT_ASSERT( ct::can_invoke_constexpr<foo3_pmf, foo3&, int>());
 
 int main() {}
 

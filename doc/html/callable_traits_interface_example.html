@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="CallableTraits">
 <link rel="up" href="index.html" title="CallableTraits">
 <link rel="prev" href="callable_traits/example_std_function_sugar.html" title="Example: std::function sugar">
-<link rel="next" href="callable_traits/compatibility.html" title="Compatibility">
+<link rel="next" href="callable_traits/contact.html" title="Contact">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -20,7 +20,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="callable_traits/example_std_function_sugar.html"><img src="../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="index.html"><img src="../src/images/up.png" alt="Up"></a><a accesskey="h" href="index.html"><img src="../src/images/home.png" alt="Home"></a><a accesskey="n" href="callable_traits/compatibility.html"><img src="../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="callable_traits/example_std_function_sugar.html"><img src="../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="index.html"><img src="../src/images/up.png" alt="Up"></a><a accesskey="h" href="index.html"><img src="../src/images/home.png" alt="Home"></a><a accesskey="n" href="callable_traits/contact.html"><img src="../src/images/next.png" alt="Next"></a>
 </div>
 <div lang="en" class="article">
 <div class="titlepage">
@@ -68,9 +68,9 @@
 <p>
       Interfaces are a <a href="https://en.wikipedia.org/wiki/Interface_(Java)" target="_top">feature
       of the Java programming language</a>. The most obvious way to model an
-      interface in C++ is by defining and inheriting pure abstract base classes.
-      However, the inheritance approach is neither the most efficient, nor the most
-      flexible solution. Inheritance-based interfaces have the following drawbacks:
+      interface in C++ is to define a pure abstract base class. However, the inheritance
+      approach is neither the most efficient, nor the most flexible solution. Inheritance-based
+      interfaces have the following drawbacks:
     </p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
@@ -112,14 +112,13 @@
       used like this:
     </p>
 <pre class="programlisting"><span class="identifier">DEFINE_INTERFACE</span><span class="special">(</span> <span class="identifier">interface_x</span><span class="special">,</span>
-  <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span>       <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span>  <span class="special">))</span>
-  <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span>       <span class="keyword">void</span><span class="special">(</span><span class="keyword">long</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
-  <span class="special">((</span> <span class="identifier">another_func</span><span class="special">,</span> <span class="keyword">int</span><span class="special">()</span>            <span class="special">))</span>
+  <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
+  <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">long</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
+  <span class="special">((</span> <span class="identifier">another_func</span><span class="special">,</span> <span class="keyword">int</span><span class="special">()</span> <span class="special">))</span>
 <span class="special">);</span>
 </pre>
 <p>
-      This loosely corresponds to the following Java code (note that Java doesn't
-      have const methods):
+      This loosely corresponds to the following Java code:
     </p>
 <pre class="programlisting"><span class="keyword">public</span> <span class="identifier">interface</span> <span class="identifier">interface_x</span> <span class="special">{</span>
    <span class="keyword">void</span> <span class="identifier">a_func</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">x</span><span class="special">);</span>
@@ -129,26 +128,23 @@
 </pre>
 <p>
       The <code class="computeroutput"><span class="identifier">DEFINE_INTERFACE</span></code> macro
-      generates a type-erased class that can be applied to any object instance that
-      matches the interface definition. The macro can be invoked at either namespace
-      or class scope. Implementation classes do not inherit the interface, which
-      allows the interfacing of classes whose definitions are inaccessible. All constraints
-      are still checked at compile time, provided the members are actually accessed.
-      <code class="computeroutput"><span class="identifier">DEFINE_INTERFACE</span></code> even accounts
-      for member data, such as <code class="computeroutput"><span class="identifier">some_data</span></code>
+      is applied to object instances, rather than class definitions. This allows
+      the interfacing of objects whose definitions are not accessible to the programmer.
+      All constraints are still checked at compile time. This example implementation
+      even accounts for member data, such as <code class="computeroutput"><span class="identifier">some_data</span></code>
       below:
     </p>
 <pre class="programlisting"><span class="identifier">DEFINE_INTERFACE</span><span class="special">(</span> <span class="identifier">interface_y</span><span class="special">,</span>
-  <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span>    <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
-  <span class="special">((</span> <span class="identifier">some_data</span><span class="special">,</span> <span class="keyword">int</span>             <span class="special">))</span>
+  <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
+  <span class="special">((</span> <span class="identifier">some_data</span><span class="special">,</span> <span class="keyword">int</span> <span class="special">))</span>
 <span class="special">);</span>
 </pre>
 <p>
       A more fleshed-out implementation of this would be very useful to anyone using
-      OOP design patterns in C++, or to developers of generic APIs. Arguably, using
-      the <code class="computeroutput"><span class="identifier">DEFINE_INTERFACE</span></code> macro
-      is easier than writing a pure abstract base class. However, this implementation
-      is not without drawbacks:
+      OOP design patterns in C++, or to developers of generic APIs. Arguably, the
+      <code class="computeroutput"><span class="identifier">DEFINE_INTERFACE</span></code> macro is easier
+      than writing pure abstract base classes. However, this implementation is not
+      without drawbacks. To name a few:
     </p>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
@@ -194,32 +190,27 @@
       macro. The implementation can be found in the following section.
     </p>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">iostream</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">typeinfo</span><span class="special">&gt;</span>
 
 <span class="preprocessor">#include</span> <span class="string">"interface.hpp"</span>
 
-<span class="identifier">DEFINE_INTERFACE</span><span class="special">(</span> <span class="identifier">interface_x</span><span class="special">,</span>
-    <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span>       <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span>  <span class="special">))</span>
-    <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span>       <span class="keyword">void</span><span class="special">(</span><span class="keyword">long</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
-    <span class="special">((</span> <span class="identifier">another_func</span><span class="special">,</span> <span class="keyword">int</span><span class="special">()</span>            <span class="special">))</span>
-    <span class="special">((</span> <span class="identifier">some_data</span><span class="special">,</span>    <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*</span>      <span class="special">))</span>
+<span class="identifier">DEFINE_INTERFACE</span><span class="special">(</span><span class="identifier">interface_x</span><span class="special">,</span>
+    <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
+    <span class="special">((</span> <span class="identifier">a_func</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">long</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">))</span>
+    <span class="special">((</span> <span class="identifier">another_func</span><span class="special">,</span> <span class="keyword">int</span><span class="special">()</span> <span class="special">))</span>
+    <span class="special">((</span> <span class="identifier">some_data</span><span class="special">,</span> <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*</span> <span class="special">))</span>
 <span class="special">);</span>
 
 <span class="comment">// two classes that implement interface_x</span>
 <span class="keyword">struct</span> <span class="identifier">a_class</span> <span class="special">{</span>
-	
     <span class="keyword">void</span> <span class="identifier">a_func</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">v</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span>
-		
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"a_class::void a_func(int v = "</span> <span class="special">&lt;&lt;</span> <span class="identifier">v</span> <span class="special">&lt;&lt;</span> <span class="string">")"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
     <span class="special">}</span>
 
     <span class="keyword">void</span> <span class="identifier">a_func</span><span class="special">(</span><span class="keyword">long</span> <span class="identifier">v</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span>
-		
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"a_class::void a_func(long v = "</span> <span class="special">&lt;&lt;</span> <span class="identifier">v</span> <span class="special">&lt;&lt;</span> <span class="string">")"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
     <span class="special">}</span>
 
     <span class="keyword">int</span> <span class="identifier">another_func</span><span class="special">()</span> <span class="special">{</span>
-		
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"a_class::another_func() = 3"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
         <span class="keyword">return</span> <span class="number">3</span><span class="special">;</span>
     <span class="special">}</span>
@@ -232,13 +223,12 @@
     <span class="comment">// Notice a_func is implemented as a function template? No problem for our interface.</span>
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">void</span> <span class="identifier">a_func</span><span class="special">(</span><span class="identifier">T</span> <span class="identifier">v</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span>
-		
-        <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"another_class::void a_func(T v = "</span> <span class="special">&lt;&lt;</span> <span class="identifier">v</span>
-				  <span class="special">&lt;&lt;</span> <span class="string">")  [ T = "</span> <span class="special">&lt;&lt;</span> <span class="keyword">typeid</span><span class="special">(</span><span class="identifier">T</span><span class="special">).</span><span class="identifier">name</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="string">" ]"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+        <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span>
+            <span class="string">"another_class::void a_func(T v = "</span> <span class="special">&lt;&lt;</span> <span class="identifier">v</span> <span class="special">&lt;&lt;</span> <span class="string">")"</span>
+            <span class="string">"  [ T = "</span> <span class="special">&lt;&lt;</span> <span class="keyword">typeid</span><span class="special">(</span><span class="identifier">T</span><span class="special">).</span><span class="identifier">name</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="string">" ]"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
     <span class="special">}</span>
 
     <span class="keyword">int</span> <span class="identifier">another_func</span><span class="special">()</span> <span class="special">{</span>
-		
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"another_class::another_func() = 5"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
         <span class="keyword">return</span> <span class="number">5</span><span class="special">;</span>
     <span class="special">}</span>
@@ -246,12 +236,7 @@
     <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*</span> <span class="identifier">some_data</span> <span class="special">=</span> <span class="string">"another_class's data"</span><span class="special">;</span>
 <span class="special">};</span>
 
-<span class="comment">// using an interface as a function parameter enforces compile-time</span>
-<span class="comment">// constraints without needing to deal with templates. This can be especially</span>
-<span class="comment">// useful for designing linked-library APIs, where exposing proprietary logic</span>
-<span class="comment">// in template headers would be undesirable.</span>
 <span class="keyword">void</span> <span class="identifier">print_data</span><span class="special">(</span><span class="identifier">interface_x</span> <span class="identifier">obj</span><span class="special">)</span> <span class="special">{</span>
-	
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">obj</span><span class="special">.</span><span class="identifier">some_data</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
 <span class="special">}</span>
 
@@ -288,9 +273,10 @@
     </p>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">arg_at</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">result_of</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">pop_front</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">push_front</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">expand_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">overwrite_at</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">replace_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">function_type</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">set_qualifiers</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">qualifier_flags</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
@@ -299,6 +285,7 @@
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_member_cv</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">get_qualifier_flags</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">apply_member_pointer</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_member_pointer</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_member_reference</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">qualified_parent_class_of</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">get_member_qualifier_flags</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
@@ -323,8 +310,14 @@
 
     <span class="comment">// used to forward a parameter without copying it</span>
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">forward_t</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">conditional_t</span><span class="special">&lt;</span> <span class="keyword">sizeof</span><span class="special">(</span><span class="keyword">void</span><span class="special">*)</span> <span class="special">&lt;</span> <span class="keyword">sizeof</span><span class="special">(</span><span class="identifier">T</span><span class="special">),</span>
-        <span class="identifier">std</span><span class="special">::</span><span class="identifier">add_lvalue_reference_t</span><span class="special">&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">add_const_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span> <span class="special">&gt;,</span> <span class="identifier">T</span><span class="special">&gt;;</span>
+    <span class="keyword">using</span> <span class="identifier">forward_t</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">conditional_t</span><span class="special">&lt;</span> <span class="keyword">sizeof</span><span class="special">(</span><span class="keyword">void</span><span class="special">*)</span> <span class="special">&lt;</span> <span class="keyword">sizeof</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span>
+        <span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">add_lvalue_reference_t</span><span class="special">&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">add_const_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span> <span class="special">&gt;,</span> <span class="identifier">T</span><span class="special">&gt;;</span>
+
+    <span class="comment">// The member struct erases the object reference type that is supplied by</span>
+    <span class="comment">// function_type, which aliases an INVOKE-aware function type when</span>
+    <span class="comment">// a pmf is passed to it. We replace the first argument (which is</span>
+    <span class="comment">// a reference to an object of the member ptr's parent class, as required</span>
+    <span class="comment">// by INVOKE) with void*.</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Ptr</span><span class="special">,</span> <span class="identifier">Ptr</span> <span class="identifier">Value</span><span class="special">,</span> <span class="keyword">bool</span> <span class="identifier">IsPmf</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">is_member_function_pointer</span><span class="special">&lt;</span><span class="identifier">Ptr</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">&gt;</span>
     <span class="keyword">struct</span> <span class="identifier">member</span><span class="special">;</span>
@@ -344,13 +337,18 @@
         <span class="keyword">struct</span> <span class="identifier">member_wrapper</span> <span class="special">{</span>
 
             <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span>
-            <span class="identifier">wrap</span><span class="special">(</span><span class="keyword">void</span><span class="special">*</span> <span class="identifier">c</span><span class="special">,</span> <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="special">{</span>
+                <span class="identifier">wrap</span><span class="special">(</span><span class="keyword">void</span><span class="special">*</span> <span class="identifier">c</span><span class="special">,</span> <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="special">{</span>
                 <span class="keyword">return</span> <span class="special">(</span><span class="keyword">reinterpret_cast</span><span class="special">&lt;</span><span class="identifier">context</span><span class="special">*&gt;(</span><span class="identifier">c</span><span class="special">)-&gt;*</span><span class="identifier">PmfValue</span><span class="special">)(</span><span class="identifier">args</span><span class="special">...);</span>
             <span class="special">};</span>
         <span class="special">};</span>
 
+        <span class="comment">// removing the member pointer so that expand_args below doesn't include</span>
+        <span class="comment">// the INVOKE-required object argument</span>
+        <span class="keyword">using</span> <span class="identifier">abominable_function_type</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_member_pointer</span><span class="special">&lt;</span><span class="identifier">Pmf</span><span class="special">&gt;;</span>
+
         <span class="comment">// expand_args is used to expand the argument types into member_wrapper</span>
-        <span class="keyword">using</span> <span class="identifier">wrapper</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">expand_args</span><span class="special">&lt;</span><span class="identifier">Pmf</span><span class="special">,</span> <span class="identifier">member_wrapper</span><span class="special">&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">wrapper</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">expand_args</span><span class="special">&lt;</span>
+            <span class="identifier">abominable_function_type</span><span class="special">,</span> <span class="identifier">member_wrapper</span><span class="special">&gt;;</span>
     <span class="special">};</span>
 
     <span class="comment">// This specialization handles member data.</span>
@@ -366,7 +364,7 @@
         <span class="keyword">struct</span> <span class="identifier">wrapper</span> <span class="special">{</span>
 
             <span class="keyword">static</span> <span class="keyword">inline</span> <span class="identifier">T</span><span class="special">&amp;</span>
-            <span class="identifier">wrap</span><span class="special">(</span><span class="keyword">void</span><span class="special">*</span> <span class="identifier">c</span><span class="special">)</span> <span class="special">{</span>
+                <span class="identifier">wrap</span><span class="special">(</span><span class="keyword">void</span><span class="special">*</span> <span class="identifier">c</span><span class="special">)</span> <span class="special">{</span>
                 <span class="keyword">return</span> <span class="keyword">reinterpret_cast</span><span class="special">&lt;</span><span class="identifier">context</span><span class="special">*&gt;(</span><span class="identifier">c</span><span class="special">)-&gt;*</span><span class="identifier">PmdValue</span><span class="special">;</span>
             <span class="special">};</span>
         <span class="special">};</span>
@@ -377,8 +375,8 @@
 <span class="preprocessor">#ifdef</span> <span class="identifier">BOOST_PP_NIL</span>
 
 <span class="identifier">DEFINE_INTERFACE</span><span class="special">(</span><span class="identifier">interface_x</span><span class="special">,</span>
-  <span class="special">((</span> <span class="identifier">print_member_data</span><span class="special">,</span> <span class="keyword">void</span><span class="special">()</span> <span class="keyword">const</span> <span class="special">))</span>
-  <span class="special">((</span> <span class="identifier">member_data</span><span class="special">,</span> <span class="keyword">int</span> <span class="special">))</span>
+<span class="special">((</span><span class="identifier">print_member_data</span><span class="special">,</span> <span class="keyword">void</span><span class="special">()</span> <span class="keyword">const</span><span class="special">))</span>
+<span class="special">((</span><span class="identifier">member_data</span><span class="special">,</span> <span class="keyword">int</span><span class="special">))</span>
 <span class="special">);</span>
 
 <span class="comment">// The above macro invocation would expand to the following code (sans comments and formatting, of course):</span>
@@ -406,7 +404,7 @@
                 <span class="comment">// this definition is only used for member data</span>
                 <span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">U</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">Member</span> <span class="special">=</span> <span class="identifier">member_type</span><span class="special">,</span>
                     <span class="keyword">bool</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">has_member_qualifiers</span><span class="special">&lt;</span><span class="identifier">member_type</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">&gt;</span>
-                <span class="keyword">struct</span> <span class="identifier">member_info</span> <span class="special">{</span>
+                    <span class="keyword">struct</span> <span class="identifier">member_info</span> <span class="special">{</span>
 
                     <span class="keyword">using</span> <span class="identifier">result_type</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">add_lvalue_reference_t</span><span class="special">&lt;</span><span class="identifier">Member</span><span class="special">&gt;;</span>
                     <span class="keyword">using</span> <span class="identifier">ptr_type</span> <span class="special">=</span> <span class="identifier">Member</span> <span class="identifier">U</span><span class="special">::*;</span>
@@ -439,7 +437,7 @@
                     <span class="comment">// overwriting the first argument with void*, "erasing" the</span>
                     <span class="comment">// qualified U reference. We then make it a function pointer.</span>
                     <span class="keyword">using</span> <span class="identifier">type_erased_ptr</span> <span class="special">=</span>
-                        <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">overwrite_at</span><span class="special">&lt;</span><span class="number">0</span><span class="special">,</span> <span class="identifier">function_type</span><span class="special">,</span> <span class="keyword">void</span><span class="special">*&gt;</span> <span class="special">*;</span>
+                        <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">replace_args</span><span class="special">&lt;</span><span class="number">0</span><span class="special">,</span> <span class="identifier">function_type</span><span class="special">,</span> <span class="keyword">void</span><span class="special">*&gt;</span> <span class="special">*;</span>
                 <span class="special">};</span>
 
                 <span class="comment">// these aliases simply make later code easier to follow</span>
@@ -466,7 +464,7 @@
 
                 <span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">U</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">Member</span> <span class="special">=</span> <span class="identifier">member_type</span><span class="special">,</span>
                     <span class="keyword">bool</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_like_function</span><span class="special">&lt;</span><span class="identifier">member_type</span><span class="special">&gt;()&gt;</span>
-                <span class="keyword">struct</span> <span class="identifier">member_info</span> <span class="special">{</span>
+                    <span class="keyword">struct</span> <span class="identifier">member_info</span> <span class="special">{</span>
 
                     <span class="keyword">using</span> <span class="identifier">result_type</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">add_lvalue_reference_t</span><span class="special">&lt;</span><span class="identifier">Member</span><span class="special">&gt;;</span>
                     <span class="keyword">using</span> <span class="identifier">ptr_type</span> <span class="special">=</span> <span class="identifier">Member</span> <span class="identifier">U</span><span class="special">::*;</span>
@@ -486,7 +484,7 @@
                         <span class="keyword">decltype</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">get_member_qualifier_flags</span><span class="special">&lt;</span><span class="identifier">ptr_type</span><span class="special">&gt;());</span>
 
                     <span class="keyword">using</span> <span class="identifier">type_erased_ptr</span> <span class="special">=</span>
-                        <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">overwrite_at</span><span class="special">&lt;</span><span class="number">0</span><span class="special">,</span> <span class="identifier">function_type</span><span class="special">,</span> <span class="keyword">void</span> <span class="special">*&gt;</span> <span class="special">*;</span>
+                        <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">replace_args</span><span class="special">&lt;</span><span class="number">0</span><span class="special">,</span> <span class="identifier">function_type</span><span class="special">,</span> <span class="keyword">void</span> <span class="special">*&gt;</span> <span class="special">*;</span>
                 <span class="special">};</span>
 
                 <span class="keyword">using</span> <span class="identifier">info</span> <span class="special">=</span> <span class="identifier">member_info</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
@@ -508,8 +506,8 @@
         <span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">T</span><span class="special">&gt;</span>
         <span class="keyword">inline</span> <span class="identifier">interface_root</span><span class="special">(</span><span class="identifier">T</span> <span class="special">&amp;</span><span class="identifier">that</span><span class="special">)</span>
             <span class="special">:</span> <span class="identifier">ptr_vtable</span><span class="special">(&amp;</span><span class="identifier">vtable_holder</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">val_vtable</span><span class="special">),</span>
-            <span class="identifier">obj_ptr</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">addressof</span><span class="special">(</span><span class="identifier">that</span><span class="special">))</span>
-        <span class="special">{}</span>
+            <span class="identifier">obj_ptr</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">addressof</span><span class="special">(</span><span class="identifier">that</span><span class="special">))</span> <span class="special">{</span>
+        <span class="special">}</span>
 
         <span class="comment">// This template is instantiated for every class from which this interface</span>
         <span class="comment">// is constructed (see constructor above). This instantiation causes the</span>
@@ -539,7 +537,7 @@
 
         <span class="keyword">template</span> <span class="special">&lt;</span> <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">flags</span> <span class="identifier">QualifierFlags</span><span class="special">,</span>
             <span class="keyword">typename</span> <span class="identifier">Base</span> <span class="special">=</span> <span class="identifier">get_next_base</span><span class="special">&lt;</span><span class="number">0</span><span class="special">&gt;&gt;</span>
-        <span class="keyword">struct</span> <span class="identifier">apply</span><span class="special">;</span>
+            <span class="keyword">struct</span> <span class="identifier">apply</span><span class="special">;</span>
 
         <span class="comment">// for unqualified member functions/data</span>
         <span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Base</span><span class="special">&gt;</span>
@@ -550,7 +548,7 @@
             <span class="keyword">using</span> <span class="identifier">Base</span><span class="special">::</span><span class="identifier">obj_ptr</span><span class="special">;</span>
 
             <span class="keyword">inline</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span>
-            <span class="identifier">print_member_data</span><span class="special">(</span> <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="special">{</span>
+                <span class="identifier">print_member_data</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="special">{</span>
                 <span class="keyword">return</span> <span class="identifier">ptr_vtable</span><span class="special">-&gt;</span><span class="identifier">func0</span><span class="special">(</span><span class="identifier">obj_ptr</span><span class="special">,</span> <span class="identifier">args</span><span class="special">...);</span>
             <span class="special">}</span>
         <span class="special">};</span>
@@ -564,7 +562,7 @@
             <span class="keyword">using</span> <span class="identifier">Base</span><span class="special">::</span><span class="identifier">obj_ptr</span><span class="special">;</span>
 
             <span class="keyword">inline</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span>
-            <span class="identifier">print_member_data</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span>
+                <span class="identifier">print_member_data</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span>
                 <span class="keyword">return</span> <span class="identifier">ptr_vtable</span><span class="special">-&gt;</span><span class="identifier">func0</span><span class="special">(</span><span class="identifier">obj_ptr</span><span class="special">,</span> <span class="identifier">args</span><span class="special">...);</span>
             <span class="special">}</span>
         <span class="special">};</span>
@@ -578,7 +576,7 @@
             <span class="keyword">using</span> <span class="identifier">Base</span><span class="special">::</span><span class="identifier">obj_ptr</span><span class="special">;</span>
 
             <span class="keyword">inline</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span>
-            <span class="identifier">print_member_data</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="keyword">volatile</span> <span class="special">{</span>
+                <span class="identifier">print_member_data</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="keyword">volatile</span> <span class="special">{</span>
                 <span class="keyword">return</span> <span class="identifier">ptr_vtable</span><span class="special">-&gt;</span><span class="identifier">func0</span><span class="special">(</span><span class="identifier">obj_ptr</span><span class="special">,</span> <span class="identifier">args</span><span class="special">...);</span>
             <span class="special">}</span>
         <span class="special">};</span>
@@ -592,7 +590,7 @@
             <span class="keyword">using</span> <span class="identifier">Base</span><span class="special">::</span><span class="identifier">obj_ptr</span><span class="special">;</span>
 
             <span class="keyword">inline</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span>
-            <span class="identifier">print_member_data</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">{</span>
+                <span class="identifier">print_member_data</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">{</span>
                 <span class="keyword">return</span> <span class="identifier">ptr_vtable</span><span class="special">-&gt;</span><span class="identifier">func0</span><span class="special">(</span><span class="identifier">obj_ptr</span><span class="special">,</span> <span class="identifier">args</span><span class="special">...);</span>
             <span class="special">}</span>
         <span class="special">};</span>
@@ -601,8 +599,13 @@
     <span class="comment">// this specialization helps link the bases together</span>
     <span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Ignored</span><span class="special">&gt;</span>
     <span class="keyword">struct</span> <span class="identifier">base</span><span class="special">&lt;</span><span class="number">0</span><span class="special">,</span> <span class="identifier">Ignored</span><span class="special">&gt;</span> <span class="special">{</span>
+
+        <span class="keyword">using</span> <span class="identifier">function_type</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">function_type</span><span class="special">&lt;</span>
+            <span class="keyword">typename</span> <span class="identifier">interface_root</span><span class="special">::</span><span class="identifier">vtable</span><span class="special">::</span><span class="identifier">pmf0</span><span class="special">&gt;;</span>
+
         <span class="keyword">using</span> <span class="identifier">impl</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">expand_args</span><span class="special">&lt;</span>
-            <span class="keyword">typename</span> <span class="identifier">interface_root</span><span class="special">::</span><span class="identifier">vtable</span><span class="special">::</span><span class="identifier">pmf0</span><span class="special">,</span> <span class="identifier">base_impl0</span><span class="special">&gt;;</span>
+            <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">pop_front</span><span class="special">&lt;</span><span class="identifier">function_type</span><span class="special">&gt;,</span>
+            <span class="identifier">base_impl0</span><span class="special">&gt;;</span>
 
         <span class="keyword">using</span> <span class="identifier">qualifiers</span> <span class="special">=</span>
             <span class="keyword">typename</span> <span class="identifier">interface_root</span><span class="special">::</span><span class="identifier">vtable</span><span class="special">::</span><span class="identifier">member_info0</span><span class="special">&lt;&gt;::</span><span class="identifier">qualifiers</span><span class="special">;</span>
@@ -616,7 +619,7 @@
 
         <span class="keyword">template</span> <span class="special">&lt;::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">flags</span> <span class="identifier">QualifierFlags</span><span class="special">,</span>
             <span class="keyword">typename</span> <span class="identifier">Base</span> <span class="special">=</span> <span class="identifier">get_next_base</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;&gt;</span>
-        <span class="keyword">struct</span> <span class="identifier">apply</span><span class="special">;</span>
+            <span class="keyword">struct</span> <span class="identifier">apply</span><span class="special">;</span>
 
         <span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Base</span><span class="special">&gt;</span>
         <span class="keyword">struct</span> <span class="identifier">apply</span><span class="special">&lt;::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">default_</span><span class="special">,</span> <span class="identifier">Base</span><span class="special">&gt;</span> <span class="special">:</span> <span class="identifier">Base</span> <span class="special">{</span>
@@ -626,7 +629,7 @@
             <span class="keyword">using</span> <span class="identifier">Base</span><span class="special">::</span><span class="identifier">obj_ptr</span><span class="special">;</span>
 
             <span class="keyword">inline</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span>
-            <span class="identifier">member_data</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="special">{</span>
+                <span class="identifier">member_data</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="special">{</span>
                 <span class="keyword">return</span> <span class="identifier">ptr_vtable</span><span class="special">-&gt;</span><span class="identifier">func1</span><span class="special">(</span><span class="identifier">obj_ptr</span><span class="special">,</span> <span class="identifier">args</span><span class="special">...);</span>
             <span class="special">}</span>
         <span class="special">};</span>
@@ -639,7 +642,7 @@
             <span class="keyword">using</span> <span class="identifier">Base</span><span class="special">::</span><span class="identifier">obj_ptr</span><span class="special">;</span>
 
             <span class="keyword">inline</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span>
-            <span class="identifier">member_data</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span>
+                <span class="identifier">member_data</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span>
                 <span class="keyword">return</span> <span class="identifier">ptr_vtable</span><span class="special">-&gt;</span><span class="identifier">func1</span><span class="special">(</span><span class="identifier">obj_ptr</span><span class="special">,</span> <span class="identifier">args</span><span class="special">...);</span>
             <span class="special">}</span>
         <span class="special">};</span>
@@ -652,7 +655,7 @@
             <span class="keyword">using</span> <span class="identifier">Base</span><span class="special">::</span><span class="identifier">obj_ptr</span><span class="special">;</span>
 
             <span class="keyword">inline</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span>
-            <span class="identifier">member_data</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="keyword">volatile</span> <span class="special">{</span>
+                <span class="identifier">member_data</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="keyword">volatile</span> <span class="special">{</span>
                 <span class="keyword">return</span> <span class="identifier">ptr_vtable</span><span class="special">-&gt;</span><span class="identifier">func1</span><span class="special">(</span><span class="identifier">obj_ptr</span><span class="special">,</span> <span class="identifier">args</span><span class="special">...);</span>
             <span class="special">}</span>
         <span class="special">};</span>
@@ -665,7 +668,7 @@
             <span class="keyword">using</span> <span class="identifier">Base</span><span class="special">::</span><span class="identifier">obj_ptr</span><span class="special">;</span>
 
             <span class="keyword">inline</span> <span class="keyword">decltype</span><span class="special">(</span><span class="keyword">auto</span><span class="special">)</span>
-            <span class="identifier">member_data</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">{</span>
+                <span class="identifier">member_data</span><span class="special">(::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">forward_t</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">&gt;...</span> <span class="identifier">args</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">{</span>
                 <span class="keyword">return</span> <span class="identifier">ptr_vtable</span><span class="special">-&gt;</span><span class="identifier">func1</span><span class="special">(</span><span class="identifier">obj_ptr</span><span class="special">,</span> <span class="identifier">args</span><span class="special">...);</span>
             <span class="special">}</span>
         <span class="special">};</span>
@@ -674,8 +677,12 @@
     <span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Ignored</span><span class="special">&gt;</span>
     <span class="keyword">struct</span> <span class="identifier">base</span><span class="special">&lt;</span><span class="number">1</span><span class="special">,</span> <span class="identifier">Ignored</span><span class="special">&gt;</span> <span class="special">{</span>
 
+        <span class="keyword">using</span> <span class="identifier">function_type</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">function_type</span><span class="special">&lt;</span>
+            <span class="keyword">typename</span> <span class="identifier">interface_root</span><span class="special">::</span><span class="identifier">vtable</span><span class="special">::</span><span class="identifier">pmf1</span><span class="special">&gt;;</span>
+
         <span class="keyword">using</span> <span class="identifier">impl</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">expand_args</span><span class="special">&lt;</span>
-            <span class="keyword">typename</span> <span class="identifier">interface_root</span><span class="special">::</span><span class="identifier">vtable</span><span class="special">::</span><span class="identifier">pmf1</span><span class="special">,</span> <span class="identifier">base_impl1</span><span class="special">&gt;;</span>
+            <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">pop_front</span><span class="special">&lt;</span><span class="identifier">function_type</span><span class="special">&gt;,</span>
+            <span class="identifier">base_impl1</span><span class="special">&gt;;</span>
 
         <span class="keyword">using</span> <span class="identifier">qualifiers</span> <span class="special">=</span>
             <span class="keyword">typename</span> <span class="identifier">interface_root</span><span class="special">::</span><span class="identifier">vtable</span><span class="special">::</span><span class="identifier">member_info1</span><span class="special">&lt;&gt;::</span><span class="identifier">qualifiers</span><span class="special">;</span>
@@ -688,17 +695,17 @@
 <span class="comment">// interface_x object. Member functions and member data are both handled.</span>
 <span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="identifier">interface_x_detail</span><span class="special">::</span><span class="identifier">interface_root</span><span class="special">::</span><span class="identifier">vtable</span> <span class="keyword">const</span>
-    <span class="identifier">interface_x_detail</span><span class="special">::</span><span class="identifier">interface_root</span><span class="special">::</span><span class="identifier">vtable_holder</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">val_vtable</span> <span class="special">=</span> <span class="special">{</span>
+<span class="identifier">interface_x_detail</span><span class="special">::</span><span class="identifier">interface_root</span><span class="special">::</span><span class="identifier">vtable_holder</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">val_vtable</span> <span class="special">=</span> <span class="special">{</span>
 
-        <span class="special">&amp;::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">member</span><span class="special">&lt;</span>
-            <span class="keyword">typename</span> <span class="identifier">vtable</span><span class="special">::</span><span class="identifier">member_info0</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">ptr_type</span><span class="special">,</span>
-            <span class="special">&amp;</span><span class="identifier">T</span><span class="special">::</span><span class="identifier">print_member_data</span>
-        <span class="special">&gt;::</span><span class="identifier">wrapper</span><span class="special">::</span><span class="identifier">wrap</span><span class="special">,</span>
+    <span class="special">&amp;::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">member</span><span class="special">&lt;</span>
+    <span class="keyword">typename</span> <span class="identifier">vtable</span><span class="special">::</span><span class="identifier">member_info0</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">ptr_type</span><span class="special">,</span>
+    <span class="special">&amp;</span><span class="identifier">T</span><span class="special">::</span><span class="identifier">print_member_data</span>
+    <span class="special">&gt;::</span><span class="identifier">wrapper</span><span class="special">::</span><span class="identifier">wrap</span><span class="special">,</span>
 
-        <span class="special">&amp;::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">member</span><span class="special">&lt;</span>
-            <span class="keyword">typename</span> <span class="identifier">vtable</span><span class="special">::</span><span class="identifier">member_info1</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">ptr_type</span><span class="special">,</span>
-            <span class="special">&amp;</span><span class="identifier">T</span><span class="special">::</span><span class="identifier">member_data</span>
-        <span class="special">&gt;::</span><span class="identifier">wrapper</span><span class="special">::</span><span class="identifier">wrap</span>
+    <span class="special">&amp;::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">member</span><span class="special">&lt;</span>
+    <span class="keyword">typename</span> <span class="identifier">vtable</span><span class="special">::</span><span class="identifier">member_info1</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">ptr_type</span><span class="special">,</span>
+    <span class="special">&amp;</span><span class="identifier">T</span><span class="special">::</span><span class="identifier">member_data</span>
+    <span class="special">&gt;::</span><span class="identifier">wrapper</span><span class="special">::</span><span class="identifier">wrap</span>
 <span class="special">};</span>
 
 <span class="comment">// We inherit the base for the last member, which inherits all</span>
@@ -843,7 +850,7 @@
             <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">get_member_qualifier_flags</span><span class="special">&lt;</span><span class="identifier">ptr_type</span><span class="special">&gt;());</span>     <span class="special">\</span>
                                                                        <span class="special">\</span>
         <span class="keyword">using</span> <span class="identifier">type_erased_ptr</span> <span class="special">=</span>                                        <span class="special">\</span>
-            <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">overwrite_at</span><span class="special">&lt;</span><span class="number">0</span><span class="special">,</span> <span class="identifier">function_type</span><span class="special">,</span> <span class="keyword">void</span><span class="special">*&gt;</span> <span class="special">*;</span>     <span class="special">\</span>
+            <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">replace_args</span><span class="special">&lt;</span><span class="number">0</span><span class="special">,</span> <span class="identifier">function_type</span><span class="special">,</span> <span class="keyword">void</span><span class="special">*&gt;</span> <span class="special">*;</span>     <span class="special">\</span>
     <span class="special">};</span>                                                                 <span class="special">\</span>
                                                                        <span class="special">\</span>
     <span class="keyword">using</span> <span class="identifier">info</span> <span class="special">=</span> <span class="identifier">member_info</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>                                       <span class="special">\</span>
@@ -891,8 +898,11 @@
 <span class="keyword">template</span> <span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">Ignored</span><span class="special">&gt;</span>                                            <span class="special">\</span>
 <span class="keyword">struct</span> <span class="identifier">base</span><span class="special">&lt;</span><span class="identifier">i</span><span class="special">,</span> <span class="identifier">Ignored</span><span class="special">&gt;</span> <span class="special">{</span>                                              <span class="special">\</span>
                                                                        <span class="special">\</span>
+    <span class="keyword">using</span> <span class="identifier">function_type</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">function_type</span><span class="special">&lt;</span>                 <span class="special">\</span>
+        <span class="keyword">typename</span> <span class="identifier">interface_root</span><span class="special">::</span><span class="identifier">vtable</span><span class="special">::</span><span class="identifier">BOOST_PP_CAT</span><span class="special">(</span><span class="identifier">pmf</span><span class="special">,</span> <span class="identifier">i</span><span class="special">)&gt;;</span>        <span class="special">\</span>
+                                                                       <span class="special">\</span>
     <span class="keyword">using</span> <span class="identifier">impl</span> <span class="special">=</span> <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">expand_args</span><span class="special">&lt;</span>                            <span class="special">\</span>
-        <span class="keyword">typename</span> <span class="identifier">interface_root</span><span class="special">::</span><span class="identifier">vtable</span><span class="special">::</span><span class="identifier">BOOST_PP_CAT</span><span class="special">(</span><span class="identifier">pmf</span><span class="special">,</span> <span class="identifier">i</span><span class="special">),</span>         <span class="special">\</span>
+        <span class="special">::</span><span class="identifier">intrfc</span><span class="special">::</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">pop_front</span><span class="special">&lt;</span><span class="identifier">function_type</span><span class="special">&gt;,</span>                        <span class="special">\</span>
         <span class="identifier">BOOST_PP_CAT</span><span class="special">(</span><span class="identifier">base_impl</span><span class="special">,</span> <span class="identifier">i</span><span class="special">)&gt;;</span>                                   <span class="special">\</span>
                                                                        <span class="special">\</span>
     <span class="keyword">using</span> <span class="identifier">qualifiers</span> <span class="special">=</span>                                                 <span class="special">\</span>
@@ -940,7 +950,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="callable_traits/example_std_function_sugar.html"><img src="../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="index.html"><img src="../src/images/up.png" alt="Up"></a><a accesskey="h" href="index.html"><img src="../src/images/home.png" alt="Home"></a><a accesskey="n" href="callable_traits/compatibility.html"><img src="../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="callable_traits/example_std_function_sugar.html"><img src="../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="index.html"><img src="../src/images/up.png" alt="Up"></a><a accesskey="h" href="index.html"><img src="../src/images/home.png" alt="Home"></a><a accesskey="n" href="callable_traits/contact.html"><img src="../src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

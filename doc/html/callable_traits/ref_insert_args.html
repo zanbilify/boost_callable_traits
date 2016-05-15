@@ -1,13 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>insert_at</title>
+<title>insert_args</title>
 <link rel="stylesheet" href="../boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="CallableTraits">
 <link rel="up" href="../index.html" title="CallableTraits">
 <link rel="prev" href="ref_clear_args.html" title="clear_args">
-<link rel="next" href="ref_overwrite_at.html" title="overwrite_at">
+<link rel="next" href="ref_replace_args.html" title="replace_args">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -20,32 +20,32 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="ref_clear_args.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_overwrite_at.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="ref_clear_args.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_replace_args.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="callable_traits.ref_insert_at"></a><a class="link" href="ref_insert_at.html" title="insert_at">insert_at</a>
+<a name="callable_traits.ref_insert_args"></a><a class="link" href="ref_insert_args.html" title="insert_args">insert_args</a>
 </h2></div></div></div>
 <pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">InsertIndex</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">NewArgs</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">insert_at</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span> <span class="special">;</span>
+    <span class="keyword">using</span> <span class="identifier">insert_args</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span> <span class="special">;</span>
 <span class="special">}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_insert_at.h0"></a>
-      <span class="phrase"><a name="callable_traits.ref_insert_at.constraints"></a></span><a class="link" href="ref_insert_at.html#callable_traits.ref_insert_at.constraints">Constraints</a>
+<a name="callable_traits.ref_insert_args.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_insert_args.constraints"></a></span><a class="link" href="ref_insert_args.html#callable_traits.ref_insert_args.constraints">Constraints</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
           <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a>
         </li></ul></div>
 <h4>
-<a name="callable_traits.ref_insert_at.h1"></a>
-      <span class="phrase"><a name="callable_traits.ref_insert_at.behavior"></a></span><a class="link" href="ref_insert_at.html#callable_traits.ref_insert_at.behavior">Behavior</a>
+<a name="callable_traits.ref_insert_args.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_insert_args.behavior"></a></span><a class="link" href="ref_insert_args.html#callable_traits.ref_insert_args.behavior">Behavior</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-          <code class="computeroutput"><span class="identifier">insert_at</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">NewArgs</span><span class="special">...&gt;</span></code> aliases a type identical to <code class="computeroutput"><span class="identifier">T</span></code>, except that <code class="computeroutput"><span class="identifier">NewArgs</span><span class="special">...</span></code> will be inserted into the <code class="literal"><span class="emphasis"><em>[Args...]</em></span></code>
+          <code class="computeroutput"><span class="identifier">insert_args</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">NewArgs</span><span class="special">...&gt;</span></code> aliases a type identical to <code class="computeroutput"><span class="identifier">T</span></code>, except that <code class="computeroutput"><span class="identifier">NewArgs</span><span class="special">...</span></code> will be inserted into the <code class="literal"><span class="emphasis"><em>[Args...]</em></span></code>
           parameter list at the 0-based <code class="computeroutput"><span class="identifier">InsertIndex</span></code>.
           TODO document out-of-bounds behavior
         </li>
@@ -55,11 +55,11 @@
         </li>
 </ul></div>
 <h4>
-<a name="callable_traits.ref_insert_at.h2"></a>
-      <span class="phrase"><a name="callable_traits.ref_insert_at.example"></a></span><a class="link" href="ref_insert_at.html#callable_traits.ref_insert_at.example">Example</a>
+<a name="callable_traits.ref_insert_args.h2"></a>
+      <span class="phrase"><a name="callable_traits.ref_insert_args.example"></a></span><a class="link" href="ref_insert_args.html#callable_traits.ref_insert_args.example">Example</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">insert_at</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">insert_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
 
@@ -69,7 +69,7 @@
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
 
     <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(*)(</span><span class="identifier">N</span><span class="special">&lt;</span><span class="number">0</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">2</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">3</span><span class="special">&gt;);</span>
-    <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">insert_at</span><span class="special">&lt;</span><span class="number">1</span><span class="special">,</span> <span class="identifier">f</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&gt;;</span>
+    <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">insert_args</span><span class="special">&lt;</span><span class="number">1</span><span class="special">,</span> <span class="identifier">f</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&gt;;</span>
     <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(*)(</span><span class="identifier">N</span><span class="special">&lt;</span><span class="number">0</span><span class="special">&gt;,</span> <span class="keyword">int</span><span class="special">,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">2</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">3</span><span class="special">&gt;);</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 <span class="special">}</span>
@@ -85,7 +85,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="ref_clear_args.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_overwrite_at.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="ref_clear_args.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_replace_args.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

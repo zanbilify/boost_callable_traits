@@ -31,7 +31,6 @@ struct function<OriginalType, CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_
     using traits = function;
     using return_type = Return;
     using arg_types = std::tuple<Args...>;
-    using invoke_arg_types = arg_types;
 
     using remove_calling_convention =
         Return(CALLABLE_TRAITS_DEFAULT_VARARGS_CC*)(Args..., ...);
@@ -64,9 +63,6 @@ struct function<OriginalType, CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_
 
     template<template<class...> class Container>
     using expand_args = Container<Args...>;
-    
-    template<template<class...> class Container>
-    using expand_invoke_args = Container<Args...>;
 
     using clear_args = typename copy_cvr<
         CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC *)(),

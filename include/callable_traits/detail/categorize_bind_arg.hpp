@@ -54,7 +54,7 @@ namespace callable_traits {
 
             using type = typename std::conditional<
                 std::is_same<return_type, invalid_type>::value,
-                template_worm<>,
+                template_worm,
                 return_type
             >::type;
         };

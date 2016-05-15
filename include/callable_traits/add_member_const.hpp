@@ -25,22 +25,6 @@ namespace callable_traits {
         };
     }
 
-    namespace permissive {
-
-        template<typename T>
-        using add_member_const = detail::fallback_if_invalid<
-            typename detail::traits<T>::add_member_const,
-            T>;
-    }
-
-    namespace verbose {
-
-        template<typename T>
-        using add_member_const = detail::fail_if_invalid<
-            typename detail::traits<T>::add_member_const,
-            detail::add_member_const_error<false>>;
-    }
-
     template<typename T>
     using add_member_const = detail::fail_if_invalid<
         typename detail::traits<T>::add_member_const,

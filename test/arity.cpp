@@ -142,22 +142,22 @@ int main() {
         //testing pmf without varargs
         using F = three_arg_function_object;
         using T = decltype(&F::operator());
-        test_arity<T, 3, 3, 3, limit>();
-        test_arity<T, 3, 3, 3, limit_plus>();
-        test_arity<T, 3, 3, 3, limit_minus>();
-        test_arity<3, 3, 3, limit>(&F::operator());
-        test_arity<3, 3, 3, limit_plus>(&F::operator());
-        test_arity<3, 3, 3, limit_minus>(&F::operator());
+        test_arity<T, 4, 4, 4, limit>();
+        test_arity<T, 4, 4, 4, limit_plus>();
+        test_arity<T, 4, 4, 4, limit_minus>();
+        test_arity<4, 4, 4, limit>(&F::operator());
+        test_arity<4, 4, 4, limit_plus>(&F::operator());
+        test_arity<4, 4, 4, limit_minus>(&F::operator());
     } {
         //testing pmf with varargs
         using F = three_arg_function_object_with_varargs;
         using T = decltype(&F::operator());
-        test_arity<T, 3, 3, 3, limit>();
-        test_arity<T, 3, 3, 3, limit_plus>();
-        test_arity<T, 3, 3, 3, limit_minus>();
-        test_arity<3, 3, 3, limit>(&F::operator());
-        test_arity<3, 3, 3, limit_plus>(&F::operator());
-        test_arity<3, 3, 3, limit_minus>(&F::operator());
+        test_arity<T, 4, 4, 4, limit>();
+        test_arity<T, 4, 4, 4, limit_plus>();
+        test_arity<T, 4, 4, 4, limit_minus>();
+        test_arity<4, 4, 4, limit>(&F::operator());
+        test_arity<4, 4, 4, limit_plus>(&F::operator());
+        test_arity<4, 4, 4, limit_minus>(&F::operator());
     } {
         //testing function object without varargs
         //min_arity will recognize default argument

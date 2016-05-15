@@ -7,8 +7,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_PUSH_BACK_HPP
-#define CALLABLE_TRAITS_PUSH_BACK_HPP
+#ifndef CALLABLE_TRAITS_REPLACE_ARGS_HPP
+#define CALLABLE_TRAITS_REPLACE_ARGS_HPP
 
 #include <callable_traits/detail/required_definitions.hpp>
 
@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct push_back_error {
+        struct replace_args_error {
 
             static_assert(Sfinae,
                 "callable_traits::push_back<T, Args...> is "
@@ -25,10 +25,10 @@ namespace callable_traits {
         };
     }
 
-    template<typename T, typename... Args>
-    using push_back = detail::fail_if_invalid<
-        typename detail::traits<T>::template push_back<Args...>,
-        detail::push_back_error<true>>;
+    template<std::size_t Index, typename T, typename... Args>
+    using replace_args = detail::fail_if_invalid<
+        typename detail::traits<T>::template replace_args<Index, Args...>,
+        detail::replace_args_error<true>>;
 }
 
-#endif //CALLABLE_TRAITS_PUSH_BACK_HPP
+#endif //CALLABLE_TRAITS_REPLACE_ARGS_HPP

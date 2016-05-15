@@ -85,22 +85,6 @@ namespace callable_traits {
         };
     }
 
-    namespace permissive {
-
-        template<typename T, typename Tag>
-        using add_calling_convention = detail::fallback_if_invalid<
-            typename detail::add_calling_convention_t<T, Tag>::type,
-            T>;
-    }
-
-    namespace verbose {
-
-        template<typename T, typename Tag>
-        using add_calling_convention = detail::fail_if_invalid<
-            typename detail::add_calling_convention_t<T, Tag>::type,
-            detail::add_calling_convention_error<false, Tag>>;
-    }
-
     template<typename T, typename Tag>
     using add_calling_convention = detail::fail_if_invalid<
         typename detail::add_calling_convention_t<T, Tag>::type,

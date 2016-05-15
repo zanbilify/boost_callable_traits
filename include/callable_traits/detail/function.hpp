@@ -189,13 +189,13 @@ namespace callable_traits {
             using pop_front = typename base::template pop_front<Count>&;
 
             template<std::size_t Index, typename... NewArgs>
-            using insert_at = typename base::template insert_at<Index, NewArgs...>&;
+            using insert_args = typename base::template insert_args<Index, NewArgs...>&;
 
             template<std::size_t Index, std::size_t Count>
-            using remove_at = typename base::template remove_at<Index, Count>&;
+            using remove_args = typename base::template remove_args<Index, Count>&;
 
             template<std::size_t Index, typename... NewArgs>
-            using overwrite_at = typename base::template overwrite_at<Index, NewArgs...>&;
+            using replace_args = typename base::template replace_args<Index, NewArgs...>&;
         };
 
         template<typename U, typename T, T Value>

@@ -27,7 +27,7 @@ namespace callable_traits {
 
             using type = T;
             using function_type = typename Base::function_object_type;
-            using invoke_arg_types = typename Base::arg_types;
+            using arg_types = typename Base::non_invoke_arg_types;
 
             static constexpr const bool value =
                 std::is_class<shallow_decay<T>>::value && !is_integral_constant<type>::value;
@@ -48,6 +48,7 @@ namespace callable_traits {
             using remove_member_pointer = type;
             using remove_varargs = invalid_type;
             using add_varargs = invalid_type;
+            using clear_args = invalid_type;
 
             template<typename>
             using apply_member_pointer = invalid_type;
@@ -55,8 +56,6 @@ namespace callable_traits {
             template<typename>
             using apply_return = invalid_type;
 
-            using clear_args = invalid_type;
-            
             template<typename...>
             using push_front = invalid_type;
             
@@ -70,13 +69,13 @@ namespace callable_traits {
             using pop_args_back = invalid_type;
             
             template<std::size_t Index, typename... NewArgs>
-            using insert_at = invalid_type;
+            using insert_args = invalid_type;
             
             template<std::size_t Index, std::size_t Count>
-            using remove_at = invalid_type;
+            using remove_args = invalid_type;
 
             template<std::size_t Index, typename... NewArgs>
-            using overwrite_at = invalid_type;
+            using replace_args = invalid_type;
 
             template<std::size_t Count>
             using pop_front = invalid_type;

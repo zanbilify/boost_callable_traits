@@ -43,16 +43,11 @@ int main() {
         using expect = int() const;
         using test = ct::add_member_const<f>;
         static_assert(std::is_same<test, expect>::value, "");
-    } {
-        // add_member_const does not compile with function pointers,
-        // function references, function objects, or member data pointers.
-        // However, you can loosen this restriction somewhat by using the
-        // callable_traits::permissive namespace instead:
-        using f = int(*)();
-        using expect = f;
-        using test = ct::permissive::add_member_const<f>;
-        static_assert(std::is_same<test, expect>::value, "");
     }
+
+    // A substitution failure will occur if add_member_const is used
+    // with function pointers, function references, function objects,
+    // or member data pointers.
 }
 //]
 #endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS

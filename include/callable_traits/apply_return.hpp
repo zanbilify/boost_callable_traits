@@ -36,22 +36,6 @@ namespace callable_traits {
         };
     }
 
-    namespace permissive {
-
-        template<typename T, typename R>
-        using apply_return = detail::fallback_if_invalid<
-            typename detail::apply_return_t<T, R>::type,
-            T>;
-    }
-
-    namespace verbose {
-
-        template<typename T, typename R>
-        using apply_return = detail::fail_if_invalid<
-            typename detail::apply_return_t<T, R>::type,
-            detail::apply_return_error<false>>;
-    }
-
     template<typename T, typename R>
     using apply_return = detail::fail_if_invalid<
         typename detail::apply_return_t<T, R>::type,

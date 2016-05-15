@@ -24,21 +24,6 @@ namespace callable_traits {
         };
     }
 
-    namespace permissive {
-
-        // returns callable_traits::invalid_type if argument types cannot be determined
-        template<typename T, template<class...> class Container>
-        using expand_args = typename detail::traits<T>::template expand_args<Container>;
-    }
-
-    namespace verbose {
-
-        template<typename T, template<class...> class Container>
-        using expand_args = detail::fail_if_invalid<
-            typename detail::traits<T>::template expand_args<Container>,
-            detail::expand_args_error<false>>;
-    }
-
     template<typename T, template<class...> class Container>
     using expand_args = detail::fail_if_invalid<
         typename detail::traits<T>::template expand_args<Container>,

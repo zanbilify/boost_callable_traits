@@ -25,21 +25,6 @@ namespace callable_traits {
         };
     }
 
-    namespace permissive {
-
-        template<typename T, std::size_t Count = 1>
-        using pop_back = detail::fallback_if_invalid<
-            typename detail::traits<T>::template pop_back<Count>, T>;
-    }
-
-    namespace verbose {
-
-        template<typename T, std::size_t Count = 1>
-        using pop_back = detail::fail_if_invalid<
-            typename detail::traits<T>::template pop_back<Count>,
-            detail::pop_back_error<false>>;
-    }
-
     template<typename T, std::size_t Count = 1>
     using pop_back = detail::fail_if_invalid<
         typename detail::traits<T>::template pop_back<Count>,
