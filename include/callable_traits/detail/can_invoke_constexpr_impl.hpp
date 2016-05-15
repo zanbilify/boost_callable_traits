@@ -111,8 +111,7 @@ namespace callable_traits {
         template<typename T, typename... Args>
         struct can_invoke_constexpr_impl_types<true, T, Args...> {
 
-            using traits = traits<T>;
-            using test = test_invoke_constexpr<traits, Args...>;
+            using test = test_invoke_constexpr<traits<T>, Args...>;
             using result = decltype(test{}( ::std::declval<T>(), ::std::declval<Args>()...));
             using is_invalid_invoke = std::is_same<result, substitution_failure>;
             using type = std::integral_constant<bool, !is_invalid_invoke::value>;
