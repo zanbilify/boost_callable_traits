@@ -24,22 +24,6 @@ namespace callable_traits {
         };
     }
 
-    namespace permissive {
-
-        template<typename T>
-        using remove_calling_convention = detail::fallback_if_invalid<
-            typename detail::traits<T>::remove_calling_convention,
-            T>;
-    }
-
-    namespace verbose {
-
-        template<typename T>
-        using remove_calling_convention = detail::fail_if_invalid<
-            typename detail::traits<T>::remove_calling_convention,
-            detail::remove_calling_convention_error<false>>;
-    }
-
     template<typename T>
     using remove_calling_convention = detail::fail_if_invalid<
         typename detail::traits<T>::remove_calling_convention,

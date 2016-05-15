@@ -25,22 +25,6 @@ namespace callable_traits {
         };
     }
 
-    namespace permissive {
-
-        template<typename T>
-        using clear_args = detail::fallback_if_invalid<
-            typename detail::traits<T>::clear_args,
-            T>;
-    }
-
-    namespace verbose {
-
-        template<typename T>
-        using clear_args = detail::fail_if_invalid<
-            typename detail::traits<T>::clear_args,
-            detail::clear_args_error<false>>;
-    }
-
     template<typename T>
     using clear_args = detail::fail_if_invalid<
         typename detail::traits<T>::clear_args,

@@ -25,22 +25,6 @@ namespace callable_traits {
         };
     }
 
-    namespace permissive {
-
-        template<typename T>
-        using result_of = detail::fallback_if_invalid<
-            typename detail::traits<T>::return_type,
-            T>;
-    }
-
-    namespace verbose {
-
-        template<typename T>
-        using result_of = detail::fail_if_invalid<
-            typename detail::traits<T>::return_type,
-            detail::result_of_error<false>>;
-    }
-
     template<typename T>
     using result_of = detail::fail_if_invalid<
             typename detail::traits<T>::return_type,

@@ -16,12 +16,22 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    template<typename... Args>
+    template<typename T, typename... Args>
     inline constexpr auto
-    can_invoke_constexpr(Args&&... args) {
+    can_invoke_constexpr(T&& t, Args&&... args) {
         return detail::can_invoke_constexpr_impl(
+            ::std::forward<T>(t),
             ::std::forward<Args>(args)...
         );
+    }
+
+    template<typename... Args>
+    inline constexpr auto
+    can_invoke_constexpr() {
+        using are_constexpr_constructible = detail::are_all_constexpr_constructible<Args...>;
+
+        return typename detail::can_invoke_constexpr_impl_types<
+            are_constexpr_constructible::value, Args...>::type{};
     }
 }
 

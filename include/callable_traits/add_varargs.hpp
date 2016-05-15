@@ -27,22 +27,6 @@ namespace callable_traits {
         };
     }
 
-    namespace permissive {
-
-        template<typename T>
-        using add_varargs = detail::fallback_if_invalid<
-            typename detail::traits<T>::add_varargs,
-            T>;
-    }
-
-    namespace verbose {
-
-        template<typename T>
-        using add_varargs = detail::fail_if_invalid<
-            typename detail::traits<T>::add_varargs,
-            detail::add_varargs_error<false>>;
-    }
-
     template<typename T>
     using add_varargs = detail::fail_if_invalid<
         typename detail::traits<T>::add_varargs,

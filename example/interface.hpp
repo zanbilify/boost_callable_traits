@@ -8,9 +8,10 @@
 
 #include <callable_traits/arg_at.hpp>
 #include <callable_traits/result_of.hpp>
+#include <callable_traits/pop_front.hpp>
 #include <callable_traits/push_front.hpp>
 #include <callable_traits/expand_args.hpp>
-#include <callable_traits/overwrite_at.hpp>
+#include <callable_traits/replace_args.hpp>
 #include <callable_traits/function_type.hpp>
 #include <callable_traits/set_qualifiers.hpp>
 #include <callable_traits/qualifier_flags.hpp>
@@ -19,6 +20,7 @@
 #include <callable_traits/remove_member_cv.hpp>
 #include <callable_traits/get_qualifier_flags.hpp>
 #include <callable_traits/apply_member_pointer.hpp>
+#include <callable_traits/remove_member_pointer.hpp>
 #include <callable_traits/remove_member_reference.hpp>
 #include <callable_traits/qualified_parent_class_of.hpp>
 #include <callable_traits/get_member_qualifier_flags.hpp>
@@ -43,8 +45,14 @@ namespace intrfc {
 
     // used to forward a parameter without copying it
     template<typename T>
-    using forward_t = std::conditional_t< sizeof(void*) < sizeof(T),
-        std::add_lvalue_reference_t< std::add_const_t<T> >, T>;
+    using forward_t = std::conditional_t< sizeof(void*) < sizeof(T)
+        , std::add_lvalue_reference_t< std::add_const_t<T> >, T>;
+
+    // The member struct erases the object reference type that is supplied by
+    // function_type, which aliases an INVOKE-aware function type when
+    // a pmf is passed to it. We replace the first argument (which is
+    // a reference to an object of the member ptr's parent class, as required
+    // by INVOKE) with void*.
 
     template<typename Ptr, Ptr Value, bool IsPmf = std::is_member_function_pointer<Ptr>::value>
     struct member;
@@ -64,13 +72,18 @@ namespace intrfc {
         struct member_wrapper {
 
             static inline decltype(auto)
-            wrap(void* c, ::intrfc::forward_t<Args>... args) {
+                wrap(void* c, ::intrfc::forward_t<Args>... args) {
                 return (reinterpret_cast<context*>(c)->*PmfValue)(args...);
             };
         };
 
+        // removing the member pointer so that expand_args below doesn't include
+        // the INVOKE-required object argument
+        using abominable_function_type = ::intrfc::ct::remove_member_pointer<Pmf>;
+
         // expand_args is used to expand the argument types into member_wrapper
-        using wrapper = ::intrfc::ct::expand_args<Pmf, member_wrapper>;
+        using wrapper = ::intrfc::ct::expand_args<
+            abominable_function_type, member_wrapper>;
     };
 
     // This specialization handles member data.
@@ -86,7 +99,7 @@ namespace intrfc {
         struct wrapper {
 
             static inline T&
-            wrap(void* c) {
+                wrap(void* c) {
                 return reinterpret_cast<context*>(c)->*PmdValue;
             };
         };
@@ -97,8 +110,8 @@ namespace intrfc {
 #ifdef BOOST_PP_NIL
 
 DEFINE_INTERFACE(interface_x,
-  (( print_member_data, void() const ))
-  (( member_data, int ))
+((print_member_data, void() const))
+((member_data, int))
 );
 
 // The above macro invocation would expand to the following code (sans comments and formatting, of course):
@@ -126,7 +139,7 @@ struct interface_x_detail {
                 // this definition is only used for member data
                 template <typename U, typename Member = member_type,
                     bool = std::has_member_qualifiers<member_type>::value>
-                struct member_info {
+                    struct member_info {
 
                     using result_type = std::add_lvalue_reference_t<Member>;
                     using ptr_type = Member U::*;
@@ -159,7 +172,7 @@ struct interface_x_detail {
                     // overwriting the first argument with void*, "erasing" the
                     // qualified U reference. We then make it a function pointer.
                     using type_erased_ptr =
-                        ::intrfc::ct::overwrite_at<0, function_type, void*> *;
+                        ::intrfc::ct::replace_args<0, function_type, void*> *;
                 };
 
                 // these aliases simply make later code easier to follow
@@ -186,7 +199,7 @@ struct interface_x_detail {
 
                 template <typename U, typename Member = member_type,
                     bool = ::intrfc::ct::is_like_function<member_type>()>
-                struct member_info {
+                    struct member_info {
 
                     using result_type = std::add_lvalue_reference_t<Member>;
                     using ptr_type = Member U::*;
@@ -206,7 +219,7 @@ struct interface_x_detail {
                         decltype(::intrfc::ct::get_member_qualifier_flags<ptr_type>());
 
                     using type_erased_ptr =
-                        ::intrfc::ct::overwrite_at<0, function_type, void *> *;
+                        ::intrfc::ct::replace_args<0, function_type, void *> *;
                 };
 
                 using info = member_info<T>;
@@ -228,8 +241,8 @@ struct interface_x_detail {
         template <class T>
         inline interface_root(T &that)
             : ptr_vtable(&vtable_holder<T>::val_vtable),
-            obj_ptr(std::addressof(that))
-        {}
+            obj_ptr(std::addressof(that)) {
+        }
 
         // This template is instantiated for every class from which this interface
         // is constructed (see constructor above). This instantiation causes the
@@ -259,7 +272,7 @@ struct interface_x_detail {
 
         template < ::intrfc::ct::flags QualifierFlags,
             typename Base = get_next_base<0>>
-        struct apply;
+            struct apply;
 
         // for unqualified member functions/data
         template <typename Base>
@@ -270,7 +283,7 @@ struct interface_x_detail {
             using Base::obj_ptr;
 
             inline decltype(auto)
-            print_member_data( ::intrfc::forward_t<Args>... args) {
+                print_member_data(::intrfc::forward_t<Args>... args) {
                 return ptr_vtable->func0(obj_ptr, args...);
             }
         };
@@ -284,7 +297,7 @@ struct interface_x_detail {
             using Base::obj_ptr;
 
             inline decltype(auto)
-            print_member_data(::intrfc::forward_t<Args>... args) const {
+                print_member_data(::intrfc::forward_t<Args>... args) const {
                 return ptr_vtable->func0(obj_ptr, args...);
             }
         };
@@ -298,7 +311,7 @@ struct interface_x_detail {
             using Base::obj_ptr;
 
             inline decltype(auto)
-            print_member_data(::intrfc::forward_t<Args>... args) volatile {
+                print_member_data(::intrfc::forward_t<Args>... args) volatile {
                 return ptr_vtable->func0(obj_ptr, args...);
             }
         };
@@ -312,7 +325,7 @@ struct interface_x_detail {
             using Base::obj_ptr;
 
             inline decltype(auto)
-            print_member_data(::intrfc::forward_t<Args>... args) const volatile {
+                print_member_data(::intrfc::forward_t<Args>... args) const volatile {
                 return ptr_vtable->func0(obj_ptr, args...);
             }
         };
@@ -321,8 +334,13 @@ struct interface_x_detail {
     // this specialization helps link the bases together
     template <typename Ignored>
     struct base<0, Ignored> {
+
+        using function_type = ::intrfc::ct::function_type<
+            typename interface_root::vtable::pmf0>;
+
         using impl = ::intrfc::ct::expand_args<
-            typename interface_root::vtable::pmf0, base_impl0>;
+            ::intrfc::ct::pop_front<function_type>,
+            base_impl0>;
 
         using qualifiers =
             typename interface_root::vtable::member_info0<>::qualifiers;
@@ -336,7 +354,7 @@ struct interface_x_detail {
 
         template <::intrfc::ct::flags QualifierFlags,
             typename Base = get_next_base<1>>
-        struct apply;
+            struct apply;
 
         template <typename Base>
         struct apply<::intrfc::ct::default_, Base> : Base {
@@ -346,7 +364,7 @@ struct interface_x_detail {
             using Base::obj_ptr;
 
             inline decltype(auto)
-            member_data(::intrfc::forward_t<Args>... args) {
+                member_data(::intrfc::forward_t<Args>... args) {
                 return ptr_vtable->func1(obj_ptr, args...);
             }
         };
@@ -359,7 +377,7 @@ struct interface_x_detail {
             using Base::obj_ptr;
 
             inline decltype(auto)
-            member_data(::intrfc::forward_t<Args>... args) const {
+                member_data(::intrfc::forward_t<Args>... args) const {
                 return ptr_vtable->func1(obj_ptr, args...);
             }
         };
@@ -372,7 +390,7 @@ struct interface_x_detail {
             using Base::obj_ptr;
 
             inline decltype(auto)
-            member_data(::intrfc::forward_t<Args>... args) volatile {
+                member_data(::intrfc::forward_t<Args>... args) volatile {
                 return ptr_vtable->func1(obj_ptr, args...);
             }
         };
@@ -385,7 +403,7 @@ struct interface_x_detail {
             using Base::obj_ptr;
 
             inline decltype(auto)
-            member_data(::intrfc::forward_t<Args>... args) const volatile {
+                member_data(::intrfc::forward_t<Args>... args) const volatile {
                 return ptr_vtable->func1(obj_ptr, args...);
             }
         };
@@ -394,8 +412,12 @@ struct interface_x_detail {
     template <typename Ignored>
     struct base<1, Ignored> {
 
+        using function_type = ::intrfc::ct::function_type<
+            typename interface_root::vtable::pmf1>;
+
         using impl = ::intrfc::ct::expand_args<
-            typename interface_root::vtable::pmf1, base_impl1>;
+            ::intrfc::ct::pop_front<function_type>,
+            base_impl1>;
 
         using qualifiers =
             typename interface_root::vtable::member_info1<>::qualifiers;
@@ -408,17 +430,17 @@ struct interface_x_detail {
 // interface_x object. Member functions and member data are both handled.
 template <typename T>
 interface_x_detail::interface_root::vtable const
-    interface_x_detail::interface_root::vtable_holder<T>::val_vtable = {
+interface_x_detail::interface_root::vtable_holder<T>::val_vtable = {
 
-        &::intrfc::member<
-            typename vtable::member_info0<T>::ptr_type,
-            &T::print_member_data
-        >::wrapper::wrap,
+    &::intrfc::member<
+    typename vtable::member_info0<T>::ptr_type,
+    &T::print_member_data
+    >::wrapper::wrap,
 
-        &::intrfc::member<
-            typename vtable::member_info1<T>::ptr_type,
-            &T::member_data
-        >::wrapper::wrap
+    &::intrfc::member<
+    typename vtable::member_info1<T>::ptr_type,
+    &T::member_data
+    >::wrapper::wrap
 };
 
 // We inherit the base for the last member, which inherits all
@@ -563,7 +585,7 @@ struct BOOST_PP_CAT(member_info, i) {                                  \
             ::intrfc::ct::get_member_qualifier_flags<ptr_type>());     \
                                                                        \
         using type_erased_ptr =                                        \
-            ::intrfc::ct::overwrite_at<0, function_type, void*> *;     \
+            ::intrfc::ct::replace_args<0, function_type, void*> *;     \
     };                                                                 \
                                                                        \
     using info = member_info<T>;                                       \
@@ -611,8 +633,11 @@ struct BOOST_PP_CAT(base_impl, i) {                                    \
 template <typename Ignored>                                            \
 struct base<i, Ignored> {                                              \
                                                                        \
+    using function_type = ::intrfc::ct::function_type<                 \
+        typename interface_root::vtable::BOOST_PP_CAT(pmf, i)>;        \
+                                                                       \
     using impl = ::intrfc::ct::expand_args<                            \
-        typename interface_root::vtable::BOOST_PP_CAT(pmf, i),         \
+        ::intrfc::ct::pop_front<function_type>,                        \
         BOOST_PP_CAT(base_impl, i)>;                                   \
                                                                        \
     using qualifiers =                                                 \

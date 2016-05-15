@@ -52,6 +52,12 @@ int main() {
         CT_ASSERT(!decltype(ct::can_invoke(&foo1::bar, std::declval<std::unique_ptr<foo1>>(), 'a', 3.0, 1)){});
         CT_ASSERT(decltype(ct::can_invoke(&foo1::bar, std::ref(foo), 'a', f, 1)){});
         CT_ASSERT(!decltype(ct::can_invoke(&foo1::bar, std::ref(foo), 'a', 3.0, 1)){});
+
+        //todo - more of these type-level tests
+        CT_ASSERT(decltype(ct::can_invoke<decltype(&foo1::bar), foo1&, char, float&, int>()){});
+        CT_ASSERT(!decltype(ct::can_invoke<decltype(&foo1::bar), foo1&, char, float&&, int>()){});
+        CT_ASSERT(decltype(ct::can_invoke<decltype(&foo1::bar), foo1*, char, float&, int>()){});
+        CT_ASSERT(!decltype(ct::can_invoke<decltype(&foo1::bar), const foo1*, char, float, int>()){});
     } {
         float f = 3.0;
         foo2 foo{};
