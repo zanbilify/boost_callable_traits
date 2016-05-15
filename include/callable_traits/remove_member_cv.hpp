@@ -26,22 +26,6 @@ namespace callable_traits {
         };
     }
 
-    namespace permissive {
-
-        template<typename T>
-        using remove_member_cv = detail::fallback_if_invalid<
-            typename detail::traits<T>::remove_member_cv,
-            T>;
-    }
-
-    namespace verbose {
-
-        template<typename T>
-        using remove_member_cv = detail::fail_if_invalid<
-            typename detail::traits<T>::remove_member_cv,
-            detail::remove_member_cv_error<false>>;
-    }
-
     template<typename T>
     using remove_member_cv = detail::fail_if_invalid<
             typename detail::traits<T>::remove_member_cv,

@@ -25,22 +25,6 @@ namespace callable_traits {
         };
     }
 
-    namespace permissive {
-
-        template<typename T, typename... Args>
-        using push_back = detail::fallback_if_invalid<
-            typename detail::traits<T>::template push_back<Args...>,
-            T>;
-    }
-
-    namespace verbose {
-
-        template<typename T, typename... Args>
-        using push_back = detail::fail_if_invalid<
-            typename detail::traits<T>::template push_back<Args...>,
-            detail::push_back_error<false>>;
-    }
-
     template<typename T, typename... Args>
     using push_back = detail::fail_if_invalid<
         typename detail::traits<T>::template push_back<Args...>,

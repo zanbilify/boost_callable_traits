@@ -25,21 +25,6 @@ namespace callable_traits {
         };
     }
 
-    namespace permissive {
-
-        template<std::size_t Index, typename T, typename... Args>
-        using overwrite_at = detail::fallback_if_invalid<
-            typename detail::traits<T>::template overwrite_at<Index, Args...>, T>;
-    }
-
-    namespace verbose {
-
-        template<std::size_t Index, typename T, typename... Args>
-        using overwrite_at = detail::fail_if_invalid<
-            typename detail::traits<T>::template overwrite_at<Index, Args...>,
-            detail::overwrite_at_error<false>>;
-    }
-
     template<std::size_t Index, typename T, typename... Args>
     using overwrite_at = detail::fail_if_invalid<
         typename detail::traits<T>::template overwrite_at<Index, Args...>,

@@ -19,13 +19,15 @@ namespace callable_traits {
     template<typename T>
     inline constexpr auto
     has_void_return(T&&) {
-        return typename std::is_same<permissive::result_of<T&&>, void>::type{};
+        return typename std::is_same<
+            typename detail::traits<T&&>::return_type, void>::type{};
     }
 
     template<typename T>
     inline constexpr auto
     has_void_return() {
-        return typename std::is_same<permissive::result_of<T>, void>::type{};
+        return typename std::is_same<
+            typename detail::traits<T>::return_type, void>::type{};
     }
 }
 

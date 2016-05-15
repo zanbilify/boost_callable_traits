@@ -24,23 +24,6 @@ namespace callable_traits {
         };
     }
 
-    namespace permissive {
-
-        // returns callable_traits::invalid_type if parameter types
-        // cannot be determined
-        template<typename T>
-        using parent_class_of =
-            typename detail::traits<T>::class_type;
-    }
-
-    namespace verbose {
-
-        template<typename T>
-        using parent_class_of = detail::fail_if_invalid<
-            typename detail::traits<T>::class_type,
-            detail::invoke_args_error<false>>;
-    }
-
     template<typename T>
     using parent_class_of = detail::fail_if_invalid<
         typename detail::traits<T>::class_type,

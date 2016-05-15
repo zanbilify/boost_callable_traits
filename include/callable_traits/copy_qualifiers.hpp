@@ -25,23 +25,6 @@ namespace callable_traits {
         };
     }
 
-    namespace permissive {
-
-        // returns callable_traits::invalid_type if parameter types
-        // cannot be determined
-        template<typename To, typename From>
-        using copy_qualifiers =
-            typename detail::copy_qualifiers_impl<detail::traits<To>, detail::traits<From>>::type;
-    }
-
-    namespace verbose {
-
-        template<typename To, typename From>
-        using copy_qualifiers = detail::fail_if_invalid<
-            typename detail::copy_qualifiers_impl<detail::traits<To>, detail::traits<From>>::type,
-            detail::copy_qualifiers_error<false>>;
-    }
-
     template<typename To, typename From>
     using copy_qualifiers = detail::fail_if_invalid<
         typename detail::copy_qualifiers_impl<detail::traits<To>, detail::traits<From>>::type,

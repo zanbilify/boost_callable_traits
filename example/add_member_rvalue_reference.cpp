@@ -46,16 +46,12 @@ int main() {
         using expect = void() const &&;
         using test = ct::add_member_rvalue_reference<f>;
         static_assert(std::is_same<test, expect>::value, "");
-    } {
-        // add_member_rvalue_reference does not compile with function pointers,
-        // function references, function objects, or member data pointers.
-        // However, you can loosen this restriction somewhat by using the
-        // callable_traits::permissive namespace instead:
-        using f = void(*)();
-        using expect = f;
-        using test = ct::permissive::add_member_rvalue_reference<f>;
-        static_assert(std::is_same<test, expect>::value, "");
     }
+
+    // A substitution failure will occur if add_member_rvalue_reference
+    // is used with function pointers, function references, function objects,
+    // or member data pointers.
 }
+
 //]
 #endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS

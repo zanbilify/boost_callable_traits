@@ -25,22 +25,6 @@ namespace callable_traits {
         };
     }
 
-    namespace permissive {
-
-        template<typename T>
-        using add_member_rvalue_reference = detail::fallback_if_invalid<
-            typename detail::traits<T>::add_member_rvalue_reference,
-            T>;
-    }
-
-    namespace verbose {
-
-        template<typename T>
-        using add_member_rvalue_reference = detail::fail_if_invalid<
-            typename detail::traits<T>::add_member_rvalue_reference,
-            detail::add_member_rvalue_reference_error<false>>;
-    }
-
     template<typename T>
     using add_member_rvalue_reference = detail::fail_if_invalid<
         typename detail::traits<T>::add_member_rvalue_reference,
