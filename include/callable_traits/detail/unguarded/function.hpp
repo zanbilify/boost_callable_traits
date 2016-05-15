@@ -19,7 +19,6 @@ struct function<T, Return(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS>
     using traits = function;
     using return_type = Return;
     using arg_types = std::tuple<Args...>;
-    using invoke_arg_types = arg_types;
     using type = Return(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS;
     using function_type = Return(Args...);
     using qualified_function_type = Return(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS;
@@ -64,9 +63,6 @@ struct function<T, Return(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS>
     
     template<template<class...> class Container>
     using expand_args = Container<Args...>;
-    
-    template<template<class...> class Container>
-    using expand_invoke_args = Container<Args...>;
 
     using clear_args = Return() CALLABLE_TRAITS_INCLUDE_QUALIFIERS;
     
@@ -94,7 +90,6 @@ struct function<T, Return (Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS>
     using traits = function;
     using return_type = Return;
     using arg_types = std::tuple<Args...>;
-    using invoke_arg_types = arg_types;
     using type = Return (Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS;
     using function_type = Return(Args..., ...);
     using qualified_function_type = Return(Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS;
@@ -137,9 +132,6 @@ struct function<T, Return (Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS>
     
     template<template<class...> class Container>
     using expand_args = Container<Args...>;
-    
-    template<template<class...> class Container>
-    using expand_invoke_args = Container<Args...>;
 
     using clear_args = Return() CALLABLE_TRAITS_INCLUDE_QUALIFIERS;
     
@@ -150,6 +142,7 @@ struct function<T, Return (Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS>
 #undef CALLABLE_TRAITS_BEGIN_PACK_MANIP
 #undef CALLABLE_TRAITS_ARGS_PACK
 #undef CALLABLE_TRAITS_END_PACK_MANIP
+
 };
 
 /**/

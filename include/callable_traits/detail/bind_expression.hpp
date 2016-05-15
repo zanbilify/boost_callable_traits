@@ -154,7 +154,7 @@ namespace callable_traits {
                 bind_args_tuple
             >::type;
 
-            using original_args = typename traits<Callable>::invoke_arg_types;
+            using original_args = typename traits<Callable>::arg_types;
             using return_type = typename traits<Callable>::return_type;
             using result_type = return_type;
 

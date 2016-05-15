@@ -4,22 +4,20 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
 ->*/
 
-//[ replace_arg
+//[ insert_args
 #include <type_traits>
-#include <callable_traits/replace_arg.hpp>
+#include <callable_traits/insert_args.hpp>
 
 namespace ct = callable_traits;
 
 template<int I>
 struct N {};
 
-struct foo {};
-
 int main() {
 
-    using f = int(&)(N<0>, N<1>, N<2>, N<3>);
-    using test = ct::replace_arg<2, f, int>;
-    using expect = int(&)(N<0>, N<1>, int, N<3>);
+    using f = int(*)(N<0>, N<1>, N<2>, N<3>);
+    using test = ct::insert_args<1, f, int>;
+    using expect = int(*)(N<0>, int, N<1>, N<2>, N<3>);
     static_assert(std::is_same<test, expect>::value, "");
 }
 //]

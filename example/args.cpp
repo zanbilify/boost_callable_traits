@@ -17,48 +17,63 @@ int main(){ return 0; }
 
 namespace ct = callable_traits;
 
-// all callable types in this example use these parameter types
-using expect = std::tuple<int, float&, const char*>;
-
-template<typename T>
+template<typename T, typename Expect>
 void test(){
     // this example shows how callable_traits::args
     // bevaves consistently for many different types
     using args = ct::args<T>;
-    static_assert(std::is_same<expect, args>{}, "");
 }
 
 int main() {
 
+    {
+        auto lamda = [](int, float&, const char*){};
+        using lam = decltype(lamda);
+        using expect = std::tuple<int, float&, const char*>;
 
-    auto lamda = [](int, float&, const char*){};
-    using lam = decltype(lamda);
-    test<lam>();
-    test<lam&>();
-    test<lam&&>();
-    test<lam const &>();
+        test<lam, expect>();
+        test<lam&, expect>();
+        test<lam&&, expect>();
+        test<lam const &, expect>();
+    }
 
-    struct foo;
-    using pmf = void(foo::*)(int, float&, const char*);
-    test<pmf>();
-    test<pmf&>();
-    test<pmf&&>();
-    test<pmf const &>();
+    {
+        struct foo;
+        using pmf = void(foo::*)(int, float&, const char*);
+        using expect = std::tuple<foo&, int, float&, const char*>;
 
-    using function_ptr = void(*)(int, float&, const char*);
-    test<function_ptr>();
-    test<function_ptr&>();
-    test<function_ptr&&>();
-    test<function_ptr const &>();
+        test<pmf, expect>();
+        test<pmf&, expect>();
+        test<pmf&&, expect>();
+        test<pmf const &, expect>();
+    }
 
-    using function_ref = void(&)(int, float&, const char*);
-    test<function_ref>();
+    {
+        using function_ptr = void(*)(int, float&, const char*);
+        using expect = std::tuple<int, float&, const char*>;
+        test<function_ptr, expect>();
+        test<function_ptr&, expect>();
+        test<function_ptr&&, expect>();
+        test<function_ptr const &, expect>();
+    }
 
-    using function = void(int, float&, const char*);
-    test<function>();
+    {
+        using function_ref = void(&)(int, float&, const char*);
+        using expect = std::tuple<int, float&, const char*>;
+        test<function_ref, expect>();
+    }
 
-    using abominable = void(int, float&, const char*) const;
-    test<abominable>();
+    {
+        using function = void(int, float&, const char*);
+        using expect = std::tuple<int, float&, const char*>;
+        test<function, expect>();
+    }
+
+    {
+        using abominable = void(int, float&, const char*) const;
+        using expect = std::tuple<int, float&, const char*>;
+        test<abominable, expect>();
+    }
 }
 //]
 #endif //#ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS

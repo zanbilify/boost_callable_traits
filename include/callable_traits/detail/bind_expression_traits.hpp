@@ -35,17 +35,12 @@ namespace callable_traits {
             static constexpr const bool value = parser::value;
             using traits = bind_expression_traits;
             using arg_types = typename parser::arg_types;
-            using invoke_arg_types = arg_types;
             using return_type = typename parser::return_type;
             using function_type = typename parser::function_type;
             using qualified_function_type = typename parser::qualified_function_type;
 
             template<template<class...> class Container>
             using expand_args =
-                typename bind_expr_detail::expand_bind_args<arg_types, Container>::type;
-
-            template<template<class...> class Container>
-            using expand_invoke_args =
                 typename bind_expr_detail::expand_bind_args<arg_types, Container>::type;
         };
     }

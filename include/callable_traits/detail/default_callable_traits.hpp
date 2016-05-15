@@ -60,21 +60,18 @@ namespace callable_traits {
             
             using return_type = invalid_type;
             
-            // arg_types is a std::tuple of argument types for callables
-            // that are not overloaded/templated function objects.
-            // arg_types is NOT defined in terms of INVOKE, which means a
-            // PMF's arg_types will not have a reference to the class type
-            // as the first tuple element.
-            using arg_types = invalid_type;
-            
-            // invoke_arg_types is a std::tuple of argument types for
+            // arg_types is a std::tuple of argument types for
             // callables that are not overloaded/templated function objects.
-            // invoke_arg_types IS defined in terms of INVOKE, which means
-            // a PMF's invoke_arg_types tuple will use a reference to its
+            // arg_types IS defined in terms of INVOKE, which means
+            // a PMF's arg_types tuple will use a reference to its
             // parent class as the first argument, with qualifiers added to
             // match the PMF's own qualifiers.
-            using invoke_arg_types = invalid_type;
+            using arg_types = invalid_type;
             
+            // used in pmf to offer a non-invoke std::tuple<Args...> to derived
+            // the function_object type
+            using non_invoke_arg_types = invalid_type;
+
             // An "approximation" of a callable type, in the form
             // of a plain function type. Defined in terms of INVOKE.
             // An identity alias for qualified/unqualified plain function
@@ -154,9 +151,6 @@ namespace callable_traits {
             // Expands the argument types into a template
             template<template<class...> class Container>
             using expand_args = invalid_type;
-            
-            template<template<class...> class Container>
-            using expand_invoke_args = invalid_type;
 
             using clear_args = invalid_type;
             
@@ -173,13 +167,13 @@ namespace callable_traits {
             using pop_back = invalid_type;
             
             template<std::size_t Index, typename... NewArgs>
-            using insert_at = invalid_type;
+            using insert_args = invalid_type;
 
             template<std::size_t Index, std::size_t Count>
-            using remove_at = invalid_type;
+            using remove_args = invalid_type;
 
             template<std::size_t Index, typename... NewArgs>
-            using replace_arg = invalid_type;
+            using replace_args = invalid_type;
         };
     }
 }

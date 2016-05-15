@@ -39,7 +39,7 @@ struct insert_impl<CALLABLE_TRAITS_IX_SEQ(I...), std::tuple<U...>, StartTo> {
 };
 
 template<std::size_t N, typename... U>
-using insert_at = typename insert_impl<
+using insert_args = typename insert_impl<
     CALLABLE_TRAITS_MAKE_IX_SEQ(arg_count + sizeof...(U)),
     std::tuple<U...>, N>::type;
 
@@ -80,7 +80,7 @@ struct remove_impl<CALLABLE_TRAITS_IX_SEQ(Is...), Index, 0> {
 };
 
 template<std::size_t StartIndex, std::size_t Count = 1>
-using remove_at = typename remove_impl<
+using remove_args = typename remove_impl<
     CALLABLE_TRAITS_MAKE_IX_SEQ(arg_count - Count), StartIndex, Count>::type;
 
 template<std::size_t I, std::size_t From, std::size_t To, std::size_t Count>
@@ -111,7 +111,7 @@ struct overwrite_impl<CALLABLE_TRAITS_IX_SEQ(I...), std::tuple<U...>, StartTo> {
 };
 
 template<std::size_t StartIndex, typename... U>
-using replace_arg = typename overwrite_impl<
+using replace_args = typename overwrite_impl<
     CALLABLE_TRAITS_MAKE_IX_SEQ(arg_count <= StartIndex + sizeof...(U) ? StartIndex + sizeof...(U) : arg_count),
     std::tuple<U...>, StartIndex>::type;
 
@@ -128,7 +128,7 @@ CALLABLE_TRAITS_ARGS_PACK..., NewArgs...
 CALLABLE_TRAITS_END_PACK_MANIP;
 
 template<std::size_t Count>
-using pop_front = remove_at<0, Count>;
+using pop_front = remove_args<0, Count>;
 
 template<std::size_t Count>
-using pop_back = remove_at<arg_count - Count, Count>;
+using pop_back = remove_args<arg_count - Count, Count>;

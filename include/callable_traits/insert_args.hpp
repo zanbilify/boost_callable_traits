@@ -7,8 +7,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_REMOVE_AT_HPP
-#define CALLABLE_TRAITS_REMOVE_AT_HPP
+#ifndef CALLABLE_TRAITS_INSERT_ARGS_HPP
+#define CALLABLE_TRAITS_INSERT_ARGS_HPP
 
 #include <callable_traits/detail/required_definitions.hpp>
 
@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct remove_at_error {
+        struct insert_args_error {
 
             static_assert(Sfinae,
                 "callable_traits::push_back<T, Args...> is "
@@ -25,10 +25,10 @@ namespace callable_traits {
         };
     }
 
-    template<std::size_t Index, typename T, std::size_t Count = 1>
-    using remove_at = detail::fail_if_invalid<
-        typename detail::traits<T>::template remove_at<Index, Count>,
-        detail::remove_at_error<true>>;
+    template<std::size_t Index, typename T, typename... Args>
+    using insert_args = detail::fail_if_invalid<
+        typename detail::traits<T>::template insert_args<Index, Args...>,
+        detail::insert_args_error<true>>;
 }
 
-#endif //CALLABLE_TRAITS_INSERT_AT_HPP
+#endif //CALLABLE_TRAITS_INSERT_ARGS_HPP

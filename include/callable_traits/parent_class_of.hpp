@@ -27,7 +27,7 @@ namespace callable_traits {
     template<typename T>
     using parent_class_of = detail::fail_if_invalid<
         typename detail::traits<T>::class_type,
-        detail::invoke_args_error<true>>;
+        detail::parent_class_of_error<true>>;
 }
 
 #endif //#ifndef CALLABLE_TRAITS_PARENT_CLASS_OF_HPP

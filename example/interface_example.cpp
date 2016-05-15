@@ -12,7 +12,7 @@ See interface.hpp in this directory for details.
 #include <callable_traits/config.hpp>
 #ifdef CALLABLE_TRAITS_MSVC
 int main(){ return 0; }
-#elif defined CALLABLE_TRAITS_GCC_OLDER_THAN_4_9_2 
+#elif defined CALLABLE_TRAITS_GCC_OLDER_THAN_4_9_2
 int main(){ return 0; }
 #else
 
@@ -79,11 +79,11 @@ int main() {
     i.a_func(12);
     i.a_func(77L);
     i.another_func();
-    
+
     print_data(i);
     i.some_data() = "x's data has changed.";
     print_data(x);
-    
+
     //reusing the same interface object
     i = y;
     i.a_func(13);

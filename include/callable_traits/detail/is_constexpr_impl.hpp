@@ -110,7 +110,13 @@ namespace callable_traits {
         inline constexpr auto
         is_constexpr_impl(T&& t, std::true_type){
             using traits = traits<T&&>;
-            using min_args = min_arity_t<traits, constants::arity_search_limit>;
+            using needs_object = typename traits::is_member_pointer;
+            using object_offset = std::integral_constant<int, needs_object::value? 1 : 0>;
+
+            // need to remove the INVOKE-required object for this operation
+            using min_args = std::integral_constant<int,
+                min_arity_t<traits, constants::arity_search_limit>::value - object_offset::value>;
+
             using seq = CALLABLE_TRAITS_MAKE_IX_SEQ(min_args::value < 0 ? 0 : min_args::value);
             using test = is_constexpr_t<traits, seq>;
             using result = decltype(test{}(::std::forward<T>(t)));

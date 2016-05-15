@@ -47,11 +47,11 @@ int main() {
     {
         using pmf = decltype(&foo1::bar);
         using args = ct::args<pmf>;
-        CT_ASSERT(is_same<args, std::tuple<char, float&, int>>{});
+        CT_ASSERT(is_same<args, std::tuple<foo1&, char, float&, int>>{});
     } {
         using pmf = decltype(&foo2::bar);
         using args = ct::args<pmf>;
-        CT_ASSERT(is_same<args, std::tuple<char, float&, int>>{});
+        CT_ASSERT(is_same<args, std::tuple<foo2&, char, float&, int>>{});
     } {
         using args = ct::args<foo3>;
         CT_ASSERT(is_same<args, std::tuple<char, float&, int>>{});

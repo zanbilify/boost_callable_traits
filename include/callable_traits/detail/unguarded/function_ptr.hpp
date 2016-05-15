@@ -30,7 +30,6 @@ struct function<OriginalType, CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(Ar
     using traits = function;
     using return_type = Return;
     using arg_types = std::tuple<Args...>;
-    using invoke_arg_types = arg_types;
     using remove_calling_convention = Return(*)(Args...);
 
     using type =
