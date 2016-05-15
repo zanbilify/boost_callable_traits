@@ -21,6 +21,16 @@ namespace callable_traits {
             return std::integral_constant<bool, !is_invalid_invoke::value>{};
         }
 
+        template<typename T, typename... Args>
+        inline constexpr auto
+        can_invoke_impl() {
+            using traits = detail::traits<T>;
+            using test = detail::test_invoke<traits, Args...>;
+            using result = decltype(test{}(::std::declval<T>(), ::std::declval<Args>()...));
+            using failure = detail::substitution_failure;
+            using is_invalid_invoke = std::is_same<result, failure>;
+            return std::integral_constant<bool, !is_invalid_invoke::value>{};
+        }
     }
 }
 

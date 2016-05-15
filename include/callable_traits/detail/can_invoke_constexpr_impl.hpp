@@ -20,6 +20,12 @@ namespace callable_traits {
             return std::false_type{};
         }
 
+        template<typename...>
+        inline constexpr auto
+        can_invoke_constexpr_impl_types() {
+            return std::false_type{};
+        }
+
 #else
 
         template<typename...>
@@ -39,7 +45,7 @@ namespace callable_traits {
                 //generalize_if_dissimilar is used to abstract away the rules of INVOKE.
                 typename Obj = generalize_if_dissimilar<class_t, U&&>>
             auto operator()(P&& p, U&& u, Rgs&&... rgs) const -> if_integral_constant<P,
-                std::integral_constant<int,
+                std::integral_constant<bool,
 
             // Where K = std::remove_reference_t<Obj>, CALLABLE_TRAITS_MAKE_CONSTEXPR(U&&)
             // resolves to a matching reference to a constexpr K object. Hence, K must be
@@ -53,7 +59,7 @@ namespace callable_traits {
 
                     ((CALLABLE_TRAITS_MAKE_CONSTEXPR(Obj).*std::remove_reference<P>::type::value)(
                         CALLABLE_TRAITS_MAKE_CONSTEXPR(Rgs&&)...
-                    ), 0)>>;
+                    ), true)>>;
 
             auto operator()(...) const -> substitution_failure;
         };
@@ -69,20 +75,15 @@ namespace callable_traits {
             //see comments on specialization above
             template<typename T, typename... Rgs>
             auto operator()(T&& t, Rgs&&...) const -> if_not_integral_constant<T,
-                std::integral_constant<int,
-                    (CALLABLE_TRAITS_MAKE_CONSTEXPR(T&&)(CALLABLE_TRAITS_MAKE_CONSTEXPR(Rgs&&)...), 0)>>;
+                std::integral_constant<bool,
+                    (CALLABLE_TRAITS_MAKE_CONSTEXPR(T&&)(CALLABLE_TRAITS_MAKE_CONSTEXPR(Rgs&&)...), true)>>;
 
             template<typename T, typename... Rgs, typename U = typename std::remove_reference<T>::type>
             auto operator()(T&& t, Rgs&&...) const -> if_integral_constant<T,
-                std::integral_constant<int, (U::value(CALLABLE_TRAITS_MAKE_CONSTEXPR(Rgs&&)...), 0)>>;
+                std::integral_constant<bool, (U::value(CALLABLE_TRAITS_MAKE_CONSTEXPR(Rgs&&)...), true)>>;
 
             auto operator()(...) const -> substitution_failure;
         };
-
-        template<typename... Ts>
-        using are_all_constexpr_constructible = CALLABLE_TRAITS_CONJUNCTION(
-            is_constexpr_constructible<Ts>...
-        );
 
         template<typename T, typename... Args, typename std::enable_if<
             negate<are_all_constexpr_constructible<T, Args...>>::value, int>::type = 0>
@@ -98,10 +99,26 @@ namespace callable_traits {
             using traits = traits<T&&>;
             using test = test_invoke_constexpr<traits, Args&&...>;
             using result = decltype(test{}(::std::forward<T>(t), ::std::forward<Args>(args)...));
-            using failure = substitution_failure;
-            using is_invalid_invoke = std::is_same<result, failure>;
+            using is_invalid_invoke = std::is_same<result, substitution_failure>;
             return std::integral_constant<bool, !is_invalid_invoke::value>{};
         }
+
+        template<bool, typename T, typename... Args>
+        struct can_invoke_constexpr_impl_types {
+            using type = std::false_type;
+        };
+
+        template<typename T, typename... Args>
+        struct can_invoke_constexpr_impl_types<true, T, Args...> {
+
+            using traits = traits<T>;
+            using test = test_invoke_constexpr<traits, Args...>;
+            using result = decltype(test{}( ::std::declval<T>(), ::std::declval<Args>()...));
+            using is_invalid_invoke = std::is_same<result, substitution_failure>;
+            using type = std::integral_constant<bool, !is_invalid_invoke::value>;
+        };
+
+
 
 #endif //ifndef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
     }

@@ -22,6 +22,7 @@ void test(){
     // this example shows how callable_traits::args
     // bevaves consistently for many different types
     using args = ct::args<T>;
+    static_assert(std::is_same<args, Expect>::value, "");
 }
 
 int main() {
