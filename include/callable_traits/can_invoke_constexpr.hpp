@@ -28,10 +28,10 @@ namespace callable_traits {
     template<typename... Args>
     inline constexpr auto
     can_invoke_constexpr() {
+        using are_constexpr_constructible = detail::are_all_constexpr_constructible<Args...>;
+
         return typename detail::can_invoke_constexpr_impl_types<
-            detail::are_all_constexpr_constructible<Args...>::value,
-            Args...
-        >::type{};
+            are_constexpr_constructible::value, Args...>::type{};
     }
 }
 

@@ -20,11 +20,10 @@ namespace callable_traits {
             return std::false_type{};
         }
 
-        template<typename...>
-        inline constexpr auto
-        can_invoke_constexpr_impl_types() {
-            return std::false_type{};
-        }
+        template<bool, typename...>
+        struct can_invoke_constexpr_impl_types {
+            using type = std::false_type;
+        };
 
 #else
 
