@@ -155,7 +155,10 @@ It is the author's hope that future versions of [libname] will offer a stable, t
 ]
 ]
 
-[section:introduction Introduction]
+[section:introduction Overview]
+
+[import ../example/overview.cpp]
+[overview]
 
 [libname] is a C++11/14/17 header-only library for the inspection, synthesis, and decomposition of callable types. Whether it's calling conventions, `const volatile &&`, or container-like manipulation of parameter lists, [libname] provides all the tools you need to *completely rid your codebase of function type specializations*. While not for everyone, [libname] offers a comprehensive, fine-grained assortment of traits and metafunctions for building and ripping apart C++'s most complicated and obscure types with ease. [libname] fills the gaps where existing library solutions fall short, aiming to be the "complete type manipulation facility for function types" mentioned in the last section of [@http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html p0172], the C++17 proposal regarding "abominable function types". [libname] currently supports GCC 4.8 and later, Clang 3.5 and later, AppleClang from XCode 6.3 and later, and MSVC 19.
 [libname] is header-only, and does not depend on any non-standard headers.
@@ -227,15 +230,6 @@ See Also: [link callable_traits.faq.faq_function_types Why not update and extend
 
 [endsect][/section:boost_function_types]
 [endsect][/section:introduction]
-
-
-[section:quick_example Example: Overview]
-[import ../example/intro.cpp]
-[intro]
-[endsect][/section:quick_example]
-
-[include make_function_example.qbk]
-[include interface_example.qbk]
 
 [/*********************************************************************]
 [/******************* C O M P A T I B I L I T Y ***********************]
@@ -1878,32 +1872,8 @@ TODO
 [result_of]
 [endsect]
 
-
-
-[/*********************************************************************]
-[/************** A C K N O W L E D G E M E N T S **********************]
-[/*********************************************************************]
-
-
-[section:acknowledgements Acknowledgements]
-
-Special thanks to Louis Dionne, the author of the massive [hana] project. [^Boost.Hana] is an incredibly thorough, useful, ambitious, envelope-pushing metaprogramming library that turned traditional C++ metaprogramming on its head. This concept of pushing the limits of the language to create something useful was a huge source of inspiration for me. Template metaprogramming is, after all, a delightful excuse to write some clever and esoteric code, which would be otherwise unacceptable in most problem domains.
-
-Sometime in October of 2015, I expressed my admiration for Louis' work in a reply to one of his comments on [@https://www.reddit.com/r/cpp r/cpp]. To my surprise, Louis replied, and encouraged me to contribute to a library project. At this point, I had little experience with C++ templates - I don't think I even knew how to write a partial template specialization. After pushing a couple of tiny, confidence-building commits on [^Boost.Hana], I started working on the project that would eventually evolve into [libname]. If not for Louis' encouragement on Reddit, [libname] would likely not exist today. Louis' occasional suggestions have also been valuable throughout the development of [libname]. Additionally, [libname] uses a slightly modified version of [^Boost.Hana]'s excellent type sorting algorithm, which is used by the [namespace_scoped][link_bind] compile-time expression parser.
-
-I'd also like to thank Alisdair Meredith, whose paper on [abominable_paper] served as the perfect launchpad for the interface design of [libname]. He also provided valuable feedback late in development.
-
-Thanks to Jason Rice, who also provided valuable feedback.
-
-Thanks to Robert Ramey, whose CppCon 2014 presentation [@https://www.youtube.com/watch?v=ACeNgqBKL7E "How you can make a Boost C++ Library"], along with the related material found at the [@http://rrsd.com/blincubator.com/ Boost Library Incubator] have been excellent resources for the development and documentation of [libname].
-
-Thanks to Matt, Ross, Ryan, Connie, Will, Melanie, Drew, Rob, and all of my former colleagues at ArcBest Technologies, for teaching me, encouraging me, and just being generally awesome people.
-
-Finally, I'd like to thank the Harding University Computer Science faculty for their mentorship, friendship, and high standards of excellence.
-
-[endsect][/section:acknowledgements]
-
-
+[include make_function_example.qbk]
+[include interface_example.qbk]
 
 [/*********************************************************************]
 [/************************* C O N T A C T *****************************]

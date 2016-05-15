@@ -94,16 +94,21 @@ struct pmf<OriginalType,
     
     template<typename U>
     using apply_member_pointer = typename copy_cvr<
-        Return(U::*)(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS, OriginalType>::type;
+        Return(CALLABLE_TRAITS_CC U::*)(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS, OriginalType>::type;
         
     template<typename NewReturn>
     using apply_return = typename copy_cvr<
-        NewReturn(T::*)(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS, OriginalType>::type;
+        NewReturn(CALLABLE_TRAITS_CC T::*)(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS, OriginalType>::type;
         
     using remove_member_pointer = qualified_function_type;
 
     template<template<class...> class Container>
     using expand_args = Container<invoke_type, Args...>;
+
+    using clear_args = typename copy_cvr<
+        Return(CALLABLE_TRAITS_CC T::*)() CALLABLE_TRAITS_INCLUDE_QUALIFIERS,
+        OriginalType
+    >::type;
 
 #undef CALLABLE_TRAITS_BEGIN_PACK_MANIP
 #undef CALLABLE_TRAITS_ARGS_PACK

@@ -48,6 +48,7 @@ namespace callable_traits {
             using remove_member_pointer = type;
             using remove_varargs = invalid_type;
             using add_varargs = invalid_type;
+            using clear_args = invalid_type;
 
             template<typename>
             using apply_member_pointer = invalid_type;
@@ -55,8 +56,6 @@ namespace callable_traits {
             template<typename>
             using apply_return = invalid_type;
 
-            using clear_args = invalid_type;
-            
             template<typename...>
             using push_front = invalid_type;
             
