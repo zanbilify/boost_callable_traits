@@ -92,7 +92,7 @@ static_assert(arity<pmf>() == 2, ""); // same as above, but with a type instead 
 static_assert(is_const_member<pmf>(), "");
 static_assert(!is_volatile_member<pmf>(), "");
 static_assert(!has_void_return<pmf>(), "");
-static_assert(!is_constexpr<pmf>(), "");
+static_assert(!is_constexpr<std::integral_constant<pmf, &number::add>>(), "");
 static_assert(!has_varargs<pmf>(), "");
 static_assert(can_invoke<pmf, const number&, int>(), "");
 static_assert(!can_invoke<pmf, const number&, const char*>(), "");
