@@ -7,10 +7,10 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_CAN_INVOKE_HPP
-#define CALLABLE_TRAITS_CAN_INVOKE_HPP
+#ifndef CALLABLE_TRAITS_IS_INVOKABLE_HPP
+#define CALLABLE_TRAITS_IS_INVOKABLE_HPP
 
-#include <callable_traits/detail/can_invoke_impl.hpp>
+#include <callable_traits/detail/is_invokable_impl.hpp>
 #include <callable_traits/detail/required_definitions.hpp>
 #include <utility>
 
@@ -18,16 +18,16 @@ namespace callable_traits {
 
     template<typename... Args>
     inline constexpr auto
-    can_invoke(Args&&... args) {
-        return detail::can_invoke_impl(
+    is_invokable(Args&&... args) {
+        return detail::is_invokable_impl(
             ::std::forward<Args>(args)...
         );
     }
 
     template<typename... Args>
     inline constexpr auto
-    can_invoke() {
-        return detail::can_invoke_impl<Args...>();
+    is_invokable() {
+        return detail::is_invokable_impl<Args...>();
     }
 }
 

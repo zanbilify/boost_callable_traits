@@ -1,5 +1,5 @@
-#ifndef CALLABLE_TRAITS_DETAIL_CAN_INVOKE_CONSTEXPR_T_HPP
-#define CALLABLE_TRAITS_DETAIL_CAN_INVOKE_CONSTEXPR_T_HPP
+#ifndef CALLABLE_TRAITS_DETAIL_IS_INVOKABLE_CONSTEXPR_T_HPP
+#define CALLABLE_TRAITS_DETAIL_IS_INVOKABLE_CONSTEXPR_T_HPP
 
 #include <callable_traits/detail/test_invoke.hpp>
 #include <callable_traits/detail/traits.hpp>
@@ -16,12 +16,12 @@ namespace callable_traits {
 #ifdef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
 
         inline constexpr auto
-        can_invoke_constexpr_impl(...) {
+        is_invokable_constexpr_impl(...) {
             return std::false_type{};
         }
 
         template<bool, typename...>
-        struct can_invoke_constexpr_impl_types {
+        struct is_invokable_constexpr_impl_types {
             using type = std::false_type;
         };
 
@@ -87,14 +87,14 @@ namespace callable_traits {
         template<typename T, typename... Args, typename std::enable_if<
             negate<are_all_constexpr_constructible<T, Args...>>::value, int>::type = 0>
         inline constexpr auto
-        can_invoke_constexpr_impl(T&&, Args&&...) {
+        is_invokable_constexpr_impl(T&&, Args&&...) {
             return std::false_type{};
         }
 
         template<typename T, typename... Args, typename std::enable_if<
             are_all_constexpr_constructible<T, Args...>::value, int>::type = 0>
         inline constexpr auto
-        can_invoke_constexpr_impl(T&& t, Args&&... args) {
+        is_invokable_constexpr_impl(T&& t, Args&&... args) {
             using traits = traits<T&&>;
             using test = test_invoke_constexpr<traits, Args&&...>;
             using result = decltype(test{}(::std::forward<T>(t), ::std::forward<Args>(args)...));
@@ -103,12 +103,12 @@ namespace callable_traits {
         }
 
         template<bool, typename T, typename... Args>
-        struct can_invoke_constexpr_impl_types {
+        struct is_invokable_constexpr_impl_types {
             using type = std::false_type;
         };
 
         template<typename T, typename... Args>
-        struct can_invoke_constexpr_impl_types<true, T, Args...> {
+        struct is_invokable_constexpr_impl_types<true, T, Args...> {
 
             using test = test_invoke_constexpr<traits<T>, Args...>;
             using result = decltype(test{}( ::std::declval<T>(), ::std::declval<Args>()...));
@@ -121,5 +121,5 @@ namespace callable_traits {
 #endif //ifndef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
     }
 }
-#endif // CALLABLE_TRAITS_DETAIL_CAN_INVOKE_CONSTEXPR_T_HPP
+#endif // CALLABLE_TRAITS_DETAIL_IS_INVOKABLE_CONSTEXPR_T_HPP
 

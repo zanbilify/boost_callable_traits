@@ -10,11 +10,11 @@ Distributed under the Boost Software License, Version 1.0.
 int main(){ return 0; }
 #else
 
-//[ can_invoke_constexpr_member_function_pointer
+//[ is_invokable_constexpr_member_function_pointer
 #include <type_traits>
-#include <callable_traits/can_invoke_constexpr.hpp>
+#include <callable_traits/is_invokable_constexpr.hpp>
 
-// NOTE: Due to non-compliance in MSVC, can_invoke_constexpr
+// NOTE: Due to non-compliance in MSVC, is_invokable_constexpr
 // always returns std::false_type on that compiler, which
 // causes a static assert below to fail.
 
@@ -28,13 +28,13 @@ struct foo {
 
 using pmf_constant = std::integral_constant<decltype(&foo::bar), &foo::bar>;
 
-// can_invoke_constexpr returns true here because foo::bar
+// is_invokable_constexpr returns true here because foo::bar
 // is constexpr, and the arguments are valid to INVOKE
-static_assert(ct::can_invoke_constexpr(pmf_constant{}, foo{}, 0), "");
+static_assert(ct::is_invokable_constexpr(pmf_constant{}, foo{}, 0), "");
 
-// can_invoke_constexpr returns false here because even though
+// is_invokable_constexpr returns false here because even though
 // foo::bar is constexpr, the arguments do not obey INVOKE rules
-static_assert(!ct::can_invoke_constexpr(pmf_constant{}, foo{}), "");
+static_assert(!ct::is_invokable_constexpr(pmf_constant{}, foo{}), "");
 
 int main() {}
 //]

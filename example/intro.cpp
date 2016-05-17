@@ -73,13 +73,13 @@ int main() {
 
     int i = 0;
 
-    // ``[namespace_scoped]``can_invoke allows us to preview whether
+    // ``[namespace_scoped]``is_invokable allows us to preview whether
     // std::invoke would compile with the given arguments.
-    static_assert(ct::can_invoke(foo{}, 0, 0, i), "");
+    static_assert(ct::is_invokable(foo{}, 0, 0, i), "");
     // no error:     std::invoke(foo{}, 0, 0, i);
 
     // This call returns std::false_type, because it's an illegal call.
-    static_assert(!ct::can_invoke(foo{}, nullptr), "");
+    static_assert(!ct::is_invokable(foo{}, nullptr), "");
     // error:         std::invoke(foo{}, nullptr);
 
     // For function objects, the following checks are determined by the

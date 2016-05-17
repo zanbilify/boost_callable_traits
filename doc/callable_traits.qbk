@@ -95,8 +95,8 @@
 [template link_args[][link callable_traits.ref_args [^args]]]
 [template link_arity[][link callable_traits.ref_arity [^arity]]]
 [template link_bind[][link callable_traits.ref_bind [^bind]]]
-[template link_can_invoke[][link callable_traits.ref_can_invoke [^can_invoke]]]
-[template link_can_invoke_constexpr[][link callable_traits.ref_can_invoke_constexpr [^can_invoke_constexpr]]]
+[template link_is_invokable[][link callable_traits.ref_is_invokable [^is_invokable]]]
+[template link_IS_INVOKABLE_constexpr[][link callable_traits.ref_IS_INVOKABLE_constexpr [^is_invokable_constexpr]]]
 [template link_clear_args[][link callable_traits.ref_clear_args [^clear_args]]]
 [template link_expand_args[][link callable_traits.ref_expand_args [^expand_args]]]
 [template link_function_type[][link callable_traits.ref_function_type [^function_type]]]
@@ -128,7 +128,6 @@
 [template link_insert_args[][link callable_traits.ref_insert_args [^insert_args]]]
 [template link_remove_args[][link callable_traits.ref_remove_args [^remove_args]]]
 [template link_replace_args[][link callable_traits.ref_replace_args [^replace_args]]]
-[template link_is_callable[][link callable_traits.ref_is_callable [^is_callable]]]
 [template link_result_of[][link callable_traits.ref_result_of [^result_of]]]
 
 [template cc_warning_rationale[]
@@ -273,7 +272,7 @@ CallableTraits has not been tested on every platform under the sun. If you find 
 
 [section:compatibility_issues Known Issues]
 
-* [link_is_constexpr] and [link_can_invoke_constexpr] always `std::false_type` on the following platforms:
+* [link_is_constexpr] and [link_IS_INVOKABLE_constexpr] always `std::false_type` on the following platforms:
   * MSVC
   * GCC < 5
 * [link_bind] trips a static_assert on the following platforms:
@@ -370,7 +369,7 @@ There are real reasons to write code like this, but they are few and far between
 
 [*4.] [namespace_scoped][link_arg_at]`<2, Callable>` is more flexible than `typename boost::function_traits<Callable>::arg3_type`.
 
-[*5.] [link_can_invoke] is used to test `INVOKE`-ability at compile-time, with value semantics. For the craziest metaprogrammers, [link_can_invoke_constexpr] does the same as `can_invoke` for [link_constexpr_constructible] types, with an added check for `constexpr`-ness
+[*5.] [link_is_invokable] is used to test `INVOKE`-ability at compile-time, with value semantics. For the craziest metaprogrammers, [link_IS_INVOKABLE_constexpr] does the same as `is_invokable` for [link_constexpr_constructible] types, with an added check for `constexpr`-ness
 
 [*6.] [link_is_constexpr] is used to check whether a [link_constexpr_constructible] type is a [link_callable] type that yields a `constexpr` result -- no arguments necessary.
 
@@ -788,8 +787,8 @@ The [libname] interface is also broken down by trait into individual header file
 
 [section ['INVOKE]]
 
-* [include_header [link_can_invoke]]
-* [include_header [link_can_invoke_constexpr]]
+* [include_header [link_is_invokable]]
+* [include_header [link_IS_INVOKABLE_constexpr]]
 * [include_header [link_function_type]]
 * [include_header [link_bind]]
 
@@ -807,7 +806,7 @@ The [libname] interface is also broken down by trait into individual header file
 [section Constant Expressions]
 
 * [include_header [link_is_constexpr]]
-* [include_header [link_can_invoke_constexpr]]
+* [include_header [link_IS_INVOKABLE_constexpr]]
 
 [endsect]
 
@@ -1334,12 +1333,12 @@ For `add_calling_convention` to work as-intended, you must:
   
 [endsect]
 
-[section:ref_can_invoke can_invoke]
+[section:ref_is_invokable is_invokable]
 
     namespace ``[lib_namespace]`` {
 	
 		template<typename T, typename... Args>
-		inline constexpr auto can_invoke(T&&, Args&&...);
+        inline constexpr auto is_invokable(T&&, Args&&...);
 		
 	}
 
@@ -1348,38 +1347,38 @@ For `add_calling_convention` to work as-intended, you must:
 * No other constraints
 
 [heading Behavior]
-* If all arguments to `can_invoke` can legally be forwarded to [invoke], then an instance of `std::true_type` is returned
+* If all arguments to `is_invokable` can legally be forwarded to [invoke], then an instance of `std::true_type` is returned
 * Otherwise, an instance of `std::false_type` is returned
 
 [heading Example - Function Object]
-[import ../example/can_invoke_function_object.cpp]
-[can_invoke_function_object]
+[import ../example/is_invokable_function_object.cpp]
+[is_invokable_function_object]
 [heading Example - Member Function Pointer]
-[import ../example/can_invoke_member_function_pointer.cpp]
-[can_invoke_member_function_pointer]
+[import ../example/is_invokable_member_function_pointer.cpp]
+[is_invokable_member_function_pointer]
 [heading Example - Function Pointer]
-[import ../example/can_invoke_function_pointer.cpp]
-[can_invoke_function_pointer]
+[import ../example/is_invokable_function_pointer.cpp]
+[is_invokable_function_pointer]
 [heading Example - Function Reference]
-[import ../example/can_invoke_function_reference.cpp]
-[can_invoke_function_reference]
+[import ../example/is_invokable_function_reference.cpp]
+[is_invokable_function_reference]
 
 [heading See Also]
-* [link_can_invoke_constexpr]
+* [link_IS_INVOKABLE_constexpr]
 
 [endsect]
 
 
 
 
-[section:ref_can_invoke_constexpr can_invoke_constexpr]
+[section:ref_IS_INVOKABLE_constexpr is_invokable_constexpr]
 
-[note `can_invoke_constexpr` [msvc_incompatible]]
+[note `is_invokable_constexpr` [msvc_incompatible]]
 
     namespace ``[lib_namespace]`` {
 	
 		template<typename T, typename... Args>
-		inline constexpr auto can_invoke_constexpr(T&& t, Args&&... args);
+		inline constexpr auto is_invokable_constexpr(T&& t, Args&&... args);
 		
 	}
 
@@ -1388,24 +1387,24 @@ For `add_calling_convention` to work as-intended, you must:
 
 [heading Behavior]
 * An instance of `std::false_type` is returned, except when:
-  * arguments to `can_invoke_constexpr` can legally be forwarded to [invoke], *and*
+  * arguments to `is_invokable_constexpr` can legally be forwarded to [invoke], *and*
   * `std::decay_t<T>` is [link_constexpr_constructible], *and*
   * `std::decay_t<Args>...` are also all [link_constexpr_constructible], *and*
   * an invocation of the arguments following [invoke] semantics is a constant expression, then:
     * an instance of `std::true_type` is returned
 
 [heading Example - Function Object]
-[import ../example/can_invoke_constexpr_function_object.cpp]
-[can_invoke_constexpr_function_object]
+[import ../example/is_invokable_constexpr_function_object.cpp]
+[is_invokable_constexpr_function_object]
 [heading Example - Member Function Pointer]
-[import ../example/can_invoke_constexpr_member_function_pointer.cpp]
-[can_invoke_constexpr_member_function_pointer]
+[import ../example/is_invokable_constexpr_member_function_pointer.cpp]
+[is_invokable_constexpr_member_function_pointer]
 [heading Example - Function Pointer]
-[import ../example/can_invoke_constexpr_function_pointer.cpp]
-[can_invoke_constexpr_function_pointer]
+[import ../example/is_invokable_constexpr_function_pointer.cpp]
+[is_invokable_constexpr_function_pointer]
 
 [heading See Also]
-* [link_can_invoke]
+* [link_is_invokable]
 * [link_is_constexpr]
 
 [endsect]
@@ -1674,13 +1673,6 @@ For `has_calling_convention` to work as-intended, you must:
 * [link_add_varargs]
 * [link_remove_varargs]
 
-[endsect]
-
-[section:ref_is_callable is_callable]
-TODO
-[heading Example]
-[/import ../example/is_callable.cpp]
-[is_callable]
 [endsect]
 
 [section:ref_has_void_return has_void_return]

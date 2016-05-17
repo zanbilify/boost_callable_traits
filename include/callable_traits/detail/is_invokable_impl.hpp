@@ -1,5 +1,5 @@
-#ifndef CALLABLE_TRAITS_DETAIL_CAN_INVOKE_IMPL_HPP
-#define CALLABLE_TRAITS_DETAIL_CAN_INVOKE_IMPL_HPP
+#ifndef CALLABLE_TRAITS_DETAIL_IS_INVOKABLE_IMPL_HPP
+#define CALLABLE_TRAITS_DETAIL_IS_INVOKABLE_IMPL_HPP
 
 #include <callable_traits/detail/test_invoke.hpp>
 #include <callable_traits/detail/traits.hpp>
@@ -12,7 +12,7 @@ namespace callable_traits {
 
         template<typename T, typename... Args>
         inline constexpr auto
-        can_invoke_impl(T&& t, Args&&... args) {
+        is_invokable_impl(T&& t, Args&&... args) {
             using traits = detail::traits<T&&>;
             using test = detail::test_invoke<traits, Args&&...>;
             using result = decltype(test{}(::std::forward<T>(t), ::std::forward<Args>(args)...));
@@ -23,7 +23,7 @@ namespace callable_traits {
 
         template<typename T, typename... Args>
         inline constexpr auto
-        can_invoke_impl() {
+        is_invokable_impl() {
             using traits = detail::traits<T>;
             using test = detail::test_invoke<traits, Args...>;
             using result = decltype(test{}(::std::declval<T>(), ::std::declval<Args>()...));
@@ -34,5 +34,5 @@ namespace callable_traits {
     }
 }
 
-#endif // CALLABLE_TRAITS_DETAIL_CAN_INVOKE_IMPL_HPP
+#endif // CALLABLE_TRAITS_DETAIL_IS_INVOKABLE_IMPL_HPP
 

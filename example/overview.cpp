@@ -94,8 +94,8 @@ static_assert(!is_volatile_member<pmf>(), "");
 static_assert(!has_void_return<pmf>(), "");
 static_assert(!is_constexpr<std::integral_constant<pmf, &number::add>>(), "");
 static_assert(!has_varargs<pmf>(), "");
-static_assert(can_invoke<pmf, const number&, int>(), "");
-static_assert(!can_invoke<pmf, const number&, const char*>(), "");
+static_assert(is_invokable<pmf, const number&, int>(), "");
+static_assert(!is_invokable<pmf, const number&, const char*>(), "");
 
 //` You can use [libname] to manipulate parameter lists (not defined in terms of INVOKE, since that wouldn't make sense here):
 

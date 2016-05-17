@@ -25,8 +25,8 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/arity.hpp>
 #include <callable_traits/bind.hpp>
 #include <callable_traits/copy_qualifiers.hpp>
-#include <callable_traits/can_invoke.hpp>
-#include <callable_traits/can_invoke_constexpr.hpp>
+#include <callable_traits/is_invokable.hpp>
+#include <callable_traits/is_invokable_constexpr.hpp>
 #include <callable_traits/clear_args.hpp>
 #include <callable_traits/expand_args.hpp>
 #include <callable_traits/function_type.hpp>

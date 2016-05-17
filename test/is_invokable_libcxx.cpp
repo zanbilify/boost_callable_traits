@@ -1,7 +1,7 @@
 //TODO how to accomodate Boost license?
 
 //These are the libc++ tests for std::functional. I've modified them
-//slightly to instead test callable_traits::can_invoke
+//slightly to instead test callable_traits::is_invokable
 
 //===----------------------------------------------------------------------===//
 //
@@ -102,7 +102,7 @@ void test_b12(Functor&& f) {
 
     // Run invoke and check the return value.
     auto ret =
-        ct::can_invoke(func_ptr, std::forward<Functor>(f), std::move(arg));
+        ct::is_invokable(func_ptr, std::forward<Functor>(f), std::move(arg));
     //assert(ret == 42);
     CT_ASSERT(decltype(ret){});
 }
@@ -115,7 +115,7 @@ void test_b34(Functor&& f) {
 
     // Run invoke and check the return value.
     auto ret =
-        ct::can_invoke(func_ptr, std::forward<Functor>(f));
+        ct::is_invokable(func_ptr, std::forward<Functor>(f));
     //assert(ret == 42);
     CT_ASSERT(decltype(ret){});
 }
@@ -125,7 +125,7 @@ void test_b5(Functor&& f) {
     NonCopyable arg;
 
     // Run invoke and check the return value.
-    auto ret = ct::can_invoke(std::forward<Functor>(f), std::move(arg));
+    auto ret = ct::is_invokable(std::forward<Functor>(f), std::move(arg));
     //assert(ret == 42);
     CT_ASSERT(decltype(ret){});
 }
