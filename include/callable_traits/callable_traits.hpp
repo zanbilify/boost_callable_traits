@@ -22,10 +22,8 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/apply_return.hpp>
 #include <callable_traits/arg_at.hpp>
 #include <callable_traits/args.hpp>
-#include <callable_traits/arity.hpp>
 #include <callable_traits/copy_qualifiers.hpp>
 #include <callable_traits/is_invokable.hpp>
-#include <callable_traits/is_invokable_constexpr.hpp>
 #include <callable_traits/clear_args.hpp>
 #include <callable_traits/expand_args.hpp>
 #include <callable_traits/function_type.hpp>
@@ -38,14 +36,11 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/has_void_return.hpp>
 #include <callable_traits/insert_args.hpp>
 #include <callable_traits/is_const_member.hpp>
-#include <callable_traits/is_constexpr.hpp>
 #include <callable_traits/is_like_function.hpp>
 #include <callable_traits/is_lvalue_reference_member.hpp>
 #include <callable_traits/is_reference_member.hpp>
 #include <callable_traits/is_rvalue_reference_member.hpp>
 #include <callable_traits/is_volatile_member.hpp>
-#include <callable_traits/max_arity.hpp>
-#include <callable_traits/min_arity.hpp>
 #include <callable_traits/replace_args.hpp>
 #include <callable_traits/parent_class_of.hpp>
 #include <callable_traits/qualified_parent_class_of.hpp>

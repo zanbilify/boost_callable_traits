@@ -44,29 +44,10 @@ int main() {
 
     // By design, the ``[libname]`` interface uses constexpr functions accepting
     // objects and returning std::integral_constants (whenever sensible). However,
-    // for those times where you don't have an object at hand, you can also pass 
+    // for those times where you don't have an object at hand, you can also pass
     // the type of that object only:
-    static_assert(ct::arity(foo{}) == 4, ""); // with object
-    static_assert(ct::arity<foo>() == 4, ""); // with type
-
-    // Attentive readers might notice that the type of the foo{}
-    // expression above is foo&&, rather than foo. Indeed,
-    // ``[libname]`` is designed to also allow both ref-qualified
-    // and cv-qualified arguments across the board:
-
-    static_assert(ct::arity<foo&&>() == 4, "");
-
-    // Now, if foo had an operator() overload with a && qualifier, taking
-    // a different number of arguments, the above static assert would fail.
-
-    // For consistency, we'll avoid the value-style overloads
-    // for the remainder of this example (whenever possible).
-
-    static_assert(ct::max_arity<foo>() == 4, "");
-    static_assert(ct::min_arity<foo>() == 3, "");
-
-    // a quick way to check for a void return type
-    static_assert(ct::has_void_return<foo>(), "");
+    static_assert(ct::has_void_return<foo>(), ""); //with type
+    static_assert(ct::has_void_return(foo{}), ""); //with object
 
     // C-style variadics detection (e.g. an ellipses in a signature)
     static_assert(!ct::has_varargs<foo>(), "");
@@ -93,14 +74,7 @@ int main() {
     static_assert(!ct::is_lvalue_reference_member<foo>(), "");
     static_assert(!ct::is_rvalue_reference_member<foo>(), "");
 
-    // is_constexpr would return std::true_type if foo's operator() were constexpr.
-    static_assert(!ct::is_constexpr<foo>(), "");
-
-    // The same check can be performed using std::integral_constant
-    // in conjunction with function addresses:
     using pmf = decltype(&foo::operator());
-    using pmf_constant = std::integral_constant<pmf, &foo::operator()>;
-    static_assert(!ct::is_constexpr<pmf_constant>(), "");
 
     // So that you don't have to scroll to the top to check,
     // here's the type of pmf for reference.
@@ -144,6 +118,6 @@ int main() {
     using expected_fn2 = void (int, int&&, const int&, void*);
     static_assert(std::is_same<not_abominable, expected_fn2>::value, "");
 }
-//]
 
+//]
 #endif

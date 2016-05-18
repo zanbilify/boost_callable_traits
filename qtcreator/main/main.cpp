@@ -5,50 +5,119 @@ Distributed under the Boost Software License, Version 1.0.
 ->*/
 
 #include <callable_traits/config.hpp>
-
-#ifdef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
+#ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
 int main(){ return 0; }
 #else
 
-//[ make_function_example
-#include <cassert>
+//[ intro
+//` This short program showcases some, but not all, of the features available in [libname].
 
-#include "../../example/make_function.hpp"
+#include <type_traits>
+#include <functional>
+#include <tuple>
+#include <callable_traits/callable_traits.hpp>
 
-using namespace example;
-using namespace std::placeholders;
+namespace ct = callable_traits;
 
-int add(int i, int j) {
-    return i + j;
-}
-
-struct adder {
-
-    int eval(int i, int j) const {
-        return i + j;
-    }
+// foo is an example of a function object
+struct foo {
+    void operator()(int, int&&, const int&, void* = nullptr) const {}
 };
 
 int main() {
 
-    // function pointer
-    auto f = make_function(&add);
-    assert(f(99, 1) == 100);
+    // indexed argument types
+    using second_arg = ct::arg_at<1, foo>;
+    static_assert(std::is_same<second_arg, int&&>::value, "");
 
-    // function reference
-    f = make_function(add);
-    assert(f(99, 1) == 100);
+    // arg types are packaged into std::tuple, which serves as the default
+    // type list in ``[libname]`` (runtime capabilities are not used).
+    using args = ct::args<foo>;
+    using expected_args = std::tuple<int, int&&, const int&, void*>;
+    static_assert(std::is_same<args, expected_args>::value, "");
 
-    // member function pointer (bound to object)
-    f = make_function(&adder::eval, adder{}, _1, _2);
-    assert(f(99, 1) == 100);
+    // ``[namespace_scoped]``function_type "decays" a callable type to a plain
+    // function type, which is structured in terms of INVOKE.
+    using function_type = ct::function_type<foo>;
+    using expected_function_type = void(int, int&&, const int&, void*);
+    static_assert(std::is_same<function_type, expected_function_type>::value, "");
 
-    // lambda
-    f = make_function([](int i, int j) {
-        return i + j;
-    });
+    // By design, the ``[libname]`` interface uses constexpr functions accepting
+    // objects and returning std::integral_constants (whenever sensible). However,
+    // for those times where you don't have an object at hand, you can also pass
+    // the type of that object only:
+    static_assert(ct::has_void_return<foo>(), ""); //with type
+    static_assert(ct::has_void_return(foo{}), ""); //with object
 
-    assert(f(99, 1) == 100);
+    // C-style variadics detection (e.g. an ellipses in a signature)
+    static_assert(!ct::has_varargs<foo>(), "");
+
+    int i = 0;
+
+    // ``[namespace_scoped]``is_invokable allows us to preview whether
+    // std::invoke would compile with the given arguments.
+    static_assert(ct::is_invokable(foo{}, 0, 0, i), "");
+    // no error:     std::invoke(foo{}, 0, 0, i);
+
+    // This call returns std::false_type, because it's an illegal call.
+    static_assert(!ct::is_invokable(foo{}, nullptr), "");
+    // error:         std::invoke(foo{}, nullptr);
+
+    // For function objects, the following checks are determined by the
+    // function qualifiers on operator(), rather than the qualifiers on
+    // of the type passed. This is done for consistency with member function
+    // pointers, where the checks below would look at the function qualifiers
+    // (rather than qualifiers on the pointer itself).
+    static_assert(ct::is_const_member<foo>(), "");
+    static_assert(!ct::is_volatile_member<foo>(), "");
+    static_assert(!ct::is_reference_member<foo>(), "");
+    static_assert(!ct::is_lvalue_reference_member<foo>(), "");
+    static_assert(!ct::is_rvalue_reference_member<foo>(), "");
+
+    using pmf = decltype(&foo::operator());
+
+    // So that you don't have to scroll to the top to check,
+    // here's the type of pmf for reference.
+    using with_const = void (foo::*)(int, int&&, const int&, void*) const;
+    static_assert(std::is_same<pmf, with_const>::value, "");
+
+    // If you find yourself in the unfortunate-and-probably-avoidable
+    // situation of needing to transform member function pointer
+    // types, ``[libname]`` has all the tools you need to prolong
+    // your sanity.
+
+    // ``[libname]`` lets you manipulate qualifiers on PMF types.
+    // To remove const:
+    using mutable_pmf = ct::remove_member_const<pmf>;
+    using without_const = void (foo::*)(int, int&&, const int&, void*) /*no const!*/;
+    static_assert(std::is_same<mutable_pmf, without_const>::value, "");
+
+    // To add an rvalue qualifier:
+    using rvalue_pmf = ct::add_member_rvalue_reference<pmf>;
+    using with_rvalue = void (foo::*)(int, int&&, const int&, void*) const &&;
+    static_assert(std::is_same<rvalue_pmf, with_rvalue>::value, "");
+
+    // Just like std::add_rvalue_reference, ``[namespace_scoped]``add_member_rvalue_reference
+    // follows C++11 reference collapsing rules. While remove_member_const
+    // and add_member_rvalue_reference are somewhat clumsy names, they are the best
+    // the best the author could provide while still allowing both terseness
+    // and grep-ability against std::remove_const, etc. in <type_traits>.
+    // Naturally, ``[libname]`` provides similar tools for the other C++
+    // function qualifiers. Head to the reference section of this documentation
+    // for more examples.
+
+    // To remove a member pointer:
+    using fn = ct::remove_member_pointer<pmf>;
+    using expected_fn = void (int, int&&, const int&, void*) const;
+    static_assert(std::is_same<fn, expected_fn>::value, "");
+
+    // We just created an abominable function type - notice the const
+    // qualifier. ``[namespace_scoped]``remove_member_const accepts abominable
+    // types too (and so does any feature where it is legal to do so):
+    using not_abominable = ct::remove_member_const<fn>;
+    using expected_fn2 = void (int, int&&, const int&, void*);
+    static_assert(std::is_same<not_abominable, expected_fn2>::value, "");
 }
 //]
+
 #endif

@@ -18,12 +18,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    struct constants {
-        static constexpr std::size_t arity_search_limit = CALLABLE_TRAITS_ARITY_SEARCH_LIMIT;
-    };
-
     struct invalid_type { invalid_type() = delete; };
-
 
     namespace detail {
 
@@ -154,13 +149,6 @@ namespace callable_traits {
         using remove_member_pointer =
             typename util_detail::remove_member_pointer_t<T>::type;
 
-
-        template<typename T, typename U = shallow_decay<T>>
-        using is_constexpr_constructible = bool_type<
-            std::is_literal_type<U>::value && std::is_default_constructible<U>::value
-        >;
-
-
         namespace util_detail {
 
             template<typename...>
@@ -276,11 +264,6 @@ namespace callable_traits {
         struct prepend<T, private_tuple<Args...> > {
             using type = private_tuple<T, Args...>;
         };*/
-
-        template<typename... Ts>
-        using are_all_constexpr_constructible = CALLABLE_TRAITS_CONJUNCTION(
-            is_constexpr_constructible<Ts>...
-        );
     }
 }
 

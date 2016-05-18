@@ -56,7 +56,6 @@
 [template concept_callable[][role green Callable]]
 [template concept_invokable[][role green Invokable]]
 [template concept_signature[][role green Signature]]
-[template concept_constexpr_constructible[][role green ConstexprDefaultConstructible]]
 [template concept_cc_tag[][role green CallingConventionTag]]
 
 [/ *** concept links *** ]
@@ -76,7 +75,6 @@
 [template link_callable[][link callable_traits.glossary.ref_callable [concept_callable]]]
 [template link_invokable[][link callable_traits.glossary.ref_invokable [concept_invokable]]]
 [template link_signature[][link callable_traits.glossary.ref_signature [concept_signature]]]
-[template link_constexpr_constructible[][link callable_traits.glossary.ref_constexpr_constructible [concept_constexpr_constructible]]]
 [template link_cc_tag[][link callable_traits.glossary.ref_cc_tag [concept_cc_tag]]]
 
 [/ *** reference links *** ]
@@ -91,9 +89,7 @@
 [template link_apply_return[][link callable_traits.ref_apply_return [^apply_return]]]
 [template link_arg_at[][link callable_traits.ref_arg_at [^arg_at]]]
 [template link_args[][link callable_traits.ref_args [^args]]]
-[template link_arity[][link callable_traits.ref_arity [^arity]]]
 [template link_is_invokable[][link callable_traits.ref_is_invokable [^is_invokable]]]
-[template link_is_invokable_constexpr[][link callable_traits.ref_is_invokable_constexpr [^is_invokable_constexpr]]]
 [template link_clear_args[][link callable_traits.ref_clear_args [^clear_args]]]
 [template link_expand_args[][link callable_traits.ref_expand_args [^expand_args]]]
 [template link_function_type[][link callable_traits.ref_function_type [^function_type]]]
@@ -102,14 +98,11 @@
 [template link_has_void_return[][link callable_traits.ref_has_void_return [^has_void_return]]]
 [template link_is_const_member[][link callable_traits.ref_is_const_member [^is_const_member]]]
 [template link_is_cv_member[][link callable_traits.ref_is_cv_member [^is_cv_member]]]
-[template link_is_constexpr[][link callable_traits.ref_is_constexpr [^is_constexpr]]]
 [template link_is_lvalue_reference_member[][link callable_traits.ref_is_lvalue_reference_member [^is_lvalue_reference_member]]]
 [template link_is_reference_member[][link callable_traits.ref_is_reference_member [^is_reference_member]]]
 [template link_is_rvalue_reference_member[][link callable_traits.ref_is_rvalue_reference_member [^is_rvalue_reference_member]]]
 [template link_has_member_qualifiers[][link callable_traits.ref_has_member_qualifiers [^has_member_qualifiers]]]
 [template link_is_volatile_member[][link callable_traits.ref_is_volatile_member [^is_volatile_member]]]
-[template link_max_arity[][link callable_traits.ref_max_arity [^max_arity]]]
-[template link_min_arity[][link callable_traits.ref_min_arity [^min_arity]]]
 [template link_qualified_function_type[][link callable_traits.ref_qualified_function_type [^qualified_function_type]]]
 [template link_remove_calling_convention[][link callable_traits.ref_remove_calling_convention [^remove_calling_convention]]]
 [template link_remove_member_const[][link callable_traits.ref_remove_member_const [^remove_member_const]]]
@@ -262,11 +255,6 @@ CallableTraits has not been tested on every platform under the sun. If you find 
 
 [section:compatibility_issues Known Issues]
 
-* [link_is_constexpr] and [link_is_invokable_constexpr] always `std::false_type` on the following platforms:
-  * MSVC
-  * GCC < 5
-* [link_min_arity] and [link_max_arity] are equivalent to [link_arity] on the following platforms:
-  * GCC < 4.9.2
 * [link_abominable] types are not compatible with some older compilers. Attempts to create [link_abominable] types using [libname] metafunctions will have no effect on the following platforms:
   * GCC < 4.9.2
 * [link_abominable] reference-qualified member functions are not compatible with some older compilers. Attempts to create a pointer to a reference-qualified member function using [libname] metafunctions will have no effect on the following platforms:
@@ -356,13 +344,13 @@ There are real reasons to write code like this, but they are few and far between
 
 [*4.] [namespace_scoped][link_arg_at]`<2, Callable>` is more flexible than `typename boost::function_traits<Callable>::arg3_type`.
 
-[*5.] [link_is_invokable] is used to test `INVOKE`-ability at compile-time, with value semantics. For the craziest metaprogrammers, [link_is_invokable_constexpr] does the same as `is_invokable` for [link_constexpr_constructible] types, with an added check for `constexpr`-ness
+[*5.] [link_is_invokable] is used to test `INVOKE`-ability at compile-time, with either value or type semantics
 
-[*6.] [link_is_constexpr] is used to check whether a [link_constexpr_constructible] type is a [link_callable] type that yields a `constexpr` result -- no arguments necessary.
+[*6.] (TODO - fill this in)
 
 [*7] (TODO - fill this in)
 
-[*8.] [link_min_arity] can be used to detect the presence of default arguments on a [link_simple_fn_obj]
+[*8.] (TODO - fill this in)
 
 [*9.] The [libname] interface mainly consists of template aliases and `constexpr std::integral_constant` functions, which are arguably preferable to `typename foo::type` and `foo::value`. While the `std::integral_constant` functions in [libname] may be a deviation from traditional type trait designs, they facilitate a metaprogramming style that uses value-semantics (a la [hana]). The functions can generally be used with either types or values, which eliminates unnecessary `decltype` usage.
 
@@ -665,11 +653,6 @@ In order to avoid significant standardese in the reference sections, we need to 
 
 [endsect]
 
-[section:ref_constexpr_constructible [concept_constexpr_constructible]]
-* Any [@http://en.cppreference.com/w/cpp/concept/LiteralType LiteralType] that is also default-constructible
-
-[endsect]
-
 [section:ref_cc_tag [concept_cc_tag]]
 * One of the following types, used to manipulate calling conventions programmatically:
   *[namespace_scoped]`cdecl_tag`
@@ -744,10 +727,6 @@ The [libname] interface is also broken down by trait into individual header file
 * [include_header [link_push_back]]
 * [include_header [link_push_front]]
 
-* [include_header [link_arity]]
-* [include_header [link_min_arity]]
-* [include_header [link_max_arity]]
-
 [endsect]
 
 
@@ -763,7 +742,6 @@ The [libname] interface is also broken down by trait into individual header file
 [section ['INVOKE]]
 
 * [include_header [link_is_invokable]]
-* [include_header [link_is_invokable_constexpr]]
 * [include_header [link_function_type]]
 
 [endsect]
@@ -773,14 +751,6 @@ The [libname] interface is also broken down by trait into individual header file
 
 * [include_header [link_apply_member_pointer]]
 * [include_header [link_remove_member_pointer]]
-
-[endsect]
-
-
-[section Constant Expressions]
-
-* [include_header [link_is_constexpr]]
-* [include_header [link_is_invokable_constexpr]]
 
 [endsect]
 
@@ -1212,40 +1182,6 @@ For `add_calling_convention` to work as-intended, you must:
 [endsect][/secttion:ref_args]
 
 
-
-
-[section:ref_arity arity]
-
-    namespace ``[lib_namespace]`` {
-	
-		template<typename T>
-		inline constexpr auto arity() {
-		   /* implementation defined */
-		}
-		
-	    template<typename U>
-		inline constexpr auto arity(U&&) {
-			return arity<U&&>();
-		}
-	}
-	
-[heading Constraints]
-`T` must be a [link_signature] or a [link_simple_fn_obj].
-
-[heading Behavior]
-* When the constraints are violated, an instance of type `std::integral_constant<int, -1>` is returned.
-* Otherwise, when `T` is a [link_signature]
-  * let `ArgCount` represent the number of parameter types in the signature of `T`
-  * `arity<T>()` returns an instance of type `std::integral_constant<int, ArgCount>`
-* Otherwise, when `T` is a [link_simple_fn_obj]
-  * Let `ArgCount` represent the number of parameter types in the signature of `decltype(&std::decay_t<T>::operator())`
-  * `arity<T>()` returns an instance of type `std::integral_constant<int, ArgCount>`
-
-[heading Example]
-[/import ../example/arity.cpp]
-[arity]
-[endsect]
-
 [section:ref_is_invokable is_invokable]
 
     namespace ``[lib_namespace]`` {
@@ -1276,52 +1212,7 @@ For `add_calling_convention` to work as-intended, you must:
 [import ../example/is_invokable_function_reference.cpp]
 [is_invokable_function_reference]
 
-[heading See Also]
-* [link_is_invokable_constexpr]
-
 [endsect]
-
-
-
-
-[section:ref_is_invokable_constexpr is_invokable_constexpr]
-
-[note `is_invokable_constexpr` [msvc_incompatible]]
-
-    namespace ``[lib_namespace]`` {
-	
-		template<typename T, typename... Args>
-		inline constexpr auto is_invokable_constexpr(T&& t, Args&&... args);
-		
-	}
-
-[heading Constraints]
-* None, except when `std::decay_t<T>` is a class/struct with a templated `operator()`, it's invocation must be SFINAE-friendly with respect to `Args...`
-
-[heading Behavior]
-* An instance of `std::false_type` is returned, except when:
-  * arguments to `is_invokable_constexpr` can legally be forwarded to [invoke], *and*
-  * `std::decay_t<T>` is [link_constexpr_constructible], *and*
-  * `std::decay_t<Args>...` are also all [link_constexpr_constructible], *and*
-  * an invocation of the arguments following [invoke] semantics is a constant expression, then:
-    * an instance of `std::true_type` is returned
-
-[heading Example - Function Object]
-[import ../example/is_invokable_constexpr_function_object.cpp]
-[is_invokable_constexpr_function_object]
-[heading Example - Member Function Pointer]
-[import ../example/is_invokable_constexpr_member_function_pointer.cpp]
-[is_invokable_constexpr_member_function_pointer]
-[heading Example - Function Pointer]
-[import ../example/is_invokable_constexpr_function_pointer.cpp]
-[is_invokable_constexpr_function_pointer]
-
-[heading See Also]
-* [link_is_invokable]
-* [link_is_constexpr]
-
-[endsect]
-
 
 
 [section:ref_clear_args clear_args]
@@ -1601,16 +1492,6 @@ TODO
 [is_cv_member]
 [endsect]
 
-[section:ref_is_constexpr is_constexpr]
-TODO
-[heading Example - Function Object]
-[import ../example/is_constexpr_function_object.cpp]
-[is_constexpr_function_object]
-[heading Example - Function Pointer]
-[import ../example/is_constexpr_function_pointer.cpp]
-[is_constexpr_function_pointer]
-[endsect]
-
 [section:ref_is_lvalue_reference_member is_lvalue_reference_member]
 TODO
 [heading Example]
@@ -1644,20 +1525,6 @@ TODO
 [heading Example]
 [/import ../example/is_volatile_member.cpp]
 [is_volatile_member]
-[endsect]
-
-[section:ref_max_arity max_arity]
-TODO
-[heading Example]
-[/import ../example/max_arity.cpp]
-[max_arity]
-[endsect]
-
-[section:ref_min_arity min_arity]
-TODO
-[heading Example]
-[/import ../example/min_arity.cpp]
-[min_arity]
 [endsect]
 
 [section:ref_remove_calling_convention remove_calling_convention]

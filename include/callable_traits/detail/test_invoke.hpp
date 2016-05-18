@@ -13,7 +13,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/fwd/pmf_fwd.hpp>
 #include <callable_traits/detail/fwd/pmd_fwd.hpp>
 #include <callable_traits/detail/utility.hpp>
-#include <callable_traits/detail/make_constexpr.hpp>
 #include <callable_traits/config.hpp>
 
 #include <type_traits>
@@ -71,7 +70,6 @@ namespace callable_traits {
 
             static constexpr int arg_count = sizeof...(Args);
         };
-
 
         template<typename IsMemberPointer, typename Traits, typename... Args>
         struct build_invoke_t;

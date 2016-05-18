@@ -15,9 +15,7 @@ callable_traits/ref_apply_member_pointer.html
 callable_traits/ref_apply_return.html
 callable_traits/ref_arg_at.html
 callable_traits/ref_args.html
-callable_traits/ref_arity.html
 callable_traits/ref_is_invokable.html
-callable_traits/ref_is_invokable_constexpr.html
 callable_traits/ref_clear_args.html
 callable_traits/ref_insert_args.html
 callable_traits/ref_replace_args.html
@@ -29,14 +27,11 @@ callable_traits/ref_has_varargs.html
 callable_traits/ref_has_void_return.html
 callable_traits/ref_is_const_member.html
 callable_traits/ref_is_cv_member.html
-callable_traits/ref_is_constexpr.html
 callable_traits/ref_is_lvalue_reference_member.html
 callable_traits/ref_is_reference_member.html
 callable_traits/ref_is_rvalue_reference_member.html
 callable_traits/ref_has_member_qualifiers.html
 callable_traits/ref_is_volatile_member.html
-callable_traits/ref_max_arity.html
-callable_traits/ref_min_arity.html
 callable_traits/ref_remove_calling_convention.html
 callable_traits/ref_remove_member_const.html
 callable_traits/ref_remove_member_cv.html

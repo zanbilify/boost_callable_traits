@@ -82,17 +82,10 @@ static_assert(is_same<
     const number&
 >{}, "");
 
-//` `arity` is defined as the number of parameters to a callable type. This is defined in terms of INVOKE, so that member function pointers always have an arity of at least one:
-static_assert(arity(&number::add) == 2, "");
-
-//` The [libname] interface uses constexpr function templates for type traits, which accept values and return `integral_constant`s. However, if you don't have any values lying around, you can always use types instead. We'll use types in the rest of the overview:
-static_assert(arity<pmf>() == 2, ""); // same as above, but with a type instead of a value
-
 //` Here are a few other trait examples:
 static_assert(is_const_member<pmf>(), "");
 static_assert(!is_volatile_member<pmf>(), "");
 static_assert(!has_void_return<pmf>(), "");
-static_assert(!is_constexpr<std::integral_constant<pmf, &number::add>>(), "");
 static_assert(!has_varargs<pmf>(), "");
 static_assert(is_invokable<pmf, const number&, int>(), "");
 static_assert(!is_invokable<pmf, const number&, const char*>(), "");
