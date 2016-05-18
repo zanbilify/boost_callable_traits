@@ -33,7 +33,8 @@ namespace callable_traits {
     template<std::size_t SearchLimit = constants::arity_search_limit, typename T>
     inline constexpr auto
     max_arity(T&&) {
-        return max_arity<T&&, SearchLimit>();
+        using no_ref = typename std::remove_reference<T>::type;
+        return max_arity<no_ref, SearchLimit>();
     }
 }
 

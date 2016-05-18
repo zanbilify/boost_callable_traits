@@ -13,7 +13,7 @@ template<int I>
 struct N {};
 
 template<typename... Ts>
-using sig = void(* const &)(Ts...);
+using sig = void(*)(Ts...);
 
 int main() {
     {

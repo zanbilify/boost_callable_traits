@@ -26,30 +26,9 @@ int main() {
     }
 
     {
-        using f = int(* const &)(int);
-        using test = ct::apply_member_pointer<f, foo>;
-        using expect = int(foo::* const &)(int);
-        static_assert(std::is_same<test, expect>::value, "");
-    }
-
-    {
-        using f = int(&)(int);
+        using f = int(*)(int);
         using test = ct::apply_member_pointer<f, foo>;
         using expect = int(foo::*)(int);
-        static_assert(std::is_same<test, expect>::value, "");
-    }
-
-    {
-        using f = int(foo::*)(int);
-        using test = ct::apply_member_pointer<f, foo>;
-        using expect = int(foo::*)(int);
-        static_assert(std::is_same<test, expect>::value, "");
-    }
-
-    {
-        using f = int(bar::* const)(int);
-        using test = ct::apply_member_pointer<f, foo>;
-        using expect = int(foo::* const)(int);
         static_assert(std::is_same<test, expect>::value, "");
     }
 }

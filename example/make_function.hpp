@@ -24,7 +24,8 @@ namespace example {
         // callable_traits::function_type decays any non-overloaded callable type to
         // a plain function type, which is structured in terms of INVOKE.
 
-        using f = ct::function_type<T&&>;
+        using no_ref = typename std::remove_reference<T>::type;
+        using f = ct::function_type<no_ref>;
         using result_type = std::function<f>;
         return result_type{ std::forward<T>(t) };
     }

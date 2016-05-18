@@ -24,7 +24,8 @@ namespace callable_traits {
     template<typename T>
     inline constexpr auto
     is_reference_member(T&&) {
-        return is_reference_member<T&&>();
+        using no_ref = typename std::remove_reference<T>::type;
+        return is_reference_member<no_ref>();
     }
 }
 

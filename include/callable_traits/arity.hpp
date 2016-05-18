@@ -17,14 +17,15 @@ namespace callable_traits {
 
     template<typename T>
     inline constexpr auto
-    arity(T&&) {
-        return detail::arity_t<detail::traits<T&&>>{};
+    arity() {
+        return detail::arity_t<detail::traits<T>>{};
     }
 
     template<typename T>
     inline constexpr auto
-    arity() {
-        return detail::arity_t<detail::traits<T>>{};
+    arity(T&&) {
+        using no_ref = typename std::remove_reference<T>::type;
+        return arity<no_ref>();
     }
 }
 

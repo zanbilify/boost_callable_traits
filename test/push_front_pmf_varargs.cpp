@@ -21,7 +21,7 @@ struct N {};
 struct foo;
 
 template<typename... Ts>
-using sig = int(foo::* const)(Ts..., ...) const volatile RREF;
+using sig = int(foo::*)(Ts..., ...) const volatile RREF;
 
 int main() {
 

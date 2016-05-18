@@ -31,15 +31,9 @@ int main() {
     auto lamda = [](int, float&, const char*){};
     using lam = decltype(lamda);
     test<lam>();
-    test<lam&>();
-    test<lam&&>();
-    test<lam const &>();
 
     using function_ptr = void(*)(int, float&, const char*);
     test<function_ptr>();
-    test<function_ptr&>();
-    test<function_ptr&&>();
-    test<function_ptr const &>();
 
     using function_ref = void(&)(int, float&, const char*);
     test<function_ref>();

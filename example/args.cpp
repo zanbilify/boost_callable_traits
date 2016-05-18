@@ -33,9 +33,6 @@ int main() {
         using expect = std::tuple<int, float&, const char*>;
 
         test<lam, expect>();
-        test<lam&, expect>();
-        test<lam&&, expect>();
-        test<lam const &, expect>();
     }
 
     {
@@ -44,18 +41,12 @@ int main() {
         using expect = std::tuple<foo&, int, float&, const char*>;
 
         test<pmf, expect>();
-        test<pmf&, expect>();
-        test<pmf&&, expect>();
-        test<pmf const &, expect>();
     }
 
     {
         using function_ptr = void(*)(int, float&, const char*);
         using expect = std::tuple<int, float&, const char*>;
         test<function_ptr, expect>();
-        test<function_ptr&, expect>();
-        test<function_ptr&&, expect>();
-        test<function_ptr const &, expect>();
     }
 
     {

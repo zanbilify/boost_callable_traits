@@ -26,7 +26,8 @@ namespace callable_traits {
     template<typename T>
     inline constexpr auto
     get_qualifier_flags(T&&) {
-        return get_qualifier_flags<T&&>();
+        using no_ref = typename std::remove_reference<T>::type;
+        return get_qualifier_flags<no_ref>();
     }
 }
 

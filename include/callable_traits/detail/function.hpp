@@ -25,7 +25,7 @@ namespace callable_traits {
 
     namespace detail {
 
-        template<typename U, typename T>
+        template<typename T>
         struct function : default_callable_traits {};
 
 #undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
@@ -152,10 +152,10 @@ namespace callable_traits {
         #undef CALLABLE_TRAITS_VARARGS_CC
         #endif
 
-        template<typename U, typename T>
-        struct function<U, T&> : function<T, T> {
+        template<typename T>
+        struct function<T&> : function<T> {
             using traits = function;
-            using base = function<T, T>;
+            using base = function<T>;
             using type = T&;
             using remove_varargs = typename base::remove_varargs&;
             using add_varargs = typename base::add_varargs&;
@@ -198,9 +198,9 @@ namespace callable_traits {
             using replace_args = typename base::template replace_args<Index, NewArgs...>&;
         };
 
-        template<typename U, typename T, T Value>
-        struct function<U, std::integral_constant<T, Value>> {
-            using traits = function<T, T>;
+        template<typename T, T Value>
+        struct function<std::integral_constant<T, Value>> {
+            using traits = function<T>;
             static constexpr const bool value = traits::value;
         };
     }

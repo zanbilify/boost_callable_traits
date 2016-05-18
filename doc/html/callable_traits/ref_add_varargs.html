@@ -42,16 +42,16 @@
     </p>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_fn" title="Function"><span class="green">Function</span></a>
+          <a class="link" href="glossary.html#callable_traits.glossary.ref_fn" title="Function"><span class="green">Function</span></a>
         </li>
 <li class="listitem">
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ptr" title="FunctionPtr"><span class="green">FunctionPtr</span></a>
+          <a class="link" href="glossary.html#callable_traits.glossary.ref_fn_ptr" title="FunctionPtr"><span class="green">FunctionPtr</span></a>
         </li>
 <li class="listitem">
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ref" title="FunctionReference"><span class="green">FunctionReference</span></a>
+          <a class="link" href="glossary.html#callable_traits.glossary.ref_fn_ref" title="FunctionReference"><span class="green">FunctionReference</span></a>
         </li>
 <li class="listitem">
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>
+          <a class="link" href="glossary.html#callable_traits.glossary.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>
         </li>
 </ul></div>
 <h4>
@@ -61,27 +61,24 @@
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
           Adds C-style variadics (<code class="computeroutput"><span class="special">...</span></code>)
           to the signature of <code class="computeroutput"><span class="identifier">T</span></code> (if
-          not already present), preserving any pointer qualifiers, such that:
+          not already present), such that:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                 <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">()&gt;</span></code>
                 aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(...)</span></code>
               </li>
 <li class="listitem">
-                <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(*</span> <span class="keyword">const</span><span class="special">)()&gt;</span></code>
-                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(*</span>
-                <span class="keyword">const</span><span class="special">)(</span><span class="keyword">int</span><span class="special">,</span> <span class="special">...)</span></code>
+                <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(*)()&gt;</span></code>
+                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="special">...)</span></code>
               </li>
 <li class="listitem">
                 <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(&amp;)()&gt;</span></code>
                 aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="keyword">int</span><span class="special">,</span> <span class="special">...)</span></code>
               </li>
 <li class="listitem">
-                <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*</span>
-                <span class="keyword">volatile</span> <span class="special">&amp;)()</span>
+                <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
                 <span class="keyword">const</span><span class="special">&gt;</span></code>
-                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*</span>
-                <span class="keyword">volatile</span> <span class="special">&amp;)(...)</span>
+                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(...)</span>
                 <span class="keyword">const</span></code>
               </li>
 </ul></div>
@@ -91,7 +88,7 @@
       <span class="phrase"><a name="callable_traits.ref_add_varargs.notes"></a></span><a class="link" href="ref_add_varargs.html#callable_traits.ref_add_varargs.notes">Notes</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-          Any enabled calling conventions are preserved on <a class="link" href="concepts.html#callable_traits.concepts.ref_fn_ptr" title="FunctionPtr"><span class="green">FunctionPtr</span></a> and <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a> types
+          Any enabled calling conventions are preserved on <a class="link" href="glossary.html#callable_traits.glossary.ref_fn_ptr" title="FunctionPtr"><span class="green">FunctionPtr</span></a> and <a class="link" href="glossary.html#callable_traits.glossary.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a> types
         </li></ul></div>
 <h4>
 <a name="callable_traits.ref_add_varargs.h3"></a>

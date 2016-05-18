@@ -52,18 +52,18 @@ int main() {
     }
 
     {
-        using f   = void(foo::*&)();
-        using l   = void(foo::*&)() &;
-        using r   = void(foo::*&)() &&;
-        using c   = void(foo::*&)() const;
-        using cl  = void(foo::*&)() const &;
-        using cr  = void(foo::*&)() const &&;
-        using v   = void(foo::*&)() volatile;
-        using vl  = void(foo::*&)() volatile &;
-        using vr  = void(foo::*&)() volatile &&;
-        using cv  = void(foo::*&)() const volatile;
-        using cvl = void(foo::*&)() const volatile &;
-        using cvr = void(foo::*&)() const volatile &&;
+        using f   = void(foo::*)();
+        using l   = void(foo::*)() &;
+        using r   = void(foo::*)() &&;
+        using c   = void(foo::*)() const;
+        using cl  = void(foo::*)() const &;
+        using cr  = void(foo::*)() const &&;
+        using v   = void(foo::*)() volatile;
+        using vl  = void(foo::*)() volatile &;
+        using vr  = void(foo::*)() volatile &&;
+        using cv  = void(foo::*)() const volatile;
+        using cvl = void(foo::*)() const volatile &;
+        using cvr = void(foo::*)() const volatile &&;
 
         CT_ASSERT(std::is_same<r,   ct::add_member_rvalue_reference<f>>{});
         CT_ASSERT(std::is_same<cr,  ct::add_member_rvalue_reference<c>>{});
@@ -81,18 +81,18 @@ int main() {
     }
 
     {
-        using f   = void(foo::*&&)(...);
-        using l   = void(foo::*&&)(...) &;
-        using r   = void(foo::*&&)(...) &&;
-        using c   = void(foo::*&&)(...) const;
-        using cl  = void(foo::*&&)(...) const &;
-        using cr  = void(foo::*&&)(...) const &&;
-        using v   = void(foo::*&&)(...) volatile;
-        using vl  = void(foo::*&&)(...) volatile &;
-        using vr  = void(foo::*&&)(...) volatile &&;
-        using cv  = void(foo::*&&)(...) const volatile;
-        using cvl = void(foo::*&&)(...) const volatile &;
-        using cvr = void(foo::*&&)(...) const volatile &&;
+        using f   = void(foo::*)(...);
+        using l   = void(foo::*)(...) &;
+        using r   = void(foo::*)(...) &&;
+        using c   = void(foo::*)(...) const;
+        using cl  = void(foo::*)(...) const &;
+        using cr  = void(foo::*)(...) const &&;
+        using v   = void(foo::*)(...) volatile;
+        using vl  = void(foo::*)(...) volatile &;
+        using vr  = void(foo::*)(...) volatile &&;
+        using cv  = void(foo::*)(...) const volatile;
+        using cvl = void(foo::*)(...) const volatile &;
+        using cvr = void(foo::*)(...) const volatile &&;
 
         CT_ASSERT(std::is_same<r,   ct::add_member_rvalue_reference<f>>{});
         CT_ASSERT(std::is_same<cr,  ct::add_member_rvalue_reference<c>>{});
@@ -110,18 +110,18 @@ int main() {
     }
     
     {
-        using f   = void(foo::* const)();
-        using l   = void(foo::* const)() &;
-        using r   = void(foo::* const)() &&;
-        using c   = void(foo::* const)() const;
-        using cl  = void(foo::* const)() const &;
-        using cr  = void(foo::* const)() const &&;
-        using v   = void(foo::* const)() volatile;
-        using vl  = void(foo::* const)() volatile &;
-        using vr  = void(foo::* const)() volatile &&;
-        using cv  = void(foo::* const)() const volatile;
-        using cvl = void(foo::* const)() const volatile &;
-        using cvr = void(foo::* const)() const volatile &&;
+        using f   = void(foo::*)();
+        using l   = void(foo::*)() &;
+        using r   = void(foo::*)() &&;
+        using c   = void(foo::*)() const;
+        using cl  = void(foo::*)() const &;
+        using cr  = void(foo::*)() const &&;
+        using v   = void(foo::*)() volatile;
+        using vl  = void(foo::*)() volatile &;
+        using vr  = void(foo::*)() volatile &&;
+        using cv  = void(foo::*)() const volatile;
+        using cvl = void(foo::*)() const volatile &;
+        using cvr = void(foo::*)() const volatile &&;
 
         CT_ASSERT(std::is_same<r,   ct::add_member_rvalue_reference<f>>{});
         CT_ASSERT(std::is_same<cr,  ct::add_member_rvalue_reference<c>>{});

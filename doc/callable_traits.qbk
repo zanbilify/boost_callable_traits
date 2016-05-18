@@ -61,25 +61,25 @@
 [template concept_cc_tag[][role green CallingConventionTag]]
 
 [/ *** concept links *** ]
-[template link_fn_ptr[][link callable_traits.concepts.ref_fn_ptr [concept_fn_ptr]]]
-[template link_fn_ref[][link callable_traits.concepts.ref_fn_ref [concept_fn_ref]]]
-[template link_simple_fn[][link callable_traits.concepts.ref_simple_fn [concept_simple_fn]]]
-[template link_abominable[][link callable_traits.concepts.ref_abominable [concept_abominable]]]
-[template link_fn[][link callable_traits.concepts.ref_fn [concept_fn]]]
-[template link_pmf[][link callable_traits.concepts.ref_pmf [concept_pmf]]]
-[template link_pmd[][link callable_traits.concepts.ref_pmd [concept_pmd]]]
-[template link_member_ptr[][link callable_traits.concepts.ref_member_ptr [concept_member_ptr]]]
-[template link_simple_fn_obj[][link callable_traits.concepts.ref_simple_fn_obj [concept_simple_fn_obj]]]
-[template link_overloaded_fn_obj[][link callable_traits.concepts.ref_overloaded_fn_obj [concept_overloaded_fn_obj]]]
-[template link_fn_obj[][link callable_traits.concepts.ref_fn_obj [concept_fn_obj]]]
-[template link_simple_callable[][link callable_traits.concepts.ref_simple_callable [concept_simple_callable]]]
-[template link_simple_invokable[][link callable_traits.concepts.ref_simple_invokable [concept_simple_invokable]]]
-[template link_callable[][link callable_traits.concepts.ref_callable [concept_callable]]]
-[template link_invokable[][link callable_traits.concepts.ref_invokable [concept_invokable]]]
-[template link_bind_expression[][link callable_traits.concepts.ref_bind_expression [concept_bind_expression]]]
-[template link_signature[][link callable_traits.concepts.ref_signature [concept_signature]]]
-[template link_constexpr_constructible[][link callable_traits.concepts.ref_constexpr_constructible [concept_constexpr_constructible]]]
-[template link_cc_tag[][link callable_traits.concepts.ref_cc_tag [concept_cc_tag]]]
+[template link_fn_ptr[][link callable_traits.glossary.ref_fn_ptr [concept_fn_ptr]]]
+[template link_fn_ref[][link callable_traits.glossary.ref_fn_ref [concept_fn_ref]]]
+[template link_simple_fn[][link callable_traits.glossary.ref_simple_fn [concept_simple_fn]]]
+[template link_abominable[][link callable_traits.glossary.ref_abominable [concept_abominable]]]
+[template link_fn[][link callable_traits.glossary.ref_fn [concept_fn]]]
+[template link_pmf[][link callable_traits.glossary.ref_pmf [concept_pmf]]]
+[template link_pmd[][link callable_traits.glossary.ref_pmd [concept_pmd]]]
+[template link_member_ptr[][link callable_traits.glossary.ref_member_ptr [concept_member_ptr]]]
+[template link_simple_fn_obj[][link callable_traits.glossary.ref_simple_fn_obj [concept_simple_fn_obj]]]
+[template link_overloaded_fn_obj[][link callable_traits.glossary.ref_overloaded_fn_obj [concept_overloaded_fn_obj]]]
+[template link_fn_obj[][link callable_traits.glossary.ref_fn_obj [concept_fn_obj]]]
+[template link_simple_callable[][link callable_traits.glossary.ref_simple_callable [concept_simple_callable]]]
+[template link_simple_invokable[][link callable_traits.glossary.ref_simple_invokable [concept_simple_invokable]]]
+[template link_callable[][link callable_traits.glossary.ref_callable [concept_callable]]]
+[template link_invokable[][link callable_traits.glossary.ref_invokable [concept_invokable]]]
+[template link_bind_expression[][link callable_traits.glossary.ref_bind_expression [concept_bind_expression]]]
+[template link_signature[][link callable_traits.glossary.ref_signature [concept_signature]]]
+[template link_constexpr_constructible[][link callable_traits.glossary.ref_constexpr_constructible [concept_constexpr_constructible]]]
+[template link_cc_tag[][link callable_traits.glossary.ref_cc_tag [concept_cc_tag]]]
 
 [/ *** reference links *** ]
 [template link_add_calling_convention[][link callable_traits.ref_add_calling_convention [^add_calling_convention]]]
@@ -343,8 +343,8 @@ Does this rings a bell?
 Do you hate your job?
 
     template<class Return, class T, class ...Args>
-	class foo<Return( __cdecl T::* const volatile &)(Args..., ...) const volatile &&> {
-	    //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    class foo<Return( __cdecl T::*)(Args..., ...) const volatile &&> {
+        //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	};
 	
 Do you seek revenge against your coworkers?
@@ -403,7 +403,7 @@ The `_t` alias templates in `<type_traits>` should be appreciated, but not imita
 
 [section Why use constexpr function templates? Why not use something like `std::is_same` or even `std::is_same_v`?]
 
-Function templates, especially when augmented by overloading them, are the only constructs in C++ that can unequivocally accept ['either] a type ['or] a value argument. Even if variable template support were commonplace among production compilers, function templates would still have the upper hand in this regard. The same argument applies to alias templates and class templates. Since [libname] supports all value categories and qualifiers, using these function templates really couldn't be any easier.
+Function templates, especially when augmented by overloading them, are the only constructs in C++ that can unequivocally accept ['either] a type ['or] a value argument. Even if variable template support were commonplace among production compilers, function templates would still have the upper hand in this regard. The same argument applies to alias templates and class templates.
 
 [endsect]
 
@@ -505,17 +505,16 @@ To include the experimental examples for calling conventions in the build, appen
 [endsect][/section:development]
 
 [/*********************************************************************]
-[/*********************** C O N C E P T S *****************************]
+[/*********************** G L O S S A R Y *****************************]
 [/*********************************************************************]
 
-[section:concepts Concepts]
+[section:glossary Glossary]
 
-[libname] relies on the following "concepts", which will be referenced throughout the documentation. Concepts will always be formatted with [role green green] text. These concepts are not part of the C++ code, but instead are used for the purpose of documenting correct usage of [CallableTraits] templates.
+[libname] relies on the following terms, which will be referenced throughout the documentation. These terms will always be formatted with [role green green] text.
 
-In order to avoid significant standardese in the reference sections, we need to syntactically decompose these types. Some concepts define "elements" to achieve this. This allows us to address multiple concepts with the same terminology and structure later.
+In order to avoid significant standardese in the reference sections, we need to syntactically decompose our callable types. Some terms define "elements" to achieve this. This allows us to address multiple terms with the same structure later.
 
 [template CallingConvention[][^['\[CallingConvention\]]]]
-[template PtrQualifiers[][^['\[PtrQualifiers\]]]]
 [template MemberQualifiers[][^['\[MemberQualifiers\]]]]
 [template VarArgs[][^['\[VarArgs\]]]]
 [template Return[][^['\[Return\]]]]
@@ -525,11 +524,10 @@ In order to avoid significant standardese in the reference sections, we need to 
 
 [section:ref_fn_ptr [concept_fn_ptr]]
 
-* Any function pointer type
-* the pointer may be cv-qualified and/or ref-qualified
-* e.g. `void(*)(int, int)` or `void(* const &)(int, int)`
+* Any unqualified pointer to a function type
+* e.g. `void(*)(int, int)`
 * Elements
-  * [^[Return] [role red ( [CallingConvention] * [PtrQualifiers] )] ( [Args] [VarArgs] )]
+  * [^[Return] [role red ( [CallingConvention] * )] ( [Args] [VarArgs] )]
   * [Category] - in red above
   * [MemberQualifiers] - not applicable
   * [ParentClass] - not applicable
@@ -544,7 +542,6 @@ In order to avoid significant standardese in the reference sections, we need to 
   * [^[Return] [role red ( & )] ( [Args] [VarArgs] )]
   * [Category] - in red above
   * [CallingConvention] - not applicable
-  * [PtrQualifiers] - not applicable
   * [MemberQualifiers] - not applicable
   * [ParentClass] - not applicable
 
@@ -559,7 +556,6 @@ In order to avoid significant standardese in the reference sections, we need to 
   * [^[Return] ( [Args] [VarArgs] )]
   * [Category] - not applicable
   * [CallingConvention] - not applicable
-  * [PtrQualifiers] - not applicable
   * [MemberQualifiers] - not applicable
   * [ParentClass] - not applicable
 
@@ -574,7 +570,6 @@ In order to avoid significant standardese in the reference sections, we need to 
   * [^[Return] ( [Args] [VarArgs]) [MemberQualifiers]]
   * [Category] - not applicable
   * [CallingConvention] - not applicable
-  * [PtrQualifiers] - not applicable
   * [ParentClass] - not applicable
 
 [endsect]
@@ -586,11 +581,10 @@ In order to avoid significant standardese in the reference sections, we need to 
 
 [section:ref_pmf [concept_pmf]]
 
-* Any pointer to member function type
-* The pointer type may be cv-qualified and/or ref-qualified
+* Any unqualified pointer to a member function type
 * e.g. `void (foo::*)(int, int)`
 * Elements
-  * [^[Return] [role red( [CallingConvention] [ParentClass]::* [PtrQualifiers] )] ( [Args] [VarArgs])  [MemberQualifiers]]
+  * [^[Return] [role red( [CallingConvention] [ParentClass]::* )] ( [Args] [VarArgs])  [MemberQualifiers]]
   * [Category] - in red above
 
 [endsect]
@@ -601,7 +595,7 @@ In order to avoid significant standardese in the reference sections, we need to 
 * The pointer type may be cv-qualified and/or ref-qualified
 * e.g. `int foo::*`
 * Elements
-  * [^[Return] [role red[ParentClass]::* [PtrQualifiers]]]
+  * [^[Return] [role red[ParentClass]::* ]]
   * [Category] - in red above
   * [CallingConvention] - not applicable
   * [MemberQualifiers] - not applicable
@@ -627,7 +621,6 @@ In order to avoid significant standardese in the reference sections, we need to 
   * [Args] -  the parameter list of member `operator()`
   * [MemberQualifiers] - any member qualifiers on `operator()`
   * [CallingConvention] - the calling convention used by member on `operator()`
-  * [PtrQualifiers] - not applicable
   * [ParentClass] - not applicable
   * [Category] - not applicable
 
@@ -708,7 +701,7 @@ In order to avoid significant standardese in the reference sections, we need to 
 	
 [endsect]
 
-[endsect][/section:concepts]
+[endsect][/section:glossary]
 
 
 
@@ -895,10 +888,9 @@ For `add_calling_convention` to work as-intended, you must:
 `T` must be a [link_fn] or [link_pmf].
 
 [heading Behavior]
-* Adds a `const` qualifier to the signature of `T` (if not already present), preserving any pointer qualifiers, such that:
+* Adds a `const` qualifier to the signature of `T` (if not already present), such that:
   * `add_member_const<int()>` aliases `int() const`
   * `add_member_const<int(foo::*)() volatile>` aliases `int(foo::*)() const volatile`
-  * `add_member_const<int(foo::* const &)()>` aliases `int(foo::* const &)() const`
 
 [heading Notes]
 * Any enabled calling conventions are preserved on [link_pmf] types
@@ -930,10 +922,9 @@ For `add_calling_convention` to work as-intended, you must:
 `T` must be a [link_fn] or [link_pmf].
 
 [heading Behavior]
-* Adds both `const` and `volatile` qualifiers to the signature of `T` (if not already present), preserving any pointer qualifiers, such that:
+* Adds both `const` and `volatile` qualifiers to the signature of `T` (if not already present), such that:
   * `add_member_cv<int()>` aliases `int() const volatile`
   * `add_member_cv<int(foo::*)() volatile>` aliases `int(foo::*)() const volatile`
-  * `add_member_cv<int(foo::* const &)()>` aliases `int(foo::* const &)() const volatile`
 
 [heading Notes]
 * Any enabled calling conventions are preserved on [link_pmf] types
@@ -969,11 +960,10 @@ For `add_calling_convention` to work as-intended, you must:
 [heading Behavior]
 * Adds an lvalue reference qualifier (`&`) qualifier to the signature of `T` (if not already present)
 * If an rvalue reference qualifier is present, the lvalue reference qualifier replaces it (in arbitrary accordance with reference collapsing rules)
-* Any pointer qualifiers are preserved
 * Such that:
   * `add_member_lvalue_reference<int()>` aliases `int() &`
   * `add_member_lvalue_reference<int(foo::*)() const &&>` aliases `int(foo::*)() const &`
-  * `add_member_lvalue_reference<int(foo::* const &)()>` aliases `int(foo::* const &)() &`
+  * `add_member_lvalue_reference<int(foo::*)()>` aliases `int(foo::*)() &`
   
 [heading Notes]
 * Any enabled calling conventions are preserved on [link_pmf] types
@@ -1007,11 +997,10 @@ For `add_calling_convention` to work as-intended, you must:
 [heading Behavior]
 * Adds an rvalue reference qualifier (`&&`) qualifier to the signature of `T` (if not already present)
 * If an lvalue reference qualifier is present, the lvalue reference qualifier remains (in arbitrary accordance with reference collapsing rules)
-* Any pointer qualifiers are preserved
 * Such that:
   * `add_member_rvalue_reference<int()>` aliases `int() &&`
   * `add_member_rvalue_reference<int(foo::*)() const &>` aliases `int(foo::*)() const &`
-  * `add_member_rvalue_reference<int(foo::* const &)()>` aliases `int(foo::* const &)() &&`
+  * `add_member_rvalue_reference<int(foo::*)()>` aliases `int(foo::*)() &&`
   
 [heading Notes]
 * Any enabled calling conventions are preserved on [link_pmf] types
@@ -1049,11 +1038,11 @@ For `add_calling_convention` to work as-intended, you must:
 * [link_pmf]
 
 [heading Behavior]
-* Adds C-style variadics (`...`) to the signature of `T` (if not already present), preserving any pointer qualifiers, such that:
+* Adds C-style variadics (`...`) to the signature of `T` (if not already present), such that:
   * `add_varargs<int()>` aliases `int(...)`
-  * `add_varargs<int(* const)()>` aliases `int(* const)(int, ...)`
+  * `add_varargs<int(*)()>` aliases `int(*)(int, ...)`
   * `add_varargs<int(&)()>` aliases `int(&)(int, ...)`
-  * `add_varargs<int(foo::* volatile &)() const>` aliases `int(foo::* volatile &)(...) const`
+  * `add_varargs<int(foo::*)() const>` aliases `int(foo::*)(...) const`
  
 [heading Notes]
 * Any enabled calling conventions are preserved on [link_fn_ptr] and [link_pmf] types
@@ -1086,10 +1075,10 @@ For `add_calling_convention` to work as-intended, you must:
 `T` must be a [link_fn] or [link_pmf].
 
 [heading Behavior]
-* Adds a `volatile` qualifier to the signature of `T` (if not already present), preserving any pointer qualifiers, such that:
+* Adds a `volatile` qualifier to the signature of `T` (if not already present), such that:
   * `add_member_volatile<int()>` aliases `int() volatile`
   * `add_member_volatile<int(foo::*)() const>` aliases `int(foo::*)() const volatile`
-  * `add_member_volatile<int(foo::* const &)()>` aliases `int(foo::* const &)() volatile`
+  * `add_member_volatile<int(foo::*)()>` aliases `int(foo::*)() volatile`
 
 [heading Notes]
 * Any enabled calling conventions are preserved on [link_pmf] types
@@ -1127,7 +1116,7 @@ For `add_calling_convention` to work as-intended, you must:
 
 [heading Behavior]
 * When the constraints are violated, a substitution failure occurs.
-* Otherwise, `apply_member_pointer<T, Class>` aliases [^[Return] ( [CallingConvention] [*Class]::* [PtrQualifiers] ( [Args] [VarArgs] ) [MemberQualifiers]]
+* Otherwise, `apply_member_pointer<T, Class>` aliases [^[Return] ( [CallingConvention] [*Class]::* ) ( [Args] [VarArgs] ) [MemberQualifiers]]
 
 [heading Example]
 [import ../example/apply_member_pointer.cpp]
@@ -1195,9 +1184,8 @@ For `add_calling_convention` to work as-intended, you must:
 * If any constraints are violated, a substitution failure occurs
 * Otherwise, `arg_at<Index, T>` aliases `std::tuple_element_t<Index, `[namespace_scoped][link_args]`<T>>`, such that:
   * `arg_at<0, void(char, short, long, int*)>` aliases `char`
-  * `arg_at<1, void(* volatile)(char, short, long, int*)>` aliases `short`
+  * `arg_at<1, void(*)(char, short, long, int*)>` aliases `short`
   * `arg_at<2, void(&)(char, short, long, int*)>` aliases `long`
-  * `arg_at<3, void(foo::* const &)(char, short, long, int*)>` aliases `int*`
   
 [heading Example]
 [/import ../example/arg_at.cpp]
@@ -1563,7 +1551,6 @@ For `add_calling_convention` to work as-intended, you must:
   * `function_type<T>` aliases `Return(ClassRef)`
   * such that:
     * `function_type<int foo::*>` aliases `int(foo const &)`
-	* `function_type<int foo::* const &>` also aliases `int(foo const &)`
 * Otherwise, when `T` is a [link_signature]:
   * Let `Args...` represent the parameter types in the signature of `T`
   * Let `Return` represent the return type of `T`

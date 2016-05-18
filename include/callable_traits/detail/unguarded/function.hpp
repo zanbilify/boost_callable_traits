@@ -9,8 +9,8 @@ DO NOT INCLUDE THIS HEADER DIRECTLY
 */
 
 
-template<typename T, typename Return, typename... Args>
-struct function<T, Return(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS>
+template<typename Return, typename... Args>
+struct function<Return(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS>
  : qualifier_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>, default_callable_traits {
      
     static constexpr bool value = true;
@@ -79,8 +79,8 @@ struct function<T, Return(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS>
 };
 
 
-template<typename T, typename Return, typename... Args>
-struct function<T, Return (Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS>
+template<typename Return, typename... Args>
+struct function<Return (Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS>
  : qualifier_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>, default_callable_traits {
      
     static constexpr bool value = true;

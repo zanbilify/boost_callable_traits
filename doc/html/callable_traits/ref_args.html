@@ -39,9 +39,9 @@
     </h4>
 <p>
       <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
-      * <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a>
-      * <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>
-      * <a class="link" href="concepts.html#callable_traits.concepts.ref_bind_expression" title="BindExpression"><span class="green">BindExpression</span></a>
+      * <a class="link" href="glossary.html#callable_traits.glossary.ref_signature" title="Signature"><span class="green">Signature</span></a>
+      * <a class="link" href="glossary.html#callable_traits.glossary.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>
+      * <a class="link" href="glossary.html#callable_traits.glossary.ref_bind_expression" title="BindExpression"><span class="green">BindExpression</span></a>
     </p>
 <h4>
 <a name="callable_traits.ref_args.h1"></a>
@@ -53,7 +53,7 @@
         </li>
 <li class="listitem">
           Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a>,
+          <a class="link" href="glossary.html#callable_traits.glossary.ref_signature" title="Signature"><span class="green">Signature</span></a>,
           then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
@@ -68,7 +68,7 @@
         </li>
 <li class="listitem">
           Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>,
+          <a class="link" href="glossary.html#callable_traits.glossary.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>,
           then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
@@ -83,7 +83,7 @@
         </li>
 <li class="listitem">
           Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_bind_expression" title="BindExpression"><span class="green">BindExpression</span></a>,
+          <a class="link" href="glossary.html#callable_traits.glossary.ref_bind_expression" title="BindExpression"><span class="green">BindExpression</span></a>,
           then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
@@ -138,9 +138,6 @@
         <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">float</span><span class="special">&amp;,</span> <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*&gt;;</span>
 
         <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">lam</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;();</span>
-        <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">lam</span><span class="special">&amp;,</span> <span class="identifier">expect</span><span class="special">&gt;();</span>
-        <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">lam</span><span class="special">&amp;&amp;,</span> <span class="identifier">expect</span><span class="special">&gt;();</span>
-        <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">lam</span> <span class="keyword">const</span> <span class="special">&amp;,</span> <span class="identifier">expect</span><span class="special">&gt;();</span>
     <span class="special">}</span>
 
     <span class="special">{</span>
@@ -149,18 +146,12 @@
         <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&amp;,</span> <span class="keyword">int</span><span class="special">,</span> <span class="keyword">float</span><span class="special">&amp;,</span> <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*&gt;;</span>
 
         <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;();</span>
-        <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&amp;,</span> <span class="identifier">expect</span><span class="special">&gt;();</span>
-        <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&amp;&amp;,</span> <span class="identifier">expect</span><span class="special">&gt;();</span>
-        <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">pmf</span> <span class="keyword">const</span> <span class="special">&amp;,</span> <span class="identifier">expect</span><span class="special">&gt;();</span>
     <span class="special">}</span>
 
     <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">function_ptr</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">float</span><span class="special">&amp;,</span> <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*);</span>
         <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">float</span><span class="special">&amp;,</span> <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*&gt;;</span>
         <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">function_ptr</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;();</span>
-        <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">function_ptr</span><span class="special">&amp;,</span> <span class="identifier">expect</span><span class="special">&gt;();</span>
-        <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">function_ptr</span><span class="special">&amp;&amp;,</span> <span class="identifier">expect</span><span class="special">&gt;();</span>
-        <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">function_ptr</span> <span class="keyword">const</span> <span class="special">&amp;,</span> <span class="identifier">expect</span><span class="special">&gt;();</span>
     <span class="special">}</span>
 
     <span class="special">{</span>

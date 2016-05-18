@@ -15,7 +15,7 @@ struct N {};
 struct foo;
 
 template<typename... Ts>
-using sig = int(foo::* const &)(Ts...) const volatile;
+using sig = int(foo::*)(Ts...) const volatile;
 
 int main() {
 

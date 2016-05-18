@@ -42,7 +42,7 @@
 <pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Ts</span><span class="special">&gt;</span>
-    <span class="keyword">inline</span> <code class="literal"><a class="link" href="concepts.html#callable_traits.concepts.ref_bind_expression" title="BindExpression"><span class="green">BindExpression</span></a></code> <span class="identifier">bind</span><span class="special">(</span><span class="identifier">Ts</span><span class="special">&amp;&amp;...</span> <span class="identifier">ts</span><span class="special">);</span>
+    <span class="keyword">inline</span> <code class="literal"><a class="link" href="glossary.html#callable_traits.glossary.ref_bind_expression" title="BindExpression"><span class="green">BindExpression</span></a></code> <span class="identifier">bind</span><span class="special">(</span><span class="identifier">Ts</span><span class="special">&amp;&amp;...</span> <span class="identifier">ts</span><span class="special">);</span>
 
 <span class="special">}</span>
 </pre>
@@ -69,11 +69,11 @@
         </li>
 <li class="listitem">
           If a call to <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code>
-          passes an <a class="link" href="concepts.html#callable_traits.concepts.ref_overloaded_fn_obj" title="OverloadedFunctionObject"><span class="green">OverloadedFunctionObject</span></a> instance as its first
+          passes an <a class="link" href="glossary.html#callable_traits.glossary.ref_overloaded_fn_obj" title="OverloadedFunctionObject"><span class="green">OverloadedFunctionObject</span></a> instance as its first
           argument, then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
                 any placeholder objects passed in this call must be re-used somewhere
-                else in the expression tree, bing passed in another call to <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code> where a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a> as its first argument
+                else in the expression tree, bing passed in another call to <code class="literal">callable_traits::</code><code class="computeroutput"><span class="identifier">bind</span></code> where a <a class="link" href="glossary.html#callable_traits.glossary.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a> as its first argument
                 (otherwise, no inference could be made about the parameter type being
                 "place-held")
               </li></ul></div>

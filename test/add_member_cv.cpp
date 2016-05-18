@@ -56,25 +56,25 @@ int main() {
     }
 
     {
-        using f =   void(foo::* volatile)(int, int);
-        using l =   void(foo::* volatile)(int, int) LREF;
-        using r =   void(foo::* volatile)(int, int) RREF;
-        using c =   void(foo::* volatile)(int, int) const;
-        using cl =  void(foo::* volatile)(int, int) const LREF;
-        using cr =  void(foo::* volatile)(int, int) const RREF;
-        using v =   void(foo::* volatile)(int, int) volatile;
-        using vl =  void(foo::* volatile)(int, int) volatile LREF;
-        using vr =  void(foo::* volatile)(int, int) volatile RREF;
-        using cv =  void(foo::* volatile)(int, int) const volatile;
-        using cvl = void(foo::* volatile)(int, int) const volatile LREF;
-        using cvr = void(foo::* volatile)(int, int) const volatile RREF;
+        using f =   void(foo::*)(int, int);
+        using l =   void(foo::*)(int, int) LREF;
+        using r =   void(foo::*)(int, int) RREF;
+        using c =   void(foo::*)(int, int) const;
+        using cl =  void(foo::*)(int, int) const LREF;
+        using cr =  void(foo::*)(int, int) const RREF;
+        using v =   void(foo::*)(int, int) volatile;
+        using vl =  void(foo::*)(int, int) volatile LREF;
+        using vr =  void(foo::*)(int, int) volatile RREF;
+        using cv =  void(foo::*)(int, int) const volatile;
+        using cvl = void(foo::*)(int, int) const volatile LREF;
+        using cvr = void(foo::*)(int, int) const volatile RREF;
 
-        CT_ASSERT(std::is_same<cv,   ct::add_member_cv<f>>{});
-        CT_ASSERT(std::is_same<cv,   ct::add_member_cv<c>>{});
-        CT_ASSERT(std::is_same<cvl,  ct::add_member_cv<l>>{});
-        CT_ASSERT(std::is_same<cvl,  ct::add_member_cv<cl>>{});
-        CT_ASSERT(std::is_same<cvr,  ct::add_member_cv<r>>{});
-        CT_ASSERT(std::is_same<cvr,  ct::add_member_cv<cr>>{});
+        CT_ASSERT(std::is_same<cv,  ct::add_member_cv<f>>{});
+        CT_ASSERT(std::is_same<cv,  ct::add_member_cv<c>>{});
+        CT_ASSERT(std::is_same<cvl, ct::add_member_cv<l>>{});
+        CT_ASSERT(std::is_same<cvl, ct::add_member_cv<cl>>{});
+        CT_ASSERT(std::is_same<cvr, ct::add_member_cv<r>>{});
+        CT_ASSERT(std::is_same<cvr, ct::add_member_cv<cr>>{});
         CT_ASSERT(std::is_same<cv,  ct::add_member_cv<v>>{});
         CT_ASSERT(std::is_same<cv,  ct::add_member_cv<cv>>{});
         CT_ASSERT(std::is_same<cvl, ct::add_member_cv<vl>>{});
@@ -99,12 +99,12 @@ int main() {
         using cvl = void() const volatile LREF;
         using cvr = void() const volatile RREF;
 
-        CT_ASSERT(std::is_same<cv,   ct::add_member_cv<f>>{});
-        CT_ASSERT(std::is_same<cv,   ct::add_member_cv<c>>{});
-        CT_ASSERT(std::is_same<cvl,  ct::add_member_cv<l>>{});
-        CT_ASSERT(std::is_same<cvl,  ct::add_member_cv<cl>>{});
-        CT_ASSERT(std::is_same<cvr,  ct::add_member_cv<r>>{});
-        CT_ASSERT(std::is_same<cvr,  ct::add_member_cv<cr>>{});
+        CT_ASSERT(std::is_same<cv,  ct::add_member_cv<f>>{});
+        CT_ASSERT(std::is_same<cv,  ct::add_member_cv<c>>{});
+        CT_ASSERT(std::is_same<cvl, ct::add_member_cv<l>>{});
+        CT_ASSERT(std::is_same<cvl, ct::add_member_cv<cl>>{});
+        CT_ASSERT(std::is_same<cvr, ct::add_member_cv<r>>{});
+        CT_ASSERT(std::is_same<cvr, ct::add_member_cv<cr>>{});
         CT_ASSERT(std::is_same<cv,  ct::add_member_cv<v>>{});
         CT_ASSERT(std::is_same<cv,  ct::add_member_cv<cv>>{});
         CT_ASSERT(std::is_same<cvl, ct::add_member_cv<vl>>{});

@@ -95,8 +95,8 @@ namespace callable_traits {
         };
 
         // Since constexpr data members must be static, you cannot create PMDs to them
-        template<typename OriginalType, typename Pmd, std::size_t... I>
-        struct is_constexpr_t<pmd<OriginalType, Pmd>, CALLABLE_TRAITS_IX_SEQ(I...)> {
+        template<typename Pmd, std::size_t... I>
+        struct is_constexpr_t<pmd<Pmd>, CALLABLE_TRAITS_IX_SEQ(I...)> {
             auto operator()(...) const -> substitution_failure;
         };
 
@@ -109,7 +109,8 @@ namespace callable_traits {
         template<typename T>
         inline constexpr auto
         is_constexpr_impl(T&& t, std::true_type){
-            using traits = traits<T&&>;
+            using no_ref = typename std::remove_reference<T>::type;
+            using traits = traits<no_ref>;
             using needs_object = typename traits::is_member_pointer;
             using object_offset = std::integral_constant<int, needs_object::value? 1 : 0>;
 

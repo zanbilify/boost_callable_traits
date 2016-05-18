@@ -1,70 +1,54 @@
-/*
-
-Copyright Barrett Adair 2015
+/*<-
+Copyright Barrett Adair 2016
 Distributed under the Boost Software License, Version 1.0.
-(See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
+(See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
+->*/
 
-*/
+#include <callable_traits/config.hpp>
 
-#include <type_traits>
-#include <cstdint>
-#include <memory>
-#include <callable_traits/callable_traits.hpp>
+#ifdef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS
+int main(){ return 0; }
+#else
 
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
+//[ make_function_example
+#include <cassert>
 
-struct foo1 {
-    int bar(char, float&, int = 0) { return{}; }
+#include "../../example/make_function.hpp"
+
+using namespace example;
+using namespace std::placeholders;
+
+int add(int i, int j) {
+    return i + j;
+}
+
+struct adder {
+
+    int eval(int i, int j) const {
+        return i + j;
+    }
 };
-
-struct foo2 {
-     int bar(char, float&, int = 0, ...) { return{}; }
-};
-
-struct foo3 {
-    int operator()(char, float&, int = 0) { return{}; }
-};
-
-struct foo4 {
-    int operator()(char, float&, int = 0, ...) { return{}; }
-};
-
-int foo5(char, float&, int = 0) { return{}; }
-
-int foo6(char, float&, int = 0, ...) { return{}; }
-
-struct foo7 {
-    int bar() { return{}; }
-};
-
-namespace ct = callable_traits;
-using std::is_same;
 
 int main() {
 
-    {
-        using pmf = decltype(&foo1::bar);
-        using args = ct::args<pmf>;
-        CT_ASSERT(is_same<args, std::tuple<foo1&, char, float&, int>>{});
-    } {
-        using pmf = decltype(&foo2::bar);
-        using args = ct::args<pmf>;
-        CT_ASSERT(is_same<args, std::tuple<foo2&, char, float&, int>>{});
-    } {
-        using args = ct::args<foo3>;
-        CT_ASSERT(is_same<args, std::tuple<char, float&, int>>{});
-    } {
-        using args = ct::args<foo4>;
-        CT_ASSERT(is_same<args, std::tuple<char, float&, int>>{});
-    } {
-        using args = ct::args<decltype(foo5)>;
-        CT_ASSERT(is_same<args, std::tuple<char, float&, int>>{});
-    } {
-        using args = ct::args<decltype(foo6)>;
-        CT_ASSERT(is_same<args, std::tuple<char, float&, int>>{});
-    }
+    // function pointer
+    auto f = make_function(&add);
+    assert(f(99, 1) == 100);
 
-    return 0;
+    // function reference
+    f = make_function(add);
+    assert(f(99, 1) == 100);
+
+    // member function pointer (bound to object)
+    f = make_function(&adder::eval, adder{}, _1, _2);
+    assert(f(99, 1) == 100);
+
+    // lambda
+    f = make_function([](int i, int j) {
+        return i + j;
+    });
+
+    assert(f(99, 1) == 100);
 }
+//]
+#endif

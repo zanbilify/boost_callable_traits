@@ -18,16 +18,16 @@ namespace callable_traits {
 
     template<typename T>
     inline constexpr auto
-    has_void_return(T&&) {
+    has_void_return() {
         return typename std::is_same<
-            typename detail::traits<T&&>::return_type, void>::type{};
+            typename detail::traits<T>::return_type, void>::type{};
     }
 
     template<typename T>
     inline constexpr auto
-    has_void_return() {
-        return typename std::is_same<
-            typename detail::traits<T>::return_type, void>::type{};
+    has_void_return(T&&) {
+        using no_ref = typename std::remove_reference<T>::type;
+        return has_void_return<no_ref>();
     }
 }
 

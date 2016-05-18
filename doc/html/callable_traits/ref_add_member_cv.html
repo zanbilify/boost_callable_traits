@@ -38,7 +38,7 @@
       <span class="phrase"><a name="callable_traits.ref_add_member_cv.constraints"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.constraints">Constraints</a>
     </h4>
 <p>
-      <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="concepts.html#callable_traits.concepts.ref_fn" title="Function"><span class="green">Function</span></a> or <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>.
+      <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="glossary.html#callable_traits.glossary.ref_fn" title="Function"><span class="green">Function</span></a> or <a class="link" href="glossary.html#callable_traits.glossary.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>.
     </p>
 <h4>
 <a name="callable_traits.ref_add_member_cv.h1"></a>
@@ -47,7 +47,7 @@
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
           Adds both <code class="computeroutput"><span class="keyword">const</span></code> and <code class="computeroutput"><span class="keyword">volatile</span></code> qualifiers to the signature of
           <code class="computeroutput"><span class="identifier">T</span></code> (if not already present),
-          preserving any pointer qualifiers, such that:
+          such that:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                 <code class="computeroutput"><span class="identifier">add_member_cv</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">()&gt;</span></code>
@@ -60,13 +60,6 @@
                 aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
                 <span class="keyword">const</span> <span class="keyword">volatile</span></code>
               </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">add_member_cv</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*</span>
-                <span class="keyword">const</span> <span class="special">&amp;)()&gt;</span></code>
-                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*</span>
-                <span class="keyword">const</span> <span class="special">&amp;)()</span>
-                <span class="keyword">const</span> <span class="keyword">volatile</span></code>
-              </li>
 </ul></div>
         </li></ul></div>
 <h4>
@@ -74,7 +67,7 @@
       <span class="phrase"><a name="callable_traits.ref_add_member_cv.notes"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.notes">Notes</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-          Any enabled calling conventions are preserved on <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a> types
+          Any enabled calling conventions are preserved on <a class="link" href="glossary.html#callable_traits.glossary.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a> types
         </li></ul></div>
 <h4>
 <a name="callable_traits.ref_add_member_cv.h3"></a>

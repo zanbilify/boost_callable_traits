@@ -21,56 +21,13 @@ namespace ct = callable_traits;
 template<typename T>
 void assert_qualified() {
     CT_ASSERT(ct::has_member_qualifiers<T>());
-    CT_ASSERT(ct::has_member_qualifiers<T&>());
-    CT_ASSERT(ct::has_member_qualifiers<T &&>());
-    CT_ASSERT(ct::has_member_qualifiers<T const>());
-    CT_ASSERT(ct::has_member_qualifiers<T const &>());
-    CT_ASSERT(ct::has_member_qualifiers<T const &&>());
-    CT_ASSERT(ct::has_member_qualifiers<T volatile>());
-    CT_ASSERT(ct::has_member_qualifiers<T volatile &>());
-    CT_ASSERT(ct::has_member_qualifiers<T volatile &&>());
-    CT_ASSERT(ct::has_member_qualifiers<T const volatile &>());
-    CT_ASSERT(ct::has_member_qualifiers<T const volatile &&>());
-
     CT_ASSERT(decltype(ct::has_member_qualifiers(std::declval<T>()))::value);
-    CT_ASSERT(decltype(ct::has_member_qualifiers(std::declval<T&>()))::value);
-    CT_ASSERT(decltype(ct::has_member_qualifiers(std::declval<T &&>()))::value);
-    CT_ASSERT(decltype(ct::has_member_qualifiers(std::declval<T const>()))::value);
-    CT_ASSERT(decltype(ct::has_member_qualifiers(std::declval<T const &>()))::value);
-    CT_ASSERT(decltype(ct::has_member_qualifiers(std::declval<T const &&>()))::value);
-    CT_ASSERT(decltype(ct::has_member_qualifiers(std::declval<T volatile>()))::value);
-    CT_ASSERT(decltype(ct::has_member_qualifiers(std::declval<T volatile &>()))::value);
-    CT_ASSERT(decltype(ct::has_member_qualifiers(std::declval<T volatile &&>()))::value);
-    CT_ASSERT(decltype(ct::has_member_qualifiers(std::declval<T const volatile &>()))::value);
-    CT_ASSERT(decltype(ct::has_member_qualifiers(std::declval<T const volatile &&>()))::value);
 }
-
 
 template<typename T>
 void assert_unqualified() {
     CT_ASSERT(!ct::has_member_qualifiers<T>());
-    CT_ASSERT(!ct::has_member_qualifiers<T&>());
-    CT_ASSERT(!ct::has_member_qualifiers<T &&>());
-    CT_ASSERT(!ct::has_member_qualifiers<T const>());
-    CT_ASSERT(!ct::has_member_qualifiers<T const &>());
-    CT_ASSERT(!ct::has_member_qualifiers<T const &&>());
-    CT_ASSERT(!ct::has_member_qualifiers<T volatile>());
-    CT_ASSERT(!ct::has_member_qualifiers<T volatile &>());
-    CT_ASSERT(!ct::has_member_qualifiers<T volatile &&>());
-    CT_ASSERT(!ct::has_member_qualifiers<T const volatile &>());
-    CT_ASSERT(!ct::has_member_qualifiers<T const volatile &&>());
-
     CT_ASSERT(!decltype(ct::has_member_qualifiers(std::declval<T>()))::value);
-    CT_ASSERT(!decltype(ct::has_member_qualifiers(std::declval<T&>()))::value);
-    CT_ASSERT(!decltype(ct::has_member_qualifiers(std::declval<T &&>()))::value);
-    CT_ASSERT(!decltype(ct::has_member_qualifiers(std::declval<T const>()))::value);
-    CT_ASSERT(!decltype(ct::has_member_qualifiers(std::declval<T const &>()))::value);
-    CT_ASSERT(!decltype(ct::has_member_qualifiers(std::declval<T const &&>()))::value);
-    CT_ASSERT(!decltype(ct::has_member_qualifiers(std::declval<T volatile>()))::value);
-    CT_ASSERT(!decltype(ct::has_member_qualifiers(std::declval<T volatile &>()))::value);
-    CT_ASSERT(!decltype(ct::has_member_qualifiers(std::declval<T volatile &&>()))::value);
-    CT_ASSERT(!decltype(ct::has_member_qualifiers(std::declval<T const volatile &>()))::value);
-    CT_ASSERT(!decltype(ct::has_member_qualifiers(std::declval<T const volatile &&>()))::value);
 }
 
 int main() {

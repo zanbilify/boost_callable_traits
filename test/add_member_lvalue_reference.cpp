@@ -53,18 +53,18 @@ int main() {
     } 
     
     {
-        using f   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*const &&)(...);
-        using l   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*const &&)(...) &;
-        using r   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*const &&)(...) &&;
-        using c   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*const &&)(...) const;
-        using cl  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*const &&)(...) const &;
-        using cr  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*const &&)(...) const &&;
-        using v   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*const &&)(...) volatile;
-        using vl  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*const &&)(...) volatile &;
-        using vr  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*const &&)(...) volatile &&;
-        using cv  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*const &&)(...) const volatile;
-        using cvl = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*const &&)(...) const volatile &;
-        using cvr = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*const &&)(...) const volatile &&;
+        using f   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...);
+        using l   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) &;
+        using r   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) &&;
+        using c   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const;
+        using cl  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const &;
+        using cr  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const &&;
+        using v   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) volatile;
+        using vl  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) volatile &;
+        using vr  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) volatile &&;
+        using cv  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile;
+        using cvl = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile &;
+        using cvr = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile &&;
 
         CT_ASSERT(std::is_same<l,    ct::add_member_lvalue_reference<f>>{});
         CT_ASSERT(std::is_same<cl,   ct::add_member_lvalue_reference<c>>{});

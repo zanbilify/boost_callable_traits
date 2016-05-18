@@ -17,14 +17,16 @@ namespace callable_traits {
 
     template<typename T>
     inline constexpr auto
-    has_varargs(T&&) {
-        return typename detail::traits<T&&>::has_varargs{};
+    has_varargs() {
+
+        return typename detail::traits<T>::has_varargs{};
     }
 
     template<typename T>
     inline constexpr auto
-    has_varargs() {
-        return typename detail::traits<T>::has_varargs{};
+    has_varargs(T&&) {
+        using no_ref = typename std::remove_reference<T>::type;
+        return has_varargs<no_ref>();
     }
 }
 

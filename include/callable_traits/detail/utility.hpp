@@ -259,39 +259,6 @@ namespace callable_traits {
             T
         >::type;
 
-        template<class T, class U>
-        struct copy_cvr {
-            
-        private:
-
-            using no_ref_U = typename std::remove_reference<U>::type;
-            using no_ref_T = typename std::remove_reference<T>::type;
-            
-            using C = typename std::conditional<
-                std::is_const<no_ref_U>::value,
-                typename std::add_const<no_ref_T>::type,
-                no_ref_T
-            >::type;
-            
-            using V = typename std::conditional<
-                std::is_volatile<no_ref_U>::value,
-                typename std::add_volatile<C>::type,
-                C
-            >::type;
-
-        public:
-
-            using type = typename std::conditional<
-                std::is_lvalue_reference<U>::value,
-                V &,
-                typename std::conditional<
-                    std::is_rvalue_reference<U>::value,
-                    V &&,
-                    V
-                >::type
-            >::type;
-        };
-
         //used to prepend a type to a tuple
         template <typename...> struct prepend;
 

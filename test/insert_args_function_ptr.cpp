@@ -13,7 +13,7 @@ template<int I>
 struct N {};
 
 template<typename... Ts>
-using sig = int(* volatile &)(Ts...);
+using sig = int(*)(Ts...);
 
 int main() {
 

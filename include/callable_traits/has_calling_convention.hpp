@@ -19,13 +19,14 @@ namespace callable_traits {
     template<typename T, typename Tag>
     inline constexpr auto
     has_calling_convention() {
-        return typename detail::has_calling_convention_t<detail::shallow_decay<T>, Tag>::type{};
+        return typename detail::has_calling_convention_t<T, Tag>::type{};
     }
 
     template<typename T, typename Tag>
     inline constexpr auto
     has_calling_convention(T&&) {
-        return has_calling_convention<T, Tag>();
+        using no_ref = typename std::remove_reference<T>::type;
+        return has_calling_convention<no_ref, Tag>();
     }
 }
 

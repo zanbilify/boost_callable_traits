@@ -63,8 +63,8 @@ namespace callable_traits {
             auto operator()(...) const -> substitution_failure;
         };
 
-        template<typename OriginalType, typename Pmd, typename... Args>
-        struct test_invoke_constexpr<pmd<OriginalType, Pmd>, Args...> {
+        template<typename Pmd, typename... Args>
+        struct test_invoke_constexpr<pmd<Pmd>, Args...> {
             auto operator()(...) const -> substitution_failure;
         };
 
@@ -95,7 +95,8 @@ namespace callable_traits {
             are_all_constexpr_constructible<T, Args...>::value, int>::type = 0>
         inline constexpr auto
         is_invokable_constexpr_impl(T&& t, Args&&... args) {
-            using traits = traits<T&&>;
+            using no_ref = typename std::remove_reference<T>::type;
+            using traits = traits<no_ref>;
             using test = test_invoke_constexpr<traits, Args&&...>;
             using result = decltype(test{}(::std::forward<T>(t), ::std::forward<Args>(args)...));
             using is_invalid_invoke = std::is_same<result, substitution_failure>;

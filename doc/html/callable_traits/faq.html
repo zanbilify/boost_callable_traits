@@ -95,8 +95,8 @@
         Do you hate your job?
       </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span>
-<span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span> <span class="identifier">__cdecl</span> <span class="identifier">T</span><span class="special">::*</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;&gt;</span> <span class="special">{</span>
-    <span class="comment">//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+<span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span> <span class="identifier">__cdecl</span> <span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;&gt;</span> <span class="special">{</span>
+    <span class="comment">//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
 <span class="special">};</span>
 </pre>
 <p>
@@ -140,7 +140,7 @@
 <p>
         <span class="bold"><strong>3.</strong></span> <code class="literal">CallableTraits</code> is
         designed to comply with <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>
-        rules, with one unobtrusive and beneficial deviation: <a class="link" href="concepts.html#callable_traits.concepts.ref_fn" title="Function"><span class="green">Function</span></a> types are compatible with all relevant
+        rules, with one unobtrusive and beneficial deviation: <a class="link" href="glossary.html#callable_traits.glossary.ref_fn" title="Function"><span class="green">Function</span></a> types are compatible with all relevant
         type operations that do not specifically require an invocation.
       </p>
 <p>
@@ -154,12 +154,12 @@
         at compile-time, with value semantics. For the craziest metaprogrammers,
         <a class="link" href="ref_is_invokable_constexpr.html" title="is_invokable_constexpr"><code class="literal">is_invokable_constexpr</code></a>
         does the same as <code class="computeroutput"><span class="identifier">is_invokable</span></code>
-        for <a class="link" href="concepts.html#callable_traits.concepts.ref_constexpr_constructible" title="ConstexprDefaultConstructible"><span class="green">ConstexprDefaultConstructible</span></a> types, with an
+        for <a class="link" href="glossary.html#callable_traits.glossary.ref_constexpr_constructible" title="ConstexprDefaultConstructible"><span class="green">ConstexprDefaultConstructible</span></a> types, with an
         added check for <code class="computeroutput"><span class="keyword">constexpr</span></code>-ness
       </p>
 <p>
         <span class="bold"><strong>6.</strong></span> <a class="link" href="ref_is_constexpr.html" title="is_constexpr"><code class="literal">is_constexpr</code></a>
-        is used to check whether a <a class="link" href="concepts.html#callable_traits.concepts.ref_constexpr_constructible" title="ConstexprDefaultConstructible"><span class="green">ConstexprDefaultConstructible</span></a> type is a <a class="link" href="concepts.html#callable_traits.concepts.ref_callable" title="Callable"><span class="green">Callable</span></a>
+        is used to check whether a <a class="link" href="glossary.html#callable_traits.glossary.ref_constexpr_constructible" title="ConstexprDefaultConstructible"><span class="green">ConstexprDefaultConstructible</span></a> type is a <a class="link" href="glossary.html#callable_traits.glossary.ref_callable" title="Callable"><span class="green">Callable</span></a>
         type that yields a <code class="computeroutput"><span class="keyword">constexpr</span></code>
         result -- no arguments necessary.
       </p>
@@ -172,7 +172,7 @@
       </p>
 <p>
         <span class="bold"><strong>8.</strong></span> <a class="link" href="ref_min_arity.html" title="min_arity"><code class="literal">min_arity</code></a>
-        can be used to detect the presence of default arguments on a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>
+        can be used to detect the presence of default arguments on a <a class="link" href="glossary.html#callable_traits.glossary.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>
       </p>
 <p>
         <span class="bold"><strong>9.</strong></span> The <code class="literal">CallableTraits</code>

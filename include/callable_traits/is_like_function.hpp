@@ -17,12 +17,13 @@ namespace callable_traits {
     template<typename T>
     inline constexpr auto is_like_function() {
         return std::integral_constant<bool,
-            detail::function<T, detail::decay_if_ptr_or_integral_constant<T>>::value>{};
+            detail::function<T>::value>{};
     }
 
     template<typename T>
     inline constexpr auto is_like_function(T&&) {
-        return is_like_function<T&&>();
+        using no_ref = typename std::remove_reference<T>::type;
+        return is_like_function<no_ref>();
     }
 }
 

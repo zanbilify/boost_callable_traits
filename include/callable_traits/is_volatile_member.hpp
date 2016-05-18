@@ -24,7 +24,8 @@ namespace callable_traits {
     template<typename T>
     inline constexpr auto
     is_volatile_member(T&&) {
-        return typename detail::traits<T&&>::is_volatile_member{};
+        using no_ref = typename std::remove_reference<T>::type;
+        return typename detail::traits<no_ref>::is_volatile_member{};
     }
 }
 

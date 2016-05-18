@@ -22,17 +22,17 @@ namespace callable_traits {
 
     namespace detail {
 
-        template<typename U, typename T>
+        template<typename T>
         struct pmd : default_callable_traits {};
 
-        template<typename U, typename T, T Value>
-        struct pmd <U, std::integral_constant<T, Value>> {
-            using traits = pmd<T, T>;
+        template<typename T, T Value>
+        struct pmd <std::integral_constant<T, Value>> {
+            using traits = pmd<T>;
             static constexpr const bool value = traits::value;
         };
 
-        template<typename OriginalType, typename D, typename T>
-        struct pmd<OriginalType, D T::*>
+        template<typename D, typename T>
+        struct pmd<D T::*>
             : default_callable_traits, qualifier_traits<dummy> {
                 
             static constexpr bool value = true;
@@ -49,16 +49,10 @@ namespace callable_traits {
             using remove_member_pointer = D;
 
             template<typename C>
-            using apply_member_pointer = typename copy_cvr<
-                D C::*,
-                OriginalType
-            >::type;
+            using apply_member_pointer = D C::*;
 
             template<typename R>
-            using apply_return = typename copy_cvr<
-                R T::*,
-                OriginalType
-            >::type;
+            using apply_return = R T::*;
 
             template<template<class...> class Container>
             using expand_args = Container<>;

@@ -13,7 +13,8 @@ namespace callable_traits {
         template<typename T, typename... Args>
         inline constexpr auto
         is_invokable_impl(T&& t, Args&&... args) {
-            using traits = detail::traits<T&&>;
+            using no_ref = typename std::remove_reference<T>::type;
+            using traits = detail::traits<no_ref>;
             using test = detail::test_invoke<traits, Args&&...>;
             using result = decltype(test{}(::std::forward<T>(t), ::std::forward<Args>(args)...));
             using failure = detail::substitution_failure;

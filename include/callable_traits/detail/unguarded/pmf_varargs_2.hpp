@@ -30,8 +30,8 @@ struct set_varargs_member_function_qualifiers_t <
         Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS;
 };
 
-template<typename OriginalType, typename Return, typename T, typename... Args>
-struct pmf<OriginalType, Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS>
+template<typename Return, typename T, typename... Args>
+struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS>
  : qualifier_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>, default_callable_traits {
 
     static constexpr bool value = true;
@@ -55,22 +55,17 @@ struct pmf<OriginalType, Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) C
     using function_type = Return(invoke_type, Args..., ...);
     using qualified_function_type = Return(Args..., ...) CALLABLE_TRAITS_INCLUDE_ABOMINABLE_QUALIFIERS;
 
-    using remove_varargs = typename copy_cvr<
-        Return(CALLABLE_TRAITS_CC T::*)(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS,
-        OriginalType
-    >::type;
+    using remove_varargs =
+        Return(CALLABLE_TRAITS_CC T::*)(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS;
 
-    using add_varargs = OriginalType;
+    using add_varargs = type;
     using class_type = T;
 
     using qualifiers = qualifier_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>;
 
     template<flags Flags>
-    using set_qualifiers = typename copy_cvr<
-        set_varargs_member_function_qualifiers<
-            Flags, CALLABLE_TRAITS_CC_TAG, T, Return, Args...>,
-            OriginalType
-        >::type;
+    using set_qualifiers = set_varargs_member_function_qualifiers<
+            Flags, CALLABLE_TRAITS_CC_TAG, T, Return, Args...>;
 
     using remove_member_reference = set_qualifiers<qualifiers::cv_flags>;
 
@@ -93,38 +88,30 @@ struct pmf<OriginalType, Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) C
     using remove_member_cv = set_qualifiers<qualifiers::ref_flags>;
 
     template<typename U>
-    using apply_member_pointer = typename copy_cvr<
-        Return(CALLABLE_TRAITS_VARARGS_CC U::*)(Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS,
-        OriginalType
-    >::type;
+    using apply_member_pointer =
+        Return(CALLABLE_TRAITS_VARARGS_CC U::*)(Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS;
 
     template<typename NewReturn>
-    using apply_return = typename copy_cvr<
-        NewReturn(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS,
-        OriginalType
-    >::type;
+    using apply_return =
+        NewReturn(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS;
 
     using remove_member_pointer = qualified_function_type;
 
     template<template<class...> class Container>
     using expand_args = Container<invoke_type, Args...>;
 
-    using clear_args = typename copy_cvr<
-        Return(CALLABLE_TRAITS_VARARGS_CC T::*)() CALLABLE_TRAITS_INCLUDE_QUALIFIERS,
-        OriginalType
-    >::type;
+    using clear_args =
+        Return(CALLABLE_TRAITS_VARARGS_CC T::*)() CALLABLE_TRAITS_INCLUDE_QUALIFIERS;
     
 #undef CALLABLE_TRAITS_BEGIN_PACK_MANIP
 #undef CALLABLE_TRAITS_ARGS_PACK
 #undef CALLABLE_TRAITS_END_PACK_MANIP
 
-#define CALLABLE_TRAITS_BEGIN_PACK_MANIP \
-    typename copy_cvr<Return( CALLABLE_TRAITS_VARARGS_CC T::*)(
+#define CALLABLE_TRAITS_BEGIN_PACK_MANIP Return( CALLABLE_TRAITS_VARARGS_CC T::*)(
 
 #define CALLABLE_TRAITS_ARGS_PACK Args
 
-#define CALLABLE_TRAITS_END_PACK_MANIP \
-    , ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS, OriginalType>::type
+#define CALLABLE_TRAITS_END_PACK_MANIP , ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS
 
 #include <callable_traits/detail/unguarded/args_pack_manipulations.hpp>
 #undef CALLABLE_TRAITS_BEGIN_PACK_MANIP

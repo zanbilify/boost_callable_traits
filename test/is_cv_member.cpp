@@ -28,56 +28,14 @@ namespace ct = callable_traits;
 template<typename T>
 void assert_cv_qualified() {
     CT_ASSERT(ct::is_cv_member<T>());
-    CT_ASSERT(ct::is_cv_member<T&>());
-    CT_ASSERT(ct::is_cv_member<T &&>());
-    CT_ASSERT(ct::is_cv_member<T const>());
-    CT_ASSERT(ct::is_cv_member<T const &>());
-    CT_ASSERT(ct::is_cv_member<T const &&>());
-    CT_ASSERT(ct::is_cv_member<T volatile>());
-    CT_ASSERT(ct::is_cv_member<T volatile &>());
-    CT_ASSERT(ct::is_cv_member<T volatile &&>());
-    CT_ASSERT(ct::is_cv_member<T const volatile &>());
-    CT_ASSERT(ct::is_cv_member<T const volatile &&>());
-
     CT_ASSERT(decltype(ct::is_cv_member(std::declval<T>()))::value);
-    CT_ASSERT(decltype(ct::is_cv_member(std::declval<T&>()))::value);
-    CT_ASSERT(decltype(ct::is_cv_member(std::declval<T &&>()))::value);
-    CT_ASSERT(decltype(ct::is_cv_member(std::declval<T const>()))::value);
-    CT_ASSERT(decltype(ct::is_cv_member(std::declval<T const &>()))::value);
-    CT_ASSERT(decltype(ct::is_cv_member(std::declval<T const &&>()))::value);
-    CT_ASSERT(decltype(ct::is_cv_member(std::declval<T volatile>()))::value);
-    CT_ASSERT(decltype(ct::is_cv_member(std::declval<T volatile &>()))::value);
-    CT_ASSERT(decltype(ct::is_cv_member(std::declval<T volatile &&>()))::value);
-    CT_ASSERT(decltype(ct::is_cv_member(std::declval<T const volatile &>()))::value);
-    CT_ASSERT(decltype(ct::is_cv_member(std::declval<T const volatile &&>()))::value);
 }
 
 
 template<typename T>
 void assert_not_cv_qualified() {
     CT_ASSERT(!ct::is_cv_member<T>());
-    CT_ASSERT(!ct::is_cv_member<T&>());
-    CT_ASSERT(!ct::is_cv_member<T &&>());
-    CT_ASSERT(!ct::is_cv_member<T const>());
-    CT_ASSERT(!ct::is_cv_member<T const &>());
-    CT_ASSERT(!ct::is_cv_member<T const &&>());
-    CT_ASSERT(!ct::is_cv_member<T volatile>());
-    CT_ASSERT(!ct::is_cv_member<T volatile &>());
-    CT_ASSERT(!ct::is_cv_member<T volatile &&>());
-    CT_ASSERT(!ct::is_cv_member<T const volatile &>());
-    CT_ASSERT(!ct::is_cv_member<T const volatile &&>());
-
     CT_ASSERT(!decltype(ct::is_cv_member(std::declval<T>()))::value);
-    CT_ASSERT(!decltype(ct::is_cv_member(std::declval<T&>()))::value);
-    CT_ASSERT(!decltype(ct::is_cv_member(std::declval<T &&>()))::value);
-    CT_ASSERT(!decltype(ct::is_cv_member(std::declval<T const>()))::value);
-    CT_ASSERT(!decltype(ct::is_cv_member(std::declval<T const &>()))::value);
-    CT_ASSERT(!decltype(ct::is_cv_member(std::declval<T const &&>()))::value);
-    CT_ASSERT(!decltype(ct::is_cv_member(std::declval<T volatile>()))::value);
-    CT_ASSERT(!decltype(ct::is_cv_member(std::declval<T volatile &>()))::value);
-    CT_ASSERT(!decltype(ct::is_cv_member(std::declval<T volatile &&>()))::value);
-    CT_ASSERT(!decltype(ct::is_cv_member(std::declval<T const volatile &>()))::value);
-    CT_ASSERT(!decltype(ct::is_cv_member(std::declval<T const volatile &&>()))::value);
 }
 
 int main() {

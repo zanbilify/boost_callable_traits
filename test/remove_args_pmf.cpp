@@ -15,7 +15,7 @@ struct N {};
 struct foo {};
 
 template<typename... Ts>
-using sig = void(foo::* const)(Ts...);
+using sig = void(foo::*)(Ts...);
 
 int main() {
 

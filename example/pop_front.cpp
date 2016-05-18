@@ -13,9 +13,9 @@ struct foo;
 
 int main() {
 
-    using f = void(foo::* const &)(int, char, long);
+    using f = void(foo::*)(int, char, long);
     using test = ct::pop_front<f>;
-    using expect = void(foo::* const &)(char, long);
+    using expect = void(foo::*)(char, long);
     static_assert(std::is_same<test, expect>::value, "");
 }
 //]

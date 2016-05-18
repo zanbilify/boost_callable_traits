@@ -154,8 +154,9 @@ namespace callable_traits {
                 bind_args_tuple
             >::type;
 
-            using original_args = typename traits<Callable>::arg_types;
-            using return_type = typename traits<Callable>::return_type;
+            using no_ref = typename std::remove_reference<Callable>::type;
+            using original_args = typename traits<no_ref>::arg_types;
+            using return_type = typename traits<no_ref>::return_type;
             using result_type = return_type;
 
 #ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS

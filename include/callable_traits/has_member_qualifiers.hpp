@@ -24,7 +24,8 @@ namespace callable_traits {
     template<typename T>
     inline constexpr auto
     has_member_qualifiers(T&&) {
-        return typename detail::traits<T&&>::has_member_qualifiers{};
+        using no_ref = typename std::remove_reference<T>::type;
+        return typename detail::traits<no_ref>::has_member_qualifiers{};
     }
 }
 

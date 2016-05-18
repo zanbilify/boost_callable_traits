@@ -37,7 +37,7 @@
       <span class="phrase"><a name="callable_traits.ref_function_type.constraints"></a></span><a class="link" href="ref_function_type.html#callable_traits.ref_function_type.constraints">Constraints</a>
     </h4>
 <p>
-      <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a>.
+      <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="glossary.html#callable_traits.glossary.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a>.
     </p>
 <h4>
 <a name="callable_traits.ref_function_type.h1"></a>
@@ -45,9 +45,9 @@
     </h4>
 <p>
       <code class="computeroutput"><span class="identifier">function_type</span></code> is used to "decay"
-      a <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a>
+      a <a class="link" href="glossary.html#callable_traits.glossary.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a>
       into an <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>-aware
-      <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn" title="UnqualifiedFunction"><span class="green">UnqualifiedFunction</span></a>.
+      <a class="link" href="glossary.html#callable_traits.glossary.ref_simple_fn" title="UnqualifiedFunction"><span class="green">UnqualifiedFunction</span></a>.
     </p>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
@@ -56,7 +56,7 @@
         </li>
 <li class="listitem">
           Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>,
+          <a class="link" href="glossary.html#callable_traits.glossary.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>,
           then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
@@ -101,7 +101,7 @@
         </li>
 <li class="listitem">
           Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_pmd" title="MemberDataPtr"><span class="green">MemberDataPtr</span></a>,
+          <a class="link" href="glossary.html#callable_traits.glossary.ref_pmd" title="MemberDataPtr"><span class="green">MemberDataPtr</span></a>,
           then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
@@ -119,27 +119,18 @@
               </li>
 <li class="listitem">
                 such that:
-                <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; ">
-<li class="listitem">
+                <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; "><li class="listitem">
                       <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="keyword">int</span>
                       <span class="identifier">foo</span><span class="special">::*&gt;</span></code>
                       aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span> <span class="keyword">const</span>
                       <span class="special">&amp;)</span></code>
-                    </li>
-<li class="listitem">
-                      <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="keyword">int</span>
-                      <span class="identifier">foo</span><span class="special">::*</span>
-                      <span class="keyword">const</span> <span class="special">&amp;&gt;</span></code>
-                      also aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span>
-                      <span class="keyword">const</span> <span class="special">&amp;)</span></code>
-                    </li>
-</ul></div>
+                    </li></ul></div>
               </li>
 </ul></div>
         </li>
 <li class="listitem">
           Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_signature" title="Signature"><span class="green">Signature</span></a>:
+          <a class="link" href="glossary.html#callable_traits.glossary.ref_signature" title="Signature"><span class="green">Signature</span></a>:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                 Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
@@ -157,7 +148,7 @@
         </li>
 <li class="listitem">
           Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>,
+          <a class="link" href="glossary.html#callable_traits.glossary.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>,
           then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
@@ -176,7 +167,7 @@
         </li>
 <li class="listitem">
           Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          <a class="link" href="concepts.html#callable_traits.concepts.ref_bind_expression" title="BindExpression"><span class="green">BindExpression</span></a>,
+          <a class="link" href="glossary.html#callable_traits.glossary.ref_bind_expression" title="BindExpression"><span class="green">BindExpression</span></a>,
           then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
@@ -227,15 +218,9 @@
     <span class="keyword">auto</span> <span class="identifier">lamda</span> <span class="special">=</span> <span class="special">[](</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">float</span><span class="special">&amp;,</span> <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*){};</span>
     <span class="keyword">using</span> <span class="identifier">lam</span> <span class="special">=</span> <span class="keyword">decltype</span><span class="special">(</span><span class="identifier">lamda</span><span class="special">);</span>
     <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">lam</span><span class="special">&gt;();</span>
-    <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">lam</span><span class="special">&amp;&gt;();</span>
-    <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">lam</span><span class="special">&amp;&amp;&gt;();</span>
-    <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">lam</span> <span class="keyword">const</span> <span class="special">&amp;&gt;();</span>
 
     <span class="keyword">using</span> <span class="identifier">function_ptr</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">float</span><span class="special">&amp;,</span> <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*);</span>
     <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">function_ptr</span><span class="special">&gt;();</span>
-    <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">function_ptr</span><span class="special">&amp;&gt;();</span>
-    <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">function_ptr</span><span class="special">&amp;&amp;&gt;();</span>
-    <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">function_ptr</span> <span class="keyword">const</span> <span class="special">&amp;&gt;();</span>
 
     <span class="keyword">using</span> <span class="identifier">function_ref</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(&amp;)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">float</span><span class="special">&amp;,</span> <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*);</span>
     <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">function_ref</span><span class="special">&gt;();</span>
