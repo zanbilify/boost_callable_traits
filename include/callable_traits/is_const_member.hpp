@@ -7,8 +7,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_is_const_member_HPP
-#define CALLABLE_TRAITS_is_const_member_HPP
+#ifndef CALLABLE_TRAITS_IS_CONST_MEMBER_HPP
+#define CALLABLE_TRAITS_IS_CONST_MEMBER_HPP
 
 #include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/required_definitions.hpp>

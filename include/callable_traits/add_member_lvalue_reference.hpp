@@ -7,8 +7,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_add_member_lvalue_reference_HPP
-#define CALLABLE_TRAITS_add_member_lvalue_reference_HPP
+#ifndef CALLABLE_TRAITS_ADD_MEMBER_LVALUE_REFERENCE_HPP
+#define CALLABLE_TRAITS_ADD_MEMBER_LVALUE_REFERENCE_HPP
 
 #include <callable_traits/detail/required_definitions.hpp>
 

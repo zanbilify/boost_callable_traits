@@ -96,7 +96,7 @@
 [template link_arity[][link callable_traits.ref_arity [^arity]]]
 [template link_bind[][link callable_traits.ref_bind [^bind]]]
 [template link_is_invokable[][link callable_traits.ref_is_invokable [^is_invokable]]]
-[template link_IS_INVOKABLE_constexpr[][link callable_traits.ref_IS_INVOKABLE_constexpr [^is_invokable_constexpr]]]
+[template link_is_invokable_constexpr[][link callable_traits.ref_is_invokable_constexpr [^is_invokable_constexpr]]]
 [template link_clear_args[][link callable_traits.ref_clear_args [^clear_args]]]
 [template link_expand_args[][link callable_traits.ref_expand_args [^expand_args]]]
 [template link_function_type[][link callable_traits.ref_function_type [^function_type]]]
@@ -272,7 +272,7 @@ CallableTraits has not been tested on every platform under the sun. If you find 
 
 [section:compatibility_issues Known Issues]
 
-* [link_is_constexpr] and [link_IS_INVOKABLE_constexpr] always `std::false_type` on the following platforms:
+* [link_is_constexpr] and [link_is_invokable_constexpr] always `std::false_type` on the following platforms:
   * MSVC
   * GCC < 5
 * [link_bind] trips a static_assert on the following platforms:
@@ -369,7 +369,7 @@ There are real reasons to write code like this, but they are few and far between
 
 [*4.] [namespace_scoped][link_arg_at]`<2, Callable>` is more flexible than `typename boost::function_traits<Callable>::arg3_type`.
 
-[*5.] [link_is_invokable] is used to test `INVOKE`-ability at compile-time, with value semantics. For the craziest metaprogrammers, [link_IS_INVOKABLE_constexpr] does the same as `is_invokable` for [link_constexpr_constructible] types, with an added check for `constexpr`-ness
+[*5.] [link_is_invokable] is used to test `INVOKE`-ability at compile-time, with value semantics. For the craziest metaprogrammers, [link_is_invokable_constexpr] does the same as `is_invokable` for [link_constexpr_constructible] types, with an added check for `constexpr`-ness
 
 [*6.] [link_is_constexpr] is used to check whether a [link_constexpr_constructible] type is a [link_callable] type that yields a `constexpr` result -- no arguments necessary.
 
@@ -788,7 +788,7 @@ The [libname] interface is also broken down by trait into individual header file
 [section ['INVOKE]]
 
 * [include_header [link_is_invokable]]
-* [include_header [link_IS_INVOKABLE_constexpr]]
+* [include_header [link_is_invokable_constexpr]]
 * [include_header [link_function_type]]
 * [include_header [link_bind]]
 
@@ -806,7 +806,7 @@ The [libname] interface is also broken down by trait into individual header file
 [section Constant Expressions]
 
 * [include_header [link_is_constexpr]]
-* [include_header [link_IS_INVOKABLE_constexpr]]
+* [include_header [link_is_invokable_constexpr]]
 
 [endsect]
 
@@ -1364,14 +1364,14 @@ For `add_calling_convention` to work as-intended, you must:
 [is_invokable_function_reference]
 
 [heading See Also]
-* [link_IS_INVOKABLE_constexpr]
+* [link_is_invokable_constexpr]
 
 [endsect]
 
 
 
 
-[section:ref_IS_INVOKABLE_constexpr is_invokable_constexpr]
+[section:ref_is_invokable_constexpr is_invokable_constexpr]
 
 [note `is_invokable_constexpr` [msvc_incompatible]]
 

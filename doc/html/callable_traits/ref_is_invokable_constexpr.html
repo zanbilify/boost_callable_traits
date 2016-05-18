@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>can_invoke_constexpr</title>
+<title>is_invokable_constexpr</title>
 <link rel="stylesheet" href="../boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="CallableTraits">
 <link rel="up" href="../index.html" title="CallableTraits">
-<link rel="prev" href="ref_can_invoke.html" title="can_invoke">
+<link rel="prev" href="ref_is_invokable.html" title="is_invokable">
 <link rel="next" href="ref_clear_args.html" title="clear_args">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -20,11 +20,11 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="ref_can_invoke.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_clear_args.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="ref_is_invokable.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_clear_args.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="callable_traits.ref_can_invoke_constexpr"></a><a class="link" href="ref_can_invoke_constexpr.html" title="can_invoke_constexpr">can_invoke_constexpr</a>
+<a name="callable_traits.ref_is_invokable_constexpr"></a><a class="link" href="ref_is_invokable_constexpr.html" title="is_invokable_constexpr">is_invokable_constexpr</a>
 </h2></div></div></div>
 <div class="note"><table border="0" summary="Note">
 <tr>
@@ -32,8 +32,8 @@
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>
-        <code class="computeroutput"><span class="identifier">can_invoke_constexpr</span></code> is not
-        compatible with the Microsoft Visual C++ compiler in Visual Studio (a.k.a.
+        <code class="computeroutput"><span class="identifier">is_invokable_constexpr</span></code> is
+        not compatible with the Microsoft Visual C++ compiler in Visual Studio (a.k.a.
         MSVC). Accordingly, the example(s) below will not compile in MSVC. However,
         Visual Studio users can still use Clang-cl. Refer to the <a class="link" href="compatibility.html#callable_traits.compatibility.compatibility_issues" title="Known Issues">Compatibility
         Issues</a> section for more information.
@@ -42,13 +42,13 @@
 <pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
-    <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="identifier">can_invoke_constexpr</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;</span> <span class="identifier">t</span><span class="special">,</span> <span class="identifier">Args</span><span class="special">&amp;&amp;...</span> <span class="identifier">args</span><span class="special">);</span>
+    <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="identifier">is_invokable_constexpr</span><span class="special">(</span><span class="identifier">T</span><span class="special">&amp;&amp;</span> <span class="identifier">t</span><span class="special">,</span> <span class="identifier">Args</span><span class="special">&amp;&amp;...</span> <span class="identifier">args</span><span class="special">);</span>
 
 <span class="special">}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_can_invoke_constexpr.h0"></a>
-      <span class="phrase"><a name="callable_traits.ref_can_invoke_constexpr.constraints"></a></span><a class="link" href="ref_can_invoke_constexpr.html#callable_traits.ref_can_invoke_constexpr.constraints">Constraints</a>
+<a name="callable_traits.ref_is_invokable_constexpr.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_is_invokable_constexpr.constraints"></a></span><a class="link" href="ref_is_invokable_constexpr.html#callable_traits.ref_is_invokable_constexpr.constraints">Constraints</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
           None, except when <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">decay_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
@@ -56,14 +56,14 @@
           with respect to <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
         </li></ul></div>
 <h4>
-<a name="callable_traits.ref_can_invoke_constexpr.h1"></a>
-      <span class="phrase"><a name="callable_traits.ref_can_invoke_constexpr.behavior"></a></span><a class="link" href="ref_can_invoke_constexpr.html#callable_traits.ref_can_invoke_constexpr.behavior">Behavior</a>
+<a name="callable_traits.ref_is_invokable_constexpr.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_is_invokable_constexpr.behavior"></a></span><a class="link" href="ref_is_invokable_constexpr.html#callable_traits.ref_is_invokable_constexpr.behavior">Behavior</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
           An instance of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code> is returned, except when:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
-                arguments to <code class="computeroutput"><span class="identifier">can_invoke_constexpr</span></code>
+                arguments to <code class="computeroutput"><span class="identifier">is_invokable_constexpr</span></code>
                 can legally be forwarded to <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>,
                 <span class="bold"><strong>and</strong></span>
               </li>
@@ -86,14 +86,14 @@
 </ul></div>
         </li></ul></div>
 <h4>
-<a name="callable_traits.ref_can_invoke_constexpr.h2"></a>
-      <span class="phrase"><a name="callable_traits.ref_can_invoke_constexpr.example_function_object"></a></span><a class="link" href="ref_can_invoke_constexpr.html#callable_traits.ref_can_invoke_constexpr.example_function_object">Example
+<a name="callable_traits.ref_is_invokable_constexpr.h2"></a>
+      <span class="phrase"><a name="callable_traits.ref_is_invokable_constexpr.example_function_object"></a></span><a class="link" href="ref_is_invokable_constexpr.html#callable_traits.ref_is_invokable_constexpr.example_function_object">Example
       - Function Object</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">can_invoke_constexpr</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_invokable_constexpr</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="comment">// NOTE: Due to non-compliance in MSVC, can_invoke_constexpr</span>
+<span class="comment">// NOTE: Due to non-compliance in MSVC, is_invokable_constexpr</span>
 <span class="comment">// always return std::false_type on that compiler, which causes</span>
 <span class="comment">// the static asserts below to fail.</span>
 
@@ -106,7 +106,7 @@
 <span class="comment">// subtracts std::integral_constant types.</span>
 <span class="keyword">struct</span> <span class="identifier">subtract</span> <span class="special">{</span>
 
-    <span class="comment">// To compile failing cases of can_invoke_constexpr, the function object</span>
+    <span class="comment">// To compile failing cases of is_invokable_constexpr, the function object</span>
     <span class="comment">// must have a SFINAE-safe signature. In this case, 'subtract' is made</span>
     <span class="comment">// SFINAE-safe with an explicit, trailing return type.</span>
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T1</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T2</span><span class="special">&gt;</span>
@@ -115,12 +115,12 @@
     <span class="special">}</span>
 <span class="special">};</span>
 
-<span class="comment">// can_invoke_constexpr returns std::true_type in the first case, because</span>
+<span class="comment">// is_invokable_constexpr returns std::true_type in the first case, because</span>
 <span class="comment">// INVOKE(subtract{}, T1{}, T2{}) is a valid expression, AND 'subtract{}' is</span>
 <span class="comment">// a constexpr function object.</span>
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke_constexpr</span><span class="special">(</span><span class="identifier">subtract</span><span class="special">{},</span> <span class="identifier">T1</span><span class="special">{},</span> <span class="identifier">T2</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
-<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke_constexpr</span><span class="special">(</span><span class="identifier">subtract</span><span class="special">{},</span> <span class="number">3</span><span class="special">,</span> <span class="number">7</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
-<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke_constexpr</span><span class="special">(</span><span class="identifier">subtract</span><span class="special">{},</span> <span class="identifier">T1</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_invokable_constexpr</span><span class="special">(</span><span class="identifier">subtract</span><span class="special">{},</span> <span class="identifier">T1</span><span class="special">{},</span> <span class="identifier">T2</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_invokable_constexpr</span><span class="special">(</span><span class="identifier">subtract</span><span class="special">{},</span> <span class="number">3</span><span class="special">,</span> <span class="number">7</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_invokable_constexpr</span><span class="special">(</span><span class="identifier">subtract</span><span class="special">{},</span> <span class="identifier">T1</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
 
 <span class="comment">//this is a function object, but is NOT constexpr</span>
 <span class="keyword">struct</span> <span class="identifier">add</span> <span class="special">{</span>
@@ -131,17 +131,17 @@
 <span class="special">};</span>
 
 <span class="comment">// Even though INVOKE(add{}, T1{}, T2{}) is valid, the respective</span>
-<span class="comment">// can_invoke_constexpr call returns std::false_type because 'add{}'</span>
+<span class="comment">// is_invokable_constexpr call returns std::false_type because 'add{}'</span>
 <span class="comment">// is not a constexpr function object.</span>
-<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke_constexpr</span><span class="special">(</span><span class="identifier">add</span><span class="special">{},</span> <span class="identifier">T1</span><span class="special">{},</span> <span class="identifier">T2</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
-<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke_constexpr</span><span class="special">(</span><span class="identifier">add</span><span class="special">{},</span> <span class="number">3</span><span class="special">,</span> <span class="number">7</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_invokable_constexpr</span><span class="special">(</span><span class="identifier">add</span><span class="special">{},</span> <span class="identifier">T1</span><span class="special">{},</span> <span class="identifier">T2</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_invokable_constexpr</span><span class="special">(</span><span class="identifier">add</span><span class="special">{},</span> <span class="number">3</span><span class="special">,</span> <span class="number">7</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
 
 
-<span class="comment">// This last section demonstrates that can_invoke_constexpr will always</span>
+<span class="comment">// This last section demonstrates that is_invokable_constexpr will always</span>
 <span class="comment">// return std::false_type when any of the arguments do not decay to literal</span>
 <span class="comment">// types. (see http://en.cppreference.com/w/cpp/concept/LiteralType).</span>
 <span class="comment">// Even though 'S' below is a constexpr function object, it is incompatible</span>
-<span class="comment">// with can_invoke_constexpr because 'S' isn't a literal type. Additionally,</span>
+<span class="comment">// with is_invokable_constexpr because 'S' isn't a literal type. Additionally,</span>
 <span class="comment">// all arguments must be default constructible.</span>
 
 <span class="keyword">struct</span> <span class="identifier">S</span> <span class="special">{</span>
@@ -151,20 +151,20 @@
 <span class="special">};</span>
 
 <span class="identifier">S</span> <span class="identifier">s</span><span class="special">{</span><span class="number">0</span><span class="special">};</span>
-<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke_constexpr</span><span class="special">(</span><span class="identifier">s</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_invokable_constexpr</span><span class="special">(</span><span class="identifier">s</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
 
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_can_invoke_constexpr.h3"></a>
-      <span class="phrase"><a name="callable_traits.ref_can_invoke_constexpr.example_member_function_pointer"></a></span><a class="link" href="ref_can_invoke_constexpr.html#callable_traits.ref_can_invoke_constexpr.example_member_function_pointer">Example
+<a name="callable_traits.ref_is_invokable_constexpr.h3"></a>
+      <span class="phrase"><a name="callable_traits.ref_is_invokable_constexpr.example_member_function_pointer"></a></span><a class="link" href="ref_is_invokable_constexpr.html#callable_traits.ref_is_invokable_constexpr.example_member_function_pointer">Example
       - Member Function Pointer</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">can_invoke_constexpr</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_invokable_constexpr</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="comment">// NOTE: Due to non-compliance in MSVC, can_invoke_constexpr</span>
+<span class="comment">// NOTE: Due to non-compliance in MSVC, is_invokable_constexpr</span>
 <span class="comment">// always returns std::false_type on that compiler, which</span>
 <span class="comment">// causes a static assert below to fail.</span>
 
@@ -178,23 +178,23 @@
 
 <span class="keyword">using</span> <span class="identifier">pmf_constant</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span><span class="special">&lt;</span><span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">foo</span><span class="special">::</span><span class="identifier">bar</span><span class="special">),</span> <span class="special">&amp;</span><span class="identifier">foo</span><span class="special">::</span><span class="identifier">bar</span><span class="special">&gt;;</span>
 
-<span class="comment">// can_invoke_constexpr returns true here because foo::bar</span>
+<span class="comment">// is_invokable_constexpr returns true here because foo::bar</span>
 <span class="comment">// is constexpr, and the arguments are valid to INVOKE</span>
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke_constexpr</span><span class="special">(</span><span class="identifier">pmf_constant</span><span class="special">{},</span> <span class="identifier">foo</span><span class="special">{},</span> <span class="number">0</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_invokable_constexpr</span><span class="special">(</span><span class="identifier">pmf_constant</span><span class="special">{},</span> <span class="identifier">foo</span><span class="special">{},</span> <span class="number">0</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
 
-<span class="comment">// can_invoke_constexpr returns false here because even though</span>
+<span class="comment">// is_invokable_constexpr returns false here because even though</span>
 <span class="comment">// foo::bar is constexpr, the arguments do not obey INVOKE rules</span>
-<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke_constexpr</span><span class="special">(</span><span class="identifier">pmf_constant</span><span class="special">{},</span> <span class="identifier">foo</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_invokable_constexpr</span><span class="special">(</span><span class="identifier">pmf_constant</span><span class="special">{},</span> <span class="identifier">foo</span><span class="special">{}),</span> <span class="string">""</span><span class="special">);</span>
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_can_invoke_constexpr.h4"></a>
-      <span class="phrase"><a name="callable_traits.ref_can_invoke_constexpr.example_function_pointer"></a></span><a class="link" href="ref_can_invoke_constexpr.html#callable_traits.ref_can_invoke_constexpr.example_function_pointer">Example
+<a name="callable_traits.ref_is_invokable_constexpr.h4"></a>
+      <span class="phrase"><a name="callable_traits.ref_is_invokable_constexpr.example_function_pointer"></a></span><a class="link" href="ref_is_invokable_constexpr.html#callable_traits.ref_is_invokable_constexpr.example_function_pointer">Example
       - Function Pointer</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">can_invoke_constexpr</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_invokable_constexpr</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
 
@@ -204,12 +204,12 @@
 
 <span class="keyword">using</span> <span class="identifier">seven_c</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span><span class="special">&lt;</span><span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">seven</span><span class="special">),</span> <span class="special">&amp;</span><span class="identifier">seven</span><span class="special">&gt;;</span>
 
-<span class="comment">// The first call to can_invoke_constexpr returns std::true_type</span>
+<span class="comment">// The first call to is_invokable_constexpr returns std::true_type</span>
 <span class="comment">// because `seven` is a constexpr function, and valid INVOKE arguments</span>
-<span class="comment">// are passed. The second call to can_invoke_constexpr returns</span>
+<span class="comment">// are passed. The second call to is_invokable_constexpr returns</span>
 <span class="comment">// std::false_type, because the arguments are not valid to INVOKE</span>
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke_constexpr</span><span class="special">(</span><span class="identifier">seven_c</span><span class="special">{},</span> <span class="number">0</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
-<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke_constexpr</span><span class="special">(</span><span class="identifier">seven_c</span><span class="special">{},</span> <span class="keyword">nullptr</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_invokable_constexpr</span><span class="special">(</span><span class="identifier">seven_c</span><span class="special">{},</span> <span class="number">0</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_invokable_constexpr</span><span class="special">(</span><span class="identifier">seven_c</span><span class="special">{},</span> <span class="keyword">nullptr</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
 
 <span class="keyword">int</span> <span class="identifier">eight</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="special">{</span>
     <span class="keyword">return</span> <span class="number">7</span><span class="special">;</span>
@@ -217,21 +217,21 @@
 
 <span class="keyword">using</span> <span class="identifier">eight_c</span> <span class="special">=</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">integral_constant</span><span class="special">&lt;</span><span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">eight</span><span class="special">),</span> <span class="special">&amp;</span><span class="identifier">eight</span><span class="special">&gt;;</span>
 
-<span class="comment">// `eight` is NOT a constexpr function, so can_invoke_constexpr</span>
+<span class="comment">// `eight` is NOT a constexpr function, so is_invokable_constexpr</span>
 <span class="comment">// returns `std::false_type` even for valid INVOKE arguments.</span>
-<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke_constexpr</span><span class="special">(</span><span class="identifier">eight_c</span><span class="special">{},</span> <span class="number">0</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
-<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">can_invoke_constexpr</span><span class="special">(</span><span class="identifier">eight_c</span><span class="special">{},</span> <span class="keyword">nullptr</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_invokable_constexpr</span><span class="special">(</span><span class="identifier">eight_c</span><span class="special">{},</span> <span class="number">0</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_invokable_constexpr</span><span class="special">(</span><span class="identifier">eight_c</span><span class="special">{},</span> <span class="keyword">nullptr</span><span class="special">),</span> <span class="string">""</span><span class="special">);</span>
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_can_invoke_constexpr.h5"></a>
-      <span class="phrase"><a name="callable_traits.ref_can_invoke_constexpr.see_also"></a></span><a class="link" href="ref_can_invoke_constexpr.html#callable_traits.ref_can_invoke_constexpr.see_also">See
+<a name="callable_traits.ref_is_invokable_constexpr.h5"></a>
+      <span class="phrase"><a name="callable_traits.ref_is_invokable_constexpr.see_also"></a></span><a class="link" href="ref_is_invokable_constexpr.html#callable_traits.ref_is_invokable_constexpr.see_also">See
       Also</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-          <a class="link" href="ref_can_invoke.html" title="can_invoke"><code class="literal">can_invoke</code></a>
+          <a class="link" href="ref_is_invokable.html" title="is_invokable"><code class="literal">is_invokable</code></a>
         </li>
 <li class="listitem">
           <a class="link" href="ref_is_constexpr.html" title="is_constexpr"><code class="literal">is_constexpr</code></a>
@@ -248,7 +248,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="ref_can_invoke.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_clear_args.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="ref_is_invokable.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_clear_args.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

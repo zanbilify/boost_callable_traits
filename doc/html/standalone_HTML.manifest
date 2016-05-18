@@ -17,8 +17,8 @@ callable_traits/ref_arg_at.html
 callable_traits/ref_args.html
 callable_traits/ref_arity.html
 callable_traits/ref_bind.html
-callable_traits/ref_can_invoke.html
-callable_traits/ref_can_invoke_constexpr.html
+callable_traits/ref_is_invokable.html
+callable_traits/ref_is_invokable_constexpr.html
 callable_traits/ref_clear_args.html
 callable_traits/ref_insert_args.html
 callable_traits/ref_replace_args.html
@@ -27,7 +27,6 @@ callable_traits/ref_expand_args.html
 callable_traits/ref_function_type.html
 callable_traits/ref_has_calling_convention.html
 callable_traits/ref_has_varargs.html
-callable_traits/ref_is_callable.html
 callable_traits/ref_has_void_return.html
 callable_traits/ref_is_const_member.html
 callable_traits/ref_is_cv_member.html

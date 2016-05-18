@@ -7,8 +7,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_add_member_volatile_HPP
-#define CALLABLE_TRAITS_add_member_volatile_HPP
+#ifndef CALLABLE_TRAITS_ADD_MEMBER_VOLATILE_HPP
+#define CALLABLE_TRAITS_ADD_MEMBER_VOLATILE_HPP
 
 #include <callable_traits/detail/required_definitions.hpp>
 

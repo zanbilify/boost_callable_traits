@@ -7,8 +7,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_has_member_qualifiers_HPP
-#define CALLABLE_TRAITS_has_member_qualifiers_HPP
+#ifndef CALLABLE_TRAITS_HAS_MEMBER_QUALIFIERS_HPP
+#define CALLABLE_TRAITS_HAS_MEMBER_QUALIFIERS_HPP
 
 #include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/required_definitions.hpp>
@@ -28,4 +28,4 @@ namespace callable_traits {
     }
 }
 
-#endif //CALLABLE_TRAITS_has_member_qualifiers_HPP
+#endif //CALLABLE_TRAITS_HAS_MEMBER_QUALIFIERS_HPP
