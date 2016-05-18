@@ -55,7 +55,6 @@
 [template concept_simple_invokable[][role green SimpleInvokable]]
 [template concept_callable[][role green Callable]]
 [template concept_invokable[][role green Invokable]]
-[template concept_bind_expression[][role green BindExpression]]
 [template concept_signature[][role green Signature]]
 [template concept_constexpr_constructible[][role green ConstexprDefaultConstructible]]
 [template concept_cc_tag[][role green CallingConventionTag]]
@@ -76,7 +75,6 @@
 [template link_simple_invokable[][link callable_traits.glossary.ref_simple_invokable [concept_simple_invokable]]]
 [template link_callable[][link callable_traits.glossary.ref_callable [concept_callable]]]
 [template link_invokable[][link callable_traits.glossary.ref_invokable [concept_invokable]]]
-[template link_bind_expression[][link callable_traits.glossary.ref_bind_expression [concept_bind_expression]]]
 [template link_signature[][link callable_traits.glossary.ref_signature [concept_signature]]]
 [template link_constexpr_constructible[][link callable_traits.glossary.ref_constexpr_constructible [concept_constexpr_constructible]]]
 [template link_cc_tag[][link callable_traits.glossary.ref_cc_tag [concept_cc_tag]]]
@@ -94,7 +92,6 @@
 [template link_arg_at[][link callable_traits.ref_arg_at [^arg_at]]]
 [template link_args[][link callable_traits.ref_args [^args]]]
 [template link_arity[][link callable_traits.ref_arity [^arity]]]
-[template link_bind[][link callable_traits.ref_bind [^bind]]]
 [template link_is_invokable[][link callable_traits.ref_is_invokable [^is_invokable]]]
 [template link_is_invokable_constexpr[][link callable_traits.ref_is_invokable_constexpr [^is_invokable_constexpr]]]
 [template link_clear_args[][link callable_traits.ref_clear_args [^clear_args]]]
@@ -185,7 +182,6 @@ This documentation will be most beneficial to readers who posess a basic underst
 * [@http://en.cppreference.com/w/cpp/language/overloaded_address taking the address of overloaded functions]
 * [@http://en.cppreference.com/w/c/language/variadic C-style variadics], a.k.a. varargs
 * [@https://en.wikipedia.org/wiki/X86_calling_conventions calling conventions]
-* [@http://en.cppreference.com/w/cpp/utility/functional/bind std::bind expressions] with [@http://en.cppreference.com/w/cpp/utility/functional/placeholders std::placeholders]
 
 [endsect][/section:prereqs]
 
@@ -262,12 +258,6 @@ See Also: [link callable_traits.faq.faq_function_types Why not update and extend
 [ [Windows]          [MinGW GCC \[4.8, ~ 5.2.1)] [[partial_support]] [libstdc++]              [-]                      ]
 ]
 
-[template msvc_disabled_functions[]
-
-
-* [link_bind]
-]
-
 CallableTraits has not been tested on every platform under the sun. If you find CallableTraits to work with another toolchain, [link callable_traits.contact let us know!]
 
 [section:compatibility_issues Known Issues]
@@ -275,9 +265,6 @@ CallableTraits has not been tested on every platform under the sun. If you find 
 * [link_is_constexpr] and [link_is_invokable_constexpr] always `std::false_type` on the following platforms:
   * MSVC
   * GCC < 5
-* [link_bind] trips a static_assert on the following platforms:
-  * MSVC
-  * GCC < 4.9.2
 * [link_min_arity] and [link_max_arity] are equivalent to [link_arity] on the following platforms:
   * GCC < 4.9.2
 * [link_abominable] types are not compatible with some older compilers. Attempts to create [link_abominable] types using [libname] metafunctions will have no effect on the following platforms:
@@ -373,7 +360,7 @@ There are real reasons to write code like this, but they are few and far between
 
 [*6.] [link_is_constexpr] is used to check whether a [link_constexpr_constructible] type is a [link_callable] type that yields a `constexpr` result -- no arguments necessary.
 
-[*7.] [link_bind] is used to intercept the signature information from a `std::placeholder` expression before forwarding on to `std::bind` or `boost::bind`. This gives library writers the power to create more flexible template APIs for callable types.
+[*7] (TODO - fill this in)
 
 [*8.] [link_min_arity] can be used to detect the presence of default arguments on a [link_simple_fn_obj]
 
@@ -678,11 +665,6 @@ In order to avoid significant standardese in the reference sections, we need to 
 
 [endsect]
 
-[section:ref_bind_expression [concept_bind_expression]]
-* The return type of a call to [namespace_scoped]`bind`
-
-[endsect]
-
 [section:ref_constexpr_constructible [concept_constexpr_constructible]]
 * Any [@http://en.cppreference.com/w/cpp/concept/LiteralType LiteralType] that is also default-constructible
 
@@ -783,7 +765,6 @@ The [libname] interface is also broken down by trait into individual header file
 * [include_header [link_is_invokable]]
 * [include_header [link_is_invokable_constexpr]]
 * [include_header [link_function_type]]
-* [include_header [link_bind]]
 
 [endsect]
 
@@ -1169,16 +1150,12 @@ For `add_calling_convention` to work as-intended, you must:
 * `T` must be one of the following:
   * [link_signature]
   * [link_simple_fn_obj]
-  * [link_bind_expression]
 * When `T` is a [link_signature], then:
   * Let `ArgCount` represent the number of arguments in the signature of `T`
   * `Index` must be less than `ArgCount` and greater than zero
 * Otherwise, when `T` is a [link_simple_fn_obj], then:
   * Let `ArgCount` represent the number of arguments in `decltype(&std::decay_t<T>::operator())`
   * `Index` must be less than `ArgCount` and greater than zero
-* Otherwise, when `T` is a [link_bind_expression], then:
-  * Let `MaxPlaceholder` represent the type of the largest `std::placeholders` object in the bind expression tree
-  * `Index` must be less than `std::is_placeholder<MaxPlaceholder>::value` and greater than zero
   
 [heading Behavior]
 * If any constraints are violated, a substitution failure occurs
@@ -1214,7 +1191,6 @@ For `add_calling_convention` to work as-intended, you must:
 `T` must be one of the following:
 * [link_signature]
 * [link_simple_fn_obj]
-* [link_bind_expression]
 
 [heading Behavior]
 * When the constraints are violated, a substitution failure occurs
@@ -1223,12 +1199,6 @@ For `add_calling_convention` to work as-intended, you must:
   * `args<T>` aliases `std::tuple<Args...>`
 * Otherwise, when `T` is a [link_simple_fn_obj], then:
   * Let `Args...` represent the parameter types in the signature of `decltype(&std::decay_t<T>::operator())`
-  * `args<T>` aliases `std::tuple<Args...>`
-* Otherwise, when `T` is a [link_bind_expression], then:
-  * Let `bind_args...` represent the argument values that were passed to [namespace]`bind` which returned an instance of `T`
-  * Let `bind_result` represent the return value of `std::bind(bind_args...)`
-  * Let `Args...` represent the "valid argument types" to `bind_result`'s `operator()`
-    * Note: the "valid argument types" are implied by the position of the `std::placeholders` objects
   * `args<T>` aliases `std::tuple<Args...>`
 
 [heading Example]
@@ -1274,51 +1244,6 @@ For `add_calling_convention` to work as-intended, you must:
 [heading Example]
 [/import ../example/arity.cpp]
 [arity]
-[endsect]
-
-[section:ref_bind bind]
-
-[note [namespace_scoped]`bind` [msvc_incompatible]]
-
-    namespace ``[lib_namespace]`` {
-	
-		template<typename... Ts>
-		inline ``[^[link_bind_expression]]`` bind(Ts&&... ts);
-		
-	}
-	
-[namespace_scoped]`bind` is used to parse type information from potentially complex `std::placeholders` expressions. The type information in [namespace_scoped]`bind` cannot legally/portably be extracted from `std::bind`, because `std::bind`'s implementation is opaque.
-
-[heading Constraints]
-* The arguments to [namespace_scoped]`bind` must be legal arguments to `std::bind`, substituting `std::bind` for [namespace_scoped]`bind` in nested sub-expressions where necessary to meet this constraint
-* All nested sub-expressions must be a call to [namespace_scoped]`bind` instead of `std::bind`
-* If a call to [namespace_scoped]`bind` passes an [link_overloaded_fn_obj] instance as its first argument, then:
-  * any placeholder objects passed in this call must be re-used somewhere else in the expression tree, bing passed in another call to [namespace_scoped]`bind` where a [link_simple_callable] as its first argument (otherwise, no inference could be made about the parameter type being "place-held")
-
-[heading Behavior]
-* If any constraints are violated, the result is undefined
-* The return type of [namespace_scoped]`bind` can be passed to any of the following:
-  * [namespace_scoped][^[link_args]]
-  * [namespace_scoped][^[link_arg_at]]
-  * [namespace_scoped][^[function_type]]
-  * [namespace_scoped][^[result_of]]
-* For convenience, the object returned by [namespace_scoped]`bind` serves as a wrapper around `std::bind`, forwarding from its `operator()` to a private member object constructed from `std::bind` in the original [namespace_scoped]`bind`
-
-[heading Notes]
-* [namespace_scoped]`bind` is the only feature of [libname] with non-constexpr behavior. However, the runtime behavior is only provided for convenience -- [namespace_scoped]`bind` is designed to be a metaprogramming tool, and may be used in unevaluated contexts.
-[heading Example 1]
-[import ../example/bind_1.cpp]
-[bind_1]
-[heading Example 2]
-[import ../example/bind_2.cpp]
-[bind_2]
-
-[heading See Also]
-  * [link_args]
-  * [link_arg_at]
-  * [function_type]
-  * [result_of]
-  
 [endsect]
 
 [section:ref_is_invokable is_invokable]
@@ -1497,7 +1422,6 @@ For `add_calling_convention` to work as-intended, you must:
 # `T` must be one of the following:
   * [link_signature]
   * [link_simple_fn_obj]
-  * [link_bind_expression]
 # Let `std::tuple<Args...>` represent [namespace_scoped][link_args]`<T>`
   * `Container<Args...>` must be a legal template instantiation.
 
@@ -1558,12 +1482,6 @@ For `add_calling_convention` to work as-intended, you must:
 *Otherwise, when `T` is a [link_simple_fn_obj], then:
   * Let `Args...` represent the parameter types in the signature of `decltype(&std::decay_t<T>::operator())`
   * Let `Return` represent the return type of `decltype(&std::decay_t<T>::operator())`
-  * `function_type<T>` aliases `Return(Args...)`
-*Otherwise, when `T` is a [link_bind_expression], then:
-  * Let `std::tuple<Args...>` represent [namespace_scoped][^[link_args]]`<T>`
-  * Let `bind_args...` represent the argument values that were passed to [namespace]`bind` which returned an instance of `T`
-  * Let `bind_result` represent the return value of `std::bind(bind_args...)`
-  * Let `Return` represent `decltype(bind_result(std::declval<Args>()...))`
   * `function_type<T>` aliases `Return(Args...)`
   
 [heading Example]
@@ -1851,7 +1769,6 @@ TODO
 [result_of]
 [endsect]
 
-[include make_function_example.qbk]
 [include interface_example.qbk]
 
 [/*********************************************************************]

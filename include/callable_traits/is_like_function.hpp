@@ -16,8 +16,7 @@ namespace callable_traits {
 
     template<typename T>
     inline constexpr auto is_like_function() {
-        return std::integral_constant<bool,
-            detail::function<T>::value>{};
+        return detail::bool_type<detail::function<T>::value>{};
     }
 
     template<typename T>

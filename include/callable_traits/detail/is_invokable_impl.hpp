@@ -19,7 +19,7 @@ namespace callable_traits {
             using result = decltype(test{}(::std::forward<T>(t), ::std::forward<Args>(args)...));
             using failure = detail::substitution_failure;
             using is_invalid_invoke = std::is_same<result, failure>;
-            return std::integral_constant<bool, !is_invalid_invoke::value>{};
+            return bool_type<!is_invalid_invoke::value>{};
         }
 
         template<typename T, typename... Args>
@@ -30,7 +30,7 @@ namespace callable_traits {
             using result = decltype(test{}(::std::declval<T>(), ::std::declval<Args>()...));
             using failure = detail::substitution_failure;
             using is_invalid_invoke = std::is_same<result, failure>;
-            return std::integral_constant<bool, !is_invalid_invoke::value>{};
+            return bool_type<!is_invalid_invoke::value>{};
         }
     }
 }

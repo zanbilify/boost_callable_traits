@@ -15,7 +15,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/fwd/pmf_fwd.hpp>
 #include <callable_traits/detail/fwd/function_fwd.hpp>
 #include <callable_traits/detail/fwd/function_object_fwd.hpp>
-#include <callable_traits/detail/bind_expression_traits.hpp>
 #include <type_traits>
 
 namespace callable_traits {
@@ -24,7 +23,6 @@ namespace callable_traits {
 
         template<typename T>
         using traits = typename CALLABLE_TRAITS_DISJUNCTION(
-            bind_expression_traits<shallow_decay<T>>,
             function_object<T>,
             function<T>,
             pmf<T>,

@@ -19,6 +19,7 @@ int main(){ return 0; }
 //[ interface_example
 
 #include <iostream>
+#include <typeinfo>
 
 #include "interface.hpp"
 

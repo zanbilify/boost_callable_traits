@@ -33,6 +33,8 @@ namespace callable_traits {
         // used as return type in failed SFINAE tests
         struct substitution_failure : std::false_type{};
 
+        template<bool Value>
+        using bool_type = std::integral_constant<bool, Value>;
 
         // shorthand for std::tuple_element
         template<std::size_t I, typename Tup>
@@ -47,7 +49,7 @@ namespace callable_traits {
             };
 
             template<std::size_t I, typename Tup>
-            struct weak_at_t<I, Tup, std::integral_constant<bool, I >= std::tuple_size<Tup>::value>>{
+            struct weak_at_t<I, Tup, bool_type<I >= std::tuple_size<Tup>::value>>{
                 using type = invalid_type;
             };
         }
@@ -65,7 +67,7 @@ namespace callable_traits {
         //polyfill for C++17 negation
         //TODO rename and move to polyfills folder
         template<typename BoolType>
-        using negate = std::integral_constant<bool, !BoolType::value>;
+        using negate = bool_type<!BoolType::value>;
 
 
         namespace util_detail {
@@ -132,7 +134,7 @@ namespace callable_traits {
         using add_member_pointer = T Class::*;
 
         template<typename Traits>
-        using can_accept_member_qualifiers = std::integral_constant<bool,
+        using can_accept_member_qualifiers = bool_type<
             Traits::is_function::value || Traits::has_member_qualifiers_function::value>;
         
         namespace util_detail {
@@ -154,7 +156,7 @@ namespace callable_traits {
 
 
         template<typename T, typename U = shallow_decay<T>>
-        using is_constexpr_constructible = std::integral_constant<bool,
+        using is_constexpr_constructible = bool_type<
             std::is_literal_type<U>::value && std::is_default_constructible<U>::value
         >;
 
@@ -197,9 +199,8 @@ namespace callable_traits {
 
         //returns std::true_type for pointers and smart pointers
         template<typename T>
-        using can_dereference = std::integral_constant<bool,
-            util_detail::can_dereference_t<T>::value
-        >;
+        using can_dereference = bool_type<
+            util_detail::can_dereference_t<T>::value>;
 
 
         namespace util_detail {
@@ -210,7 +211,7 @@ namespace callable_traits {
             };
 
             template<typename T>
-            struct generalize_t<T, std::integral_constant<bool,
+            struct generalize_t<T, bool_type<
                     can_dereference<T>::value && !is_reference_wrapper<T>::value
             >>{
                 using type = decltype(*std::declval<T>());

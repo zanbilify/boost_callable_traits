@@ -12,7 +12,6 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/utility.hpp>
-#include <callable_traits/detail/bind_expression_parser.hpp>
 #include <callable_traits/detail/function_object.hpp>
 #include <callable_traits/detail/function.hpp>
 #include <callable_traits/detail/pmf.hpp>

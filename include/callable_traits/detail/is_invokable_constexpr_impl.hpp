@@ -44,7 +44,7 @@ namespace callable_traits {
                 //generalize_if_dissimilar is used to abstract away the rules of INVOKE.
                 typename Obj = generalize_if_dissimilar<class_t, U&&>>
             auto operator()(P&& p, U&& u, Rgs&&... rgs) const -> if_integral_constant<P,
-                std::integral_constant<bool,
+                bool_type<
 
             // Where K = std::remove_reference_t<Obj>, CALLABLE_TRAITS_MAKE_CONSTEXPR(U&&)
             // resolves to a matching reference to a constexpr K object. Hence, K must be
@@ -74,12 +74,12 @@ namespace callable_traits {
             //see comments on specialization above
             template<typename T, typename... Rgs>
             auto operator()(T&& t, Rgs&&...) const -> if_not_integral_constant<T,
-                std::integral_constant<bool,
+                bool_type<
                     (CALLABLE_TRAITS_MAKE_CONSTEXPR(T&&)(CALLABLE_TRAITS_MAKE_CONSTEXPR(Rgs&&)...), true)>>;
 
             template<typename T, typename... Rgs, typename U = typename std::remove_reference<T>::type>
             auto operator()(T&& t, Rgs&&...) const -> if_integral_constant<T,
-                std::integral_constant<bool, (U::value(CALLABLE_TRAITS_MAKE_CONSTEXPR(Rgs&&)...), true)>>;
+                bool_type<(U::value(CALLABLE_TRAITS_MAKE_CONSTEXPR(Rgs&&)...), true)>>;
 
             auto operator()(...) const -> substitution_failure;
         };
@@ -100,7 +100,7 @@ namespace callable_traits {
             using test = test_invoke_constexpr<traits, Args&&...>;
             using result = decltype(test{}(::std::forward<T>(t), ::std::forward<Args>(args)...));
             using is_invalid_invoke = std::is_same<result, substitution_failure>;
-            return std::integral_constant<bool, !is_invalid_invoke::value>{};
+            return bool_type<!is_invalid_invoke::value>{};
         }
 
         template<bool, typename T, typename... Args>
@@ -114,7 +114,7 @@ namespace callable_traits {
             using test = test_invoke_constexpr<traits<T>, Args...>;
             using result = decltype(test{}( ::std::declval<T>(), ::std::declval<Args>()...));
             using is_invalid_invoke = std::is_same<result, substitution_failure>;
-            using type = std::integral_constant<bool, !is_invalid_invoke::value>;
+            using type = bool_type<!is_invalid_invoke::value>;
         };
 
 

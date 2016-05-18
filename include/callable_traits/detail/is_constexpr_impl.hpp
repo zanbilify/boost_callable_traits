@@ -123,7 +123,7 @@ namespace callable_traits {
             using result = decltype(test{}(::std::forward<T>(t)));
             using failure = substitution_failure;
             using is_not_constexpr = std::is_same<result, failure>;
-            return std::integral_constant<bool, !is_not_constexpr::value>{};
+            return bool_type<!is_not_constexpr::value>{};
         }
 
 #endif //ifdef CALLABLE_TRAITS_DISABLE_CONSTEXPR_CHECKS

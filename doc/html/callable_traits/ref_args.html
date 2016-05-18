@@ -41,7 +41,6 @@
       <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
       * <a class="link" href="glossary.html#callable_traits.glossary.ref_signature" title="Signature"><span class="green">Signature</span></a>
       * <a class="link" href="glossary.html#callable_traits.glossary.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>
-      * <a class="link" href="glossary.html#callable_traits.glossary.ref_bind_expression" title="BindExpression"><span class="green">BindExpression</span></a>
     </p>
 <h4>
 <a name="callable_traits.ref_args.h1"></a>
@@ -74,36 +73,6 @@
 <li class="listitem">
                 Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
                 represent the parameter types in the signature of <code class="computeroutput"><span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">decay_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="keyword">operator</span><span class="special">())</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">args</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-                aliases <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">...&gt;</span></code>
-              </li>
-</ul></div>
-        </li>
-<li class="listitem">
-          Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          <a class="link" href="glossary.html#callable_traits.glossary.ref_bind_expression" title="BindExpression"><span class="green">BindExpression</span></a>,
-          then:
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
-<li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">bind_args</span><span class="special">...</span></code>
-                represent the argument values that were passed to [namespace]<code class="computeroutput"><span class="identifier">bind</span></code> which returned an instance
-                of <code class="computeroutput"><span class="identifier">T</span></code>
-              </li>
-<li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">bind_result</span></code> represent
-                the return value of <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(</span><span class="identifier">bind_args</span><span class="special">...)</span></code>
-              </li>
-<li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
-                represent the "valid argument types" to <code class="computeroutput"><span class="identifier">bind_result</span></code>'s
-                <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
-                <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; "><li class="listitem">
-                      Note: the "valid argument types" are implied by the
-                      position of the <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">placeholders</span></code>
-                      objects
-                    </li></ul></div>
               </li>
 <li class="listitem">
                 <code class="computeroutput"><span class="identifier">args</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>

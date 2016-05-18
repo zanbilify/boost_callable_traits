@@ -16,7 +16,6 @@ callable_traits/ref_apply_return.html
 callable_traits/ref_arg_at.html
 callable_traits/ref_args.html
 callable_traits/ref_arity.html
-callable_traits/ref_bind.html
 callable_traits/ref_is_invokable.html
 callable_traits/ref_is_invokable_constexpr.html
 callable_traits/ref_clear_args.html
@@ -50,6 +49,5 @@ callable_traits/ref_push_front.html
 callable_traits/ref_pop_back.html
 callable_traits/ref_push_front0.html
 callable_traits/ref_result_of.html
-callable_traits/example_std_function_sugar.html
 callable_traits_interface_example.html
 callable_traits/contact.html

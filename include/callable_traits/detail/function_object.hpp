@@ -36,10 +36,9 @@ namespace callable_traits {
             using class_type = invalid_type;
             using invoke_type = invalid_type;
 
-            using is_function_object = std::integral_constant<bool,
-                std::is_class<shallow_decay<T>>::value>;
+            using is_function_object = typename std::is_class<shallow_decay<T>>::type;
 
-            using is_overloaded_function_object = std::integral_constant<bool,
+            using is_overloaded_function_object = bool_type<
                 is_function_object::value
                 && !has_normal_call_operator<shallow_decay<T>>::value>;
 
