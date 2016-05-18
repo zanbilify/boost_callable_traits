@@ -95,7 +95,16 @@ matrix:
         apt:
           packages: ["clang-3.8"]
           sources: *sources
-          
+
+    # GCC 6
+    - env: UNIT_TESTS=true COMPILER=g++-6 STDLIB=libstdc++ BOOST_VERSION=default
+      os: linux
+      compiler: g++
+      addons:
+        apt:
+          packages: ["gcc-6"]
+          sources: *sources
+
     # GCC 5.2
     - env: UNIT_TESTS=true COMPILER=g++-5 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
