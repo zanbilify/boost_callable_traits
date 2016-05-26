@@ -15,7 +15,6 @@ callable_traits/ref_apply_member_pointer.html
 callable_traits/ref_apply_return.html
 callable_traits/ref_arg_at.html
 callable_traits/ref_args.html
-callable_traits/ref_is_invokable.html
 callable_traits/ref_clear_args.html
 callable_traits/ref_insert_args.html
 callable_traits/ref_replace_args.html

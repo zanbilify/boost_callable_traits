@@ -30,7 +30,7 @@ namespace callable_traits {
             using arg_types = typename Base::non_invoke_arg_types;
 
             static constexpr const bool value =
-                std::is_class<shallow_decay<T>>::value && !is_integral_constant<type>::value;
+                std::is_class<shallow_decay<T>>::value;
 
             using traits = function_object;
             using class_type = invalid_type;

@@ -89,7 +89,6 @@
 [template link_apply_return[][link callable_traits.ref_apply_return [^apply_return]]]
 [template link_arg_at[][link callable_traits.ref_arg_at [^arg_at]]]
 [template link_args[][link callable_traits.ref_args [^args]]]
-[template link_is_invokable[][link callable_traits.ref_is_invokable [^is_invokable]]]
 [template link_clear_args[][link callable_traits.ref_clear_args [^clear_args]]]
 [template link_expand_args[][link callable_traits.ref_expand_args [^expand_args]]]
 [template link_function_type[][link callable_traits.ref_function_type [^function_type]]]
@@ -344,7 +343,7 @@ There are real reasons to write code like this, but they are few and far between
 
 [*4.] [namespace_scoped][link_arg_at]`<2, Callable>` is more flexible than `typename boost::function_traits<Callable>::arg3_type`.
 
-[*5.] [link_is_invokable] is used to test `INVOKE`-ability at compile-time, with either value or type semantics
+[*5.] (TODO - fill this in)
 
 [*6.] (TODO - fill this in)
 
@@ -716,7 +715,7 @@ The [libname] interface is also broken down by trait into individual header file
 [endsect]
 
 
-[section Parameters]
+[section Parameters and Return Types]
 
 * [include_header [link_args]]
 * [include_header [link_arg_at]]
@@ -727,22 +726,10 @@ The [libname] interface is also broken down by trait into individual header file
 * [include_header [link_push_back]]
 * [include_header [link_push_front]]
 
-[endsect]
-
-
-[section Return Types]
-
+* [include_header [link_function_type]]
 * [include_header [link_apply_return]]
 * [include_header [link_result_of]]
 * [include_header [link_has_void_return]]
-
-[endsect]
-
-
-[section ['INVOKE]]
-
-* [include_header [link_is_invokable]]
-* [include_header [link_function_type]]
 
 [endsect]
 
@@ -1180,40 +1167,6 @@ For `add_calling_convention` to work as-intended, you must:
 * [link_expand_args]
 
 [endsect][/secttion:ref_args]
-
-
-[section:ref_is_invokable is_invokable]
-
-    namespace ``[lib_namespace]`` {
-	
-		template<typename T, typename... Args>
-        inline constexpr auto is_invokable(T&&, Args&&...);
-		
-	}
-
-[heading Constraints]
-* When `std::decay_t<T>` is a class/struct with a templated `operator()`, it's invocation must be SFINAE-friendly with respect to `Args&&...`
-* No other constraints
-
-[heading Behavior]
-* If all arguments to `is_invokable` can legally be forwarded to [invoke], then an instance of `std::true_type` is returned
-* Otherwise, an instance of `std::false_type` is returned
-
-[heading Example - Function Object]
-[import ../example/is_invokable_function_object.cpp]
-[is_invokable_function_object]
-[heading Example - Member Function Pointer]
-[import ../example/is_invokable_member_function_pointer.cpp]
-[is_invokable_member_function_pointer]
-[heading Example - Function Pointer]
-[import ../example/is_invokable_function_pointer.cpp]
-[is_invokable_function_pointer]
-[heading Example - Function Reference]
-[import ../example/is_invokable_function_reference.cpp]
-[is_invokable_function_reference]
-
-[endsect]
-
 
 [section:ref_clear_args clear_args]
 
