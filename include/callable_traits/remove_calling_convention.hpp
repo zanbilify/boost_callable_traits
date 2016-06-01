@@ -16,7 +16,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct remove_calling_convention_error {
+        struct remove_calling_convention_error : sfinae_error {
 
             static_assert(Sfinae,
                 "Unable to remove calling convention from type T in"

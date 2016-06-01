@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct push_back_error {
+        struct push_back_error : sfinae_error {
 
             static_assert(Sfinae,
                 "callable_traits::push_back<T, Args...> is "

@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct add_varargs_error {
+        struct add_varargs_error : sfinae_error {
 
             static_assert(Sfinae,
                 "callable_traits::add_varargs<T> is not "
@@ -28,9 +28,15 @@ namespace callable_traits {
     }
 
     template<typename T>
-    using add_varargs = detail::fail_if_invalid<
-        typename detail::traits<T>::add_varargs,
-        detail::add_varargs_error<true>>;
+    struct add_varargs {
+
+        using type = detail::fail_if_invalid<
+            typename detail::traits<T>::add_varargs,
+            detail::add_varargs_error<true>>;
+    };
+
+    template<typename T>
+    using add_varargs_t = typename add_varargs<T>::type;
 }
 
 #endif

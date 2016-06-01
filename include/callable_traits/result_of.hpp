@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct result_of_error {
+        struct result_of_error : sfinae_error {
 
             static_assert(Sfinae,
                 "callable_traits::result_of<T> is not "

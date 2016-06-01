@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct args_error {
+        struct args_error : sfinae_error {
 
             static_assert(Sfinae,
                 "Could not determine the parameters for "
@@ -29,9 +29,15 @@ namespace callable_traits {
     }
 
     template<typename T>
-    using args = detail::fail_if_invalid<
-        typename detail::traits<T>::arg_types,
-        detail::args_error<true>>;
+    struct args {
+
+        using type = detail::fail_if_invalid<
+            typename detail::traits<T>::arg_types,
+            detail::args_error<true>>;
+    };
+
+    template<typename T>
+    using args_t = typename args<T>::type;
 }
 
 #endif //#ifndef CALLABLE_TRAITS_ARGS_HPP

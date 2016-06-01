@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct apply_return_error {
+        struct apply_return_error : sfinae_error {
 
             static_assert(Sfinae,
                 "callable_traits::apply_return<T, R> is "
@@ -25,21 +25,27 @@ namespace callable_traits {
         };
 
         template<typename T, typename R>
-        struct apply_return_t {
+        struct apply_return_helper {
             using type = typename detail::traits<T>::template apply_return<R>;
         };
 
         //special case
         template<typename... Args, typename R>
-        struct apply_return_t<std::tuple<Args...>, R> {
+        struct apply_return_helper<std::tuple<Args...>, R> {
             using type = R(Args...);
         };
     }
 
     template<typename T, typename R>
-    using apply_return = detail::fail_if_invalid<
-        typename detail::apply_return_t<T, R>::type,
-        detail::apply_return_error<true>>;
+    struct apply_return {
+
+        using type = detail::fail_if_invalid<
+            typename detail::apply_return_helper<T, R>::type,
+            detail::apply_return_error<true>>;
+    };
+
+    template<typename T, typename R>
+    using apply_return_t = typename apply_return<T, R>::type;
 }
 
 #endif

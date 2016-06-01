@@ -18,14 +18,14 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae, typename Tag>
-        struct add_calling_convention_error {
+        struct add_calling_convention_error : sfinae_error {
 
             static_assert(Sfinae,
                 "Unknown calling convention. Expected a calling convention tag.");
         };
         
         template<bool Sfinae>
-        struct add_calling_convention_error<Sfinae, stdcall_tag> {
+        struct add_calling_convention_error<Sfinae, stdcall_tag> : sfinae_error {
 
             #ifdef CALLABLE_TRAITS_ENABLE_STDCALL
             static_assert(Sfinae,
@@ -40,7 +40,7 @@ namespace callable_traits {
         };
         
         template<bool Sfinae>
-        struct add_calling_convention_error<Sfinae, fastcall_tag> {
+        struct add_calling_convention_error<Sfinae, fastcall_tag> : sfinae_error {
 
             #ifdef CALLABLE_TRAITS_ENABLE_FASTCALL
             static_assert(Sfinae,
@@ -55,7 +55,7 @@ namespace callable_traits {
         };
         
         template<bool Sfinae>
-        struct add_calling_convention_error<Sfinae, cdecl_tag> {
+        struct add_calling_convention_error<Sfinae, cdecl_tag> : sfinae_error {
 
             #ifdef CALLABLE_TRAITS_ENABLE_CDECL
             static_assert(Sfinae,
@@ -70,7 +70,7 @@ namespace callable_traits {
         };
         
         template<bool Sfinae>
-        struct add_calling_convention_error<Sfinae, pascal_tag> {
+        struct add_calling_convention_error<Sfinae, pascal_tag> : sfinae_error {
 
 #ifdef CALLABLE_TRAITS_ENABLE_PASCAL
             static_assert(Sfinae,

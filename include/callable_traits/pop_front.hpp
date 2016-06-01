@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct pop_front_error {
+        struct pop_front_error : sfinae_error {
 
             static_assert(Sfinae,
                 "callable_traits::push_back<T, Args...> is "
@@ -26,7 +26,7 @@ namespace callable_traits {
     }
 
     template<typename T, std::size_t Count = 1>
-    using pop_front = detail::fail_if_invalid<
+    struct args_pop_front = detail::fail_if_invalid<
         typename detail::traits<T>::template pop_front<Count>,
         detail::pop_front_error<true>>;
 }

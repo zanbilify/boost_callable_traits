@@ -18,7 +18,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct copy_qualifiers_error {
+        struct copy_qualifiers_error : sfinae_error {
 
             static_assert(Sfinae,
                 "TODO: error message for callable_traits::copy_qualifiers");
@@ -26,9 +26,16 @@ namespace callable_traits {
     }
 
     template<typename To, typename From>
-    using copy_qualifiers = detail::fail_if_invalid<
-        typename detail::copy_qualifiers_impl<detail::traits<To>, detail::traits<From>>::type,
-        detail::copy_qualifiers_error<true>>;
+    struct copy_qualifiers {
+
+        using type = detail::fail_if_invalid<
+            typename detail::copy_qualifiers_impl<
+                detail::traits<To>, detail::traits<From>>::type,
+            detail::copy_qualifiers_error<true>>;
+    };
+
+    template<typename To, typename From>
+    using copy_qualifiers_t = typename copy_qualifiers<To, From>::type;
 }
 
 #endif //#ifndef CALLABLE_TRAITS_COPY_QUALIFIERS_HPP

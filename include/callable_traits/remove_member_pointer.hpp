@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct remove_member_pointer_error {
+        struct remove_member_pointer_error : sfinae_error {
 
             static_assert(Sfinae,
                 "callable_traits::remove_member_pointer<T> "

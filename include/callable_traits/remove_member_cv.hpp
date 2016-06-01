@@ -18,7 +18,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct remove_member_cv_error {
+        struct remove_member_cv_error : sfinae_error {
 
             static_assert(Sfinae,
                 "callable_traits::remove_member_cv<T> "

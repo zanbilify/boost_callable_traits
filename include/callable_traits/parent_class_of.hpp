@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct parent_class_of_error {
+        struct parent_class_of_error : sfinae_error {
 
             static_assert(Sfinae,
                 "TODO: error message for callable_traits::parent_class_of");
@@ -25,9 +25,16 @@ namespace callable_traits {
     }
 
     template<typename T>
-    using parent_class_of = detail::fail_if_invalid<
-        typename detail::traits<T>::class_type,
-        detail::parent_class_of_error<true>>;
+    struct parent_class_of {
+
+        using type = detail::fail_if_invalid<
+            typename detail::traits<T>::class_type,
+            detail::parent_class_of_error<true>>;
+    };
+
+    template<typename T>
+    using parent_class_of_t =
+        typename parent_class_of<T>::type;
 }
 
 #endif //#ifndef CALLABLE_TRAITS_PARENT_CLASS_OF_HPP

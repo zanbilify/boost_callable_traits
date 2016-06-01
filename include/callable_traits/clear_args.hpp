@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct clear_args_error {
+        struct clear_args_error : sfinae_error {
 
             static_assert(Sfinae,
                 "callable_traits::clear_args<T> is "
@@ -26,9 +26,14 @@ namespace callable_traits {
     }
 
     template<typename T>
-    using clear_args = detail::fail_if_invalid<
+    struct clear_args {
+
+        using type = detail::fail_if_invalid<
         typename detail::traits<T>::clear_args,
         detail::clear_args_error<true>>;
-}
+    };
+
+    template<typename T>
+    using clear_args_t = typename clear_args<T>::type;
 
 #endif //CALLABLE_TRAITS_CLEAR_ARGS_HPP

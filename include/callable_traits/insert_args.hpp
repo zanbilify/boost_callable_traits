@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct insert_args_error {
+        struct insert_args_error : sfinae_error {
 
             static_assert(Sfinae,
                 "callable_traits::push_back<T, Args...> is "
@@ -26,9 +26,15 @@ namespace callable_traits {
     }
 
     template<std::size_t Index, typename T, typename... Args>
-    using insert_args = detail::fail_if_invalid<
-        typename detail::traits<T>::template insert_args<Index, Args...>,
-        detail::insert_args_error<true>>;
+    struct insert_args {
+        using type = detail::fail_if_invalid<
+            typename detail::traits<T>::template insert_args<Index, Args...>,
+            detail::insert_args_error<true>>;
+    };
+
+    template<std::size_t Index, typename T, typename... Args>
+    using insert_args_t =
+        typename insert_args<Index, T, Args...>::type;
 }
 
 #endif //CALLABLE_TRAITS_INSERT_ARGS_HPP

@@ -26,9 +26,15 @@ namespace callable_traits {
     }
 
     template<typename T>
-    using add_member_const = detail::fail_if_invalid<
-        typename detail::traits<T>::add_member_const,
-        detail::add_member_const_error<true>>;
+    struct add_member_const {
+
+        using type = detail::fail_if_invalid<
+            typename detail::traits<T>::add_member_const,
+            detail::add_member_const_error<true>>;
+    };
+
+    template<typename T>
+    using add_member_const_t = typename add_member_const<T>::type;
 }
 
 #endif

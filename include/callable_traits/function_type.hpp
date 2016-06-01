@@ -28,9 +28,15 @@ namespace callable_traits {
     }
 
     template<typename T>
-    using function_type = detail::fallback_if_invalid<
-        typename detail::traits<T>::function_type,
-        typename detail::make_function<T>::type>;
+    struct function_type {
+
+        using type = detail::fallback_if_invalid<
+            typename detail::traits<T>::function_type,
+            typename detail::make_function<T>::type>;
+    };
+
+    template<typename T>
+    using function_type_t = typename function_type<T>::type;
 }
 
 #endif

@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct qualified_parent_class_of_error {
+        struct qualified_parent_class_of_error : sfinae_error {
 
             static_assert(Sfinae,
                 "TODO: error message for callable_traits::qualified_parent_class_of");

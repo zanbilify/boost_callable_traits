@@ -18,7 +18,6 @@ namespace callable_traits {
     template<typename T>
     inline constexpr auto
     has_varargs() {
-
         return typename detail::traits<T>::has_varargs{};
     }
 

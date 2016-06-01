@@ -47,6 +47,11 @@ namespace callable_traits {
             struct weak_at_t<I, Tup, bool_type<I >= std::tuple_size<Tup>::value>>{
                 using type = invalid_type;
             };
+
+            template<std::size_t I>
+            struct weak_at_t<I, invalid_type, std::true_type>{
+                using type = invalid_type;
+            };
         }
 
         // bounds-checked version of at (see above)
@@ -100,11 +105,18 @@ namespace callable_traits {
         using remove_member_pointer =
             typename util_detail::remove_member_pointer_t<T>::type;
 
+        struct sfinae_error {
+            struct _ {};
+        };
+
         namespace util_detail {
             template<typename T, bool Value>
             struct type_value {
                 static constexpr const bool value = Value;
-                using type = T;
+
+                struct _ {
+                    using type = T;
+                };
             };
         }
 
@@ -112,7 +124,7 @@ namespace callable_traits {
         using fail_if_invalid = typename CALLABLE_TRAITS_DISJUNCTION(
             util_detail::type_value<T, !std::is_same<T, invalid_type>::value>,
             FailType
-        )::type;
+        )::_::type;
 
         template<typename T, typename Fallback>
         using fallback_if_invalid = typename std::conditional<

@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct expand_args_error {
+        struct expand_args_error : sfinae_error {
 
             static_assert(Sfinae,
                 "callable_traits::expand_args<T, U> is not a valid operation.");
@@ -25,9 +25,15 @@ namespace callable_traits {
     }
 
     template<typename T, template<class...> class Container>
-    using expand_args = detail::fail_if_invalid<
+    struct expand_args {
+
+        using type = detail::fail_if_invalid<
         typename detail::traits<T>::template expand_args<Container>,
         detail::expand_args_error<true>>;
+    };
+
+    template<typename T, template<class...> class Container>
+    using expand_args_t = typename expand_args<T, Container>::type;
 }
 
 #endif //CALLABLE_TRAITS_EXPAND_ARGS_HPP

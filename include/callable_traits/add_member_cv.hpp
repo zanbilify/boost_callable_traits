@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct add_member_cv_error {
+        struct add_member_cv_error : sfinae_error {
 
             static_assert(Sfinae,
                 "callable_traits::add_member_cv<T> "
@@ -26,9 +26,15 @@ namespace callable_traits {
     }
 
     template<typename T>
-    using add_member_cv = detail::fail_if_invalid<
+    struct add_member_cv {
+
+        using type = detail::fail_if_invalid<
         typename detail::traits<T>::add_member_cv,
         detail::add_member_cv_error<true>>;
+    };
+
+    template<typename T>
+    using add_member_cv_t = typename add_member_cv<T>::type;
 }
 
 #endif
