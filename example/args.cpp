@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 int main(){ return 0; }
 #else
 
-//[ args_t
+//[ args
 #include <type_traits>
 #include <memory>
 #include <callable_traits/callable_traits.hpp>

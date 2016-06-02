@@ -93,10 +93,8 @@
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">Expect</span><span class="special">&gt;</span>
 <span class="keyword">void</span> <span class="identifier">test</span><span class="special">(){</span>
-    <span class="comment">// this example shows how callable_traits::args</span>
-    <span class="comment">// bevaves consistently for many different types</span>
-    <span class="keyword">using</span> <span class="identifier">args</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">args</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">args</span><span class="special">,</span> <span class="identifier">Expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+    <span class="keyword">using</span> <span class="identifier">args_t</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">args_t</span><span class="special">,</span> <span class="identifier">Expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 <span class="special">}</span>
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>

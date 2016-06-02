@@ -9,7 +9,7 @@ Distributed under the Boost Software License, Version 1.0.
 int main(){ return 0; }
 #else
 
-//[ add_member_lvalue_reference_t
+//[ add_member_lvalue_reference
 #include <type_traits>
 #include <callable_traits/add_member_lvalue_reference.hpp>
 
