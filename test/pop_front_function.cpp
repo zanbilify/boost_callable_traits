@@ -19,21 +19,21 @@ int main() {
 
     {
         using f = sig<N<0>, N<1>, N<2>, N<3>, N<4>>;
-        using test = ct::pop_front<f>;
+        using test = ct::args_pop_front_t<f>;
         using expect = sig<N<1>, N<2>, N<3>, N<4>>;
         CT_ASSERT(std::is_same<test, expect>::value);
     }
 
     {
         using f = sig<N<0>, N<1>, N<2>, N<3>, N<4>>;
-        using test = ct::pop_front<f, 2>;
+        using test = ct::args_pop_front_t<f, 2>;
         using expect = sig<N<2>, N<3>, N<4>>;
         CT_ASSERT(std::is_same<test, expect>::value);
     }
 
     {
         using f = sig<N<0>, N<1>, N<2>, N<3>, N<4>>;
-        using test = ct::pop_front<f, 5>;
+        using test = ct::args_pop_front_t<f, 5>;
         using expect = sig<>;
         CT_ASSERT(std::is_same<test, expect>::value);
     }

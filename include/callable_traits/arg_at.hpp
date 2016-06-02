@@ -11,7 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_ARG_AT_HPP
 
 #include <callable_traits/args.hpp>
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 #include <tuple>
 
 namespace callable_traits {

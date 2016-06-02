@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_REMOVE_VARARGS_HPP
 #define CALLABLE_TRAITS_REMOVE_VARARGS_HPP
 
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 
@@ -26,9 +26,16 @@ namespace callable_traits {
     }
 
     template<typename T>
-    using remove_varargs = detail::fail_if_invalid<
+    struct remove_varargs {
+
+        using type = detail::fail_if_invalid<
             typename detail::traits<T>::remove_varargs,
             detail::remove_varargs_error<true>>;
+    };
+
+    template<typename T>
+    using remove_varargs_t =
+        typename remove_varargs<T>::type;
 }
 
 #endif

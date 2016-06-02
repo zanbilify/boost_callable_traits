@@ -11,12 +11,17 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_SET_QUALIFIERS_HPP
 
 #include <callable_traits/detail/set_qualifiers_impl.hpp>
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 
     template<typename T, flags Flags>
-    using set_qualifiers = typename detail::set_qualifiers_impl<T, Flags>::type;
+    struct set_qualifiers {
+        using type = typename detail::set_qualifiers_impl<T, Flags>::type;
+    };
+
+    template<typename T, flags Flags>
+    using set_qualifiers_t = typename set_qualifiers<T, Flags>::type;
 }
 
 #endif //#ifndef CALLABLE_TRAITS_SET_QUALIFIERS_HPP

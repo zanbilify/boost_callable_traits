@@ -12,7 +12,7 @@ namespace ct = callable_traits;
 int main() {
 
     using f = void(int, char);
-    using test = ct::push_front<f, long, void*>;
+    using test = ct::args_push_front_t<f, long, void*>;
     using expect = void(long, void*, int, char);
     static_assert(std::is_same<test, expect>::value, "");
 }

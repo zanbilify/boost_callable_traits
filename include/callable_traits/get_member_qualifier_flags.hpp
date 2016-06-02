@@ -11,7 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_GET_MEMBER_QUALIFIER_FLAGS_HPP
 #define CALLABLE_TRAITS_GET_MEMBER_QUALIFIER_FLAGS_HPP
 
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 #include <type_traits>
 #include <cstdint>
 

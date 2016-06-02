@@ -12,7 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/utility.hpp>
 #include <callable_traits/detail/calling_conventions.hpp>
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 

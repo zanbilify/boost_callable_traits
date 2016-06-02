@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_REMOVE_MEMBER_CV_HPP
 #define CALLABLE_TRAITS_REMOVE_MEMBER_CV_HPP
 
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 
 namespace callable_traits {
@@ -27,9 +27,16 @@ namespace callable_traits {
     }
 
     template<typename T>
-    using remove_member_cv = detail::fail_if_invalid<
+    struct remove_member_cv {
+
+        using type = detail::fail_if_invalid<
             typename detail::traits<T>::remove_member_cv,
             detail::remove_member_cv_error<true>>;
+    };
+
+    template<typename T>
+    using remove_member_cv_t =
+        typename remove_member_cv<T>::type;
 }
 
 #endif

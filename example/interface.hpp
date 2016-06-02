@@ -66,7 +66,7 @@ namespace intrfc {
         // qualified_parent_class_of yields a reference type which is qualified
         // according to the member function type.
         using context =
-            std::remove_reference_t<ct::qualified_parent_class_of<Pmf>>;
+            std::remove_reference_t<ct::qualified_parent_class_of_t<Pmf>>;
 
         template<typename... Args>
         struct member_wrapper {
@@ -79,10 +79,10 @@ namespace intrfc {
 
         // removing the member pointer so that expand_args below doesn't include
         // the INVOKE-required object argument
-        using abominable_function_type = ::intrfc::ct::remove_member_pointer<Pmf>;
+        using abominable_function_type = ::intrfc::ct::remove_member_pointer_t<Pmf>;
 
         // expand_args is used to expand the argument types into member_wrapper
-        using wrapper = ::intrfc::ct::expand_args<
+        using wrapper = ::intrfc::ct::expand_args_t<
             abominable_function_type, member_wrapper>;
     };
 
@@ -158,11 +158,11 @@ struct interface_x_detail {
                 struct member_info<U, member_type, true> {
 
                     using ptr_type = member_type U::*;
-                    using result_type = ::intrfc::ct::result_of<ptr_type>;
+                    using result_type = ::intrfc::ct::result_of_t<ptr_type>;
 
                     // The first argument of this function type is a qualified U
                     // reference, because function_type is defined in terms of INVOKE
-                    using function_type = ::intrfc::ct::function_type<ptr_type>;
+                    using function_type = ::intrfc::ct::function_type_t<ptr_type>;
 
                     // we will use these later to correctly re-construct our forwarding
                     // interface function
@@ -172,7 +172,7 @@ struct interface_x_detail {
                     // overwriting the first argument with void*, "erasing" the
                     // qualified U reference. We then make it a function pointer.
                     using type_erased_ptr =
-                        ::intrfc::ct::replace_args<0, function_type, void*> *;
+                        ::intrfc::ct::replace_args_t<0, function_type, void*> *;
                 };
 
                 // these aliases simply make later code easier to follow
@@ -212,14 +212,14 @@ struct interface_x_detail {
                 struct member_info<U, member_type, true> {
 
                     using ptr_type = member_type U::*;
-                    using result_type = ::intrfc::ct::result_of<ptr_type>;
-                    using function_type = ::intrfc::ct::function_type<ptr_type>;
+                    using result_type = ::intrfc::ct::result_of_t<ptr_type>;
+                    using function_type = ::intrfc::ct::function_type_t<ptr_type>;
 
                     using qualifiers =
                         decltype(::intrfc::ct::get_member_qualifier_flags<ptr_type>());
 
                     using type_erased_ptr =
-                        ::intrfc::ct::replace_args<0, function_type, void *> *;
+                        ::intrfc::ct::replace_args_t<0, function_type, void *> *;
                 };
 
                 using info = member_info<T>;
@@ -335,11 +335,11 @@ struct interface_x_detail {
     template <typename Ignored>
     struct base<0, Ignored> {
 
-        using function_type = ::intrfc::ct::function_type<
+        using function_type = ::intrfc::ct::function_type_t<
             typename interface_root::vtable::pmf0>;
 
-        using impl = ::intrfc::ct::expand_args<
-            ::intrfc::ct::pop_front<function_type>,
+        using impl = ::intrfc::ct::expand_args_t<
+            ::intrfc::ct::args_pop_front_t<function_type>,
             base_impl0>;
 
         using qualifiers =
@@ -412,11 +412,11 @@ struct interface_x_detail {
     template <typename Ignored>
     struct base<1, Ignored> {
 
-        using function_type = ::intrfc::ct::function_type<
+        using function_type = ::intrfc::ct::function_type_t<
             typename interface_root::vtable::pmf1>;
 
-        using impl = ::intrfc::ct::expand_args<
-            ::intrfc::ct::pop_front<function_type>,
+        using impl = ::intrfc::ct::expand_args_t<
+            ::intrfc::ct::args_pop_front_t<function_type>,
             base_impl1>;
 
         using qualifiers =
@@ -578,14 +578,14 @@ struct BOOST_PP_CAT(member_info, i) {                                  \
     struct member_info <U, member_type, true> {                        \
                                                                        \
         using ptr_type = member_type U::*;                             \
-        using result_type = ::intrfc::ct::result_of<ptr_type>;         \
-        using function_type = ::intrfc::ct::function_type<ptr_type>;   \
+        using result_type = ::intrfc::ct::result_of_t<ptr_type>;       \
+        using function_type = ::intrfc::ct::function_type_t<ptr_type>; \
                                                                        \
         using qualifiers = decltype(                                   \
             ::intrfc::ct::get_member_qualifier_flags<ptr_type>());     \
                                                                        \
         using type_erased_ptr =                                        \
-            ::intrfc::ct::replace_args<0, function_type, void*> *;     \
+            ::intrfc::ct::replace_args_t<0, function_type, void*> *;   \
     };                                                                 \
                                                                        \
     using info = member_info<T>;                                       \
@@ -633,11 +633,11 @@ struct BOOST_PP_CAT(base_impl, i) {                                    \
 template <typename Ignored>                                            \
 struct base<i, Ignored> {                                              \
                                                                        \
-    using function_type = ::intrfc::ct::function_type<                 \
+    using function_type = ::intrfc::ct::function_type_t<               \
         typename interface_root::vtable::BOOST_PP_CAT(pmf, i)>;        \
                                                                        \
-    using impl = ::intrfc::ct::expand_args<                            \
-        ::intrfc::ct::pop_front<function_type>,                        \
+    using impl = ::intrfc::ct::expand_args_t<                          \
+        ::intrfc::ct::args_pop_front_t<function_type>,                 \
         BOOST_PP_CAT(base_impl, i)>;                                   \
                                                                        \
     using qualifiers =                                                 \

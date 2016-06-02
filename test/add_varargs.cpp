@@ -54,31 +54,31 @@ int main() {
         using va_cvl = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile LREF;
         using va_cvr = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile RREF;
 
-        CT_ASSERT(std::is_same<va_f,   ct::add_varargs<f>>{});
-        CT_ASSERT(std::is_same<va_l,   ct::add_varargs<l>>{});
-        CT_ASSERT(std::is_same<va_r,   ct::add_varargs<r>>{});
-        CT_ASSERT(std::is_same<va_c,   ct::add_varargs<c>>{});
-        CT_ASSERT(std::is_same<va_cl,  ct::add_varargs<cl>>{});
-        CT_ASSERT(std::is_same<va_cr,  ct::add_varargs<cr>>{});
-        CT_ASSERT(std::is_same<va_v,   ct::add_varargs<v>>{});
-        CT_ASSERT(std::is_same<va_vl,  ct::add_varargs<vl>>{});
-        CT_ASSERT(std::is_same<va_vr,  ct::add_varargs<vr>>{});
-        CT_ASSERT(std::is_same<va_cv,  ct::add_varargs<cv>>{});
-        CT_ASSERT(std::is_same<va_cvl, ct::add_varargs<cvl>>{});
-        CT_ASSERT(std::is_same<va_cvr, ct::add_varargs<cvr>>{});
+        CT_ASSERT(std::is_same<va_f,   ct::add_varargs_t<f>>{});
+        CT_ASSERT(std::is_same<va_l,   ct::add_varargs_t<l>>{});
+        CT_ASSERT(std::is_same<va_r,   ct::add_varargs_t<r>>{});
+        CT_ASSERT(std::is_same<va_c,   ct::add_varargs_t<c>>{});
+        CT_ASSERT(std::is_same<va_cl,  ct::add_varargs_t<cl>>{});
+        CT_ASSERT(std::is_same<va_cr,  ct::add_varargs_t<cr>>{});
+        CT_ASSERT(std::is_same<va_v,   ct::add_varargs_t<v>>{});
+        CT_ASSERT(std::is_same<va_vl,  ct::add_varargs_t<vl>>{});
+        CT_ASSERT(std::is_same<va_vr,  ct::add_varargs_t<vr>>{});
+        CT_ASSERT(std::is_same<va_cv,  ct::add_varargs_t<cv>>{});
+        CT_ASSERT(std::is_same<va_cvl, ct::add_varargs_t<cvl>>{});
+        CT_ASSERT(std::is_same<va_cvr, ct::add_varargs_t<cvr>>{});
 
-        CT_ASSERT(std::is_same<va_f,   ct::add_varargs<va_f>>{});
-        CT_ASSERT(std::is_same<va_l,   ct::add_varargs<va_l>>{});
-        CT_ASSERT(std::is_same<va_r,   ct::add_varargs<va_r>>{});
-        CT_ASSERT(std::is_same<va_c,   ct::add_varargs<va_c>>{});
-        CT_ASSERT(std::is_same<va_cl,  ct::add_varargs<va_cl>>{});
-        CT_ASSERT(std::is_same<va_cr,  ct::add_varargs<va_cr>>{});
-        CT_ASSERT(std::is_same<va_v,   ct::add_varargs<va_v>>{});
-        CT_ASSERT(std::is_same<va_vl,  ct::add_varargs<va_vl>>{});
-        CT_ASSERT(std::is_same<va_vr,  ct::add_varargs<va_vr>>{});
-        CT_ASSERT(std::is_same<va_cv,  ct::add_varargs<va_cv>>{});
-        CT_ASSERT(std::is_same<va_cvl, ct::add_varargs<va_cvl>>{});
-        CT_ASSERT(std::is_same<va_cvr, ct::add_varargs<va_cvr>>{});
+        CT_ASSERT(std::is_same<va_f,   ct::add_varargs_t<va_f>>{});
+        CT_ASSERT(std::is_same<va_l,   ct::add_varargs_t<va_l>>{});
+        CT_ASSERT(std::is_same<va_r,   ct::add_varargs_t<va_r>>{});
+        CT_ASSERT(std::is_same<va_c,   ct::add_varargs_t<va_c>>{});
+        CT_ASSERT(std::is_same<va_cl,  ct::add_varargs_t<va_cl>>{});
+        CT_ASSERT(std::is_same<va_cr,  ct::add_varargs_t<va_cr>>{});
+        CT_ASSERT(std::is_same<va_v,   ct::add_varargs_t<va_v>>{});
+        CT_ASSERT(std::is_same<va_vl,  ct::add_varargs_t<va_vl>>{});
+        CT_ASSERT(std::is_same<va_vr,  ct::add_varargs_t<va_vr>>{});
+        CT_ASSERT(std::is_same<va_cv,  ct::add_varargs_t<va_cv>>{});
+        CT_ASSERT(std::is_same<va_cvl, ct::add_varargs_t<va_cvl>>{});
+        CT_ASSERT(std::is_same<va_cvr, ct::add_varargs_t<va_cvr>>{});
     }
 
     {
@@ -108,31 +108,31 @@ int main() {
         using va_cvl = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const volatile LREF;
         using va_cvr = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const volatile RREF;
 
-        CT_ASSERT(std::is_same<va_f,   ct::add_varargs<f>>{});
-        CT_ASSERT(std::is_same<va_l,   ct::add_varargs<l>>{});
-        CT_ASSERT(std::is_same<va_r,   ct::add_varargs<r>>{});
-        CT_ASSERT(std::is_same<va_c,   ct::add_varargs<c>>{});
-        CT_ASSERT(std::is_same<va_cl,  ct::add_varargs<cl>>{});
-        CT_ASSERT(std::is_same<va_cr,  ct::add_varargs<cr>>{});
-        CT_ASSERT(std::is_same<va_v,   ct::add_varargs<v>>{});
-        CT_ASSERT(std::is_same<va_vl,  ct::add_varargs<vl>>{});
-        CT_ASSERT(std::is_same<va_vr,  ct::add_varargs<vr>>{});
-        CT_ASSERT(std::is_same<va_cv,  ct::add_varargs<cv>>{});
-        CT_ASSERT(std::is_same<va_cvl, ct::add_varargs<cvl>>{});
-        CT_ASSERT(std::is_same<va_cvr, ct::add_varargs<cvr>>{});
+        CT_ASSERT(std::is_same<va_f,   ct::add_varargs_t<f>>{});
+        CT_ASSERT(std::is_same<va_l,   ct::add_varargs_t<l>>{});
+        CT_ASSERT(std::is_same<va_r,   ct::add_varargs_t<r>>{});
+        CT_ASSERT(std::is_same<va_c,   ct::add_varargs_t<c>>{});
+        CT_ASSERT(std::is_same<va_cl,  ct::add_varargs_t<cl>>{});
+        CT_ASSERT(std::is_same<va_cr,  ct::add_varargs_t<cr>>{});
+        CT_ASSERT(std::is_same<va_v,   ct::add_varargs_t<v>>{});
+        CT_ASSERT(std::is_same<va_vl,  ct::add_varargs_t<vl>>{});
+        CT_ASSERT(std::is_same<va_vr,  ct::add_varargs_t<vr>>{});
+        CT_ASSERT(std::is_same<va_cv,  ct::add_varargs_t<cv>>{});
+        CT_ASSERT(std::is_same<va_cvl, ct::add_varargs_t<cvl>>{});
+        CT_ASSERT(std::is_same<va_cvr, ct::add_varargs_t<cvr>>{});
 
-        CT_ASSERT(std::is_same<va_f,   ct::add_varargs<va_f>>{});
-        CT_ASSERT(std::is_same<va_l,   ct::add_varargs<va_l>>{});
-        CT_ASSERT(std::is_same<va_r,   ct::add_varargs<va_r>>{});
-        CT_ASSERT(std::is_same<va_c,   ct::add_varargs<va_c>>{});
-        CT_ASSERT(std::is_same<va_cl,  ct::add_varargs<va_cl>>{});
-        CT_ASSERT(std::is_same<va_cr,  ct::add_varargs<va_cr>>{});
-        CT_ASSERT(std::is_same<va_v,   ct::add_varargs<va_v>>{});
-        CT_ASSERT(std::is_same<va_vl,  ct::add_varargs<va_vl>>{});
-        CT_ASSERT(std::is_same<va_vr,  ct::add_varargs<va_vr>>{});
-        CT_ASSERT(std::is_same<va_cv,  ct::add_varargs<va_cv>>{});
-        CT_ASSERT(std::is_same<va_cvl, ct::add_varargs<va_cvl>>{});
-        CT_ASSERT(std::is_same<va_cvr, ct::add_varargs<va_cvr>>{});
+        CT_ASSERT(std::is_same<va_f,   ct::add_varargs_t<va_f>>{});
+        CT_ASSERT(std::is_same<va_l,   ct::add_varargs_t<va_l>>{});
+        CT_ASSERT(std::is_same<va_r,   ct::add_varargs_t<va_r>>{});
+        CT_ASSERT(std::is_same<va_c,   ct::add_varargs_t<va_c>>{});
+        CT_ASSERT(std::is_same<va_cl,  ct::add_varargs_t<va_cl>>{});
+        CT_ASSERT(std::is_same<va_cr,  ct::add_varargs_t<va_cr>>{});
+        CT_ASSERT(std::is_same<va_v,   ct::add_varargs_t<va_v>>{});
+        CT_ASSERT(std::is_same<va_vl,  ct::add_varargs_t<va_vl>>{});
+        CT_ASSERT(std::is_same<va_vr,  ct::add_varargs_t<va_vr>>{});
+        CT_ASSERT(std::is_same<va_cv,  ct::add_varargs_t<va_cv>>{});
+        CT_ASSERT(std::is_same<va_cvl, ct::add_varargs_t<va_cvl>>{});
+        CT_ASSERT(std::is_same<va_cvr, ct::add_varargs_t<va_cvr>>{});
     }
 
 #ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
@@ -164,31 +164,31 @@ int main() {
         using va_cvl = void(...) const volatile LREF;
         using va_cvr = void(...) const volatile RREF;
 
-        CT_ASSERT(std::is_same<va_f,   ct::add_varargs<f>>{});
-        CT_ASSERT(std::is_same<va_l,   ct::add_varargs<l>>{});
-        CT_ASSERT(std::is_same<va_r,   ct::add_varargs<r>>{});
-        CT_ASSERT(std::is_same<va_c,   ct::add_varargs<c>>{});
-        CT_ASSERT(std::is_same<va_cl,  ct::add_varargs<cl>>{});
-        CT_ASSERT(std::is_same<va_cr,  ct::add_varargs<cr>>{});
-        CT_ASSERT(std::is_same<va_v,   ct::add_varargs<v>>{});
-        CT_ASSERT(std::is_same<va_vl,  ct::add_varargs<vl>>{});
-        CT_ASSERT(std::is_same<va_vr,  ct::add_varargs<vr>>{});
-        CT_ASSERT(std::is_same<va_cv,  ct::add_varargs<cv>>{});
-        CT_ASSERT(std::is_same<va_cvl, ct::add_varargs<cvl>>{});
-        CT_ASSERT(std::is_same<va_cvr, ct::add_varargs<cvr>>{});
+        CT_ASSERT(std::is_same<va_f,   ct::add_varargs_t<f>>{});
+        CT_ASSERT(std::is_same<va_l,   ct::add_varargs_t<l>>{});
+        CT_ASSERT(std::is_same<va_r,   ct::add_varargs_t<r>>{});
+        CT_ASSERT(std::is_same<va_c,   ct::add_varargs_t<c>>{});
+        CT_ASSERT(std::is_same<va_cl,  ct::add_varargs_t<cl>>{});
+        CT_ASSERT(std::is_same<va_cr,  ct::add_varargs_t<cr>>{});
+        CT_ASSERT(std::is_same<va_v,   ct::add_varargs_t<v>>{});
+        CT_ASSERT(std::is_same<va_vl,  ct::add_varargs_t<vl>>{});
+        CT_ASSERT(std::is_same<va_vr,  ct::add_varargs_t<vr>>{});
+        CT_ASSERT(std::is_same<va_cv,  ct::add_varargs_t<cv>>{});
+        CT_ASSERT(std::is_same<va_cvl, ct::add_varargs_t<cvl>>{});
+        CT_ASSERT(std::is_same<va_cvr, ct::add_varargs_t<cvr>>{});
 
-        CT_ASSERT(std::is_same<va_f,   ct::add_varargs<va_f>>{});
-        CT_ASSERT(std::is_same<va_l,   ct::add_varargs<va_l>>{});
-        CT_ASSERT(std::is_same<va_r,   ct::add_varargs<va_r>>{});
-        CT_ASSERT(std::is_same<va_c,   ct::add_varargs<va_c>>{});
-        CT_ASSERT(std::is_same<va_cl,  ct::add_varargs<va_cl>>{});
-        CT_ASSERT(std::is_same<va_cr,  ct::add_varargs<va_cr>>{});
-        CT_ASSERT(std::is_same<va_v,   ct::add_varargs<va_v>>{});
-        CT_ASSERT(std::is_same<va_vl,  ct::add_varargs<va_vl>>{});
-        CT_ASSERT(std::is_same<va_vr,  ct::add_varargs<va_vr>>{});
-        CT_ASSERT(std::is_same<va_cv,  ct::add_varargs<va_cv>>{});
-        CT_ASSERT(std::is_same<va_cvl, ct::add_varargs<va_cvl>>{});
-        CT_ASSERT(std::is_same<va_cvr, ct::add_varargs<va_cvr>>{});
+        CT_ASSERT(std::is_same<va_f,   ct::add_varargs_t<va_f>>{});
+        CT_ASSERT(std::is_same<va_l,   ct::add_varargs_t<va_l>>{});
+        CT_ASSERT(std::is_same<va_r,   ct::add_varargs_t<va_r>>{});
+        CT_ASSERT(std::is_same<va_c,   ct::add_varargs_t<va_c>>{});
+        CT_ASSERT(std::is_same<va_cl,  ct::add_varargs_t<va_cl>>{});
+        CT_ASSERT(std::is_same<va_cr,  ct::add_varargs_t<va_cr>>{});
+        CT_ASSERT(std::is_same<va_v,   ct::add_varargs_t<va_v>>{});
+        CT_ASSERT(std::is_same<va_vl,  ct::add_varargs_t<va_vl>>{});
+        CT_ASSERT(std::is_same<va_vr,  ct::add_varargs_t<va_vr>>{});
+        CT_ASSERT(std::is_same<va_cv,  ct::add_varargs_t<va_cv>>{});
+        CT_ASSERT(std::is_same<va_cvl, ct::add_varargs_t<va_cvl>>{});
+        CT_ASSERT(std::is_same<va_cvr, ct::add_varargs_t<va_cvr>>{});
     }
 
 #endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
@@ -196,6 +196,6 @@ int main() {
     {
         using f = void(&)();
         using va_f = void(&)(...);
-        CT_ASSERT(std::is_same<va_f,   ct::add_varargs<f>>{});
+        CT_ASSERT(std::is_same<va_f,   ct::add_varargs_t<f>>{});
     }
 }

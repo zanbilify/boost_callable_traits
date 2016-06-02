@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 int main(){ return 0; }
 #else
 
-//[ args
+//[ args_t
 #include <type_traits>
 #include <memory>
 #include <callable_traits/callable_traits.hpp>
@@ -19,10 +19,8 @@ namespace ct = callable_traits;
 
 template<typename T, typename Expect>
 void test(){
-    // this example shows how callable_traits::args
-    // bevaves consistently for many different types
-    using args = ct::args<T>;
-    static_assert(std::is_same<args, Expect>::value, "");
+    using args_t = ct::args_t<T>;
+    static_assert(std::is_same<args_t, Expect>::value, "");
 }
 
 int main() {

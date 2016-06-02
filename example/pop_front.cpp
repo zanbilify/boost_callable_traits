@@ -14,7 +14,7 @@ struct foo;
 int main() {
 
     using f = void(foo::*)(int, char, long);
-    using test = ct::pop_front<f>;
+    using test = ct::args_pop_front_t<f>;
     using expect = void(foo::*)(char, long);
     static_assert(std::is_same<test, expect>::value, "");
 }

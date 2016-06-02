@@ -7,8 +7,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_DETAIL_REQUIRED_DEFINITIONS_HPP
-#define CALLABLE_TRAITS_DETAIL_REQUIRED_DEFINITIONS_HPP
+#ifndef CALLABLE_TRAITS_DETAIL_CORE_HPP
+#define CALLABLE_TRAITS_DETAIL_CORE_HPP
 
 #include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/utility.hpp>
@@ -17,4 +17,4 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/pmf.hpp>
 #include <callable_traits/detail/pmd.hpp>
 
-#endif
+#endif //#ifndef CALLABLE_TRAITS_DETAIL_CORE_HPP

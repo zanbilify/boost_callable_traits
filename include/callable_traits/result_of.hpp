@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_RESULT_OF_HPP
 #define CALLABLE_TRAITS_RESULT_OF_HPP
 
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 
@@ -26,9 +26,15 @@ namespace callable_traits {
     }
 
     template<typename T>
-    using result_of = detail::fail_if_invalid<
+    struct result_of {
+
+        using type = detail::fail_if_invalid<
             typename detail::traits<T>::return_type,
             detail::result_of_error<true>>;
+    };
+
+    template<typename T>
+    using result_of_t = typename result_of<T>::type;
 }
 
 #endif

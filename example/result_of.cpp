@@ -22,7 +22,7 @@ struct foo;
 
 template<typename T>
 void test() {
-    using result = ct::result_of<T>;
+    using result = ct::result_of_t<T>;
     static_assert(std::is_same<expect, result>{}, "");
 }
 

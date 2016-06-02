@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_COPY_QUALIFIERS_HPP
 #define CALLABLE_TRAITS_COPY_QUALIFIERS_HPP
 
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 #include <callable_traits/detail/copy_qualifiers_impl.hpp>
 
 namespace callable_traits {
@@ -35,7 +35,8 @@ namespace callable_traits {
     };
 
     template<typename To, typename From>
-    using copy_qualifiers_t = typename copy_qualifiers<To, From>::type;
+    using copy_qualifiers_t =
+        typename copy_qualifiers<To, From>::type;
 }
 
 #endif //#ifndef CALLABLE_TRAITS_COPY_QUALIFIERS_HPP

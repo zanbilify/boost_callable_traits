@@ -11,7 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_IS_VOLATILE_MEMBER_HPP
 
 #include <callable_traits/detail/traits.hpp>
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 
