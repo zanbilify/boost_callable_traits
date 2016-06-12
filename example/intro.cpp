@@ -42,15 +42,11 @@ int main() {
     using expected_function_type = void(int, int&&, const int&, void*);
     static_assert(std::is_same<function_type, expected_function_type>::value, "");
 
-    // By design, the ``[libname]`` interface uses constexpr functions accepting
-    // objects and returning std::integral_constants (whenever sensible). However,
-    // for those times where you don't have an object at hand, you can also pass
-    // the type of that object only:
-    static_assert(ct::has_void_return<foo>(), ""); //with type
-    static_assert(ct::has_void_return(foo{}), ""); //with object
+    // quick check for void return
+    static_assert(ct::has_void_return<foo>::value, ""); //with type
 
     // C-style variadics detection (e.g. an ellipses in a signature)
-    static_assert(!ct::has_varargs<foo>(), "");
+    static_assert(!ct::has_varargs<foo>::value, "");
 
     // For function objects, the following checks are determined by the
     // function qualifiers on operator(), rather than the qualifiers on

@@ -41,6 +41,10 @@ Distributed under the Boost Software License, Version 1.0.
  #define CALLABLE_TRAITS_CONJUNCTION(...) ::std::conjunction< __VA_ARGS__ >
  #define CALLALBLE_TRAITS_DECLTYPE_AUTO decltype(auto)
 
+#ifndef __cpp_variable_templates
+#define CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+#endif
+
  #ifndef __cpp_decltype_auto
   #undef CALLALBLE_TRAITS_DECLTYPE_AUTO
   #define CALLALBLE_TRAITS_DECLTYPE_AUTO auto

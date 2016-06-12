@@ -17,17 +17,26 @@ Distributed under the Boost Software License, Version 1.0.
 namespace callable_traits {
 
     template<typename T, typename Tag>
-    inline constexpr auto
-    has_calling_convention() {
-        return typename detail::has_calling_convention_t<T, Tag>::type{};
-    }
+    struct has_calling_convention
+        : detail::has_calling_convention_t<T, Tag>::type {
+        using type = typename detail::has_calling_convention_t<T, Tag>::type;
+    };
+
+    #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+
+    template<typename T, typename>
+    struct has_calling_convention_v {
+        static_assert(sizeof(T) < 1,
+            "Variable templates not supported on this compiler.");
+    };
+
+    #else
 
     template<typename T, typename Tag>
-    inline constexpr auto
-    has_calling_convention(T&&) {
-        using no_ref = typename std::remove_reference<T>::type;
-        return has_calling_convention<no_ref, Tag>();
-    }
+    constexpr bool has_calling_convention_v =
+        detail::has_calling_convention_t<T, Tag>::type::value;
+
+    #endif
 }
 
 #endif //CALLABLE_TRAITS_HAS_CALLING_CONVENTION_HPP

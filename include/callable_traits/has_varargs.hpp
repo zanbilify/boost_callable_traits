@@ -16,17 +16,26 @@ Distributed under the Boost Software License, Version 1.0.
 namespace callable_traits {
 
     template<typename T>
-    inline constexpr auto
-    has_varargs() {
-        return typename detail::traits<T>::has_varargs{};
-    }
+    struct has_varargs
+        : detail::traits<T>::has_varargs {
+        using type = typename detail::traits<T>::has_varargs;
+    };
+
+    #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
 
     template<typename T>
-    inline constexpr auto
-    has_varargs(T&&) {
-        using no_ref = typename std::remove_reference<T>::type;
-        return has_varargs<no_ref>();
-    }
+    struct has_varargs_v {
+        static_assert(sizeof(T) < 1,
+            "Variable templates not supported on this compiler.");
+    };
+
+    #else
+
+    template<typename T>
+    constexpr bool has_varargs_v =
+        detail::traits<T>::has_varargs::value;
+
+    #endif
 }
 
 #endif

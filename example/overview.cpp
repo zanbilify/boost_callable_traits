@@ -83,10 +83,10 @@ static_assert(is_same<
 >{}, "");
 
 //` Here are a few other trait examples:
-static_assert(is_const_member<pmf>(), "");
-static_assert(!is_volatile_member<pmf>(), "");
-static_assert(!has_void_return<pmf>(), "");
-static_assert(!has_varargs<pmf>(), "");
+static_assert(is_const_member<pmf>{}, "");
+static_assert(!is_volatile_member<pmf>{}, "");
+static_assert(!has_void_return<pmf>{}, "");
+static_assert(!has_varargs<pmf>{}, "");
 
 //` You can use [libname] to manipulate parameter lists (not defined in terms of INVOKE, since that wouldn't make sense here):
 

@@ -16,17 +16,27 @@ Distributed under the Boost Software License, Version 1.0.
 namespace callable_traits {
 
     template<typename T>
-    inline constexpr auto
-    is_volatile_member() {
-        return typename detail::traits<T>::is_volatile_member{};
-    }
+    struct is_volatile_member
+        : detail::traits<T>::is_volatile_member {
+
+        using type = typename detail::traits<T>::is_volatile_member;
+    };
+
+    #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
 
     template<typename T>
-    inline constexpr auto
-    is_volatile_member(T&&) {
-        using no_ref = typename std::remove_reference<T>::type;
-        return typename detail::traits<no_ref>::is_volatile_member{};
-    }
+    struct is_volatile_member_v {
+        static_assert(sizeof(T) < 1,
+            "Variable templates not supported on this compiler.");
+    };
+
+    #else
+
+    template<typename T>
+    constexpr bool is_volatile_member_v =
+        detail::traits<T>::is_volatile_member::value;
+
+    #endif
 }
 
 #endif

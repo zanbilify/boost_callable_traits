@@ -20,14 +20,12 @@ namespace ct = callable_traits;
 
 template<typename T>
 void assert_qualified() {
-    CT_ASSERT(ct::has_member_qualifiers<T>());
-    CT_ASSERT(decltype(ct::has_member_qualifiers(std::declval<T>()))::value);
+    CT_ASSERT(ct::has_member_qualifiers<T>::value);
 }
 
 template<typename T>
 void assert_unqualified() {
-    CT_ASSERT(!ct::has_member_qualifiers<T>());
-    CT_ASSERT(!decltype(ct::has_member_qualifiers(std::declval<T>()))::value);
+    CT_ASSERT(!ct::has_member_qualifiers<T>::value);
 }
 
 int main() {

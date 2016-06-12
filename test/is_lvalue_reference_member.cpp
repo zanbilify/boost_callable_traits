@@ -25,7 +25,6 @@ template<typename T>
 void assert_lvalue_qualified() {
     
     CT_ASSERT(ct::is_lvalue_reference_member<T>());
-    CT_ASSERT(decltype(ct::is_lvalue_reference_member(std::declval<T>()))::value);
 }
 
 
@@ -33,7 +32,6 @@ template<typename T>
 void assert_not_lvalue_qualified() {
 
     CT_ASSERT(!ct::is_lvalue_reference_member<T>());
-    CT_ASSERT(!decltype(ct::is_lvalue_reference_member(std::declval<T>()))::value);
 }
 
 int main() {

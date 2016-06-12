@@ -28,14 +28,12 @@ namespace ct = callable_traits;
 template<typename T>
 void assert_const_qualified() {
     CT_ASSERT(ct::is_const_member<T>());
-    CT_ASSERT(decltype(ct::is_const_member(std::declval<T>()))::value);
 }
 
 
 template<typename T>
 void assert_not_const_qualified() {
     CT_ASSERT(!ct::is_const_member<T>());
-    CT_ASSERT(!decltype(ct::is_const_member(std::declval<T>()))::value);
 }
 
 int main() {

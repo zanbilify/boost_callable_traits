@@ -30,7 +30,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/get_qualifier_flags.hpp>
 #include <callable_traits/has_calling_convention.hpp>
 #include <callable_traits/has_member_qualifiers.hpp>
-#include <callable_traits/has_same_qualifiers.hpp>
 #include <callable_traits/has_varargs.hpp>
 #include <callable_traits/has_void_return.hpp>
 #include <callable_traits/insert_args.hpp>
