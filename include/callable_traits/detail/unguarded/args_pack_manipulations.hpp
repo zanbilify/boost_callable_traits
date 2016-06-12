@@ -35,6 +35,7 @@ struct insert_impl<CALLABLE_TRAITS_IX_SEQ(I...), std::tuple<U...>, StartTo> {
             std::tuple<CALLABLE_TRAITS_ARGS_PACK..., U...>>::type...
         CALLABLE_TRAITS_END_PACK_MANIP,
 
+        fail_if<!(StartTo <= arg_count), index_out_of_range_for_parameter_list>
     >;
 };
 
@@ -65,6 +66,7 @@ struct remove_impl<CALLABLE_TRAITS_IX_SEQ(Is...), Index, Count> {
         std::tuple<CALLABLE_TRAITS_ARGS_PACK...>>::type...
         CALLABLE_TRAITS_END_PACK_MANIP,
 
+        fail_if<!(Index < arg_count), index_out_of_range_for_parameter_list>
     >;
 };
 
@@ -106,6 +108,7 @@ struct overwrite_impl<CALLABLE_TRAITS_IX_SEQ(I...), std::tuple<U...>, StartTo> {
         std::tuple<CALLABLE_TRAITS_ARGS_PACK..., U...>>::type...
         CALLABLE_TRAITS_END_PACK_MANIP,
 
+        fail_if<!(StartTo <= arg_count), index_out_of_range_for_parameter_list>
     >;
 };
 
