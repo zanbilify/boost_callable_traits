@@ -14,23 +14,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace detail {
-
-        template<bool Sfinae>
-        struct args_pop_back_error : sfinae_error {
-
-            static_assert(Sfinae,
-                "callable_traits::args_push_back<T, Args...> is "
-                "not a meaningful operation for this T.");
-        };
-    }
-
     template<typename T, std::size_t Count = 1>
     struct args_pop_back {
 
         using type = detail::fail_if_invalid<
             typename detail::traits<T>::template pop_back<Count>,
-            detail::args_pop_back_error<true>>;
+            cannot_determine_parameters_for_this_type>;
     };
 
     template<typename T, std::size_t Count = 1>

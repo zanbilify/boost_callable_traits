@@ -14,23 +14,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace detail {
-
-        template<bool Sfinae>
-        struct remove_args_error : sfinae_error {
-
-            static_assert(Sfinae,
-                "callable_traits::push_back<T, Args...> is "
-                "not a meaningful operation for this T.");
-        };
-    }
-
     template<std::size_t Index, typename T, std::size_t Count = 1>
     struct remove_args {
 
         using type = detail::fail_if_invalid<
             typename detail::traits<T>::template remove_args<Index, Count>,
-            detail::remove_args_error<true>>;
+            cannot_determine_parameters_for_this_type>;
     };
 
     template<std::size_t Index, typename T, std::size_t Count = 1>

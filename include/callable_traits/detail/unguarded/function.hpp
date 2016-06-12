@@ -25,6 +25,7 @@ struct function<Return(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS>
     using remove_varargs = type;
     using add_varargs = Return (Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS;
     
+    // todo is this really necessary?
     using has_member_qualifiers_function = bool_type<
         !std::is_same<qualified_function_type, function_type>::value>;
         

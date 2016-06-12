@@ -14,23 +14,17 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace detail {
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(remove_member_pointer)
 
-        template<bool Sfinae>
-        struct remove_member_pointer_error : sfinae_error {
-
-            static_assert(Sfinae,
-                "callable_traits::remove_member_pointer<T> "
-                "is not a meaningful operation for this T.");
-        };
-    }
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(remove_member_pointer,
+        cannot_remove_member_pointer_from_this_type)
 
     template<typename T>
     struct remove_member_pointer {
 
         using type = detail::fail_if_invalid<
             typename detail::traits<T>::remove_member_pointer,
-            detail::remove_member_pointer_error<true>>;
+            cannot_remove_member_pointer_from_this_type>;
     };
 
     template<typename T>

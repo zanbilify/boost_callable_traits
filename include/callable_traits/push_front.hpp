@@ -30,7 +30,7 @@ namespace callable_traits {
 
         using type = detail::fail_if_invalid<
             typename detail::traits<T>::template push_front<Args...>,
-            detail::args_push_front_error<true>>;
+            cannot_determine_parameters_for_this_type>;
     };
 
     template<typename T, typename... Args>

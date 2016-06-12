@@ -14,22 +14,17 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace detail {
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(expand_args)
 
-        template<bool Sfinae>
-        struct expand_args_error {
-
-            static_assert(Sfinae,
-                "callable_traits::expand_args<T, U> is not a valid operation.");
-        };
-    }
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(expand_args,
+        cannot_expand_the_parameter_list_of_first_template_argument)
 
     template<typename T, template<class...> class Container>
     struct expand_args {
 
         using type = detail::fail_if_invalid<
         typename detail::traits<T>::template expand_args<Container>,
-        detail::expand_args_error<true>>;
+        cannot_expand_the_parameter_list_of_first_template_argument>;
     };
 
     template<typename T, template<class...> class Container>

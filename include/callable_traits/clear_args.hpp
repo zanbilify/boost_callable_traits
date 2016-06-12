@@ -14,23 +14,17 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace detail {
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(clear_args)
 
-        template<bool Sfinae>
-        struct clear_args_error : sfinae_error {
-
-            static_assert(Sfinae,
-                "callable_traits::clear_args<T> is "
-                "not a meaningful operation for this T.");
-        };
-    }
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(clear_args,
+        cannot_clear_the_parameter_list_for_this_type)
 
     template<typename T>
     struct clear_args {
 
         using type = detail::fail_if_invalid<
         typename detail::traits<T>::clear_args,
-        detail::clear_args_error<true>>;
+        cannot_clear_the_parameter_list_for_this_type>;
     };
 
     template<typename T>

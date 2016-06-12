@@ -15,21 +15,29 @@ Distributed under the Boost Software License, Version 1.0.
 #include <tuple>
 
 namespace callable_traits {
-    
-    namespace detail {
-        struct arg_at_error : sfinae_error {};
-    }
 
     template<std::size_t I, typename T>
     struct arg_at {
 
-        using type = detail::fail_if_invalid<
-            detail::weak_at<I, typename detail::traits<T>::arg_types>,
-            detail::arg_at_error>;
+        private:
+
+            using arg_types = typename args<T>::type;
+
+        public:
+
+        // SFINAEs away if index is out of range or if argument
+        // types cannot be determined. Simple error messages are
+        // provided in case the error occurs outside of a SFINAE context
+
+        using type = detail::sfinae_try<
+
+            detail::at<I, arg_types>,
+
+            detail::fail_if<I >= std::tuple_size<arg_types>::value,
+                index_out_of_range_for_parameter_list>
+        >;
     };
 
-    // returns callable_traits::invalid_type if
-    // index is out of range
     template<std::size_t I, typename T>
     using arg_at_t = typename arg_at<I, T>::type;
 }

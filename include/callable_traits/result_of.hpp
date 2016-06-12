@@ -14,23 +14,17 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace detail {
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(result_of)
 
-        template<bool Sfinae>
-        struct result_of_error : sfinae_error {
-
-            static_assert(Sfinae,
-                "callable_traits::result_of<T> is not "
-                "a meaningful operation for this T.");
-        };
-    }
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(result_of,
+        unable_to_determine_return_type)
 
     template<typename T>
     struct result_of {
 
         using type = detail::fail_if_invalid<
             typename detail::traits<T>::return_type,
-            detail::result_of_error<true>>;
+            unable_to_determine_return_type>;
     };
 
     template<typename T>

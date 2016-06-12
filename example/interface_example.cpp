@@ -12,7 +12,7 @@ See interface.hpp in this directory for details.
 #include <callable_traits/config.hpp>
 #ifdef CALLABLE_TRAITS_MSVC
 int main(){ return 0; }
-#elif defined CALLABLE_TRAITS_GCC_OLDER_THAN_4_9_2
+#elif defined CALLABLE_TRAITS_GCC_OLDER_THAN_5_0_0
 int main(){ return 0; }
 #else
 

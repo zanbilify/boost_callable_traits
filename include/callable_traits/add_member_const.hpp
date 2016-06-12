@@ -14,23 +14,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace detail {
-
-        template<bool Sfinae>
-        struct add_member_const_error {
-
-            static_assert(Sfinae,
-                "callable_traits::add_member_const<T> "
-                "is not a meaningful operation for this T.");
-        };
-    }
-
     template<typename T>
     struct add_member_const {
 
         using type = detail::fail_if_invalid<
             typename detail::traits<T>::add_member_const,
-            detail::add_member_const_error<true>>;
+            member_qualifiers_are_illegal_for_this_type>;
     };
 
     template<typename T>

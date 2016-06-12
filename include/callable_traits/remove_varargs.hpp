@@ -14,23 +14,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace detail {
-
-        template<bool Sfinae>
-        struct remove_varargs_error : sfinae_error {
-
-            static_assert(Sfinae,
-                "callable_traits::remove_varargs<T> "
-                "is not a meaningful operation for this T.");
-        };
-    }
-
     template<typename T>
     struct remove_varargs {
 
         using type = detail::fail_if_invalid<
             typename detail::traits<T>::remove_varargs,
-            detail::remove_varargs_error<true>>;
+            varargs_are_illegal_for_this_type>;
     };
 
     template<typename T>

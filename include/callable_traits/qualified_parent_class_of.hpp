@@ -14,22 +14,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace detail {
-
-        template<bool Sfinae>
-        struct qualified_parent_class_of_error : sfinae_error {
-
-            static_assert(Sfinae,
-                "TODO: error message for callable_traits::qualified_parent_class_of");
-        };
-    }
-
     template<typename T>
     struct qualified_parent_class_of {
 
         using type = detail::fail_if_invalid<
             typename detail::traits<T>::invoke_type,
-            detail::qualified_parent_class_of_error<true>>;
+            type_is_not_a_member_pointer>;
     };
 
     template<typename T>

@@ -15,23 +15,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace detail {
-
-        template<bool Sfinae>
-        struct remove_member_cv_error : sfinae_error {
-
-            static_assert(Sfinae,
-                "callable_traits::remove_member_cv<T> "
-                "is not a meaningful operation for this T.");
-        };
-    }
-
     template<typename T>
     struct remove_member_cv {
 
         using type = detail::fail_if_invalid<
             typename detail::traits<T>::remove_member_cv,
-            detail::remove_member_cv_error<true>>;
+            member_qualifiers_are_illegal_for_this_type>;
     };
 
     template<typename T>

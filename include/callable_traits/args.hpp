@@ -14,26 +14,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace detail {
-
-        template<bool Sfinae>
-        struct args_error : sfinae_error {
-
-            static_assert(Sfinae,
-                "Could not determine the parameters for "
-                "T in callable_traits::args<T>. Note: "
-                "If T is the type of a generic lambda or "
-                " overloaded/templated function object, "
-                "the parameters cannot be determined. ");
-        };
-    }
-
     template<typename T>
     struct args {
 
         using type = detail::fail_if_invalid<
             typename detail::traits<T>::arg_types,
-            detail::args_error<true>>;
+            cannot_determine_parameters_for_this_type>;
     };
 
     template<typename T>

@@ -28,14 +28,14 @@ struct insert_impl;
 template<std::size_t... I, typename... U, std::size_t StartTo>
 struct insert_impl<CALLABLE_TRAITS_IX_SEQ(I...), std::tuple<U...>, StartTo> {
 
-    static_assert(StartTo <= arg_count, "Insert index out of range");
-
-    using type =
+    using type = sfinae_try<
         CALLABLE_TRAITS_BEGIN_PACK_MANIP
         typename std::tuple_element<
             map_insert<I, arg_count, StartTo, sizeof...(U)>::value,
             std::tuple<CALLABLE_TRAITS_ARGS_PACK..., U...>>::type...
-        CALLABLE_TRAITS_END_PACK_MANIP;
+        CALLABLE_TRAITS_END_PACK_MANIP,
+
+    >;
 };
 
 template<std::size_t N, typename... U>
@@ -58,15 +58,14 @@ struct remove_impl;
 template<std::size_t... Is, std::size_t Index, std::size_t Count>
 struct remove_impl<CALLABLE_TRAITS_IX_SEQ(Is...), Index, Count> {
 
-    static_assert(Index < arg_count,
-        "Remove index out of range");
-
-    using type =
+    using type = sfinae_try<
         CALLABLE_TRAITS_BEGIN_PACK_MANIP
         typename std::tuple_element<
         map_remove<Is, Index, Count>::value,
         std::tuple<CALLABLE_TRAITS_ARGS_PACK...>>::type...
-        CALLABLE_TRAITS_END_PACK_MANIP;
+        CALLABLE_TRAITS_END_PACK_MANIP,
+
+    >;
 };
 
 //when not removing anything
@@ -100,14 +99,14 @@ struct overwrite_impl;
 template<std::size_t... I, typename... U, std::size_t StartTo>
 struct overwrite_impl<CALLABLE_TRAITS_IX_SEQ(I...), std::tuple<U...>, StartTo> {
 
-    static_assert(StartTo <= arg_count, "Insert index out of range");
-
-    using type =
+    using type = sfinae_try<
         CALLABLE_TRAITS_BEGIN_PACK_MANIP
         typename std::tuple_element<
         map_overwrite<I, arg_count, StartTo, sizeof...(U)>::value,
         std::tuple<CALLABLE_TRAITS_ARGS_PACK..., U...>>::type...
-        CALLABLE_TRAITS_END_PACK_MANIP;
+        CALLABLE_TRAITS_END_PACK_MANIP,
+
+    >;
 };
 
 template<std::size_t StartIndex, typename... U>

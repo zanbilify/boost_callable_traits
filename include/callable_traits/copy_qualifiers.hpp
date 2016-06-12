@@ -15,15 +15,10 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace detail {
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(copy_qualifiers)
 
-        template<bool Sfinae>
-        struct copy_qualifiers_error : sfinae_error {
-
-            static_assert(Sfinae,
-                "TODO: error message for callable_traits::copy_qualifiers");
-        };
-    }
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(copy_qualifiers,
+        cannot_copy_qualifiers_for_these_types)
 
     template<typename To, typename From>
     struct copy_qualifiers {
@@ -31,7 +26,7 @@ namespace callable_traits {
         using type = detail::fail_if_invalid<
             typename detail::copy_qualifiers_impl<
                 detail::traits<To>, detail::traits<From>>::type,
-            detail::copy_qualifiers_error<true>>;
+            cannot_copy_qualifiers_for_these_types>;
     };
 
     template<typename To, typename From>

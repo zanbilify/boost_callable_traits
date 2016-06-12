@@ -16,14 +16,6 @@ namespace callable_traits {
 
     namespace detail {
 
-        template<bool Sfinae>
-        struct apply_return_error : sfinae_error {
-
-            static_assert(Sfinae,
-                "callable_traits::apply_return<T, R> is "
-                "not a meaningful operation for this T.");
-        };
-
         template<typename T, typename R>
         struct apply_return_helper {
             using type = typename detail::traits<T>::template apply_return<R>;
@@ -36,12 +28,18 @@ namespace callable_traits {
         };
     }
 
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(apply_return)
+
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(apply_return,
+    invalid_types_for_apply_return)
+
+
     template<typename T, typename R>
     struct apply_return {
 
         using type = detail::fail_if_invalid<
             typename detail::apply_return_helper<T, R>::type,
-            detail::apply_return_error<true>>;
+            invalid_types_for_apply_return>;
     };
 
     template<typename T, typename R>
