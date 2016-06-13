@@ -12,6 +12,16 @@ Distributed under the Boost Software License, Version 1.0.
  #define CALLABLE_TRAITS_EMPTY_
  #define CALLABLE_TRAITS_EMPTY CALLABLE_TRAITS_EMPTY_
 
+ #ifdef __cpp_transactional_memory
+  #define CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+ #endif
+
+ #ifdef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+  #define CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER transaction_safe
+ #else
+  #define CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER
+ #endif
+
  #ifndef __clang__
   #if defined __GNUC__
 

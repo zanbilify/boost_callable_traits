@@ -87,5 +87,11 @@ struct name : callable_traits_ERROR::origin<                     \
 
     CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(varargs,
         varargs_are_illegal_for_this_type)
+
+    /*** transaction_safe errors ***/
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(transaction_safe_error)
+
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(transaction_safe_error,
+        transaction_safe_is_not_enabled_on_this_platform)
 }
 #endif // #ifndef CALLABLE_TRAITS_SFINAE_ERRORS_HPP

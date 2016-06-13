@@ -56,4 +56,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/result_of.hpp>
 #include <callable_traits/set_member_qualifiers.hpp>
 #include <callable_traits/set_qualifiers.hpp>
+#include <callable_traits/is_transaction_safe.hpp>
+#include <callable_traits/remove_transaction_safe.hpp>
+#include <callable_traits/add_transaction_safe.hpp>
 #endif

@@ -94,6 +94,16 @@ namespace callable_traits {
             // invalid_type for function objects and PMDs.
             using add_varargs = invalid_type;
             
+            // std::true_type when the signature includes transaction_safe, when
+            // the feature is available
+            using is_transaction_safe = std::false_type;
+
+            // adds transaction_safe to a signature if the feature is available
+            using add_transaction_safe = invalid_type;
+
+            // removes transaction_safe from a signature if present
+            using remove_transaction_safe = invalid_type;
+
             // The class of a PMD or PMF. invalid_type for other types
             using class_type = invalid_type;
             
