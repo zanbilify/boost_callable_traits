@@ -68,10 +68,10 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...)
 
     using non_invoke_arg_types = std::tuple<Args...>;
 
-    // todo - use CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE?
+    // todo document that transaction_safe is not preserved
     using function_object_type = Return(Args..., ...);
 
-    // todo - use CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE?
+    // todo document that transaction_safe is not preserved
     using function_type = Return(invoke_type, Args..., ...);
 
     using qualified_function_type = Return(Args..., ...)
@@ -97,7 +97,7 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...)
 
     template<flags Flags>
     using set_qualifiers = set_varargs_member_function_qualifiers<
-            Flags, CALLABLE_TRAITS_CC_TAG, T, Return, Args...>;
+            Flags, is_transaction_safe::value, CALLABLE_TRAITS_CC_TAG, T, Return, Args...>;
 
     using remove_member_reference = set_qualifiers<qualifiers::cv_flags>;
 

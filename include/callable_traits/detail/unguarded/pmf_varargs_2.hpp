@@ -9,10 +9,11 @@ DO NOT INCLUDE THIS HEADER DIRECTLY
 
 */
 
-//todo - account for transaction_safe with a template bool parameter
 template<typename T, typename Return, typename... Args>
 struct set_varargs_member_function_qualifiers_t <
-    flag_map<int CALLABLE_TRAITS_INCLUDE_QUALIFIERS>::value, CALLABLE_TRAITS_CC_TAG, T, Return, Args...> {
+    flag_map<int CALLABLE_TRAITS_INCLUDE_QUALIFIERS>::value,
+    false,
+    CALLABLE_TRAITS_CC_TAG, T, Return, Args...> {
 
     using type =
         Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS;
@@ -26,6 +27,18 @@ struct set_varargs_member_function_qualifiers_t <
 #undef CALLABLE_TRAITS_IS_TRANSACTION_SAFE
 
 #ifdef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+
+template<typename T, typename Return, typename... Args>
+struct set_varargs_member_function_qualifiers_t <
+    flag_map<int CALLABLE_TRAITS_INCLUDE_QUALIFIERS>::value,
+    true,
+    CALLABLE_TRAITS_CC_TAG, T, Return, Args...> {
+
+    using type =
+        Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...)
+            CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER;
+};
+
 #define CALLABLE_TRAITS_IS_TRANSACTION_SAFE std::true_type
 #define CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE transaction_safe
 #include <callable_traits/detail/unguarded/pmf_varargs_3.hpp>

@@ -22,7 +22,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/apply_return.hpp>
 #include <callable_traits/arg_at.hpp>
 #include <callable_traits/args.hpp>
-#include <callable_traits/copy_qualifiers.hpp>
 #include <callable_traits/clear_args.hpp>
 #include <callable_traits/expand_args.hpp>
 #include <callable_traits/function_type.hpp>

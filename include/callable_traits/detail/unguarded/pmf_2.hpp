@@ -9,13 +9,14 @@ DO NOT INCLUDE THIS HEADER DIRECTLY
 
 */
 
-//todo - account for transaction_safe with a template bool parameter
 template<typename Return, typename T, typename... Args>
 struct set_member_function_qualifiers_t<
     flag_map<int CALLABLE_TRAITS_INCLUDE_QUALIFIERS>::value,
-        CALLABLE_TRAITS_CC_TAG, T, Return, Args...> {
+    false,
+    CALLABLE_TRAITS_CC_TAG, T, Return, Args...> {
 
-    using type = Return(CALLABLE_TRAITS_CC T::*)(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS;
+    using type = Return(CALLABLE_TRAITS_CC T::*)(Args...)
+        CALLABLE_TRAITS_INCLUDE_QUALIFIERS;
 };
 
 #define CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE
@@ -25,7 +26,19 @@ struct set_member_function_qualifiers_t<
 #undef CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE
 #undef CALLABLE_TRAITS_IS_TRANSACTION_SAFE
 
+
 #ifdef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+
+template<typename Return, typename T, typename... Args>
+struct set_member_function_qualifiers_t<
+    flag_map<int CALLABLE_TRAITS_INCLUDE_QUALIFIERS>::value,
+    true,
+    CALLABLE_TRAITS_CC_TAG, T, Return, Args...> {
+
+    using type = Return(CALLABLE_TRAITS_CC T::*)(Args...)
+        CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER;
+};
+
 #define CALLABLE_TRAITS_IS_TRANSACTION_SAFE std::true_type
 #define CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE transaction_safe
 #include <callable_traits/detail/unguarded/pmf_3.hpp>

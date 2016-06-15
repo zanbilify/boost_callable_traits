@@ -62,10 +62,6 @@ namespace callable_traits {
         template<typename T, typename Class>
         using add_member_pointer = T Class::*;
 
-        template<typename Traits>
-        using can_accept_member_qualifiers = bool_type<
-            Traits::is_function::value || Traits::has_member_qualifiers_function::value>;
-        
         namespace util_detail {
 
             template<typename T>

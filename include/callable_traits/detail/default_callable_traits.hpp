@@ -52,9 +52,6 @@ namespace callable_traits {
             // std::true_type for plain function types only
             using is_function = std::false_type;
             
-            // std::true_type for function types with qualifiers
-            using has_member_qualifiers_function = std::false_type;
-            
             // std::true_type for callables with C-style variadics
             using has_varargs = std::false_type;
             

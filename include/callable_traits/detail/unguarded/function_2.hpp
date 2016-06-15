@@ -42,7 +42,7 @@ struct function<Return(Args...)
     using type = Return(Args...)
         CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
 
-    // todo - should we use CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE here?
+    // todo document that transaction_safe is not preserved
     using function_type = Return(Args...);
 
     using qualified_function_type = Return(Args...)
@@ -60,10 +60,6 @@ struct function<Return(Args...)
     using add_transaction_safe = Return(Args...)
         CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER;
 
-    // todo is this really necessary?
-    using has_member_qualifiers_function = bool_type<
-        !std::is_same<qualified_function_type, function_type>::value>;
-        
     using qualifiers = qualifier_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>;
     
     template<flags Flags>
@@ -138,7 +134,7 @@ struct function<Return (Args..., ...)
     using type = Return (Args..., ...)
         CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
 
-    // todo - should we use CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE here?
+    // todo document that transaction_safe is not preserved
     using function_type = Return(Args..., ...);
 
     using qualified_function_type = Return(Args..., ...)
