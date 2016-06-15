@@ -15,7 +15,7 @@ Distributed under the Boost Software License, Version 1.0.
 namespace callable_traits {
 
     template<typename T, typename... Args>
-    struct args_push_back {
+    struct push_back_args {
 
         using type = detail::fail_if_invalid<
             typename detail::traits<T>::template push_back<Args...>,
@@ -23,8 +23,8 @@ namespace callable_traits {
     };
 
     template<typename T, typename... Args>
-    using args_push_back_t =
-        typename args_push_back<T, Args...>::type;
+    using push_back_args_t =
+        typename push_back_args<T, Args...>::type;
 }
 
 #endif //CALLABLE_TRAITS_PUSH_BACK_HPP

@@ -15,13 +15,13 @@ struct N {};
 struct foo;
 
 template<typename... Ts>
-using sig = int(*)(Ts...);
+using sig = int(&)(Ts...);
 
 int main() {
 
     {
         using f = sig<N<0>, N<1>, N<2>, N<3>, N<4>>;
-        using test = ct::args_push_front_t<f, int, char>;
+        using test = ct::push_front_args_t<f, int, char>;
         using expect = sig<int, char, N<0>, N<1>, N<2>, N<3>, N<4>>;
         CT_ASSERT(std::is_same<test, expect>::value);
     }

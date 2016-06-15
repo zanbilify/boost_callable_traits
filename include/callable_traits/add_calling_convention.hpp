@@ -1,5 +1,4 @@
-/*!
-@file add_member_const
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.

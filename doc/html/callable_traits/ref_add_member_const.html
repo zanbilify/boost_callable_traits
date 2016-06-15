@@ -6,7 +6,7 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="CallableTraits">
 <link rel="up" href="../index.html" title="CallableTraits">
-<link rel="prev" href="ref_add_calling_convention.html" title="add_calling_convention">
+<link rel="prev" href="building.html" title="Building the test suite">
 <link rel="next" href="ref_add_member_cv.html" title="add_member_cv">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -20,54 +20,230 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="ref_add_calling_convention.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_add_member_cv.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="building.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_add_member_cv.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_add_member_const"></a><a class="link" href="ref_add_member_const.html" title="add_member_const">add_member_const</a>
 </h2></div></div></div>
-<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">add_member_const</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span><span class="special">;</span>
+    <span class="keyword">struct</span> <span class="identifier">add_member_const</span> <span class="special">{</span>
 
+        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+    <span class="special">};</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+    <span class="keyword">using</span> <span class="identifier">add_member_const_t</span> <span class="special">=</span> <span class="keyword">typename</span> <span class="identifier">add_member_const</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span><span class="special">;</span>
 <span class="special">}</span>
 </pre>
 <h4>
 <a name="callable_traits.ref_add_member_const.h0"></a>
       <span class="phrase"><a name="callable_traits.ref_add_member_const.constraints"></a></span><a class="link" href="ref_add_member_const.html#callable_traits.ref_add_member_const.constraints">Constraints</a>
     </h4>
-<p>
-      <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="glossary.html#callable_traits.glossary.ref_fn" title="Function"><span class="green">Function</span></a> or <a class="link" href="glossary.html#callable_traits.glossary.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>.
-    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+          <code class="computeroutput"><span class="identifier">T</span></code> must be a function type
+          or a member function pointer
+        </li></ul></div>
 <h4>
 <a name="callable_traits.ref_add_member_const.h1"></a>
       <span class="phrase"><a name="callable_traits.ref_add_member_const.behavior"></a></span><a class="link" href="ref_add_member_const.html#callable_traits.ref_add_member_const.behavior">Behavior</a>
     </h4>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-          Adds a <code class="computeroutput"><span class="keyword">const</span></code> qualifier to
-          the signature of <code class="computeroutput"><span class="identifier">T</span></code> (if
-          not already present), such that:
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-                <code class="computeroutput"><span class="identifier">add_member_const</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">()&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span> <span class="keyword">const</span></code>
-              </li>
+          Adds a member <code class="computeroutput"><span class="keyword">const</span></code> qualifier
+          to <code class="computeroutput"><span class="identifier">T</span></code>, if not already present
+        </li>
 <li class="listitem">
-                <code class="computeroutput"><span class="identifier">add_member_const</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">volatile</span><span class="special">&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">const</span>
-                <span class="keyword">volatile</span></code>
-              </li>
-</ul></div>
-        </li></ul></div>
 <h4>
 <a name="callable_traits.ref_add_member_const.h2"></a>
-      <span class="phrase"><a name="callable_traits.ref_add_member_const.notes"></a></span><a class="link" href="ref_add_member_const.html#callable_traits.ref_add_member_const.notes">Notes</a>
-    </h4>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-          Any enabled calling conventions are preserved on <a class="link" href="glossary.html#callable_traits.glossary.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a> types
-        </li></ul></div>
+          <span class="phrase"><a name="callable_traits.ref_add_member_const.input_output_examples"></a></span><a class="link" href="ref_add_member_const.html#callable_traits.ref_add_member_const.input_output_examples">Input/Output
+          Examples</a>
+        </h4>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                  <p>
+                    <code class="computeroutput"><span class="identifier">T</span></code>
+                  </p>
+                </th>
+<th>
+                  <p>
+                    <code class="computeroutput"><span class="identifier">add_member_const_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+                  </p>
+                </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span>
+                    <span class="keyword">const</span></code>
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="keyword">const</span></code>
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="special">&amp;</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="keyword">const</span> <span class="special">&amp;</span></code>
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="special">&amp;&amp;</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="keyword">const</span> <span class="special">&amp;&amp;</span></code>
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="keyword">const</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="keyword">const</span></code>
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="keyword">volatile</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="keyword">const</span> <span class="keyword">volatile</span></code>
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="identifier">transaction_safe</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="keyword">const</span> <span class="identifier">transaction_safe</span></code>
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    (substitution failure)
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span> <span class="special">(&amp;)()</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    (substitution failure)
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span> <span class="special">(*)()</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    (substitution failure)
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    (substitution failure)
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*</span>
+                    <span class="keyword">const</span><span class="special">)()</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    (substitution failure)
+                  </p>
+                </td>
+</tr>
+</tbody>
+</table></div>
+</li>
+</ul></div>
 <h4>
 <a name="callable_traits.ref_add_member_const.h3"></a>
-      <span class="phrase"><a name="callable_traits.ref_add_member_const.example"></a></span><a class="link" href="ref_add_member_const.html#callable_traits.ref_add_member_const.example">Example</a>
+      <span class="phrase"><a name="callable_traits.ref_add_member_const.example_program"></a></span><a class="link" href="ref_add_member_const.html#callable_traits.ref_add_member_const.example_program">Example
+      Program</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_member_const</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
@@ -109,19 +285,6 @@
     <span class="comment">// or member data pointers.</span>
 <span class="special">}</span>
 </pre>
-<h4>
-<a name="callable_traits.ref_add_member_const.h4"></a>
-      <span class="phrase"><a name="callable_traits.ref_add_member_const.see_also"></a></span><a class="link" href="ref_add_member_const.html#callable_traits.ref_add_member_const.see_also">See
-      Also</a>
-    </h4>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
-<li class="listitem">
-          <a class="link" href="ref_remove_member_const.html" title="remove_member_const"><code class="literal">remove_member_const</code></a>
-        </li>
-<li class="listitem">
-          <a class="link" href="ref_is_const_member.html" title="is_const_member"><code class="literal">is_const_member</code></a>
-        </li>
-</ul></div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>
@@ -133,7 +296,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="ref_add_calling_convention.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_add_member_cv.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="building.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_add_member_cv.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

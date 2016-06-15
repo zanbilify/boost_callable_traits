@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -12,14 +11,20 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+//[add_member_lvalue_reference_hpp
+//`[section:ref_add_member_lvalue_reference add_member_lvalue_reference]
+
 namespace callable_traits {
 
     template<typename T>
     struct add_member_lvalue_reference {
 
-        using type = detail::fail_if_invalid<
-            typename detail::traits<T>::add_member_lvalue_reference,
-            member_qualifiers_are_illegal_for_this_type>;
+        using type = //implementation-defined
+        //<-
+            detail::fail_if_invalid<
+                typename detail::traits<T>::add_member_lvalue_reference,
+                member_qualifiers_are_illegal_for_this_type>;
+        //->
     };
 
     template<typename T>
@@ -27,4 +32,36 @@ namespace callable_traits {
         typename add_member_lvalue_reference<T>::type;
 }
 
+/*`
+[heading Constraints]
+* `T` must be a function type or a member function pointer
+
+[heading Behavior]
+* Adds a member lvalue reference qualifier (`&`) to `T`, if not already present
+* If an rvalue reference qualifier is present, the lvalue reference qualifier replaces it (in accordance with reference collapsing rules)
+
+[heading Input/Output Examples]
+[table
+    [[`T`]                              [`add_member_lvalue_reference_t<T>`]]
+    [[`int()`]                          [`int() &`]]
+    [[`int(foo::*)()`]                  [`int(foo::*)() &`]]
+    [[`int(foo::*)() &`]                [`int(foo::*)() &`]]
+    [[`int(foo::*)() &&`]               [`int(foo::*)() &`]]
+    [[`int(foo::*)() const`]            [`int(foo::*)() const &`]]
+    [[`int(foo::*)() transaction_safe`] [`int(foo::*)() & transaction_safe`]]
+    [[`int`]                            [(substitution failure)]]
+    [[`int (&)()`]                      [(substitution failure)]]
+    [[`int (*)()`]                      [(substitution failure)]]
+    [[`int foo::*`]                     [(substitution failure)]]
+    [[`int (foo::* const)()`]           [(substitution failure)]]
+]
+
+[heading Example Program]
+[import ../example/add_member_lvalue_reference.cpp]
+[add_member_lvalue_reference]
+[endsect]
+*/
+//]
+
 #endif
+

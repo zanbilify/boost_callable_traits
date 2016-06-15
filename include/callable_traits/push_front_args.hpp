@@ -17,7 +17,7 @@ namespace callable_traits {
     namespace detail {
 
         template<bool Sfinae>
-        struct args_push_front_error : sfinae_error {
+        struct push_front_args_error : sfinae_error {
 
             static_assert(Sfinae,
                 "callable_traits::push_front<T, Args...> is "
@@ -26,7 +26,7 @@ namespace callable_traits {
     }
 
     template<typename T, typename... Args>
-    struct args_push_front {
+    struct push_front_args {
 
         using type = detail::fail_if_invalid<
             typename detail::traits<T>::template push_front<Args...>,
@@ -34,8 +34,8 @@ namespace callable_traits {
     };
 
     template<typename T, typename... Args>
-    using args_push_front_t =
-        typename args_push_front<T, Args...>::type;
+    using push_front_args_t =
+        typename push_front_args<T, Args...>::type;
 }
 
 #endif //CALLABLE_TRAITS_PUSH_FRONT_HPP

@@ -8,8 +8,8 @@
 
 #include <callable_traits/arg_at.hpp>
 #include <callable_traits/result_of.hpp>
-#include <callable_traits/pop_front.hpp>
-#include <callable_traits/push_front.hpp>
+#include <callable_traits/pop_front_args.hpp>
+#include <callable_traits/push_front_args.hpp>
 #include <callable_traits/expand_args.hpp>
 #include <callable_traits/replace_args.hpp>
 #include <callable_traits/function_type.hpp>
@@ -338,7 +338,7 @@ struct interface_x_detail {
             typename interface_root::vtable::pmf0>;
 
         using impl = ::intrfc::ct::expand_args_t<
-            ::intrfc::ct::args_pop_front_t<function_type>,
+            ::intrfc::ct::pop_front_args_t<function_type>,
             base_impl0>;
 
         using qualifiers =
@@ -415,7 +415,7 @@ struct interface_x_detail {
             typename interface_root::vtable::pmf1>;
 
         using impl = ::intrfc::ct::expand_args_t<
-            ::intrfc::ct::args_pop_front_t<function_type>,
+            ::intrfc::ct::pop_front_args_t<function_type>,
             base_impl1>;
 
         using qualifiers =
@@ -636,7 +636,7 @@ struct base<i, Ignored> {                                              \
         typename interface_root::vtable::BOOST_PP_CAT(pmf, i)>;        \
                                                                        \
     using impl = ::intrfc::ct::expand_args_t<                          \
-        ::intrfc::ct::args_pop_front_t<function_type>,                 \
+        ::intrfc::ct::pop_front_args_t<function_type>,                 \
         BOOST_PP_CAT(base_impl, i)>;                                   \
                                                                        \
     using qualifiers =                                                 \

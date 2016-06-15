@@ -37,7 +37,7 @@
       <span class="phrase"><a name="callable_traits.ref_function_type.constraints"></a></span><a class="link" href="ref_function_type.html#callable_traits.ref_function_type.constraints">Constraints</a>
     </h4>
 <p>
-      <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="glossary.html#callable_traits.glossary.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a>.
+      <code class="computeroutput"><span class="identifier">T</span></code> must be a [link_simple_callable].
     </p>
 <h4>
 <a name="callable_traits.ref_function_type.h1"></a>
@@ -45,9 +45,8 @@
     </h4>
 <p>
       <code class="computeroutput"><span class="identifier">function_type</span></code> is used to "decay"
-      a <a class="link" href="glossary.html#callable_traits.glossary.ref_simple_callable" title="SimpleCallable"><span class="green">SimpleCallable</span></a>
-      into an <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>-aware
-      <a class="link" href="glossary.html#callable_traits.glossary.ref_simple_fn" title="UnqualifiedFunction"><span class="green">UnqualifiedFunction</span></a>.
+      a [link_simple_callable] into an <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>-aware
+      [link_simple_fn].
     </p>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
@@ -56,8 +55,7 @@
         </li>
 <li class="listitem">
           Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          <a class="link" href="glossary.html#callable_traits.glossary.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>,
-          then:
+          [link_pmf], then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                 Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
@@ -101,8 +99,7 @@
         </li>
 <li class="listitem">
           Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          <a class="link" href="glossary.html#callable_traits.glossary.ref_pmd" title="MemberDataPtr"><span class="green">MemberDataPtr</span></a>,
-          then:
+          [link_pmd], then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                 Let <code class="computeroutput"><span class="identifier">ClassRef</span></code> represent
@@ -130,7 +127,7 @@
         </li>
 <li class="listitem">
           Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          <a class="link" href="glossary.html#callable_traits.glossary.ref_signature" title="Signature"><span class="green">Signature</span></a>:
+          [link_signature]:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                 Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
@@ -148,8 +145,7 @@
         </li>
 <li class="listitem">
           Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          <a class="link" href="glossary.html#callable_traits.glossary.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>,
-          then:
+          [link_simple_fn_obj], then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                 Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
@@ -207,19 +203,6 @@
 <p>
       TODO - PMD and PMF examples
     </p>
-<h4>
-<a name="callable_traits.ref_function_type.h3"></a>
-      <span class="phrase"><a name="callable_traits.ref_function_type.see_also"></a></span><a class="link" href="ref_function_type.html#callable_traits.ref_function_type.see_also">See
-      Also</a>
-    </h4>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
-<li class="listitem">
-          <a class="link" href="ref_args.html" title="args"><code class="literal">args</code></a>
-        </li>
-<li class="listitem">
-          <a class="link" href="ref_result_of.html" title="result_of"><code class="literal">result_of</code></a>
-        </li>
-</ul></div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

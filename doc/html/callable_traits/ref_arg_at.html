@@ -42,15 +42,16 @@
           <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
-                <a class="link" href="glossary.html#callable_traits.glossary.ref_signature" title="Signature"><span class="green">Signature</span></a>
+                [link_signature]
               </li>
 <li class="listitem">
-                <a class="link" href="glossary.html#callable_traits.glossary.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>
+                [link_simple_fn_obj]
               </li>
 </ul></div>
         </li>
 <li class="listitem">
-          When <code class="computeroutput"><span class="identifier">T</span></code> is a <a class="link" href="glossary.html#callable_traits.glossary.ref_signature" title="Signature"><span class="green">Signature</span></a>, then:
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a [link_signature],
+          then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                 Let <code class="computeroutput"><span class="identifier">ArgCount</span></code> represent
@@ -65,8 +66,7 @@
         </li>
 <li class="listitem">
           Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          <a class="link" href="glossary.html#callable_traits.glossary.ref_simple_fn_obj" title="SimpleFunctionObject"><span class="green">SimpleFunctionObject</span></a>,
-          then:
+          [link_simple_fn_obj], then:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                 Let <code class="computeroutput"><span class="identifier">ArgCount</span></code> represent
@@ -90,7 +90,7 @@
         </li>
 <li class="listitem">
           Otherwise, <code class="computeroutput"><span class="identifier">arg_at</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">&gt;</span></code>
-          aliases <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple_element_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> </code><code class="literal">callable_traits::</code><a class="link" href="ref_args.html" title="args"><code class="literal">args</code></a><code class="computeroutput"><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;&gt;</span></code>, such that:
+          aliases <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple_element_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> </code><code class="literal">callable_traits::</code>[link_args]<code class="computeroutput"><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;&gt;</span></code>, such that:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                 <code class="computeroutput"><span class="identifier">arg_at</span><span class="special">&lt;</span><span class="number">0</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">,</span> <span class="keyword">long</span><span class="special">,</span> <span class="keyword">int</span><span class="special">*)&gt;</span></code>
@@ -114,19 +114,6 @@
 <p>
       [arg_at]
     </p>
-<h4>
-<a name="callable_traits.ref_arg_at.h3"></a>
-      <span class="phrase"><a name="callable_traits.ref_arg_at.see_also"></a></span><a class="link" href="ref_arg_at.html#callable_traits.ref_arg_at.see_also">See
-      Also</a>
-    </h4>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
-<li class="listitem">
-          <a class="link" href="ref_args.html" title="args"><code class="literal">args</code></a>
-        </li>
-<li class="listitem">
-          <a class="link" href="ref_expand_args.html" title="expand_args"><code class="literal">expand_args</code></a>
-        </li>
-</ul></div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>
