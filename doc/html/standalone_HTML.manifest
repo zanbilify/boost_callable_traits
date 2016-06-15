@@ -29,7 +29,6 @@ callable_traits/ref_is_reference_member.html
 callable_traits/ref_is_rvalue_reference_member.html
 callable_traits/ref_has_member_qualifiers.html
 callable_traits/ref_is_volatile_member.html
-callable_traits/ref_remove_calling_convention.html
 callable_traits/ref_remove_member_const.html
 callable_traits/ref_remove_member_cv.html
 callable_traits/ref_remove_member_pointer.html

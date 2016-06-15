@@ -22,16 +22,6 @@ CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER - `transaction_safe` when
 */
 
 template<typename Ret, typename T, typename... Args>
-struct add_calling_convention_t<
-    Ret(T::*)(Args...)
-        CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE,
-    CALLABLE_TRAITS_CC_TAG> {
-
-    // todo - why is CALLABLE_TRAITS_INCLUDE_QUALIFIERS not used here? Fix, or add comment to explain
-    using type = Ret(CALLABLE_TRAITS_CC T::*)(Args...) CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
-};
-
-template<typename Ret, typename T, typename... Args>
 struct has_calling_convention_t<
     Ret(CALLABLE_TRAITS_CC T::*)(Args...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS
         CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE,

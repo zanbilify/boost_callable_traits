@@ -32,7 +32,6 @@
 [template function_types[][^Boost.FunctionTypes]]
 
 [/ *** reference links ***
-[template link_add_calling_convention[][link callable_traits.ref_add_calling_convention [^add_calling_convention]]]
 [template link_add_member_const[][link callable_traits.ref_add_member_const [^add_member_const]]]
 [template link_add_member_cv[][link callable_traits.ref_add_member_cv [^add_member_cv]]]
 [template link_add_member_lvalue_reference[][link callable_traits.ref_add_member_lvalue_reference [^add_member_lvalue_reference]]]
@@ -57,7 +56,6 @@
 [template link_has_member_qualifiers[][link callable_traits.ref_has_member_qualifiers [^has_member_qualifiers]]]
 [template link_is_volatile_member[][link callable_traits.ref_is_volatile_member [^is_volatile_member]]]
 [template link_qualified_function_type[][link callable_traits.ref_qualified_function_type [^qualified_function_type]]]
-[template link_remove_calling_convention[][link callable_traits.ref_remove_calling_convention [^remove_calling_convention]]]
 [template link_remove_member_const[][link callable_traits.ref_remove_member_const [^remove_member_const]]]
 [template link_remove_member_cv[][link callable_traits.ref_remove_member_cv [^remove_member_cv]]]
 [template link_remove_member_pointer[][link callable_traits.ref_remove_member_pointer [^remove_member_pointer]]]
@@ -79,7 +77,7 @@
 [import ../example/overview.cpp]
 [overview]
 
-[libname] is a C++11/14/17 header-only library for the inspection, synthesis, and decomposition of callable types. Whether it's calling conventions, `const volatile &&`, or container-like manipulation of parameter lists, [libname] provides all the tools you need to *completely rid your codebase of function type specializations*. While not for everyone, [libname] offers a comprehensive, fine-grained assortment of traits and metafunctions for building and ripping apart C++'s most complicated and obscure types with ease. [libname] fills the gaps where existing library solutions fall short, aiming to be the "complete type manipulation facility for function types" mentioned in the last section of [@http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html p0172], the C++17 proposal regarding "abominable function types". [libname] currently supports GCC 4.8 and later, Clang 3.5 and later, AppleClang from XCode 6.3 and later, and Visual Studio 2015.
+[libname] is a C++11/14/17 header-only library for the inspection, synthesis, and decomposition of callable types. From `const volatile &&` to container-like manipulation of parameter lists, [libname] provides all the tools you need to rid your codebase of function type specializations. [libname] offers a comprehensive, fine-grained assortment of traits and metafunctions for building and ripping apart C++'s most complicated and obscure types with ease. [libname] fills the gaps where existing library solutions fall short, aiming to be the "complete type manipulation facility for function types" mentioned in the last section of [@http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html p0172], the C++17 proposal regarding "abominable function types". [libname] currently supports GCC 4.8 and later, Clang 3.5 and later, AppleClang from XCode 6.3 and later, and Visual Studio 2015.
 
 [libname] is header-only, and does not depend on any headers outside the standard library.
 
@@ -332,49 +330,6 @@ To include the experimental examples for calling conventions in the build, appen
 
 [endsect][/section:building]
 
-[/[section:ref_add_calling_convention add_calling_convention]
-
-[warning This feature is currently considered experimental. Your [feedback] is much appreciated! ]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T, typename CcTag>
-		using add_calling_convention = /* implementation-defined */;
-		
-	}
-
-[heading Constraints]
-* `T` must be a [link_fn_ptr] or [link_pmf]
-* `CcTag` must be a [link_cc_tag]
-
-[heading Behavior]
-Adds the calling convention specified by `CcTag` to the pointer type `T`.
-
-[heading Notes]
-
-For `add_calling_convention` to work as-intended, you must:
-
-# Be programming on a platform that supports adding the desired calling convention to type `T`
-# Define one or more of the following macros before including any [libname] headers:
- * `CALLABLE_TRAITS_ENABLE_CDECL` for `__cdecl`
- * `CALLABLE_TRAITS_ENABLE_STDCALL` for `__stdcall`
- * `CALLABLE_TRAITS_ENABLE_FASTCALL` for `__fastcall`
- * `CALLABLE_TRAITS_ENABLE_PASCAL` for `pascal`
-
-[heading Example - [^__fastcall] to [^__stdcall]]
-[import ../example/experimental_changing_calling_conventions.cpp]
-[experimental_changing_calling_conventions]
-[heading Example - [^__cdecl]]
-[import ../example/experimental_calling_convention_cdecl.cpp]
-[experimental_calling_convention_cdecl]
-
-[/[heading See Also]
-* [link_remove_calling_convention]
-* [link_has_calling_convention]]
-
-[endsect][/section:ref_add_calling_convention] END COMMENTED OUT DOCUMENTATION]
-
-
 [import ../include/callable_traits/add_member_const.hpp]
 [add_member_const_hpp]
 
@@ -393,35 +348,8 @@ For `add_calling_convention` to work as-intended, you must:
 [import ../include/callable_traits/add_transaction_safe.hpp]
 [add_transaction_safe_hpp]
 
-[section:ref_add_varargs add_varargs]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T>
-		using add_varargs = /* implementation-defined */;
-	}
-	
-[heading Constraints]
-
-`T` must be one of the following:
-
-* [link_fn]
-* [link_fn_ptr]
-* [link_fn_ref]
-* [link_pmf]
-
-[heading Behavior]
-* Adds C-style variadics (`...`) to the signature of `T` (if not already present), such that:
-  * `add_varargs<int()>` aliases `int(...)`
-  * `add_varargs<int(*)()>` aliases `int(*)(int, ...)`
-  * `add_varargs<int(&)()>` aliases `int(&)(int, ...)`
-  * `add_varargs<int(foo::*)() const>` aliases `int(foo::*)(...) const`
- 
-[heading Example]
-[import ../example/add_varargs.cpp]
-[add_varargs]
-
-[endsect][/section:ref_add_varargs]
+[import ../include/callable_traits/add_varargs.hpp]
+[add_varargs_hpp]
 
 [section:ref_apply_member_pointer apply_member_pointer]
 
@@ -769,10 +697,6 @@ For `has_calling_convention` to work as-intended, you must:
 [heading Example - [^__fastcall] to [^__stdcall]]
 [experimental_changing_calling_conventions]
 
-[/[heading See Also]
-* [link_add_calling_convention]
-* [link_remove_calling_convention]]
-
 [endsect]
 
 [section:ref_has_varargs has_varargs]
@@ -867,12 +791,6 @@ TODO
 [heading Example]
 [/import ../example/is_volatile_member.cpp]
 [is_volatile_member]
-[endsect]
-
-[section:ref_remove_calling_convention remove_calling_convention]
-TODO
-[heading Example - [^__fastcall] to [^__stdcall]]
-[experimental_changing_calling_conventions]
 [endsect]
 
 [section:ref_remove_member_const remove_member_const]

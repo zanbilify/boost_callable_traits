@@ -23,11 +23,6 @@ namespace callable_traits {
     namespace detail {
 
         template<typename T, typename Tag>
-        struct add_calling_convention_t {
-            using type = invalid_type;
-        };
-
-        template<typename T, typename Tag>
         struct has_calling_convention_t {
             using type = std::false_type;
         };

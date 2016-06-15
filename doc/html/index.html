@@ -83,7 +83,6 @@
 <dt><span class="section"><a href="callable_traits/ref_is_rvalue_reference_member.html">is_rvalue_reference_member</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_has_member_qualifiers.html">has_member_qualifiers</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_is_volatile_member.html">is_volatile_member</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_remove_calling_convention.html">remove_calling_convention</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_remove_member_const.html">remove_member_const</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_remove_member_cv.html">remove_member_cv</a></span></dt>
 <dt><span class="section"><a href="callable_traits/ref_remove_member_pointer.html">remove_member_pointer</a></span></dt>
@@ -233,12 +232,9 @@
 </pre>
 <p>
       <code class="literal">CallableTraits</code> is a C++11/14/17 header-only library for
-      the inspection, synthesis, and decomposition of callable types. Whether it's
-      calling conventions, <code class="computeroutput"><span class="keyword">const</span> <span class="keyword">volatile</span>
-      <span class="special">&amp;&amp;</span></code>, or container-like manipulation
-      of parameter lists, <code class="literal">CallableTraits</code> provides all the tools
-      you need to <span class="bold"><strong>completely rid your codebase of function
-      type specializations</strong></span>. While not for everyone, <code class="literal">CallableTraits</code>
+      the inspection, synthesis, and decomposition of callable types. From <code class="computeroutput"><span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;</span></code> to container-like manipulation of
+      parameter lists, <code class="literal">CallableTraits</code> provides all the tools you
+      need to rid your codebase of function type specializations. <code class="literal">CallableTraits</code>
       offers a comprehensive, fine-grained assortment of traits and metafunctions
       for building and ripping apart C++'s most complicated and obscure types with
       ease. <code class="literal">CallableTraits</code> fills the gaps where existing library

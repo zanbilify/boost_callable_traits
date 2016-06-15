@@ -56,7 +56,7 @@ namespace callable_traits {
   * member function pointer
 
 [heading Behavior]
-* Adds a `transaction_safe` specifier to `T` (if not already present)
+* Adds a `transaction_safe` specifier to `T`, if not already present
 
 [heading Input/Output Examples]
 [table

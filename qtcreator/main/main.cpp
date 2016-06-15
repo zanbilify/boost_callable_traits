@@ -1,29 +1,48 @@
-#include <tuple>
-#include <utility>
+/*<-
+Copyright (c) 2016 Barrett Adair
+
+Distributed under the Boost Software License, Version 1.0.
+(See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
+->*/
+
+#include <callable_traits/config.hpp>
+#ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+int main(){ return 0; }
+#else
+
+//[ function_type
 #include <type_traits>
 #include <callable_traits/callable_traits.hpp>
 
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
-
 namespace ct = callable_traits;
 
-template<int I>
-struct N {};
+template<typename T>
+void test(){
 
-struct foo;
-
-template<typename... Ts>
-using sig = int(&)(Ts...);
+    // this example shows how callable_traits::function_type_t
+    // bevaves consistently for many different types
+    using type = ct::function_type_t<T>;
+    using expect = void(int, float&, const char*);
+    static_assert(std::is_same<expect, type>{}, "");
+}
 
 int main() {
 
-    {
-        using f = sig<N<0>, N<1>, N<2>, N<3>, N<4>>;
-        using test = ct::args_push_front_t<f, int, char>;
-        using expect = sig<int, char, N<0>, N<1>, N<2>, N<3>, N<4>>;
-        CT_ASSERT(std::is_same<test, expect>::value);
-    }
-}
+    auto lamda = [](int, float&, const char*){};
+    using lam = decltype(lamda);
+    test<lam>();
 
+    using function_ptr = void(*)(int, float&, const char*);
+    test<function_ptr>();
+
+    using function_ref = void(&)(int, float&, const char*);
+    test<function_ref>();
+
+    using function = void(int, float&, const char*);
+    test<function>();
+
+    using abominable = void(int, float&, const char*) const;
+    test<abominable>();
+}
+//]
+#endif //#ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS

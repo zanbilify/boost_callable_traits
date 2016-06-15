@@ -26,41 +26,47 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_add_varargs"></a><a class="link" href="ref_add_varargs.html" title="add_varargs">add_varargs</a>
 </h2></div></div></div>
-<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">add_varargs</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span><span class="special">;</span>
+    <span class="keyword">struct</span> <span class="identifier">add_varargs</span> <span class="special">{</span>
+
+        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+    <span class="special">};</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+    <span class="keyword">using</span> <span class="identifier">add_varargs_t</span> <span class="special">=</span> <span class="keyword">typename</span> <span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span><span class="special">;</span>
 <span class="special">}</span>
 </pre>
 <h4>
 <a name="callable_traits.ref_add_varargs.h0"></a>
       <span class="phrase"><a name="callable_traits.ref_add_varargs.constraints"></a></span><a class="link" href="ref_add_varargs.html#callable_traits.ref_add_varargs.constraints">Constraints</a>
     </h4>
-<p>
-      <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
-    </p>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+          <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
-          [link_fn]
-        </li>
+                function type
+              </li>
 <li class="listitem">
-          [link_fn_ptr]
-        </li>
+                function pointer
+              </li>
 <li class="listitem">
-          [link_fn_ref]
-        </li>
+                function reference
+              </li>
 <li class="listitem">
-          [link_pmf]
-        </li>
+                member function pointer
+              </li>
 </ul></div>
+        </li></ul></div>
 <h4>
 <a name="callable_traits.ref_add_varargs.h1"></a>
       <span class="phrase"><a name="callable_traits.ref_add_varargs.behavior"></a></span><a class="link" href="ref_add_varargs.html#callable_traits.ref_add_varargs.behavior">Behavior</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
           Adds C-style variadics (<code class="computeroutput"><span class="special">...</span></code>)
-          to the signature of <code class="computeroutput"><span class="identifier">T</span></code> (if
-          not already present), such that:
+          to the signature of <code class="computeroutput"><span class="identifier">T</span></code>,
+          if not already present
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
                 <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">()&gt;</span></code>
@@ -84,6 +90,195 @@
         </li></ul></div>
 <h4>
 <a name="callable_traits.ref_add_varargs.h2"></a>
+      <span class="phrase"><a name="callable_traits.ref_add_varargs.input_output_examples"></a></span><a class="link" href="ref_add_varargs.html#callable_traits.ref_add_varargs.input_output_examples">Input/Output
+      Examples</a>
+    </h4>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+              <p>
+                <code class="computeroutput"><span class="identifier">T</span></code>
+              </p>
+            </th>
+<th>
+              <p>
+                <code class="computeroutput"><span class="identifier">add_varargs_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+              </p>
+            </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(...)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="special">...)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="special">(&amp;)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(...)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="special">(*)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(...)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="special">(*)(...)</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(...)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(...)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="special">&amp;</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(...)</span>
+                <span class="special">&amp;</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="special">&amp;&amp;</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(...)</span>
+                <span class="special">&amp;&amp;</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="keyword">const</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(...)</span>
+                <span class="keyword">const</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="identifier">transaction_safe</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(...)</span>
+                <span class="identifier">transaction_safe</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                (substitution failure)
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                (substitution failure)
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="special">(*&amp;)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                (substitution failure)
+              </p>
+            </td>
+</tr>
+</tbody>
+</table></div>
+<h4>
+<a name="callable_traits.ref_add_varargs.h3"></a>
       <span class="phrase"><a name="callable_traits.ref_add_varargs.example"></a></span><a class="link" href="ref_add_varargs.html#callable_traits.ref_add_varargs.example">Example</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>

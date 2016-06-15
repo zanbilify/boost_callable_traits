@@ -20,15 +20,6 @@ CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER - `transaction_safe` when
 */
 
 template<typename Ret, typename... Args>
-struct add_calling_convention_t<
-    Ret(*)(Args...) CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE,
-    CALLABLE_TRAITS_CC_TAG> {
-
-    using type = CALLABLE_TRAITS_ST Ret(CALLABLE_TRAITS_CC*)(Args...)
-        CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
-};
-
-template<typename Ret, typename... Args>
 struct has_calling_convention_t<
     CALLABLE_TRAITS_ST Ret(CALLABLE_TRAITS_CC*)(Args...) CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE,
     CALLABLE_TRAITS_CC_TAG> {
@@ -50,8 +41,6 @@ struct function<
     using return_type = Return;
 
     using arg_types = std::tuple<Args...>;
-
-    using remove_calling_convention = Return(*)(Args...) CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
 
     using type = CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(Args...)
         CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;

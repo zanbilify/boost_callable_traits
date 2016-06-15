@@ -36,7 +36,7 @@ namespace callable_traits {
 * `T` must be a function type or a member function pointer
 
 [heading Behavior]
-* Adds a member volatile qualifier to `T` (if not already present)
+* Adds a member volatile qualifier to `T`, if not already present
 
 [heading Input/Output Examples]
 [table

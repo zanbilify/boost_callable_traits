@@ -11,7 +11,6 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_CALLABLE_TRAITS_HPP
 
 #include <callable_traits/detail/core.hpp>
-#include <callable_traits/add_calling_convention.hpp>
 #include <callable_traits/add_member_const.hpp>
 #include <callable_traits/add_member_cv.hpp>
 #include <callable_traits/add_member_lvalue_reference.hpp>
@@ -27,7 +26,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/function_type.hpp>
 #include <callable_traits/get_member_qualifier_flags.hpp>
 #include <callable_traits/get_qualifier_flags.hpp>
-#include <callable_traits/has_calling_convention.hpp>
 #include <callable_traits/has_member_qualifiers.hpp>
 #include <callable_traits/has_varargs.hpp>
 #include <callable_traits/has_void_return.hpp>
