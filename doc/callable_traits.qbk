@@ -351,50 +351,14 @@ To include the experimental examples for calling conventions in the build, appen
 [import ../include/callable_traits/add_varargs.hpp]
 [add_varargs_hpp]
 
-[section:ref_apply_member_pointer apply_member_pointer]
+[import ../include/callable_traits/apply_member_pointer.hpp]
+[apply_member_pointer_hpp]
 
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T, typename Class>
-		using apply_member_pointer = /* implementation-defined */;
-		
-	}
-	
-[heading Constraints]
-
-`T` must be one of the following:
-
-* [link_fn]
-* [link_fn_ptr]
-* [link_fn_ref]
-* [link_member_ptr]
-
-[heading Behavior]
-* When the constraints are violated, a substitution failure occurs.
-* Otherwise, `apply_member_pointer<T, Class>` aliases [^[Return] ( [CallingConvention] [*Class]::* ) ( [Args] [VarArgs] ) [MemberQualifiers]]
-
-[heading Example]
-[import ../example/apply_member_pointer.cpp]
-[apply_member_pointer]
-
-[/[heading See Also]
-* [link_remove_member_pointer]]
-
-[endsect][/section:ref_apply_member_pointer]
-
-
-
-
+[import ../include/callable_traits/apply_return.hpp]
+[apply_return_hpp]
 
 [section:ref_apply_return apply_return]
 
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T, typename NewReturn>
-		using apply_return = /* implementation-defined */;
-		
-	}
-	
 [heading Constraints]
 
 `T` must be a [link_signature] or a [link_pmd].

@@ -26,32 +26,47 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_apply_member_pointer"></a><a class="link" href="ref_apply_member_pointer.html" title="apply_member_pointer">apply_member_pointer</a>
 </h2></div></div></div>
-<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">Class</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">apply_member_pointer</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span><span class="special">;</span>
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">C</span><span class="special">&gt;</span>
+    <span class="keyword">struct</span> <span class="identifier">apply_member_pointer</span> <span class="special">{</span>
 
+        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+    <span class="special">};</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">C</span><span class="special">&gt;</span>
+    <span class="keyword">using</span> <span class="identifier">apply_member_pointer_t</span> <span class="special">=</span>
+        <span class="keyword">typename</span> <span class="identifier">apply_member_pointer</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">C</span><span class="special">&gt;::</span><span class="identifier">type</span><span class="special">;</span>
 <span class="special">}</span>
 </pre>
 <h4>
 <a name="callable_traits.ref_apply_member_pointer.h0"></a>
       <span class="phrase"><a name="callable_traits.ref_apply_member_pointer.constraints"></a></span><a class="link" href="ref_apply_member_pointer.html#callable_traits.ref_apply_member_pointer.constraints">Constraints</a>
     </h4>
-<p>
-      <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
-    </p>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-          [link_fn]
+          <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                function
+              </li>
+<li class="listitem">
+                function pointer
+              </li>
+<li class="listitem">
+                function reference
+              </li>
+<li class="listitem">
+                member function pointer
+              </li>
+<li class="listitem">
+                member data pointer
+              </li>
+</ul></div>
         </li>
 <li class="listitem">
-          [link_fn_ptr]
-        </li>
-<li class="listitem">
-          [link_fn_ref]
-        </li>
-<li class="listitem">
-          [link_member_ptr]
+          <code class="computeroutput"><span class="identifier">C</span></code> must be a user-defined
+          type
         </li>
 </ul></div>
 <h4>
@@ -60,16 +75,199 @@
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-          When the constraints are violated, a substitution failure occurs.
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a function, function
+          pointer, or function reference, then the aliased type is a member function
+          pointer of <code class="computeroutput"><span class="identifier">C</span></code> with the same
+          parameters and return type
         </li>
 <li class="listitem">
-          Otherwise, <code class="computeroutput"><span class="identifier">apply_member_pointer</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">Class</span><span class="special">&gt;</span></code> aliases <code class="literal">[Return] ( [CallingConvention]
-          <span class="bold"><strong>Class</strong></span>::* ) ( [Args] [VarArgs] ) [MemberQualifiers]</code>
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a member function
+          pointer of any type, the aliased type is a member function pointer of
+          <code class="computeroutput"><span class="identifier">C</span></code> with the same parameters
+          and return type
         </li>
 </ul></div>
 <h4>
 <a name="callable_traits.ref_apply_member_pointer.h2"></a>
-      <span class="phrase"><a name="callable_traits.ref_apply_member_pointer.example"></a></span><a class="link" href="ref_apply_member_pointer.html#callable_traits.ref_apply_member_pointer.example">Example</a>
+      <span class="phrase"><a name="callable_traits.ref_apply_member_pointer.input_output_examples"></a></span><a class="link" href="ref_apply_member_pointer.html#callable_traits.ref_apply_member_pointer.input_output_examples">Input/Output
+      Examples</a>
+    </h4>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+              <p>
+                <code class="computeroutput"><span class="identifier">T</span></code>
+              </p>
+            </th>
+<th>
+              <p>
+                <code class="computeroutput"><span class="identifier">apply_member_pointer_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;</span></code>
+              </p>
+            </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="special">(&amp;)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="special">(*)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">bar</span><span class="special">::*)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">bar</span><span class="special">::*)()</span>
+                <span class="special">&amp;</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="special">&amp;</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">bar</span><span class="special">::*)()</span>
+                <span class="special">&amp;&amp;</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="special">&amp;&amp;</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">bar</span><span class="special">::*)()</span>
+                <span class="keyword">const</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="keyword">const</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">bar</span><span class="special">::*)()</span>
+                <span class="identifier">transaction_safe</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="identifier">transaction_safe</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">bar</span><span class="special">::*</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                (substitution failure)
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">bar</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                (substitution failure)
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="special">(*</span><span class="keyword">const</span><span class="special">)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                (substitution failure)
+              </p>
+            </td>
+</tr>
+</tbody>
+</table></div>
+<h4>
+<a name="callable_traits.ref_apply_member_pointer.h3"></a>
+      <span class="phrase"><a name="callable_traits.ref_apply_member_pointer.example_program"></a></span><a class="link" href="ref_apply_member_pointer.html#callable_traits.ref_apply_member_pointer.example_program">Example
+      Program</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">apply_member_pointer</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>

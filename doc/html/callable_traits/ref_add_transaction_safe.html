@@ -47,7 +47,7 @@
           <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
-                function type
+                function
               </li>
 <li class="listitem">
                 function pointer
@@ -247,13 +247,12 @@
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_transaction_safe</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">using</span> <span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">add_transaction_safe_t</span><span class="special">;</span>
-<span class="keyword">using</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same_v</span><span class="special">;</span>
 
 <span class="keyword">using</span> <span class="identifier">not_safe</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">();</span>
 <span class="keyword">using</span> <span class="identifier">safe</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">()</span> <span class="identifier">transaction_safe</span><span class="special">;</span>
 <span class="keyword">using</span> <span class="identifier">safe_added</span> <span class="special">=</span> <span class="identifier">add_transaction_safe_t</span><span class="special">&lt;</span><span class="identifier">not_safe</span><span class="special">&gt;;</span>
 
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same_v</span><span class="special">&lt;</span><span class="identifier">safe</span><span class="special">,</span> <span class="identifier">safe_added</span><span class="special">&gt;,</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">safe</span><span class="special">,</span> <span class="identifier">safe_added</span><span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
 </pre>

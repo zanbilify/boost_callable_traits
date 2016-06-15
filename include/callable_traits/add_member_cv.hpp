@@ -33,7 +33,7 @@ namespace callable_traits {
 
 /*`
 [heading Constraints]
-* `T` must be a function type or a member function pointer
+* `T` must be a function or a member function pointer
 
 [heading Behavior]
 * Adds member `const` and `volatile` qualifiers to `T`, if not already present

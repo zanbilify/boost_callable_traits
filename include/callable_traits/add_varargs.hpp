@@ -35,7 +35,7 @@ namespace callable_traits {
 /*`
 [heading Constraints]
 * `T` must be one of the following:
-  * function type
+  * function
   * function pointer
   * function reference
   * member function pointer
