@@ -86,7 +86,7 @@ matrix:
     - env: UNIT_TESTS=true LLVM_VERSION=default STDLIB=libstdc++ BOOST_VERSION=default
 
     # GCC 6
-    - env: UNIT_TESTS=true CXX=g++-6 STDLIB=libstdc++ BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=17 GCC_VERSION=6 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: g++
       addons:
@@ -95,7 +95,7 @@ matrix:
           sources: *sources
 
     # GCC 5.2
-    - env: UNIT_TESTS=true CXX=g++-5 STDLIB=libstdc++ BOOST_VERSION=default
+    - env: UNIT_TESTS=true GCC_VERSION=5 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: g++
       addons:
@@ -104,7 +104,7 @@ matrix:
           sources: *sources
 
     # GCC 4.9
-    - env: UNIT_TESTS=true CXX=g++-4.9 STDLIB=libstdc++ BOOST_VERSION=default
+    - env: UNIT_TESTS=true GCC_VERSION=4.9 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: g++
       addons:
@@ -113,7 +113,7 @@ matrix:
           sources: *sources
 
     # GCC 4.8
-    - env: UNIT_TESTS=true CPP=1y CXX=g++-4.8 STDLIB=libstdc++ BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=1y GCC_VERSION=4.8 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: g++
       addons:
@@ -124,6 +124,7 @@ matrix:
 before_install:
 
   - if [ -z "$CPP" ]; then export CPP="14"; fi
+  - if [[ "${GCC_VERSION}" != "" ]]; then export CXX="g++-${GCC_VERSION}"; fi
   
 install:
   ############################################################################
