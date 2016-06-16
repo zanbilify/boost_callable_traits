@@ -28,7 +28,7 @@ env:
 addons:
   apt:
     packages:
-      - g++-5
+      - g++-6
     sources: &sources
       - ubuntu-toolchain-r-test
 
@@ -91,7 +91,6 @@ matrix:
       compiler: gcc
       addons:
         apt:
-          packages: ["gcc-6"]
           sources: *sources
 
     # GCC 5.2
