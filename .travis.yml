@@ -124,8 +124,7 @@ matrix:
 before_install:
 
   - if [ -z "$CPP" ]; then export CPP="14"; fi
-  - if [[ "${GCC_VERSION}" != "" ]]; then export CXX="g++-${GCC_VERSION}"; fi
-  
+
 install:
   ############################################################################
   # All the dependencies are installed in ${TRAVIS_BUILD_DIR}/deps/
@@ -228,6 +227,7 @@ before_script:
   # Go back to the root of the project and setup the build directory
   ############################################################################
   - cd ${TRAVIS_BUILD_DIR}
+  - if [[ "${GCC_VERSION}" != "" ]]; then export CXX="g++-${GCC_VERSION}"; fi
   - (mkdir build && cd build && cmake .. -DCMAKE_CXX_COMPILER=${CXX} -DBUILD_CXX_STD=$CPP ${CMAKE_OPTIONS} )
 
 script:
