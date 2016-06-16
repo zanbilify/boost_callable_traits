@@ -85,7 +85,7 @@ matrix:
     # Build with libstdc++ instead of libc++
     - env: UNIT_TESTS=true LLVM_VERSION=default STDLIB=libstdc++ BOOST_VERSION=default
 
-     GCC 6
+    # GCC 6
     - env: UNIT_TESTS=true CXX=g++-6 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: g++
