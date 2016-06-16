@@ -23,7 +23,7 @@ namespace callable_traits {
     namespace detail {
 
         template<typename T>
-        struct pmd : default_callable_traits {};
+        struct pmd : default_callable_traits<T> {};
 
         template<typename T, T Value>
         struct pmd <std::integral_constant<T, Value>> {
@@ -33,7 +33,7 @@ namespace callable_traits {
 
         template<typename D, typename T>
         struct pmd<D T::*>
-            : default_callable_traits, qualifier_traits<dummy> {
+            : default_callable_traits<>, qualifier_traits<dummy> {
                 
             static constexpr bool value = true;
 

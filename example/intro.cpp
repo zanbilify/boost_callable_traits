@@ -27,30 +27,26 @@ struct foo {
 int main() {
 
     // indexed argument types
-    using second_arg = ct::arg_at<1, foo>;
+    using second_arg = ct::arg_at_t<1, foo>;
     static_assert(std::is_same<second_arg, int&&>::value, "");
 
     // arg types are packaged into std::tuple, which serves as the default
     // type list in ``[libname]`` (runtime capabilities are not used).
-    using args = ct::args<foo>;
+    using args = ct::args_t<foo>;
     using expected_args = std::tuple<int, int&&, const int&, void*>;
     static_assert(std::is_same<args, expected_args>::value, "");
 
     // ``[namespace_scoped]``function_type "decays" a callable type to a plain
     // function type, which is structured in terms of INVOKE.
-    using function_type = ct::function_type<foo>;
+    using function_type = ct::function_type_t<foo>;
     using expected_function_type = void(int, int&&, const int&, void*);
     static_assert(std::is_same<function_type, expected_function_type>::value, "");
 
-    // By design, the ``[libname]`` interface uses constexpr functions accepting
-    // objects and returning std::integral_constants (whenever sensible). However,
-    // for those times where you don't have an object at hand, you can also pass
-    // the type of that object only:
-    static_assert(ct::has_void_return<foo>(), ""); //with type
-    static_assert(ct::has_void_return(foo{}), ""); //with object
+    // quick check for void return
+    static_assert(ct::has_void_return<foo>::value, ""); //with type
 
     // C-style variadics detection (e.g. an ellipses in a signature)
-    static_assert(!ct::has_varargs<foo>(), "");
+    static_assert(!ct::has_varargs<foo>::value, "");
 
     // For function objects, the following checks are determined by the
     // function qualifiers on operator(), rather than the qualifiers on
@@ -77,12 +73,12 @@ int main() {
 
     // ``[libname]`` lets you manipulate qualifiers on PMF types.
     // To remove const:
-    using mutable_pmf = ct::remove_member_const<pmf>;
+    using mutable_pmf = ct::remove_member_const_t<pmf>;
     using without_const = void (foo::*)(int, int&&, const int&, void*) /*no const!*/;
     static_assert(std::is_same<mutable_pmf, without_const>::value, "");
 
     // To add an rvalue qualifier:
-    using rvalue_pmf = ct::add_member_rvalue_reference<pmf>;
+    using rvalue_pmf = ct::add_member_rvalue_reference_t<pmf>;
     using with_rvalue = void (foo::*)(int, int&&, const int&, void*) const &&;
     static_assert(std::is_same<rvalue_pmf, with_rvalue>::value, "");
 
@@ -96,14 +92,14 @@ int main() {
     // for more examples.
 
     // To remove a member pointer:
-    using fn = ct::remove_member_pointer<pmf>;
+    using fn = ct::remove_member_pointer_t<pmf>;
     using expected_fn = void (int, int&&, const int&, void*) const;
     static_assert(std::is_same<fn, expected_fn>::value, "");
 
     // We just created an abominable function type - notice the const
     // qualifier. ``[namespace_scoped]``remove_member_const accepts abominable
     // types too (and so does any feature where it is legal to do so):
-    using not_abominable = ct::remove_member_const<fn>;
+    using not_abominable = ct::remove_member_const_t<fn>;
     using expected_fn2 = void (int, int&&, const int&, void*);
     static_assert(std::is_same<not_abominable, expected_fn2>::value, "");
 }

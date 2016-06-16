@@ -20,7 +20,7 @@ struct foo;
 
 template<typename T, typename Expect>
 void test() {
-    using U = ct::remove_member_pointer<T>;
+    using U = ct::remove_member_pointer_t<T>;
     static_assert(std::is_same<Expect, U>{}, "");
 }
 

@@ -11,22 +11,32 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_HAS_MEMBER_QUALIFIERS_HPP
 
 #include <callable_traits/detail/traits.hpp>
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 
     template<typename T>
-    inline constexpr auto
-    has_member_qualifiers() {
-        return typename detail::traits<T>::has_member_qualifiers{};
-    }
-    
+    struct has_member_qualifiers
+        : detail::traits<T>::has_member_qualifiers {
+        using type = typename detail::traits<T>::has_member_qualifiers;
+    };
+
+    #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+
     template<typename T>
-    inline constexpr auto
-    has_member_qualifiers(T&&) {
-        using no_ref = typename std::remove_reference<T>::type;
-        return typename detail::traits<no_ref>::has_member_qualifiers{};
-    }
+    struct has_member_qualifiers_v {
+        static_assert(sizeof(T) < 1,
+            "Variable templates not supported on this compiler.");
+    };
+
+    #else
+
+    template<typename T>
+    constexpr bool has_member_qualifiers_v =
+        detail::traits<T>::has_member_qualifiers::value;
+
+    #endif
+
 }
 
 #endif //CALLABLE_TRAITS_HAS_MEMBER_QUALIFIERS_HPP

@@ -20,16 +20,18 @@ namespace callable_traits {
         template<typename T>
         struct has_normal_call_operator
         {
-            template<typename N, N Value> struct check { check(std::nullptr_t) {} };
+            template<typename N, N Value>
+            struct check { check(std::nullptr_t) {} };
 
             template<typename U>
-            static std::int8_t test(check<decltype(&U::operator()), &U::operator()>);
+            static std::int8_t test(
+                check<decltype(&U::operator()), &U::operator()>);
 
             template<typename>
             static std::int16_t test(...);
 
-            static constexpr bool value = sizeof(test<T>(nullptr)) == sizeof(std::int8_t);
-
+            static constexpr bool value =
+                sizeof(test<T>(nullptr)) == sizeof(std::int8_t);
         };
 
         struct callable_dummy {
@@ -38,7 +40,7 @@ namespace callable_traits {
 
         template<typename T>
         struct ambiguous_function_object_traits
-            : qualifier_traits<T>, default_callable_traits {};
+            : qualifier_traits<T>, default_callable_traits<T> {};
 
         template<typename T>
         using default_to_function_object = typename std::conditional<
@@ -54,7 +56,8 @@ namespace callable_traits {
             ambiguous_function_object_traits<T>
         >::type;
 
-        template<typename T, typename Base = function_object_base<shallow_decay<T>>>
+        template<typename T, typename Base =
+            function_object_base<shallow_decay<T>>>
         struct function_object;
     }
 }

@@ -41,18 +41,18 @@ int main() {
         using cvl = char(foo::*)(foo*, int) const volatile LREF;
         using cvr = char(foo::*)(foo*, int) const volatile RREF;
 
-        CT_ASSERT(std::is_same<f,  ct::remove_member_volatile<f>>{});
-        CT_ASSERT(std::is_same<l,  ct::remove_member_volatile<vl>>{});
-        CT_ASSERT(std::is_same<l,  ct::remove_member_volatile<l>>{});
-        CT_ASSERT(std::is_same<f,  ct::remove_member_volatile<v>>{});
-        CT_ASSERT(std::is_same<r,  ct::remove_member_volatile<r>>{});
-        CT_ASSERT(std::is_same<r,  ct::remove_member_volatile<vr>>{});
-        CT_ASSERT(std::is_same<c,  ct::remove_member_volatile<c>>{});
-        CT_ASSERT(std::is_same<c,  ct::remove_member_volatile<cv>>{});
-        CT_ASSERT(std::is_same<cl, ct::remove_member_volatile<cl>>{});
-        CT_ASSERT(std::is_same<cl, ct::remove_member_volatile<cvl>>{});
-        CT_ASSERT(std::is_same<cr, ct::remove_member_volatile<cr>>{});
-        CT_ASSERT(std::is_same<cr, ct::remove_member_volatile<cvr>>{});
+        CT_ASSERT(std::is_same<f,  ct::remove_member_volatile_t<f>>{});
+        CT_ASSERT(std::is_same<l,  ct::remove_member_volatile_t<vl>>{});
+        CT_ASSERT(std::is_same<l,  ct::remove_member_volatile_t<l>>{});
+        CT_ASSERT(std::is_same<f,  ct::remove_member_volatile_t<v>>{});
+        CT_ASSERT(std::is_same<r,  ct::remove_member_volatile_t<r>>{});
+        CT_ASSERT(std::is_same<r,  ct::remove_member_volatile_t<vr>>{});
+        CT_ASSERT(std::is_same<c,  ct::remove_member_volatile_t<c>>{});
+        CT_ASSERT(std::is_same<c,  ct::remove_member_volatile_t<cv>>{});
+        CT_ASSERT(std::is_same<cl, ct::remove_member_volatile_t<cl>>{});
+        CT_ASSERT(std::is_same<cl, ct::remove_member_volatile_t<cvl>>{});
+        CT_ASSERT(std::is_same<cr, ct::remove_member_volatile_t<cr>>{});
+        CT_ASSERT(std::is_same<cr, ct::remove_member_volatile_t<cvr>>{});
     }
     
 #ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
@@ -71,18 +71,18 @@ int main() {
         using cvl = foo&&() const volatile LREF;
         using cvr = foo&&() const volatile RREF;
 
-        CT_ASSERT(std::is_same<f,  ct::remove_member_volatile<f>>{});
-        CT_ASSERT(std::is_same<f,  ct::remove_member_volatile<v>>{});
-        CT_ASSERT(std::is_same<l,  ct::remove_member_volatile<vl>>{});
-        CT_ASSERT(std::is_same<l,  ct::remove_member_volatile<l>>{});
-        CT_ASSERT(std::is_same<r,  ct::remove_member_volatile<r>>{});
-        CT_ASSERT(std::is_same<r,  ct::remove_member_volatile<vr>>{});
-        CT_ASSERT(std::is_same<c,  ct::remove_member_volatile<c>>{});
-        CT_ASSERT(std::is_same<c,  ct::remove_member_volatile<cv>>{});
-        CT_ASSERT(std::is_same<cl, ct::remove_member_volatile<cl>>{});
-        CT_ASSERT(std::is_same<cl, ct::remove_member_volatile<cvl>>{});
-        CT_ASSERT(std::is_same<cr, ct::remove_member_volatile<cr>>{});
-        CT_ASSERT(std::is_same<cr, ct::remove_member_volatile<cvr>>{});
+        CT_ASSERT(std::is_same<f,  ct::remove_member_volatile_t<f>>{});
+        CT_ASSERT(std::is_same<f,  ct::remove_member_volatile_t<v>>{});
+        CT_ASSERT(std::is_same<l,  ct::remove_member_volatile_t<vl>>{});
+        CT_ASSERT(std::is_same<l,  ct::remove_member_volatile_t<l>>{});
+        CT_ASSERT(std::is_same<r,  ct::remove_member_volatile_t<r>>{});
+        CT_ASSERT(std::is_same<r,  ct::remove_member_volatile_t<vr>>{});
+        CT_ASSERT(std::is_same<c,  ct::remove_member_volatile_t<c>>{});
+        CT_ASSERT(std::is_same<c,  ct::remove_member_volatile_t<cv>>{});
+        CT_ASSERT(std::is_same<cl, ct::remove_member_volatile_t<cl>>{});
+        CT_ASSERT(std::is_same<cl, ct::remove_member_volatile_t<cvl>>{});
+        CT_ASSERT(std::is_same<cr, ct::remove_member_volatile_t<cr>>{});
+        CT_ASSERT(std::is_same<cr, ct::remove_member_volatile_t<cvr>>{});
     }
 
 #endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS

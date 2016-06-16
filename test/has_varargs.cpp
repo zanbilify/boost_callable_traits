@@ -28,15 +28,13 @@ namespace ct = callable_traits;
 template<typename T>
 void assert_has_varargs() {
 
-    CT_ASSERT(ct::has_varargs<T>());
-    CT_ASSERT(decltype(ct::has_varargs(std::declval<T>()))::value);
+    CT_ASSERT(ct::has_varargs<T>::value);
 }
 
 template<typename T>
 void assert_not_has_varargs() {
 
-    CT_ASSERT(!ct::has_varargs<T>());
-    CT_ASSERT(!decltype(ct::has_varargs(std::declval<T>()))::value);
+    CT_ASSERT(!ct::has_varargs<T>::value);
 }
 
 

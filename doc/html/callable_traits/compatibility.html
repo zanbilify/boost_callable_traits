@@ -26,22 +26,13 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.compatibility"></a><a class="link" href="compatibility.html" title="Compatibility">Compatibility</a>
 </h2></div></div></div>
-<div class="toc"><dl class="toc"><dt><span class="section"><a href="compatibility.html#callable_traits.compatibility.compatibility_issues">Known
-      Issues</a></span></dt></dl></div>
 <div class="informaltable"><table class="table">
 <colgroup>
 <col>
 <col>
 <col>
-<col>
-<col>
 </colgroup>
 <thead><tr>
-<th>
-              <p>
-                Operating System
-              </p>
-            </th>
 <th>
               <p>
                 Compiler
@@ -54,11 +45,6 @@
             </th>
 <th>
               <p>
-                stdlib
-              </p>
-            </th>
-<th>
-              <p>
                 Continuous Integration
               </p>
             </th>
@@ -67,11 +53,6 @@
 <tr>
 <td>
               <p>
-                Linux
-              </p>
-            </td>
-<td>
-              <p>
                 Clang 3.5+
               </p>
             </td>
@@ -82,11 +63,6 @@
             </td>
 <td>
               <p>
-                libc++
-              </p>
-            </td>
-<td>
-              <p>
                 <a href="https://travis-ci.org/badair/callable_traits/builds" target="_top">Travis</a>
               </p>
             </td>
@@ -94,12 +70,7 @@
 <tr>
 <td>
               <p>
-                Linux
-              </p>
-            </td>
-<td>
-              <p>
-                Clang 3.5+
+                GCC 4.8+
               </p>
             </td>
 <td>
@@ -109,129 +80,11 @@
             </td>
 <td>
               <p>
-                libstdc++
-              </p>
-            </td>
-<td>
-              <p>
                 <a href="https://travis-ci.org/badair/callable_traits/builds" target="_top">Travis</a>
               </p>
             </td>
 </tr>
 <tr>
-<td>
-              <p>
-                Linux
-              </p>
-            </td>
-<td>
-              <p>
-                Clang (other)
-              </p>
-            </td>
-<td>
-              <p>
-                <span class="gray">No/Unknown</span>
-              </p>
-            </td>
-<td>
-              <p>
-                libstdc++
-              </p>
-            </td>
-<td>
-              <p>
-                -
-              </p>
-            </td>
-</tr>
-<tr>
-<td>
-              <p>
-                Linux
-              </p>
-            </td>
-<td>
-              <p>
-                GCC 5.2.1 +
-              </p>
-            </td>
-<td>
-              <p>
-                <span class="green">Yes</span>
-              </p>
-            </td>
-<td>
-              <p>
-                libstdc++
-              </p>
-            </td>
-<td>
-              <p>
-                <a href="https://travis-ci.org/badair/callable_traits/builds" target="_top">Travis</a>
-              </p>
-            </td>
-</tr>
-<tr>
-<td>
-              <p>
-                Linux
-              </p>
-            </td>
-<td>
-              <p>
-                GCC [4.8, ~ 5.2.1)
-              </p>
-            </td>
-<td>
-              <p>
-                <span class="green">Yes (basic)</span>
-              </p>
-            </td>
-<td>
-              <p>
-                libstdc++
-              </p>
-            </td>
-<td>
-              <p>
-                <a href="https://travis-ci.org/badair/callable_traits/builds" target="_top">Travis</a>
-              </p>
-            </td>
-</tr>
-<tr>
-<td>
-              <p>
-                Linux
-              </p>
-            </td>
-<td>
-              <p>
-                GCC(other)
-              </p>
-            </td>
-<td>
-              <p>
-                <span class="gray">No/Unknown</span>
-              </p>
-            </td>
-<td>
-              <p>
-                libstdc++
-              </p>
-            </td>
-<td>
-              <p>
-                -
-              </p>
-            </td>
-</tr>
-<tr>
-<td>
-              <p>
-                OSX
-              </p>
-            </td>
 <td>
               <p>
                 AppleClang / XCode 6.3+
@@ -244,11 +97,6 @@
             </td>
 <td>
               <p>
-                libc++
-              </p>
-            </td>
-<td>
-              <p>
                 <a href="https://travis-ci.org/badair/callable_traits/builds" target="_top">Travis</a>
               </p>
             </td>
@@ -256,216 +104,17 @@
 <tr>
 <td>
               <p>
-                OSX
+                MSVC / Visual Studio 2015
               </p>
             </td>
 <td>
               <p>
-                Clang 3.5+
-              </p>
-            </td>
-<td>
-              <p>
-                <span class="black">Untested - likely</span>
-              </p>
-            </td>
-<td>
-              <p>
-                libc++
-              </p>
-            </td>
-<td>
-              <p>
-                -
-              </p>
-            </td>
-</tr>
-<tr>
-<td>
-              <p>
-                OSX
-              </p>
-            </td>
-<td>
-              <p>
-                Clang 3.4 and below
-              </p>
-            </td>
-<td>
-              <p>
-                <span class="gray">No/Unknown</span>
-              </p>
-            </td>
-<td>
-              <p>
-                libc++
-              </p>
-            </td>
-<td>
-              <p>
-                -
-              </p>
-            </td>
-</tr>
-<tr>
-<td>
-              <p>
-                Windows
-              </p>
-            </td>
-<td>
-              <p>
-                MSVC 19
-              </p>
-            </td>
-<td>
-              <p>
-                <span class="green">Yes (basic)</span>
-              </p>
-            </td>
-<td>
-              <p>
-                Dinkumware (<a class="link" href="contact.html" title="Contact">?</a>)
+                <span class="green">Yes</span>
               </p>
             </td>
 <td>
               <p>
                 <a href="https://ci.appveyor.com/project/badair/callable-traits" target="_top">Appveyor</a>
-              </p>
-            </td>
-</tr>
-<tr>
-<td>
-              <p>
-                Windows
-              </p>
-            </td>
-<td>
-              <p>
-                MSVC (other)
-              </p>
-            </td>
-<td>
-              <p>
-                <span class="gray">No/Unknown</span>
-              </p>
-            </td>
-<td>
-              <p>
-                Dinkumware (<a class="link" href="contact.html" title="Contact">?</a>)
-              </p>
-            </td>
-<td>
-              <p>
-                -
-              </p>
-            </td>
-</tr>
-<tr>
-<td>
-              <p>
-                Windows
-              </p>
-            </td>
-<td>
-              <p>
-                Clang-cl 3.7+
-              </p>
-            </td>
-<td>
-              <p>
-                <span class="green">Yes</span>
-              </p>
-            </td>
-<td>
-              <p>
-                <a class="link" href="contact.html" title="Contact">?</a>
-              </p>
-            </td>
-<td>
-              <p>
-                -
-              </p>
-            </td>
-</tr>
-<tr>
-<td>
-              <p>
-                Windows
-              </p>
-            </td>
-<td>
-              <p>
-                Clang-cl (other)
-              </p>
-            </td>
-<td>
-              <p>
-                <span class="gray">No/Unknown</span>
-              </p>
-            </td>
-<td>
-              <p>
-                <a class="link" href="contact.html" title="Contact">?</a>
-              </p>
-            </td>
-<td>
-              <p>
-                -
-              </p>
-            </td>
-</tr>
-<tr>
-<td>
-              <p>
-                Windows
-              </p>
-            </td>
-<td>
-              <p>
-                MinGW GCC 5.3
-              </p>
-            </td>
-<td>
-              <p>
-                <span class="green">Yes</span>
-              </p>
-            </td>
-<td>
-              <p>
-                libstdc++
-              </p>
-            </td>
-<td>
-              <p>
-                -
-              </p>
-            </td>
-</tr>
-<tr>
-<td>
-              <p>
-                Windows
-              </p>
-            </td>
-<td>
-              <p>
-                MinGW GCC [4.8, ~ 5.2.1)
-              </p>
-            </td>
-<td>
-              <p>
-                <span class="green">Yes (basic)</span>
-              </p>
-            </td>
-<td>
-              <p>
-                libstdc++
-              </p>
-            </td>
-<td>
-              <p>
-                -
               </p>
             </td>
 </tr>
@@ -476,49 +125,6 @@
       find CallableTraits to work with another toolchain, <a class="link" href="contact.html" title="Contact">let
       us know!</a>
     </p>
-<div class="section">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="callable_traits.compatibility.compatibility_issues"></a><a class="link" href="compatibility.html#callable_traits.compatibility.compatibility_issues" title="Known Issues">Known
-      Issues</a>
-</h3></div></div></div>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
-<li class="listitem">
-            <a class="link" href="glossary.html#callable_traits.glossary.ref_abominable" title="AbominableFunction"><span class="green">AbominableFunction</span></a>
-            types are not compatible with some older compilers. Attempts to create
-            <a class="link" href="glossary.html#callable_traits.glossary.ref_abominable" title="AbominableFunction"><span class="green">AbominableFunction</span></a>
-            types using <code class="literal">CallableTraits</code> metafunctions will have
-            no effect on the following platforms:
-            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
-                  GCC &lt; 4.9.2
-                </li></ul></div>
-          </li>
-<li class="listitem">
-            <a class="link" href="glossary.html#callable_traits.glossary.ref_abominable" title="AbominableFunction"><span class="green">AbominableFunction</span></a>
-            reference-qualified member functions are not compatible with some older
-            compilers. Attempts to create a pointer to a reference-qualified member
-            function using <code class="literal">CallableTraits</code> metafunctions will have
-            no effect on the following platforms:
-            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
-                  GCC &lt; 4.9.2
-                </li></ul></div>
-          </li>
-<li class="listitem">
-            <code class="literal">CallableTraits</code> has <span class="emphasis"><em>not</em></span> yet been
-            tested on all minor/patch versions of the supported compilers. If you
-            experience problems on a supported platform, <a class="link" href="contact.html" title="Contact">contact
-            the author</a>.
-          </li>
-<li class="listitem">
-            Calling convention support is largely untested. Please <a class="link" href="contact.html" title="Contact">contact
-            the author</a> if you have experience in this domain.
-          </li>
-<li class="listitem">
-            Documentation, test coverage, and API tweaks are currently the primary
-            focus of development. Check out the <a href="https://github.com/badair/callable_traits/issues" target="_top">Issues
-            page</a> for more information about progress on this front.
-          </li>
-</ul></div>
-</div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

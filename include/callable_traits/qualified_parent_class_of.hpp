@@ -10,24 +10,21 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_QUALIFIED_PARENT_CLASS_OF_HPP
 #define CALLABLE_TRAITS_QUALIFIED_PARENT_CLASS_OF_HPP
 
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 
-    namespace detail {
+    template<typename T>
+    struct qualified_parent_class_of {
 
-        template<bool Sfinae>
-        struct qualified_parent_class_of_error {
-
-            static_assert(Sfinae,
-                "TODO: error message for callable_traits::qualified_parent_class_of");
-        };
-    }
+        using type = detail::fail_if_invalid<
+            typename detail::traits<T>::invoke_type,
+            type_is_not_a_member_pointer>;
+    };
 
     template<typename T>
-    using qualified_parent_class_of = detail::fail_if_invalid<
-        typename detail::traits<T>::invoke_type,
-        detail::qualified_parent_class_of_error<true>>;
+    using qualified_parent_class_of_t =
+        typename qualified_parent_class_of<T>::type;
 }
 
 #endif //#ifndef CALLABLE_TRAITS_QUALIFIED_PARENT_CLASS_OF_HPP

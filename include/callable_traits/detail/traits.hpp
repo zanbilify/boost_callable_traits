@@ -27,7 +27,8 @@ namespace callable_traits {
             function<T>,
             pmf<T>,
             pmd<T>,
-            function_object<T>
+            function_object<T>,
+            default_callable_traits<T>
         )::traits;
     }
 }

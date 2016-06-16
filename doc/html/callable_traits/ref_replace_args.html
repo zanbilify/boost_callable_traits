@@ -37,7 +37,7 @@
       <span class="phrase"><a name="callable_traits.ref_replace_args.constraints"></a></span><a class="link" href="ref_replace_args.html#callable_traits.ref_replace_args.constraints">Constraints</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-          <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="glossary.html#callable_traits.glossary.ref_signature" title="Signature"><span class="green">Signature</span></a>
+          <code class="computeroutput"><span class="identifier">T</span></code> must be a [link_signature]
         </li></ul></div>
 <h4>
 <a name="callable_traits.ref_replace_args.h1"></a>
@@ -45,13 +45,12 @@
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-          <code class="computeroutput"><span class="identifier">replace_args</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">NewArgs</span><span class="special">...&gt;</span></code> aliases a type identical to <code class="computeroutput"><span class="identifier">T</span></code>, except that <code class="computeroutput"><span class="identifier">NewArgs</span><span class="special">...</span></code> will begin overwriting the <code class="literal"><span class="emphasis"><em>[Args...]</em></span></code>
-          parameter list at the 0-based <code class="computeroutput"><span class="identifier">InsertIndex</span></code>,
+          <code class="computeroutput"><span class="identifier">replace_args</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">NewArgs</span><span class="special">...&gt;</span></code> aliases a type identical to <code class="computeroutput"><span class="identifier">T</span></code>, except that <code class="computeroutput"><span class="identifier">NewArgs</span><span class="special">...</span></code> will begin overwriting the [Args] parameter
+          list at the 0-based <code class="computeroutput"><span class="identifier">InsertIndex</span></code>,
           extending the parameter list as necessary.
         </li>
 <li class="listitem">
-          <code class="literal"><span class="emphasis"><em>[VarArgs]</em></span></code> remain if present in
-          <code class="computeroutput"><span class="identifier">T</span></code>.
+          [VarArgs] remain if present in <code class="computeroutput"><span class="identifier">T</span></code>.
         </li>
 </ul></div>
 <h4>
@@ -71,7 +70,7 @@
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
 
     <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(&amp;)(</span><span class="identifier">N</span><span class="special">&lt;</span><span class="number">0</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">2</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">3</span><span class="special">&gt;);</span>
-    <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">replace_args</span><span class="special">&lt;</span><span class="number">2</span><span class="special">,</span> <span class="identifier">f</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&gt;;</span>
+    <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">replace_args_t</span><span class="special">&lt;</span><span class="number">2</span><span class="special">,</span> <span class="identifier">f</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&gt;;</span>
     <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(&amp;)(</span><span class="identifier">N</span><span class="special">&lt;</span><span class="number">0</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;,</span> <span class="keyword">int</span><span class="special">,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">3</span><span class="special">&gt;);</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 <span class="special">}</span>

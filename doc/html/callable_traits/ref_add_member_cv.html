@@ -26,52 +26,236 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_add_member_cv"></a><a class="link" href="ref_add_member_cv.html" title="add_member_cv">add_member_cv</a>
 </h2></div></div></div>
-<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+<h4>
+<a name="callable_traits.ref_add_member_cv.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_add_member_cv.header"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.header">Header</a>
+    </h4>
+<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_member_cv</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<h4>
+<a name="callable_traits.ref_add_member_cv.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_add_member_cv.definition"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.definition">Definition</a>
+    </h4>
+<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">add_member_cv</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span><span class="special">;</span>
+    <span class="keyword">using</span> <span class="identifier">add_member_cv_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+    <span class="keyword">struct</span> <span class="identifier">add_member_cv</span> <span class="special">{</span>
+        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">add_member_cv_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+    <span class="special">};</span>
 <span class="special">}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_add_member_cv.h0"></a>
+<a name="callable_traits.ref_add_member_cv.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_add_member_cv.constraints"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.constraints">Constraints</a>
     </h4>
-<p>
-      <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="glossary.html#callable_traits.glossary.ref_fn" title="Function"><span class="green">Function</span></a> or <a class="link" href="glossary.html#callable_traits.glossary.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>.
-    </p>
-<h4>
-<a name="callable_traits.ref_add_member_cv.h1"></a>
-      <span class="phrase"><a name="callable_traits.ref_add_member_cv.behavior"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.behavior">Behavior</a>
-    </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-          Adds both <code class="computeroutput"><span class="keyword">const</span></code> and <code class="computeroutput"><span class="keyword">volatile</span></code> qualifiers to the signature of
-          <code class="computeroutput"><span class="identifier">T</span></code> (if not already present),
-          such that:
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">add_member_cv</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">()&gt;</span></code>
-                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span>
-                <span class="keyword">const</span> <span class="keyword">volatile</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">add_member_cv</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
-                <span class="keyword">volatile</span><span class="special">&gt;</span></code>
-                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
-                <span class="keyword">const</span> <span class="keyword">volatile</span></code>
-              </li>
-</ul></div>
-        </li></ul></div>
-<h4>
-<a name="callable_traits.ref_add_member_cv.h2"></a>
-      <span class="phrase"><a name="callable_traits.ref_add_member_cv.notes"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.notes">Notes</a>
-    </h4>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-          Any enabled calling conventions are preserved on <a class="link" href="glossary.html#callable_traits.glossary.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a> types
+          <code class="computeroutput"><span class="identifier">T</span></code> must be a function type
+          or a member function pointer type
         </li></ul></div>
 <h4>
 <a name="callable_traits.ref_add_member_cv.h3"></a>
-      <span class="phrase"><a name="callable_traits.ref_add_member_cv.example"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.example">Example</a>
+      <span class="phrase"><a name="callable_traits.ref_add_member_cv.behavior"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.behavior">Behavior</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          A substitution failure occurs if the constraints are violated
+        </li>
+<li class="listitem">
+          Adds member <code class="computeroutput"><span class="keyword">const</span></code> and <code class="computeroutput"><span class="keyword">volatile</span></code> qualifiers to <code class="computeroutput"><span class="identifier">T</span></code>,
+          if not already present
+        </li>
+</ul></div>
+<h4>
+<a name="callable_traits.ref_add_member_cv.h4"></a>
+      <span class="phrase"><a name="callable_traits.ref_add_member_cv.input_output_examples"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.input_output_examples">Input/Output
+      Examples</a>
+    </h4>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+              <p>
+                <code class="computeroutput"><span class="identifier">T</span></code>
+              </p>
+            </th>
+<th>
+              <p>
+                <code class="computeroutput"><span class="identifier">add_member_cv_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+              </p>
+            </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span>
+                <span class="keyword">const</span> <span class="keyword">volatile</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="keyword">const</span> <span class="keyword">volatile</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="special">&amp;</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="keyword">const</span> <span class="keyword">volatile</span>
+                <span class="special">&amp;</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="special">&amp;&amp;</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="keyword">const</span> <span class="keyword">volatile</span>
+                <span class="special">&amp;&amp;</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="keyword">const</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="keyword">const</span> <span class="keyword">volatile</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="keyword">volatile</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="keyword">const</span> <span class="keyword">volatile</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="identifier">transaction_safe</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="keyword">const</span> <span class="keyword">volatile</span>
+                <span class="identifier">transaction_safe</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                (substitution failure)
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="special">(&amp;)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                (substitution failure)
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="special">(*)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                (substitution failure)
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                (substitution failure)
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*</span>
+                <span class="keyword">const</span><span class="special">)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                (substitution failure)
+              </p>
+            </td>
+</tr>
+</tbody>
+</table></div>
+<h4>
+<a name="callable_traits.ref_add_member_cv.h5"></a>
+      <span class="phrase"><a name="callable_traits.ref_add_member_cv.example_program"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.example_program">Example
+      Program</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_member_cv</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
@@ -85,54 +269,30 @@
     <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">pmf</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)();</span>
         <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">const</span> <span class="keyword">volatile</span><span class="special">;</span>
-        <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_member_cv</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_member_cv_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
         <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
     <span class="special">}</span> <span class="special">{</span>
-        <span class="comment">// add_member_cv doesn't change anything when</span>
+        <span class="comment">// add_member_cv_t doesn't change anything when</span>
         <span class="comment">// the function type is already cv-qualified.</span>
         <span class="keyword">using</span> <span class="identifier">pmf</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;;</span>
         <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;;</span>
-        <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_member_cv</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_member_cv_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
         <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
     <span class="special">}</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">pmf</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">volatile</span> <span class="special">&amp;;</span>
         <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;;</span>
-        <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_member_cv</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_member_cv_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
         <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
     <span class="special">}</span> <span class="special">{</span>
-        <span class="comment">// add_member_cv can also be used with "abominable"</span>
+        <span class="comment">// add_member_cv_t can also be used with "abominable"</span>
         <span class="comment">// function types.</span>
         <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">();</span>
         <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">()</span> <span class="keyword">const</span> <span class="keyword">volatile</span><span class="special">;</span>
-        <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_member_cv</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_member_cv_t</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">&gt;;</span>
         <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
     <span class="special">}</span>
-
-<span class="comment">// A substitution failure will occur if add_member_cv is used</span>
-<span class="comment">// with function pointers, function references, function objects,</span>
-<span class="comment">// or member data pointers.</span>
-
 <span class="special">}</span>
 </pre>
-<h4>
-<a name="callable_traits.ref_add_member_cv.h4"></a>
-      <span class="phrase"><a name="callable_traits.ref_add_member_cv.see_also"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.see_also">See
-      Also</a>
-    </h4>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
-<li class="listitem">
-          <a class="link" href="ref_add_member_const.html" title="add_member_const"><code class="literal">add_member_const</code></a>
-        </li>
-<li class="listitem">
-          <a class="link" href="ref_add_member_volatile.html" title="add_member_volatile"><code class="literal">add_member_volatile</code></a>
-        </li>
-<li class="listitem">
-          <a class="link" href="ref_remove_member_cv.html" title="remove_member_cv"><code class="literal">remove_member_cv</code></a>
-        </li>
-<li class="listitem">
-          <a class="link" href="ref_is_cv_member.html" title="is_cv_member"><code class="literal">is_cv_member</code></a>
-        </li>
-</ul></div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

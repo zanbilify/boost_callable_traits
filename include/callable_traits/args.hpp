@@ -10,28 +10,20 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_ARGS_HPP
 #define CALLABLE_TRAITS_ARGS_HPP
 
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 
-    namespace detail {
+    template<typename T>
+    struct args {
 
-        template<bool Sfinae>
-        struct args_error {
-
-            static_assert(Sfinae,
-                "Could not determine the parameters for "
-                "T in callable_traits::args<T>. Note: "
-                "If T is the type of a generic lambda or "
-                " overloaded/templated function object, "
-                "the parameters cannot be determined. ");
-        };
-    }
+        using type = detail::fail_if_invalid<
+            typename detail::traits<T>::arg_types,
+            cannot_determine_parameters_for_this_type>;
+    };
 
     template<typename T>
-    using args = detail::fail_if_invalid<
-        typename detail::traits<T>::arg_types,
-        detail::args_error<true>>;
+    using args_t = typename args<T>::type;
 }
 
 #endif //#ifndef CALLABLE_TRAITS_ARGS_HPP

@@ -24,24 +24,24 @@ namespace callable_traits {
 
     namespace detail {
 
-        template<flags Applied, typename CallingConvention,
+        template<flags Applied, bool IsTransactionSafe, typename CallingConvention,
             typename T, typename Return, typename... Args>
         struct set_member_function_qualifiers_t;
 
-        template<flags Applied, typename CallingConvention,
+        template<flags Applied, bool IsTransactionSafe, typename CallingConvention,
             typename T, typename Return, typename... Args>
         struct set_varargs_member_function_qualifiers_t;
 
-        template<flags Flags, typename... Ts>
+        template<flags Flags, bool IsTransactionSafe, typename... Ts>
         using set_member_function_qualifiers =
-            typename set_member_function_qualifiers_t<Flags, Ts...>::type;
+            typename set_member_function_qualifiers_t<Flags, IsTransactionSafe, Ts...>::type;
 
-        template<flags Flags, typename... Ts>
+        template<flags Flags, bool IsTransactionSafe, typename... Ts>
         using set_varargs_member_function_qualifiers =
-            typename set_varargs_member_function_qualifiers_t<Flags, Ts...>::type;
+            typename set_varargs_member_function_qualifiers_t<Flags, IsTransactionSafe, Ts...>::type;
 
         template<typename T, typename U>
-        struct pmf : default_callable_traits {};
+        struct pmf : default_callable_traits<T> {};
 
         template<typename U, typename T, T Value>
         struct pmf <U, std::integral_constant<T, Value>> {

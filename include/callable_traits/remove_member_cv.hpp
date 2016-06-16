@@ -10,26 +10,22 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_REMOVE_MEMBER_CV_HPP
 #define CALLABLE_TRAITS_REMOVE_MEMBER_CV_HPP
 
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 
 namespace callable_traits {
 
-    namespace detail {
+    template<typename T>
+    struct remove_member_cv {
 
-        template<bool Sfinae>
-        struct remove_member_cv_error {
-
-            static_assert(Sfinae,
-                "callable_traits::remove_member_cv<T> "
-                "is not a meaningful operation for this T.");
-        };
-    }
+        using type = detail::fail_if_invalid<
+            typename detail::traits<T>::remove_member_cv,
+            member_qualifiers_are_illegal_for_this_type>;
+    };
 
     template<typename T>
-    using remove_member_cv = detail::fail_if_invalid<
-            typename detail::traits<T>::remove_member_cv,
-            detail::remove_member_cv_error<true>>;
+    using remove_member_cv_t =
+        typename remove_member_cv<T>::type;
 }
 
 #endif

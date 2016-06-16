@@ -10,20 +10,31 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_IS_LIKE_FUNCTION_HPP
 #define CALLABLE_TRAITS_IS_LIKE_FUNCTION_HPP
 
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 
     template<typename T>
-    inline constexpr auto is_like_function() {
-        return detail::bool_type<detail::function<T>::value>{};
-    }
+    struct is_like_function
+        : detail::bool_type<detail::function<T>::value> {
+
+        using type = detail::bool_type<detail::function<T>::value>;
+    };
+
+    #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
 
     template<typename T>
-    inline constexpr auto is_like_function(T&&) {
-        using no_ref = typename std::remove_reference<T>::type;
-        return is_like_function<no_ref>();
-    }
+    struct is_like_function_v {
+        static_assert(sizeof(T) < 1,
+            "Variable templates not supported on this compiler.");
+    };
+
+    #else
+
+    template<typename T>
+    constexpr bool is_like_function_v = detail::function<T>::value;
+
+    #endif
 }
 
 #endif // CALLABLE_TRAITS_IS_LIKE_FUNCTION_HPP

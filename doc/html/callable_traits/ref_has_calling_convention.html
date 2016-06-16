@@ -45,10 +45,11 @@
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-          <code class="computeroutput"><span class="identifier">T</span></code> must be a <a class="link" href="glossary.html#callable_traits.glossary.ref_fn_ptr" title="FunctionPtr"><span class="green">FunctionPtr</span></a> or <a class="link" href="glossary.html#callable_traits.glossary.ref_pmf" title="MemberFunctionPtr"><span class="green">MemberFunctionPtr</span></a>
+          <code class="computeroutput"><span class="identifier">T</span></code> must be a [link_fn_ptr]
+          or [link_pmf]
         </li>
 <li class="listitem">
-          <code class="computeroutput"><span class="identifier">CcTag</span></code> must be a <a class="link" href="glossary.html#callable_traits.glossary.ref_cc_tag" title="CallingConventionTag"><span class="green">CallingConventionTag</span></a>
+          <code class="computeroutput"><span class="identifier">CcTag</span></code> must be a [link_cc_tag]
         </li>
 </ul></div>
 <h4>
@@ -106,48 +107,9 @@
       <span class="phrase"><a name="callable_traits.ref_has_calling_convention.example_fastcall_to_stdcall"></a></span><a class="link" href="ref_has_calling_convention.html#callable_traits.ref_has_calling_convention.example_fastcall_to_stdcall">Example
       - <code class="literal">__fastcall</code> to <code class="literal">__stdcall</code></a>
     </h4>
-<pre class="programlisting"><span class="preprocessor">#define</span> <span class="identifier">CALLABLE_TRAITS_ENABLE_STDCALL</span>
-<span class="preprocessor">#define</span> <span class="identifier">CALLABLE_TRAITS_ENABLE_FASTCALL</span>
-
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">has_calling_convention</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_calling_convention</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_calling_convention</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
-
-<span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
-
-    <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="identifier">__fastcall</span> <span class="special">*)(</span><span class="keyword">int</span><span class="special">);</span>
-
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_calling_convention</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">,</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">fastcall_tag</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_calling_convention</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">,</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">stdcall_tag</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="identifier">__stdcall</span> <span class="special">*)(</span><span class="keyword">int</span><span class="special">);</span>
-
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_calling_convention</span><span class="special">&lt;</span><span class="identifier">expect</span><span class="special">,</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">stdcall_tag</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_calling_convention</span><span class="special">&lt;</span><span class="identifier">expect</span><span class="special">,</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">fastcall_tag</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-
-    <span class="keyword">using</span> <span class="identifier">g</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_calling_convention</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">&gt;;</span>
-    <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_calling_convention</span><span class="special">&lt;</span><span class="identifier">g</span><span class="special">,</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">stdcall_tag</span><span class="special">&gt;;</span>
-
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_calling_convention</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">stdcall_tag</span><span class="special">&gt;(),</span> <span class="string">""</span><span class="special">);</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-<span class="special">}</span>
-</pre>
-<h4>
-<a name="callable_traits.ref_has_calling_convention.h4"></a>
-      <span class="phrase"><a name="callable_traits.ref_has_calling_convention.see_also"></a></span><a class="link" href="ref_has_calling_convention.html#callable_traits.ref_has_calling_convention.see_also">See
-      Also</a>
-    </h4>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
-<li class="listitem">
-          <a class="link" href="ref_add_calling_convention.html" title="add_calling_convention"><code class="literal">add_calling_convention</code></a>
-        </li>
-<li class="listitem">
-          <a class="link" href="ref_remove_calling_convention.html" title="remove_calling_convention"><code class="literal">remove_calling_convention</code></a>
-        </li>
-</ul></div>
+<p>
+      [experimental_changing_calling_conventions]
+    </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

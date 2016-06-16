@@ -19,9 +19,9 @@ namespace ct = callable_traits;
 template<typename T>
 void test(){
 
-    // this example shows how callable_traits::function_type
+    // this example shows how callable_traits::function_type_t
     // bevaves consistently for many different types
-    using type = ct::function_type<T>;
+    using type = ct::function_type_t<T>;
     using expect = void(int, float&, const char*);
     static_assert(std::is_same<expect, type>{}, "");
 }

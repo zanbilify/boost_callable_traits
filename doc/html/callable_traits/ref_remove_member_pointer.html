@@ -42,7 +42,7 @@
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">Expect</span><span class="special">&gt;</span>
 <span class="keyword">void</span> <span class="identifier">test</span><span class="special">()</span> <span class="special">{</span>
-    <span class="keyword">using</span> <span class="identifier">U</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_member_pointer</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+    <span class="keyword">using</span> <span class="identifier">U</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_member_pointer_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">Expect</span><span class="special">,</span> <span class="identifier">U</span><span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
 <span class="special">}</span>
 

@@ -10,24 +10,20 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_EXPAND_ARGS_HPP
 #define CALLABLE_TRAITS_EXPAND_ARGS_HPP
 
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 
-    namespace detail {
+    template<typename T, template<class...> class Container>
+    struct expand_args {
 
-        template<bool Sfinae>
-        struct expand_args_error {
-
-            static_assert(Sfinae,
-                "callable_traits::expand_args<T, U> is not a valid operation.");
-        };
-    }
+        using type = detail::fail_if_invalid<
+        typename detail::traits<T>::template expand_args<Container>,
+        cannot_expand_the_parameter_list_of_first_template_argument>;
+    };
 
     template<typename T, template<class...> class Container>
-    using expand_args = detail::fail_if_invalid<
-        typename detail::traits<T>::template expand_args<Container>,
-        detail::expand_args_error<true>>;
+    using expand_args_t = typename expand_args<T, Container>::type;
 }
 
 #endif //CALLABLE_TRAITS_EXPAND_ARGS_HPP

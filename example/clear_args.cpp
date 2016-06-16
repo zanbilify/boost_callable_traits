@@ -12,7 +12,7 @@ namespace ct = callable_traits;
 int main() {
 
     using f = void(int, char);
-    using cleared = ct::clear_args<f>;
+    using cleared = ct::clear_args_t<f>;
     using expect = void();
     static_assert(std::is_same<cleared, expect>::value, "");
 }

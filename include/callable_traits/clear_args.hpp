@@ -10,25 +10,20 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_CLEAR_ARGS_HPP
 #define CALLABLE_TRAITS_CLEAR_ARGS_HPP
 
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 
-    namespace detail {
+    template<typename T>
+    struct clear_args {
 
-        template<bool Sfinae>
-        struct clear_args_error {
-
-            static_assert(Sfinae,
-                "callable_traits::clear_args<T> is "
-                "not a meaningful operation for this T.");
-        };
-    }
+        using type = detail::fail_if_invalid<
+        typename detail::traits<T>::clear_args,
+        cannot_clear_the_parameter_list_for_this_type>;
+    };
 
     template<typename T>
-    using clear_args = detail::fail_if_invalid<
-        typename detail::traits<T>::clear_args,
-        detail::clear_args_error<true>>;
+    using clear_args_t = typename clear_args<T>::type;
 }
 
 #endif //CALLABLE_TRAITS_CLEAR_ARGS_HPP

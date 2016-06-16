@@ -26,7 +26,9 @@ namespace callable_traits {
         struct function_object : Base {
 
             using type = T;
+
             using function_type = typename Base::function_object_type;
+
             using arg_types = typename Base::non_invoke_arg_types;
 
             static constexpr const bool value =
@@ -43,14 +45,26 @@ namespace callable_traits {
                 && !has_normal_call_operator<shallow_decay<T>>::value>;
 
             using is_member_pointer = std::false_type;
+
             using is_member_function_pointer = std::false_type;
-            using remove_member_pointer = type;
+
+            using remove_member_pointer = invalid_type;
+
             using remove_varargs = invalid_type;
+
             using add_varargs = invalid_type;
+
+            using is_transaction_safe = typename Base::is_transaction_safe;
+
+            using add_transaction_safe = invalid_type;
+
+            using remove_transaction_safe = invalid_type;
+
             using clear_args = invalid_type;
 
-            template<typename>
-            using apply_member_pointer = invalid_type;
+            template<typename C, typename U = T>
+            using apply_member_pointer =
+                typename std::remove_reference<U>::type C::*;
 
             template<typename>
             using apply_return = invalid_type;
@@ -95,7 +109,7 @@ namespace callable_traits {
 
         template<typename T, typename U, typename Base>
         struct function_object <T U::*, Base>
-            : default_callable_traits {};
+            : default_callable_traits<> {};
     }
 }
 

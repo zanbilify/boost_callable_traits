@@ -16,7 +16,7 @@ template<typename...> struct foo{};
 
 int main() {
 
-    using args = ct::expand_args<decltype(f), foo>;
+    using args = ct::expand_args_t<decltype(f), foo>;
     static_assert(std::is_same<args, foo<int, char>>::value, "");
 }
 //]

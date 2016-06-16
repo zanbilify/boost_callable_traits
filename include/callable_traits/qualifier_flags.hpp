@@ -114,7 +114,6 @@ namespace callable_traits {
                     : (IsAddingLRef ? ((Existing & ~rref_) | Other )
                         : (Existing | Other)))>;
 
-        //todo change int to flags here
         template<typename T> struct flag_map { static constexpr flags value = default_; };
         template<typename T> struct flag_map<T &> { static constexpr flags value = lref_; };
         template<typename T> struct flag_map<T &&> { static constexpr flags value = rref_; };

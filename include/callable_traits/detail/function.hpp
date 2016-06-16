@@ -26,7 +26,7 @@ namespace callable_traits {
     namespace detail {
 
         template<typename T>
-        struct function : default_callable_traits {};
+        struct function : default_callable_traits<> {};
 
 #undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
 #define CALLABLE_TRAITS_INCLUDE_QUALIFIERS
@@ -154,6 +154,9 @@ namespace callable_traits {
 
         template<typename T>
         struct function<T&> : function<T> {
+
+            static constexpr const bool value = !std::is_pointer<T>::value;
+
             using traits = function;
             using base = function<T>;
             using type = T&;

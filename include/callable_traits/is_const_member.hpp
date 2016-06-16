@@ -11,22 +11,32 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_IS_CONST_MEMBER_HPP
 
 #include <callable_traits/detail/traits.hpp>
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 
     template<typename T>
-    inline constexpr auto
-    is_const_member() {
-        return typename detail::traits<T>::is_const_member{};
-    }
+    struct is_const_member
+        : detail::traits<T>::is_const_member {
+
+        using type = typename detail::traits<T>::is_const_member;
+    };
+
+    #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
 
     template<typename T>
-    inline constexpr auto
-    is_const_member(T&&) {
-        using no_ref = typename std::remove_reference<T>::type;
-        return is_const_member<no_ref>();
-    }
+    struct is_const_member_v {
+        static_assert(sizeof(T) < 1,
+            "Variable templates not supported on this compiler.");
+    };
+
+    #else
+
+    template<typename T>
+    constexpr bool is_const_member_v =
+        detail::traits<T>::is_const_member::value;
+
+    #endif
 }
 
 #endif

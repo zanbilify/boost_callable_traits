@@ -10,25 +10,21 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_REMOVE_VARARGS_HPP
 #define CALLABLE_TRAITS_REMOVE_VARARGS_HPP
 
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 
-    namespace detail {
+    template<typename T>
+    struct remove_varargs {
 
-        template<bool Sfinae>
-        struct remove_varargs_error {
-
-            static_assert(Sfinae,
-                "callable_traits::remove_varargs<T> "
-                "is not a meaningful operation for this T.");
-        };
-    }
+        using type = detail::fail_if_invalid<
+            typename detail::traits<T>::remove_varargs,
+            varargs_are_illegal_for_this_type>;
+    };
 
     template<typename T>
-    using remove_varargs = detail::fail_if_invalid<
-            typename detail::traits<T>::remove_varargs,
-            detail::remove_varargs_error<true>>;
+    using remove_varargs_t =
+        typename remove_varargs<T>::type;
 }
 
 #endif

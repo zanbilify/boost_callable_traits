@@ -10,25 +10,21 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_REMOVE_ARGS_HPP
 #define CALLABLE_TRAITS_REMOVE_ARGS_HPP
 
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 
-    namespace detail {
+    template<std::size_t Index, typename T, std::size_t Count = 1>
+    struct remove_args {
 
-        template<bool Sfinae>
-        struct remove_args_error {
-
-            static_assert(Sfinae,
-                "callable_traits::push_back<T, Args...> is "
-                "not a meaningful operation for this T.");
-        };
-    }
+        using type = detail::fail_if_invalid<
+            typename detail::traits<T>::template remove_args<Index, Count>,
+            cannot_determine_parameters_for_this_type>;
+    };
 
     template<std::size_t Index, typename T, std::size_t Count = 1>
-    using remove_args = detail::fail_if_invalid<
-        typename detail::traits<T>::template remove_args<Index, Count>,
-        detail::remove_args_error<true>>;
+    using remove_args_t =
+        typename remove_args<Index, T, Count>::type;
 }
 
 #endif //CALLABLE_TRAITS_REMOVE_ARGS_HPP

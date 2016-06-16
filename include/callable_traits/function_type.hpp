@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_FUNCTION_TYPE_HPP
 #define CALLABLE_TRAITS_FUNCTION_TYPE_HPP
 
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 
@@ -28,9 +28,15 @@ namespace callable_traits {
     }
 
     template<typename T>
-    using function_type = detail::fallback_if_invalid<
-        typename detail::traits<T>::function_type,
-        typename detail::make_function<T>::type>;
+    struct function_type {
+
+        using type = detail::fallback_if_invalid<
+            typename detail::traits<T>::function_type,
+            typename detail::make_function<T>::type>;
+    };
+
+    template<typename T>
+    using function_type_t = typename function_type<T>::type;
 }
 
 #endif

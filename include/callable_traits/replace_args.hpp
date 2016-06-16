@@ -10,25 +10,21 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_REPLACE_ARGS_HPP
 #define CALLABLE_TRAITS_REPLACE_ARGS_HPP
 
-#include <callable_traits/detail/required_definitions.hpp>
+#include <callable_traits/detail/core.hpp>
 
 namespace callable_traits {
 
-    namespace detail {
+    template<std::size_t Index, typename T, typename... Args>
+    struct replace_args {
 
-        template<bool Sfinae>
-        struct replace_args_error {
-
-            static_assert(Sfinae,
-                "callable_traits::push_back<T, Args...> is "
-                "not a meaningful operation for this T.");
-        };
-    }
+        using type = detail::fail_if_invalid<
+        typename detail::traits<T>::template replace_args<Index, Args...>,
+        cannot_determine_parameters_for_this_type>;
+    };
 
     template<std::size_t Index, typename T, typename... Args>
-    using replace_args = detail::fail_if_invalid<
-        typename detail::traits<T>::template replace_args<Index, Args...>,
-        detail::replace_args_error<true>>;
+    using replace_args_t =
+        typename replace_args<Index, T, Args...>::type;
 }
 
 #endif //CALLABLE_TRAITS_REPLACE_ARGS_HPP

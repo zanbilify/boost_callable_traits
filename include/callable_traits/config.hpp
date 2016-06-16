@@ -12,18 +12,37 @@ Distributed under the Boost Software License, Version 1.0.
  #define CALLABLE_TRAITS_EMPTY_
  #define CALLABLE_TRAITS_EMPTY CALLABLE_TRAITS_EMPTY_
 
+ #ifdef __cpp_transactional_memory
+  #define CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+ #endif
+
+ #ifdef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+  #define CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER transaction_safe
+ #else
+  #define CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER
+ #endif
+
  #ifndef __clang__
   #if defined __GNUC__
+
    #define CALLABLE_TRAITS_GCC
+
    #if __GNUC__ >= 6
-    #define CALLABLE_TRAITS_GCC_AT_LEAST_4_9_2
-   #elif __GNUC__ >= 5
+     #define CALLABLE_TRAITS_GCC_AT_LEAST_6_0_0
+   #endif
+
+   #if __GNUC__ < 5
+     #define CALLABLE_TRAITS_GCC_OLDER_THAN_5_0_0
+   #endif
+
+   #if __GNUC__ >= 5
     #define CALLABLE_TRAITS_GCC_AT_LEAST_4_9_2
    #elif __GNUC__ == 4 && __GNUC_MINOR__ == 9 && __GNUC_PATCHLEVEL__ >= 2
     #define CALLABLE_TRAITS_GCC_AT_LEAST_4_9_2
    #else
     #define CALLABLE_TRAITS_GCC_OLDER_THAN_4_9_2
-   #endif //#if __GNUC__ >= 6
+   #endif //#if __GNUC__ >= 5
+
   #endif //#if defined __GNUC__
  #endif //#ifndef __clang__
 
@@ -39,12 +58,10 @@ Distributed under the Boost Software License, Version 1.0.
  #define CALLABLE_TRAITS_MAKE_IX_SEQ(...) ::std::make_index_sequence< __VA_ARGS__ >
  #define CALLABLE_TRAITS_DISJUNCTION(...) ::std::disjunction< __VA_ARGS__ >
  #define CALLABLE_TRAITS_CONJUNCTION(...) ::std::conjunction< __VA_ARGS__ >
- #define CALLALBLE_TRAITS_DECLTYPE_AUTO decltype(auto)
 
- #ifndef __cpp_decltype_auto
-  #undef CALLALBLE_TRAITS_DECLTYPE_AUTO
-  #define CALLALBLE_TRAITS_DECLTYPE_AUTO auto
- #endif
+#ifndef __cpp_variable_templates
+#define CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+#endif
 
  #ifndef __cpp_lib_logical_traits
   #include <callable_traits/detail/polyfills/conjunction.hpp>
@@ -60,7 +77,7 @@ Distributed under the Boost Software License, Version 1.0.
   #define CALLABLE_TRAITS_DEFAULT_VARARGS_CC __cdecl
   #define CALLABLE_TRAITS_PMF_VARGARGS_CDECL_DEFAULT
 
-  //Visual Studio 2015 Update 2 broke std::make_index_sequence
+  // Visual Studio 2015 Update 2 broke std::make_index_sequence
   #if _MSC_FULL_VER == 190023918
   #include <callable_traits/detail/polyfills/make_index_sequence.hpp>
   #endif //#if _MSC_FULL_VER == 190023918
