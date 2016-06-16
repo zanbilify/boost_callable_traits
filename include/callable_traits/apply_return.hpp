@@ -12,7 +12,12 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/core.hpp>
 
 //[ apply_return_hpp
-//`[section:ref_apply_return apply_return]
+/*`
+[section:ref_apply_return apply_return]
+[heading Header]
+``#include<callable_traits/apply_return.hpp>``
+[heading Definition]
+*/
 
 namespace callable_traits {
     //<-
@@ -29,26 +34,20 @@ namespace callable_traits {
             using type = R(Args...);
         };
     }
+    //->
 
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(apply_return)
-
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(apply_return,
-    invalid_types_for_apply_return)
+    template<typename T, typename R>
+    using apply_return_t = //implementation-defined
+    //<-
+        detail::fail_if_invalid<
+            typename detail::apply_return_helper<T, R>::type,
+            invalid_types_for_apply_return>;
     //->
 
     template<typename T, typename R>
     struct apply_return {
-
-        using type = //implementation-defined
-        //<-
-            detail::fail_if_invalid<
-                typename detail::apply_return_helper<T, R>::type,
-                invalid_types_for_apply_return>;
-        //->
+        using type = apply_return_t<T, R>;
     };
-
-    template<typename T, typename R>
-    using apply_return_t = typename apply_return<T, R>::type;
 }
 
 /*`

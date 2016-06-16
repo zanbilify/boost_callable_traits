@@ -61,48 +61,53 @@ int main() {
     test_case<int(int) volatile RREF TX_SAFE,      int(foo::*)(int) volatile RREF TX_SAFE      >();
 #endif
 
-    test_case<int(...),                            int(VA_CC foo::*)(...)                            >();
+//MSVC doesn't like varargs on abominable functions
+#ifndef CALLABLE_TRAITS_MSVC
+
+    test_case<int(...),                            int(foo::*)(...)                            >();
+
 
 #ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
-    test_case<int(...) TX_SAFE,                    int(VA_CC foo::*)(...) TX_SAFE                    >();
-    test_case<int(...) LREF,                       int(VA_CC foo::*)(...) LREF                       >();
-    test_case<int(...) LREF TX_SAFE,               int(VA_CC foo::*)(...) LREF TX_SAFE               >();
-    test_case<int(...) RREF,                       int(VA_CC foo::*)(...) RREF                       >();
-    test_case<int(...) RREF TX_SAFE,               int(VA_CC foo::*)(...) RREF TX_SAFE               >();
-    test_case<int(...) const,                      int(VA_CC foo::*)(...) const                      >();
-    test_case<int(...) const TX_SAFE,              int(VA_CC foo::*)(...) const TX_SAFE              >();
-    test_case<int(...) const LREF,                 int(VA_CC foo::*)(...) const LREF                 >();
-    test_case<int(...) const LREF TX_SAFE,         int(VA_CC foo::*)(...) const LREF TX_SAFE         >();
-    test_case<int(...) const RREF,                 int(VA_CC foo::*)(...) const RREF                 >();
-    test_case<int(...) const RREF TX_SAFE,         int(VA_CC foo::*)(...) const RREF TX_SAFE         >();
-    test_case<int(...) volatile,                   int(VA_CC foo::*)(...) volatile                   >();
-    test_case<int(...) volatile TX_SAFE,           int(VA_CC foo::*)(...) volatile TX_SAFE           >();
-    test_case<int(...) volatile LREF,              int(VA_CC foo::*)(...) volatile LREF              >();
-    test_case<int(...) volatile LREF TX_SAFE,      int(VA_CC foo::*)(...) volatile LREF TX_SAFE      >();
-    test_case<int(...) volatile RREF,              int(VA_CC foo::*)(...) volatile RREF              >();
-    test_case<int(...) volatile RREF TX_SAFE,      int(VA_CC foo::*)(...) volatile RREF TX_SAFE      >();
-#endif
+    test_case<int(...) TX_SAFE,                    int(foo::*)(...) TX_SAFE                    >();
+    test_case<int(...) LREF,                       int(foo::*)(...) LREF                       >();
+    test_case<int(...) LREF TX_SAFE,               int(foo::*)(...) LREF TX_SAFE               >();
+    test_case<int(...) RREF,                       int(foo::*)(...) RREF                       >();
+    test_case<int(...) RREF TX_SAFE,               int(foo::*)(...) RREF TX_SAFE               >();
+    test_case<int(...) const,                      int(foo::*)(...) const                      >();
+    test_case<int(...) const TX_SAFE,              int(foo::*)(...) const TX_SAFE              >();
+    test_case<int(...) const LREF,                 int(foo::*)(...) const LREF                 >();
+    test_case<int(...) const LREF TX_SAFE,         int(foo::*)(...) const LREF TX_SAFE         >();
+    test_case<int(...) const RREF,                 int(foo::*)(...) const RREF                 >();
+    test_case<int(...) const RREF TX_SAFE,         int(foo::*)(...) const RREF TX_SAFE         >();
+    test_case<int(...) volatile,                   int(foo::*)(...) volatile                   >();
+    test_case<int(...) volatile TX_SAFE,           int(foo::*)(...) volatile TX_SAFE           >();
+    test_case<int(...) volatile LREF,              int(foo::*)(...) volatile LREF              >();
+    test_case<int(...) volatile LREF TX_SAFE,      int(foo::*)(...) volatile LREF TX_SAFE      >();
+    test_case<int(...) volatile RREF,              int(foo::*)(...) volatile RREF              >();
+    test_case<int(...) volatile RREF TX_SAFE,      int(foo::*)(...) volatile RREF TX_SAFE      >();
+#endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
 
-    test_case<int(int, ...),                       int(VA_CC foo::*)(int, ...)                       >();
+    test_case<int(int, ...),                       int(foo::*)(int, ...)                       >();
 
 #ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
-    test_case<int(int, ...) TX_SAFE,               int(VA_CC foo::*)(int, ...) TX_SAFE               >();
-    test_case<int(int, ...) LREF,                  int(VA_CC foo::*)(int, ...) LREF                  >();
-    test_case<int(int, ...) LREF TX_SAFE,          int(VA_CC foo::*)(int, ...) LREF TX_SAFE          >();
-    test_case<int(int, ...) RREF,                  int(VA_CC foo::*)(int, ...) RREF                  >();
-    test_case<int(int, ...) RREF TX_SAFE,          int(VA_CC foo::*)(int, ...) RREF TX_SAFE          >();
-    test_case<int(int, ...) const,                 int(VA_CC foo::*)(int, ...) const                 >();
-    test_case<int(int, ...) const TX_SAFE,         int(VA_CC foo::*)(int, ...) const TX_SAFE         >();
-    test_case<int(int, ...) const LREF,            int(VA_CC foo::*)(int, ...) const LREF            >();
-    test_case<int(int, ...) const LREF TX_SAFE,    int(VA_CC foo::*)(int, ...) const LREF TX_SAFE    >();
-    test_case<int(int, ...) const RREF,            int(VA_CC foo::*)(int, ...) const RREF            >();
-    test_case<int(int, ...) const RREF TX_SAFE,    int(VA_CC foo::*)(int, ...) const RREF TX_SAFE    >();
-    test_case<int(int, ...) volatile,              int(VA_CC foo::*)(int, ...) volatile              >();
-    test_case<int(int, ...) volatile TX_SAFE,      int(VA_CC foo::*)(int, ...) volatile TX_SAFE      >();
-    test_case<int(int, ...) volatile LREF,         int(VA_CC foo::*)(int, ...) volatile LREF         >();
-    test_case<int(int, ...) volatile LREF TX_SAFE, int(VA_CC foo::*)(int, ...) volatile LREF TX_SAFE >();
-    test_case<int(int, ...) volatile RREF,         int(VA_CC foo::*)(int, ...) volatile RREF         >();
-    test_case<int(int, ...) volatile RREF TX_SAFE, int(VA_CC foo::*)(int, ...) volatile RREF TX_SAFE >();
-#endif
+    test_case<int(int, ...) TX_SAFE,               int(foo::*)(int, ...) TX_SAFE               >();
+    test_case<int(int, ...) LREF,                  int(foo::*)(int, ...) LREF                  >();
+    test_case<int(int, ...) LREF TX_SAFE,          int(foo::*)(int, ...) LREF TX_SAFE          >();
+    test_case<int(int, ...) RREF,                  int(foo::*)(int, ...) RREF                  >();
+    test_case<int(int, ...) RREF TX_SAFE,          int(foo::*)(int, ...) RREF TX_SAFE          >();
+    test_case<int(int, ...) const,                 int(foo::*)(int, ...) const                 >();
+    test_case<int(int, ...) const TX_SAFE,         int(foo::*)(int, ...) const TX_SAFE         >();
+    test_case<int(int, ...) const LREF,            int(foo::*)(int, ...) const LREF            >();
+    test_case<int(int, ...) const LREF TX_SAFE,    int(foo::*)(int, ...) const LREF TX_SAFE    >();
+    test_case<int(int, ...) const RREF,            int(foo::*)(int, ...) const RREF            >();
+    test_case<int(int, ...) const RREF TX_SAFE,    int(foo::*)(int, ...) const RREF TX_SAFE    >();
+    test_case<int(int, ...) volatile,              int(foo::*)(int, ...) volatile              >();
+    test_case<int(int, ...) volatile TX_SAFE,      int(foo::*)(int, ...) volatile TX_SAFE      >();
+    test_case<int(int, ...) volatile LREF,         int(foo::*)(int, ...) volatile LREF         >();
+    test_case<int(int, ...) volatile LREF TX_SAFE, int(foo::*)(int, ...) volatile LREF TX_SAFE >();
+    test_case<int(int, ...) volatile RREF,         int(foo::*)(int, ...) volatile RREF         >();
+    test_case<int(int, ...) volatile RREF TX_SAFE, int(foo::*)(int, ...) volatile RREF TX_SAFE >();
+#endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#endif //#ifndef CALLABLE_TRAITS_MSVC
 
 }

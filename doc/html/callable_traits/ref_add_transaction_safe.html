@@ -26,51 +26,65 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_add_transaction_safe"></a><a class="link" href="ref_add_transaction_safe.html" title="add_transaction_safe">add_transaction_safe</a>
 </h2></div></div></div>
+<h4>
+<a name="callable_traits.ref_add_transaction_safe.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_add_transaction_safe.header"></a></span><a class="link" href="ref_add_transaction_safe.html#callable_traits.ref_add_transaction_safe.header">Header</a>
+    </h4>
+<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_transaction_safe</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<h4>
+<a name="callable_traits.ref_add_transaction_safe.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_add_transaction_safe.definition"></a></span><a class="link" href="ref_add_transaction_safe.html#callable_traits.ref_add_transaction_safe.definition">Definition</a>
+    </h4>
 <pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">add_transaction_safe</span> <span class="special">{</span>
-
-        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-    <span class="special">};</span>
+    <span class="keyword">using</span> <span class="identifier">add_transaction_safe_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">add_transaction_safe_t</span> <span class="special">=</span>
-        <span class="keyword">typename</span> <span class="identifier">add_transaction_safe</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span><span class="special">;</span>
+    <span class="keyword">struct</span> <span class="identifier">add_transaction_safe</span> <span class="special">{</span>
+        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">add_transaction_safe_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+    <span class="special">};</span>
+
+
 <span class="special">}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_add_transaction_safe.h0"></a>
+<a name="callable_traits.ref_add_transaction_safe.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_add_transaction_safe.constraints"></a></span><a class="link" href="ref_add_transaction_safe.html#callable_traits.ref_add_transaction_safe.constraints">Constraints</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
           <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
-                function
+                function type
               </li>
 <li class="listitem">
-                function pointer
+                function pointer type
               </li>
 <li class="listitem">
-                function reference
+                function reference type
               </li>
 <li class="listitem">
-                member function pointer
+                member function pointer type
               </li>
 </ul></div>
         </li></ul></div>
 <h4>
-<a name="callable_traits.ref_add_transaction_safe.h1"></a>
+<a name="callable_traits.ref_add_transaction_safe.h3"></a>
       <span class="phrase"><a name="callable_traits.ref_add_transaction_safe.behavior"></a></span><a class="link" href="ref_add_transaction_safe.html#callable_traits.ref_add_transaction_safe.behavior">Behavior</a>
     </h4>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          A substitution failure occurs if the constraints are violated
+        </li>
+<li class="listitem">
           Adds a <code class="computeroutput"><span class="identifier">transaction_safe</span></code>
           specifier to <code class="computeroutput"><span class="identifier">T</span></code>, if not
           already present
-        </li></ul></div>
+        </li>
+</ul></div>
 <h4>
-<a name="callable_traits.ref_add_transaction_safe.h2"></a>
+<a name="callable_traits.ref_add_transaction_safe.h4"></a>
       <span class="phrase"><a name="callable_traits.ref_add_transaction_safe.input_output_examples"></a></span><a class="link" href="ref_add_transaction_safe.html#callable_traits.ref_add_transaction_safe.input_output_examples">Input/Output
       Examples</a>
     </h4>
@@ -239,7 +253,7 @@
 </tbody>
 </table></div>
 <h4>
-<a name="callable_traits.ref_add_transaction_safe.h3"></a>
+<a name="callable_traits.ref_add_transaction_safe.h5"></a>
       <span class="phrase"><a name="callable_traits.ref_add_transaction_safe.example_program"></a></span><a class="link" href="ref_add_transaction_safe.html#callable_traits.ref_add_transaction_safe.example_program">Example
       Program</a>
     </h4>

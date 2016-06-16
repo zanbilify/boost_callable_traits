@@ -15,6 +15,7 @@ namespace callable_traits {
     
     namespace detail {
             
+        template<typename T = void>
         struct default_callable_traits {
             
             // value is used by all traits classes to participate 
@@ -144,10 +145,18 @@ namespace callable_traits {
             
             // Changes the parent class type for PMDs and PMFs. Turns
             // function pointers, function references, and
-            // qualified/unqualified function types into PMFs. invalid_type
-            // for function objects.
-            template<typename>
-            using apply_member_pointer = invalid_type;
+            // qualified/unqualified function types into PMFs. Turns
+            // everything else into member data pointers.
+            template<typename C,
+                typename U = T,
+                typename K = typename std::remove_reference<U>::type,
+                typename L = typename std::conditional<
+                    std::is_same<void, K>::value, invalid_type, K>::type,
+                typename Class = typename std::conditional<
+                    std::is_class<C>::value, C, invalid_type>::type>
+            using apply_member_pointer = typename std::conditional<
+                std::is_same<L, invalid_type>::value || std::is_same<Class, invalid_type>::value,
+                invalid_type, L Class::*>::type;
             
             // Changes the return type of PMFs, function pointers, function
             // references, and qualified/unqualified function types. Changes

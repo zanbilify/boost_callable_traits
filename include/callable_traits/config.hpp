@@ -77,7 +77,7 @@ Distributed under the Boost Software License, Version 1.0.
   #define CALLABLE_TRAITS_DEFAULT_VARARGS_CC __cdecl
   #define CALLABLE_TRAITS_PMF_VARGARGS_CDECL_DEFAULT
 
-  //Visual Studio 2015 Update 2 broke std::make_index_sequence
+  // Visual Studio 2015 Update 2 broke std::make_index_sequence
   #if _MSC_FULL_VER == 190023918
   #include <callable_traits/detail/polyfills/make_index_sequence.hpp>
   #endif //#if _MSC_FULL_VER == 190023918

@@ -44,10 +44,6 @@ int main() {
         using test = ct::add_member_const_t<f>;
         static_assert(std::is_same<test, expect>::value, "");
     }
-
-    // A substitution failure will occur if add_member_const_t is used
-    // with function pointers, function references, function objects,
-    // or member data pointers.
 }
 //]
 #endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS

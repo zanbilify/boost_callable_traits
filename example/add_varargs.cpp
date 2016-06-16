@@ -40,20 +40,5 @@ int main() {
         using twice = ct::add_varargs_t<test>;
         static_assert(std::is_same<test, twice>::value, "");
     }
-
-    // add_varargs_t fails in a SFINAE-friendly manner when
-    // used on a function object or a member data pointer.
-    //
-    // {
-    //     using d = int foo::*;
-    //     using test = ct::add_varargs_t<d>;
-    // }
-    //
-    // The error message is about as obvious as it can be without
-    // resorting to a SFINAE-unfriendly static_assert (namespaces
-    // omitted for brevity):
-    //
-    //   error: no type named 'type' in 'struct disjunction<
-    //   type_value<invalid_type, false>, add_varargs_t_error<0> >'
 }
 //]

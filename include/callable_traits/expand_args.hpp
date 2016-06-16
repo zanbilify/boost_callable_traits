@@ -14,11 +14,6 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(expand_args)
-
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(expand_args,
-        cannot_expand_the_parameter_list_of_first_template_argument)
-
     template<typename T, template<class...> class Container>
     struct expand_args {
 

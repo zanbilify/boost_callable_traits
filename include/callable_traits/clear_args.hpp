@@ -14,11 +14,6 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(clear_args)
-
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(clear_args,
-        cannot_clear_the_parameter_list_for_this_type)
-
     template<typename T>
     struct clear_args {
 

@@ -6,7 +6,7 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="CallableTraits">
 <link rel="up" href="../index.html" title="CallableTraits">
-<link rel="prev" href="ref_apply_return0.html" title="apply_return">
+<link rel="prev" href="ref_apply_return.html" title="apply_return">
 <link rel="next" href="ref_args.html" title="args">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -20,17 +20,23 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="ref_apply_return0.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_args.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="ref_apply_return.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_args.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_arg_at"></a><a class="link" href="ref_arg_at.html" title="arg_at">arg_at</a>
 </h2></div></div></div>
-<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Index</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">arg_at</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span><span class="special">;</span>
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">I</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+    <span class="keyword">struct</span> <span class="identifier">arg_at</span> <span class="special">{</span>
 
+        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+
+    <span class="special">};</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">I</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+    <span class="keyword">using</span> <span class="identifier">arg_at_t</span> <span class="special">=</span> <span class="keyword">typename</span> <span class="identifier">arg_at</span><span class="special">&lt;</span><span class="identifier">I</span><span class="special">,</span> <span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span><span class="special">;</span>
 <span class="special">}</span>
 </pre>
 <h4>
@@ -42,42 +48,30 @@
           <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
-                [link_signature]
+                function
               </li>
 <li class="listitem">
-                [link_simple_fn_obj]
+                function pointer
+              </li>
+<li class="listitem">
+                function reference
+              </li>
+<li class="listitem">
+                member function pointer
+              </li>
+<li class="listitem">
+                member data pointer
+              </li>
+<li class="listitem">
+                user-defined type with non-overloaded <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
+              </li>
+<li class="listitem">
+                type of a non-generic lambda
               </li>
 </ul></div>
         </li>
 <li class="listitem">
-          When <code class="computeroutput"><span class="identifier">T</span></code> is a [link_signature],
-          then:
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
-<li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">ArgCount</span></code> represent
-                the number of arguments in the signature of <code class="computeroutput"><span class="identifier">T</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">Index</span></code> must be less
-                than <code class="computeroutput"><span class="identifier">ArgCount</span></code> and
-                greater than zero
-              </li>
-</ul></div>
-        </li>
-<li class="listitem">
-          Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          [link_simple_fn_obj], then:
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
-<li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">ArgCount</span></code> represent
-                the number of arguments in <code class="computeroutput"><span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">decay_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="keyword">operator</span><span class="special">())</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">Index</span></code> must be less
-                than <code class="computeroutput"><span class="identifier">ArgCount</span></code> and
-                greater than zero
-              </li>
-</ul></div>
+          <code class="computeroutput"><span class="identifier">I</span></code> must be less than <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple_size</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;&gt;::</span><span class="identifier">value</span></code>
         </li>
 </ul></div>
 <h4>
@@ -125,7 +119,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="ref_apply_return0.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_args.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="ref_apply_return.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_args.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

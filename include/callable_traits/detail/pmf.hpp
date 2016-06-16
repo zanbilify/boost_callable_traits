@@ -41,7 +41,7 @@ namespace callable_traits {
             typename set_varargs_member_function_qualifiers_t<Flags, IsTransactionSafe, Ts...>::type;
 
         template<typename T, typename U>
-        struct pmf : default_callable_traits {};
+        struct pmf : default_callable_traits<T> {};
 
         template<typename U, typename T, T Value>
         struct pmf <U, std::integral_constant<T, Value>> {

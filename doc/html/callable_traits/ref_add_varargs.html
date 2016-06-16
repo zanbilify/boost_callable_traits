@@ -26,70 +26,63 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_add_varargs"></a><a class="link" href="ref_add_varargs.html" title="add_varargs">add_varargs</a>
 </h2></div></div></div>
+<h4>
+<a name="callable_traits.ref_add_varargs.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_add_varargs.header"></a></span><a class="link" href="ref_add_varargs.html#callable_traits.ref_add_varargs.header">Header</a>
+    </h4>
+<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<h4>
+<a name="callable_traits.ref_add_varargs.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_add_varargs.definition"></a></span><a class="link" href="ref_add_varargs.html#callable_traits.ref_add_varargs.definition">Definition</a>
+    </h4>
 <pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">add_varargs</span> <span class="special">{</span>
-
-        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-    <span class="special">};</span>
+    <span class="keyword">using</span> <span class="identifier">add_varargs_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">add_varargs_t</span> <span class="special">=</span> <span class="keyword">typename</span> <span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span><span class="special">;</span>
+    <span class="keyword">struct</span> <span class="identifier">add_varargs</span> <span class="special">{</span>
+        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">add_varargs_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+    <span class="special">};</span>
 <span class="special">}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_add_varargs.h0"></a>
+<a name="callable_traits.ref_add_varargs.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_add_varargs.constraints"></a></span><a class="link" href="ref_add_varargs.html#callable_traits.ref_add_varargs.constraints">Constraints</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
           <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
           <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
 <li class="listitem">
-                function
+                function type
               </li>
 <li class="listitem">
-                function pointer
+                function pointer type
               </li>
 <li class="listitem">
-                function reference
+                function reference type
               </li>
 <li class="listitem">
-                member function pointer
+                member function pointer type
               </li>
 </ul></div>
         </li></ul></div>
 <h4>
-<a name="callable_traits.ref_add_varargs.h1"></a>
+<a name="callable_traits.ref_add_varargs.h3"></a>
       <span class="phrase"><a name="callable_traits.ref_add_varargs.behavior"></a></span><a class="link" href="ref_add_varargs.html#callable_traits.ref_add_varargs.behavior">Behavior</a>
     </h4>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          A substitution failure occurs if the constraints are violated
+        </li>
+<li class="listitem">
           Adds C-style variadics (<code class="computeroutput"><span class="special">...</span></code>)
           to the signature of <code class="computeroutput"><span class="identifier">T</span></code>,
           if not already present
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">()&gt;</span></code>
-                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(...)</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(*)()&gt;</span></code>
-                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="special">...)</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(&amp;)()&gt;</span></code>
-                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="keyword">int</span><span class="special">,</span> <span class="special">...)</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">add_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
-                <span class="keyword">const</span><span class="special">&gt;</span></code>
-                aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(...)</span>
-                <span class="keyword">const</span></code>
-              </li>
+        </li>
 </ul></div>
-        </li></ul></div>
 <h4>
-<a name="callable_traits.ref_add_varargs.h2"></a>
+<a name="callable_traits.ref_add_varargs.h4"></a>
       <span class="phrase"><a name="callable_traits.ref_add_varargs.input_output_examples"></a></span><a class="link" href="ref_add_varargs.html#callable_traits.ref_add_varargs.input_output_examples">Input/Output
       Examples</a>
     </h4>
@@ -278,7 +271,7 @@
 </tbody>
 </table></div>
 <h4>
-<a name="callable_traits.ref_add_varargs.h3"></a>
+<a name="callable_traits.ref_add_varargs.h5"></a>
       <span class="phrase"><a name="callable_traits.ref_add_varargs.example_program"></a></span><a class="link" href="ref_add_varargs.html#callable_traits.ref_add_varargs.example_program">Example
       Program</a>
     </h4>
@@ -317,21 +310,6 @@
         <span class="keyword">using</span> <span class="identifier">twice</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_varargs_t</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">&gt;;</span>
         <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">twice</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
     <span class="special">}</span>
-
-    <span class="comment">// add_varargs_t fails in a SFINAE-friendly manner when</span>
-    <span class="comment">// used on a function object or a member data pointer.</span>
-    <span class="comment">//</span>
-    <span class="comment">// {</span>
-    <span class="comment">//     using d = int foo::*;</span>
-    <span class="comment">//     using test = ct::add_varargs_t&lt;d&gt;;</span>
-    <span class="comment">// }</span>
-    <span class="comment">//</span>
-    <span class="comment">// The error message is about as obvious as it can be without</span>
-    <span class="comment">// resorting to a SFINAE-unfriendly static_assert (namespaces</span>
-    <span class="comment">// omitted for brevity):</span>
-    <span class="comment">//</span>
-    <span class="comment">//   error: no type named 'type' in 'struct disjunction&lt;</span>
-    <span class="comment">//   type_value&lt;invalid_type, false&gt;, add_varargs_t_error&lt;0&gt; &gt;'</span>
 <span class="special">}</span>
 </pre>
 </div>

@@ -357,60 +357,9 @@ To include the experimental examples for calling conventions in the build, appen
 [import ../include/callable_traits/apply_return.hpp]
 [apply_return_hpp]
 
-[section:ref_apply_return apply_return]
+[import ../include/callable_traits/arg_at.hpp]
+[arg_at_hpp]	
 
-[heading Constraints]
-
-`T` must be a [link_signature] or a [link_pmd].
-
-[heading Behavior]
-* `apply_return<T, NewReturn>` aliases [^[*NewReturn] [Category] ( [Args] [VarArgs] ) [MemberQualifiers]]
-
-[heading Example]
-[/import ../example/apply_return.cpp]
-[apply_return]
-
-[endsect][/section:ref_apply_return]
-
-
-
-
-[section:ref_arg_at arg_at]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<std::size_t Index, typename T>
-		using arg_at = /* implementation-defined */;
-		
-	}
-	
-[heading Constraints]
-* `T` must be one of the following:
-  * [link_signature]
-  * [link_simple_fn_obj]
-* When `T` is a [link_signature], then:
-  * Let `ArgCount` represent the number of arguments in the signature of `T`
-  * `Index` must be less than `ArgCount` and greater than zero
-* Otherwise, when `T` is a [link_simple_fn_obj], then:
-  * Let `ArgCount` represent the number of arguments in `decltype(&std::decay_t<T>::operator())`
-  * `Index` must be less than `ArgCount` and greater than zero
-  
-[heading Behavior]
-* If any constraints are violated, a substitution failure occurs
-* Otherwise, `arg_at<Index, T>` aliases `std::tuple_element_t<Index, `[namespace_scoped][link_args]`<T>>`, such that:
-  * `arg_at<0, void(char, short, long, int*)>` aliases `char`
-  * `arg_at<1, void(*)(char, short, long, int*)>` aliases `short`
-  * `arg_at<2, void(&)(char, short, long, int*)>` aliases `long`
-  
-[heading Example]
-[/import ../example/arg_at.cpp]
-[arg_at]
-
-[/[heading See Also]
-* [link_args]
-* [link_expand_args]]
-
-[endsect][/section:ref_arg_at]
 
 
 

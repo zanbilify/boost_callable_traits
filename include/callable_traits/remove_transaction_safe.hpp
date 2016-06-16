@@ -14,11 +14,6 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(remove_transaction_safe)
-
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(remove_transaction_safe,
-        cannot_remove_transaction_safe_from_this_type)
-
     template<typename T>
     struct remove_transaction_safe {
 

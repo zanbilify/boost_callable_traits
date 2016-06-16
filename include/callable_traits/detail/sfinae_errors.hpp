@@ -33,11 +33,15 @@ namespace callable_traits {
             static constexpr bool value = B;
         };
 
-        template<typename T, typename... ThrowIfs>
+        template<typename T, typename... FailIfs>
         using sfinae_try = typename CALLABLE_TRAITS_DISJUNCTION(
-            ThrowIfs...,
-            success<T>
-        )::_::type;
+                FailIfs..., success<T>)::_::type;
+
+        template<typename FailMsg, typename ForceTwoPhaseLookup>
+        struct fail {
+            using type = typename std::conditional<sizeof(ForceTwoPhaseLookup*) < 1,
+            FailMsg, FailMsg>::type::_::type;
+        };
     }
 
 #define CALLABLE_TRAITS_PP_CAT_(x, y) x ## y
@@ -52,46 +56,41 @@ namespace callable_traits_ERROR {                              \
 }                                                              \
 /**/
 
-#define CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(origin, name)    \
+#define CALLABLE_TRAITS_SFINAE_MSG(origin, name)    \
 struct CALLABLE_TRAITS_PP_CAT(name, _ ){};                       \
 struct name : callable_traits_ERROR::origin<                     \
     CALLABLE_TRAITS_PP_CAT(name, _ )>{};                         \
 /**/
 
-    /*** parameter manipulation errors ***/
+
     CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(parameters)
-
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(parameters,
-        index_out_of_range_for_parameter_list)
-
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(parameters,
-        cannot_determine_parameters_for_this_type)
-
-
-    /*** parent class errors ***/
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(clear_args)
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(apply_return)
     CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(parent_class)
-
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(parent_class,
-        type_is_not_a_member_pointer)
-
-
-    /*** member qualifier errors ***/
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(member_qualifiers)
-
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(member_qualifiers,
-        member_qualifiers_are_illegal_for_this_type)
-
-
-    /*** varargs errors ***/
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(apply_member_pointer)
     CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(varargs)
-
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(varargs,
-        varargs_are_illegal_for_this_type)
-
-    /*** transaction_safe errors ***/
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(member_qualifiers)
     CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(transaction_safe_error)
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(add_transaction_safe)
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(expand_args)
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(remove_member_pointer)
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(remove_transaction_safe)
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(result_of)
 
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(transaction_safe_error,
-        transaction_safe_is_not_enabled_on_this_platform)
+    CALLABLE_TRAITS_SFINAE_MSG(parameters,              index_out_of_range_for_parameter_list)
+    CALLABLE_TRAITS_SFINAE_MSG(parameters,              cannot_determine_parameters_for_this_type)
+    CALLABLE_TRAITS_SFINAE_MSG(clear_args,              cannot_clear_the_parameter_list_for_this_type)
+    CALLABLE_TRAITS_SFINAE_MSG(apply_return,            invalid_types_for_apply_return)
+    CALLABLE_TRAITS_SFINAE_MSG(parent_class,            type_is_not_a_member_pointer)
+    CALLABLE_TRAITS_SFINAE_MSG(apply_member_pointer,    members_cannot_have_a_type_of_void)
+    CALLABLE_TRAITS_SFINAE_MSG(apply_member_pointer,    second_template_argument_must_be_a_class_or_struct)
+    CALLABLE_TRAITS_SFINAE_MSG(member_qualifiers,       member_qualifiers_are_illegal_for_this_type)
+    CALLABLE_TRAITS_SFINAE_MSG(varargs,                 varargs_are_illegal_for_this_type)
+    CALLABLE_TRAITS_SFINAE_MSG(transaction_safe_error,  transaction_safe_is_not_enabled_on_this_platform)
+    CALLABLE_TRAITS_SFINAE_MSG(add_transaction_safe,    cannot_add_transaction_safe_to_this_type)
+    CALLABLE_TRAITS_SFINAE_MSG(remove_transaction_safe, cannot_remove_transaction_safe_from_this_type)
+    CALLABLE_TRAITS_SFINAE_MSG(expand_args,             cannot_expand_the_parameter_list_of_first_template_argument)
+    CALLABLE_TRAITS_SFINAE_MSG(remove_member_pointer,   cannot_remove_member_pointer_from_this_type)
+    CALLABLE_TRAITS_SFINAE_MSG(result_of,               unable_to_determine_return_type)
 }
 #endif // #ifndef CALLABLE_TRAITS_SFINAE_ERRORS_HPP

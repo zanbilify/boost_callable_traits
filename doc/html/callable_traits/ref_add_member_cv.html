@@ -26,36 +26,49 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_add_member_cv"></a><a class="link" href="ref_add_member_cv.html" title="add_member_cv">add_member_cv</a>
 </h2></div></div></div>
+<h4>
+<a name="callable_traits.ref_add_member_cv.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_add_member_cv.header"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.header">Header</a>
+    </h4>
+<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_member_cv</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<h4>
+<a name="callable_traits.ref_add_member_cv.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_add_member_cv.definition"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.definition">Definition</a>
+    </h4>
 <pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">add_member_cv</span> <span class="special">{</span>
-
-        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-    <span class="special">};</span>
+    <span class="keyword">using</span> <span class="identifier">add_member_cv_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">add_member_cv_t</span> <span class="special">=</span> <span class="keyword">typename</span> <span class="identifier">add_member_cv</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span><span class="special">;</span>
+    <span class="keyword">struct</span> <span class="identifier">add_member_cv</span> <span class="special">{</span>
+        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">add_member_cv_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+    <span class="special">};</span>
 <span class="special">}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_add_member_cv.h0"></a>
+<a name="callable_traits.ref_add_member_cv.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_add_member_cv.constraints"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.constraints">Constraints</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-          <code class="computeroutput"><span class="identifier">T</span></code> must be a function or
-          a member function pointer
+          <code class="computeroutput"><span class="identifier">T</span></code> must be a function type
+          or a member function pointer type
         </li></ul></div>
 <h4>
-<a name="callable_traits.ref_add_member_cv.h1"></a>
+<a name="callable_traits.ref_add_member_cv.h3"></a>
       <span class="phrase"><a name="callable_traits.ref_add_member_cv.behavior"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.behavior">Behavior</a>
     </h4>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          A substitution failure occurs if the constraints are violated
+        </li>
+<li class="listitem">
           Adds member <code class="computeroutput"><span class="keyword">const</span></code> and <code class="computeroutput"><span class="keyword">volatile</span></code> qualifiers to <code class="computeroutput"><span class="identifier">T</span></code>,
           if not already present
-        </li></ul></div>
+        </li>
+</ul></div>
 <h4>
-<a name="callable_traits.ref_add_member_cv.h2"></a>
+<a name="callable_traits.ref_add_member_cv.h4"></a>
       <span class="phrase"><a name="callable_traits.ref_add_member_cv.input_output_examples"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.input_output_examples">Input/Output
       Examples</a>
     </h4>
@@ -240,7 +253,7 @@
 </tbody>
 </table></div>
 <h4>
-<a name="callable_traits.ref_add_member_cv.h3"></a>
+<a name="callable_traits.ref_add_member_cv.h5"></a>
       <span class="phrase"><a name="callable_traits.ref_add_member_cv.example_program"></a></span><a class="link" href="ref_add_member_cv.html#callable_traits.ref_add_member_cv.example_program">Example
       Program</a>
     </h4>
@@ -278,11 +291,6 @@
         <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_member_cv_t</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">&gt;;</span>
         <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
     <span class="special">}</span>
-
-<span class="comment">// A substitution failure will occur if add_member_cv_t is used</span>
-<span class="comment">// with function pointers, function references, function objects,</span>
-<span class="comment">// or member data pointers.</span>
-
 <span class="special">}</span>
 </pre>
 </div>

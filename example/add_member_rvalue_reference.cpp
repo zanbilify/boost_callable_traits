@@ -47,10 +47,6 @@ int main() {
         using test = ct::add_member_rvalue_reference_t<f>;
         static_assert(std::is_same<test, expect>::value, "");
     }
-
-    // A substitution failure will occur if add_member_rvalue_reference_t
-    // is used with function pointers, function references, function objects,
-    // or member data pointers.
 }
 
 //]

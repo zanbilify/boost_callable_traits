@@ -62,8 +62,9 @@ namespace callable_traits {
 
             using clear_args = invalid_type;
 
-            template<typename>
-            using apply_member_pointer = invalid_type;
+            template<typename C, typename U = T>
+            using apply_member_pointer =
+                typename std::remove_reference<U>::type C::*;
 
             template<typename>
             using apply_return = invalid_type;
@@ -108,7 +109,7 @@ namespace callable_traits {
 
         template<typename T, typename U, typename Base>
         struct function_object <T U::*, Base>
-            : default_callable_traits {};
+            : default_callable_traits<> {};
     }
 }
 

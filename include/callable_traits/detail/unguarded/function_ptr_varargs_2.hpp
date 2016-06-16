@@ -30,7 +30,7 @@ struct has_calling_convention_t<
 template<typename Return, typename... Args>
 struct function<CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC *)(Args..., ...)
     CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE>
- : qualifier_traits<dummy>, default_callable_traits {
+ : qualifier_traits<dummy>, default_callable_traits<> {
 
     static constexpr bool value = true;
 

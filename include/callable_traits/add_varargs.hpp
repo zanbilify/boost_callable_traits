@@ -12,40 +12,41 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
-//[add_varargs_hpp
-//`[section:ref_add_varargs add_varargs]
+//[ add_varargs_hpp
+/*`
+[section:ref_add_varargs add_varargs]
+[heading Header]
+``#include<callable_traits/add_varargs.hpp>``
+[heading Definition]
+*/
 
 namespace callable_traits {
 
     template<typename T>
-    struct add_varargs {
-
-        using type = //implementation-defined
-        //<-
-            detail::fail_if_invalid<
-                typename detail::traits<T>::add_varargs,
-                varargs_are_illegal_for_this_type>;
-        //->
-    };
+    using add_varargs_t = //implementation-defined
+//<-
+        detail::fail_if_invalid<
+            typename detail::traits<T>::add_varargs,
+            varargs_are_illegal_for_this_type>;
+//->
 
     template<typename T>
-    using add_varargs_t = typename add_varargs<T>::type;
+    struct add_varargs {
+        using type = add_varargs_t<T>;
+    };
 }
 
 /*`
 [heading Constraints]
 * `T` must be one of the following:
-  * function
-  * function pointer
-  * function reference
-  * member function pointer
+  * function type
+  * function pointer type
+  * function reference type
+  * member function pointer type
 
 [heading Behavior]
+* A substitution failure occurs if the constraints are violated
 * Adds C-style variadics (`...`) to the signature of `T`, if not already present
-  * `add_varargs<int()>` aliases `int(...)`
-  * `add_varargs<int(*)()>` aliases `int(*)(int, ...)`
-  * `add_varargs<int(&)()>` aliases `int(&)(int, ...)`
-  * `add_varargs<int(foo::*)() const>` aliases `int(foo::*)(...) const`
 
 [heading Input/Output Examples]
 [table

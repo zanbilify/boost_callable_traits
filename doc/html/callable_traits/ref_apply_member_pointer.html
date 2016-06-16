@@ -26,43 +26,34 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_apply_member_pointer"></a><a class="link" href="ref_apply_member_pointer.html" title="apply_member_pointer">apply_member_pointer</a>
 </h2></div></div></div>
+<h4>
+<a name="callable_traits.ref_apply_member_pointer.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_apply_member_pointer.header"></a></span><a class="link" href="ref_apply_member_pointer.html#callable_traits.ref_apply_member_pointer.header">Header</a>
+    </h4>
+<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">apply_member_pointer</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<h4>
+<a name="callable_traits.ref_apply_member_pointer.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_apply_member_pointer.definition"></a></span><a class="link" href="ref_apply_member_pointer.html#callable_traits.ref_apply_member_pointer.definition">Definition</a>
+    </h4>
 <pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">C</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">apply_member_pointer</span> <span class="special">{</span>
-
-        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-    <span class="special">};</span>
+    <span class="keyword">using</span> <span class="identifier">apply_member_pointer_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">C</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">apply_member_pointer_t</span> <span class="special">=</span>
-        <span class="keyword">typename</span> <span class="identifier">apply_member_pointer</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">C</span><span class="special">&gt;::</span><span class="identifier">type</span><span class="special">;</span>
+    <span class="keyword">struct</span> <span class="identifier">apply_member_pointer</span> <span class="special">{</span>
+        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">apply_member_pointer_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">C</span><span class="special">&gt;;</span>
+    <span class="special">};</span>
 <span class="special">}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_apply_member_pointer.h0"></a>
+<a name="callable_traits.ref_apply_member_pointer.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_apply_member_pointer.constraints"></a></span><a class="link" href="ref_apply_member_pointer.html#callable_traits.ref_apply_member_pointer.constraints">Constraints</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-          <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
-<li class="listitem">
-                function
-              </li>
-<li class="listitem">
-                function pointer
-              </li>
-<li class="listitem">
-                function reference
-              </li>
-<li class="listitem">
-                member function pointer
-              </li>
-<li class="listitem">
-                member data pointer
-              </li>
-</ul></div>
+          <code class="computeroutput"><span class="identifier">T</span></code> may be any type except
+          <code class="computeroutput"><span class="keyword">void</span></code>
         </li>
 <li class="listitem">
           <code class="computeroutput"><span class="identifier">C</span></code> must be a user-defined
@@ -70,10 +61,13 @@
         </li>
 </ul></div>
 <h4>
-<a name="callable_traits.ref_apply_member_pointer.h1"></a>
+<a name="callable_traits.ref_apply_member_pointer.h3"></a>
       <span class="phrase"><a name="callable_traits.ref_apply_member_pointer.behavior"></a></span><a class="link" href="ref_apply_member_pointer.html#callable_traits.ref_apply_member_pointer.behavior">Behavior</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          A substitution failure occurs if the constraints are violated
+        </li>
 <li class="listitem">
           When <code class="computeroutput"><span class="identifier">T</span></code> is a function, function
           pointer, or function reference, then the aliased type is a member function
@@ -86,9 +80,12 @@
           <code class="computeroutput"><span class="identifier">C</span></code> with the same parameters
           and return type
         </li>
+<li class="listitem">
+          Otherwise, the aliased type is a member data pointer equivalent to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">remove_reference_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span> <span class="identifier">C</span><span class="special">::*</span></code>
+        </li>
 </ul></div>
 <h4>
-<a name="callable_traits.ref_apply_member_pointer.h2"></a>
+<a name="callable_traits.ref_apply_member_pointer.h4"></a>
       <span class="phrase"><a name="callable_traits.ref_apply_member_pointer.input_output_examples"></a></span><a class="link" href="ref_apply_member_pointer.html#callable_traits.ref_apply_member_pointer.input_output_examples">Input/Output
       Examples</a>
     </h4>
@@ -234,19 +231,33 @@
             </td>
 <td>
               <p>
-                (substitution failure)
+                <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span></code>
               </p>
             </td>
 </tr>
 <tr>
 <td>
               <p>
-                <code class="computeroutput"><span class="identifier">bar</span></code>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="special">&amp;</span></code>
               </p>
             </td>
 <td>
               <p>
-                (substitution failure)
+                <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">const</span> <span class="keyword">int</span>
+                <span class="special">&amp;</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">const</span> <span class="keyword">int</span>
+                <span class="identifier">foo</span><span class="special">::*</span></code>
               </p>
             </td>
 </tr>
@@ -258,6 +269,18 @@
             </td>
 <td>
               <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="special">(*</span><span class="keyword">const</span> <span class="identifier">foo</span><span class="special">::*)()</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span></code>
+              </p>
+            </td>
+<td>
+              <p>
                 (substitution failure)
               </p>
             </td>
@@ -265,7 +288,7 @@
 </tbody>
 </table></div>
 <h4>
-<a name="callable_traits.ref_apply_member_pointer.h3"></a>
+<a name="callable_traits.ref_apply_member_pointer.h5"></a>
       <span class="phrase"><a name="callable_traits.ref_apply_member_pointer.example_program"></a></span><a class="link" href="ref_apply_member_pointer.html#callable_traits.ref_apply_member_pointer.example_program">Example
       Program</a>
     </h4>
@@ -277,22 +300,80 @@
 <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">;</span>
 <span class="keyword">struct</span> <span class="identifier">bar</span><span class="special">;</span>
 
-<span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">);</span>
-
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
 
     <span class="special">{</span>
+        <span class="comment">// function type -&gt; member function pointer type</span>
         <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(</span><span class="keyword">int</span><span class="special">);</span>
-        <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">apply_member_pointer_t</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">g</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">apply_member_pointer_t</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;;</span>
         <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">);</span>
-        <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+        <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">g</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
     <span class="special">}</span>
 
     <span class="special">{</span>
-        <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(*)(</span><span class="keyword">int</span><span class="special">);</span>
-        <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">apply_member_pointer_t</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;;</span>
-        <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">);</span>
-        <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+        <span class="comment">// function pointer type (unqualified) -&gt; member function pointer type</span>
+        <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(*)();</span>
+        <span class="keyword">using</span> <span class="identifier">g</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">apply_member_pointer_t</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)();</span>
+        <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">g</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+    <span class="special">}</span>
+
+
+    <span class="special">{</span>
+        <span class="comment">// function pointer type (qualified) -&gt; member data pointer type</span>
+
+        <span class="comment">// Look out for cases like these two. If the input type to apply_member_pointer</span>
+        <span class="comment">// is a <span class="bold"><strong>qualified</strong></span> function pointer type, then the  aliased type is a member data</span>
+        <span class="comment">// pointer to a <span class="bold"><strong>qualified function pointer</strong></span>.</span>
+
+        <span class="special">{</span>
+            <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(*&amp;)();</span>
+            <span class="keyword">using</span> <span class="identifier">g</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">apply_member_pointer_t</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;;</span>
+            <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span> <span class="special">(*</span> <span class="identifier">foo</span><span class="special">::*)();</span>
+            <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">g</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+        <span class="special">}</span>
+
+        <span class="special">{</span>
+            <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(*</span> <span class="keyword">const</span><span class="special">)();</span>
+            <span class="keyword">using</span> <span class="identifier">g</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">apply_member_pointer_t</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;;</span>
+            <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span> <span class="special">(*</span> <span class="keyword">const</span> <span class="identifier">foo</span><span class="special">::*)();</span>
+            <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">g</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+        <span class="special">}</span>
+    <span class="special">}</span>
+
+    <span class="special">{</span>
+        <span class="comment">// function reference type -&gt; member function pointer type</span>
+        <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(&amp;)();</span>
+        <span class="keyword">using</span> <span class="identifier">g</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">apply_member_pointer_t</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)();</span>
+        <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">g</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+    <span class="special">}</span>
+
+    <span class="special">{</span>
+        <span class="comment">// member function pointer type -&gt; member function pointer type</span>
+        <span class="comment">// (note the different parent class)</span>
+        <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(</span><span class="identifier">bar</span><span class="special">::*)()</span> <span class="keyword">const</span><span class="special">;</span>
+        <span class="keyword">using</span> <span class="identifier">g</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">apply_member_pointer_t</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">const</span><span class="special">;</span>
+        <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">g</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+    <span class="special">}</span>
+
+    <span class="special">{</span>
+        <span class="comment">// non-callable type -&gt; member data pointer type</span>
+        <span class="keyword">using</span> <span class="identifier">g</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">apply_member_pointer_t</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*;</span>
+        <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">g</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+    <span class="special">}</span>
+
+
+    <span class="special">{</span>
+        <span class="comment">// function object type -&gt; member data pointer type</span>
+        <span class="comment">// the same is true for lambdas and generic lambdas</span>
+        <span class="keyword">auto</span> <span class="identifier">lambda</span> <span class="special">=</span> <span class="special">[](){};</span>
+        <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">decltype</span><span class="special">(</span><span class="identifier">lambda</span><span class="special">);</span>
+        <span class="keyword">using</span> <span class="identifier">g</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">apply_member_pointer_t</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;;</span>
+        <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="identifier">f</span> <span class="identifier">foo</span><span class="special">::*;</span>
+        <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">g</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
     <span class="special">}</span>
 <span class="special">}</span>
 </pre>

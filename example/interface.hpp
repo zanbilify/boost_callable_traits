@@ -18,7 +18,6 @@
 #include <callable_traits/is_like_function.hpp>
 #include <callable_traits/remove_member_cv.hpp>
 #include <callable_traits/get_qualifier_flags.hpp>
-#include <callable_traits/apply_member_pointer.hpp>
 #include <callable_traits/remove_member_pointer.hpp>
 #include <callable_traits/remove_member_reference.hpp>
 #include <callable_traits/qualified_parent_class_of.hpp>

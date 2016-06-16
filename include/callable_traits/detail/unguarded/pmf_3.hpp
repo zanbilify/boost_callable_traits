@@ -33,7 +33,7 @@ struct has_calling_convention_t<
 template<typename Return, typename T, typename... Args>
 struct pmf<Return(CALLABLE_TRAITS_CC T::*)(Args...)
     CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE>
-    : qualifier_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>, default_callable_traits {
+    : qualifier_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>, default_callable_traits<> {
      
     static constexpr bool value = true;
     

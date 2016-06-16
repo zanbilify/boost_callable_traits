@@ -14,11 +14,6 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(result_of)
-
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_FOR(result_of,
-        unable_to_determine_return_type)
-
     template<typename T>
     struct result_of {
 
