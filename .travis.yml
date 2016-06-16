@@ -43,40 +43,41 @@ matrix:
     ##########################################################################
 
     # Clang 3.5
-    - env: UNIT_TESTS=true LLVM_VERSION=3.5.2 BOOST_VERSION=default
-      addons:
-        apt:
-          sources: &sources
-            - ubuntu-toolchain-r-test
-
+    #- env: UNIT_TESTS=true LLVM_VERSION=3.5.2 BOOST_VERSION=default
 
     # Clang 3.6
     - env: UNIT_TESTS=true LLVM_VERSION=3.6.2 BOOST_VERSION=default
-      addons:
-        apt:
-          sources: *sources
 
     # Clang 3.7
     - env: UNIT_TESTS=true LLVM_VERSION=3.7.1 BOOST_VERSION=default
-      addons:
-        apt:
-          sources: *sources
 
     # Clang 3.8		 
     - env: UNIT_TESTS=true LLVM_VERSION=3.8.0 BOOST_VERSION=default
-      addons:
-        apt:
-          sources: *sources
 
     # Xcode 6.3
     - os: osx
       env: UNIT_TESTS=true BOOST_VERSION=default
       osx_image: beta-xcode6.3
 
+    # Xcode 6.4
+    - os: osx
+      env: UNIT_TESTS=true BOOST_VERSION=default
+      osx_image: xcode6.4
+
+    # Xcode 7
+    - os: osx
+      env: UNIT_TESTS=true BOOST_VERSION=default
+      osx_image: xcode7
+
     # Xcode 7.1
     - os: osx
       env: UNIT_TESTS=true BOOST_VERSION=default
       osx_image: xcode7.1
+
+    # Xcode 7.2
+    - os: osx
+      env: UNIT_TESTS=true BOOST_VERSION=default
+      osx_image: xcode7.2
 
     ##########################################################################
     # Build with variations in the configuration
@@ -84,16 +85,6 @@ matrix:
 
     # Build with libstdc++ instead of libc++
     - env: UNIT_TESTS=true LLVM_VERSION=default STDLIB=libstdc++ BOOST_VERSION=default
-      addons:
-        apt:
-          packages: ["clang-3.7"]
-          sources: *sources
-
-    - env: UNIT_TESTS=true LLVM_VERSION=default STDLIB=libstdc++ BOOST_VERSION=default
-      addons:
-        apt:
-          packages: ["clang-3.8"]
-          sources: *sources
 
     # GCC 6
     #- env: UNIT_TESTS=true COMPILER=g++-6 STDLIB=libstdc++ BOOST_VERSION=default
@@ -108,10 +99,6 @@ matrix:
     - env: UNIT_TESTS=true COMPILER=g++-5 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: g++
-      addons:
-        apt:
-          packages: ["g++-5"]
-          sources: *sources
 
     # GCC 4.9
     - env: UNIT_TESTS=true COMPILER=g++-4.9 STDLIB=libstdc++ BOOST_VERSION=default
