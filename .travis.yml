@@ -26,6 +26,13 @@ env:
   matrix:
     - TRAVIS_EMPTY_JOB_WORKAROUND=true
 
+addons:
+  apt:
+    packages:
+      - g++-5
+    sources: &sources
+      - ubuntu-toolchain-r-test
+
 matrix:
   exclude:
     - env: TRAVIS_EMPTY_JOB_WORKAROUND=true
