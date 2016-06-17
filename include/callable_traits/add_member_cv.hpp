@@ -40,8 +40,8 @@ namespace callable_traits {
 * `T` must be a function type or a member function pointer type
 
 [heading Behavior]
-* A substitution failure occurs if the constraints are violated
-* Adds member `const` and `volatile` qualifiers to `T`, if not already present
+* A substitution failure occurs if the constraints are violated.
+* Adds member `const` and `volatile` qualifiers to `T`, if not already present.
 
 [heading Input/Output Examples]
 [table

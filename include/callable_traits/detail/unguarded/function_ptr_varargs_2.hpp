@@ -81,6 +81,12 @@ struct function<CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC *)(Args...,
     template<template<class...> class Container>
     using expand_args = Container<Args...>;
 
+    template<template<class...> class Container, typename... RightArgs>
+    using expand_args_left = Container<Args..., RightArgs...>;
+
+    template<template<class...> class Container, typename... LeftArgs>
+    using expand_args_right = Container<LeftArgs..., Args...>;
+
     using clear_args =
         CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC *)()
             CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;

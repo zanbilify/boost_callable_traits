@@ -99,6 +99,12 @@ struct function<Return(Args...)
     template<template<class...> class Container>
     using expand_args = Container<Args...>;
 
+    template<template<class...> class Container, typename... RightArgs>
+    using expand_args_left = Container<Args..., RightArgs...>;
+
+    template<template<class...> class Container, typename... LeftArgs>
+    using expand_args_right = Container<LeftArgs..., Args...>;
+
     using clear_args = Return()
         CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
     

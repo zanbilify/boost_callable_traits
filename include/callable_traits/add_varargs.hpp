@@ -45,8 +45,8 @@ namespace callable_traits {
   * member function pointer type
 
 [heading Behavior]
-* A substitution failure occurs if the constraints are violated
-* Adds C-style variadics (`...`) to the signature of `T`, if not already present
+* A substitution failure occurs if the constraints are violated.
+* Adds C-style variadics (`...`) to the signature of `T`, if not already present.
 
 [heading Input/Output Examples]
 [table
