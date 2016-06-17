@@ -6,8 +6,8 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="CallableTraits">
 <link rel="up" href="../index.html" title="CallableTraits">
-<link rel="prev" href="ref_expand_args0.html" title="expand_args">
-<link rel="next" href="ref_has_calling_convention.html" title="has_calling_convention">
+<link rel="prev" href="ref_expand_args_right.html" title="expand_args_right">
+<link rel="next" href="ref_insert_args.html" title="insert_args">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -20,151 +20,298 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="ref_expand_args0.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_has_calling_convention.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="ref_expand_args_right.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_insert_args.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_function_type"></a><a class="link" href="ref_function_type.html" title="function_type">function_type</a>
 </h2></div></div></div>
-<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+<h4>
+<a name="callable_traits.ref_function_type.h0"></a>
+      <span class="phrase"><a name="callable_traits.ref_function_type.header"></a></span><a class="link" href="ref_function_type.html#callable_traits.ref_function_type.header">Header</a>
+    </h4>
+<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">function_type</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<h4>
+<a name="callable_traits.ref_function_type.h1"></a>
+      <span class="phrase"><a name="callable_traits.ref_function_type.definition"></a></span><a class="link" href="ref_function_type.html#callable_traits.ref_function_type.definition">Definition</a>
+    </h4>
+<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">function_type</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span><span class="special">;</span>
+    <span class="keyword">using</span> <span class="identifier">function_type_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+    <span class="keyword">struct</span> <span class="identifier">function_type</span> <span class="special">{</span>
+        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">function_type_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+    <span class="special">};</span>
 <span class="special">}</span>
 </pre>
 <h4>
-<a name="callable_traits.ref_function_type.h0"></a>
+<a name="callable_traits.ref_function_type.h2"></a>
       <span class="phrase"><a name="callable_traits.ref_function_type.constraints"></a></span><a class="link" href="ref_function_type.html#callable_traits.ref_function_type.constraints">Constraints</a>
     </h4>
-<p>
-      <code class="computeroutput"><span class="identifier">T</span></code> must be a [link_simple_callable].
-    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+          <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                function
+              </li>
+<li class="listitem">
+                function pointer
+              </li>
+<li class="listitem">
+                function reference
+              </li>
+<li class="listitem">
+                member function pointer
+              </li>
+<li class="listitem">
+                member data pointer
+              </li>
+<li class="listitem">
+                user-defined type with a non-overloaded <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
+              </li>
+<li class="listitem">
+                type of a non-generic lambda
+              </li>
+</ul></div>
+        </li></ul></div>
 <h4>
-<a name="callable_traits.ref_function_type.h1"></a>
+<a name="callable_traits.ref_function_type.h3"></a>
       <span class="phrase"><a name="callable_traits.ref_function_type.behavior"></a></span><a class="link" href="ref_function_type.html#callable_traits.ref_function_type.behavior">Behavior</a>
     </h4>
-<p>
-      <code class="computeroutput"><span class="identifier">function_type</span></code> is used to "decay"
-      a [link_simple_callable] into an <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>-aware
-      [link_simple_fn].
-    </p>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-          When the constraints are violated, the substitution fails in a SFINAE-friendly
-          manner.
+          When the constraints are violated, a substitution failure occurs.
         </li>
 <li class="listitem">
-          Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          [link_pmf], then:
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
-<li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
-                represent the parameter types in the signature of <code class="computeroutput"><span class="identifier">T</span></code>
-              </li>
-<li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">ClassRef</span></code> represent
-                a reference of the parent class/struct of <code class="computeroutput"><span class="identifier">T</span></code>,
-                applying any qualifiers necessary to match the member function qualifiers
-                on <code class="computeroutput"><span class="identifier">T</span></code>
-              </li>
-<li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">Return</span></code> represent
-                the return type of <code class="computeroutput"><span class="identifier">T</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-                aliases <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">ClassRef</span><span class="special">,</span>
-                <span class="identifier">Args</span><span class="special">...)</span></code>
-              </li>
-<li class="listitem">
-                such that:
-                <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; ">
-<li class="listitem">
-                      <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">char</span><span class="special">)&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span> <span class="special">&amp;,</span>
-                      <span class="keyword">char</span><span class="special">)</span></code>
-                    </li>
-<li class="listitem">
-                      <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">char</span><span class="special">)</span> <span class="special">&amp;&amp;&gt;</span></code>
-                      aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span> <span class="special">&amp;&amp;,</span>
-                      <span class="keyword">char</span><span class="special">)</span></code>
-                    </li>
-<li class="listitem">
-                      <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">char</span><span class="special">)</span> <span class="keyword">const</span><span class="special">&gt;</span></code> aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span>
-                      <span class="keyword">const</span> <span class="special">&amp;,</span>
-                      <span class="keyword">char</span><span class="special">)</span></code>
-                    </li>
-</ul></div>
-              </li>
-</ul></div>
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a function, the
+          aliased type is identical to <code class="computeroutput"><span class="identifier">T</span></code>,
+          except that the aliased function type will not have member qualifiers or
+          the <code class="computeroutput"><span class="identifier">transaction_safe</span></code> specifier.
         </li>
 <li class="listitem">
-          Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          [link_pmd], then:
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
-<li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">ClassRef</span></code> represent
-                a <code class="computeroutput"><span class="keyword">const</span></code> reference of
-                the parent class/struct of <code class="computeroutput"><span class="identifier">T</span></code>
-              </li>
-<li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">Return</span></code> represent
-                the pointed-to data member type of <code class="computeroutput"><span class="identifier">T</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-                aliases <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">ClassRef</span><span class="special">)</span></code>
-              </li>
-<li class="listitem">
-                such that:
-                <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; "><li class="listitem">
-                      <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="keyword">int</span>
-                      <span class="identifier">foo</span><span class="special">::*&gt;</span></code>
-                      aliases <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span> <span class="keyword">const</span>
-                      <span class="special">&amp;)</span></code>
-                    </li></ul></div>
-              </li>
-</ul></div>
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a function pointer,
+          the aliased type is equivalent to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">remove_pointer_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>.
         </li>
 <li class="listitem">
-          Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          [link_signature]:
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
-<li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
-                represent the parameter types in the signature of <code class="computeroutput"><span class="identifier">T</span></code>
-              </li>
-<li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">Return</span></code> represent
-                the return type of <code class="computeroutput"><span class="identifier">T</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-                aliases <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)</span></code>
-              </li>
-</ul></div>
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a function reference,
+          the aliased type is equivalent to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">remove_reference_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>.
         </li>
 <li class="listitem">
-          Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          [link_simple_fn_obj], then:
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a function object,
+          the aliased type is a function type with the same return type and parameter
+          list as <code class="computeroutput"><span class="identifier">T</span></code>'s <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>.
+        </li>
 <li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
-                represent the parameter types in the signature of <code class="computeroutput"><span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">decay_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="keyword">operator</span><span class="special">())</span></code>
-              </li>
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a member function
+          pointer, the aliased type is a function type with the same return type
+          as <code class="computeroutput"><span class="identifier">T</span></code>, and the first parameter
+          is a reference to the parent class of <code class="computeroutput"><span class="identifier">T</span></code>,
+          qualified according to the member qualifiers on <code class="computeroutput"><span class="identifier">T</span></code>.
+          The subsequent parameters, if any, are the parameter types of <code class="computeroutput"><span class="identifier">T</span></code>.
+        </li>
 <li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">Return</span></code> represent
-                the return type of <code class="computeroutput"><span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">decay_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="keyword">operator</span><span class="special">())</span></code>
-              </li>
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a member data
+          pointer, the aliased type is a function type returning the underlying member
+          type of <code class="computeroutput"><span class="identifier">T</span></code>, taking a single
+          parameter, which is a <code class="computeroutput"><span class="keyword">const</span></code>
+          reference to the parent type of <code class="computeroutput"><span class="identifier">T</span></code>.
+        </li>
 <li class="listitem">
-                <code class="computeroutput"><span class="identifier">function_type</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-                aliases <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)</span></code>
-              </li>
-</ul></div>
+          In all cases, the aliased function type will not have member qualifiers,
+          and will not have the <code class="computeroutput"><span class="identifier">transaction_safe</span></code>
+          specifier.
         </li>
 </ul></div>
 <h4>
-<a name="callable_traits.ref_function_type.h2"></a>
-      <span class="phrase"><a name="callable_traits.ref_function_type.example"></a></span><a class="link" href="ref_function_type.html#callable_traits.ref_function_type.example">Example</a>
+<a name="callable_traits.ref_function_type.h4"></a>
+      <span class="phrase"><a name="callable_traits.ref_function_type.input_output_examples"></a></span><a class="link" href="ref_function_type.html#callable_traits.ref_function_type.input_output_examples">Input/Output
+      Examples</a>
+    </h4>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+              <p>
+                <code class="computeroutput"><span class="identifier">T</span></code>
+              </p>
+            </th>
+<th>
+              <p>
+                <code class="computeroutput"><span class="identifier">function_type_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+              </p>
+            </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="identifier">transaction_safe</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(*)(</span><span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(&amp;)(</span><span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(*)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">()</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">&amp;,</span>
+                <span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">foo</span><span class="special">&amp;,</span> <span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="keyword">volatile</span> <span class="special">&amp;&amp;</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">volatile</span> <span class="identifier">foo</span><span class="special">&amp;&amp;)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">foo</span><span class="special">&amp;)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">const</span> <span class="keyword">int</span>
+                <span class="identifier">foo</span><span class="special">::*</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">foo</span><span class="special">&amp;)</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                (substitution failure)
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="special">(*</span><span class="keyword">const</span><span class="special">)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                (substitution failure)
+              </p>
+            </td>
+</tr>
+</tbody>
+</table></div>
+<h4>
+<a name="callable_traits.ref_function_type.h5"></a>
+      <span class="phrase"><a name="callable_traits.ref_function_type.example_program"></a></span><a class="link" href="ref_function_type.html#callable_traits.ref_function_type.example_program">Example
+      Program</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
@@ -200,9 +347,6 @@
     <span class="identifier">test</span><span class="special">&lt;</span><span class="identifier">abominable</span><span class="special">&gt;();</span>
 <span class="special">}</span>
 </pre>
-<p>
-      TODO - PMD and PMF examples
-    </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>
@@ -214,7 +358,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="ref_expand_args0.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_has_calling_convention.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="ref_expand_args_right.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_insert_args.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

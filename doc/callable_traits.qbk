@@ -375,6 +375,9 @@ To include the experimental examples for calling conventions in the build, appen
 [import ../include/callable_traits/expand_args_right.hpp]
 [expand_args_right_hpp]
 
+[import ../include/callable_traits/function_type.hpp]
+[function_type_hpp]
+
 [section:ref_insert_args insert_args]
 
     namespace ``[lib_namespace]`` {
@@ -433,134 +436,6 @@ To include the experimental examples for calling conventions in the build, appen
 [heading Example]
 [import ../example/remove_args.cpp]
 [remove_args]
-[endsect]
-
-[section:ref_expand_args expand_args]
-
-    namespace ``[lib_namespace]`` {
-
-		template<typename T, template<class...> class Container>
-		using expand_args = /* implementation-defined */;
-	}
-
-[heading Constraints]
-# `T` must be one of the following:
-  * [link_signature]
-  * [link_simple_fn_obj]
-# Let `std::tuple<Args...>` represent [namespace_scoped][link_args]`<T>`
-  * `Container<Args...>` must be a legal template instantiation.
-
-[heading Behavior]
-* When the first constraint is violated, a substitution failure occurs
-* When the second constraint is violated, the behavior is undefined
-* When both constraints are satisfied, then:
-  * Let `std::tuple<Args...>` represent [namespace_scoped][link_args]`<T>`
-  * `expand_args<T, Container>` aliases `Container<Args...>`
-
-
-[heading Example]
-[import ../example/expand_args.cpp]
-[expand_args]
-
-[heading See Also]
-* [link_args]
-* [link_arg_at]
-
-[endsect]
-
-
-[section:ref_function_type function_type]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T>
-		using function_type = /* implementation-defined */;
-	}
-		
-[heading Constraints]
-`T` must be a [link_simple_callable].
-
-[heading Behavior]
-
-`function_type` is used to "decay" a [link_simple_callable] into an [invoke]-aware [link_simple_fn].
-
-* When the constraints are violated, the substitution fails in a SFINAE-friendly manner.
-* Otherwise, when `T` is a [link_pmf], then:
-  * Let `Args...` represent the parameter types in the signature of `T`
-  * Let `ClassRef` represent a reference of the parent class/struct of `T`, applying any qualifiers necessary to match the member function qualifiers on `T`
-  * Let `Return` represent the return type of `T`
-  * `function_type<T>` aliases `Return(ClassRef, Args...)`
-  * such that:
-    * `function_type<int(foo::*)(char)>` aliases `int(foo &, char)`
-    * `function_type<int(foo::*)(char) &&>` aliases `int(foo &&, char)`
-	* `function_type<int(foo::*)(char) const>` aliases `int(foo const &, char)`
-* Otherwise, when `T` is a [link_pmd], then:
-  * Let `ClassRef` represent a `const` reference of the parent class/struct of `T`
-  * Let `Return` represent the pointed-to data member type of `T`
-  * `function_type<T>` aliases `Return(ClassRef)`
-  * such that:
-    * `function_type<int foo::*>` aliases `int(foo const &)`
-* Otherwise, when `T` is a [link_signature]:
-  * Let `Args...` represent the parameter types in the signature of `T`
-  * Let `Return` represent the return type of `T`
-  * `function_type<T>` aliases `Return(Args...)`
-*Otherwise, when `T` is a [link_simple_fn_obj], then:
-  * Let `Args...` represent the parameter types in the signature of `decltype(&std::decay_t<T>::operator())`
-  * Let `Return` represent the return type of `decltype(&std::decay_t<T>::operator())`
-  * `function_type<T>` aliases `Return(Args...)`
-  
-[heading Example]
-[import ../example/function_type.cpp]
-[function_type]
-
-TODO - PMD and PMF examples
-
-[/[heading See Also]
-* [link_args]
-* [link_result_of]]
-
-[endsect][/section:ref_function_type]
-
-
-
-
-[section:ref_has_calling_convention has_calling_convention]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T, typename CcTag>
-		inline constexpr auto has_calling_convention() {
-			/* implementation-defined */
-		}
-		
-		template<typename U, typename CcTag>
-		inline constexpr auto has_calling_convention(U&&) {
-			return has_calling_convention<U, CcTag>();
-		}
-	}
-	
-[heading Constraints]
-* `T` must be a [link_fn_ptr] or [link_pmf]
-* `CcTag` must be a [link_cc_tag]
-
-[heading Behavior]
-* If `T` uses the calling convention specified by `CcTag`, then an instance of `std::true_type` is returned.
-* Otherwise, an instance of `std::false_type` is returned.
-
-[heading Notes]
-
-For `has_calling_convention` to work as-intended, you must:
-
-# Be programming on a platform that supports the desired calling convention
-# Define one or more of the following macros before including any [libname] headers:
- * `CALLABLE_TRAITS_ENABLE_CDECL` for `__cdecl`
- * `CALLABLE_TRAITS_ENABLE_STDCALL` for `__stdcall`
- * `CALLABLE_TRAITS_ENABLE_FASTCALL` for `__fastcall`
- * `CALLABLE_TRAITS_ENABLE_PASCAL` for `pascal`
-	
-[heading Example - [^__fastcall] to [^__stdcall]]
-[experimental_changing_calling_conventions]
-
 [endsect]
 
 [section:ref_has_varargs has_varargs]
