@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_FUNCTION_HPP
 #define CALLABLE_TRAITS_DETAIL_FUNCTION_HPP
 
-#include <callable_traits/qualifier_flags.hpp>
+#include <callable_traits/detail/qualifier_flags.hpp>
 #include <callable_traits/detail/qualifier_traits.hpp>
 #include <callable_traits/detail/fwd/function_fwd.hpp>
 #include <callable_traits/detail/calling_conventions.hpp>

@@ -26,8 +26,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/expand_args_left.hpp>
 #include <callable_traits/expand_args_right.hpp>
 #include <callable_traits/function_type.hpp>
-#include <callable_traits/get_member_qualifier_flags.hpp>
-#include <callable_traits/get_qualifier_flags.hpp>
 #include <callable_traits/has_member_qualifiers.hpp>
 #include <callable_traits/has_varargs.hpp>
 #include <callable_traits/has_void_return.hpp>
@@ -53,8 +51,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/remove_member_volatile.hpp>
 #include <callable_traits/remove_varargs.hpp>
 #include <callable_traits/result_of.hpp>
-#include <callable_traits/set_member_qualifiers.hpp>
-#include <callable_traits/set_qualifiers.hpp>
 #include <callable_traits/is_transaction_safe.hpp>
 #include <callable_traits/remove_transaction_safe.hpp>
 #include <callable_traits/add_transaction_safe.hpp>

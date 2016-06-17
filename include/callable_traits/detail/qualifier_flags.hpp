@@ -16,11 +16,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
+    namespace detail {
+    
         //bit flags used to signify cv/ref qualifiers
         using flags = std::uint32_t;
 
         /*
-
             | && &  V  C |
         --------------------------------------------
         0   | 0  0  0  0 | default
@@ -39,8 +40,6 @@ namespace callable_traits {
         11  | 1  0  1  1 | const volatile &&
 
         */
-
-    inline namespace qualifier_flags {
 
         //! Flag representing the default qualifiers on a type 
         //! or member function overload.
@@ -73,9 +72,6 @@ namespace callable_traits {
 #endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
 
         constexpr flags cv_ = 3;
-    }
-
-    namespace detail {
 
         template<flags Flags>
         using remove_const_flag = std::integral_constant<flags, Flags & ~const_>;
