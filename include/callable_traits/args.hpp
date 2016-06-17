@@ -13,7 +13,11 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/core.hpp>
 
 //[ args_hpp
-//`[section:ref_args args]
+/*`[section:ref_args args]
+[heading Header]
+``#include<callable_traits/args.hpp>``
+[heading Definition]
+*/
 
 namespace callable_traits {
 
@@ -69,7 +73,7 @@ namespace callable_traits {
 [heading Example Program]
 [import ../example/args.cpp]
 [args]
-[endsect][/secttion:ref_args]
+[endsect]
 */
 //]
 

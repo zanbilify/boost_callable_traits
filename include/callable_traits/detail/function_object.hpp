@@ -13,6 +13,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/pmf.hpp>
 #include <callable_traits/detail/qualifier_traits.hpp>
 #include <callable_traits/detail/default_callable_traits.hpp>
+#include <callable_traits/detail/fwd/function_fwd.hpp>
 #include <callable_traits/detail/fwd/function_object_fwd.hpp>
 #include <callable_traits/detail/utility.hpp>
 
@@ -27,7 +28,7 @@ namespace callable_traits {
 
             using type = T;
 
-            using function_type = typename Base::function_object_type;
+            using function_type = typename Base::function_object_signature;
 
             using arg_types = typename Base::non_invoke_arg_types;
 
@@ -61,6 +62,18 @@ namespace callable_traits {
             using remove_transaction_safe = invalid_type;
 
             using clear_args = invalid_type;
+
+            template<template<class...> class Container>
+            using expand_args = typename function<function_type>::template
+                expand_args<Container>;
+
+            template<template<class...> class Container, typename... RightArgs>
+            using expand_args_left = typename function<function_type>::template
+                expand_args_left<Container, RightArgs...>;
+
+            template<template<class...> class Container, typename... LeftArgs>
+            using expand_args_right = typename function<function_type>::template
+                expand_args_right<Container, LeftArgs...>;
 
             template<typename C, typename U = T>
             using apply_member_pointer =

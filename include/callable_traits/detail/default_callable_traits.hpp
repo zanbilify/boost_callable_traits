@@ -77,7 +77,7 @@ namespace callable_traits {
             using function_type = invalid_type;
             
             // Used to smoothen the edges between PMFs and function objects
-            using function_object_type = invalid_type;
+            using function_object_signature = invalid_type;
 
             // An identity alias for qualified/unqualified plain function
             // types. Equivalent to remove_member_pointer for PMFs. Same
@@ -167,6 +167,12 @@ namespace callable_traits {
             // Expands the argument types into a template
             template<template<class...> class Container>
             using expand_args = invalid_type;
+
+            template<template<class...> class Container, typename... RightArgs>
+            using expand_args_left = invalid_type;
+
+            template<template<class...> class Container, typename... LeftArgs>
+            using expand_args_right = invalid_type;
 
             using clear_args = invalid_type;
             

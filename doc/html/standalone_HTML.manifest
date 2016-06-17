@@ -13,12 +13,14 @@ callable_traits/ref_apply_member_pointer.html
 callable_traits/ref_apply_return.html
 callable_traits/ref_arg_at.html
 callable_traits/ref_args.html
-callable_traits/ref_args0.html
 callable_traits/ref_clear_args.html
+callable_traits/ref_expand_args.html
+callable_traits/ref_expand_args_left.html
+callable_traits/ref_expand_args_right.html
 callable_traits/ref_insert_args.html
 callable_traits/ref_replace_args.html
 callable_traits/ref_remove_args.html
-callable_traits/ref_expand_args.html
+callable_traits/ref_expand_args0.html
 callable_traits/ref_function_type.html
 callable_traits/ref_has_calling_convention.html
 callable_traits/ref_has_varargs.html

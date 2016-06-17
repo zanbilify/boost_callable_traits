@@ -76,6 +76,15 @@ struct function<
         CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)()
             CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
 
+    template<template<class...> class Container>
+    using expand_args = Container<Args...>;
+
+    template<template<class...> class Container, typename... RightArgs>
+    using expand_args_left = Container<Args..., RightArgs...>;
+
+    template<template<class...> class Container, typename... LeftArgs>
+    using expand_args_right = Container<LeftArgs..., Args...>;
+
 #undef CALLABLE_TRAITS_BEGIN_PACK_MANIP
 #undef CALLABLE_TRAITS_ARGS_PACK
 #undef CALLABLE_TRAITS_END_PACK_MANIP

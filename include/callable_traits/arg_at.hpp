@@ -15,7 +15,11 @@ Distributed under the Boost Software License, Version 1.0.
 #include <tuple>
 
 //[ arg_at_hpp
-//`[section:ref_arg_at arg_at]
+/*`[section:ref_arg_at arg_at]
+[heading Header]
+``#include<callable_traits/arg_at.hpp>``
+[heading Definition]
+*/
 
 namespace callable_traits {
 

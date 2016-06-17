@@ -363,67 +363,17 @@ To include the experimental examples for calling conventions in the build, appen
 [import ../include/callable_traits/args.hpp]
 [args_hpp]
 
+[import ../include/callable_traits/clear_args.hpp]
+[clear_args_hpp]
 
+[import ../include/callable_traits/expand_args.hpp]
+[expand_args_hpp]
 
+[import ../include/callable_traits/expand_args_left.hpp]
+[expand_args_left_hpp]
 
-[section:ref_args args]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T>
-		using args = /* implementation-defined */;
-		
-	}
-	
-[heading Constraints]
-`T` must be one of the following:
-* [link_signature]
-* [link_simple_fn_obj]
-
-[heading Behavior]
-* When the constraints are violated, a substitution failure occurs
-* Otherwise, when `T` is a [link_signature], then:
-  * Let `Args...` represent the parameter types in the signature of `T`
-  * `args<T>` aliases `std::tuple<Args...>`
-* Otherwise, when `T` is a [link_simple_fn_obj], then:
-  * Let `Args...` represent the parameter types in the signature of `decltype(&std::decay_t<T>::operator())`
-  * `args<T>` aliases `std::tuple<Args...>`
-
-[heading Example]
-[import ../example/args.cpp]
-[args]
-
-[/[heading See Also]
-* [link_arg_at]
-* [link_expand_args]]
-
-[endsect][/secttion:ref_args]
-
-[section:ref_clear_args clear_args]
-
-    namespace ``[lib_namespace]`` {
-
-            template<typename T>
-			using clear_args = /* implementation-defined */;
-        }
-
-[heading Constraints]
-* `T` must be a [link_signature]
-
-[heading Behavior]
-* When the constraints are violated, a substitution failure occurs
-* Otherwise, `clear_args<T>` is identical to `T`, except that the aliased type's parameter list is reduced to `void`
-
-[heading Notes]
-* Any C-style variadics on `T` are removed by `clear_args<T>`
-* Any enabled calling conventions are preserved on pointer types
-
-[heading Example]
-[import ../example/clear_args.cpp]
-[clear_args]
-
-[endsect]
-
+[import ../include/callable_traits/expand_args_right.hpp]
+[expand_args_right_hpp]
 
 [section:ref_insert_args insert_args]
 

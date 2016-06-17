@@ -59,7 +59,7 @@ struct pmf<Return(CALLABLE_TRAITS_CC T::*)(Args...)
     using non_invoke_arg_types = std::tuple<Args...>;
 
     // todo document that transaction_safe is not preserved
-    using function_object_type = Return(Args...);
+    using function_object_signature = Return(Args...);
 
     // todo document that transaction_safe is not preserved
     using function_type = Return(invoke_type, Args...);
