@@ -29,14 +29,12 @@
 <pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">I</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">arg_at</span> <span class="special">{</span>
-
-        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-
-    <span class="special">};</span>
+    <span class="keyword">using</span> <span class="identifier">arg_at_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">I</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">arg_at_t</span> <span class="special">=</span> <span class="keyword">typename</span> <span class="identifier">arg_at</span><span class="special">&lt;</span><span class="identifier">I</span><span class="special">,</span> <span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span><span class="special">;</span>
+    <span class="keyword">struct</span> <span class="identifier">arg_at</span> <span class="special">{</span>
+        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">arg_at_t</span><span class="special">&lt;</span><span class="identifier">I</span><span class="special">,</span> <span class="identifier">T</span><span class="special">&gt;;</span>
+    <span class="special">};</span>
 <span class="special">}</span>
 </pre>
 <h4>
@@ -80,30 +78,17 @@
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-          If any constraints are violated, a substitution failure occurs
+          If any constraints are violated, a substitution failure occurs.
         </li>
 <li class="listitem">
           Otherwise, <code class="computeroutput"><span class="identifier">arg_at</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">&gt;</span></code>
-          aliases <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple_element_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> </code><code class="literal">callable_traits::</code>[link_args]<code class="computeroutput"><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;&gt;</span></code>, such that:
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">arg_at</span><span class="special">&lt;</span><span class="number">0</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">,</span> <span class="keyword">long</span><span class="special">,</span> <span class="keyword">int</span><span class="special">*)&gt;</span></code>
-                aliases <code class="computeroutput"><span class="keyword">char</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">arg_at</span><span class="special">&lt;</span><span class="number">1</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(*)(</span><span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">,</span> <span class="keyword">long</span><span class="special">,</span> <span class="keyword">int</span><span class="special">*)&gt;</span></code>
-                aliases <code class="computeroutput"><span class="keyword">short</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">arg_at</span><span class="special">&lt;</span><span class="number">2</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(&amp;)(</span><span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">,</span> <span class="keyword">long</span><span class="special">,</span> <span class="keyword">int</span><span class="special">*)&gt;</span></code>
-                aliases <code class="computeroutput"><span class="keyword">long</span></code>
-              </li>
-</ul></div>
+          is equivalent to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple_element_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;&gt;</span></code>.
         </li>
 </ul></div>
 <h4>
 <a name="callable_traits.ref_arg_at.h2"></a>
-      <span class="phrase"><a name="callable_traits.ref_arg_at.example"></a></span><a class="link" href="ref_arg_at.html#callable_traits.ref_arg_at.example">Example</a>
+      <span class="phrase"><a name="callable_traits.ref_arg_at.example_program"></a></span><a class="link" href="ref_arg_at.html#callable_traits.ref_arg_at.example_program">Example
+      Program</a>
     </h4>
 <p>
       [arg_at]

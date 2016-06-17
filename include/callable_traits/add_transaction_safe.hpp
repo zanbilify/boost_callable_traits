@@ -55,8 +55,8 @@ namespace callable_traits {
   * member function pointer type
 
 [heading Behavior]
-* A substitution failure occurs if the constraints are violated
-* Adds a `transaction_safe` specifier to `T`, if not already present
+* A substitution failure occurs if the constraints are violated.
+* Adds a `transaction_safe` specifier to `T`, if not already present.
 
 [heading Input/Output Examples]
 [table

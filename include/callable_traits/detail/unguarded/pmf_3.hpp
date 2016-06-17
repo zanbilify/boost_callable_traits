@@ -126,6 +126,12 @@ struct pmf<Return(CALLABLE_TRAITS_CC T::*)(Args...)
     template<template<class...> class Container>
     using expand_args = Container<invoke_type, Args...>;
 
+    template<template<class...> class Container, typename... RightArgs>
+    using expand_args_left = Container<invoke_type, Args..., RightArgs...>;
+
+    template<template<class...> class Container, typename... LeftArgs>
+    using expand_args_right = Container<LeftArgs..., invoke_type, Args...>;
+
     using clear_args =
         Return(CALLABLE_TRAITS_CC T::*)()
             CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;

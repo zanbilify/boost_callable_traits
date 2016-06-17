@@ -89,9 +89,6 @@ matrix:
     - env: UNIT_TESTS=true CPP=17 GCC_VERSION=6 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: gcc
-      addons:
-        apt:
-          sources: *sources
 
     # GCC 5.2
     - env: UNIT_TESTS=true GCC_VERSION=5 STDLIB=libstdc++ BOOST_VERSION=default

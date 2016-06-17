@@ -80,20 +80,20 @@
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
           When <code class="computeroutput"><span class="identifier">T</span></code> is <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">...&gt;</span></code>,
-          the aliased type is <code class="computeroutput"><span class="identifier">R</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)</span></code>
+          the aliased type is <code class="computeroutput"><span class="identifier">R</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)</span></code>.
         </li>
 <li class="listitem">
           When <code class="computeroutput"><span class="identifier">T</span></code> is a function, function
           pointer, function reference, or member function pointer, the aliased type's
           return type is <code class="computeroutput"><span class="identifier">R</span></code>, but is
-          otherwise identical to <code class="computeroutput"><span class="identifier">T</span></code>
+          otherwise identical to <code class="computeroutput"><span class="identifier">T</span></code>.
         </li>
 <li class="listitem">
           When <code class="computeroutput"><span class="identifier">T</span></code> is a member data
           pointer of class <code class="computeroutput"><span class="identifier">foo</span></code> to
           a <code class="computeroutput"><span class="identifier">U</span></code> type (such that <code class="computeroutput"><span class="identifier">T</span></code> is <code class="computeroutput"><span class="identifier">U</span>
           <span class="identifier">foo</span><span class="special">::*</span></code>),
-          the aliased type is <code class="computeroutput"><span class="identifier">R</span> <span class="identifier">foo</span><span class="special">::*</span></code>
+          the aliased type is <code class="computeroutput"><span class="identifier">R</span> <span class="identifier">foo</span><span class="special">::*</span></code>.
         </li>
 </ul></div>
 <h4>

@@ -40,9 +40,9 @@ namespace callable_traits {
 * `T` must be a function type or a member function pointer type
 
 [heading Behavior]
-* A substitution failure occurs if the constraints are violated
-* Adds a member lvalue reference qualifier (`&`) to `T`, if not already present
-* If an rvalue reference qualifier is present, the lvalue reference qualifier replaces it (in accordance with reference collapsing rules)
+* A substitution failure occurs if the constraints are violated.
+* Adds a member lvalue reference qualifier (`&`) to `T`, if not already present.
+* If an rvalue reference qualifier is present, the lvalue reference qualifier replaces it (in accordance with reference collapsing rules).
 
 [heading Input/Output Examples]
 [table

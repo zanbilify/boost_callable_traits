@@ -61,9 +61,9 @@ namespace callable_traits {
   * member data pointer
 
 [heading Behavior]
-* When `T` is `std::tuple<Args...>`, the aliased type is `R(Args...)`
-* When `T` is a function, function pointer, function reference, or member function pointer, the aliased type's return type is `R`, but is otherwise identical to `T`
-* When `T` is a member data pointer of class `foo` to a `U` type (such that `T` is `U foo::*`), the aliased type is `R foo::*`
+* When `T` is `std::tuple<Args...>`, the aliased type is `R(Args...)`.
+* When `T` is a function, function pointer, function reference, or member function pointer, the aliased type's return type is `R`, but is otherwise identical to `T`.
+* When `T` is a member data pointer of class `foo` to a `U` type (such that `T` is `U foo::*`), the aliased type is `R foo::*`.
 
 [heading Input/Output Examples]
 [table

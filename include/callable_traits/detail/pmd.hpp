@@ -55,7 +55,7 @@ namespace callable_traits {
             using apply_return = R T::*;
 
             template<template<class...> class Container>
-            using expand_args = Container<>;
+            using expand_args = Container<invoke_type>;
         };
     }
 }

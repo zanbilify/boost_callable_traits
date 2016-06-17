@@ -74,10 +74,10 @@ namespace callable_traits {
 * `C` must be a user-defined type
 
 [heading Behavior]
-* A substitution failure occurs if the constraints are violated
-* When `T` is a function, function pointer, or function reference, then the aliased type is a member function pointer of `C` with the same parameters and return type
-* When `T` is a member function pointer of any type, the aliased type is a member function pointer of `C` with the same parameters and return type
-* Otherwise, the aliased type is a member data pointer equivalent to `std::remove_reference_t<T> C::*`
+* A substitution failure occurs if the constraints are violated.
+* When `T` is a function, function pointer, or function reference, then the aliased type is a member function pointer of `C` with the same parameters and return type.
+* When `T` is a member function pointer of any type, the aliased type is a member function pointer of `C` with the same parameters and return type.
+* Otherwise, the aliased type is a member data pointer equivalent to `std::remove_reference_t<T> C::*`.
 
 [heading Input/Output Examples]
 [table

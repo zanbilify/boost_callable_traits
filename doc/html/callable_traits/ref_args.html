@@ -7,7 +7,7 @@
 <link rel="home" href="../index.html" title="CallableTraits">
 <link rel="up" href="../index.html" title="CallableTraits">
 <link rel="prev" href="ref_arg_at.html" title="arg_at">
-<link rel="next" href="ref_clear_args.html" title="clear_args">
+<link rel="next" href="ref_args0.html" title="args">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -20,67 +20,268 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="ref_arg_at.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_clear_args.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="ref_arg_at.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_args0.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.ref_args"></a><a class="link" href="ref_args.html" title="args">args</a>
 </h2></div></div></div>
-<pre class="programlisting"><span class="keyword">namespace</span> <code class="literal">callable_traits</code> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">args</span> <span class="special">=</span> <span class="comment">/* implementation-defined */</span><span class="special">;</span>
+    <span class="keyword">using</span> <span class="identifier">args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+    <span class="keyword">struct</span> <span class="identifier">args</span> <span class="special">{</span>
+        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+    <span class="special">};</span>
 <span class="special">}</span>
 </pre>
 <h4>
 <a name="callable_traits.ref_args.h0"></a>
       <span class="phrase"><a name="callable_traits.ref_args.constraints"></a></span><a class="link" href="ref_args.html#callable_traits.ref_args.constraints">Constraints</a>
     </h4>
-<p>
-      <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
-      * [link_signature] * [link_simple_fn_obj]
-    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+          <code class="computeroutput"><span class="identifier">T</span></code> must be one of the following:
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+<li class="listitem">
+                function
+              </li>
+<li class="listitem">
+                function pointer
+              </li>
+<li class="listitem">
+                function reference
+              </li>
+<li class="listitem">
+                member function pointer
+              </li>
+<li class="listitem">
+                member data pointer
+              </li>
+<li class="listitem">
+                user-defined type with a non-overloaded <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
+              </li>
+<li class="listitem">
+                type of a non-generic lambda
+              </li>
+</ul></div>
+        </li></ul></div>
 <h4>
 <a name="callable_traits.ref_args.h1"></a>
       <span class="phrase"><a name="callable_traits.ref_args.behavior"></a></span><a class="link" href="ref_args.html#callable_traits.ref_args.behavior">Behavior</a>
     </h4>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-          When the constraints are violated, a substitution failure occurs
+          When the constraints are violated, a substitution failure occurs.
         </li>
 <li class="listitem">
-          Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          [link_signature], then:
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
-<li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
-                represent the parameter types in the signature of <code class="computeroutput"><span class="identifier">T</span></code>
-              </li>
-<li class="listitem">
-                <code class="computeroutput"><span class="identifier">args</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-                aliases <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">...&gt;</span></code>
-              </li>
-</ul></div>
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a function, function
+          pointer, or function reference, the aliased type is a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span></code>
+          whose element types match those of the function's parameter list.
         </li>
 <li class="listitem">
-          Otherwise, when <code class="computeroutput"><span class="identifier">T</span></code> is a
-          [link_simple_fn_obj], then:
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a function object,
+          the aliased type is a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span></code>
+          whose element types match those of the function object's <code class="computeroutput"><span class="keyword">operator</span><span class="special">()</span></code>
+          parameter list.
+        </li>
 <li class="listitem">
-                Let <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
-                represent the parameter types in the signature of <code class="computeroutput"><span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">decay_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="keyword">operator</span><span class="special">())</span></code>
-              </li>
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a member function
+          pointer, the aliased type is a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span></code>
+          instantiation, where the first tuple element is a reference to the parent
+          class of <code class="computeroutput"><span class="identifier">T</span></code>, qualified according
+          to the member qualifiers on <code class="computeroutput"><span class="identifier">T</span></code>,
+          such that this first tuple element type is equivalent to <code class="computeroutput"><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">qualified_parent_class_of</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>.
+          The subsequent template type arguments, if any, are the parameter types
+          of the member function.
+        </li>
 <li class="listitem">
-                <code class="computeroutput"><span class="identifier">args</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-                aliases <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">...&gt;</span></code>
-              </li>
-</ul></div>
+          When <code class="computeroutput"><span class="identifier">T</span></code> is a member data
+          pointer, the aliased type is a <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span></code>
+          with a single element, which is a <code class="computeroutput"><span class="keyword">const</span></code>
+          reference to the parent type of the member.
         </li>
 </ul></div>
 <h4>
 <a name="callable_traits.ref_args.h2"></a>
-      <span class="phrase"><a name="callable_traits.ref_args.example"></a></span><a class="link" href="ref_args.html#callable_traits.ref_args.example">Example</a>
+      <span class="phrase"><a name="callable_traits.ref_args.input_output_examples"></a></span><a class="link" href="ref_args.html#callable_traits.ref_args.input_output_examples">Input/Output
+      Examples</a>
+    </h4>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+              <p>
+                <code class="computeroutput"><span class="identifier">T</span></code>
+              </p>
+            </th>
+<th>
+              <p>
+                <code class="computeroutput"><span class="identifier">args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+              </p>
+            </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">float</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">float</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&gt;</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(*)(</span><span class="keyword">float</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">float</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">int</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(&amp;)(</span><span class="keyword">float</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">float</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">int</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="keyword">float</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">&amp;&amp;</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">float</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&gt;</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(*)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;&gt;</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">float</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&amp;,</span>
+                <span class="keyword">float</span><span class="special">,</span>
+                <span class="keyword">char</span><span class="special">,</span>
+                <span class="keyword">int</span><span class="special">&gt;</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">const</span> <span class="identifier">foo</span><span class="special">&amp;,</span> <span class="keyword">int</span><span class="special">&gt;</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                <span class="keyword">volatile</span> <span class="special">&amp;&amp;</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">volatile</span> <span class="identifier">foo</span>
+                <span class="special">&amp;&amp;&gt;</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">const</span> <span class="identifier">foo</span><span class="special">&amp;&gt;</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">const</span> <span class="keyword">int</span>
+                <span class="identifier">foo</span><span class="special">::*</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">const</span> <span class="identifier">foo</span><span class="special">&amp;&gt;</span></code>
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                (substitution failure)
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="keyword">int</span> <span class="special">(*</span><span class="keyword">const</span><span class="special">)()</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                (substitution failure)
+              </p>
+            </td>
+</tr>
+</tbody>
+</table></div>
+<h4>
+<a name="callable_traits.ref_args.h3"></a>
+      <span class="phrase"><a name="callable_traits.ref_args.example_program"></a></span><a class="link" href="ref_args.html#callable_traits.ref_args.example_program">Example
+      Program</a>
     </h4>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">memory</span><span class="special">&gt;</span>
@@ -148,7 +349,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="ref_arg_at.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_clear_args.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="ref_arg_at.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="ref_args0.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>
