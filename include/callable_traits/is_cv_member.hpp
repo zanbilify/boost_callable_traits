@@ -13,8 +13,19 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/core.hpp>
 
+//[ is_cv_member_hpp
+/*`[section:ref_is_cv_member is_cv_member]
+[heading Header]
+``#include<callable_traits/is_cv_member.hpp>``
+[heading Definition]
+*/
+
 namespace callable_traits {
 
+    template<typename T>
+    struct is_cv_member; //implementation-defined
+
+    //<-
     template<typename T>
     struct is_cv_member
         : detail::traits<T>::is_cv_member {
@@ -31,12 +42,49 @@ namespace callable_traits {
     };
 
     #else
-
+    //->
     template<typename T>
-    constexpr bool is_cv_member_v =
+    constexpr bool is_cv_member_v = //implementation-defined
+    //<-
         detail::traits<T>::is_cv_member::value;
 
     #endif
+    //->
 }
+/*`
+[heading Constraints]
+* none
+
+[heading Behavior]
+* `std::false_type` is inherited by `is_cv_member<T>` and is aliased by `typename is_cv_member<T>::type`, except when one of the following criteria is met, in which case `std::true_type` would be similarly inherited and aliased:
+  * `T` is a function type with both `const` and `volatile` member qualifiers
+  * `T` is a pointer to a member function with both `const` and `volatile` member qualifiers
+  * `T` is a function object with a non-overloaded `operator()`, where the `operator()` has both `const` and `volatile` member qualifiers
+* On compilers that support variable templates, `is_cv_member_v<T>` is equivalent to `is_cv_member<T>::value`.
+
+[heading Input/Output Examples]
+[table
+    [[`T`]                              [`is_cv_member_v<T>`]]
+    [[`int() const volatile`]           [`true`]]
+    [[`int() const volatile &`]         [`true`]]
+    [[`int(foo::*)() const volatile`]   [`true`]]
+    [[`int() const`]                    [`false`]]
+    [[`int() volatile`]                 [`false`]]
+    [[`int(foo::*)() const`]            [`false`]]
+    [[`int() const`]                    [`false`]]
+    [[`int() volatile`]                 [`false`]]
+    [[`int() &&`]                       [`false`]]
+    [[`int(*)()`]                       [`false`]]
+    [[`int`]                            [`false`]]
+    [[`int foo::*`]                     [`false`]]
+    [[`const int foo::*`]               [`false`]]
+]
+
+[heading Example Program]
+[import ../example/is_cv_member.cpp]
+[is_cv_member]
+[endsect]
+*/
+//]
 
 #endif

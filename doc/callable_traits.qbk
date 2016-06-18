@@ -378,25 +378,23 @@ To include the experimental examples for calling conventions in the build, appen
 [import ../include/callable_traits/function_type.hpp]
 [function_type_hpp]
 
-[section:ref_insert_args insert_args]
+[import ../include/callable_traits/has_member_qualifiers.hpp]
+[has_member_qualifiers_hpp]
 
-    namespace ``[lib_namespace]`` {
-	
-	    template<std::size_t InsertIndex, typename T, typename... NewArgs>
-        using insert_args = /* implementation-defined */ ;
-	}
-	
-[heading Constraints]
-* `T` must be a [link_signature]
+[import ../include/callable_traits/has_varargs.hpp]
+[has_varargs_hpp]
 
-[heading Behavior]
-* `insert_args<Index, T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` will be inserted into the [Args] parameter list at the 0-based `InsertIndex`. TODO document out-of-bounds behavior
-* [VarArgs] remain if present in `T`.
+[import ../include/callable_traits/has_void_return.hpp]
+[has_void_return_hpp]
 
-[heading Example]
-[import ../example/insert_args.cpp]
-[insert_args]
-[endsect]
+[import ../include/callable_traits/insert_args.hpp]
+[insert_args_hpp]
+
+[import ../include/callable_traits/is_const_member.hpp]
+[is_const_member_hpp]
+
+[import ../include/callable_traits/is_cv_member.hpp]
+[is_cv_member_hpp]
 
 [section:ref_replace_args replace_args]
 
@@ -436,44 +434,6 @@ To include the experimental examples for calling conventions in the build, appen
 [heading Example]
 [import ../example/remove_args.cpp]
 [remove_args]
-[endsect]
-
-[section:ref_has_varargs has_varargs]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T>
-		inline constexpr auto has_varargs() {
-			/* implementation-defined */
-		}
-		
-		template<typename U>
-		inline constexpr auto has_varargs(U&&) {
-			return has_varargs<U&&>();
-		}
-	}
-	
-[heading Constraints]
-* `T` must be a [link_simple_callable]
-
-[heading Behavior]
-* If the constraints are violated, a substitution failure occurs
-* Otherwise, if `T` is a [link_signature], then:
-  * If `T` uses C-style variadics, an instance of `std::true_type` is returned
-  * Otherwise, an instance of `std::false_type` is returned
-* Otherwise, if `T` is a [link_simple_fn_obj], then:
-  * If `decltype(&std::decay_t<T>::operator())` uses C-style variadics, then an instance of `std::true_type` is returned
-  * Otherwise, an instance of `std::false_type` is returned
-* Otherwise, an instance of `std::false_type` is returned
-  
-[heading Example]
-[/import ../example/has_varargs.cpp]
-[has_varargs]
-
-[/[heading See Also]
-* [link_add_varargs]
-* [link_remove_varargs]]
-
 [endsect]
 
 [section:ref_has_void_return has_void_return]
@@ -634,8 +594,6 @@ TODO
 [import ../example/result_of.cpp]
 [result_of]
 [endsect]
-
-[include interface_example.qbk]
 
 [/*********************************************************************]
 [/************************* C O N T A C T *****************************]

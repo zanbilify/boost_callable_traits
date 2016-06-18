@@ -31,7 +31,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/has_void_return.hpp>
 #include <callable_traits/insert_args.hpp>
 #include <callable_traits/is_const_member.hpp>
-#include <callable_traits/is_like_function.hpp>
 #include <callable_traits/is_lvalue_reference_member.hpp>
 #include <callable_traits/is_reference_member.hpp>
 #include <callable_traits/is_rvalue_reference_member.hpp>

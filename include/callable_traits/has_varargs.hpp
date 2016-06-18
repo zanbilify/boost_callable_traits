@@ -13,8 +13,19 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/core.hpp>
 
+//[ has_varargs_hpp
+/*`[section:ref_has_varargs has_varargs]
+[heading Header]
+``#include<callable_traits/has_varargs.hpp>``
+[heading Definition]
+*/
+
 namespace callable_traits {
 
+    template<typename T>
+    struct has_varargs; //implementation-defined
+
+    //<-
     template<typename T>
     struct has_varargs
         : detail::traits<T>::has_varargs {
@@ -30,12 +41,47 @@ namespace callable_traits {
     };
 
     #else
-
+    //->
     template<typename T>
-    constexpr bool has_varargs_v =
+    constexpr bool has_varargs_v = //implementation-defined
+    //<-
         detail::traits<T>::has_varargs::value;
 
     #endif
+    //->
 }
+
+/*`
+[heading Constraints]
+* none
+
+[heading Behavior]
+* `std::false_type` is inherited by `has_varargs<T>` and is aliased by `typename has_varargs<T>::type`, except when one of the following criteria is met, in which case `std::true_type` would be similarly inherited and aliased:
+  * `T` is a function, function pointer, or function reference where the function's parameter list includes C-style variadics.
+  * `T` is a pointer to a member function with C-style variadics in the parameter list.
+  * `T` is a function object with a non-overloaded `operator()`, which has C-style variadics in the parameter list of its `operator()`.
+* On compilers that support variable templates, `has_varargs_v<T>` is equivalent to `has_varargs<T>::value`.
+
+[heading Input/Output Examples]
+[table
+    [[`T`]                              [`has_varargs_v<T>`]]
+    [[`void(...)`]                      [`true`]]
+    [[`void(int, ...) const`]           [`true`]]
+    [[`void(*)(...)`]                   [`true`]]
+    [[`void(&)(...)`]                   [`true`]]
+    [[`void(foo::*)(...) const`]        [`true`]]
+    [[`void(*)()`]                      [`false`]]
+    [[`void(*&)()`]                     [`false`]]
+    [[`int`]                            [`false`]]
+    [[`const int`]                      [`false`]]
+    [[`int foo::*`]                     [`false`]]
+]
+
+[heading Example Program]
+[import ../example/has_varargs.cpp]
+[has_member_qualifiers]
+[endsect]
+*/
+//]
 
 #endif

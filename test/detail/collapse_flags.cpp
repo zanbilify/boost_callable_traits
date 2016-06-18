@@ -17,9 +17,8 @@ using namespace callable_traits::detail;
 
 int main() {
 
-    // callable_traits::collapse_flags emulates the
-    // C++11 reference collapsing rules. Here, we test that
-    //behavior.
+    // callable_traits::collapse_flags emulates the C++11
+    // reference collapsing rules. Here, we test that behavior.
 
     using rref_plus_lref = collapse_flags<rref_, lref_>;
     CT_ASSERT(rref_plus_lref::value == lref_);
