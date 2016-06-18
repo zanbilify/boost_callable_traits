@@ -151,16 +151,27 @@ The use cases for [libname] are closely related to those of [function_types_link
 [template full_support[][role green Yes] ]
 [template partial_support[][role green Yes (basic)] ]
 [template unknown_support[][role gray No/Unknown] ]
-[template likely_support[][role black Untested - likely] ]
+[template likely_support[][role black Likely] ]
 [template link_travis_ci[][@https://travis-ci.org/badair/callable_traits/builds Travis]]
 [template link_appveyor_ci[][@https://ci.appveyor.com/project/badair/callable-traits Appveyor]]
 
 [table
-[ [Compiler]                  [Support]           [Continuous Integration] ]
-[ [Clang 3.5+]                [[full_support]]    [[link_travis_ci]]       ]
-[ [GCC 4.8+]                  [[full_support]]    [[link_travis_ci]]       ]
-[ [AppleClang / XCode 6.3+]   [[full_support]]    [[link_travis_ci]]       ]
-[ [MSVC / Visual Studio 2015] [[full_support]]    [[link_appveyor_ci]]     ]
+[ [Compiler]                    [Continuous Integration] ]
+[ [Clang 3.5]                   [[link_travis_ci]]       ]
+[ [Clang 3.6]                   [[link_travis_ci]]       ]
+[ [Clang 3.7]                   [[link_travis_ci]]       ]
+[ [Clang 3.8]                   [[link_travis_ci]]       ]
+[ [GCC 4.8]                     [[link_travis_ci]]       ]
+[ [GCC 4.9]                     [[link_travis_ci]]       ]
+[ [GCC 5.2]                     [[link_travis_ci]]       ]
+[ [GCC 5.3]                     [(tested locally)]       ]
+[ [GCC 6.1]                     [[link_travis_ci]]       ]
+[ [AppleClang / XCode 6.3 beta] [[link_travis_ci]]       ]
+[ [AppleClang / XCode 6.4]      [[link_travis_ci]]       ]
+[ [AppleClang / XCode 7]        [[link_travis_ci]]       ]
+[ [AppleClang / XCode 7.1]      [[link_travis_ci]]       ]
+[ [AppleClang / XCode 7.2]      [[link_travis_ci]]       ]
+[ [MSVC / Visual Studio 2015]   [[link_appveyor_ci]]     ]
 ]
 
 CallableTraits has not been tested on every platform under the sun. If you find CallableTraits to work with another toolchain, [link callable_traits.contact let us know!]
@@ -416,6 +427,15 @@ To include the experimental examples for calling conventions in the build, appen
 
 [import ../include/callable_traits/pop_back_args.hpp]
 [pop_back_args_hpp]
+
+[import ../include/callable_traits/pop_front_args.hpp]
+[pop_front_args_hpp]
+
+[import ../include/callable_traits/push_back_args.hpp]
+[push_back_args_hpp]
+
+[import ../include/callable_traits/push_front_args.hpp]
+[push_front_args_hpp]
 
 [section:ref_replace_args replace_args]
 

@@ -31,6 +31,9 @@ callable_traits/ref_is_transaction_safe.html
 callable_traits/ref_is_volatile_member.html
 callable_traits/ref_parent_class_of.html
 callable_traits/ref_pop_back_args.html
+callable_traits/ref_pop_front_args.html
+callable_traits/ref_push_back_args.html
+callable_traits/ref_push_front_args.html
 callable_traits/ref_replace_args.html
 callable_traits/ref_remove_args.html
 callable_traits/contact.html

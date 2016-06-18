@@ -7,8 +7,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_POP_BACK_HPP
-#define CALLABLE_TRAITS_POP_BACK_HPP
+#ifndef CALLABLE_TRAITS_POP_BACK_ARGS_HPP
+#define CALLABLE_TRAITS_POP_BACK_ARGS_HPP
 
 #include <callable_traits/detail/core.hpp>
 
@@ -65,4 +65,4 @@ namespace callable_traits {
 */
 //]
 
-#endif //CALLABLE_TRAITS_POP_BACK_HPP
+#endif //CALLABLE_TRAITS_POP_BACK_ARGS_HPP

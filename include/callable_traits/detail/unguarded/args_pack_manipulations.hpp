@@ -130,7 +130,7 @@ CALLABLE_TRAITS_ARGS_PACK..., NewArgs...
 CALLABLE_TRAITS_END_PACK_MANIP;
 
 template<std::size_t Count>
-using pop_front = remove_args<0, Count>;
+using pop_front = remove_args<0, arg_count <= Count ? arg_count : Count>;
 
 template<std::size_t Count>
 using pop_back = remove_args<

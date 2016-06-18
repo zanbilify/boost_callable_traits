@@ -1,10 +1,12 @@
 /*<-
+
 Copyright Barrett Adair 2016
+
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
 ->*/
 
-//[ agrs_push_front
+//[ push_front_args
 #include <callable_traits/push_front_args.hpp>
 
 namespace ct = callable_traits;
