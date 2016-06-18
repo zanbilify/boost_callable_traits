@@ -5,52 +5,31 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 ->*/
 
-#include "test.hpp"
-#include <tuple>
-#include <callable_traits/expand_args.hpp>
+#include <callable_traits/pop_back_args.hpp>
 
-int main() {
+namespace ct = callable_traits;
 
-    {
-        using f = void();
-        using expect = std::tuple<>;
-        assert_same<ct::expand_args_t<f, std::tuple>, expect>();
-    }
+static_assert(std::is_same<
+    ct::pop_back_args_t<int(char, short, int)>,
+    int(char, short)
+>::value, "");
 
-    {
-        using f = void(*)();
-        using expect = std::tuple<>;
-        assert_same<ct::expand_args_t<f, std::tuple>, expect>();
-    }
+struct foo;
 
-    {
-        using f = void(&)();
-        using expect = std::tuple<>;
-        assert_same<ct::expand_args_t<f, std::tuple>, expect>();
-    }
+static_assert(std::is_same<
+    ct::pop_back_args_t<int(foo::*)(char, short, int), 2>,
+    int(foo::*)(char)
+>::value, "");
 
-    {
-        using f = void(int, char);
-        using expect = std::tuple<int, char>;
-        assert_same<ct::expand_args_t<f, std::tuple>, expect>();
-    }
+static_assert(std::is_same<
+    ct::pop_back_args_t<int(*)(char, short, int), 3>,
+    int(*)()
+>::value, "");
 
-    {
-        using f = void(*)(int, char);
-        using expect = std::tuple<int, char>;
-        assert_same<ct::expand_args_t<f, std::tuple>, expect>();
-    }
+static_assert(std::is_same<
+    //underflow is handled
+    ct::pop_back_args_t<int(&)(char, short, int), 27>,
+    int(&)()
+>::value, "");
 
-    {
-        using f = void(&)(int, char);
-        using expect = std::tuple<int, char>;
-        assert_same<ct::expand_args_t<f, std::tuple>, expect>();
-    }
-
-    {
-        auto lambda = [](int, char){};
-        using f = decltype(lambda);
-        using expect = std::tuple<int, char>;
-        assert_same<ct::expand_args_t<f, std::tuple>, expect>();
-    }
-}
+int main() {}

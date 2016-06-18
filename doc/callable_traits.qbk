@@ -396,6 +396,27 @@ To include the experimental examples for calling conventions in the build, appen
 [import ../include/callable_traits/is_cv_member.hpp]
 [is_cv_member_hpp]
 
+[import ../include/callable_traits/is_lvalue_reference_member.hpp]
+[is_lvalue_reference_member_hpp]
+
+[import ../include/callable_traits/is_reference_member.hpp]
+[is_reference_member_hpp]
+
+[import ../include/callable_traits/is_rvalue_reference_member.hpp]
+[is_rvalue_reference_member_hpp]
+
+[import ../include/callable_traits/is_transaction_safe.hpp]
+[is_transaction_safe_hpp]
+
+[import ../include/callable_traits/is_volatile_member.hpp]
+[is_volatile_member_hpp]
+
+[import ../include/callable_traits/parent_class_of.hpp]
+[parent_class_of_hpp]
+
+[import ../include/callable_traits/pop_back_args.hpp]
+[pop_back_args_hpp]
+
 [section:ref_replace_args replace_args]
 
     namespace ``[lib_namespace]`` {
@@ -436,172 +457,13 @@ To include the experimental examples for calling conventions in the build, appen
 [remove_args]
 [endsect]
 
-[section:ref_has_void_return has_void_return]
-TODO
-[heading Example]
-[/import ../example/has_void_return.cpp]
-[has_void_return]
-[endsect]
-
-[section:ref_is_const_member is_const_member]
-TODO
-[heading Example]
-[/import ../example/is_const_member.cpp]
-[is_const_member]
-[endsect]
-
-[section:ref_is_cv_member is_cv_member]
-TODO
-[heading Example]
-[/import ../example/is_cv_member.cpp]
-[is_cv_member]
-[endsect]
-
-[section:ref_is_lvalue_reference_member is_lvalue_reference_member]
-TODO
-[heading Example]
-[/import ../example/is_lvalue_reference_member.cpp]
-[is_lvalue_reference_member]
-[endsect]
-
-[section:ref_is_reference_member is_reference_member]
-TODO
-[heading Example]
-[/import ../example/is_reference_member.cpp]
-[is_reference_member]
-[endsect]
-
-[section:ref_is_rvalue_reference_member is_rvalue_reference_member]
-TODO
-[heading Example]
-[/import ../example/is_rvalue_reference_member.cpp]
-[is_rvalue_reference_member]
-[endsect]
-
-[section:ref_has_member_qualifiers has_member_qualifiers]
-TODO
-[heading Example]
-[/import ../example/has_member_qualifiers.cpp]
-[has_member_qualifiers]
-[endsect]
-
-[section:ref_is_volatile_member is_volatile_member]
-TODO
-[heading Example]
-[/import ../example/is_volatile_member.cpp]
-[is_volatile_member]
-[endsect]
-
-[section:ref_remove_member_const remove_member_const]
-TODO
-[heading Example]
-[/import ../example/remove_member_const.cpp]
-[remove_member_const]
-[endsect]
-
-[section:ref_remove_member_cv remove_member_cv]
-TODO
-[heading Example]
-[/import ../example/remove_member_cv.cpp]
-[remove_member_cv]
-[endsect]
-
-[section:ref_remove_member_pointer remove_member_pointer]
-TODO
-[heading Example]
-[import ../example/remove_member_pointer.cpp]
-[remove_member_pointer]
-[endsect]
-
-[section:ref_remove_member_reference remove_member_reference]
-TODO
-[heading Example]
-[/import ../example/remove_member_reference.cpp]
-[remove_member_reference]
-[endsect]
-
-[section:ref_remove_varargs remove_varargs]
-TODO
-[heading Example]
-[/import ../example/remove_varargs.cpp]
-[remove_varargs]
-[endsect]
-
-[section:ref_remove_member_volatile remove_member_volatile]
-TODO
-[heading Example]
-[/import ../example/remove_member_volatile.cpp]
-[remove_member_volatile]
-[endsect]
-
-[section:ref_push_back_args push_back_args]
-
-    namespace ``[lib_namespace]`` {
-
-		template<typename T, typename... NewArgs>
-		using push_back_args = /* implementation-defined */;
-	}
-	
-[heading Constraints]
-* `T` must be a [link_signature]
-
-[heading Behavior]
-* `push_back_args<T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` have been appended to the back of `T`'s parameter list [Args].
-* [VarArgs] remain if present in `T`.
-	
-[heading Example]
-[import ../example/push_back_args.cpp]
-[push_back_args]
-[endsect]
-
-[section:ref_push_front_args push_front_args]
-
-    namespace ``[lib_namespace]`` {
-
-		template<typename T, typename... NewArgs>
-		using push_front_args = /* implementation-defined */;
-	}
-	
-[heading Constraints]
-* `T` must be a [link_signature]
-
-[heading Behavior]
-* `push_back_args<T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` have been appended to the front of `T`'s parameter list [Args].
-* [VarArgs] remain if present in `T`.
-
-[heading Example]
-[import ../example/push_front_args.cpp]
-[push_front_args]
-[endsect]
-
-[section:ref_pop_back_args pop_back_args]
-TODO
-[heading Example]
-[import ../example/pop_back_args.cpp]
-[pop_back_args]
-[endsect]
-
-[section:ref_push_front_args pop_front_args]
-TODO
-[heading Example]
-[import ../example/pop_front_args.cpp]
-[pop_front_args]
-[endsect]
-
-[section:ref_result_of result_of]
-TODO
-[heading Example]
-[import ../example/result_of.cpp]
-[result_of]
-[endsect]
-
 [/*********************************************************************]
 [/************************* C O N T A C T *****************************]
 [/*********************************************************************]
 
 [section:contact Contact]
 
-[libname] is authored and maintained by Barrett Adair
+[libname] is authored and maintained by Barrett Adair.
 
 Comments, feedback, bug reports, and questions are appreciated, which can be submitted in the following ways:
 

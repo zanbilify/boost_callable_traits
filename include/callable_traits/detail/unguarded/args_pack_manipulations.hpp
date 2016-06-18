@@ -133,4 +133,6 @@ template<std::size_t Count>
 using pop_front = remove_args<0, Count>;
 
 template<std::size_t Count>
-using pop_back = remove_args<arg_count - Count, Count>;
+using pop_back = remove_args<
+    arg_count <= Count ? 0 : arg_count - Count,
+    arg_count <= Count ? arg_count : Count>;

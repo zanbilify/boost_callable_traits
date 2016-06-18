@@ -10,7 +10,6 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_IS_CONST_MEMBER_HPP
 #define CALLABLE_TRAITS_IS_CONST_MEMBER_HPP
 
-#include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/core.hpp>
 
 //[ is_const_member_hpp
@@ -90,4 +89,4 @@ namespace callable_traits {
 */
 //]
 
-#endif
+#endif //#ifndef CALLABLE_TRAITS_IS_CONST_MEMBER_HPP
