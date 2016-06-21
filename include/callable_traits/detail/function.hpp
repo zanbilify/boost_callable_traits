@@ -162,7 +162,6 @@ namespace callable_traits {
             using type = T&;
             using remove_varargs = typename base::remove_varargs&;
             using add_varargs = typename base::add_varargs&;
-            using remove_member_pointer = type;
 
             using remove_member_reference = invalid_type;
             using add_member_lvalue_reference = invalid_type;

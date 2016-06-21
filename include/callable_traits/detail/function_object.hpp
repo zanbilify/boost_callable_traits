@@ -49,8 +49,6 @@ namespace callable_traits {
 
             using is_member_function_pointer = std::false_type;
 
-            using remove_member_pointer = invalid_type;
-
             using remove_varargs = invalid_type;
 
             using add_varargs = invalid_type;

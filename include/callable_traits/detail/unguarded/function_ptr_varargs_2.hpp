@@ -66,8 +66,6 @@ struct function<CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC *)(Args...,
     using add_transaction_safe = Return(CALLABLE_TRAITS_VARARGS_CC *)(Args..., ...)
         CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER;
 
-    using remove_member_pointer = type;
-
     template<typename U>
     using apply_member_pointer =
         CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC U::*)(Args..., ...)

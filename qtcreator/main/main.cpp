@@ -1,38 +1,33 @@
 /*<-
-
-Copyright Barrett Adair 2016
+Copyright (c) 2016 Barrett Adair
 
 Distributed under the Boost Software License, Version 1.0.
-(See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
-
+(See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 ->*/
 
-//[ pop_back_args
-#include <callable_traits/pop_front_args.hpp>
+#include <callable_traits/config.hpp>
+
+//[ qualified_parent_class_of
+#include <type_traits>
+#include <callable_traits/qualified_parent_class_of.hpp>
 
 namespace ct = callable_traits;
-
-static_assert(std::is_same<
-    ct::pop_front_args_t<int(char, short, int)>,
-    int(short, int)
->::value, "");
 
 struct foo;
 
 static_assert(std::is_same<
-    ct::pop_front_args_t<int(foo::*)(char, short, int) const, 2>,
-    int(foo::*)(int) const
+    foo &,
+    ct::qualified_parent_class_of_t<int(foo::*)()>
 >::value, "");
 
 static_assert(std::is_same<
-    ct::pop_front_args_t<int(*)(char, short, int), 3>,
-    int(*)()
+    foo const &,
+    ct::qualified_parent_class_of_t<int(foo::*)() const>
 >::value, "");
 
 static_assert(std::is_same<
-    //overflow is handled
-    ct::pop_front_args_t<int(&)(char, short, int), 27>,
-    int(&)()
+    foo volatile &&,
+    ct::qualified_parent_class_of_t<int(foo::*)() volatile &&>
 >::value, "");
 
 int main() {}

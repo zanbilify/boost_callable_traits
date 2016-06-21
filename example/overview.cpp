@@ -45,11 +45,6 @@ static_assert(is_same<
     number
 >{}, "");
 
-static_assert(is_same<
-    remove_member_pointer_t<pmf>,
-    int (int) const
->{}, "");
-
 //` INVOKE-aware metafunctions:
 
 static_assert(is_same<

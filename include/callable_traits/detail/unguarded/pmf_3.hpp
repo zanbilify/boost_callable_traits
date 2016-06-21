@@ -121,8 +121,6 @@ struct pmf<Return(CALLABLE_TRAITS_CC T::*)(Args...)
         NewReturn(CALLABLE_TRAITS_CC T::*)(Args...)
             CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
         
-    using remove_member_pointer = qualified_function_type;
-
     template<template<class...> class Container>
     using expand_args = Container<invoke_type, Args...>;
 

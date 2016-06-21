@@ -91,16 +91,10 @@ int main() {
     // function qualifiers. Head to the reference section of this documentation
     // for more examples.
 
-    // To remove a member pointer:
-    using fn = ct::remove_member_pointer_t<pmf>;
-    using expected_fn = void (int, int&&, const int&, void*) const;
-    static_assert(std::is_same<fn, expected_fn>::value, "");
-
-    // We just created an abominable function type - notice the const
-    // qualifier. ``[namespace_scoped]``remove_member_const accepts abominable
-    // types too (and so does any feature where it is legal to do so):
+    // To remove member const:
+    using fn = void (int) const;
     using not_abominable = ct::remove_member_const_t<fn>;
-    using expected_fn2 = void (int, int&&, const int&, void*);
+    using expected_fn2 = void (int);
     static_assert(std::is_same<not_abominable, expected_fn2>::value, "");
 }
 

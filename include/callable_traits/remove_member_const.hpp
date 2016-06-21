@@ -12,19 +12,59 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+//[ remove_member_const_hpp
+/*`
+[section:ref_remove_member_const remove_member_const]
+[heading Header]
+``#include<callable_traits/remove_member_const.hpp>``
+[heading Definition]
+*/
+
 namespace callable_traits {
 
     template<typename T>
-    struct remove_member_const {
-
-        using type = detail::fail_if_invalid<
+    using remove_member_const_t = //implementation-defined
+    //<-
+        detail::fail_if_invalid<
             typename detail::traits<T>::remove_member_const,
             member_qualifiers_are_illegal_for_this_type>;
-    };
+    //->
 
     template<typename T>
-    using remove_member_const_t =
-        typename remove_member_const<T>::type;
+    struct remove_member_const {
+        using type = remove_member_const_t<T>;
+    };
 }
 
-#endif
+/*`
+[heading Constraints]
+* `T` must be a function type or a member function pointer type
+
+[heading Behavior]
+* A substitution failure occuers if the constraints are violated.
+* Removes the member `const` qualifier from `T`, if present.
+
+[heading Input/Output Examples]
+[table
+    [[`T`]                              [`remove_member_const_t<T>`]]
+    [[`int() const`]                    [`int()`]]
+    [[`int(foo::*)() const`]            [`int(foo::*)()`]]
+    [[`int(foo::*)() const &`]          [`int(foo::*)() &`]]
+    [[`int(foo::*)() const &&`]         [`int(foo::*)() &&`]]
+    [[`int(foo::*)() const`]            [`int(foo::*)()`]]
+    [[`int(foo::*)() const volatile`]   [`int(foo::*)() volatile`]]
+    [[`int`]                            [(substitution failure)]]
+    [[`int (&)()`]                      [(substitution failure)]]
+    [[`int (*)()`]                      [(substitution failure)]]
+    [[`int foo::*`]                     [(substitution failure)]]
+    [[`int (foo::* const)()`]           [(substitution failure)]]
+]
+
+[heading Example Program]
+[import ../example/remove_member_const.cpp]
+[remove_member_const]
+[endsect]
+*/
+//]
+
+#endif //#ifndef CALLABLE_TRAITS_REMOVE_MEMBER_CONST_HPP

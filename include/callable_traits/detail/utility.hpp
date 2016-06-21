@@ -63,23 +63,6 @@ namespace callable_traits {
         using add_member_pointer = T Class::*;
 
         namespace util_detail {
-
-            template<typename T>
-            struct remove_member_pointer_t {
-                using type = T;
-            };
-
-            template<typename T, typename U>
-            struct remove_member_pointer_t<T U::*>{
-                using type = T;
-            };
-        }
-
-        template<typename T>
-        using remove_member_pointer =
-            typename util_detail::remove_member_pointer_t<T>::type;
-
-        namespace util_detail {
             template<typename T, bool Value>
             struct type_value {
                 static constexpr const bool value = Value;

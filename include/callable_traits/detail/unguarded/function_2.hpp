@@ -90,8 +90,6 @@ struct function<Return(Args...)
     template<typename U>
     using apply_member_pointer = add_member_pointer<type, U>;
     
-    using remove_member_pointer = type;
-    
     template<typename NewReturn>
     using apply_return = NewReturn(Args...)
         CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
@@ -190,8 +188,6 @@ struct function<Return (Args..., ...)
         Return( CALLABLE_TRAITS_DEFAULT_VARARGS_CC U::*)(Args..., ...)
             CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
         
-    using remove_member_pointer = type;
-    
     template<typename NewReturn>
     using apply_return = NewReturn(Args..., ...)
         CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
@@ -215,5 +211,3 @@ struct function<Return (Args..., ...)
 #undef CALLABLE_TRAITS_END_PACK_MANIP
 
 };
-
-/**/

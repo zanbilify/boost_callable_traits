@@ -37,15 +37,14 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/is_volatile_member.hpp>
 #include <callable_traits/replace_args.hpp>
 #include <callable_traits/parent_class_of.hpp>
-#include <callable_traits/qualified_parent_class_of.hpp>
 #include <callable_traits/pop_back_args.hpp>
 #include <callable_traits/pop_front_args.hpp>
 #include <callable_traits/push_back_args.hpp>
 #include <callable_traits/push_front_args.hpp>
+#include <callable_traits/qualified_parent_class_of.hpp>
 #include <callable_traits/remove_args.hpp>
 #include <callable_traits/remove_member_const.hpp>
 #include <callable_traits/remove_member_cv.hpp>
-#include <callable_traits/remove_member_pointer.hpp>
 #include <callable_traits/remove_member_reference.hpp>
 #include <callable_traits/remove_member_volatile.hpp>
 #include <callable_traits/remove_varargs.hpp>

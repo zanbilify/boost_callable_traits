@@ -14,28 +14,18 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace callable_traits {
 
-    namespace detail {
-
-        template<bool Sfinae>
-        struct remove_member_reference_error : sfinae_error {
-
-            static_assert(Sfinae,
-                "callable_traits::remove_member_reference<T> "
-                "is not a meaningful operation for this T.");
-        };
-    }
+    template<typename T>
+    using remove_member_reference_t = //implementation-defined
+    //<-
+        detail::fail_if_invalid<
+            typename detail::traits<T>::remove_member_reference,
+            member_qualifiers_are_illegal_for_this_type>;
+    //->
 
     template<typename T>
     struct remove_member_reference {
-
-        using type = detail::fail_if_invalid<
-            typename detail::traits<T>::remove_member_reference,
-            detail::remove_member_reference_error<true>>;
+        using type = remove_member_reference_t<T>;
     };
-
-    template<typename T>
-    using remove_member_reference_t =
-        typename remove_member_reference<T>::type;
 }
 
 #endif

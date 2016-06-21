@@ -56,40 +56,19 @@
       use reference collapsing rules when adding member function ref-qualifiers?</a></span></dt>
 </dl></dd>
 <dt><span class="section"><a href="callable_traits/building.html">Building the test suite</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_add_member_const.html">add_member_const</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_add_member_cv.html">add_member_cv</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_add_member_lvalue_reference.html">add_member_lvalue_reference</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_add_member_rvalue_reference.html">add_member_rvalue_reference</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_add_member_volatile.html">add_member_volatile</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_add_transaction_safe.html">add_transaction_safe</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_add_varargs.html">add_varargs</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_apply_member_pointer.html">apply_member_pointer</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_apply_return.html">apply_return</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_arg_at.html">arg_at</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_args.html">args</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_clear_args.html">clear_args</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_expand_args.html">expand_args</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_expand_args_left.html">expand_args_left</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_expand_args_right.html">expand_args_right</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_function_type.html">function_type</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_has_member_qualifiers.html">has_member_qualifiers</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_has_varargs.html">has_varargs</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_has_void_return.html">has_void_return</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_insert_args.html">insert_args</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_is_const_member.html">is_const_member</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_is_cv_member.html">is_cv_member</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_is_lvalue_reference_member.html">is_lvalue_reference_member</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_is_reference_member.html">is_reference_member</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_is_rvalue_reference_member.html">is_rvalue_reference_member</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_is_transaction_safe.html">is_transaction_safe</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_is_volatile_member.html">is_volatile_member</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_parent_class_of.html">parent_class_of</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_pop_back_args.html">pop_back_args</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_pop_front_args.html">pop_front_args</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_push_back_args.html">push_back_args</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_push_front_args.html">push_front_args</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_replace_args.html">replace_args</a></span></dt>
-<dt><span class="section"><a href="callable_traits/ref_remove_args.html">remove_args</a></span></dt>
+<dt><span class="section"><a href="callable_traits/reference.html">Reference Documentation</a></span></dt>
+<dd><dl>
+<dt><span class="section"><a href="callable_traits/reference.html#callable_traits.reference.member_qualifier_features">Member
+      Qualifier Features</a></span></dt>
+<dt><span class="section"><a href="callable_traits/reference.html#callable_traits.reference.parameter_list_features">Parameter
+      List Features</a></span></dt>
+<dt><span class="section"><a href="callable_traits/reference.html#callable_traits.reference.return_type_features">Return
+      Type Features</a></span></dt>
+<dt><span class="section"><a href="callable_traits/reference.html#callable_traits.reference.member_pointer_features">Member
+      Pointer Features</a></span></dt>
+<dt><span class="section"><a href="callable_traits/reference.html#callable_traits.reference.transactional_memory_features">Transactional
+      Memory Features</a></span></dt>
+</dl></dd>
 <dt><span class="section"><a href="callable_traits/contact.html">Contact</a></span></dt>
 </dl>
 </div>
@@ -136,11 +115,6 @@
 <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
     <span class="identifier">parent_class_of_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
     <span class="identifier">number</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">remove_member_pointer_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
-    <span class="keyword">int</span> <span class="special">(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span>
 <span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
 </pre>
 <p>

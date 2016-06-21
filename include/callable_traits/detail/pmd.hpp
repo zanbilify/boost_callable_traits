@@ -46,7 +46,6 @@ namespace callable_traits {
             using qualified_function_type = D(invoke_type);
             using arg_types = std::tuple<invoke_type>;
             using return_type = typename std::add_lvalue_reference<D>::type;
-            using remove_member_pointer = D;
 
             template<typename C>
             using apply_member_pointer = D C::*;

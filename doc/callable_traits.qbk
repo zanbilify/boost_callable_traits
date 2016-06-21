@@ -58,7 +58,6 @@
 [template link_qualified_function_type[][link callable_traits.ref_qualified_function_type [^qualified_function_type]]]
 [template link_remove_member_const[][link callable_traits.ref_remove_member_const [^remove_member_const]]]
 [template link_remove_member_cv[][link callable_traits.ref_remove_member_cv [^remove_member_cv]]]
-[template link_remove_member_pointer[][link callable_traits.ref_remove_member_pointer [^remove_member_pointer]]]
 [template link_remove_member_reference[][link callable_traits.ref_remove_member_reference [^remove_member_reference]]]
 [template link_remove_varargs[][link callable_traits.ref_remove_varargs [^remove_varargs]]]
 [template link_remove_member_volatile[][link callable_traits.ref_remove_member_volatile [^remove_member_volatile]]]
@@ -341,11 +340,28 @@ To include the experimental examples for calling conventions in the build, appen
 
 [endsect][/section:building]
 
+
+[section:reference Reference Documentation]
+
+[section:member_qualifier_features Member Qualifier Features]
+
 [import ../include/callable_traits/add_member_const.hpp]
 [add_member_const_hpp]
 
+[import ../include/callable_traits/remove_member_const.hpp]
+[remove_member_const_hpp]
+
+[import ../include/callable_traits/add_member_volatile.hpp]
+[add_member_volatile_hpp]
+
+[import ../include/callable_traits/remove_member_volatile.hpp]
+[remove_member_volatile_hpp]
+
 [import ../include/callable_traits/add_member_cv.hpp]
 [add_member_cv_hpp]
+
+[import ../include/callable_traits/remove_member_cv.hpp]
+[remove_member_cv_hpp]
 
 [import ../include/callable_traits/add_member_lvalue_reference.hpp]
 [add_member_lvalue_reference_hpp]
@@ -353,56 +369,17 @@ To include the experimental examples for calling conventions in the build, appen
 [import ../include/callable_traits/add_member_rvalue_reference.hpp]
 [add_member_rvalue_reference_hpp]
 
-[import ../include/callable_traits/add_member_volatile.hpp]
-[add_member_volatile_hpp]
-
-[import ../include/callable_traits/add_transaction_safe.hpp]
-[add_transaction_safe_hpp]
-
-[import ../include/callable_traits/add_varargs.hpp]
-[add_varargs_hpp]
-
-[import ../include/callable_traits/apply_member_pointer.hpp]
-[apply_member_pointer_hpp]
-
-[import ../include/callable_traits/apply_return.hpp]
-[apply_return_hpp]
-
-[import ../include/callable_traits/arg_at.hpp]
-[arg_at_hpp]	
-
-[import ../include/callable_traits/args.hpp]
-[args_hpp]
-
-[import ../include/callable_traits/clear_args.hpp]
-[clear_args_hpp]
-
-[import ../include/callable_traits/expand_args.hpp]
-[expand_args_hpp]
-
-[import ../include/callable_traits/expand_args_left.hpp]
-[expand_args_left_hpp]
-
-[import ../include/callable_traits/expand_args_right.hpp]
-[expand_args_right_hpp]
-
-[import ../include/callable_traits/function_type.hpp]
-[function_type_hpp]
+[import ../include/callable_traits/remove_member_reference.hpp]
+[remove_member_reference_hpp]
 
 [import ../include/callable_traits/has_member_qualifiers.hpp]
 [has_member_qualifiers_hpp]
 
-[import ../include/callable_traits/has_varargs.hpp]
-[has_varargs_hpp]
-
-[import ../include/callable_traits/has_void_return.hpp]
-[has_void_return_hpp]
-
-[import ../include/callable_traits/insert_args.hpp]
-[insert_args_hpp]
-
 [import ../include/callable_traits/is_const_member.hpp]
 [is_const_member_hpp]
+
+[import ../include/callable_traits/is_volatile_member.hpp]
+[is_volatile_member_hpp]
 
 [import ../include/callable_traits/is_cv_member.hpp]
 [is_cv_member_hpp]
@@ -410,20 +387,38 @@ To include the experimental examples for calling conventions in the build, appen
 [import ../include/callable_traits/is_lvalue_reference_member.hpp]
 [is_lvalue_reference_member_hpp]
 
-[import ../include/callable_traits/is_reference_member.hpp]
-[is_reference_member_hpp]
-
 [import ../include/callable_traits/is_rvalue_reference_member.hpp]
 [is_rvalue_reference_member_hpp]
 
-[import ../include/callable_traits/is_transaction_safe.hpp]
-[is_transaction_safe_hpp]
+[import ../include/callable_traits/is_reference_member.hpp]
+[is_reference_member_hpp]
 
-[import ../include/callable_traits/is_volatile_member.hpp]
-[is_volatile_member_hpp]
+[endsect][/section:member_qualifier_features]
 
-[import ../include/callable_traits/parent_class_of.hpp]
-[parent_class_of_hpp]
+
+
+[section:parameter_list_features Parameter List Features]
+
+[import ../include/callable_traits/function_type.hpp]
+[function_type_hpp]
+
+[import ../include/callable_traits/args.hpp]
+[args_hpp]
+
+[import ../include/callable_traits/arg_at.hpp]
+[arg_at_hpp]
+
+[import ../include/callable_traits/clear_args.hpp]
+[clear_args_hpp]
+
+[import ../include/callable_traits/remove_args.hpp]
+[remove_args_hpp]
+
+[import ../include/callable_traits/replace_args.hpp]
+[replace_args_hpp]
+
+[import ../include/callable_traits/insert_args.hpp]
+[insert_args_hpp]
 
 [import ../include/callable_traits/pop_back_args.hpp]
 [pop_back_args_hpp]
@@ -437,45 +432,72 @@ To include the experimental examples for calling conventions in the build, appen
 [import ../include/callable_traits/push_front_args.hpp]
 [push_front_args_hpp]
 
-[section:ref_replace_args replace_args]
+[import ../include/callable_traits/expand_args.hpp]
+[expand_args_hpp]
 
-    namespace ``[lib_namespace]`` {
-	
-	    template<std::size_t StartIndex, typename T, typename... NewArgs>
-        using replace_args = /* implementation-defined */ ;
-	}
-	
-[heading Constraints]
-* `T` must be a [link_signature]
+[import ../include/callable_traits/expand_args_left.hpp]
+[expand_args_left_hpp]
 
-[heading Behavior]
-* `replace_args<Index, T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` will begin overwriting the [Args] parameter list at the 0-based `InsertIndex`, extending the parameter list as necessary.
-* [VarArgs] remain if present in `T`.
+[import ../include/callable_traits/expand_args_right.hpp]
+[expand_args_right_hpp]
 
-[heading Example]
-[import ../example/replace_args.cpp]
-[replace_args]
-[endsect]
+[import ../include/callable_traits/add_varargs.hpp]
+[add_varargs_hpp]
 
-[section:ref_remove_args remove_args]
+[import ../include/callable_traits/remove_varargs.hpp]
+[remove_varargs_hpp]
 
-    namespace ``[lib_namespace]`` {
-	
-	    template<std::size_t StartIndex, typename T, std::size_t Count = 1>
-		using remove_args = /* implementation-defined */ ;
-	}
-	
-[heading Constraints]
-* `T` must be a [link_signature]
+[import ../include/callable_traits/has_varargs.hpp]
+[has_varargs_hpp]
 
-[heading Behavior]
-* `remove_args<Index, Callable, Count>` aliases a type identical to `T`, except that all parameter types in the parameter list will be removed from 0-based `Index` to `Index + Count`. TODO document out-of-bounds behavior
-* [VarArgs] remain if present in `T`.
+[endsect][/section:parameter_list_features]
 
-[heading Example]
-[import ../example/remove_args.cpp]
-[remove_args]
-[endsect]
+
+
+[section:return_type_features Return Type Features]
+
+[import ../include/callable_traits/result_of.hpp]
+[result_of_hpp]
+
+[import ../include/callable_traits/apply_return.hpp]
+[apply_return_hpp]
+
+[import ../include/callable_traits/has_void_return.hpp]
+[has_void_return_hpp]
+
+[endsect][/section:return_type_features]
+
+
+
+[section:member_pointer_features Member Pointer Features]
+
+[import ../include/callable_traits/apply_member_pointer.hpp]
+[apply_member_pointer_hpp]
+
+[import ../include/callable_traits/parent_class_of.hpp]
+[parent_class_of_hpp]
+
+[import ../include/callable_traits/qualified_parent_class_of.hpp]
+[qualified_parent_class_of_hpp]
+
+[endsect][/section:member_pointer_features]
+
+
+
+[section:transactional_memory_features Transactional Memory Features]
+
+[import ../include/callable_traits/add_transaction_safe.hpp]
+[add_transaction_safe_hpp]
+
+[import ../include/callable_traits/remove_transaction_safe.hpp]
+[remove_transaction_safe_hpp]
+
+[import ../include/callable_traits/is_transaction_safe.hpp]
+[is_transaction_safe_hpp]
+
+[endsect][/section:transactional_memory_features]
+
+[endsect][/section:reference]
 
 [/*********************************************************************]
 [/************************* C O N T A C T *****************************]
@@ -488,8 +510,8 @@ To include the experimental examples for calling conventions in the build, appen
 Comments, feedback, bug reports, and questions are appreciated, which can be submitted in the following ways:
 
 # Open a new issue [@https://github.com/badair/callable_traits/issues/new here] on GitHub
-# Message the author [@https://gitter.im/badair/callable_traits here] on Gitter, an excellent chat service built around GitHub, with message persistence and Markdown support
-# Send the author an email at
+# Message me [@https://gitter.im/badair/callable_traits here] on Gitter
+# Send me an email at
   * barrettellisadair
   * at...
   * gmail dot com
