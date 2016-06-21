@@ -8,75 +8,18 @@ HEADER GUARDS INTENTIONALLY OMITTED
 DO NOT INCLUDE THIS HEADER DIRECTLY
 */
 
-template<typename Ret, typename... Args>
-struct add_calling_convention_t<
-    Ret(*)(Args...), CALLABLE_TRAITS_CC_TAG> {
-    using type = CALLABLE_TRAITS_ST Ret(CALLABLE_TRAITS_CC*)(Args...);
-};
+#define CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE
+#define CALLABLE_TRAITS_IS_TRANSACTION_SAFE std::false_type
+#include <callable_traits/detail/unguarded/function_ptr_2.hpp>
 
-template<typename Ret, typename... Args>
-struct has_calling_convention_t<
-    CALLABLE_TRAITS_ST Ret(CALLABLE_TRAITS_CC*)(Args...), CALLABLE_TRAITS_CC_TAG> {
-    using type = std::true_type;
-};
+#undef CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE
+#undef CALLABLE_TRAITS_IS_TRANSACTION_SAFE
 
-template<typename OriginalType, typename Return, typename... Args>
-struct function<OriginalType, CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(Args...)>
- : qualifier_traits<dummy>, default_callable_traits {
+#ifdef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+#define CALLABLE_TRAITS_IS_TRANSACTION_SAFE std::true_type
+#define CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE transaction_safe
+#include <callable_traits/detail/unguarded/function_ptr_2.hpp>
+#endif
 
-    static constexpr bool value = true;
-
-    using is_function = std::true_type;
-    using traits = function;
-    using return_type = Return;
-    using arg_types = std::tuple<Args...>;
-    using remove_calling_convention = Return(*)(Args...);
-
-    using type =
-        CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(Args...);
-
-    using function_type = Return(Args...);
-    using qualified_function_type = function_type;
-    using remove_varargs = OriginalType;
-
-    using add_varargs = typename copy_cvr<
-        CALLABLE_TRAITS_ST Return (CALLABLE_TRAITS_VARARGS_CC *)(Args..., ...),
-        OriginalType
-    >::type;
-
-    using remove_member_pointer = OriginalType;
-
-    template<typename U>
-    using apply_member_pointer = typename copy_cvr<
-        CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC U::*)(Args...),
-        OriginalType
-    >::type;
-
-    template<typename NewReturn>
-    using apply_return = typename copy_cvr<
-        CALLABLE_TRAITS_ST NewReturn(CALLABLE_TRAITS_CC *)(Args...),
-        OriginalType
-    >::type;
-
-    using clear_args = typename copy_cvr<
-        CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(),
-        OriginalType
-    >::type;
-
-#undef CALLABLE_TRAITS_BEGIN_PACK_MANIP
-#undef CALLABLE_TRAITS_ARGS_PACK
-#undef CALLABLE_TRAITS_END_PACK_MANIP
-
-#define CALLABLE_TRAITS_BEGIN_PACK_MANIP \
-    typename copy_cvr< Return(CALLABLE_TRAITS_CC *)(
-
-#define CALLABLE_TRAITS_ARGS_PACK Args
-
-#define CALLABLE_TRAITS_END_PACK_MANIP ), OriginalType>::type
-
-#include <callable_traits/detail/unguarded/args_pack_manipulations.hpp>
-#undef CALLABLE_TRAITS_BEGIN_PACK_MANIP
-#undef CALLABLE_TRAITS_ARGS_PACK
-#undef CALLABLE_TRAITS_END_PACK_MANIP
-};
-
+#undef CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE
+#undef CALLABLE_TRAITS_IS_TRANSACTION_SAFE

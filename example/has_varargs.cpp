@@ -1,0 +1,26 @@
+/*<-
+Copyright (c) 2016 Barrett Adair
+
+Distributed under the Boost Software License, Version 1.0.
+(See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
+->*/
+
+#ifdef CALLABLE_TRAITS_MSVC
+// MSVC requires __cdecl for varargs, and I don't want to clutter the example
+int main(){}
+#else
+    
+//[ has_varargs
+#include <type_traits>
+#include <callable_traits/has_varargs.hpp>
+
+namespace ct = callable_traits;
+
+struct foo;
+
+static_assert(ct::has_varargs<int(...)>::value, "");
+static_assert(!ct::has_varargs<int()>::value, "");
+
+int main() {}
+//]
+#endif

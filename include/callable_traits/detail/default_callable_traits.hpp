@@ -15,6 +15,7 @@ namespace callable_traits {
     
     namespace detail {
             
+        template<typename T = void>
         struct default_callable_traits {
             
             // value is used by all traits classes to participate 
@@ -52,9 +53,6 @@ namespace callable_traits {
             // std::true_type for plain function types only
             using is_function = std::false_type;
             
-            // std::true_type for function types with qualifiers
-            using has_member_qualifiers_function = std::false_type;
-            
             // std::true_type for callables with C-style variadics
             using has_varargs = std::false_type;
             
@@ -79,7 +77,7 @@ namespace callable_traits {
             using function_type = invalid_type;
             
             // Used to smoothen the edges between PMFs and function objects
-            using function_object_type = invalid_type;
+            using function_object_signature = invalid_type;
 
             // An identity alias for qualified/unqualified plain function
             // types. Equivalent to remove_member_pointer for PMFs. Same
@@ -94,6 +92,16 @@ namespace callable_traits {
             // invalid_type for function objects and PMDs.
             using add_varargs = invalid_type;
             
+            // std::true_type when the signature includes transaction_safe, when
+            // the feature is available
+            using is_transaction_safe = std::false_type;
+
+            // adds transaction_safe to a signature if the feature is available
+            using add_transaction_safe = invalid_type;
+
+            // removes transaction_safe from a signature if present
+            using remove_transaction_safe = invalid_type;
+
             // The class of a PMD or PMF. invalid_type for other types
             using class_type = invalid_type;
             
@@ -137,10 +145,18 @@ namespace callable_traits {
             
             // Changes the parent class type for PMDs and PMFs. Turns
             // function pointers, function references, and
-            // qualified/unqualified function types into PMFs. invalid_type
-            // for function objects.
-            template<typename>
-            using apply_member_pointer = invalid_type;
+            // qualified/unqualified function types into PMFs. Turns
+            // everything else into member data pointers.
+            template<typename C,
+                typename U = T,
+                typename K = typename std::remove_reference<U>::type,
+                typename L = typename std::conditional<
+                    std::is_same<void, K>::value, invalid_type, K>::type,
+                typename Class = typename std::conditional<
+                    std::is_class<C>::value, C, invalid_type>::type>
+            using apply_member_pointer = typename std::conditional<
+                std::is_same<L, invalid_type>::value || std::is_same<Class, invalid_type>::value,
+                invalid_type, L Class::*>::type;
             
             // Changes the return type of PMFs, function pointers, function
             // references, and qualified/unqualified function types. Changes
@@ -151,6 +167,12 @@ namespace callable_traits {
             // Expands the argument types into a template
             template<template<class...> class Container>
             using expand_args = invalid_type;
+
+            template<template<class...> class Container, typename... RightArgs>
+            using expand_args_left = invalid_type;
+
+            template<template<class...> class Container, typename... LeftArgs>
+            using expand_args_right = invalid_type;
 
             using clear_args = invalid_type;
             

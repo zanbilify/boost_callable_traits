@@ -19,10 +19,8 @@ namespace ct = callable_traits;
 
 template<typename T, typename Expect>
 void test(){
-    // this example shows how callable_traits::args
-    // bevaves consistently for many different types
-    using args = ct::args<T>;
-    static_assert(std::is_same<args, Expect>::value, "");
+    using args_t = ct::args_t<T>;
+    static_assert(std::is_same<args_t, Expect>::value, "");
 }
 
 int main() {
@@ -33,9 +31,6 @@ int main() {
         using expect = std::tuple<int, float&, const char*>;
 
         test<lam, expect>();
-        test<lam&, expect>();
-        test<lam&&, expect>();
-        test<lam const &, expect>();
     }
 
     {
@@ -44,18 +39,12 @@ int main() {
         using expect = std::tuple<foo&, int, float&, const char*>;
 
         test<pmf, expect>();
-        test<pmf&, expect>();
-        test<pmf&&, expect>();
-        test<pmf const &, expect>();
     }
 
     {
         using function_ptr = void(*)(int, float&, const char*);
         using expect = std::tuple<int, float&, const char*>;
         test<function_ptr, expect>();
-        test<function_ptr&, expect>();
-        test<function_ptr&&, expect>();
-        test<function_ptr const &, expect>();
     }
 
     {

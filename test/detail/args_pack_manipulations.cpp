@@ -2,6 +2,7 @@
 #include <utility>
 #include <type_traits>
 #include <callable_traits/config.hpp>
+#include <callable_traits/detail/sfinae_errors.hpp>
 
 #ifndef CT_ASSERT
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)

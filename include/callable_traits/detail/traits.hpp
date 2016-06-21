@@ -15,7 +15,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/fwd/pmf_fwd.hpp>
 #include <callable_traits/detail/fwd/function_fwd.hpp>
 #include <callable_traits/detail/fwd/function_object_fwd.hpp>
-#include <callable_traits/detail/bind_expression_traits.hpp>
 #include <type_traits>
 
 namespace callable_traits {
@@ -23,21 +22,13 @@ namespace callable_traits {
     namespace detail {
 
         template<typename T>
-        using decay_if_ptr_or_integral_constant = typename std::conditional<
-            std::is_pointer<typename std::remove_reference<T>::type>::value
-            || is_integral_constant<T>::value,
-            shallow_decay<T>,
-            T
-        >::type;
-
-        template<typename T, typename Decayed = shallow_decay<T>>
         using traits = typename CALLABLE_TRAITS_DISJUNCTION(
-            bind_expression_traits<Decayed>,
             function_object<T>,
-            function<T, decay_if_ptr_or_integral_constant<T>>,
+            function<T>,
             pmf<T>,
-            pmd<T, shallow_decay<T>>,
-            function_object<Decayed>
+            pmd<T>,
+            function_object<T>,
+            default_callable_traits<T>
         )::traits;
     }
 }

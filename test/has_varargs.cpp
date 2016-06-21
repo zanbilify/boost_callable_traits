@@ -28,58 +28,13 @@ namespace ct = callable_traits;
 template<typename T>
 void assert_has_varargs() {
 
-    CT_ASSERT(ct::has_varargs<T>());
-    CT_ASSERT(ct::has_varargs<T&>());
-    CT_ASSERT(ct::has_varargs<T &&>());
-    CT_ASSERT(ct::has_varargs<T const>());
-    CT_ASSERT(ct::has_varargs<T const &>());
-    CT_ASSERT(ct::has_varargs<T const &&>());
-    CT_ASSERT(ct::has_varargs<T volatile>());
-    CT_ASSERT(ct::has_varargs<T volatile &>());
-    CT_ASSERT(ct::has_varargs<T volatile &&>());
-    CT_ASSERT(ct::has_varargs<T const volatile &>());
-    CT_ASSERT(ct::has_varargs<T const volatile &&>());
-
-    CT_ASSERT(decltype(ct::has_varargs(std::declval<T>()))::value);
-    CT_ASSERT(decltype(ct::has_varargs(std::declval<T&>()))::value);
-    CT_ASSERT(decltype(ct::has_varargs(std::declval<T &&>()))::value);
-    CT_ASSERT(decltype(ct::has_varargs(std::declval<T const>()))::value);
-    CT_ASSERT(decltype(ct::has_varargs(std::declval<T const &>()))::value);
-    CT_ASSERT(decltype(ct::has_varargs(std::declval<T const &&>()))::value);
-    CT_ASSERT(decltype(ct::has_varargs(std::declval<T volatile>()))::value);
-    CT_ASSERT(decltype(ct::has_varargs(std::declval<T volatile &>()))::value);
-    CT_ASSERT(decltype(ct::has_varargs(std::declval<T volatile &&>()))::value);
-    CT_ASSERT(decltype(ct::has_varargs(std::declval<T const volatile &>()))::value);
-    CT_ASSERT(decltype(ct::has_varargs(std::declval<T const volatile &&>()))::value);
+    CT_ASSERT(ct::has_varargs<T>::value);
 }
-
 
 template<typename T>
 void assert_not_has_varargs() {
 
-    CT_ASSERT(!ct::has_varargs<T>());
-    CT_ASSERT(!ct::has_varargs<T&>());
-    CT_ASSERT(!ct::has_varargs<T &&>());
-    CT_ASSERT(!ct::has_varargs<T const>());
-    CT_ASSERT(!ct::has_varargs<T const &>());
-    CT_ASSERT(!ct::has_varargs<T const &&>());
-    CT_ASSERT(!ct::has_varargs<T volatile>());
-    CT_ASSERT(!ct::has_varargs<T volatile &>());
-    CT_ASSERT(!ct::has_varargs<T volatile &&>());
-    CT_ASSERT(!ct::has_varargs<T const volatile &>());
-    CT_ASSERT(!ct::has_varargs<T const volatile &&>());
-
-    CT_ASSERT(!decltype(ct::has_varargs(std::declval<T>()))::value);
-    CT_ASSERT(!decltype(ct::has_varargs(std::declval<T&>()))::value);
-    CT_ASSERT(!decltype(ct::has_varargs(std::declval<T &&>()))::value);
-    CT_ASSERT(!decltype(ct::has_varargs(std::declval<T const>()))::value);
-    CT_ASSERT(!decltype(ct::has_varargs(std::declval<T const &>()))::value);
-    CT_ASSERT(!decltype(ct::has_varargs(std::declval<T const &&>()))::value);
-    CT_ASSERT(!decltype(ct::has_varargs(std::declval<T volatile>()))::value);
-    CT_ASSERT(!decltype(ct::has_varargs(std::declval<T volatile &>()))::value);
-    CT_ASSERT(!decltype(ct::has_varargs(std::declval<T volatile &&>()))::value);
-    CT_ASSERT(!decltype(ct::has_varargs(std::declval<T const volatile &>()))::value);
-    CT_ASSERT(!decltype(ct::has_varargs(std::declval<T const volatile &&>()))::value);
+    CT_ASSERT(!ct::has_varargs<T>::value);
 }
 
 
@@ -114,63 +69,11 @@ int main() {
     }
 
     {
-        using f   = int foo::*;
-        using l   = int foo::* LREF;
-        using r   = int foo::* RREF ;
-        using c   = int foo::* const;
-        using cl  = int foo::* const LREF;
-        using cr  = int foo::* const RREF;
-        using v   = int foo::* volatile;
-        using vl  = int foo::* volatile LREF;
-        using vr  = int foo::* volatile RREF;
-        using cv  = int foo::* const volatile;
-        using cvl = int foo::* const volatile LREF;
-        using cvr = int foo::* const volatile RREF;
-
-        assert_not_has_varargs<f>();
-        assert_not_has_varargs<l>();
-        assert_not_has_varargs<r>();
-        assert_not_has_varargs<c>();
-        assert_not_has_varargs<cl>();
-        assert_not_has_varargs<cr>();
-        assert_not_has_varargs<v>();
-        assert_not_has_varargs<vl>();
-        assert_not_has_varargs<vr>();
-        assert_not_has_varargs<cv>();
-        assert_not_has_varargs<cvl>();
-        assert_not_has_varargs<cvr>();
-    }
-
-    {
         //a member data pointer to a function pointer
         //is not treated like a member function pointer
         using f_ptr = void(*)(...);
-
         using f   = f_ptr foo::*;
-        using l   = f_ptr foo::* &;
-        using r   = f_ptr foo::* && ;
-        using c   = f_ptr foo::* const;
-        using cl  = f_ptr foo::* const &;
-        using cr  = f_ptr foo::* const &&;
-        using v   = f_ptr foo::* volatile;
-        using vl  = f_ptr foo::* volatile &;
-        using vr  = f_ptr foo::* volatile &&;
-        using cv  = f_ptr foo::* const volatile;
-        using cvl = f_ptr foo::* const volatile &;
-        using cvr = f_ptr foo::* const volatile &&;
-
         assert_not_has_varargs<f>();
-        assert_not_has_varargs<l>();
-        assert_not_has_varargs<r>();
-        assert_not_has_varargs<c>();
-        assert_not_has_varargs<cl>();
-        assert_not_has_varargs<cr>();
-        assert_not_has_varargs<v>();
-        assert_not_has_varargs<vl>();
-        assert_not_has_varargs<vr>();
-        assert_not_has_varargs<cv>();
-        assert_not_has_varargs<cvl>();
-        assert_not_has_varargs<cvr>();
     }
 
     {

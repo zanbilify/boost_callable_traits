@@ -37,6 +37,10 @@ callable_traits_append_flag(callable_traits_HAS_QUNUSED_ARGUMENTS          -Qunu
 callable_traits_append_flag(callable_traits_HAS_WNO_UNUSED_LOCAL_TYPEDEFS  -Wno-unused-local-typedefs)
 callable_traits_append_flag(callable_traits_HAS_WWRITE_STRINGS             -Wwrite-strings)
 
+if(NOT ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
+    callable_traits_append_flag(callable_traits_HAS_FGNU_TM                    -fgnu-tm)
+endif()
+
 if(MSVC AND NOT ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
     #disable warning about symbol truncation. Doesn't matter, affected types are not linked
     callable_traits_append_flag(callable_traits_HAS_WD4503                     -wd4503)
