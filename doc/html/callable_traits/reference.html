@@ -52,6 +52,7 @@
 <dt><span class="section"><a href="reference.html#callable_traits.reference.member_qualifier_features.ref_remove_member_cv">remove_member_cv</a></span></dt>
 <dt><span class="section"><a href="reference.html#callable_traits.reference.member_qualifier_features.ref_add_member_lvalue_reference">add_member_lvalue_reference</a></span></dt>
 <dt><span class="section"><a href="reference.html#callable_traits.reference.member_qualifier_features.ref_add_member_rvalue_reference">add_member_rvalue_reference</a></span></dt>
+<dt><span class="section"><a href="reference.html#callable_traits.reference.member_qualifier_features.ref_remove_member_reference">remove_member_reference</a></span></dt>
 <dt><span class="section"><a href="reference.html#callable_traits.reference.member_qualifier_features.ref_has_member_qualifiers">has_member_qualifiers</a></span></dt>
 <dt><span class="section"><a href="reference.html#callable_traits.reference.member_qualifier_features.ref_is_const_member">is_const_member</a></span></dt>
 <dt><span class="section"><a href="reference.html#callable_traits.reference.member_qualifier_features.ref_is_volatile_member">is_volatile_member</a></span></dt>
@@ -2149,9 +2150,242 @@
 <span class="special">}</span>
 </pre>
 </div>
-<p>
-        [remove_member_reference_hpp]
-      </p>
+<div class="section">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference"></a><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_remove_member_reference" title="remove_member_reference">remove_member_reference</a>
+</h4></div></div></div>
+<h6>
+<a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference.h0"></a>
+          <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference.header"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_remove_member_reference.header">Header</a>
+        </h6>
+<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_member_reference</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<h6>
+<a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference.h1"></a>
+          <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_remove_member_reference.definition">Definition</a>
+        </h6>
+<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+    <span class="keyword">using</span> <span class="identifier">remove_member_reference_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+    <span class="keyword">struct</span> <span class="identifier">remove_member_reference</span> <span class="special">{</span>
+        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">remove_member_reference_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+    <span class="special">};</span>
+<span class="special">}</span>
+</pre>
+<h6>
+<a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference.h2"></a>
+          <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference.constraints"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_remove_member_reference.constraints">Constraints</a>
+        </h6>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+              <code class="computeroutput"><span class="identifier">T</span></code> must be a function
+              type or a member function pointer type
+            </li></ul></div>
+<h6>
+<a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference.h3"></a>
+          <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference.behavior"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_remove_member_reference.behavior">Behavior</a>
+        </h6>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+              A substitution failure occuers if the constraints are violated.
+            </li>
+<li class="listitem">
+              Removes member <code class="computeroutput"><span class="special">&amp;</span></code> or
+              <code class="computeroutput"><span class="special">&amp;&amp;</span></code> qualifiers
+              from <code class="computeroutput"><span class="identifier">T</span></code>, if present.
+            </li>
+</ul></div>
+<h6>
+<a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference.h4"></a>
+          <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference.input_output_examples"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_remove_member_reference.input_output_examples">Input/Output
+          Examples</a>
+        </h6>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                  <p>
+                    <code class="computeroutput"><span class="identifier">T</span></code>
+                  </p>
+                </th>
+<th>
+                  <p>
+                    <code class="computeroutput"><span class="identifier">remove_member_const_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+                  </p>
+                </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span>
+                    <span class="special">&amp;</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span></code>
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="special">&amp;</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span></code>
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="keyword">const</span> <span class="special">&amp;</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="keyword">const</span></code>
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="keyword">const</span> <span class="special">&amp;&amp;</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span>
+                    <span class="keyword">const</span></code>
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span></code>
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    (substitution failure)
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span> <span class="special">(&amp;)()</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    (substitution failure)
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span> <span class="special">(*)()</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    (substitution failure)
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    (substitution failure)
+                  </p>
+                </td>
+</tr>
+<tr>
+<td>
+                  <p>
+                    <code class="computeroutput"><span class="keyword">int</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*</span>
+                    <span class="keyword">const</span><span class="special">)()</span></code>
+                  </p>
+                </td>
+<td>
+                  <p>
+                    (substitution failure)
+                  </p>
+                </td>
+</tr>
+</tbody>
+</table></div>
+<h6>
+<a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference.h5"></a>
+          <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference.example_program"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_remove_member_reference.example_program">Example
+          Program</a>
+        </h6>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_member_reference</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+
+<span class="keyword">struct</span> <span class="identifier">foo</span> <span class="special">{};</span>
+
+<span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
+
+    <span class="special">{</span>
+        <span class="keyword">using</span> <span class="identifier">pmf</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="special">&amp;;</span>
+        <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)();</span>
+        <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_member_reference_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
+        <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+    <span class="special">}</span> <span class="special">{</span>
+        <span class="keyword">using</span> <span class="identifier">pmf</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">const</span> <span class="special">&amp;&amp;;</span>
+        <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">const</span><span class="special">;</span>
+        <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_member_reference_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
+        <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+    <span class="special">}</span> <span class="special">{</span>
+        <span class="keyword">using</span> <span class="identifier">pmf</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;;</span>
+        <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">const</span> <span class="keyword">volatile</span><span class="special">;</span>
+        <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_member_reference_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;;</span>
+        <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+    <span class="special">}</span> <span class="special">{</span>
+        <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">()</span> <span class="special">&amp;&amp;;</span>
+        <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">();</span>
+        <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_member_reference_t</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">&gt;;</span>
+        <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+    <span class="special">}</span>
+<span class="special">}</span>
+</pre>
+</div>
 <div class="section">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="callable_traits.reference.member_qualifier_features.ref_has_member_qualifiers"></a><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_has_member_qualifiers" title="has_member_qualifiers">has_member_qualifiers</a>
