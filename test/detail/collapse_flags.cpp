@@ -6,20 +6,19 @@ Distributed under the Boost Software License, Version 1.0.
 */
 
 #include <type_traits>
-#include <callable_traits/qualifier_flags.hpp>
+#include <callable_traits/detail/qualifier_flags.hpp>
 
 #ifndef CT_ASSERT
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
 
 using namespace callable_traits;
-using callable_traits::detail::collapse_flags;
+using namespace callable_traits::detail;
 
 int main() {
 
-    // callable_traits::collapse_flags emulates the
-    // C++11 reference collapsing rules. Here, we test that
-    //behavior.
+    // callable_traits::collapse_flags emulates the C++11
+    // reference collapsing rules. Here, we test that behavior.
 
     using rref_plus_lref = collapse_flags<rref_, lref_>;
     CT_ASSERT(rref_plus_lref::value == lref_);

@@ -13,20 +13,12 @@
         [lang en]
 ]
 
-
-
 [/ developer: you should enable word wrap before you read further]
-
-
-
 
 [template libname[][^CallableTraits]]
 [template lib_namespace[][^callable_traits]]
 [template namespace_scoped[][^callable_traits::]]
 [template header_include_prefix[]callable_traits/]
-[template detail_open_include[]    `#include<`[^[header_include_prefix]]]
-[template detail_close_include[]`.hpp>`]
-[template include_header[name][detail_open_include][^[name]][detail_close_include]]
 [template invoke[][@http://en.cppreference.com/w/cpp/utility/functional/invoke [^['INVOKE]]]]
 [template hana[][@https://boostorg.github.io/hana/ [^Boost.Hana]]]
 [template feedback[][link callable_traits.contact feedback]]
@@ -36,53 +28,10 @@
 [template abominable_paper[][@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0172r0.html "abominable" function types]]
 [template link_compatibility[][link callable_traits.compatibility Compatibility]]
 [template link_compatibility_issues[][link callable_traits.compatibility.compatibility_issues Compatibility Issues]]
-[template function_types_link[][@http://www.boost.org/doc/libs/1_60_0/libs/function_types/doc/html/index.html [^Boost.FunctionTypes]]]
+[template function_types_link[][@http://www.boost.org/doc/libs/1_61_0/libs/function_types/doc/html/index.html [^Boost.FunctionTypes]]]
 [template function_types[][^Boost.FunctionTypes]]
 
-[/ *** these templates are used to turn concept names green ***]
-[template concept_fn_ptr[][role green FunctionPtr]]
-[template concept_fn_ref[][role green FunctionReference]]
-[template concept_simple_fn[][role green UnqualifiedFunction]]
-[template concept_abominable[][role green AbominableFunction]]
-[template concept_fn[][role green Function]]
-[template concept_pmf[][role green MemberFunctionPtr]]
-[template concept_pmd[][role green MemberDataPtr]]
-[template concept_member_ptr[][role green MemberPtr]]
-[template concept_simple_fn_obj[][role green SimpleFunctionObject]]
-[template concept_overloaded_fn_obj[][role green OverloadedFunctionObject]]
-[template concept_fn_obj[][role green FunctionObject]]
-[template concept_simple_callable[][role green SimpleCallable]]
-[template concept_simple_invokable[][role green SimpleInvokable]]
-[template concept_callable[][role green Callable]]
-[template concept_invokable[][role green Invokable]]
-[template concept_bind_expression[][role green BindExpression]]
-[template concept_signature[][role green Signature]]
-[template concept_constexpr_constructible[][role green ConstexprDefaultConstructible]]
-[template concept_cc_tag[][role green CallingConventionTag]]
-
-[/ *** concept links *** ]
-[template link_fn_ptr[][link callable_traits.concepts.ref_fn_ptr [concept_fn_ptr]]]
-[template link_fn_ref[][link callable_traits.concepts.ref_fn_ref [concept_fn_ref]]]
-[template link_simple_fn[][link callable_traits.concepts.ref_simple_fn [concept_simple_fn]]]
-[template link_abominable[][link callable_traits.concepts.ref_abominable [concept_abominable]]]
-[template link_fn[][link callable_traits.concepts.ref_fn [concept_fn]]]
-[template link_pmf[][link callable_traits.concepts.ref_pmf [concept_pmf]]]
-[template link_pmd[][link callable_traits.concepts.ref_pmd [concept_pmd]]]
-[template link_member_ptr[][link callable_traits.concepts.ref_member_ptr [concept_member_ptr]]]
-[template link_simple_fn_obj[][link callable_traits.concepts.ref_simple_fn_obj [concept_simple_fn_obj]]]
-[template link_overloaded_fn_obj[][link callable_traits.concepts.ref_overloaded_fn_obj [concept_overloaded_fn_obj]]]
-[template link_fn_obj[][link callable_traits.concepts.ref_fn_obj [concept_fn_obj]]]
-[template link_simple_callable[][link callable_traits.concepts.ref_simple_callable [concept_simple_callable]]]
-[template link_simple_invokable[][link callable_traits.concepts.ref_simple_invokable [concept_simple_invokable]]]
-[template link_callable[][link callable_traits.concepts.ref_callable [concept_callable]]]
-[template link_invokable[][link callable_traits.concepts.ref_invokable [concept_invokable]]]
-[template link_bind_expression[][link callable_traits.concepts.ref_bind_expression [concept_bind_expression]]]
-[template link_signature[][link callable_traits.concepts.ref_signature [concept_signature]]]
-[template link_constexpr_constructible[][link callable_traits.concepts.ref_constexpr_constructible [concept_constexpr_constructible]]]
-[template link_cc_tag[][link callable_traits.concepts.ref_cc_tag [concept_cc_tag]]]
-
-[/ *** reference links *** ]
-[template link_add_calling_convention[][link callable_traits.ref_add_calling_convention [^add_calling_convention]]]
+[/ *** reference links ***
 [template link_add_member_const[][link callable_traits.ref_add_member_const [^add_member_const]]]
 [template link_add_member_cv[][link callable_traits.ref_add_member_cv [^add_member_cv]]]
 [template link_add_member_lvalue_reference[][link callable_traits.ref_add_member_lvalue_reference [^add_member_lvalue_reference]]]
@@ -93,10 +42,6 @@
 [template link_apply_return[][link callable_traits.ref_apply_return [^apply_return]]]
 [template link_arg_at[][link callable_traits.ref_arg_at [^arg_at]]]
 [template link_args[][link callable_traits.ref_args [^args]]]
-[template link_arity[][link callable_traits.ref_arity [^arity]]]
-[template link_bind[][link callable_traits.ref_bind [^bind]]]
-[template link_can_invoke[][link callable_traits.ref_can_invoke [^can_invoke]]]
-[template link_can_invoke_constexpr[][link callable_traits.ref_can_invoke_constexpr [^can_invoke_constexpr]]]
 [template link_clear_args[][link callable_traits.ref_clear_args [^clear_args]]]
 [template link_expand_args[][link callable_traits.ref_expand_args [^expand_args]]]
 [template link_function_type[][link callable_traits.ref_function_type [^function_type]]]
@@ -105,54 +50,25 @@
 [template link_has_void_return[][link callable_traits.ref_has_void_return [^has_void_return]]]
 [template link_is_const_member[][link callable_traits.ref_is_const_member [^is_const_member]]]
 [template link_is_cv_member[][link callable_traits.ref_is_cv_member [^is_cv_member]]]
-[template link_is_constexpr[][link callable_traits.ref_is_constexpr [^is_constexpr]]]
 [template link_is_lvalue_reference_member[][link callable_traits.ref_is_lvalue_reference_member [^is_lvalue_reference_member]]]
 [template link_is_reference_member[][link callable_traits.ref_is_reference_member [^is_reference_member]]]
 [template link_is_rvalue_reference_member[][link callable_traits.ref_is_rvalue_reference_member [^is_rvalue_reference_member]]]
 [template link_has_member_qualifiers[][link callable_traits.ref_has_member_qualifiers [^has_member_qualifiers]]]
 [template link_is_volatile_member[][link callable_traits.ref_is_volatile_member [^is_volatile_member]]]
-[template link_max_arity[][link callable_traits.ref_max_arity [^max_arity]]]
-[template link_min_arity[][link callable_traits.ref_min_arity [^min_arity]]]
 [template link_qualified_function_type[][link callable_traits.ref_qualified_function_type [^qualified_function_type]]]
-[template link_remove_calling_convention[][link callable_traits.ref_remove_calling_convention [^remove_calling_convention]]]
 [template link_remove_member_const[][link callable_traits.ref_remove_member_const [^remove_member_const]]]
 [template link_remove_member_cv[][link callable_traits.ref_remove_member_cv [^remove_member_cv]]]
-[template link_remove_member_pointer[][link callable_traits.ref_remove_member_pointer [^remove_member_pointer]]]
 [template link_remove_member_reference[][link callable_traits.ref_remove_member_reference [^remove_member_reference]]]
 [template link_remove_varargs[][link callable_traits.ref_remove_varargs [^remove_varargs]]]
 [template link_remove_member_volatile[][link callable_traits.ref_remove_member_volatile [^remove_member_volatile]]]
-[template link_push_back[][link callable_traits.ref_push_back [^push_back]]]
-[template link_push_front[][link callable_traits.ref_push_front [^push_front]]]
-[template link_pop_back[][link callable_traits.ref_pop_back [^pop_back]]]
-[template link_pop_front[][link callable_traits.ref_pop_front [^pop_front]]]
+[template link_push_back_args[][link callable_traits.ref_push_back_args [^push_back_args]]]
+[template link_push_front_args[][link callable_traits.ref_push_front_args [^push_front_args]]]
+[template link_pop_back_args[][link callable_traits.ref_pop_back_args [^pop_back_args]]]
+[template link_pop_front_args[][link callable_traits.ref_pop_front_args [^pop_front_args]]]
 [template link_insert_args[][link callable_traits.ref_insert_args [^insert_args]]]
 [template link_remove_args[][link callable_traits.ref_remove_args [^remove_args]]]
 [template link_replace_args[][link callable_traits.ref_replace_args [^replace_args]]]
-[template link_is_callable[][link callable_traits.ref_is_callable [^is_callable]]]
-[template link_result_of[][link callable_traits.ref_result_of [^result_of]]]
-
-[template cc_warning_rationale[]
-The rationale for classifying the calling convention features as "experimental" is three-fold:
-
-# Calling conventions are, by definition, highly platform-specific.
-# Each calling convention effectively doubles the test surface of [libname] on every supported platform. Tests have not yet been written to account for this.
-# The author's knowledge of cross-platform behavior of calling conventions in C++ is limited.
-
-It is the author's hope that future versions of [libname] will offer a stable, thoroughly-tested, and well-documented implementation of these features. If you have experience in this domain, please [link_contact_the_author].
-]
-
-[template cc_warning_full[]
-[warning Features for the manipulation and inspection of calling conventions are optional, which must be enabled with macro definitions. The features regarding them are currently classified as ['experimental], and are subject to breaking changes in future versions of [libname].
-
-[cc_warning_rationale]
-]
-]
-
-[template cc_warning_brief[]
-[warning Features for calling conventions are currently classified as ['experimental], and are subject to breaking changes in future versions of [libname].
-
-[cc_warning_rationale]
-]
+[template link_return_type[][link callable_traits.ref_return_type [^return_type]]]
 ]
 
 [section:introduction Overview]
@@ -160,12 +76,11 @@ It is the author's hope that future versions of [libname] will offer a stable, t
 [import ../example/overview.cpp]
 [overview]
 
-[libname] is a C++11/14/17 header-only library for the inspection, synthesis, and decomposition of callable types. Whether it's calling conventions, `const volatile &&`, or container-like manipulation of parameter lists, [libname] provides all the tools you need to *completely rid your codebase of function type specializations*. While not for everyone, [libname] offers a comprehensive, fine-grained assortment of traits and metafunctions for building and ripping apart C++'s most complicated and obscure types with ease. [libname] fills the gaps where existing library solutions fall short, aiming to be the "complete type manipulation facility for function types" mentioned in the last section of [@http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html p0172], the C++17 proposal regarding "abominable function types". [libname] currently supports GCC 4.8 and later, Clang 3.5 and later, AppleClang from XCode 6.3 and later, and MSVC 19.
-[libname] is header-only, and does not depend on any non-standard headers.
+[libname] is a C++11/14/17 header-only library for the inspection, synthesis, and decomposition of callable types. From `const volatile &&` to container-like manipulation of parameter lists, [libname] provides all the tools you need to rid your codebase of function type specializations. [libname] offers a comprehensive, fine-grained assortment of traits and metafunctions for building and ripping apart C++'s most complicated and obscure types with ease. [libname] fills the gaps where existing library solutions fall short, aiming to be the "complete type manipulation facility for function types" mentioned in the last section of [@http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html p0172], the C++17 proposal regarding "abominable function types". [libname] currently supports GCC 4.8 and later, Clang 3.5 and later, AppleClang from XCode 6.3 and later, and Visual Studio 2015.
+
+[libname] is header-only, and does not depend on any headers outside the standard library.
 
 [libname] is currently hosted at [repo]. [*[libname] is not a Boost library.]
-
-[note A few features are disabled for older/non-compliant compilers. See the [link_compatibility_issues] section for more details. ]
 
 [section:prereqs Prerequisite Topics]
 
@@ -186,7 +101,6 @@ This documentation will be most beneficial to readers who posess a basic underst
 * [@http://en.cppreference.com/w/cpp/language/overloaded_address taking the address of overloaded functions]
 * [@http://en.cppreference.com/w/c/language/variadic C-style variadics], a.k.a. varargs
 * [@https://en.wikipedia.org/wiki/X86_calling_conventions calling conventions]
-* [@http://en.cppreference.com/w/cpp/utility/functional/bind std::bind expressions] with [@http://en.cppreference.com/w/cpp/utility/functional/placeholders std::placeholders]
 
 [endsect][/section:prereqs]
 
@@ -208,25 +122,21 @@ Template specializations like those in the code snippet above ['still] do not ac
 
 [note The upcoming ISO standard for C++17 includes a [@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html change to the core language] which adds the [^noexcept] qualifier to the type system. If the author's understanding is correct, this would increase the the count of necessary template specializations to [role red[*96]] ([unsure]). Currently, C++17 `noexcept` qualifiers are not handled in [libname], because compiler vendors have not implemented support for this feature (to best of the author's knowledge). However, features to account for and manipulate `noexcept` qualifiers are planned in [libname], as soon as feature is implemented by a compiler vendor. Of course, the [libname] feature additions will be non-breaking for currently supported compiler versions.]
 
-[note features for [@https://isocpp.org/files/papers/n4000.pdf [^transaction_safe]] are planned, but not yet implemented.]
-
-[cc_warning_full]
-
 [endsect][/section:motivation]
 
 [section:boost_function_types Regarding [^Boost.FunctionTypes]]
 
-The use cases for [libname] are closely related to those of [function_types_link]. Here are some reasons why you might prefer [libname]:
+The use cases for [libname] overlaop significantly with those of [function_types_link]. Here are some reasons why you might prefer [libname] over the latter:
 
 # [function_types] is tightly coupled to [@http://www.boost.org/doc/libs/1_60_0/libs/mpl/doc/index.html [^Boost.MPL]] sequences, while [libname] generally takes a lower-level approach. No knowledge of MPL terminology is needed to use [libname].
 # Other types in C++ receive fine-grained, low-level attention in [^Boost.TypeTraits] and [^<type_traits>]. [libname] gives callable types similar attention, without additional metaprogramming dependencies.
 # [libname] aims to eliminate function type template specializations. [function_types] does not.
 # [libname] targets C++11/14/17 features. [function_types] does not.
-# The [function_types] interface relies heavily on tag types. [libname] does not (except for platform-specific calling conventions).
+# The [function_types] interface relies heavily on tag types. [libname] does not.
 
-By building on the achievements of others, [libname] borrows and extends much of the functionality found in [function_types], re-packaging it in a more accessible `type_traits`-style interface. There is nothing inherently wrong with [function_types], which is a great choice for projects already using the MPL, and for metaprogramming on older compilers. However, an MPL sequence-based solution with no C++11 support should not be the only option for inspecting and manipulating callable types.
+[function_types] is a good tool for projects already dependent on the MPL, which must also support very old compilers. However, the [function_types] interface is unpleasant to use. It relies heavily on both the MPL and tag types, for problems that are more simply solved with neither. Using [function_types] requires an understanding of the library's "big picture."
 
-See Also: [link callable_traits.faq.faq_function_types Why not update and extend [function_types] instead?]
+[libname] reimplements much of the functionality found in [function_types], but offers a much more accessible `type_traits`-style interface. There is nothing inherently wrong with [function_types], but an MPL sequence-based solution with no C++11/14/17 support should not be the only library option for inspecting and manipulating callable types.
 
 [endsect][/section:boost_function_types]
 [endsect][/section:introduction]
@@ -240,56 +150,30 @@ See Also: [link callable_traits.faq.faq_function_types Why not update and extend
 [template full_support[][role green Yes] ]
 [template partial_support[][role green Yes (basic)] ]
 [template unknown_support[][role gray No/Unknown] ]
-[template likely_support[][role black Untested - likely] ]
+[template likely_support[][role black Likely] ]
 [template link_travis_ci[][@https://travis-ci.org/badair/callable_traits/builds Travis]]
 [template link_appveyor_ci[][@https://ci.appveyor.com/project/badair/callable-traits Appveyor]]
 
-[table  
-[ [Operating System] [Compiler]                  [Support]           [stdlib]                 [Continuous Integration] ]
-[ [Linux]            [Clang 3.5+]                [[full_support]]    [libc++]                 [[link_travis_ci]]       ]
-[ [Linux]            [Clang 3.5+]                [[full_support]]    [libstdc++]              [[link_travis_ci]]       ]
-[ [Linux]            [Clang (other)]             [[unknown_support]] [libstdc++]              [-]                      ]
-[ [Linux]            [GCC 5.2.1 +]               [[full_support]]    [libstdc++]              [[link_travis_ci]]       ]
-[ [Linux]            [GCC \[4.8, ~ 5.2.1)]       [[partial_support]] [libstdc++]              [[link_travis_ci]]       ]
-[ [Linux]            [GCC(other)]                [[unknown_support]] [libstdc++]              [-]                      ]
-[ [OSX]              [AppleClang / XCode 6.3+]   [[full_support]]    [libc++]                 [[link_travis_ci]]       ]
-[ [OSX]              [Clang 3.5+]                [[likely_support]]  [libc++]                 [-]                      ]
-[ [OSX]              [Clang 3.4 and below]       [[unknown_support]] [libc++]                 [-]                      ]
-[ [Windows]          [MSVC 19]                   [[partial_support]] [Dinkumware ([unsure])]  [[link_appveyor_ci]]     ]
-[ [Windows]          [MSVC (other)]              [[unknown_support]] [Dinkumware ([unsure])]  [-]                      ]
-[ [Windows]          [Clang-cl 3.7+]             [[full_support]]    [[unsure]]               [-]                      ]
-[ [Windows]          [Clang-cl (other)]          [[unknown_support]] [[unsure]]               [-]                      ]
-[ [Windows]          [MinGW GCC 5.3]             [[full_support]]    [libstdc++]              [-]                      ]
-[ [Windows]          [MinGW GCC \[4.8, ~ 5.2.1)] [[partial_support]] [libstdc++]              [-]                      ]
-]
-
-[template msvc_disabled_functions[]
-
-
-* [link_bind]
+[table
+[ [Compiler]                    [Continuous Integration] ]
+[ [Clang 3.5]                   [[link_travis_ci]]       ]
+[ [Clang 3.6]                   [[link_travis_ci]]       ]
+[ [Clang 3.7]                   [[link_travis_ci]]       ]
+[ [Clang 3.8]                   [[link_travis_ci]]       ]
+[ [GCC 4.8]                     [[link_travis_ci]]       ]
+[ [GCC 4.9]                     [[link_travis_ci]]       ]
+[ [GCC 5.2]                     [[link_travis_ci]]       ]
+[ [GCC 5.3]                     [(tested locally)]       ]
+[ [GCC 6.1]                     [[link_travis_ci]]       ]
+[ [AppleClang / XCode 6.3 beta] [[link_travis_ci]]       ]
+[ [AppleClang / XCode 6.4]      [[link_travis_ci]]       ]
+[ [AppleClang / XCode 7]        [[link_travis_ci]]       ]
+[ [AppleClang / XCode 7.1]      [[link_travis_ci]]       ]
+[ [AppleClang / XCode 7.2]      [[link_travis_ci]]       ]
+[ [MSVC / Visual Studio 2015]   [[link_appveyor_ci]]     ]
 ]
 
 CallableTraits has not been tested on every platform under the sun. If you find CallableTraits to work with another toolchain, [link callable_traits.contact let us know!]
-
-[section:compatibility_issues Known Issues]
-
-* [link_is_constexpr] and [link_can_invoke_constexpr] always `std::false_type` on the following platforms:
-  * MSVC
-  * GCC < 5
-* [link_bind] trips a static_assert on the following platforms:
-  * MSVC
-  * GCC < 4.9.2
-* [link_min_arity] and [link_max_arity] are equivalent to [link_arity] on the following platforms:
-  * GCC < 4.9.2
-* [link_abominable] types are not compatible with some older compilers. Attempts to create [link_abominable] types using [libname] metafunctions will have no effect on the following platforms:
-  * GCC < 4.9.2
-* [link_abominable] reference-qualified member functions are not compatible with some older compilers. Attempts to create a pointer to a reference-qualified member function using [libname] metafunctions will have no effect on the following platforms:
-  * GCC < 4.9.2
-* [libname] has ['not] yet been tested on all minor/patch versions of the supported compilers. If you experience problems on a supported platform, [link_contact_the_author].
-* Calling convention support is largely untested. Please [link_contact_the_author] if you have experience in this domain.
-* Documentation, test coverage, and API tweaks are currently the primary focus of development. Check out the [@https://github.com/badair/callable_traits/issues Issues page] for more information about progress on this front.
-
-[endsect][/section:compatibility_issues]
 
 [endsect][/section:compatibility]
 
@@ -302,9 +186,9 @@ CallableTraits has not been tested on every platform under the sun. If you find 
 [section:faq FAQ]
 
 
-[section:reasons Why should I use [libname]?]
+[heading:reasons Why should I use [libname]?]
 
-If you are not writing generic code, you simply shouldn't.
+If you are not writing generic code, you shouldn't.
 
 If you ['are] writing generic code, take a moment to skim your header files, and see if you can find code that looks like this:
 
@@ -318,6 +202,7 @@ or like this...
     template<class Return, class ...Args>
 	class foo<Return(Args...)> {
 	    //   ^^^^^^^^^^^^^^^^
+        //...
 	};
 
 or maybe something like this...
@@ -325,6 +210,7 @@ or maybe something like this...
     template<class Return, class ...Args>
 	class foo<Return(*)(Args...)> {
 	    //     ^^^^^^^^^^^^^^^^^^
+        //...
 	};
 
 perhaps...
@@ -332,6 +218,7 @@ perhaps...
     template<class Return, class ...Args>
 	class foo<Return(&)(Args...)> {
 	    //    ^^^^^^^^^^^^^^^^^^
+        //...
 	};
 	
 Does this rings a bell?
@@ -339,86 +226,192 @@ Does this rings a bell?
 	template<class Return, class T, class ...Args>
 	class foo<Return(T::*)(Args...)> {
 	    //    ^^^^^^^^^^^^^^^^^^^^^
+        //...
 	};
 	
 Do you hate your job?
 
     template<class Return, class T, class ...Args>
-	class foo<Return( __cdecl T::* const volatile &)(Args..., ...) const volatile &&> {
-	    //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	};
-	
-Do you seek revenge against your coworkers?
-
-    #define EXPAND_LIKE_THE_DICKENS(QUALIFIERS)    \
-    template<class Return, class T, class ...Args> \
-	class foo<Return(T::*)(Args...) QUALIFIERS> {  \ 
-        /* ... */                                  \
+    class foo<Return(T::*)(Args..., ...) const volatile && transaction_safe> {
+        //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        //...
 	};
 
-There are real reasons to write code like this, but they are few and far between. Implementers of the `<functional>` header and signal libraries have been trudging through these template tarpits for years now. With [libname], you can get rid of every line of code related to these techniques. [libname]'s mission is to rid the world of this code [*forever]. Even if you are only specializing a simple function type like `Return(Args...)`, [libname] can make your code more readable, more maintainable, and less error-prone. 
+There are real reasons to write code like this, but they are few and far between. Implementers of the `<functional>` header and callback libraries have been trudging through these template tarpits for years now. Often, these template specializations will contain nearly-duplicate code, which slows development time and increases the likelihood of regression bugs.
 
-[endsect]
+With [libname], you can get rid of all of these template specializations (unless you are concerned with platform-specific calling conventions). Part of [libname]'s mission is to rid the world of this code forever. Even if you are only specializing a simple function type like `Return(Args...)`, perhaps you will find that [libname] can help make your code more readable, more maintainable, more generic, and less error-prone.
 
-[section:reasons What makes [libname] unique?]
-
-[*1.] [libname] offers template aliases such as [link_remove_member_const] for manipulating function qualifiers, designed to parallel the `<type_traits>` aliases such as `std::remove_const_t`.
-
-[*2.] [libname] is designed to accept cv-qualified and ref-qualified types, which eliminates the need to prepare template argument types with metafunctions such as `std::remove_reference` and `std::decay`. This is especially useful when dealing with perfectly-forwarded parameter types in function templates.
-
-[*3.] [libname] is designed to comply with [invoke] rules, with one unobtrusive and beneficial deviation: [link_fn] types are compatible with all relevant type operations that do not specifically require an invocation.
-
-[*4.] [namespace_scoped][link_arg_at]`<2, Callable>` is more flexible than `typename boost::function_traits<Callable>::arg3_type`.
-
-[*5.] [link_can_invoke] is used to test `INVOKE`-ability at compile-time, with value semantics. For the craziest metaprogrammers, [link_can_invoke_constexpr] does the same as `can_invoke` for [link_constexpr_constructible] types, with an added check for `constexpr`-ness
-
-[*6.] [link_is_constexpr] is used to check whether a [link_constexpr_constructible] type is a [link_callable] type that yields a `constexpr` result -- no arguments necessary.
-
-[*7.] [link_bind] is used to intercept the signature information from a `std::placeholder` expression before forwarding on to `std::bind` or `boost::bind`. This gives library writers the power to create more flexible template APIs for callable types.
-
-[*8.] [link_min_arity] can be used to detect the presence of default arguments on a [link_simple_fn_obj]
-
-[*9.] The [libname] interface mainly consists of template aliases and `constexpr std::integral_constant` functions, which are arguably preferable to `typename foo::type` and `foo::value`. While the `std::integral_constant` functions in [libname] may be a deviation from traditional type trait designs, they facilitate a metaprogramming style that uses value-semantics (a la [hana]). The functions can generally be used with either types or values, which eliminates unnecessary `decltype` usage.
-
-[*10.] [libname] includes optional features for the manipulation and inspection of calling conventions. These features are currently deemed experimental, because they greatly increase the test surface of [libname], are platform-specific, and are not yet fully tested on any platform.
-
-[endsect][/section:reasons]
-
-[section:faq_function_types Why not update and extend [function_types] instead?]
-
-As discussed in the introduction, [function_types] is a good tool for many situations. However, the interface is unpleasant. It which relies heavily on both the MPL and tag types, for problems that are more simply solved with neither. Using [function_types] requires an understanding of MPL sequences, as well as an understanding of the [function_types] "big picture." [function_types] is more complicated than is necessary, and takes longer to grok. In the C++ of today, [function_types] is also sorely lacking in features. Retrofitting [function_types] with the features found in [libname] would mean adding many more tag types, supporting old compilers with too much conditional compilation, and continuing to work around an unnecessary MPL dependency.
-
-[endsect]
-
-[section Why does [namespace_scoped][^args] alias a [^std::tuple]?]
+[heading Why does [namespace_scoped][^args] alias a [^std::tuple]?]
 
 Boost contains a handful of excellent type containers. However, [libname] is designed to only use the standard headers, so `<tuple>` was the only option under this limitation.
 
-[endsect]
+[heading Why use reference collapsing rules when adding member function ref-qualifiers?]
 
-[section Why are the [libname] alias templates not suffixed with `_t`, as in `std::add_lvalue_reference_t`?]
-
-The `_t` alias templates in `<type_traits>` should be appreciated, but not imitated. These alias templates were a belated addition to the standard library. They use a cleaner syntax, so that users can forgo the `typename /*...*/::type` dance. However, it is both ironic and unfortunate that a pair of unnecessary characters (`_t`) are used for the sole purpose of removing some ['other] decidedly unnecessary characters (`typename` and `::type`). It's time to stop the bleeding, cut our losses, and start giving things sensible names.
+Although arbitrary, the reference collapsing rules are well-defined and already known to many template metaprogrammers. Anything else would be a burden to memorize.
 
 [endsect]
 
-[section Why use constexpr function templates? Why not use something like `std::is_same` or even `std::is_same_v`?]
 
-Function templates, especially when augmented by overloading them, are the only constructs in C++ that can unequivocally accept ['either] a type ['or] a value argument. Even if variable template support were commonplace among production compilers, function templates would still have the upper hand in this regard. The same argument applies to alias templates and class templates. Since [libname] supports all value categories and qualifiers, using these function templates really couldn't be any easier.
 
-[endsect]
+[section:reference Reference Documentation]
 
-[section Why use reference collapsing rules when adding member function ref-qualifiers?]
+[section:member_qualifier_features Member Qualifier Features]
 
-Although arbitrary, the reference collapsing rules are well-defined and already known to template metaprogrammers. Anything else would be a burden to memorize.
+[import ../include/callable_traits/add_member_const.hpp]
+[add_member_const_hpp]
 
-[endsect]
+[import ../include/callable_traits/remove_member_const.hpp]
+[remove_member_const_hpp]
 
-[endsect]
+[import ../include/callable_traits/add_member_volatile.hpp]
+[add_member_volatile_hpp]
 
-[section:development Development]
+[import ../include/callable_traits/remove_member_volatile.hpp]
+[remove_member_volatile_hpp]
 
-[note Boost.Build configuration files have not yet been written for building the tests and examples. The `Boost.Build` configuration files are currently only used by the author to build this documentation (along with a hacky batch script, which is unpublished).]
+[import ../include/callable_traits/add_member_cv.hpp]
+[add_member_cv_hpp]
+
+[import ../include/callable_traits/remove_member_cv.hpp]
+[remove_member_cv_hpp]
+
+[import ../include/callable_traits/add_member_lvalue_reference.hpp]
+[add_member_lvalue_reference_hpp]
+
+[import ../include/callable_traits/add_member_rvalue_reference.hpp]
+[add_member_rvalue_reference_hpp]
+
+[import ../include/callable_traits/remove_member_reference.hpp]
+[remove_member_reference_hpp]
+
+[import ../include/callable_traits/has_member_qualifiers.hpp]
+[has_member_qualifiers_hpp]
+
+[import ../include/callable_traits/is_const_member.hpp]
+[is_const_member_hpp]
+
+[import ../include/callable_traits/is_volatile_member.hpp]
+[is_volatile_member_hpp]
+
+[import ../include/callable_traits/is_cv_member.hpp]
+[is_cv_member_hpp]
+
+[import ../include/callable_traits/is_lvalue_reference_member.hpp]
+[is_lvalue_reference_member_hpp]
+
+[import ../include/callable_traits/is_rvalue_reference_member.hpp]
+[is_rvalue_reference_member_hpp]
+
+[import ../include/callable_traits/is_reference_member.hpp]
+[is_reference_member_hpp]
+
+[endsect][/section:member_qualifier_features]
+
+
+
+[section:parameter_list_features Parameter List Features]
+
+[import ../include/callable_traits/function_type.hpp]
+[function_type_hpp]
+
+[import ../include/callable_traits/args.hpp]
+[args_hpp]
+
+[import ../include/callable_traits/arg_at.hpp]
+[arg_at_hpp]
+
+[import ../include/callable_traits/clear_args.hpp]
+[clear_args_hpp]
+
+[import ../include/callable_traits/remove_args.hpp]
+[remove_args_hpp]
+
+[import ../include/callable_traits/replace_args.hpp]
+[replace_args_hpp]
+
+[import ../include/callable_traits/insert_args.hpp]
+[insert_args_hpp]
+
+[import ../include/callable_traits/pop_back_args.hpp]
+[pop_back_args_hpp]
+
+[import ../include/callable_traits/pop_front_args.hpp]
+[pop_front_args_hpp]
+
+[import ../include/callable_traits/push_back_args.hpp]
+[push_back_args_hpp]
+
+[import ../include/callable_traits/push_front_args.hpp]
+[push_front_args_hpp]
+
+[import ../include/callable_traits/expand_args.hpp]
+[expand_args_hpp]
+
+[import ../include/callable_traits/expand_args_left.hpp]
+[expand_args_left_hpp]
+
+[import ../include/callable_traits/expand_args_right.hpp]
+[expand_args_right_hpp]
+
+[import ../include/callable_traits/add_varargs.hpp]
+[add_varargs_hpp]
+
+[import ../include/callable_traits/remove_varargs.hpp]
+[remove_varargs_hpp]
+
+[import ../include/callable_traits/has_varargs.hpp]
+[has_varargs_hpp]
+
+[endsect][/section:parameter_list_features]
+
+
+
+[section:return_type_features Return Type Features]
+
+[import ../include/callable_traits/return_type.hpp]
+[return_type_hpp]
+
+[import ../include/callable_traits/apply_return.hpp]
+[apply_return_hpp]
+
+[import ../include/callable_traits/has_void_return.hpp]
+[has_void_return_hpp]
+
+[endsect][/section:return_type_features]
+
+
+
+[section:member_pointer_features Member Pointer Features]
+
+[import ../include/callable_traits/apply_member_pointer.hpp]
+[apply_member_pointer_hpp]
+
+[import ../include/callable_traits/parent_class_of.hpp]
+[parent_class_of_hpp]
+
+[import ../include/callable_traits/qualified_parent_class_of.hpp]
+[qualified_parent_class_of_hpp]
+
+[endsect][/section:member_pointer_features]
+
+
+
+[section:transactional_memory_features Transactional Memory Features]
+
+[import ../include/callable_traits/add_transaction_safe.hpp]
+[add_transaction_safe_hpp]
+
+[import ../include/callable_traits/remove_transaction_safe.hpp]
+[remove_transaction_safe_hpp]
+
+[import ../include/callable_traits/is_transaction_safe.hpp]
+[is_transaction_safe_hpp]
+
+[endsect][/section:transactional_memory_features]
+
+[endsect][/section:reference]
+
+
 
 [section:building Building the test suite]
 
@@ -428,10 +421,10 @@ This section contains the instructions for building and running the test cases a
 
 [heading Dependencies]
 
-Even though the [libname] headers do not rely on external dependencies, you'll need to install [@https://cmake.org/ CMake] version 3.0 or higher to use the test suite. For Windows users who wish to build the test suite with Visual Studio 2015 Update 2, it appears that CMake version 3.5 or higher is required. The build instructions assume that both CMake and Git executables exist in your environment PATH. 
+Even though the [libname] headers do not rely on external dependencies, you'll need to install [@https://cmake.org/ CMake] version 3.0 or higher to use the test suite. For Windows users who wish to build the test suite with Visual Studio 2015 Update 2, it appears that CMake version 3.5 or higher is required. The build instructions assume that both CMake and Git executables exist in your environment PATH.
 
 [heading One-click scripts]
- 
+
 For convenience, one-click testing scripts for Linux and Windows are packaged with [libname], each of which must be run from the directory in which the script resides. Running one of these scripts will create a `build-xxx` subdirectory in the [libname] root directory, and perform all testing there. Even though these scripts were designed to be as generic as possible, issues may exist because they have not seen widespread use. Refer to the console instructions below if the provided testing scripts do not work for you.
 
 First, clone the repository:
@@ -442,30 +435,30 @@ First, clone the repository:
   * Examples related to calling conventions are ['excluded] from these build scripts
   * script directory: `[CallableTraits root]/scripts/posix`
     * `gcc-libcstdxx.sh`
-	  * compiles with the g++ version found in the PATH
-	  * This is the script most likely to work out-of-the-box, since GCC 4.8 comes pre-installed on many Linux distributions
+      * compiles with the g++ version found in the PATH
+      * This is the script most likely to work out-of-the-box, since GCC 4.8 comes pre-installed on many Linux distributions
     * `clang-libcxx.sh`
-	  * compiles with the clang++ executable in the PATH
-	  * uses libc++ for the standard library implementation
+      * compiles with the clang++ executable in the PATH
+      * uses libc++ for the standard library implementation
     * `clang-libcstdxx.sh`
-	  * compiles with the clang++ executable in the PATH
-	  * uses libstdc++ for the standard library implementation
+      * compiles with the clang++ executable in the PATH
+      * uses libstdc++ for the standard library implementation
 
 * Windows
   * Examples related to calling conventions are ['included] in these build scripts
   * script directory: `[CallableTraits root]\scripts\windows`
     * `MSVC-Win32-Debug.bat`
-	  * compiles with MSVC 19
-	  * Visual Studio 2015 must be installed in the default install directory
+      * compiles with MSVC 19
+      * Visual Studio 2015 must be installed in the default install directory
     * `LLVM-vs2014-Win32-Debug.bat`
-	  * compiles with clang/c2
-	  * Visual Studio 2015 must be installed in the default install directory
-	  * This script assumes that the Windows Installer found on [@http://llvm.org/builds/ this page] was used to install LLVM, which is integrated with Visual Studio
-	* `MinGW-Win32-Release.bat`
-	  * compiles with a MinGW-based GCC build
-	  * [*requires a [@http://gnuwin32.sourceforge.net/packages/make.htm Windows build of GNU Make] to be installed and present in the PATH]
-	  * Expects to find the MinGW root directory at `C:\\MinGW*`
-	  
+      * compiles with clang/c2
+      * Visual Studio 2015 must be installed in the default install directory
+      * This script assumes that the Windows Installer found on [@http://llvm.org/builds/ this page] was used to install LLVM, which is integrated with Visual Studio
+    * `MinGW-Win32-Release.bat`
+      * compiles with a MinGW-based GCC build
+      * [*requires a [@http://gnuwin32.sourceforge.net/packages/make.htm Windows build of GNU Make] to be installed and present in the PATH]
+      * Expects to find the MinGW root directory at `C:\\MinGW*`
+
 
 [heading Console instructions - Linux/OSX]
 
@@ -482,7 +475,7 @@ make check
 
 [heading Console instructions - Windows]
 
-Cygwin and MSYS users should refer to the Linux section (you know who you are).
+[note Cygwin and MSYS users should refer to the Linux section (you know who you are).]
 
 Fire up `cmd.exe` and enter the following commands:
 
@@ -501,1379 +494,10 @@ To include the experimental examples for calling conventions in the build, appen
 
 [tip If you need additional help building the test suite, [link_contact_the_author].]
 
+[note Boost.Build configuration files have not yet been written for building the tests and examples. The `Boost.Build` configuration files are currently only used by the author to build this documentation (along with some unpublished scripting hacks).]
+
 [endsect][/section:building]
 
-[endsect][/section:development]
-
-[/*********************************************************************]
-[/*********************** C O N C E P T S *****************************]
-[/*********************************************************************]
-
-[section:concepts Concepts]
-
-[libname] relies on the following "concepts", which will be referenced throughout the documentation. Concepts will always be formatted with [role green green] text. These concepts are not part of the C++ code, but instead are used for the purpose of documenting correct usage of [CallableTraits] templates.
-
-In order to avoid significant standardese in the reference sections, we need to syntactically decompose these types. Some concepts define "elements" to achieve this. This allows us to address multiple concepts with the same terminology and structure later.
-
-[template CallingConvention[][^['\[CallingConvention\]]]]
-[template PtrQualifiers[][^['\[PtrQualifiers\]]]]
-[template MemberQualifiers[][^['\[MemberQualifiers\]]]]
-[template VarArgs[][^['\[VarArgs\]]]]
-[template Return[][^['\[Return\]]]]
-[template ParentClass[][^['\[ParentClass\]]]]
-[template Args[][^['\[Args...\]]]]
-[template Category[][^['\[Category\]]]]
-
-[section:ref_fn_ptr [concept_fn_ptr]]
-
-* Any function pointer type
-* the pointer may be cv-qualified and/or ref-qualified
-* e.g. `void(*)(int, int)` or `void(* const &)(int, int)`
-* Elements
-  * [^[Return] [role red ( [CallingConvention] * [PtrQualifiers] )] ( [Args] [VarArgs] )]
-  * [Category] - in red above
-  * [MemberQualifiers] - not applicable
-  * [ParentClass] - not applicable
-
-[endsect]
-
-[section:ref_fn_ref [concept_fn_ref]]
-
-* Any function reference type
-* e.g. `void(&)(int, int)`
-* Elements
-  * [^[Return] [role red ( & )] ( [Args] [VarArgs] )]
-  * [Category] - in red above
-  * [CallingConvention] - not applicable
-  * [PtrQualifiers] - not applicable
-  * [MemberQualifiers] - not applicable
-  * [ParentClass] - not applicable
-
-[endsect]
-
-[section:ref_simple_fn [concept_simple_fn]]
-* Any unqualified function type
-* Not technically "callable", but still falls under the [libname] umbrella
-* Mutually exclusive with [link_abominable]
-* e.g. `void(int, int)`
-* Elements
-  * [^[Return] ( [Args] [VarArgs] )]
-  * [Category] - not applicable
-  * [CallingConvention] - not applicable
-  * [PtrQualifiers] - not applicable
-  * [MemberQualifiers] - not applicable
-  * [ParentClass] - not applicable
-
-[endsect]
-
-[section:ref_abominable [concept_abominable]]
-* Any qualified (a.k.a. [@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0172r0.html "abominable"]) function type
-* Not technically "callable", but still falls under the [libname] umbrella
-* Mutually exclusive with [link_simple_fn]
-* e.g. `void(int, int) const`
-* Elements
-  * [^[Return] ( [Args] [VarArgs]) [MemberQualifiers]]
-  * [Category] - not applicable
-  * [CallingConvention] - not applicable
-  * [PtrQualifiers] - not applicable
-  * [ParentClass] - not applicable
-
-[endsect]
-
-[section:ref_fn [concept_fn]]
-* The superset of [link_simple_fn] and [link_abominable]
-
-[endsect]
-
-[section:ref_pmf [concept_pmf]]
-
-* Any pointer to member function type
-* The pointer type may be cv-qualified and/or ref-qualified
-* e.g. `void (foo::*)(int, int)`
-* Elements
-  * [^[Return] [role red( [CallingConvention] [ParentClass]::* [PtrQualifiers] )] ( [Args] [VarArgs])  [MemberQualifiers]]
-  * [Category] - in red above
-
-[endsect]
-
-[section:ref_pmd [concept_pmd]]
-
-* Any pointer to data member type
-* The pointer type may be cv-qualified and/or ref-qualified
-* e.g. `int foo::*`
-* Elements
-  * [^[Return] [role red[ParentClass]::* [PtrQualifiers]]]
-  * [Category] - in red above
-  * [CallingConvention] - not applicable
-  * [MemberQualifiers] - not applicable
-  * [Args] -  not applicable
-  
-[endsect]
-
-[section:ref_member_ptr [concept_member_ptr]]
-
-* The superset of [link_pmf] and [link_pmd]
-
-[endsect]
-
-[section:ref_simple_fn_obj [concept_simple_fn_obj]]
-
-* Any class/struct with a ['non-templated, non-overloaded] function call operator
-* Includes non-generic lambda types
-* May be cv-qualified and/or ref-qualified
-* Mutually exclusive with [link_overloaded_fn_obj]
-* e.g. the type of this lambda: `[](int x, int y) { return x + y; }`
-* Elements
-  * [Return] - the return type of member `operator()`
-  * [Args] -  the parameter list of member `operator()`
-  * [MemberQualifiers] - any member qualifiers on `operator()`
-  * [CallingConvention] - the calling convention used by member on `operator()`
-  * [PtrQualifiers] - not applicable
-  * [ParentClass] - not applicable
-  * [Category] - not applicable
-
-[endsect]
-
-[section:ref_overloaded_fn_obj [concept_overloaded_fn_obj]]
-
-* Any class/struct with a ['templated or overloaded] function call operator, with the following limitation for those with templated function call operators (which includes generic lambdas):
-  * If templated , all instantiations must be [@http://stackoverflow.com/questions/35033306/what-does-it-mean-when-one-says-something-is-sfinae-friendly SFINAE-friendly], and must not use [@http://en.cppreference.com/w/cpp/language/indent_name dependent names], except where the dependent "names" are C++ operators.
-* May be cv-qualified and/or ref-qualified
-* Mutually exclusive with [link_simple_fn_obj]
-* e.g. the type of this generic lambda: `[](auto x, auto y) { return x + y; }`
-
-[tip Generic lambdas or classes with templated function objects that are either not SFINAE-friendly or rely on dependent names for template instantiations are generally incompatible with [libname].]
-
-[endsect]
-
-[section:ref_fn_obj [concept_fn_obj]]
-* The superset of [link_overloaded_fn_obj] and [link_simple_fn_obj]
-
-[endsect]
-
-[section:ref_signature [concept_signature]]
-* The superset of the following:
-  * [link_fn_ptr]
-  * [link_fn_ref]
-  * [link_fn]
-  * [link_pmf]
-
-[endsect]
-
-[section:ref_callable [concept_callable]]
-* The superset of the following:
-  * [link_fn_ptr]
-  * [link_fn_ref]
-  * [link_fn]
-  * [link_pmf]
-  * [link_pmd]
-  * [link_fn_obj]
-
-[endsect]
-  
-[section:ref_simple_callable [concept_simple_callable]]
-* Includes all [link_callable] types, [*except] [link_overloaded_fn_obj]
-
-[endsect]
-
-[section:ref_simple_invokable [concept_simple_invokable]]
-* Includes all [link_callable] types, [*except] [link_overloaded_fn_obj] and [link_fn]
-
-[endsect]
-
-[section:ref_invokable [concept_invokable]]
-* Includes all [link_callable] types, [*except] [link_fn]
-
-[endsect]
-
-[section:ref_bind_expression [concept_bind_expression]]
-* The return type of a call to [namespace_scoped]`bind`
-
-[endsect]
-
-[section:ref_constexpr_constructible [concept_constexpr_constructible]]
-* Any [@http://en.cppreference.com/w/cpp/concept/LiteralType LiteralType] that is also default-constructible
-
-[endsect]
-
-[section:ref_cc_tag [concept_cc_tag]]
-* One of the following types, used to manipulate calling conventions programmatically:
-  *[namespace_scoped]`cdecl_tag`
-    * [CallingConvention] - `__cdecl`
-  *[namespace_scoped]`stdcall_tag`
-    * [CallingConvention] - `__stdcall`
-  *[namespace_scoped]`fastcall_tag`
-    * [CallingConvention] - `__fastcall`
-  *[namespace_scoped]`pascal_tag`
-    * [CallingConvention] - `pascal`
-	
-[endsect]
-
-[endsect][/section:concepts]
-
-
-
-
-[/*********************************************************************]
-[/************************ H E A D E R S ******************************]
-[/*********************************************************************]
-
-[section:headers Headers]
-The easiest way to get started using [libname] is to include the main header file, which includes all public header files in [libname]:
-
-[include_header callable_traits]
-
-The [libname] interface is also broken down by trait into individual header files. To use only the traits you need, include one or more of the following headers, grouped by category:
-
-
-[section Qualifiers]
-
-* `const`
-  * [include_header [link_add_member_const]]
-  * [include_header [link_remove_member_const]]
-  * [include_header [link_is_const_member]]
-
-* `volatile`
-  * [include_header [link_add_member_volatile]]
-  * [include_header [link_remove_member_volatile]]
-  * [include_header [link_is_volatile_member]]
-
-* `const volatile`
-  * [include_header [link_add_member_cv]]
-  * [include_header [link_remove_member_cv]]
-
-* `&`
-  * [include_header [link_add_member_lvalue_reference]]
-  * [include_header [link_is_lvalue_reference_member]]
-
-
-* `&&`
-  * [include_header [link_add_member_rvalue_reference]]
-  * [include_header [link_is_rvalue_reference_member]]
-
-* Other
-  * [include_header [link_remove_member_reference]]
-  * [include_header [link_is_reference_member]]
-  * [include_header [link_has_member_qualifiers]]
-
-[endsect]
-
-
-[section Parameters]
-
-* [include_header [link_args]]
-* [include_header [link_arg_at]]
-* [include_header [link_insert_args]]
-* [include_header [link_replace_args]]
-* [include_header [link_remove_args]]
-* [include_header [link_clear_args]]
-* [include_header [link_push_back]]
-* [include_header [link_push_front]]
-
-* [include_header [link_arity]]
-* [include_header [link_min_arity]]
-* [include_header [link_max_arity]]
-
-[endsect]
-
-
-[section Return Types]
-
-* [include_header [link_apply_return]]
-* [include_header [link_result_of]]
-* [include_header [link_has_void_return]]
-
-[endsect]
-
-
-[section ['INVOKE]]
-
-* [include_header [link_can_invoke]]
-* [include_header [link_can_invoke_constexpr]]
-* [include_header [link_function_type]]
-* [include_header [link_bind]]
-
-[endsect]
-
-
-[section Member Pointers]
-
-* [include_header [link_apply_member_pointer]]
-* [include_header [link_remove_member_pointer]]
-
-[endsect]
-
-
-[section Constant Expressions]
-
-* [include_header [link_is_constexpr]]
-* [include_header [link_can_invoke_constexpr]]
-
-[endsect]
-
-
-[section Variadics]
-
-* [include_header [link_add_varargs]]
-* [include_header [link_remove_varargs]]
-* [include_header [link_has_varargs]]
-
-[endsect]
-
-
-[section Calling Conventions (experimental)]
-
-* [include_header [link_add_calling_convention]]
-* [include_header [link_remove_calling_convention]]
-* [include_header [link_has_calling_convention]]
-
-[endsect]
-
-[endsect][/section:headers]
-
-
-[template msvc_incompatible[] is not compatible with the Microsoft Visual C++ compiler in Visual Studio (a.k.a. MSVC). Accordingly, the example(s) below will not compile in MSVC. However, Visual Studio users can still use Clang-cl. Refer to the [link_compatibility_issues] section for more information.]
-
-
-
-
-[section:ref_add_calling_convention add_calling_convention]
-
-[warning This feature is currently considered experimental. Your [feedback] is much appreciated! ]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T, typename CcTag>
-		using add_calling_convention = /* implementation-defined */;
-		
-	}
-
-[heading Constraints]
-* `T` must be a [link_fn_ptr] or [link_pmf]
-* `CcTag` must be a [link_cc_tag]
-
-[heading Behavior]
-Adds the calling convention specified by `CcTag` to the pointer type `T`.
-
-[heading Notes]
-
-For `add_calling_convention` to work as-intended, you must:
-
-# Be programming on a platform that supports adding the desired calling convention to type `T`
-# Define one or more of the following macros before including any [libname] headers:
- * `CALLABLE_TRAITS_ENABLE_CDECL` for `__cdecl`
- * `CALLABLE_TRAITS_ENABLE_STDCALL` for `__stdcall`
- * `CALLABLE_TRAITS_ENABLE_FASTCALL` for `__fastcall`
- * `CALLABLE_TRAITS_ENABLE_PASCAL` for `pascal`
-
-[heading Example - [^__fastcall] to [^__stdcall]]
-[import ../example/experimental_changing_calling_conventions.cpp]
-[experimental_changing_calling_conventions]
-[heading Example - [^__cdecl]]
-[import ../example/experimental_calling_convention_cdecl.cpp]
-[experimental_calling_convention_cdecl]
-
-[heading See Also]
-* [link_remove_calling_convention]
-* [link_has_calling_convention]
-
-[endsect][/section:ref_add_calling_convention]
-
-
-
-
-
-[section:ref_add_member_const add_member_const]
-    
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T>
-		using add_member_const = /* implementation-defined */;
-		
-	}
-	
-[heading Constraints]
-`T` must be a [link_fn] or [link_pmf].
-
-[heading Behavior]
-* Adds a `const` qualifier to the signature of `T` (if not already present), preserving any pointer qualifiers, such that:
-  * `add_member_const<int()>` aliases `int() const`
-  * `add_member_const<int(foo::*)() volatile>` aliases `int(foo::*)() const volatile`
-  * `add_member_const<int(foo::* const &)()>` aliases `int(foo::* const &)() const`
-
-[heading Notes]
-* Any enabled calling conventions are preserved on [link_pmf] types
-
-[heading Example]
-[import ../example/add_member_const.cpp]
-[add_member_const]
-
-[heading See Also]
-* [link_remove_member_const]
-* [link_is_const_member]
-
-[endsect][/section:ref_add_member_const]
-
-
-
-
-
-[section:ref_add_member_cv add_member_cv]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T>
-		using add_member_cv = /* implementation-defined */;
-		
-	}
-	
-[heading Constraints]
-`T` must be a [link_fn] or [link_pmf].
-
-[heading Behavior]
-* Adds both `const` and `volatile` qualifiers to the signature of `T` (if not already present), preserving any pointer qualifiers, such that:
-  * `add_member_cv<int()>` aliases `int() const volatile`
-  * `add_member_cv<int(foo::*)() volatile>` aliases `int(foo::*)() const volatile`
-  * `add_member_cv<int(foo::* const &)()>` aliases `int(foo::* const &)() const volatile`
-
-[heading Notes]
-* Any enabled calling conventions are preserved on [link_pmf] types
-
-[heading Example]
-[import ../example/add_member_cv.cpp]
-[add_member_cv]
-
-[heading See Also]
-* [link_add_member_const]
-* [link_add_member_volatile]
-* [link_remove_member_cv]
-* [link_is_cv_member]
-
-[endsect][/section:ref_add_member_cv]
-
-
-
-
-
-[section:ref_add_member_lvalue_reference add_member_lvalue_reference]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T>
-		using add_member_lvalue_reference = /* implementation-defined */;
-		
-	}
-	
-[heading Constraints]
-`T` must be a [link_fn] or [link_pmf].
-
-[heading Behavior]
-* Adds an lvalue reference qualifier (`&`) qualifier to the signature of `T` (if not already present)
-* If an rvalue reference qualifier is present, the lvalue reference qualifier replaces it (in arbitrary accordance with reference collapsing rules)
-* Any pointer qualifiers are preserved
-* Such that:
-  * `add_member_lvalue_reference<int()>` aliases `int() &`
-  * `add_member_lvalue_reference<int(foo::*)() const &&>` aliases `int(foo::*)() const &`
-  * `add_member_lvalue_reference<int(foo::* const &)()>` aliases `int(foo::* const &)() &`
-  
-[heading Notes]
-* Any enabled calling conventions are preserved on [link_pmf] types
-
-[heading Example]
-[import ../example/add_member_lvalue_reference.cpp]
-[add_member_lvalue_reference]
-
-[heading See Also]
-* [link_is_lvalue_reference_member]
-* [link_add_member_rvalue_reference]
-* [link_remove_member_reference]
-
-[endsect][/section:ref_add_member_lvalue_reference]
-
-
-
-
-[section:ref_add_member_rvalue_reference add_member_rvalue_reference]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T>
-		using add_member_rvalue_reference = /* implementation-defined */;
-		
-	}
-	
-[heading Constraints]
-`T` must be a [link_fn] or [link_pmf].
-
-[heading Behavior]
-* Adds an rvalue reference qualifier (`&&`) qualifier to the signature of `T` (if not already present)
-* If an lvalue reference qualifier is present, the lvalue reference qualifier remains (in arbitrary accordance with reference collapsing rules)
-* Any pointer qualifiers are preserved
-* Such that:
-  * `add_member_rvalue_reference<int()>` aliases `int() &&`
-  * `add_member_rvalue_reference<int(foo::*)() const &>` aliases `int(foo::*)() const &`
-  * `add_member_rvalue_reference<int(foo::* const &)()>` aliases `int(foo::* const &)() &&`
-  
-[heading Notes]
-* Any enabled calling conventions are preserved on [link_pmf] types
-
-[heading Example]
-[import ../example/add_member_rvalue_reference.cpp]
-[add_member_rvalue_reference]
-
-[heading See Also]
-* [link_add_member_lvalue_reference]
-* [link_remove_member_reference]
-
-[endsect][/section:ref_add_member_rvalue_reference]
-
-
-
-
-
-[section:ref_add_varargs add_varargs]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T>
-		using add_varargs = /* implementation-defined */;
-		
-	}
-	
-[heading Constraints]
-
-`T` must be one of the following:
-
-* [link_fn]
-* [link_fn_ptr]
-* [link_fn_ref]
-* [link_pmf]
-
-[heading Behavior]
-* Adds C-style variadics (`...`) to the signature of `T` (if not already present), preserving any pointer qualifiers, such that:
-  * `add_varargs<int()>` aliases `int(...)`
-  * `add_varargs<int(* const)()>` aliases `int(* const)(int, ...)`
-  * `add_varargs<int(&)()>` aliases `int(&)(int, ...)`
-  * `add_varargs<int(foo::* volatile &)() const>` aliases `int(foo::* volatile &)(...) const`
- 
-[heading Notes]
-* Any enabled calling conventions are preserved on [link_fn_ptr] and [link_pmf] types
-
-[heading Example]
-[import ../example/add_varargs.cpp]
-[add_varargs]
-
-[heading See Also]
-* [link_remove_varargs]
-* [link_has_varargs]
-* [link_remove_member_reference]
-
-[endsect][/section:ref_add_varargs]
-
-
-
-
-
-[section:ref_add_member_volatile add_member_volatile]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T>
-		using add_member_volatile = /* implementation-defined */;
-		
-	}
-	
-[heading Constraints]
-`T` must be a [link_fn] or [link_pmf].
-
-[heading Behavior]
-* Adds a `volatile` qualifier to the signature of `T` (if not already present), preserving any pointer qualifiers, such that:
-  * `add_member_volatile<int()>` aliases `int() volatile`
-  * `add_member_volatile<int(foo::*)() const>` aliases `int(foo::*)() const volatile`
-  * `add_member_volatile<int(foo::* const &)()>` aliases `int(foo::* const &)() volatile`
-
-[heading Notes]
-* Any enabled calling conventions are preserved on [link_pmf] types
-
-[heading Example]
-[import ../example/add_member_volatile.cpp]
-[add_member_volatile]
-
-[heading See Also]
-* [link_remove_member_volatile]
-* [link_is_volatile_member]
-
-[endsect][/section:ref_add_member_volatile]
-
-
-
-
-[section:ref_apply_member_pointer apply_member_pointer]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T, typename Class>
-		using apply_member_pointer = /* implementation-defined */;
-		
-	}
-	
-[heading Constraints]
-
-`T` must be one of the following:
-
-* [link_fn]
-* [link_fn_ptr]
-* [link_fn_ref]
-* [link_member_ptr]
-
-[heading Behavior]
-* When the constraints are violated, a substitution failure occurs.
-* Otherwise, `apply_member_pointer<T, Class>` aliases [^[Return] ( [CallingConvention] [*Class]::* [PtrQualifiers] ( [Args] [VarArgs] ) [MemberQualifiers]]
-
-[heading Example]
-[import ../example/apply_member_pointer.cpp]
-[apply_member_pointer]
-
-[heading See Also]
-* [link_remove_member_pointer]
-
-[endsect][/section:ref_apply_member_pointer]
-
-
-
-
-
-[section:ref_apply_return apply_return]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T, typename NewReturn>
-		using apply_return = /* implementation-defined */;
-		
-	}
-	
-[heading Constraints]
-
-`T` must be a [link_signature] or a [link_pmd].
-
-[heading Behavior]
-* `apply_return<T, NewReturn>` aliases [^[*NewReturn] [Category] ( [Args] [VarArgs] ) [MemberQualifiers]]
-
-[heading Example]
-[/import ../example/apply_return.cpp]
-[apply_return]
-
-[endsect][/section:ref_apply_return]
-
-
-
-
-[section:ref_arg_at arg_at]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<std::size_t Index, typename T>
-		using arg_at = /* implementation-defined */;
-		
-	}
-	
-[heading Constraints]
-* `T` must be one of the following:
-  * [link_signature]
-  * [link_simple_fn_obj]
-  * [link_bind_expression]
-* When `T` is a [link_signature], then:
-  * Let `ArgCount` represent the number of arguments in the signature of `T`
-  * `Index` must be less than `ArgCount` and greater than zero
-* Otherwise, when `T` is a [link_simple_fn_obj], then:
-  * Let `ArgCount` represent the number of arguments in `decltype(&std::decay_t<T>::operator())`
-  * `Index` must be less than `ArgCount` and greater than zero
-* Otherwise, when `T` is a [link_bind_expression], then:
-  * Let `MaxPlaceholder` represent the type of the largest `std::placeholders` object in the bind expression tree
-  * `Index` must be less than `std::is_placeholder<MaxPlaceholder>::value` and greater than zero
-  
-[heading Behavior]
-* If any constraints are violated, a substitution failure occurs
-* Otherwise, `arg_at<Index, T>` aliases `std::tuple_element_t<Index, `[namespace_scoped][link_args]`<T>>`, such that:
-  * `arg_at<0, void(char, short, long, int*)>` aliases `char`
-  * `arg_at<1, void(* volatile)(char, short, long, int*)>` aliases `short`
-  * `arg_at<2, void(&)(char, short, long, int*)>` aliases `long`
-  * `arg_at<3, void(foo::* const &)(char, short, long, int*)>` aliases `int*`
-  
-[heading Example]
-[/import ../example/arg_at.cpp]
-[arg_at]
-
-[heading See Also]
-* [link_args]
-* [link_expand_args]
-
-[endsect][/section:ref_arg_at]
-
-
-
-
-
-[section:ref_args args]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T>
-		using args = /* implementation-defined */;
-		
-	}
-	
-[heading Constraints]
-`T` must be one of the following:
-* [link_signature]
-* [link_simple_fn_obj]
-* [link_bind_expression]
-
-[heading Behavior]
-* When the constraints are violated, a substitution failure occurs
-* Otherwise, when `T` is a [link_signature], then:
-  * Let `Args...` represent the parameter types in the signature of `T`
-  * `args<T>` aliases `std::tuple<Args...>`
-* Otherwise, when `T` is a [link_simple_fn_obj], then:
-  * Let `Args...` represent the parameter types in the signature of `decltype(&std::decay_t<T>::operator())`
-  * `args<T>` aliases `std::tuple<Args...>`
-* Otherwise, when `T` is a [link_bind_expression], then:
-  * Let `bind_args...` represent the argument values that were passed to [namespace]`bind` which returned an instance of `T`
-  * Let `bind_result` represent the return value of `std::bind(bind_args...)`
-  * Let `Args...` represent the "valid argument types" to `bind_result`'s `operator()`
-    * Note: the "valid argument types" are implied by the position of the `std::placeholders` objects
-  * `args<T>` aliases `std::tuple<Args...>`
-
-[heading Example]
-[import ../example/args.cpp]
-[args]
-
-[heading See Also]
-* [link_arg_at]
-* [link_expand_args]
-
-[endsect][/secttion:ref_args]
-
-
-
-
-[section:ref_arity arity]
-
-    namespace ``[lib_namespace]`` {
-	
-		template<typename T>
-		inline constexpr auto arity() {
-		   /* implementation defined */
-		}
-		
-	    template<typename U>
-		inline constexpr auto arity(U&&) {
-			return arity<U&&>();
-		}
-	}
-	
-[heading Constraints]
-`T` must be a [link_signature] or a [link_simple_fn_obj].
-
-[heading Behavior]
-* When the constraints are violated, an instance of type `std::integral_constant<int, -1>` is returned.
-* Otherwise, when `T` is a [link_signature]
-  * let `ArgCount` represent the number of parameter types in the signature of `T`
-  * `arity<T>()` returns an instance of type `std::integral_constant<int, ArgCount>`
-* Otherwise, when `T` is a [link_simple_fn_obj]
-  * Let `ArgCount` represent the number of parameter types in the signature of `decltype(&std::decay_t<T>::operator())`
-  * `arity<T>()` returns an instance of type `std::integral_constant<int, ArgCount>`
-
-[heading Example]
-[/import ../example/arity.cpp]
-[arity]
-[endsect]
-
-[section:ref_bind bind]
-
-[note [namespace_scoped]`bind` [msvc_incompatible]]
-
-    namespace ``[lib_namespace]`` {
-	
-		template<typename... Ts>
-		inline ``[^[link_bind_expression]]`` bind(Ts&&... ts);
-		
-	}
-	
-[namespace_scoped]`bind` is used to parse type information from potentially complex `std::placeholders` expressions. The type information in [namespace_scoped]`bind` cannot legally/portably be extracted from `std::bind`, because `std::bind`'s implementation is opaque.
-
-[heading Constraints]
-* The arguments to [namespace_scoped]`bind` must be legal arguments to `std::bind`, substituting `std::bind` for [namespace_scoped]`bind` in nested sub-expressions where necessary to meet this constraint
-* All nested sub-expressions must be a call to [namespace_scoped]`bind` instead of `std::bind`
-* If a call to [namespace_scoped]`bind` passes an [link_overloaded_fn_obj] instance as its first argument, then:
-  * any placeholder objects passed in this call must be re-used somewhere else in the expression tree, bing passed in another call to [namespace_scoped]`bind` where a [link_simple_callable] as its first argument (otherwise, no inference could be made about the parameter type being "place-held")
-
-[heading Behavior]
-* If any constraints are violated, the result is undefined
-* The return type of [namespace_scoped]`bind` can be passed to any of the following:
-  * [namespace_scoped][^[link_args]]
-  * [namespace_scoped][^[link_arg_at]]
-  * [namespace_scoped][^[function_type]]
-  * [namespace_scoped][^[result_of]]
-* For convenience, the object returned by [namespace_scoped]`bind` serves as a wrapper around `std::bind`, forwarding from its `operator()` to a private member object constructed from `std::bind` in the original [namespace_scoped]`bind`
-
-[heading Notes]
-* [namespace_scoped]`bind` is the only feature of [libname] with non-constexpr behavior. However, the runtime behavior is only provided for convenience -- [namespace_scoped]`bind` is designed to be a metaprogramming tool, and may be used in unevaluated contexts.
-[heading Example 1]
-[import ../example/bind_1.cpp]
-[bind_1]
-[heading Example 2]
-[import ../example/bind_2.cpp]
-[bind_2]
-
-[heading See Also]
-  * [link_args]
-  * [link_arg_at]
-  * [function_type]
-  * [result_of]
-  
-[endsect]
-
-[section:ref_can_invoke can_invoke]
-
-    namespace ``[lib_namespace]`` {
-	
-		template<typename T, typename... Args>
-		inline constexpr auto can_invoke(T&&, Args&&...);
-		
-	}
-
-[heading Constraints]
-* When `std::decay_t<T>` is a class/struct with a templated `operator()`, it's invocation must be SFINAE-friendly with respect to `Args&&...`
-* No other constraints
-
-[heading Behavior]
-* If all arguments to `can_invoke` can legally be forwarded to [invoke], then an instance of `std::true_type` is returned
-* Otherwise, an instance of `std::false_type` is returned
-
-[heading Example - Function Object]
-[import ../example/can_invoke_function_object.cpp]
-[can_invoke_function_object]
-[heading Example - Member Function Pointer]
-[import ../example/can_invoke_member_function_pointer.cpp]
-[can_invoke_member_function_pointer]
-[heading Example - Function Pointer]
-[import ../example/can_invoke_function_pointer.cpp]
-[can_invoke_function_pointer]
-[heading Example - Function Reference]
-[import ../example/can_invoke_function_reference.cpp]
-[can_invoke_function_reference]
-
-[heading See Also]
-* [link_can_invoke_constexpr]
-
-[endsect]
-
-
-
-
-[section:ref_can_invoke_constexpr can_invoke_constexpr]
-
-[note `can_invoke_constexpr` [msvc_incompatible]]
-
-    namespace ``[lib_namespace]`` {
-	
-		template<typename T, typename... Args>
-		inline constexpr auto can_invoke_constexpr(T&& t, Args&&... args);
-		
-	}
-
-[heading Constraints]
-* None, except when `std::decay_t<T>` is a class/struct with a templated `operator()`, it's invocation must be SFINAE-friendly with respect to `Args...`
-
-[heading Behavior]
-* An instance of `std::false_type` is returned, except when:
-  * arguments to `can_invoke_constexpr` can legally be forwarded to [invoke], *and*
-  * `std::decay_t<T>` is [link_constexpr_constructible], *and*
-  * `std::decay_t<Args>...` are also all [link_constexpr_constructible], *and*
-  * an invocation of the arguments following [invoke] semantics is a constant expression, then:
-    * an instance of `std::true_type` is returned
-
-[heading Example - Function Object]
-[import ../example/can_invoke_constexpr_function_object.cpp]
-[can_invoke_constexpr_function_object]
-[heading Example - Member Function Pointer]
-[import ../example/can_invoke_constexpr_member_function_pointer.cpp]
-[can_invoke_constexpr_member_function_pointer]
-[heading Example - Function Pointer]
-[import ../example/can_invoke_constexpr_function_pointer.cpp]
-[can_invoke_constexpr_function_pointer]
-
-[heading See Also]
-* [link_can_invoke]
-* [link_is_constexpr]
-
-[endsect]
-
-
-
-[section:ref_clear_args clear_args]
-
-    namespace ``[lib_namespace]`` {
-
-            template<typename T>
-			using clear_args = /* implementation-defined */;
-        }
-
-[heading Constraints]
-* `T` must be a [link_signature]
-
-[heading Behavior]
-* When the constraints are violated, a substitution failure occurs
-* Otherwise, `clear_args<T>` is identical to `T`, except that the aliased type's parameter list is reduced to `void`
-
-[heading Notes]
-* Any C-style variadics on `T` are removed by `clear_args<T>`
-* Any enabled calling conventions are preserved on pointer types
-
-[heading Example]
-[import ../example/clear_args.cpp]
-[clear_args]
-
-[endsect]
-
-
-[section:ref_insert_args insert_args]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<std::size_t InsertIndex, typename T, typename... NewArgs>
-        using insert_args = /* implementation-defined */ ;
-	}
-	
-[heading Constraints]
-* `T` must be a [link_signature]
-
-[heading Behavior]
-* `insert_args<Index, T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` will be inserted into the [Args] parameter list at the 0-based `InsertIndex`. TODO document out-of-bounds behavior
-* [VarArgs] remain if present in `T`.
-
-[heading Example]
-[import ../example/insert_args.cpp]
-[insert_args]
-[endsect]
-
-[section:ref_replace_args replace_args]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<std::size_t StartIndex, typename T, typename... NewArgs>
-        using replace_args = /* implementation-defined */ ;
-	}
-	
-[heading Constraints]
-* `T` must be a [link_signature]
-
-[heading Behavior]
-* `replace_args<Index, T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` will begin overwriting the [Args] parameter list at the 0-based `InsertIndex`, extending the parameter list as necessary.
-* [VarArgs] remain if present in `T`.
-
-[heading Example]
-[import ../example/replace_args.cpp]
-[replace_args]
-[endsect]
-
-[section:ref_remove_args remove_args]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<std::size_t StartIndex, typename T, std::size_t Count = 1>
-		using remove_args = /* implementation-defined */ ;
-	}
-	
-[heading Constraints]
-* `T` must be a [link_signature]
-
-[heading Behavior]
-* `remove_args<Index, Callable, Count>` aliases a type identical to `T`, except that all parameter types in the parameter list will be removed from 0-based `Index` to `Index + Count`. TODO document out-of-bounds behavior
-* [VarArgs] remain if present in `T`.
-
-[heading Example]
-[import ../example/remove_args.cpp]
-[remove_args]
-[endsect]
-
-[section:ref_expand_args expand_args]
-
-    namespace ``[lib_namespace]`` {
-
-		template<typename T, template<class...> class Container>
-		using expand_args = /* implementation-defined */;
-	}
-
-[heading Constraints]
-# `T` must be one of the following:
-  * [link_signature]
-  * [link_simple_fn_obj]
-  * [link_bind_expression]
-# Let `std::tuple<Args...>` represent [namespace_scoped][link_args]`<T>`
-  * `Container<Args...>` must be a legal template instantiation.
-
-[heading Behavior]
-* When the first constraint is violated, a substitution failure occurs
-* When the second constraint is violated, the behavior is undefined
-* When both constraints are satisfied, then:
-  * Let `std::tuple<Args...>` represent [namespace_scoped][link_args]`<T>`
-  * `expand_args<T, Container>` aliases `Container<Args...>`
-
-
-[heading Example]
-[import ../example/expand_args.cpp]
-[expand_args]
-
-[heading See Also]
-* [link_args]
-* [link_arg_at]
-
-[endsect]
-
-
-[section:ref_function_type function_type]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T>
-		using function_type = /* implementation-defined */;
-	}
-		
-[heading Constraints]
-`T` must be a [link_simple_callable].
-
-[heading Behavior]
-
-`function_type` is used to "decay" a [link_simple_callable] into an [invoke]-aware [link_simple_fn].
-
-* When the constraints are violated, the substitution fails in a SFINAE-friendly manner.
-* Otherwise, when `T` is a [link_pmf], then:
-  * Let `Args...` represent the parameter types in the signature of `T`
-  * Let `ClassRef` represent a reference of the parent class/struct of `T`, applying any qualifiers necessary to match the member function qualifiers on `T`
-  * Let `Return` represent the return type of `T`
-  * `function_type<T>` aliases `Return(ClassRef, Args...)`
-  * such that:
-    * `function_type<int(foo::*)(char)>` aliases `int(foo &, char)`
-    * `function_type<int(foo::*)(char) &&>` aliases `int(foo &&, char)`
-	* `function_type<int(foo::*)(char) const>` aliases `int(foo const &, char)`
-* Otherwise, when `T` is a [link_pmd], then:
-  * Let `ClassRef` represent a `const` reference of the parent class/struct of `T`
-  * Let `Return` represent the pointed-to data member type of `T`
-  * `function_type<T>` aliases `Return(ClassRef)`
-  * such that:
-    * `function_type<int foo::*>` aliases `int(foo const &)`
-	* `function_type<int foo::* const &>` also aliases `int(foo const &)`
-* Otherwise, when `T` is a [link_signature]:
-  * Let `Args...` represent the parameter types in the signature of `T`
-  * Let `Return` represent the return type of `T`
-  * `function_type<T>` aliases `Return(Args...)`
-*Otherwise, when `T` is a [link_simple_fn_obj], then:
-  * Let `Args...` represent the parameter types in the signature of `decltype(&std::decay_t<T>::operator())`
-  * Let `Return` represent the return type of `decltype(&std::decay_t<T>::operator())`
-  * `function_type<T>` aliases `Return(Args...)`
-*Otherwise, when `T` is a [link_bind_expression], then:
-  * Let `std::tuple<Args...>` represent [namespace_scoped][^[link_args]]`<T>`
-  * Let `bind_args...` represent the argument values that were passed to [namespace]`bind` which returned an instance of `T`
-  * Let `bind_result` represent the return value of `std::bind(bind_args...)`
-  * Let `Return` represent `decltype(bind_result(std::declval<Args>()...))`
-  * `function_type<T>` aliases `Return(Args...)`
-  
-[heading Example]
-[import ../example/function_type.cpp]
-[function_type]
-
-TODO - PMD and PMF examples
-
-[heading See Also]
-* [link_args]
-* [link_result_of]
-
-[endsect][/section:ref_function_type]
-
-
-
-
-[section:ref_has_calling_convention has_calling_convention]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T, typename CcTag>
-		inline constexpr auto has_calling_convention() {
-			/* implementation-defined */
-		}
-		
-		template<typename U, typename CcTag>
-		inline constexpr auto has_calling_convention(U&&) {
-			return has_calling_convention<U, CcTag>();
-		}
-	}
-	
-[heading Constraints]
-* `T` must be a [link_fn_ptr] or [link_pmf]
-* `CcTag` must be a [link_cc_tag]
-
-[heading Behavior]
-* If `T` uses the calling convention specified by `CcTag`, then an instance of `std::true_type` is returned.
-* Otherwise, an instance of `std::false_type` is returned.
-
-[heading Notes]
-
-For `has_calling_convention` to work as-intended, you must:
-
-# Be programming on a platform that supports the desired calling convention
-# Define one or more of the following macros before including any [libname] headers:
- * `CALLABLE_TRAITS_ENABLE_CDECL` for `__cdecl`
- * `CALLABLE_TRAITS_ENABLE_STDCALL` for `__stdcall`
- * `CALLABLE_TRAITS_ENABLE_FASTCALL` for `__fastcall`
- * `CALLABLE_TRAITS_ENABLE_PASCAL` for `pascal`
-	
-[heading Example - [^__fastcall] to [^__stdcall]]
-[experimental_changing_calling_conventions]
-
-[heading See Also]
-* [link_add_calling_convention]
-* [link_remove_calling_convention]
-
-[endsect]
-
-[section:ref_has_varargs has_varargs]
-
-    namespace ``[lib_namespace]`` {
-	
-	    template<typename T>
-		inline constexpr auto has_varargs() {
-			/* implementation-defined */
-		}
-		
-		template<typename U>
-		inline constexpr auto has_varargs(U&&) {
-			return has_varargs<U&&>();
-		}
-	}
-	
-[heading Constraints]
-* `T` must be a [link_simple_callable]
-
-[heading Behavior]
-* If the constraints are violated, a substitution failure occurs
-* Otherwise, if `T` is a [link_signature], then:
-  * If `T` uses C-style variadics, an instance of `std::true_type` is returned
-  * Otherwise, an instance of `std::false_type` is returned
-* Otherwise, if `T` is a [link_simple_fn_obj], then:
-  * If `decltype(&std::decay_t<T>::operator())` uses C-style variadics, then an instance of `std::true_type` is returned
-  * Otherwise, an instance of `std::false_type` is returned
-* Otherwise, an instance of `std::false_type` is returned
-  
-[heading Example]
-[/import ../example/has_varargs.cpp]
-[has_varargs]
-
-[heading See Also]
-* [link_add_varargs]
-* [link_remove_varargs]
-
-[endsect]
-
-[section:ref_is_callable is_callable]
-TODO
-[heading Example]
-[/import ../example/is_callable.cpp]
-[is_callable]
-[endsect]
-
-[section:ref_has_void_return has_void_return]
-TODO
-[heading Example]
-[/import ../example/has_void_return.cpp]
-[has_void_return]
-[endsect]
-
-[section:ref_is_const_member is_const_member]
-TODO
-[heading Example]
-[/import ../example/is_const_member.cpp]
-[is_const_member]
-[endsect]
-
-[section:ref_is_cv_member is_cv_member]
-TODO
-[heading Example]
-[/import ../example/is_cv_member.cpp]
-[is_cv_member]
-[endsect]
-
-[section:ref_is_constexpr is_constexpr]
-TODO
-[heading Example - Function Object]
-[import ../example/is_constexpr_function_object.cpp]
-[is_constexpr_function_object]
-[heading Example - Function Pointer]
-[import ../example/is_constexpr_function_pointer.cpp]
-[is_constexpr_function_pointer]
-[endsect]
-
-[section:ref_is_lvalue_reference_member is_lvalue_reference_member]
-TODO
-[heading Example]
-[/import ../example/is_lvalue_reference_member.cpp]
-[is_lvalue_reference_member]
-[endsect]
-
-[section:ref_is_reference_member is_reference_member]
-TODO
-[heading Example]
-[/import ../example/is_reference_member.cpp]
-[is_reference_member]
-[endsect]
-
-[section:ref_is_rvalue_reference_member is_rvalue_reference_member]
-TODO
-[heading Example]
-[/import ../example/is_rvalue_reference_member.cpp]
-[is_rvalue_reference_member]
-[endsect]
-
-[section:ref_has_member_qualifiers has_member_qualifiers]
-TODO
-[heading Example]
-[/import ../example/has_member_qualifiers.cpp]
-[has_member_qualifiers]
-[endsect]
-
-[section:ref_is_volatile_member is_volatile_member]
-TODO
-[heading Example]
-[/import ../example/is_volatile_member.cpp]
-[is_volatile_member]
-[endsect]
-
-[section:ref_max_arity max_arity]
-TODO
-[heading Example]
-[/import ../example/max_arity.cpp]
-[max_arity]
-[endsect]
-
-[section:ref_min_arity min_arity]
-TODO
-[heading Example]
-[/import ../example/min_arity.cpp]
-[min_arity]
-[endsect]
-
-[section:ref_remove_calling_convention remove_calling_convention]
-TODO
-[heading Example - [^__fastcall] to [^__stdcall]]
-[experimental_changing_calling_conventions]
-[endsect]
-
-[section:ref_remove_member_const remove_member_const]
-TODO
-[heading Example]
-[/import ../example/remove_member_const.cpp]
-[remove_member_const]
-[endsect]
-
-[section:ref_remove_member_cv remove_member_cv]
-TODO
-[heading Example]
-[/import ../example/remove_member_cv.cpp]
-[remove_member_cv]
-[endsect]
-
-[section:ref_remove_member_pointer remove_member_pointer]
-TODO
-[heading Example]
-[import ../example/remove_member_pointer.cpp]
-[remove_member_pointer]
-[endsect]
-
-[section:ref_remove_member_reference remove_member_reference]
-TODO
-[heading Example]
-[/import ../example/remove_member_reference.cpp]
-[remove_member_reference]
-[endsect]
-
-[section:ref_remove_varargs remove_varargs]
-TODO
-[heading Example]
-[/import ../example/remove_varargs.cpp]
-[remove_varargs]
-[endsect]
-
-[section:ref_remove_member_volatile remove_member_volatile]
-TODO
-[heading Example]
-[/import ../example/remove_member_volatile.cpp]
-[remove_member_volatile]
-[endsect]
-
-[section:ref_push_back push_back]
-
-    namespace ``[lib_namespace]`` {
-
-		template<typename T, typename... NewArgs>
-		using push_back = /* implementation-defined */;
-	}
-	
-[heading Constraints]
-* `T` must be a [link_signature]
-
-[heading Behavior]
-* `push_back<T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` have been appended to the back of `T`'s parameter list [Args].
-* [VarArgs] remain if present in `T`.
-	
-[heading Example]
-[import ../example/push_back.cpp]
-[push_back]
-[endsect]
-
-[section:ref_push_front push_front]
-
-    namespace ``[lib_namespace]`` {
-
-		template<typename T, typename... NewArgs>
-		using push_front = /* implementation-defined */;
-	}
-	
-[heading Constraints]
-* `T` must be a [link_signature]
-
-[heading Behavior]
-* `push_back<T, NewArgs...>` aliases a type identical to `T`, except that `NewArgs...` have been appended to the front of `T`'s parameter list [Args].
-* [VarArgs] remain if present in `T`.
-
-[heading Example]
-[import ../example/push_front.cpp]
-[push_front]
-[endsect]
-
-[section:ref_pop_back pop_back]
-TODO
-[heading Example]
-[import ../example/pop_back.cpp]
-[pop_back]
-[endsect]
-
-[section:ref_push_front pop_front]
-TODO
-[heading Example]
-[import ../example/pop_front.cpp]
-[pop_front]
-[endsect]
-
-[section:ref_result_of result_of]
-TODO
-[heading Example]
-[import ../example/result_of.cpp]
-[result_of]
-[endsect]
-
-[include make_function_example.qbk]
-[include interface_example.qbk]
 
 [/*********************************************************************]
 [/************************* C O N T A C T *****************************]
@@ -1881,13 +505,13 @@ TODO
 
 [section:contact Contact]
 
-[libname] is authored and maintained by Barrett Adair
+[libname] is authored and maintained by Barrett Adair.
 
 Comments, feedback, bug reports, and questions are appreciated, which can be submitted in the following ways:
 
 # Open a new issue [@https://github.com/badair/callable_traits/issues/new here] on GitHub
-# Message the author [@https://gitter.im/badair/callable_traits here] on Gitter, an excellent chat service built around GitHub, with message persistence and Markdown support
-# Send the author an email at
+# Message me [@https://gitter.im/badair/callable_traits here] on Gitter
+# Send me an email at
   * barrettellisadair
   * at...
   * gmail dot com

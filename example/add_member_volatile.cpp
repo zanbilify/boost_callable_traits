@@ -22,32 +22,28 @@ int main() {
     {
         using pmf = void(foo::*)();
         using expect = void(foo::*)() volatile;
-        using test = ct::add_member_volatile<pmf>;
+        using test = ct::add_member_volatile_t<pmf>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
-        // add_member_volatile doesn't change anything when
+        // add_member_volatile_t doesn't change anything when
         // the function type is already volatile.
         using pmf = void(foo::*)() volatile &&;
         using expect = void(foo::*)() volatile &&;
-        using test = ct::add_member_volatile<pmf>;
+        using test = ct::add_member_volatile_t<pmf>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
         using pmf = void(foo::*)() const &;
         using expect = void(foo::*)() const volatile &;
-        using test = ct::add_member_volatile<pmf>;
+        using test = ct::add_member_volatile_t<pmf>;
         static_assert(std::is_same<test, expect>::value, "");
     } {
-        // add_member_volatile can also be used with "abominable"
+        // add_member_volatile_t can also be used with "abominable"
         // function types.
         using f = void();
         using expect = void() volatile;
-        using test = ct::add_member_volatile<f>;
+        using test = ct::add_member_volatile_t<f>;
         static_assert(std::is_same<test, expect>::value, "");
     }
-
-    // A substitution failure will occur if add_member_volatile
-    // is used with function pointers, function references,
-    // function objects, or member data pointers.
 }
 
 //]

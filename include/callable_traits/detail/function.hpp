@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_FUNCTION_HPP
 #define CALLABLE_TRAITS_DETAIL_FUNCTION_HPP
 
-#include <callable_traits/qualifier_flags.hpp>
+#include <callable_traits/detail/qualifier_flags.hpp>
 #include <callable_traits/detail/qualifier_traits.hpp>
 #include <callable_traits/detail/fwd/function_fwd.hpp>
 #include <callable_traits/detail/calling_conventions.hpp>
@@ -25,8 +25,8 @@ namespace callable_traits {
 
     namespace detail {
 
-        template<typename U, typename T>
-        struct function : default_callable_traits {};
+        template<typename T>
+        struct function : default_callable_traits<> {};
 
 #undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
 #define CALLABLE_TRAITS_INCLUDE_QUALIFIERS
@@ -152,14 +152,16 @@ namespace callable_traits {
         #undef CALLABLE_TRAITS_VARARGS_CC
         #endif
 
-        template<typename U, typename T>
-        struct function<U, T&> : function<T, T> {
+        template<typename T>
+        struct function<T&> : function<T> {
+
+            static constexpr const bool value = !std::is_pointer<T>::value;
+
             using traits = function;
-            using base = function<T, T>;
+            using base = function<T>;
             using type = T&;
             using remove_varargs = typename base::remove_varargs&;
             using add_varargs = typename base::add_varargs&;
-            using remove_member_pointer = type;
 
             using remove_member_reference = invalid_type;
             using add_member_lvalue_reference = invalid_type;
@@ -198,9 +200,9 @@ namespace callable_traits {
             using replace_args = typename base::template replace_args<Index, NewArgs...>&;
         };
 
-        template<typename U, typename T, T Value>
-        struct function<U, std::integral_constant<T, Value>> {
-            using traits = function<T, T>;
+        template<typename T, T Value>
+        struct function<std::integral_constant<T, Value>> {
+            using traits = function<T>;
             static constexpr const bool value = traits::value;
         };
     }

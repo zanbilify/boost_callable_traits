@@ -46,24 +46,24 @@ int main() {
 
     {
         using pmf = decltype(&foo1::bar);
-        using args = ct::args<pmf>;
-        CT_ASSERT(is_same<args, std::tuple<foo1&, char, float&, int>>{});
+        using args_t = ct::args_t<pmf>;
+        CT_ASSERT(is_same<args_t, std::tuple<foo1&, char, float&, int>>{});
     } {
         using pmf = decltype(&foo2::bar);
-        using args = ct::args<pmf>;
-        CT_ASSERT(is_same<args, std::tuple<foo2&, char, float&, int>>{});
+        using args_t = ct::args_t<pmf>;
+        CT_ASSERT(is_same<args_t, std::tuple<foo2&, char, float&, int>>{});
     } {
-        using args = ct::args<foo3>;
-        CT_ASSERT(is_same<args, std::tuple<char, float&, int>>{});
+        using args_t = ct::args_t<foo3>;
+        CT_ASSERT(is_same<args_t, std::tuple<char, float&, int>>{});
     } {
-        using args = ct::args<foo4>;
-        CT_ASSERT(is_same<args, std::tuple<char, float&, int>>{});
+        using args_t = ct::args_t<foo4>;
+        CT_ASSERT(is_same<args_t, std::tuple<char, float&, int>>{});
     } {
-        using args = ct::args<decltype(foo5)>;
-        CT_ASSERT(is_same<args, std::tuple<char, float&, int>>{});
+        using args_t = ct::args_t<decltype(foo5)>;
+        CT_ASSERT(is_same<args_t, std::tuple<char, float&, int>>{});
     } {
-        using args = ct::args<decltype(foo6)>;
-        CT_ASSERT(is_same<args, std::tuple<char, float&, int>>{});
+        using args_t = ct::args_t<decltype(foo6)>;
+        CT_ASSERT(is_same<args_t, std::tuple<char, float&, int>>{});
     }
 
     return 0;

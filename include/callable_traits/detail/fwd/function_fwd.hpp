@@ -17,7 +17,7 @@ namespace callable_traits {
 
     namespace detail {
 
-        template<typename OriginalType, typename U>
+        template<typename T>
         struct function;
     }
 }

@@ -5,18 +5,17 @@ Distributed under the Boost Software License, Version 1.0.
 ->*/
 
 //[ expand_args
-#include <tuple>
 #include <callable_traits/expand_args.hpp>
 
 namespace ct = callable_traits;
 
 void f(int, char);
 
-template<typename...> struct foo{};
+template<typename, typename> struct foo{};
 
 int main() {
 
-    using args = ct::expand_args<decltype(f), foo>;
+    using args = ct::expand_args_t<decltype(f), foo>;
     static_assert(std::is_same<args, foo<int, char>>::value, "");
 }
 //]

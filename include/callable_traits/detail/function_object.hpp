@@ -13,6 +13,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/pmf.hpp>
 #include <callable_traits/detail/qualifier_traits.hpp>
 #include <callable_traits/detail/default_callable_traits.hpp>
+#include <callable_traits/detail/fwd/function_fwd.hpp>
 #include <callable_traits/detail/fwd/function_object_fwd.hpp>
 #include <callable_traits/detail/utility.hpp>
 
@@ -26,32 +27,55 @@ namespace callable_traits {
         struct function_object : Base {
 
             using type = T;
-            using function_type = typename Base::function_object_type;
+
+            using function_type = typename Base::function_object_signature;
+
             using arg_types = typename Base::non_invoke_arg_types;
 
             static constexpr const bool value =
-                std::is_class<shallow_decay<T>>::value && !is_integral_constant<type>::value;
+                std::is_class<shallow_decay<T>>::value;
 
             using traits = function_object;
             using class_type = invalid_type;
             using invoke_type = invalid_type;
 
-            using is_function_object = std::integral_constant<bool,
-                std::is_class<shallow_decay<T>>::value>;
+            using is_function_object = typename std::is_class<shallow_decay<T>>::type;
 
-            using is_overloaded_function_object = std::integral_constant<bool,
+            using is_overloaded_function_object = bool_type<
                 is_function_object::value
                 && !has_normal_call_operator<shallow_decay<T>>::value>;
 
             using is_member_pointer = std::false_type;
+
             using is_member_function_pointer = std::false_type;
-            using remove_member_pointer = type;
+
             using remove_varargs = invalid_type;
+
             using add_varargs = invalid_type;
+
+            using is_transaction_safe = typename Base::is_transaction_safe;
+
+            using add_transaction_safe = invalid_type;
+
+            using remove_transaction_safe = invalid_type;
+
             using clear_args = invalid_type;
 
-            template<typename>
-            using apply_member_pointer = invalid_type;
+            template<template<class...> class Container>
+            using expand_args = typename function<function_type>::template
+                expand_args<Container>;
+
+            template<template<class...> class Container, typename... RightArgs>
+            using expand_args_left = typename function<function_type>::template
+                expand_args_left<Container, RightArgs...>;
+
+            template<template<class...> class Container, typename... LeftArgs>
+            using expand_args_right = typename function<function_type>::template
+                expand_args_right<Container, LeftArgs...>;
+
+            template<typename C, typename U = T>
+            using apply_member_pointer =
+                typename std::remove_reference<U>::type C::*;
 
             template<typename>
             using apply_return = invalid_type;
@@ -96,7 +120,7 @@ namespace callable_traits {
 
         template<typename T, typename U, typename Base>
         struct function_object <T U::*, Base>
-            : default_callable_traits {};
+            : default_callable_traits<> {};
     }
 }
 

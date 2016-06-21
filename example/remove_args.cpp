@@ -18,7 +18,7 @@ struct foo {};
 int main() {
 
     using f = int(foo::*)(N<0>, N<1>, N<2>, N<3>);
-    using test = ct::remove_args<2, f>;
+    using test = ct::remove_args_t<2, f>;
     using expect = int(foo::*)(N<0>, N<1>, N<3>);
     static_assert(std::is_same<test, expect>::value, "");
 }

@@ -25,28 +25,6 @@ template<typename T>
 void assert_rvalue_qualified() {
     
     CT_ASSERT(ct::is_rvalue_reference_member<T>());
-    CT_ASSERT(ct::is_rvalue_reference_member<T&>());
-    CT_ASSERT(ct::is_rvalue_reference_member<T &&>());
-    CT_ASSERT(ct::is_rvalue_reference_member<T const>());
-    CT_ASSERT(ct::is_rvalue_reference_member<T const &>());
-    CT_ASSERT(ct::is_rvalue_reference_member<T const &&>());
-    CT_ASSERT(ct::is_rvalue_reference_member<T volatile>());
-    CT_ASSERT(ct::is_rvalue_reference_member<T volatile &>());
-    CT_ASSERT(ct::is_rvalue_reference_member<T volatile &&>());
-    CT_ASSERT(ct::is_rvalue_reference_member<T const volatile &>());
-    CT_ASSERT(ct::is_rvalue_reference_member<T const volatile &&>());
-
-    CT_ASSERT(decltype(ct::is_rvalue_reference_member(std::declval<T>()))::value);
-    CT_ASSERT(decltype(ct::is_rvalue_reference_member(std::declval<T&>()))::value);
-    CT_ASSERT(decltype(ct::is_rvalue_reference_member(std::declval<T &&>()))::value);
-    CT_ASSERT(decltype(ct::is_rvalue_reference_member(std::declval<T const>()))::value);
-    CT_ASSERT(decltype(ct::is_rvalue_reference_member(std::declval<T const &>()))::value);
-    CT_ASSERT(decltype(ct::is_rvalue_reference_member(std::declval<T const &&>()))::value);
-    CT_ASSERT(decltype(ct::is_rvalue_reference_member(std::declval<T volatile>()))::value);
-    CT_ASSERT(decltype(ct::is_rvalue_reference_member(std::declval<T volatile &>()))::value);
-    CT_ASSERT(decltype(ct::is_rvalue_reference_member(std::declval<T volatile &&>()))::value);
-    CT_ASSERT(decltype(ct::is_rvalue_reference_member(std::declval<T const volatile &>()))::value);
-    CT_ASSERT(decltype(ct::is_rvalue_reference_member(std::declval<T const volatile &&>()))::value);
 }
 
 
@@ -54,28 +32,6 @@ template<typename T>
 void assert_not_rvalue_qualified() {
     
     CT_ASSERT(!ct::is_rvalue_reference_member<T>());
-    CT_ASSERT(!ct::is_rvalue_reference_member<T&>());
-    CT_ASSERT(!ct::is_rvalue_reference_member<T &&>());
-    CT_ASSERT(!ct::is_rvalue_reference_member<T const>());
-    CT_ASSERT(!ct::is_rvalue_reference_member<T const &>());
-    CT_ASSERT(!ct::is_rvalue_reference_member<T const &&>());
-    CT_ASSERT(!ct::is_rvalue_reference_member<T volatile>());
-    CT_ASSERT(!ct::is_rvalue_reference_member<T volatile &>());
-    CT_ASSERT(!ct::is_rvalue_reference_member<T volatile &&>());
-    CT_ASSERT(!ct::is_rvalue_reference_member<T const volatile &>());
-    CT_ASSERT(!ct::is_rvalue_reference_member<T const volatile &&>());
-
-    CT_ASSERT(!decltype(ct::is_rvalue_reference_member(std::declval<T>()))::value);
-    CT_ASSERT(!decltype(ct::is_rvalue_reference_member(std::declval<T&>()))::value);
-    CT_ASSERT(!decltype(ct::is_rvalue_reference_member(std::declval<T &&>()))::value);
-    CT_ASSERT(!decltype(ct::is_rvalue_reference_member(std::declval<T const>()))::value);
-    CT_ASSERT(!decltype(ct::is_rvalue_reference_member(std::declval<T const &>()))::value);
-    CT_ASSERT(!decltype(ct::is_rvalue_reference_member(std::declval<T const &&>()))::value);
-    CT_ASSERT(!decltype(ct::is_rvalue_reference_member(std::declval<T volatile>()))::value);
-    CT_ASSERT(!decltype(ct::is_rvalue_reference_member(std::declval<T volatile &>()))::value);
-    CT_ASSERT(!decltype(ct::is_rvalue_reference_member(std::declval<T volatile &&>()))::value);
-    CT_ASSERT(!decltype(ct::is_rvalue_reference_member(std::declval<T const volatile &>()))::value);
-    CT_ASSERT(!decltype(ct::is_rvalue_reference_member(std::declval<T const volatile &&>()))::value);
 }
 
 int main() {
