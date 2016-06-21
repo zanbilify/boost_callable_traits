@@ -6,8 +6,8 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="CallableTraits">
 <link rel="up" href="../index.html" title="CallableTraits">
-<link rel="prev" href="building.html" title="Building the test suite">
-<link rel="next" href="contact.html" title="Contact">
+<link rel="prev" href="faq.html" title="FAQ">
+<link rel="next" href="building.html" title="Building the test suite">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -20,7 +20,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="building.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="contact.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="faq.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="building.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
@@ -8477,9 +8477,18 @@
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_has_varargs.example_program"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_has_varargs.example_program">Example
           Program</a>
         </h6>
-<p>
-          [has_member_qualifiers]
-        </p>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">has_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+
+<span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">;</span>
+
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(...)&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">()&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+
+<span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
+</pre>
 </div>
 </div>
 <div class="section">
@@ -8488,37 +8497,37 @@
       Type Features</a>
 </h3></div></div></div>
 <div class="toc"><dl class="toc">
-<dt><span class="section"><a href="reference.html#callable_traits.reference.return_type_features.ref_result_of">result_of</a></span></dt>
+<dt><span class="section"><a href="reference.html#callable_traits.reference.return_type_features.ref_return_type">return_type</a></span></dt>
 <dt><span class="section"><a href="reference.html#callable_traits.reference.return_type_features.ref_apply_return">apply_return</a></span></dt>
 <dt><span class="section"><a href="reference.html#callable_traits.reference.return_type_features.ref_has_void_return">has_void_return</a></span></dt>
 </dl></div>
 <div class="section">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="callable_traits.reference.return_type_features.ref_result_of"></a><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_result_of" title="result_of">result_of</a>
+<a name="callable_traits.reference.return_type_features.ref_return_type"></a><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_return_type" title="return_type">return_type</a>
 </h4></div></div></div>
 <h6>
-<a name="callable_traits.reference.return_type_features.ref_result_of.h0"></a>
-          <span class="phrase"><a name="callable_traits.reference.return_type_features.ref_result_of.header"></a></span><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_result_of.header">Header</a>
+<a name="callable_traits.reference.return_type_features.ref_return_type.h0"></a>
+          <span class="phrase"><a name="callable_traits.reference.return_type_features.ref_return_type.header"></a></span><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_return_type.header">Header</a>
         </h6>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">result_of</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">return_type</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h6>
-<a name="callable_traits.reference.return_type_features.ref_result_of.h1"></a>
-          <span class="phrase"><a name="callable_traits.reference.return_type_features.ref_result_of.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_result_of.definition">Definition</a>
+<a name="callable_traits.reference.return_type_features.ref_return_type.h1"></a>
+          <span class="phrase"><a name="callable_traits.reference.return_type_features.ref_return_type.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_return_type.definition">Definition</a>
         </h6>
 <pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">result_of_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+    <span class="keyword">using</span> <span class="identifier">return_type_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">result_of</span> <span class="special">{</span>
-        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">result_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+    <span class="keyword">struct</span> <span class="identifier">return_type</span> <span class="special">{</span>
+        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">return_type_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
 <span class="special">}</span>
 </pre>
 <h6>
-<a name="callable_traits.reference.return_type_features.ref_result_of.h2"></a>
-          <span class="phrase"><a name="callable_traits.reference.return_type_features.ref_result_of.constraints"></a></span><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_result_of.constraints">Constraints</a>
+<a name="callable_traits.reference.return_type_features.ref_return_type.h2"></a>
+          <span class="phrase"><a name="callable_traits.reference.return_type_features.ref_return_type.constraints"></a></span><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_return_type.constraints">Constraints</a>
         </h6>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
               <code class="computeroutput"><span class="identifier">T</span></code> must be one of the
@@ -8548,8 +8557,8 @@
 </ul></div>
             </li></ul></div>
 <h6>
-<a name="callable_traits.reference.return_type_features.ref_result_of.h3"></a>
-          <span class="phrase"><a name="callable_traits.reference.return_type_features.ref_result_of.behavior"></a></span><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_result_of.behavior">Behavior</a>
+<a name="callable_traits.reference.return_type_features.ref_return_type.h3"></a>
+          <span class="phrase"><a name="callable_traits.reference.return_type_features.ref_return_type.behavior"></a></span><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_return_type.behavior">Behavior</a>
         </h6>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
@@ -8560,8 +8569,8 @@
             </li>
 </ul></div>
 <h6>
-<a name="callable_traits.reference.return_type_features.ref_result_of.h4"></a>
-          <span class="phrase"><a name="callable_traits.reference.return_type_features.ref_result_of.input_output_examples"></a></span><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_result_of.input_output_examples">Input/Output
+<a name="callable_traits.reference.return_type_features.ref_return_type.h4"></a>
+          <span class="phrase"><a name="callable_traits.reference.return_type_features.ref_return_type.input_output_examples"></a></span><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_return_type.input_output_examples">Input/Output
           Examples</a>
         </h6>
 <div class="informaltable"><table class="table">
@@ -8577,8 +8586,7 @@
                 </th>
 <th>
                   <p>
-                    <code class="computeroutput"><span class="identifier">result_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span>
-                    <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&gt;</span></code>
+                    <code class="computeroutput"><span class="identifier">return_type_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&gt;</span></code>
                   </p>
                 </th>
 </tr></thead>
@@ -8660,8 +8668,8 @@
 </tbody>
 </table></div>
 <h6>
-<a name="callable_traits.reference.return_type_features.ref_result_of.h5"></a>
-          <span class="phrase"><a name="callable_traits.reference.return_type_features.ref_result_of.example_program"></a></span><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_result_of.example_program">Example
+<a name="callable_traits.reference.return_type_features.ref_return_type.h5"></a>
+          <span class="phrase"><a name="callable_traits.reference.return_type_features.ref_return_type.example_program"></a></span><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_return_type.example_program">Example
           Program</a>
         </h6>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
@@ -8675,7 +8683,7 @@
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">void</span> <span class="identifier">test</span><span class="special">()</span> <span class="special">{</span>
-    <span class="keyword">using</span> <span class="identifier">result</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">result_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+    <span class="keyword">using</span> <span class="identifier">result</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">return_type_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">expect</span><span class="special">,</span> <span class="identifier">result</span><span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
 <span class="special">}</span>
 
@@ -10643,7 +10651,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="building.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="contact.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="faq.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="building.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

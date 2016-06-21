@@ -12,18 +12,18 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
-//[ result_of_hpp
+//[ return_type_hpp
 /*`
-[section:ref_result_of result_of]
+[section:ref_return_type return_type]
 [heading Header]
-``#include<callable_traits/result_of.hpp>``
+``#include<callable_traits/return_type.hpp>``
 [heading Definition]
 */
 
 namespace callable_traits {
 
     template<typename T>
-    using result_of_t = //implementation-defined
+    using return_type_t = //implementation-defined
     //<-
         detail::fail_if_invalid<
             typename detail::traits<T>::return_type,
@@ -31,8 +31,8 @@ namespace callable_traits {
     //->
 
     template<typename T>
-    struct result_of {
-        using type = result_of_t<T>;
+    struct return_type {
+        using type = return_type_t<T>;
     };
 }
 
@@ -53,7 +53,7 @@ namespace callable_traits {
 
 [heading Input/Output Examples]
 [table
-    [[`T`]                              [`result_of_t<T, std::tuple>`]]
+    [[`T`]                              [`return_type_t<T, std::tuple>`]]
     [[`void()`]                         [`void`]]
     [[`float(*)()`]                     [`float`]]
     [[`const char*(&)()`]               [`const char *`]]
@@ -63,8 +63,8 @@ namespace callable_traits {
 ]
 
 [heading Example Program]
-[import ../example/result_of.cpp]
-[result_of]
+[import ../example/return_type.cpp]
+[return_type]
 [endsect]
 */
 //]

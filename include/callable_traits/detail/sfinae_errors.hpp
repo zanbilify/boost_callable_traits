@@ -74,7 +74,7 @@ struct name : callable_traits_ERROR::origin<                     \
     CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(add_transaction_safe)
     CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(expand_args)
     CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(remove_transaction_safe)
-    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(result_of)
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(return_type)
 
     CALLABLE_TRAITS_SFINAE_MSG(parameters,              index_out_of_range_for_parameter_list)
     CALLABLE_TRAITS_SFINAE_MSG(parameters,              cannot_determine_parameters_for_this_type)
@@ -89,6 +89,6 @@ struct name : callable_traits_ERROR::origin<                     \
     CALLABLE_TRAITS_SFINAE_MSG(add_transaction_safe,    cannot_add_transaction_safe_to_this_type)
     CALLABLE_TRAITS_SFINAE_MSG(remove_transaction_safe, cannot_remove_transaction_safe_from_this_type)
     CALLABLE_TRAITS_SFINAE_MSG(expand_args,             cannot_expand_the_parameter_list_of_first_template_argument)
-    CALLABLE_TRAITS_SFINAE_MSG(result_of,               unable_to_determine_return_type)
+    CALLABLE_TRAITS_SFINAE_MSG(return_type,               unable_to_determine_return_type)
 }
 #endif // #ifndef CALLABLE_TRAITS_SFINAE_ERRORS_HPP

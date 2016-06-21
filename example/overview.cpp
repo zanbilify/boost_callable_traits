@@ -63,7 +63,7 @@ static_assert(is_same<
 >{}, "");
 
 static_assert(is_same<
-    result_of_t<pmf>,
+    return_type_t<pmf>,
     int
 >{}, "");
 

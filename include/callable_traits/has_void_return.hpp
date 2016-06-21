@@ -10,7 +10,6 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_HAS_VOID_RETURN_HPP
 #define CALLABLE_TRAITS_HAS_VOID_RETURN_HPP
 
-#include <callable_traits/result_of.hpp>
 #include <callable_traits/detail/core.hpp>
 #include <type_traits>
 

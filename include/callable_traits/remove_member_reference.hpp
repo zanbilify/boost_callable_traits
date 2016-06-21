@@ -66,4 +66,4 @@ namespace callable_traits {
 */
 //]
 
-#endif
+#endif //#ifndef CALLABLE_TRAITS_REMOVE_MEMBER_REFERENCE_HPP

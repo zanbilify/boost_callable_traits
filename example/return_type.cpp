@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 int main(){ return 0; }
 #else
 
-//[ result_of
+//[ return_type
 #include <type_traits>
 #include <callable_traits/callable_traits.hpp>
 
@@ -22,7 +22,7 @@ struct foo;
 
 template<typename T>
 void test() {
-    using result = ct::result_of_t<T>;
+    using result = ct::return_type_t<T>;
     static_assert(std::is_same<expect, result>{}, "");
 }
 

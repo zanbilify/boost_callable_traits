@@ -79,7 +79,7 @@ namespace callable_traits {
 
 [heading Example Program]
 [import ../example/has_varargs.cpp]
-[has_member_qualifiers]
+[has_varargs]
 [endsect]
 */
 //]

@@ -48,7 +48,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/remove_member_reference.hpp>
 #include <callable_traits/remove_member_volatile.hpp>
 #include <callable_traits/remove_varargs.hpp>
-#include <callable_traits/result_of.hpp>
+#include <callable_traits/return_type.hpp>
 #include <callable_traits/is_transaction_safe.hpp>
 #include <callable_traits/remove_transaction_safe.hpp>
 #include <callable_traits/add_transaction_safe.hpp>
