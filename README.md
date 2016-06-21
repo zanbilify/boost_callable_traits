@@ -49,7 +49,7 @@ Quick reference:
   * [add_varargs](http://badair.github.io/callable_traits/doc/html/callable_traits/reference.html#callable_traits.reference.parameter_list_features.ref_add_varargs)
   * [remove_varargs](http://badair.github.io/callable_traits/doc/html/callable_traits/reference.html#callable_traits.reference.parameter_list_features.ref_remove_varargs)
   * [has_varargs](http://badair.github.io/callable_traits/doc/html/callable_traits/reference.html#callable_traits.reference.parameter_list_features.ref_has_varargs)
-*Return Type Features
+* Return Type Features
   * [return_type](http://badair.github.io/callable_traits/doc/html/callable_traits/reference.html#callable_traits.reference.return_type_features.ref_return_type)
   * [apply_return](http://badair.github.io/callable_traits/doc/html/callable_traits/reference.html#callable_traits.reference.return_type_features.ref_apply_return)
   * [has_void_return](http://badair.github.io/callable_traits/doc/html/callable_traits/reference.html#callable_traits.reference.return_type_features.ref_has_void_return)
