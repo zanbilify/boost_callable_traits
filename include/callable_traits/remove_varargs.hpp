@@ -46,7 +46,7 @@ namespace callable_traits {
 
 [heading Behavior]
 * A substitution failure occurs if the constraints are violated.
-* Adds C-style variadics (`...`) to the signature of `T`, if not already present.
+* Removes C-style variadics (`...`) from the signature of `T`, if present.
 
 [heading Input/Output Examples]
 [table
