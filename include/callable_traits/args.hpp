@@ -50,7 +50,7 @@ namespace callable_traits {
 * When the constraints are violated, a substitution failure occurs.
 * When `T` is a function, function pointer, or function reference, the aliased type is a `std::tuple` whose element types match those of the function's parameter list.
 * When `T` is a function object, the aliased type is a `std::tuple` whose element types match those of the function object's `operator()` parameter list.
-* When `T` is a member function pointer, the aliased type is a `std::tuple` instantiation, where the first tuple element is a reference to the parent class of `T`, qualified according to the member qualifiers on `T`, such that this first tuple element type is equivalent to `callable_traits::qualified_parent_class_of<T>`. The subsequent template type arguments, if any, are the parameter types of the member function.
+* When `T` is a member function pointer, the aliased type is a `std::tuple` instantiation, where the first tuple element is a reference to the parent class of `T`, qualified according to the member qualifiers on `T`, such that this first tuple element type is equivalent to `callable_traits::qualified_parent_class_of_t<T>`. The subsequent template type arguments, if any, are the parameter types of the member function.
 * When `T` is a member data pointer, the aliased type is a `std::tuple` with a single element, which is a `const` reference to the parent class of `T`.
 
 [heading Input/Output Examples]

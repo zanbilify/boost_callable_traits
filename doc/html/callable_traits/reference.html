@@ -99,7 +99,7 @@
         </h6>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-              A substitution failure occuers if the constraints are violated.
+              A substitution failure occurs if the constraints are violated.
             </li>
 <li class="listitem">
               Adds a member <code class="computeroutput"><span class="keyword">const</span></code> qualifier
@@ -369,7 +369,7 @@
         </h6>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-              A substitution failure occuers if the constraints are violated.
+              A substitution failure occurs if the constraints are violated.
             </li>
 <li class="listitem">
               Removes the member <code class="computeroutput"><span class="keyword">const</span></code>
@@ -875,7 +875,7 @@
         </h6>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-              A substitution failure occuers if the constraints are violated.
+              A substitution failure occurs if the constraints are violated.
             </li>
 <li class="listitem">
               Removes the member <code class="computeroutput"><span class="keyword">volatile</span></code>
@@ -1399,7 +1399,7 @@
         </h6>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-              A substitution failure occuers if the constraints are violated.
+              A substitution failure occurs if the constraints are violated.
             </li>
 <li class="listitem">
               Removes member <code class="computeroutput"><span class="keyword">const</span></code> and/or
@@ -4769,7 +4769,7 @@
               instantiation, where the first tuple element is a reference to the
               parent class of <code class="computeroutput"><span class="identifier">T</span></code>,
               qualified according to the member qualifiers on <code class="computeroutput"><span class="identifier">T</span></code>,
-              such that this first tuple element type is equivalent to <code class="computeroutput"><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">qualified_parent_class_of</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>.
+              such that this first tuple element type is equivalent to <code class="computeroutput"><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">qualified_parent_class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>.
               The subsequent template type arguments, if any, are the parameter types
               of the member function.
             </li>
@@ -5106,9 +5106,8 @@
               If any constraints are violated, a substitution failure occurs.
             </li>
 <li class="listitem">
-              Otherwise, <code class="computeroutput"><span class="identifier">arg_at</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span>
-              <span class="identifier">T</span><span class="special">&gt;</span></code>
-              is equivalent to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple_element_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;&gt;</span></code>.
+              Otherwise, <code class="computeroutput"><span class="identifier">arg_at_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">&gt;</span></code> is equivalent to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple_element_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span>
+              <span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;&gt;</span></code>.
             </li>
 </ul></div>
 <h6>
@@ -6846,7 +6845,7 @@
               template instantiation, where the first template type argument is a
               reference to the parent class of <code class="computeroutput"><span class="identifier">T</span></code>,
               qualified according to the member qualifiers on <code class="computeroutput"><span class="identifier">T</span></code>,
-              such that this type is equivalent to <code class="computeroutput"><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">qualified_parent_class_of</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>. The subsequent template type arguments
+              such that this type is equivalent to <code class="computeroutput"><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">qualified_parent_class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>. The subsequent template type arguments
               are the parameter list of the member function.
             </li>
 <li class="listitem">
@@ -8042,9 +8041,9 @@
               A substitution failure occurs if the constraints are violated.
             </li>
 <li class="listitem">
-              Adds C-style variadics (<code class="computeroutput"><span class="special">...</span></code>)
-              to the signature of <code class="computeroutput"><span class="identifier">T</span></code>,
-              if not already present.
+              Removes C-style variadics (<code class="computeroutput"><span class="special">...</span></code>)
+              from the signature of <code class="computeroutput"><span class="identifier">T</span></code>,
+              if present.
             </li>
 </ul></div>
 <h6>
@@ -10175,7 +10174,7 @@
         </h6>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-              A substitution failure occuers if the constraints are violated.
+              A substitution failure occurs if the constraints are violated.
             </li>
 <li class="listitem">
               Removes the member <code class="computeroutput"><span class="identifier">transaction_safe</span></code>
