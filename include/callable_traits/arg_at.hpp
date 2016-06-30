@@ -58,7 +58,7 @@ namespace callable_traits {
 
 [heading Behavior]
 * If any constraints are violated, a substitution failure occurs.
-* Otherwise, `arg_at<Index, T>` is equivalent to `std::tuple_element_t<Index, callable_traits::args_t<T>>`.
+* Otherwise, `arg_at_t<Index, T>` is equivalent to `std::tuple_element_t<Index, callable_traits::args_t<T>>`.
 
 [heading Example Program]
 [/import ../example/arg_at.cpp]
