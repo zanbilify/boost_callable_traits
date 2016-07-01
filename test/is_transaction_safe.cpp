@@ -7,23 +7,18 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/config.hpp>
 
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
-
 #ifndef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
 int main(){}
 #else
 
 #include <callable_traits/is_transaction_safe.hpp>
-
-namespace ct = callable_traits;
+#include "test.hpp"
 
 template<typename Safe, typename NotSafe>
 void test() {
 
-    CT_ASSERT(ct::is_transaction_safe<Safe>::value);
-    CT_ASSERT(!ct::is_transaction_safe<NotSafe>::value);
+    CT_ASSERT( is_transaction_safe<Safe>::value);
+    CT_ASSERT(! is_transaction_safe<NotSafe>::value);
 }
 
 #define TEST_TRANSACTION_SAFE(not_safe) test<not_safe transaction_safe, not_safe>()

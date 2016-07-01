@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -12,6 +11,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
 //[ expand_args_left_hpp
 /*`[section:ref_expand_args_left expand_args_left]
 [heading Header]
@@ -19,7 +20,6 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
 
     template<typename T, template<class...> class Container, typename... RightArgs>
     using expand_args_left_t = //implementation-defined
@@ -34,7 +34,10 @@ namespace callable_traits {
     struct expand_args_left {
         using type = expand_args_left_t<T, Container, RightArgs...>;
     };
-}
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
+
 
 /*`
 [heading Constraints]

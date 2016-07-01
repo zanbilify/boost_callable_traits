@@ -8,18 +8,14 @@ Distributed under the Boost Software License, Version 1.0.
 #include <functional>
 #include <tuple>
 #include <callable_traits/remove_member_reference.hpp>
+#include "test.hpp"
 
 #ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
 int main(){ return 0; }
 #else
 
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
 
 struct foo{};
-
-namespace ct = callable_traits;
 
 int main() {
     {
@@ -36,18 +32,18 @@ int main() {
         using cvl = void(foo::*)() const volatile &;
         using cvr = void(foo::*)() const volatile &&;
 
-        CT_ASSERT(std::is_same<f,   ct::remove_member_reference_t<f>>{});
-        CT_ASSERT(std::is_same<c,   ct::remove_member_reference_t<c>>{});
-        CT_ASSERT(std::is_same<v,   ct::remove_member_reference_t<v>>{});
-        CT_ASSERT(std::is_same<cv,  ct::remove_member_reference_t<cv>>{});
-        CT_ASSERT(std::is_same<f,   ct::remove_member_reference_t<l>>{});
-        CT_ASSERT(std::is_same<c,   ct::remove_member_reference_t<cl>>{});
-        CT_ASSERT(std::is_same<v,   ct::remove_member_reference_t<vl>>{});
-        CT_ASSERT(std::is_same<cv,  ct::remove_member_reference_t<cvl>>{});
-        CT_ASSERT(std::is_same<f,   ct::remove_member_reference_t<r>>{});
-        CT_ASSERT(std::is_same<c,   ct::remove_member_reference_t<cr>>{});
-        CT_ASSERT(std::is_same<v,   ct::remove_member_reference_t<vr>>{});
-        CT_ASSERT(std::is_same<cv,  ct::remove_member_reference_t<cvr>>{});
+        CT_ASSERT(std::is_same<f,    remove_member_reference_t<f>>{});
+        CT_ASSERT(std::is_same<c,    remove_member_reference_t<c>>{});
+        CT_ASSERT(std::is_same<v,    remove_member_reference_t<v>>{});
+        CT_ASSERT(std::is_same<cv,   remove_member_reference_t<cv>>{});
+        CT_ASSERT(std::is_same<f,    remove_member_reference_t<l>>{});
+        CT_ASSERT(std::is_same<c,    remove_member_reference_t<cl>>{});
+        CT_ASSERT(std::is_same<v,    remove_member_reference_t<vl>>{});
+        CT_ASSERT(std::is_same<cv,   remove_member_reference_t<cvl>>{});
+        CT_ASSERT(std::is_same<f,    remove_member_reference_t<r>>{});
+        CT_ASSERT(std::is_same<c,    remove_member_reference_t<cr>>{});
+        CT_ASSERT(std::is_same<v,    remove_member_reference_t<vr>>{});
+        CT_ASSERT(std::is_same<cv,   remove_member_reference_t<cvr>>{});
     }
 
     {
@@ -64,18 +60,18 @@ int main() {
         using cvl = void() const volatile &;
         using cvr = void() const volatile &&;
 
-        CT_ASSERT(std::is_same<f,   ct::remove_member_reference_t<f>>{});
-        CT_ASSERT(std::is_same<c,   ct::remove_member_reference_t<c>>{});
-        CT_ASSERT(std::is_same<v,   ct::remove_member_reference_t<v>>{});
-        CT_ASSERT(std::is_same<cv,  ct::remove_member_reference_t<cv>>{});
-        CT_ASSERT(std::is_same<f,   ct::remove_member_reference_t<l>>{});
-        CT_ASSERT(std::is_same<c,   ct::remove_member_reference_t<cl>>{});
-        CT_ASSERT(std::is_same<v,   ct::remove_member_reference_t<vl>>{});
-        CT_ASSERT(std::is_same<cv,  ct::remove_member_reference_t<cvl>>{});
-        CT_ASSERT(std::is_same<f,   ct::remove_member_reference_t<r>>{});
-        CT_ASSERT(std::is_same<c,   ct::remove_member_reference_t<cr>>{});
-        CT_ASSERT(std::is_same<v,   ct::remove_member_reference_t<vr>>{});
-        CT_ASSERT(std::is_same<cv,  ct::remove_member_reference_t<cvr>>{});
+        CT_ASSERT(std::is_same<f,    remove_member_reference_t<f>>{});
+        CT_ASSERT(std::is_same<c,    remove_member_reference_t<c>>{});
+        CT_ASSERT(std::is_same<v,    remove_member_reference_t<v>>{});
+        CT_ASSERT(std::is_same<cv,   remove_member_reference_t<cv>>{});
+        CT_ASSERT(std::is_same<f,    remove_member_reference_t<l>>{});
+        CT_ASSERT(std::is_same<c,    remove_member_reference_t<cl>>{});
+        CT_ASSERT(std::is_same<v,    remove_member_reference_t<vl>>{});
+        CT_ASSERT(std::is_same<cv,   remove_member_reference_t<cvl>>{});
+        CT_ASSERT(std::is_same<f,    remove_member_reference_t<r>>{});
+        CT_ASSERT(std::is_same<c,    remove_member_reference_t<cr>>{});
+        CT_ASSERT(std::is_same<v,    remove_member_reference_t<vr>>{});
+        CT_ASSERT(std::is_same<cv,   remove_member_reference_t<cvr>>{});
     }
 }
 

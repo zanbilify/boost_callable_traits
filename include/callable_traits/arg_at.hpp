@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -14,6 +13,8 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/core.hpp>
 #include <tuple>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
 //[ arg_at_hpp
 /*`[section:ref_arg_at arg_at]
 [heading Header]
@@ -21,7 +22,6 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
 
     template<std::size_t I, typename T>
     using arg_at_t = //implementation-defined
@@ -42,7 +42,10 @@ namespace callable_traits {
     struct arg_at {
         using type = arg_at_t<I, T>;
     };
-}
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
+
 
 /*`
 [heading Constraints]

@@ -10,10 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <cstdint>
 #include <memory>
 #include <callable_traits/callable_traits.hpp>
-
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
+#include "test.hpp"
 
 struct foo1 {
     int bar(char, float&, int = 0) { return{}; }
@@ -35,25 +32,24 @@ int foo5(char, float&, int = 0) { return{}; }
 
 int foo6(char, float&, int = 0, ...) { return{}; }
 
-namespace ct = callable_traits;
 using std::is_same;
 
 int main() {
 
     {
         using pmf = decltype(&foo1::bar);
-        CT_ASSERT(std::is_same<ct::return_type_t<pmf>, int>{});
+        CT_ASSERT(std::is_same< return_type_t<pmf>, int>{});
     } {
         using pmf = decltype(&foo2::bar);
-        CT_ASSERT(std::is_same<ct::return_type_t<pmf>, int>{});
+        CT_ASSERT(std::is_same< return_type_t<pmf>, int>{});
     } {
-        CT_ASSERT(std::is_same<ct::return_type_t<foo3>, int>{});
+        CT_ASSERT(std::is_same< return_type_t<foo3>, int>{});
     } {
-        CT_ASSERT(std::is_same<ct::return_type_t<foo4>, int>{});
+        CT_ASSERT(std::is_same< return_type_t<foo4>, int>{});
     } {
-        CT_ASSERT(std::is_same<ct::return_type_t<decltype(foo5)>, int>{});
+        CT_ASSERT(std::is_same< return_type_t<decltype(foo5)>, int>{});
     } {
-        CT_ASSERT(std::is_same<ct::return_type_t<decltype(foo6)>, int>{});
+        CT_ASSERT(std::is_same< return_type_t<decltype(foo6)>, int>{});
     }
 
     return 0;

@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -11,43 +10,32 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_DETAIL_PMF_HPP
 
 #include <callable_traits/detail/fwd/pmf_fwd.hpp>
-#include <callable_traits/detail/calling_conventions.hpp>
 #include <callable_traits/detail/set_function_qualifiers.hpp>
 #include <callable_traits/detail/qualifier_flags.hpp>
-#include <callable_traits/detail/qualifier_traits.hpp>
 #include <callable_traits/detail/default_callable_traits.hpp>
 #include <callable_traits/detail/utility.hpp>
-#include <callable_traits/config.hpp>
 #include <tuple>
 
-namespace callable_traits {
+CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
-    namespace detail {
-
-        template<flags Applied, bool IsTransactionSafe, typename CallingConvention,
+        template<qualifier_flags Applied, bool IsTransactionSafe, typename CallingConvention,
             typename T, typename Return, typename... Args>
         struct set_member_function_qualifiers_t;
 
-        template<flags Applied, bool IsTransactionSafe, typename CallingConvention,
+        template<qualifier_flags Applied, bool IsTransactionSafe, typename CallingConvention,
             typename T, typename Return, typename... Args>
         struct set_varargs_member_function_qualifiers_t;
 
-        template<flags Flags, bool IsTransactionSafe, typename... Ts>
+        template<qualifier_flags Flags, bool IsTransactionSafe, typename... Ts>
         using set_member_function_qualifiers =
             typename set_member_function_qualifiers_t<Flags, IsTransactionSafe, Ts...>::type;
 
-        template<flags Flags, bool IsTransactionSafe, typename... Ts>
+        template<qualifier_flags Flags, bool IsTransactionSafe, typename... Ts>
         using set_varargs_member_function_qualifiers =
             typename set_varargs_member_function_qualifiers_t<Flags, IsTransactionSafe, Ts...>::type;
 
         template<typename T, typename U>
         struct pmf : default_callable_traits<T> {};
-
-        template<typename U, typename T, T Value>
-        struct pmf <U, std::integral_constant<T, Value>> {
-            using traits = pmf<T, T>;
-            static constexpr const bool value = traits::value;
-        };
 
         #define CALLABLE_TRAITS_CC_TAG dummy
         #define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
@@ -99,7 +87,7 @@ namespace callable_traits {
         #undef CALLABLE_TRAITS_CC_TAG
         #undef CALLABLE_TRAITS_VARARGS_CC
         #endif
-    }
-}
+
+CALLABLE_TRAITS_DETAIL_NAMESPACE_END
 
 #endif

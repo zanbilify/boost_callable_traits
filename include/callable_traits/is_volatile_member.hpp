@@ -12,6 +12,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
 //[ is_volatile_member_hpp
 /*`[section:ref_is_volatile_member is_volatile_member]
 [heading Header]
@@ -19,7 +21,6 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
 
     template<typename T>
     struct is_volatile_member; //implementation-defined
@@ -48,8 +49,10 @@ namespace callable_traits {
         detail::traits<T>::is_volatile_member::value;
 
     #endif
-    //->
-}
+    //->//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
+
 
 /*`
 [heading Constraints]

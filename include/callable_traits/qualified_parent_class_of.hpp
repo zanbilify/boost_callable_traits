@@ -20,7 +20,7 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
+CALLABLE_TRAITS_NAMESPACE_BEGIN
 
     template<typename T>
     using qualified_parent_class_of_t = //implementation-defined
@@ -34,7 +34,10 @@ namespace callable_traits {
     struct qualified_parent_class_of {
         using type = qualified_parent_class_of_t<T>;
     };
-}
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
+
 
 /*`
 [heading Constraints]

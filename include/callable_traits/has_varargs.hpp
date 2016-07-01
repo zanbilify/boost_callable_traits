@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -10,8 +9,9 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_HAS_VARARGS_HPP
 #define CALLABLE_TRAITS_HAS_VARARGS_HPP
 
-#include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/core.hpp>
+
+CALLABLE_TRAITS_NAMESPACE_BEGIN
 
 //[ has_varargs_hpp
 /*`[section:ref_has_varargs has_varargs]
@@ -20,7 +20,6 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
 
     template<typename T>
     struct has_varargs; //implementation-defined
@@ -48,8 +47,10 @@ namespace callable_traits {
         detail::traits<T>::has_varargs::value;
 
     #endif
-    //->
-}
+    //->//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
+
 
 /*`
 [heading Constraints]

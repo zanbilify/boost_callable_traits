@@ -2,27 +2,24 @@
 #include <utility>
 #include <type_traits>
 #include <callable_traits/config.hpp>
+
 #include <callable_traits/detail/sfinae_errors.hpp>
+#include "test.hpp"
 
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
 
-namespace callable_traits {
+CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
-    namespace detail {
-
-        template<typename... Ts>
-        struct pack {
+template<typename... Ts>
+struct pack {
 
 #define CALLABLE_TRAITS_BEGIN_PACK_MANIP void(
 #define CALLABLE_TRAITS_ARGS_PACK Ts
 #define CALLABLE_TRAITS_END_PACK_MANIP , ... )
 #include <callable_traits/detail/unguarded/args_pack_manipulations.hpp>
 
-        };
-    }
-}
+};  
+
+CALLABLE_TRAITS_DETAIL_NAMESPACE_END
 
 
 using namespace callable_traits::detail;

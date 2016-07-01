@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -10,7 +9,6 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_PMD_HPP
 #define CALLABLE_TRAITS_DETAIL_PMD_HPP
 
-#include <type_traits>
 
 #include <callable_traits/detail/fwd/function_object_fwd.hpp>
 #include <callable_traits/detail/function.hpp>
@@ -18,26 +16,17 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/default_callable_traits.hpp>
 #include <callable_traits/detail/utility.hpp>
 
-namespace callable_traits {
-
-    namespace detail {
+CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
         template<typename T>
         struct pmd : default_callable_traits<T> {};
 
-        template<typename T, T Value>
-        struct pmd <std::integral_constant<T, Value>> {
-            using traits = pmd<T>;
-            static constexpr const bool value = traits::value;
-        };
-
         template<typename D, typename T>
         struct pmd<D T::*>
-            : default_callable_traits<>, qualifier_traits<dummy> {
+            : default_callable_traits<> {
                 
             static constexpr bool value = true;
 
-            using is_member_pointer = std::true_type;
             using traits = pmd;   
             using class_type = T;
             using invoke_type = T const &;
@@ -56,7 +45,7 @@ namespace callable_traits {
             template<template<class...> class Container>
             using expand_args = Container<invoke_type>;
         };
-    }
-}
+
+CALLABLE_TRAITS_DETAIL_NAMESPACE_END
 
 #endif

@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -21,7 +20,7 @@ Distributed under the Boost Software License, Version 1.0.
 */
 
 
-namespace callable_traits {
+CALLABLE_TRAITS_NAMESPACE_BEGIN
 
     template<typename T, std::size_t Count = 1>
     using pop_back_args_t = //implementation-defined
@@ -35,7 +34,10 @@ namespace callable_traits {
     struct pop_back_args {
         using type = pop_back_args_t<T, Count>;
     };
-}
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
+
 
 /*`
 [heading Constraints]

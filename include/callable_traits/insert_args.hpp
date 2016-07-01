@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -12,6 +11,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
 //[ insert_args_hpp
 /*`[section:ref_insert_args insert_args]
 [heading Header]
@@ -19,7 +20,6 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
 
     template<std::size_t Index, typename T, typename... Args>
     using insert_args_t = //implementation-defined
@@ -33,7 +33,10 @@ namespace callable_traits {
     struct insert_args {
         using type = insert_args_t<Index, T, Args...>;
     };
-}
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
+
 
 
 /*`

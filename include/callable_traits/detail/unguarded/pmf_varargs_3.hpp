@@ -21,26 +21,15 @@ CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER - `transaction_safe` when
 
 */
 
-template<typename Ret, typename T, typename... Args>
-struct has_calling_convention_t<
-    Ret(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...)
-        CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE,
-    CALLABLE_TRAITS_CC_TAG> {
-    using type = std::true_type;
-};
-
 template<typename Return, typename T, typename... Args>
 struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...)
     CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE>
- : qualifier_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>, default_callable_traits<> {
+ : default_callable_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS> {
 
     static constexpr bool value = true;
 
     using has_varargs = std::true_type;
 
-    using is_member_pointer = std::true_type;
-
-    using is_member_function_pointer = std::true_type;
     using traits = pmf;
 
     using return_type = Return;
@@ -83,9 +72,9 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...)
 
     using class_type = T;
 
-    using qualifiers = qualifier_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>;
+    using qualifiers = default_callable_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>;
 
-    template<flags Flags>
+    template<qualifier_flags Flags>
     using set_qualifiers = set_varargs_member_function_qualifiers<
             Flags, is_transaction_safe::value, CALLABLE_TRAITS_CC_TAG, T, Return, Args...>;
 
@@ -139,9 +128,7 @@ struct pmf<Return(CALLABLE_TRAITS_VARARGS_CC T::*)(Args..., ...)
 #undef CALLABLE_TRAITS_END_PACK_MANIP
 
 #define CALLABLE_TRAITS_BEGIN_PACK_MANIP Return( CALLABLE_TRAITS_VARARGS_CC T::*)(
-
 #define CALLABLE_TRAITS_ARGS_PACK Args
-
 #define CALLABLE_TRAITS_END_PACK_MANIP \
     , ...) CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE
 

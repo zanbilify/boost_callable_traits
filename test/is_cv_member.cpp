@@ -8,32 +8,19 @@ Distributed under the Boost Software License, Version 1.0.
 #include <functional>
 #include <utility>
 #include <callable_traits/is_cv_member.hpp>
-
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
-
-#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
-#define LREF
-#define RREF
-#else
-#define LREF &
-#define RREF &&
-#endif
+#include "test.hpp"
 
 struct foo {};
 
-namespace ct = callable_traits;
-
 template<typename T>
 void assert_cv_qualified() {
-    CT_ASSERT(ct::is_cv_member<T>());
+    CT_ASSERT( is_cv_member<T>());
 }
 
 
 template<typename T>
 void assert_not_cv_qualified() {
-    CT_ASSERT(!ct::is_cv_member<T>());
+    CT_ASSERT(! is_cv_member<T>());
 }
 
 int main() {
@@ -110,18 +97,18 @@ int main() {
         using cvl = void() const volatile LREF;
         using cvr = void() const volatile RREF;
 
-        CT_ASSERT(!ct::is_cv_member<f>());
-        CT_ASSERT(!ct::is_cv_member<l>());
-        CT_ASSERT(!ct::is_cv_member<r>());
-        CT_ASSERT(!ct::is_cv_member<c>());
-        CT_ASSERT(!ct::is_cv_member<cl>());
-        CT_ASSERT(!ct::is_cv_member<cr>());
-        CT_ASSERT(!ct::is_cv_member<v>());
-        CT_ASSERT(!ct::is_cv_member<vl>());
-        CT_ASSERT(!ct::is_cv_member<vr>());
-        CT_ASSERT(ct::is_cv_member<cv>());
-        CT_ASSERT(ct::is_cv_member<cvl>());
-        CT_ASSERT(ct::is_cv_member<cvr>());
+        CT_ASSERT(! is_cv_member<f>());
+        CT_ASSERT(! is_cv_member<l>());
+        CT_ASSERT(! is_cv_member<r>());
+        CT_ASSERT(! is_cv_member<c>());
+        CT_ASSERT(! is_cv_member<cl>());
+        CT_ASSERT(! is_cv_member<cr>());
+        CT_ASSERT(! is_cv_member<v>());
+        CT_ASSERT(! is_cv_member<vl>());
+        CT_ASSERT(! is_cv_member<vr>());
+        CT_ASSERT( is_cv_member<cv>());
+        CT_ASSERT( is_cv_member<cvl>());
+        CT_ASSERT( is_cv_member<cvr>());
     }
 
 #endif

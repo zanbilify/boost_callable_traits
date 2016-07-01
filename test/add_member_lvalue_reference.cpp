@@ -8,18 +8,13 @@ Distributed under the Boost Software License, Version 1.0.
 #include <functional>
 #include <tuple>
 #include <callable_traits/add_member_lvalue_reference.hpp>
+#include "test.hpp"
 
 #ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
 int main(){ return 0; }
 #else
 
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
-
 struct foo{};
-
-namespace ct = callable_traits;
 
 int main() {
     
@@ -37,19 +32,19 @@ int main() {
         using cvl = void(foo::*)() const volatile &;
         using cvr = void(foo::*)() const volatile &&;
 
-        CT_ASSERT(std::is_same<l,    ct::add_member_lvalue_reference_t<f>>{});
-        CT_ASSERT(std::is_same<cl,   ct::add_member_lvalue_reference_t<c>>{});
-        CT_ASSERT(std::is_same<vl,   ct::add_member_lvalue_reference_t<v>>{});
-        CT_ASSERT(std::is_same<vl,   ct::add_member_lvalue_reference_t<v>>{});
-        CT_ASSERT(std::is_same<cvl,  ct::add_member_lvalue_reference_t<cv>>{});
-        CT_ASSERT(std::is_same<l,    ct::add_member_lvalue_reference_t<l>>{});
-        CT_ASSERT(std::is_same<cl,   ct::add_member_lvalue_reference_t<cl>>{});
-        CT_ASSERT(std::is_same<vl,   ct::add_member_lvalue_reference_t<vl>>{});
-        CT_ASSERT(std::is_same<cvl,  ct::add_member_lvalue_reference_t<cvl>>{});
-        CT_ASSERT(!std::is_same<r,   ct::add_member_lvalue_reference_t<r>>{});
-        CT_ASSERT(!std::is_same<cr,  ct::add_member_lvalue_reference_t<cr>>{});
-        CT_ASSERT(!std::is_same<vr,  ct::add_member_lvalue_reference_t<vr>>{});
-        CT_ASSERT(!std::is_same<cvr, ct::add_member_lvalue_reference_t<cvr>>{});
+        CT_ASSERT(std::is_same<l,     add_member_lvalue_reference_t<f>>{});
+        CT_ASSERT(std::is_same<cl,    add_member_lvalue_reference_t<c>>{});
+        CT_ASSERT(std::is_same<vl,    add_member_lvalue_reference_t<v>>{});
+        CT_ASSERT(std::is_same<vl,    add_member_lvalue_reference_t<v>>{});
+        CT_ASSERT(std::is_same<cvl,   add_member_lvalue_reference_t<cv>>{});
+        CT_ASSERT(std::is_same<l,     add_member_lvalue_reference_t<l>>{});
+        CT_ASSERT(std::is_same<cl,    add_member_lvalue_reference_t<cl>>{});
+        CT_ASSERT(std::is_same<vl,    add_member_lvalue_reference_t<vl>>{});
+        CT_ASSERT(std::is_same<cvl,   add_member_lvalue_reference_t<cvl>>{});
+        CT_ASSERT(!std::is_same<r,    add_member_lvalue_reference_t<r>>{});
+        CT_ASSERT(!std::is_same<cr,   add_member_lvalue_reference_t<cr>>{});
+        CT_ASSERT(!std::is_same<vr,   add_member_lvalue_reference_t<vr>>{});
+        CT_ASSERT(!std::is_same<cvr,  add_member_lvalue_reference_t<cvr>>{});
     } 
     
     {
@@ -66,19 +61,19 @@ int main() {
         using cvl = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile &;
         using cvr = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile &&;
 
-        CT_ASSERT(std::is_same<l,    ct::add_member_lvalue_reference_t<f>>{});
-        CT_ASSERT(std::is_same<cl,   ct::add_member_lvalue_reference_t<c>>{});
-        CT_ASSERT(std::is_same<vl,   ct::add_member_lvalue_reference_t<v>>{});
-        CT_ASSERT(std::is_same<vl,   ct::add_member_lvalue_reference_t<v>>{});
-        CT_ASSERT(std::is_same<cvl,  ct::add_member_lvalue_reference_t<cv>>{});
-        CT_ASSERT(std::is_same<l,    ct::add_member_lvalue_reference_t<l>>{});
-        CT_ASSERT(std::is_same<cl,   ct::add_member_lvalue_reference_t<cl>>{});
-        CT_ASSERT(std::is_same<vl,   ct::add_member_lvalue_reference_t<vl>>{});
-        CT_ASSERT(std::is_same<cvl,  ct::add_member_lvalue_reference_t<cvl>>{});
-        CT_ASSERT(!std::is_same<r,   ct::add_member_lvalue_reference_t<r>>{});
-        CT_ASSERT(!std::is_same<cr,  ct::add_member_lvalue_reference_t<cr>>{});
-        CT_ASSERT(!std::is_same<vr,  ct::add_member_lvalue_reference_t<vr>>{});
-        CT_ASSERT(!std::is_same<cvr, ct::add_member_lvalue_reference_t<cvr>>{});
+        CT_ASSERT(std::is_same<l,     add_member_lvalue_reference_t<f>>{});
+        CT_ASSERT(std::is_same<cl,    add_member_lvalue_reference_t<c>>{});
+        CT_ASSERT(std::is_same<vl,    add_member_lvalue_reference_t<v>>{});
+        CT_ASSERT(std::is_same<vl,    add_member_lvalue_reference_t<v>>{});
+        CT_ASSERT(std::is_same<cvl,   add_member_lvalue_reference_t<cv>>{});
+        CT_ASSERT(std::is_same<l,     add_member_lvalue_reference_t<l>>{});
+        CT_ASSERT(std::is_same<cl,    add_member_lvalue_reference_t<cl>>{});
+        CT_ASSERT(std::is_same<vl,    add_member_lvalue_reference_t<vl>>{});
+        CT_ASSERT(std::is_same<cvl,   add_member_lvalue_reference_t<cvl>>{});
+        CT_ASSERT(!std::is_same<r,    add_member_lvalue_reference_t<r>>{});
+        CT_ASSERT(!std::is_same<cr,   add_member_lvalue_reference_t<cr>>{});
+        CT_ASSERT(!std::is_same<vr,   add_member_lvalue_reference_t<vr>>{});
+        CT_ASSERT(!std::is_same<cvr,  add_member_lvalue_reference_t<cvr>>{});
     }
     
     {
@@ -95,19 +90,19 @@ int main() {
         using cvl = void(...) const volatile &;
         using cvr = void(...) const volatile &&;
 
-        CT_ASSERT(std::is_same<l,    ct::add_member_lvalue_reference_t<f>>{});
-        CT_ASSERT(std::is_same<cl,   ct::add_member_lvalue_reference_t<c>>{});
-        CT_ASSERT(std::is_same<vl,   ct::add_member_lvalue_reference_t<v>>{});
-        CT_ASSERT(std::is_same<vl,   ct::add_member_lvalue_reference_t<v>>{});
-        CT_ASSERT(std::is_same<cvl,  ct::add_member_lvalue_reference_t<cv>>{});
-        CT_ASSERT(std::is_same<l,    ct::add_member_lvalue_reference_t<l>>{});
-        CT_ASSERT(std::is_same<cl,   ct::add_member_lvalue_reference_t<cl>>{});
-        CT_ASSERT(std::is_same<vl,   ct::add_member_lvalue_reference_t<vl>>{});
-        CT_ASSERT(std::is_same<cvl,  ct::add_member_lvalue_reference_t<cvl>>{});
-        CT_ASSERT(!std::is_same<r,   ct::add_member_lvalue_reference_t<r>>{});
-        CT_ASSERT(!std::is_same<cr,  ct::add_member_lvalue_reference_t<cr>>{});
-        CT_ASSERT(!std::is_same<vr,  ct::add_member_lvalue_reference_t<vr>>{});
-        CT_ASSERT(!std::is_same<cvr, ct::add_member_lvalue_reference_t<cvr>>{});
+        CT_ASSERT(std::is_same<l,     add_member_lvalue_reference_t<f>>{});
+        CT_ASSERT(std::is_same<cl,    add_member_lvalue_reference_t<c>>{});
+        CT_ASSERT(std::is_same<vl,    add_member_lvalue_reference_t<v>>{});
+        CT_ASSERT(std::is_same<vl,    add_member_lvalue_reference_t<v>>{});
+        CT_ASSERT(std::is_same<cvl,   add_member_lvalue_reference_t<cv>>{});
+        CT_ASSERT(std::is_same<l,     add_member_lvalue_reference_t<l>>{});
+        CT_ASSERT(std::is_same<cl,    add_member_lvalue_reference_t<cl>>{});
+        CT_ASSERT(std::is_same<vl,    add_member_lvalue_reference_t<vl>>{});
+        CT_ASSERT(std::is_same<cvl,   add_member_lvalue_reference_t<cvl>>{});
+        CT_ASSERT(!std::is_same<r,    add_member_lvalue_reference_t<r>>{});
+        CT_ASSERT(!std::is_same<cr,   add_member_lvalue_reference_t<cr>>{});
+        CT_ASSERT(!std::is_same<vr,   add_member_lvalue_reference_t<vr>>{});
+        CT_ASSERT(!std::is_same<cvr,  add_member_lvalue_reference_t<cvr>>{});
     }
 }
 

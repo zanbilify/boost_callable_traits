@@ -8,10 +8,8 @@ Distributed under the Boost Software License, Version 1.0.
 #include <functional>
 #include <utility>
 #include <callable_traits/has_member_qualifiers.hpp>
+#include "test.hpp"
 
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
 
 #ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
 int main() { return 0; }
@@ -19,17 +17,15 @@ int main() { return 0; }
 
 struct foo {};
 
-namespace ct = callable_traits;
-
 template<typename T>
 void assert_qualified() {
-    CT_ASSERT(ct::has_member_qualifiers<T>::value);
+    CT_ASSERT( has_member_qualifiers<T>::value);
 }
 
 
 template<typename T>
 void assert_unqualified() {
-    CT_ASSERT(!ct::has_member_qualifiers<T>::value);
+    CT_ASSERT(! has_member_qualifiers<T>::value);
 }
 
 int main() {
@@ -106,18 +102,18 @@ int main() {
         using cvl = void() const volatile &;
         using cvr = void() const volatile &&;
 
-        CT_ASSERT(!ct::has_member_qualifiers<f>());
-        CT_ASSERT(ct::has_member_qualifiers<l>());
-        CT_ASSERT(ct::has_member_qualifiers<r>());
-        CT_ASSERT(ct::has_member_qualifiers<c>());
-        CT_ASSERT(ct::has_member_qualifiers<cl>());
-        CT_ASSERT(ct::has_member_qualifiers<cr>());
-        CT_ASSERT(ct::has_member_qualifiers<v>());
-        CT_ASSERT(ct::has_member_qualifiers<vl>());
-        CT_ASSERT(ct::has_member_qualifiers<vr>());
-        CT_ASSERT(ct::has_member_qualifiers<cv>());
-        CT_ASSERT(ct::has_member_qualifiers<cvl>());
-        CT_ASSERT(ct::has_member_qualifiers<cvr>());
+        CT_ASSERT(! has_member_qualifiers<f>());
+        CT_ASSERT( has_member_qualifiers<l>());
+        CT_ASSERT( has_member_qualifiers<r>());
+        CT_ASSERT( has_member_qualifiers<c>());
+        CT_ASSERT( has_member_qualifiers<cl>());
+        CT_ASSERT( has_member_qualifiers<cr>());
+        CT_ASSERT( has_member_qualifiers<v>());
+        CT_ASSERT( has_member_qualifiers<vl>());
+        CT_ASSERT( has_member_qualifiers<vr>());
+        CT_ASSERT( has_member_qualifiers<cv>());
+        CT_ASSERT( has_member_qualifiers<cvl>());
+        CT_ASSERT( has_member_qualifiers<cvr>());
     }
 
 #endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS

@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -11,7 +10,6 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_DETAIL_FUNCTION_OBJECT_HPP
 
 #include <callable_traits/detail/pmf.hpp>
-#include <callable_traits/detail/qualifier_traits.hpp>
 #include <callable_traits/detail/default_callable_traits.hpp>
 #include <callable_traits/detail/fwd/function_fwd.hpp>
 #include <callable_traits/detail/fwd/function_object_fwd.hpp>
@@ -19,9 +17,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <tuple>
 
-namespace callable_traits {
-
-    namespace detail {
+CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
         template<typename T, typename Base>
         struct function_object : Base {
@@ -38,16 +34,6 @@ namespace callable_traits {
             using traits = function_object;
             using class_type = invalid_type;
             using invoke_type = invalid_type;
-
-            using is_function_object = typename std::is_class<shallow_decay<T>>::type;
-
-            using is_overloaded_function_object = bool_type<
-                is_function_object::value
-                && !has_normal_call_operator<shallow_decay<T>>::value>;
-
-            using is_member_pointer = std::false_type;
-
-            using is_member_function_pointer = std::false_type;
 
             using remove_varargs = invalid_type;
 
@@ -121,7 +107,7 @@ namespace callable_traits {
         template<typename T, typename U, typename Base>
         struct function_object <T U::*, Base>
             : default_callable_traits<> {};
-    }
-}
+
+CALLABLE_TRAITS_DETAIL_NAMESPACE_END
 
 #endif

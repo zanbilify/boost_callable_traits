@@ -8,22 +8,9 @@ Distributed under the Boost Software License, Version 1.0.
 #include <functional>
 #include <tuple>
 #include <callable_traits/remove_member_volatile.hpp>
-
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
-
-#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
-#define LREF
-#define RREF
-#else
-#define LREF &
-#define RREF &&
-#endif
+#include "test.hpp"
 
 struct foo{};
-
-namespace ct = callable_traits;
 
 int main() {
     
@@ -41,18 +28,18 @@ int main() {
         using cvl = char(foo::*)(foo*, int) const volatile LREF;
         using cvr = char(foo::*)(foo*, int) const volatile RREF;
 
-        CT_ASSERT(std::is_same<f,  ct::remove_member_volatile_t<f>>{});
-        CT_ASSERT(std::is_same<l,  ct::remove_member_volatile_t<vl>>{});
-        CT_ASSERT(std::is_same<l,  ct::remove_member_volatile_t<l>>{});
-        CT_ASSERT(std::is_same<f,  ct::remove_member_volatile_t<v>>{});
-        CT_ASSERT(std::is_same<r,  ct::remove_member_volatile_t<r>>{});
-        CT_ASSERT(std::is_same<r,  ct::remove_member_volatile_t<vr>>{});
-        CT_ASSERT(std::is_same<c,  ct::remove_member_volatile_t<c>>{});
-        CT_ASSERT(std::is_same<c,  ct::remove_member_volatile_t<cv>>{});
-        CT_ASSERT(std::is_same<cl, ct::remove_member_volatile_t<cl>>{});
-        CT_ASSERT(std::is_same<cl, ct::remove_member_volatile_t<cvl>>{});
-        CT_ASSERT(std::is_same<cr, ct::remove_member_volatile_t<cr>>{});
-        CT_ASSERT(std::is_same<cr, ct::remove_member_volatile_t<cvr>>{});
+        CT_ASSERT(std::is_same<f,   remove_member_volatile_t<f>>{});
+        CT_ASSERT(std::is_same<l,   remove_member_volatile_t<vl>>{});
+        CT_ASSERT(std::is_same<l,   remove_member_volatile_t<l>>{});
+        CT_ASSERT(std::is_same<f,   remove_member_volatile_t<v>>{});
+        CT_ASSERT(std::is_same<r,   remove_member_volatile_t<r>>{});
+        CT_ASSERT(std::is_same<r,   remove_member_volatile_t<vr>>{});
+        CT_ASSERT(std::is_same<c,   remove_member_volatile_t<c>>{});
+        CT_ASSERT(std::is_same<c,   remove_member_volatile_t<cv>>{});
+        CT_ASSERT(std::is_same<cl,  remove_member_volatile_t<cl>>{});
+        CT_ASSERT(std::is_same<cl,  remove_member_volatile_t<cvl>>{});
+        CT_ASSERT(std::is_same<cr,  remove_member_volatile_t<cr>>{});
+        CT_ASSERT(std::is_same<cr,  remove_member_volatile_t<cvr>>{});
     }
     
 #ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
@@ -71,18 +58,18 @@ int main() {
         using cvl = foo&&() const volatile LREF;
         using cvr = foo&&() const volatile RREF;
 
-        CT_ASSERT(std::is_same<f,  ct::remove_member_volatile_t<f>>{});
-        CT_ASSERT(std::is_same<f,  ct::remove_member_volatile_t<v>>{});
-        CT_ASSERT(std::is_same<l,  ct::remove_member_volatile_t<vl>>{});
-        CT_ASSERT(std::is_same<l,  ct::remove_member_volatile_t<l>>{});
-        CT_ASSERT(std::is_same<r,  ct::remove_member_volatile_t<r>>{});
-        CT_ASSERT(std::is_same<r,  ct::remove_member_volatile_t<vr>>{});
-        CT_ASSERT(std::is_same<c,  ct::remove_member_volatile_t<c>>{});
-        CT_ASSERT(std::is_same<c,  ct::remove_member_volatile_t<cv>>{});
-        CT_ASSERT(std::is_same<cl, ct::remove_member_volatile_t<cl>>{});
-        CT_ASSERT(std::is_same<cl, ct::remove_member_volatile_t<cvl>>{});
-        CT_ASSERT(std::is_same<cr, ct::remove_member_volatile_t<cr>>{});
-        CT_ASSERT(std::is_same<cr, ct::remove_member_volatile_t<cvr>>{});
+        CT_ASSERT(std::is_same<f,   remove_member_volatile_t<f>>{});
+        CT_ASSERT(std::is_same<f,   remove_member_volatile_t<v>>{});
+        CT_ASSERT(std::is_same<l,   remove_member_volatile_t<vl>>{});
+        CT_ASSERT(std::is_same<l,   remove_member_volatile_t<l>>{});
+        CT_ASSERT(std::is_same<r,   remove_member_volatile_t<r>>{});
+        CT_ASSERT(std::is_same<r,   remove_member_volatile_t<vr>>{});
+        CT_ASSERT(std::is_same<c,   remove_member_volatile_t<c>>{});
+        CT_ASSERT(std::is_same<c,   remove_member_volatile_t<cv>>{});
+        CT_ASSERT(std::is_same<cl,  remove_member_volatile_t<cl>>{});
+        CT_ASSERT(std::is_same<cl,  remove_member_volatile_t<cvl>>{});
+        CT_ASSERT(std::is_same<cr,  remove_member_volatile_t<cr>>{});
+        CT_ASSERT(std::is_same<cr,  remove_member_volatile_t<cvr>>{});
     }
 
 #endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS

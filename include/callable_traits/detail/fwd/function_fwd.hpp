@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -11,11 +10,8 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_DETAIL_FWD_FUNCTION_FWD_HPP
 
 #include <callable_traits/detail/utility.hpp>
-#include <type_traits>
 
-namespace callable_traits {
-
-    namespace detail {
+CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
         template<typename T>
         struct function;

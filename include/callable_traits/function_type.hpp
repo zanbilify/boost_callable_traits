@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -12,6 +11,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
 //[ function_type_hpp
 /*`[section:ref_function_type function_type]
 [heading Header]
@@ -19,7 +20,6 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
 
     template<typename T>
     using function_type_t = //implementation-defined
@@ -33,7 +33,10 @@ namespace callable_traits {
     struct function_type {
         using type = function_type_t<T>;
     };
-}
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
+
 
 /*`
 [heading Constraints]

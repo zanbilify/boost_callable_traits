@@ -8,10 +8,8 @@ Distributed under the Boost Software License, Version 1.0.
 #include <functional>
 #include <utility>
 #include <callable_traits/is_lvalue_reference_member.hpp>
+#include "test.hpp"
 
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
 
 #ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
 int main(){ return 0; }
@@ -19,19 +17,17 @@ int main(){ return 0; }
 
 struct foo {};
 
-namespace ct = callable_traits;
-
 template<typename T>
 void assert_lvalue_qualified() {
     
-    CT_ASSERT(ct::is_lvalue_reference_member<T>());
+    CT_ASSERT( is_lvalue_reference_member<T>());
 }
 
 
 template<typename T>
 void assert_not_lvalue_qualified() {
 
-    CT_ASSERT(!ct::is_lvalue_reference_member<T>());
+    CT_ASSERT(! is_lvalue_reference_member<T>());
 }
 
 int main() {
@@ -106,18 +102,18 @@ int main() {
         using cvl = void() const volatile &;
         using cvr = void() const volatile &&;
 
-        CT_ASSERT(!ct::is_lvalue_reference_member<f>());
-        CT_ASSERT(ct::is_lvalue_reference_member<l>());
-        CT_ASSERT(!ct::is_lvalue_reference_member<r>());
-        CT_ASSERT(!ct::is_lvalue_reference_member<c>());
-        CT_ASSERT(ct::is_lvalue_reference_member<cl>());
-        CT_ASSERT(!ct::is_lvalue_reference_member<cr>());
-        CT_ASSERT(!ct::is_lvalue_reference_member<v>());
-        CT_ASSERT(ct::is_lvalue_reference_member<vl>());
-        CT_ASSERT(!ct::is_lvalue_reference_member<vr>());
-        CT_ASSERT(!ct::is_lvalue_reference_member<cv>());
-        CT_ASSERT(ct::is_lvalue_reference_member<cvl>());
-        CT_ASSERT(!ct::is_lvalue_reference_member<cvr>());
+        CT_ASSERT(! is_lvalue_reference_member<f>());
+        CT_ASSERT( is_lvalue_reference_member<l>());
+        CT_ASSERT(! is_lvalue_reference_member<r>());
+        CT_ASSERT(! is_lvalue_reference_member<c>());
+        CT_ASSERT( is_lvalue_reference_member<cl>());
+        CT_ASSERT(! is_lvalue_reference_member<cr>());
+        CT_ASSERT(! is_lvalue_reference_member<v>());
+        CT_ASSERT( is_lvalue_reference_member<vl>());
+        CT_ASSERT(! is_lvalue_reference_member<vr>());
+        CT_ASSERT(! is_lvalue_reference_member<cv>());
+        CT_ASSERT( is_lvalue_reference_member<cvl>());
+        CT_ASSERT(! is_lvalue_reference_member<cvr>());
     }
 
     using f_ptr = void(*)();

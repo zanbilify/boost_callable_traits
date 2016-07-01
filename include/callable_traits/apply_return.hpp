@@ -19,7 +19,7 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
+CALLABLE_TRAITS_NAMESPACE_BEGIN
     //<-
     namespace detail {
 
@@ -48,7 +48,10 @@ namespace callable_traits {
     struct apply_return {
         using type = apply_return_t<T, R>;
     };
-}
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
+
 
 /*`
 [heading Constraints]

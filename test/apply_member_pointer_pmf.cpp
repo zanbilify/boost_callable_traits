@@ -5,15 +5,16 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 ->*/
 
-#include "test.hpp"
+
 #include <callable_traits/apply_member_pointer.hpp>
+#include "test.hpp"
 
 struct a;
 struct b;
 
 template<typename Input, typename Output>
 void test_case() {
-    assert_same<ct::apply_member_pointer_t<Input, b>, Output>();
+    assert_same< apply_member_pointer_t<Input, b>, Output>();
 }
 
 int main() {

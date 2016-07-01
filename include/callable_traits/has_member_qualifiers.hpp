@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -10,8 +9,9 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_HAS_MEMBER_QUALIFIERS_HPP
 #define CALLABLE_TRAITS_HAS_MEMBER_QUALIFIERS_HPP
 
-#include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/core.hpp>
+
+CALLABLE_TRAITS_NAMESPACE_BEGIN
 
 //[ has_member_qualifiers_hpp
 /*`[section:ref_has_member_qualifiers has_member_qualifiers]
@@ -20,38 +20,40 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
+template<typename T>
+struct has_member_qualifiers; //immplementation-defined
 
-    template<typename T>
-    struct has_member_qualifiers; //immplementation-defined
+//<-
+template<typename T>
+struct has_member_qualifiers
 
-    //<-
-    template<typename T>
-    struct has_member_qualifiers
+    : detail::traits<T>::has_member_qualifiers {
+    using type = typename detail::traits<T>::has_member_qualifiers;
+};
 
-        : detail::traits<T>::has_member_qualifiers {
-        using type = typename detail::traits<T>::has_member_qualifiers;
-    };
+// older compilers don't support variable templates
+#ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
 
-    // older compilers don't support variable templates
-    #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+template<typename T>
+struct has_member_qualifiers_v {
+    static_assert(sizeof(T) < 1,
+        "Variable templates not supported on this compiler.");
+};
 
-    template<typename T>
-    struct has_member_qualifiers_v {
-        static_assert(sizeof(T) < 1,
-            "Variable templates not supported on this compiler.");
-    };
+#else
+//->
+template<typename T>
+constexpr bool has_member_qualifiers_v = //implementation-defined
+//<-
+    detail::traits<T>::has_member_qualifiers::value;
 
-    #else
-    //->
-    template<typename T>
-    constexpr bool has_member_qualifiers_v = //implementation-defined
-    //<-
-        detail::traits<T>::has_member_qualifiers::value;
+#endif
+//->
 
-    #endif
-    //->
-}
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
+
 
 /*`
 [heading Constraints]

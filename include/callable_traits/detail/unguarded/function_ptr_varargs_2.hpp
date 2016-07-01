@@ -19,22 +19,12 @@ CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER - `transaction_safe` when
     CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE is enabled, otherwise nothing
 */
 
-template<typename Ret, typename... Args>
-struct has_calling_convention_t<
-    CALLABLE_TRAITS_ST Ret(CALLABLE_TRAITS_VARARGS_CC*)(Args..., ...)
-        CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE,
-    CALLABLE_TRAITS_CC_TAG> {
-    using type = std::true_type;
-};
-
 template<typename Return, typename... Args>
 struct function<CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC *)(Args..., ...)
     CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE>
- : qualifier_traits<dummy>, default_callable_traits<> {
+ : default_callable_traits<> {
 
     static constexpr bool value = true;
-
-    using is_function = std::true_type;
 
     using has_varargs = std::true_type;
 
@@ -57,7 +47,6 @@ struct function<CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC *)(Args...,
             CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
 
     using add_varargs = type;
-
 
     using is_transaction_safe = CALLABLE_TRAITS_IS_TRANSACTION_SAFE;
 
@@ -96,9 +85,9 @@ struct function<CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC *)(Args...,
 #define CALLABLE_TRAITS_BEGIN_PACK_MANIP Return(CALLABLE_TRAITS_VARARGS_CC *)(
 #define CALLABLE_TRAITS_ARGS_PACK Args
 #define CALLABLE_TRAITS_END_PACK_MANIP , ...) CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE
-
 #include <callable_traits/detail/unguarded/args_pack_manipulations.hpp>
 #undef CALLABLE_TRAITS_BEGIN_PACK_MANIP
+#undef CALLABLE_TRAITS_ARGS_PACK         
 #undef CALLABLE_TRAITS_END_PACK_MANIP
 };
 

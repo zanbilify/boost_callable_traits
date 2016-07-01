@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -20,7 +19,7 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
+CALLABLE_TRAITS_NAMESPACE_BEGIN
 
     template<typename T, typename... Args>
     using push_back_args_t = //implementation-defined
@@ -34,7 +33,10 @@ namespace callable_traits {
     struct push_back_args {
         using type = push_back_args_t<T, Args...>;
     };
-}
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
+
 
 /*`
 [heading Constraints]

@@ -1,4 +1,4 @@
-/*!
+/*
 @copyright Barrett Adair 2016
 
 Distributed under the Boost Software License, Version 1.0.
@@ -10,11 +10,8 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_SFINAE_ERRORS_HPP
 
 #include <callable_traits/config.hpp>
-#include <type_traits>
 
-namespace callable_traits {
-
-    namespace detail {
+CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
         struct sfinae_error{};
 
@@ -91,4 +88,5 @@ struct name : callable_traits_ERROR::origin<                     \
     CALLABLE_TRAITS_SFINAE_MSG(expand_args,             cannot_expand_the_parameter_list_of_first_template_argument)
     CALLABLE_TRAITS_SFINAE_MSG(return_type,               unable_to_determine_return_type)
 }
+
 #endif // #ifndef CALLABLE_TRAITS_SFINAE_ERRORS_HPP
