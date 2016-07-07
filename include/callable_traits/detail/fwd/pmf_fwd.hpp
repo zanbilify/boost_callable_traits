@@ -13,7 +13,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
-        template<typename T, typename U = shallow_decay<T>>
+        template<typename T>
         struct pmf;
 
     }

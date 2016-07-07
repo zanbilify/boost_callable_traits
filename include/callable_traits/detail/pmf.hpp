@@ -34,7 +34,7 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
         using set_varargs_member_function_qualifiers =
             typename set_varargs_member_function_qualifiers_t<Flags, IsTransactionSafe, Ts...>::type;
 
-        template<typename T, typename U>
+        template<typename T>
         struct pmf : default_callable_traits<T> {};
 
         #define CALLABLE_TRAITS_CC_TAG dummy

@@ -38,12 +38,6 @@ using bool_type = std::integral_constant<bool, Value>;
 template<std::size_t I, typename Tup>
 using at = typename std::tuple_element<I, Tup>::type;
 
-// a faster version of std::decay_t
-template<typename T>
-using shallow_decay = typename std::remove_cv<
-    typename std::remove_reference<T>::type
->::type;
-
 template<typename T, typename Class>
 using add_member_pointer = T Class::*;
 

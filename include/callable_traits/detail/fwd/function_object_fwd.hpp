@@ -53,8 +53,7 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
             ambiguous_function_object_traits<T>
         >::type;
 
-        template<typename T, typename Base =
-            function_object_base<shallow_decay<T>>>
+        template<typename T, typename Base = function_object_base<T>>
         struct function_object;
     }
 }

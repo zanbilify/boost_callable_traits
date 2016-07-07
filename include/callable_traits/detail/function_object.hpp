@@ -28,8 +28,7 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
             using arg_types = typename Base::non_invoke_arg_types;
 
-            static constexpr const bool value =
-                std::is_class<shallow_decay<T>>::value;
+            static constexpr const bool value = std::is_class<T>::value;
 
             using traits = function_object;
             using class_type = invalid_type;
