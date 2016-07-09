@@ -9,9 +9,31 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_ARG_AT_HPP
 #define CALLABLE_TRAITS_ARG_AT_HPP
 
-#include <callable_traits/args.hpp>
 #include <callable_traits/detail/core.hpp>
 #include <tuple>
+
+CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
+
+    template<std::size_t I, typename T>
+    struct arg_at_helper {
+
+        static constexpr bool has_parameter_list =
+            !std::is_same<typename detail::traits<T>::arg_types, invalid_type>::value;
+
+        using temp_tuple = typename std::conditional<has_parameter_list,
+            typename detail::traits<T>::arg_types, std::tuple<invalid_type>>::type;
+
+        static constexpr bool is_out_of_range = has_parameter_list &&
+            I >= std::tuple_size<temp_tuple>::value;
+
+        static constexpr std::size_t index =
+            has_parameter_list && !is_out_of_range ? I : 0;
+
+        using permissive_tuple = typename std::conditional<has_parameter_list && !is_out_of_range,
+            typename detail::traits<T>::arg_types, std::tuple<invalid_type>>::type;
+    };
+
+CALLABLE_TRAITS_DETAIL_NAMESPACE_END
 
 CALLABLE_TRAITS_NAMESPACE_BEGIN
 
@@ -31,9 +53,17 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
     // in case the error occurs outside of a SFINAE context
         detail::sfinae_try<
 
-            detail::at<I, typename args<T>::type>,
+            typename std::tuple_element<
+                detail::arg_at_helper<I, T>::index,
+                typename detail::arg_at_helper<I,T>::permissive_tuple
+            >::type,
 
-            detail::fail_if<I >= std::tuple_size<typename args<T>::type>::value,
+            detail::fail_if<
+                !detail::arg_at_helper<I, T>::has_parameter_list,
+                cannot_determine_parameters_for_this_type>,
+
+            detail::fail_if<
+                detail::arg_at_helper<I, T>::is_out_of_range,
                 index_out_of_range_for_parameter_list>
         >;
     //->
