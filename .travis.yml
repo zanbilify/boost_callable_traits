@@ -117,6 +117,14 @@ matrix:
           packages: ["g++-4.8"]
           sources: *sources
 
+    # GCC 4.7
+    - env: UNIT_TESTS=true CPP=1y GCC_VERSION=4.7 STDLIB=libstdc++ BOOST_VERSION=default
+      os: linux
+      compiler: g++
+      addons:
+        apt:
+          packages: ["g++-4.7"]
+          sources: *sources
 before_install:
 
   - if [ -z "$CPP" ]; then export CPP="14"; fi
@@ -161,6 +169,7 @@ install:
       mkdir cmake && travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
       export PATH=${DEPS_DIR}/cmake/bin:${PATH}
     else
+      brew unlink cmake
       brew install cmake
     fi
     

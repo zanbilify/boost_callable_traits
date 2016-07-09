@@ -52,11 +52,11 @@ elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "AppleClang")
         ")
     endif()
 elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
-    if (${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS "4.8.0")
+    if (${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS "4.7.4")
     message(WARNING "
     ### You appear to be using GCC ${CMAKE_CXX_COMPILER_VERSION}, which might
     ### not be able to compile CallableTraits. CallableTraits officially supports
-        ### GCC versions >= 4.8.0.
+        ### GCC versions >= 4.7.4.
     ")
     endif()
 else()

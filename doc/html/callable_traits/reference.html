@@ -74,7 +74,7 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_add_member_const.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_add_member_const.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_add_member_const.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">add_member_const_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -83,7 +83,6 @@
     <span class="keyword">struct</span> <span class="identifier">add_member_const</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">add_member_const_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_add_member_const.h2"></a>
@@ -344,7 +343,7 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_remove_member_const.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_remove_member_const.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_remove_member_const.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">remove_member_const_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -353,7 +352,6 @@
     <span class="keyword">struct</span> <span class="identifier">remove_member_const</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">remove_member_const_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_remove_member_const.h2"></a>
@@ -595,7 +593,7 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_add_member_volatile.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_add_member_volatile.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_add_member_volatile.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">add_member_volatile_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -604,7 +602,6 @@
     <span class="keyword">struct</span> <span class="identifier">add_member_volatile</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">add_member_volatile_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_add_member_volatile.h2"></a>
@@ -850,7 +847,7 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_remove_member_volatile.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_remove_member_volatile.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_remove_member_volatile.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">remove_member_volatile_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -859,7 +856,6 @@
     <span class="keyword">struct</span> <span class="identifier">remove_member_volatile</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">remove_member_volatile_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_remove_member_volatile.h2"></a>
@@ -1101,7 +1097,7 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_add_member_cv.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_add_member_cv.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_add_member_cv.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">add_member_cv_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -1110,7 +1106,6 @@
     <span class="keyword">struct</span> <span class="identifier">add_member_cv</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">add_member_cv_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_add_member_cv.h2"></a>
@@ -1374,7 +1369,7 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_remove_member_cv.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_remove_member_cv.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_remove_member_cv.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">remove_member_cv_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -1383,7 +1378,6 @@
     <span class="keyword">struct</span> <span class="identifier">remove_member_cv</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">remove_member_cv_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_remove_member_cv.h2"></a>
@@ -1637,7 +1631,7 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_add_member_lvalue_reference.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_add_member_lvalue_reference.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_add_member_lvalue_reference.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">add_member_lvalue_reference_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -1646,7 +1640,6 @@
     <span class="keyword">struct</span> <span class="identifier">add_member_lvalue_reference</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">add_member_lvalue_reference_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_add_member_lvalue_reference.h2"></a>
@@ -1900,7 +1893,7 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_add_member_rvalue_reference.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_add_member_rvalue_reference.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_add_member_rvalue_reference.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">add_member_rvalue_reference_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -1909,7 +1902,6 @@
     <span class="keyword">struct</span> <span class="identifier">add_member_rvalue_reference</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">add_member_rvalue_reference_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_add_member_rvalue_reference.h2"></a>
@@ -2163,7 +2155,7 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_remove_member_reference.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">remove_member_reference_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -2172,7 +2164,6 @@
     <span class="keyword">struct</span> <span class="identifier">remove_member_reference</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">remove_member_reference_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_remove_member_reference.h2"></a>
@@ -2399,14 +2390,11 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_has_member_qualifiers.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_has_member_qualifiers.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_has_member_qualifiers.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">has_member_qualifiers</span><span class="special">;</span> <span class="comment">//immplementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">has_member_qualifiers</span><span class="special">;</span> <span class="comment">//immplementation-defined</span>
-
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">has_member_qualifiers_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-<span class="special">}</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">has_member_qualifiers_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_has_member_qualifiers.h2"></a>
@@ -2691,14 +2679,16 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_is_const_member.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_is_const_member.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_is_const_member.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">is_const_member</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">is_const_member</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_const_member_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="comment">//&lt;-</span>
+    <span class="identifier">detail</span><span class="special">::</span><span class="identifier">traits</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">is_const_member</span><span class="special">::</span><span class="identifier">value</span><span class="special">;</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_const_member_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-<span class="special">}</span>
+<span class="preprocessor">#endif</span>
+<span class="comment">//-&gt;</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_is_const_member.h2"></a>
@@ -2989,14 +2979,16 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_is_volatile_member.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_is_volatile_member.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_is_volatile_member.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">is_volatile_member</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">is_volatile_member</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_volatile_member_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="comment">//&lt;-</span>
+    <span class="identifier">detail</span><span class="special">::</span><span class="identifier">traits</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">is_volatile_member</span><span class="special">::</span><span class="identifier">value</span><span class="special">;</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_volatile_member_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-<span class="special">}</span>
+<span class="preprocessor">#endif</span>
+<span class="comment">//-&gt;</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_is_volatile_member.h2"></a>
@@ -3278,14 +3270,16 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_is_cv_member.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_is_cv_member.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_is_cv_member.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">is_cv_member</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">is_cv_member</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_cv_member_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="comment">//&lt;-</span>
+    <span class="identifier">detail</span><span class="special">::</span><span class="identifier">traits</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">is_cv_member</span><span class="special">::</span><span class="identifier">value</span><span class="special">;</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_cv_member_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-<span class="special">}</span>
+<span class="preprocessor">#endif</span>
+<span class="comment">//-&gt;</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_is_cv_member.h2"></a>
@@ -3554,14 +3548,16 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_is_lvalue_reference_member.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_is_lvalue_reference_member.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_is_lvalue_reference_member.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">is_lvalue_reference_member</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">is_lvalue_reference_member</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_lvalue_reference_member_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="comment">//&lt;-</span>
+    <span class="identifier">detail</span><span class="special">::</span><span class="identifier">traits</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">is_lvalue_reference_member</span><span class="special">::</span><span class="identifier">value</span><span class="special">;</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_lvalue_reference_member_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-<span class="special">}</span>
+<span class="preprocessor">#endif</span>
+<span class="comment">//-&gt;</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_is_lvalue_reference_member.h2"></a>
@@ -3813,14 +3809,16 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_is_rvalue_reference_member.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_is_rvalue_reference_member.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_is_rvalue_reference_member.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">is_rvalue_reference_member</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">is_rvalue_reference_member</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_rvalue_reference_member_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="comment">//&lt;-</span>
+    <span class="identifier">detail</span><span class="special">::</span><span class="identifier">traits</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">is_rvalue_reference_member</span><span class="special">::</span><span class="identifier">value</span><span class="special">;</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_rvalue_reference_member_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-<span class="special">}</span>
+<span class="preprocessor">#endif</span>
+<span class="comment">//-&gt;</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_is_rvalue_reference_member.h2"></a>
@@ -4072,14 +4070,16 @@
 <a name="callable_traits.reference.member_qualifier_features.ref_is_reference_member.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_qualifier_features.ref_is_reference_member.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_qualifier_features.ref_is_reference_member.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">is_reference_member</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">is_reference_member</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_reference_member_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="comment">//&lt;-</span>
+    <span class="identifier">detail</span><span class="special">::</span><span class="identifier">traits</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">is_reference_member</span><span class="special">::</span><span class="identifier">value</span><span class="special">;</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_reference_member_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-<span class="special">}</span>
+<span class="preprocessor">#endif</span>
+<span class="comment">//-&gt;</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_qualifier_features.ref_is_reference_member.h2"></a>
@@ -4370,16 +4370,13 @@
 <a name="callable_traits.reference.parameter_list_features.ref_function_type.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_function_type.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_function_type.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">using</span> <span class="identifier">function_type_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">function_type_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">function_type</span> <span class="special">{</span>
-        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">function_type_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
-    <span class="special">};</span>
-<span class="special">}</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">function_type</span> <span class="special">{</span>
+    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">function_type_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+<span class="special">};</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_function_type.h2"></a>
@@ -4702,16 +4699,13 @@
 <a name="callable_traits.reference.parameter_list_features.ref_args.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_args.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_args.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">using</span> <span class="identifier">args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">args</span> <span class="special">{</span>
-        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
-    <span class="special">};</span>
-<span class="special">}</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">args</span> <span class="special">{</span>
+    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+<span class="special">};</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_args.h2"></a>
@@ -5049,16 +5043,13 @@
 <a name="callable_traits.reference.parameter_list_features.ref_arg_at.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_arg_at.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_arg_at.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">I</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">using</span> <span class="identifier">arg_at_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">I</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">arg_at_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">I</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">arg_at</span> <span class="special">{</span>
-        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">arg_at_t</span><span class="special">&lt;</span><span class="identifier">I</span><span class="special">,</span> <span class="identifier">T</span><span class="special">&gt;;</span>
-    <span class="special">};</span>
-<span class="special">}</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">I</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">arg_at</span> <span class="special">{</span>
+    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">arg_at_t</span><span class="special">&lt;</span><span class="identifier">I</span><span class="special">,</span> <span class="identifier">T</span><span class="special">&gt;;</span>
+<span class="special">};</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_arg_at.h2"></a>
@@ -5132,16 +5123,13 @@
 <a name="callable_traits.reference.parameter_list_features.ref_clear_args.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_clear_args.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_clear_args.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">using</span> <span class="identifier">clear_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">clear_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">clear_args</span> <span class="special">{</span>
-        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">clear_args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
-    <span class="special">};</span>
-<span class="special">}</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">clear_args</span> <span class="special">{</span>
+    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">clear_args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+<span class="special">};</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_clear_args.h2"></a>
@@ -5382,7 +5370,7 @@
 <a name="callable_traits.reference.parameter_list_features.ref_remove_args.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_remove_args.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_remove_args.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Index</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Count</span> <span class="special">=</span> <span class="number">1</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">remove_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -5391,7 +5379,6 @@
     <span class="keyword">struct</span> <span class="identifier">remove_args</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">remove_args_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">Count</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_remove_args.h2"></a>
@@ -5561,7 +5548,7 @@
 <a name="callable_traits.reference.parameter_list_features.ref_replace_args.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_replace_args.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_replace_args.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Index</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">replace_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -5570,7 +5557,6 @@
     <span class="keyword">struct</span> <span class="identifier">replace_args</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">replace_args_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">Args</span><span class="special">...&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_replace_args.h2"></a>
@@ -5794,16 +5780,13 @@
 <a name="callable_traits.reference.parameter_list_features.ref_insert_args.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_insert_args.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_insert_args.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Index</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
+<span class="keyword">using</span> <span class="identifier">insert_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Index</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">insert_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Index</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">insert_args</span> <span class="special">{</span>
-        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">insert_args_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">Args</span><span class="special">...&gt;;</span>
-    <span class="special">};</span>
-<span class="special">}</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Index</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">insert_args</span> <span class="special">{</span>
+    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">insert_args_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">Args</span><span class="special">...&gt;;</span>
+<span class="special">};</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_insert_args.h2"></a>
@@ -6097,7 +6080,7 @@
 <a name="callable_traits.reference.parameter_list_features.ref_pop_back_args.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_pop_back_args.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_pop_back_args.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Count</span> <span class="special">=</span> <span class="number">1</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">pop_back_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -6106,7 +6089,6 @@
     <span class="keyword">struct</span> <span class="identifier">pop_back_args</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">pop_back_args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">Count</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_pop_back_args.h2"></a>
@@ -6275,7 +6257,7 @@
 <a name="callable_traits.reference.parameter_list_features.ref_pop_front_args.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_pop_front_args.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_pop_front_args.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Count</span> <span class="special">=</span> <span class="number">1</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">pop_front_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -6284,7 +6266,6 @@
     <span class="keyword">struct</span> <span class="identifier">pop_front_args</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">pop_front_args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">Count</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_pop_front_args.h2"></a>
@@ -6453,7 +6434,7 @@
 <a name="callable_traits.reference.parameter_list_features.ref_push_back_args.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_push_back_args.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_push_back_args.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">push_back_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -6462,7 +6443,6 @@
     <span class="keyword">struct</span> <span class="identifier">push_back_args</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">push_back_args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">Args</span><span class="special">...&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_push_back_args.h2"></a>
@@ -6616,7 +6596,7 @@
 <a name="callable_traits.reference.parameter_list_features.ref_push_front_args.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_push_front_args.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_push_front_args.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">push_front_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -6625,7 +6605,6 @@
     <span class="keyword">struct</span> <span class="identifier">push_front_args</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">push_front_args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">Args</span><span class="special">...&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_push_front_args.h2"></a>
@@ -6779,16 +6758,13 @@
 <a name="callable_traits.reference.parameter_list_features.ref_expand_args.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_expand_args.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_expand_args.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">&gt;</span>
+<span class="keyword">using</span> <span class="identifier">expand_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">expand_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">expand_args</span> <span class="special">{</span>
-        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">expand_args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">Container</span><span class="special">&gt;;</span>
-    <span class="special">};</span>
-<span class="special">}</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">expand_args</span> <span class="special">{</span>
+    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">expand_args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">Container</span><span class="special">&gt;;</span>
+<span class="special">};</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_expand_args.h2"></a>
@@ -7089,16 +7065,13 @@
 <a name="callable_traits.reference.parameter_list_features.ref_expand_args_left.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_expand_args_left.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_expand_args_left.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">RightArgs</span><span class="special">&gt;</span>
+<span class="keyword">using</span> <span class="identifier">expand_args_left_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">RightArgs</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">expand_args_left_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">RightArgs</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">expand_args_left</span> <span class="special">{</span>
-        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">expand_args_left_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">Container</span><span class="special">,</span> <span class="identifier">RightArgs</span><span class="special">...&gt;;</span>
-    <span class="special">};</span>
-<span class="special">}</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">RightArgs</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">expand_args_left</span> <span class="special">{</span>
+    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">expand_args_left_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">Container</span><span class="special">,</span> <span class="identifier">RightArgs</span><span class="special">...&gt;;</span>
+<span class="special">};</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_expand_args_left.h2"></a>
@@ -7394,16 +7367,13 @@
 <a name="callable_traits.reference.parameter_list_features.ref_expand_args_right.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_expand_args_right.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_expand_args_right.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">LeftArgs</span><span class="special">&gt;</span>
+<span class="keyword">using</span> <span class="identifier">expand_args_right_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">LeftArgs</span><span class="special">&gt;</span>
-    <span class="keyword">using</span> <span class="identifier">expand_args_right_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">LeftArgs</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">expand_args_right</span> <span class="special">{</span>
-        <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">expand_args_right_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">Container</span><span class="special">,</span> <span class="identifier">LeftArgs</span><span class="special">...&gt;;</span>
-    <span class="special">};</span>
-<span class="special">}</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">LeftArgs</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">expand_args_right</span> <span class="special">{</span>
+    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">expand_args_right_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">Container</span><span class="special">,</span> <span class="identifier">LeftArgs</span><span class="special">...&gt;;</span>
+<span class="special">};</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_expand_args_right.h2"></a>
@@ -7706,7 +7676,7 @@
 <a name="callable_traits.reference.parameter_list_features.ref_add_varargs.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_add_varargs.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_add_varargs.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">add_varargs_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -7715,7 +7685,6 @@
     <span class="keyword">struct</span> <span class="identifier">add_varargs</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">add_varargs_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_add_varargs.h2"></a>
@@ -7999,7 +7968,7 @@
 <a name="callable_traits.reference.parameter_list_features.ref_remove_varargs.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_remove_varargs.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_remove_varargs.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">remove_varargs_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -8008,7 +7977,6 @@
     <span class="keyword">struct</span> <span class="identifier">remove_varargs</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">remove_varargs_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_remove_varargs.h2"></a>
@@ -8276,14 +8244,16 @@
 <a name="callable_traits.reference.parameter_list_features.ref_has_varargs.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.parameter_list_features.ref_has_varargs.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.parameter_list_features.ref_has_varargs.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">has_varargs</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">has_varargs</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">has_varargs_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="comment">//&lt;-</span>
+    <span class="identifier">detail</span><span class="special">::</span><span class="identifier">traits</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">has_varargs</span><span class="special">::</span><span class="identifier">value</span><span class="special">;</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">has_varargs_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-<span class="special">}</span>
+<span class="preprocessor">#endif</span>
+<span class="comment">//-&gt;</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.parameter_list_features.ref_has_varargs.h2"></a>
@@ -8513,7 +8483,7 @@
 <a name="callable_traits.reference.return_type_features.ref_return_type.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.return_type_features.ref_return_type.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_return_type.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">return_type_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -8522,7 +8492,6 @@
     <span class="keyword">struct</span> <span class="identifier">return_type</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">return_type_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.return_type_features.ref_return_type.h2"></a>
@@ -8713,7 +8682,7 @@
 <a name="callable_traits.reference.return_type_features.ref_apply_return.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.return_type_features.ref_apply_return.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_apply_return.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">R</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">apply_return_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -8722,7 +8691,6 @@
     <span class="keyword">struct</span> <span class="identifier">apply_return</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">apply_return_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">R</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.return_type_features.ref_apply_return.h2"></a>
@@ -8986,14 +8954,16 @@
 <a name="callable_traits.reference.return_type_features.ref_has_void_return.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.return_type_features.ref_has_void_return.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.return_type_features.ref_has_void_return.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">has_void_return</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">has_void_return</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">has_void_return_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="comment">//&lt;-</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">detail</span><span class="special">::</span><span class="identifier">traits</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">return_type</span><span class="special">,</span> <span class="keyword">void</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">;</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">has_void_return_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-<span class="special">}</span>
+<span class="preprocessor">#endif</span>
+<span class="comment">//-&gt;</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.return_type_features.ref_has_void_return.h2"></a>
@@ -9220,7 +9190,7 @@
 <a name="callable_traits.reference.member_pointer_features.ref_apply_member_pointer.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_pointer_features.ref_apply_member_pointer.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_pointer_features.ref_apply_member_pointer.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">C</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">apply_member_pointer_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -9229,7 +9199,6 @@
     <span class="keyword">struct</span> <span class="identifier">apply_member_pointer</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">apply_member_pointer_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">C</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_pointer_features.ref_apply_member_pointer.h2"></a>
@@ -9577,7 +9546,7 @@
 <a name="callable_traits.reference.member_pointer_features.ref_parent_class_of.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_pointer_features.ref_parent_class_of.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_pointer_features.ref_parent_class_of.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">parent_class_of_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -9586,7 +9555,6 @@
     <span class="keyword">struct</span> <span class="identifier">parent_class_of</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">parent_class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_pointer_features.ref_parent_class_of.h2"></a>
@@ -9691,7 +9659,7 @@
 <a name="callable_traits.reference.member_pointer_features.ref_qualified_parent_class_of.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.member_pointer_features.ref_qualified_parent_class_of.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.member_pointer_features.ref_qualified_parent_class_of.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">qualified_parent_class_of_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -9700,7 +9668,6 @@
     <span class="keyword">struct</span> <span class="identifier">qualified_parent_class_of</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">qualified_parent_class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.member_pointer_features.ref_qualified_parent_class_of.h2"></a>
@@ -9885,7 +9852,7 @@
 <a name="callable_traits.reference.transactional_memory_features.ref_add_transaction_safe.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.transactional_memory_features.ref_add_transaction_safe.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.transactional_memory_features.ref_add_transaction_safe.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">add_transaction_safe_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -9894,9 +9861,6 @@
     <span class="keyword">struct</span> <span class="identifier">add_transaction_safe</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">add_transaction_safe_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-
-
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.transactional_memory_features.ref_add_transaction_safe.h2"></a>
@@ -10135,7 +10099,7 @@
 <a name="callable_traits.reference.transactional_memory_features.ref_remove_transaction_safe.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.transactional_memory_features.ref_remove_transaction_safe.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.transactional_memory_features.ref_remove_transaction_safe.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="identifier">CALLABLE_TRAITS_NAMESPACE_BEGIN</span>
 
     <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
     <span class="keyword">using</span> <span class="identifier">remove_transaction_safe_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -10144,7 +10108,6 @@
     <span class="keyword">struct</span> <span class="identifier">remove_transaction_safe</span> <span class="special">{</span>
         <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">remove_transaction_safe_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="special">};</span>
-<span class="special">}</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.transactional_memory_features.ref_remove_transaction_safe.h2"></a>
@@ -10367,14 +10330,16 @@
 <a name="callable_traits.reference.transactional_memory_features.ref_is_transaction_safe.h1"></a>
           <span class="phrase"><a name="callable_traits.reference.transactional_memory_features.ref_is_transaction_safe.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.transactional_memory_features.ref_is_transaction_safe.definition">Definition</a>
         </h6>
-<pre class="programlisting"><span class="keyword">namespace</span> <span class="identifier">callable_traits</span> <span class="special">{</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">is_transaction_safe</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">struct</span> <span class="identifier">is_transaction_safe</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_transaction_safe_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="comment">//&lt;-</span>
+    <span class="identifier">detail</span><span class="special">::</span><span class="identifier">traits</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">is_transaction_safe</span><span class="special">::</span><span class="identifier">value</span><span class="special">;</span>
 
-    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-    <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_transaction_safe_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-<span class="special">}</span>
+<span class="preprocessor">#endif</span>
+<span class="comment">//-&gt;</span>
 </pre>
 <h6>
 <a name="callable_traits.reference.transactional_memory_features.ref_is_transaction_safe.h2"></a>

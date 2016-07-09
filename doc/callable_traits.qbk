@@ -160,6 +160,7 @@ The use cases for [libname] overlaop significantly with those of [function_types
 [ [Clang 3.6]                   [[link_travis_ci]]       ]
 [ [Clang 3.7]                   [[link_travis_ci]]       ]
 [ [Clang 3.8]                   [[link_travis_ci]]       ]
+[ [GCC 4.7]                     [[link_travis_ci]]       ]
 [ [GCC 4.8]                     [[link_travis_ci]]       ]
 [ [GCC 4.9]                     [[link_travis_ci]]       ]
 [ [GCC 5.2]                     [[link_travis_ci]]       ]
@@ -250,7 +251,6 @@ Boost contains a handful of excellent type containers. However, [libname] is des
 Although arbitrary, the reference collapsing rules are well-defined and already known to many template metaprogrammers. Anything else would be a burden to memorize.
 
 [endsect]
-
 
 
 [section:reference Reference Documentation]
