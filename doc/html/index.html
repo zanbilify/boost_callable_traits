@@ -161,7 +161,7 @@
 
 <span class="comment">// This function template helps keep our example code neat</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">A</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">B</span><span class="special">&gt;</span>
-<span class="identifier">assert_same</span><span class="special">(){</span> <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">A</span><span class="special">,</span> <span class="identifier">B</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span> <span class="special">}</span>
+<span class="keyword">void</span> <span class="identifier">assert_same</span><span class="special">(){</span> <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">A</span><span class="special">,</span> <span class="identifier">B</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span> <span class="special">}</span>
 
 <span class="comment">// foo is a function object</span>
 <span class="keyword">struct</span> <span class="identifier">foo</span> <span class="special">{</span>
@@ -178,7 +178,7 @@
 
     <span class="comment">// arg_at_t gives us indexed access to a parameter list</span>
     <span class="identifier">assert_same</span><span class="special">&lt;</span>
-        <span class="identifier">ct</span><span class="special">::</span><span class="identifier">arg_at_t</span><span class="special">&lt;</span><span class="number">1</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;;</span>
+        <span class="identifier">ct</span><span class="special">::</span><span class="identifier">arg_at_t</span><span class="special">&lt;</span><span class="number">1</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;,</span>
         <span class="keyword">char</span>
     <span class="special">&gt;();</span>
 
@@ -200,21 +200,21 @@
     <span class="comment">// Conversely, add_member_const_t adds a const member qualifier</span>
     <span class="identifier">assert_same</span><span class="special">&lt;</span>
         <span class="identifier">pmf</span><span class="special">,</span>
-        <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_member_const</span><span class="special">&lt;</span><span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">float</span><span class="special">)</span>
+        <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_member_const_t</span><span class="special">&lt;</span><span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">float</span><span class="special">)&gt;</span>
     <span class="special">&gt;();</span>
 
     <span class="comment">// is_const_member_v checks for the presence of member const</span>
     <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_const_member_v</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span> <span class="string">""</span><span class="special">);</span>
 
-    <span class="comment">// pop_args_front removes the first parameter from signature:</span>
+    <span class="comment">// pop_front_args_t removes the first parameter from signature:</span>
     <span class="identifier">assert_same</span><span class="special">&lt;</span>
-        <span class="identifier">ct</span><span class="special">::</span><span class="identifier">pop_args_front</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
+        <span class="identifier">ct</span><span class="special">::</span><span class="identifier">pop_front_args_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
         <span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(/*</span><span class="keyword">int</span> <span class="identifier">is</span> <span class="identifier">gone</span><span class="special">!*/</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">float</span><span class="special">)</span> <span class="keyword">const</span>
     <span class="special">&gt;();</span>
 
-    <span class="comment">// clear_args removes all parameter types:</span>
+    <span class="comment">// clear_args_t removes all parameter types:</span>
     <span class="identifier">assert_same</span><span class="special">&lt;</span>
-        <span class="identifier">ct</span><span class="special">::</span><span class="identifier">clear_args</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
+        <span class="identifier">ct</span><span class="special">::</span><span class="identifier">clear_args_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
         <span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(/*</span> <span class="identifier">nothing</span> <span class="identifier">to</span> <span class="identifier">see</span> <span class="identifier">here</span><span class="special">!</span> <span class="special">*/)</span> <span class="keyword">const</span>
     <span class="special">&gt;();</span>
 <span class="special">}</span>
