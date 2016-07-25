@@ -6,7 +6,7 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="CallableTraits">
 <link rel="up" href="../index.html" title="CallableTraits">
-<link rel="prev" href="compatibility.html" title="Compatibility">
+<link rel="prev" href="../index.html" title="CallableTraits">
 <link rel="next" href="reference.html" title="Reference Documentation">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -20,7 +20,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="compatibility.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="reference.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="../index.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="reference.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
@@ -32,7 +32,7 @@
       should I use <code class="literal">CallableTraits</code>?</a>
     </h4>
 <p>
-      If you are not writing generic code, you shouldn't.
+      If you are not writing generic code, you should not use <code class="literal">CallableTraits</code>.
     </p>
 <p>
       If you <span class="emphasis"><em>are</em></span> writing generic code, take a moment to skim
@@ -44,16 +44,7 @@
 <span class="special">};</span>
 </pre>
 <p>
-      or like this...
-    </p>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span>
-<span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)&gt;</span> <span class="special">{</span>
-    <span class="comment">//   ^^^^^^^^^^^^^^^^</span>
-    <span class="comment">//...</span>
-<span class="special">};</span>
-</pre>
-<p>
-      or maybe something like this...
+      Or maybe something like this:
     </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span>
 <span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(*)(</span><span class="identifier">Args</span><span class="special">...)&gt;</span> <span class="special">{</span>
@@ -62,25 +53,8 @@
 <span class="special">};</span>
 </pre>
 <p>
-      perhaps...
-    </p>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span>
-<span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(&amp;)(</span><span class="identifier">Args</span><span class="special">...)&gt;</span> <span class="special">{</span>
-    <span class="comment">//    ^^^^^^^^^^^^^^^^^^</span>
-    <span class="comment">//...</span>
-<span class="special">};</span>
-</pre>
-<p>
-      Does this rings a bell?
-    </p>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span>
-<span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)&gt;</span> <span class="special">{</span>
-    <span class="comment">//    ^^^^^^^^^^^^^^^^^^^^^</span>
-    <span class="comment">//...</span>
-<span class="special">};</span>
-</pre>
-<p>
-      Do you hate your job?
+      Or, if you are <span class="bold"><strong>really</strong></span> unlucky, something like
+      this:
     </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span>
 <span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;</span> <span class="identifier">transaction_safe</span><span class="special">&gt;</span> <span class="special">{</span>
@@ -89,33 +63,38 @@
 <span class="special">};</span>
 </pre>
 <p>
-      There are real reasons to write code like this, but they are few and far between.
-      Implementers of the <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">functional</span><span class="special">&gt;</span></code> header and callback libraries have been
-      trudging through these template tarpits for years now. Often, these template
-      specializations will contain nearly-duplicate code, which slows development
-      time and increases the likelihood of regression bugs.
-    </p>
-<p>
       With <code class="literal">CallableTraits</code>, you can get rid of all of these template
-      specializations (unless you are concerned with platform-specific calling conventions).
-      Part of <code class="literal">CallableTraits</code>'s mission is to rid the world of
-      this code forever. Even if you are only specializing a simple function type
-      like <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)</span></code>,
-      perhaps you will find that <code class="literal">CallableTraits</code> can help make
-      your code more readable, more maintainable, more generic, and less error-prone.
+      specializations (unless you deal with platform-specific calling conventions).
+      Even if you are only specializing a simple function type like <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)</span></code>, <code class="literal">CallableTraits</code> might
+      be useful to you. You may find that <code class="literal">CallableTraits</code> can help
+      make your code more readable, more maintainable, more generic, and less error-prone.
     </p>
 <h4>
 <a name="callable_traits.faq.h1"></a>
-      <span class="phrase"><a name="callable_traits.faq.why_does_namespace_scoped_args_a"></a></span><a class="link" href="faq.html#callable_traits.faq.why_does_namespace_scoped_args_a">Why
-      does <code class="literal">callable_traits::</code><code class="literal">args</code> alias a <code class="literal">std::tuple</code>?</a>
+      <span class="phrase"><a name="callable_traits.faq.why_should_i_use_this_instead_of"></a></span><a class="link" href="faq.html#callable_traits.faq.why_should_i_use_this_instead_of">Why
+      should I use this instead of this 30 line header I wrote 10 years ago?</a>
+    </h4>
+<p>
+      <code class="literal">CallableTraits</code> is very thoroughly tested on many platforms.
+      <code class="literal">CallableTraits</code> correctly handles many corner cases that
+      are often overlooked. The need for a proper library solution grows as more
+      and more features area added to C++. Eventually, I will submit a proposal for
+      <code class="literal">CallableTraits</code> features to the ISO C++20 standards committee.
+    </p>
+<h4>
+<a name="callable_traits.faq.h2"></a>
+      <span class="phrase"><a name="callable_traits.faq.why_does_namespace_scoped_args_t"></a></span><a class="link" href="faq.html#callable_traits.faq.why_does_namespace_scoped_args_t">Why
+      does <code class="literal">callable_traits::</code><code class="literal">args_t</code> alias a
+      <code class="literal">std::tuple</code> instead of X?</a>
     </h4>
 <p>
       Boost contains a handful of excellent type containers. However, <code class="literal">CallableTraits</code>
       is designed to only use the standard headers, so <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">tuple</span><span class="special">&gt;</span></code>
-      was the only option under this limitation.
+      was the only option under this limitation. It would be trivial to support other
+      variadic containers, and I will consider doing so if there is sufficient interest.
     </p>
 <h4>
-<a name="callable_traits.faq.h2"></a>
+<a name="callable_traits.faq.h3"></a>
       <span class="phrase"><a name="callable_traits.faq.why_use_reference_collapsing_rul"></a></span><a class="link" href="faq.html#callable_traits.faq.why_use_reference_collapsing_rul">Why
       use reference collapsing rules when adding member function ref-qualifiers?</a>
     </h4>
@@ -123,6 +102,87 @@
       Although arbitrary, the reference collapsing rules are well-defined and already
       known to many template metaprogrammers. Anything else would be a burden to
       memorize.
+    </p>
+<h4>
+<a name="callable_traits.faq.h4"></a>
+      <span class="phrase"><a name="callable_traits.faq.how_is_this_a_c_11_library_if_it"></a></span><a class="link" href="faq.html#callable_traits.faq.how_is_this_a_c_11_library_if_it">How
+      is this a C++11 library if it uses newer features like variable templates?</a>
+    </h4>
+<p>
+      If your compiler doesn't support a certain language feature, then that feature
+      will simply be unavailable to use. Here are some examples:
+    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          GCC 4.7.4 doesn't like this type: <code class="computeroutput"><span class="keyword">void</span><span class="special">()</span> <span class="special">&amp;</span></code>.
+          So, <code class="computeroutput"><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">add_member_lvalue_reference</span><span class="special">&lt;</span><span class="keyword">void</span><span class="special">()&gt;</span></code>
+          will simply not work.
+        </li>
+<li class="listitem">
+          GCC 4.7.4 doesn't allow variable templates. As such, <code class="computeroutput"><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">has_void_return_v</span></code>
+          is conditionally compiled as a struct with a <code class="computeroutput"><span class="keyword">static_assert</span></code>
+          that always fails. Instead, you can use <code class="computeroutput"><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">has_void_return</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">value</span></code>.
+        </li>
+<li class="listitem">
+          At the time of this writing, <code class="computeroutput"><span class="identifier">transaction_safe</span></code>
+          features currently only work for GCC 6+, and only when the correct compiler
+          flag <code class="computeroutput"><span class="special">-</span><span class="identifier">fgnu</span><span class="special">-</span><span class="identifier">tm</span></code> is
+          enabled. In all other cases, <code class="computeroutput"><span class="identifier">transaction_safe</span></code>
+          features in <code class="literal">CallableTraits</code> are conditionally compiled
+          to fail upon usage, with appropriate error messages.
+        </li>
+</ul></div>
+<p>
+      It doesn't take much imagination to see how this pattern works for other language
+      features.
+    </p>
+<h4>
+<a name="callable_traits.faq.h5"></a>
+      <span class="phrase"><a name="callable_traits.faq.many_features_in_this_library_ca"></a></span><a class="link" href="faq.html#callable_traits.faq.many_features_in_this_library_ca">Many
+      features in this library cause a "substitution failure" when the
+      template constraints are violated. Does this mean that I can violate the constraints
+      in a SFINAE context, as long as there is another legal substitute?</a>
+    </h4>
+<p>
+      Yes. The SFINAE-ability of violated constraints has been tested extensively
+      on all compilers. Achieving this required some messy code in the public header
+      files.
+    </p>
+<h4>
+<a name="callable_traits.faq.h6"></a>
+      <span class="phrase"><a name="callable_traits.faq.i_see_that_arg_at_is_defined_in_"></a></span><a class="link" href="faq.html#callable_traits.faq.i_see_that_arg_at_is_defined_in_">I
+      see that <code class="computeroutput"><span class="identifier">arg_at</span></code> is defined
+      in terms of <code class="computeroutput"><span class="identifier">arg_at_t</span></code>. Shouldn't
+      it be the other way around?</a>
+    </h4>
+<p>
+      Alias templates are much more friednly to SFINAE. The <code class="computeroutput"><span class="keyword">struct</span></code>-style
+      metafunctions are provided only to parallel the <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span></code>
+      naming conventions.
+    </p>
+<h4>
+<a name="callable_traits.faq.h7"></a>
+      <span class="phrase"><a name="callable_traits.faq.what_about_c_17_noexcept"></a></span><a class="link" href="faq.html#callable_traits.faq.what_about_c_17_noexcept">What
+      about C++17 <code class="computeroutput"><span class="keyword">noexcept</span></code>?</a>
+    </h4>
+<p>
+      The upcoming ISO standard for C++17 includes a <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html" target="_top">change
+      to the core language</a> which adds the <code class="literal">noexcept</code> qualifier
+      to the type system. Currently, C++17 <code class="computeroutput"><span class="keyword">noexcept</span></code>
+      qualifiers are not handled in <code class="literal">CallableTraits</code>, because compiler
+      vendors have not implemented support for this feature (as far as I know). However,
+      features are planned, and they will be non-breaking additions to the library.
+    </p>
+<h4>
+<a name="callable_traits.faq.h8"></a>
+      <span class="phrase"><a name="callable_traits.faq.what_about_calling_conventions"></a></span><a class="link" href="faq.html#callable_traits.faq.what_about_calling_conventions">What
+      about calling conventions?</a>
+    </h4>
+<p>
+      I originally implemented features for these. However, these features necessitated
+      many, many more platform-specific test cases than I was willing to write for
+      a version 1.0 release. The code is still designed to accommodate such features,
+      so I would consider adding them in the future if there is sufficient interest.
     </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
@@ -135,7 +195,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="compatibility.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="reference.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="../index.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="reference.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

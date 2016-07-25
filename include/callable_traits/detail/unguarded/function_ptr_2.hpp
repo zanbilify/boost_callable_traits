@@ -19,28 +19,19 @@ CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER - `transaction_safe` when
     CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE is enabled, otherwise nothing
 */
 
-template<typename Ret, typename... Args>
-struct has_calling_convention_t<
-    CALLABLE_TRAITS_ST Ret(CALLABLE_TRAITS_CC*)(Args...) CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE,
-    CALLABLE_TRAITS_CC_TAG> {
-
-    using type = std::true_type;
-};
-
 template<typename Return, typename... Args>
 struct function<
     CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(Args...) CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE>
- : qualifier_traits<dummy>, default_callable_traits<> {
+ : default_callable_traits<> {
 
     static constexpr bool value = true;
-
-    using is_function = std::true_type;
 
     using traits = function;
 
     using return_type = Return;
 
     using arg_types = std::tuple<Args...>;
+    using non_invoke_arg_types = arg_types;
 
     using type = CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_CC *)(Args...)
         CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;

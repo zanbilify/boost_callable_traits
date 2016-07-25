@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -10,9 +9,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_DETAIL_FWD_PMD_FWD_HPP
 #define CALLABLE_TRAITS_DETAIL_FWD_PMD_FWD_HPP
 
-namespace callable_traits {
-
-    namespace detail {
+CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
         template<typename T>
         struct pmd;

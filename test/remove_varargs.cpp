@@ -8,22 +8,11 @@ Distributed under the Boost Software License, Version 1.0.
 #include <functional>
 #include <tuple>
 #include <callable_traits/remove_varargs.hpp>
+#include "test.hpp"
 
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
 
-#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
-#define LREF
-#define RREF
-#else
-#define LREF &
-#define RREF &&
-#endif
 
 struct foo {};
-
-namespace ct = callable_traits;
 
 int main() {
 
@@ -54,31 +43,31 @@ int main() {
         using va_cvl = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile LREF;
         using va_cvr = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile RREF;
 
-        CT_ASSERT(std::is_same<f,   ct::remove_varargs_t<va_f>>{});
-        CT_ASSERT(std::is_same<l,   ct::remove_varargs_t<va_l>>{});
-        CT_ASSERT(std::is_same<r,   ct::remove_varargs_t<va_r>>{});
-        CT_ASSERT(std::is_same<c,   ct::remove_varargs_t<va_c>>{});
-        CT_ASSERT(std::is_same<cl,  ct::remove_varargs_t<va_cl>>{});
-        CT_ASSERT(std::is_same<cr,  ct::remove_varargs_t<va_cr>>{});
-        CT_ASSERT(std::is_same<v,   ct::remove_varargs_t<va_v>>{});
-        CT_ASSERT(std::is_same<vl,  ct::remove_varargs_t<va_vl>>{});
-        CT_ASSERT(std::is_same<vr,  ct::remove_varargs_t<va_vr>>{});
-        CT_ASSERT(std::is_same<cv,  ct::remove_varargs_t<va_cv>>{});
-        CT_ASSERT(std::is_same<cvl, ct::remove_varargs_t<va_cvl>>{});
-        CT_ASSERT(std::is_same<cvr, ct::remove_varargs_t<va_cvr>>{});
+        CT_ASSERT(std::is_same<f,    remove_varargs_t<va_f>>{});
+        CT_ASSERT(std::is_same<l,    remove_varargs_t<va_l>>{});
+        CT_ASSERT(std::is_same<r,    remove_varargs_t<va_r>>{});
+        CT_ASSERT(std::is_same<c,    remove_varargs_t<va_c>>{});
+        CT_ASSERT(std::is_same<cl,   remove_varargs_t<va_cl>>{});
+        CT_ASSERT(std::is_same<cr,   remove_varargs_t<va_cr>>{});
+        CT_ASSERT(std::is_same<v,    remove_varargs_t<va_v>>{});
+        CT_ASSERT(std::is_same<vl,   remove_varargs_t<va_vl>>{});
+        CT_ASSERT(std::is_same<vr,   remove_varargs_t<va_vr>>{});
+        CT_ASSERT(std::is_same<cv,   remove_varargs_t<va_cv>>{});
+        CT_ASSERT(std::is_same<cvl,  remove_varargs_t<va_cvl>>{});
+        CT_ASSERT(std::is_same<cvr,  remove_varargs_t<va_cvr>>{});
 
-        CT_ASSERT(std::is_same<f,   ct::remove_varargs_t<f>>{});
-        CT_ASSERT(std::is_same<l,   ct::remove_varargs_t<l>>{});
-        CT_ASSERT(std::is_same<r,   ct::remove_varargs_t<r>>{});
-        CT_ASSERT(std::is_same<c,   ct::remove_varargs_t<c>>{});
-        CT_ASSERT(std::is_same<cl,  ct::remove_varargs_t<cl>>{});
-        CT_ASSERT(std::is_same<cr,  ct::remove_varargs_t<cr>>{});
-        CT_ASSERT(std::is_same<v,   ct::remove_varargs_t<v>>{});
-        CT_ASSERT(std::is_same<vl,  ct::remove_varargs_t<vl>>{});
-        CT_ASSERT(std::is_same<vr,  ct::remove_varargs_t<vr>>{});
-        CT_ASSERT(std::is_same<cv,  ct::remove_varargs_t<cv>>{});
-        CT_ASSERT(std::is_same<cvl, ct::remove_varargs_t<cvl>>{});
-        CT_ASSERT(std::is_same<cvr, ct::remove_varargs_t<cvr>>{});
+        CT_ASSERT(std::is_same<f,    remove_varargs_t<f>>{});
+        CT_ASSERT(std::is_same<l,    remove_varargs_t<l>>{});
+        CT_ASSERT(std::is_same<r,    remove_varargs_t<r>>{});
+        CT_ASSERT(std::is_same<c,    remove_varargs_t<c>>{});
+        CT_ASSERT(std::is_same<cl,   remove_varargs_t<cl>>{});
+        CT_ASSERT(std::is_same<cr,   remove_varargs_t<cr>>{});
+        CT_ASSERT(std::is_same<v,    remove_varargs_t<v>>{});
+        CT_ASSERT(std::is_same<vl,   remove_varargs_t<vl>>{});
+        CT_ASSERT(std::is_same<vr,   remove_varargs_t<vr>>{});
+        CT_ASSERT(std::is_same<cv,   remove_varargs_t<cv>>{});
+        CT_ASSERT(std::is_same<cvl,  remove_varargs_t<cvl>>{});
+        CT_ASSERT(std::is_same<cvr,  remove_varargs_t<cvr>>{});
     }
 
     {
@@ -108,31 +97,31 @@ int main() {
         using va_cvl = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const volatile LREF;
         using va_cvr = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const volatile RREF;
 
-        CT_ASSERT(std::is_same<f,   ct::remove_varargs_t<va_f>>{});
-        CT_ASSERT(std::is_same<l,   ct::remove_varargs_t<va_l>>{});
-        CT_ASSERT(std::is_same<r,   ct::remove_varargs_t<va_r>>{});
-        CT_ASSERT(std::is_same<c,   ct::remove_varargs_t<va_c>>{});
-        CT_ASSERT(std::is_same<cl,  ct::remove_varargs_t<va_cl>>{});
-        CT_ASSERT(std::is_same<cr,  ct::remove_varargs_t<va_cr>>{});
-        CT_ASSERT(std::is_same<v,   ct::remove_varargs_t<va_v>>{});
-        CT_ASSERT(std::is_same<vl,  ct::remove_varargs_t<va_vl>>{});
-        CT_ASSERT(std::is_same<vr,  ct::remove_varargs_t<va_vr>>{});
-        CT_ASSERT(std::is_same<cv,  ct::remove_varargs_t<va_cv>>{});
-        CT_ASSERT(std::is_same<cvl, ct::remove_varargs_t<va_cvl>>{});
-        CT_ASSERT(std::is_same<cvr, ct::remove_varargs_t<va_cvr>>{});
+        CT_ASSERT(std::is_same<f,    remove_varargs_t<va_f>>{});
+        CT_ASSERT(std::is_same<l,    remove_varargs_t<va_l>>{});
+        CT_ASSERT(std::is_same<r,    remove_varargs_t<va_r>>{});
+        CT_ASSERT(std::is_same<c,    remove_varargs_t<va_c>>{});
+        CT_ASSERT(std::is_same<cl,   remove_varargs_t<va_cl>>{});
+        CT_ASSERT(std::is_same<cr,   remove_varargs_t<va_cr>>{});
+        CT_ASSERT(std::is_same<v,    remove_varargs_t<va_v>>{});
+        CT_ASSERT(std::is_same<vl,   remove_varargs_t<va_vl>>{});
+        CT_ASSERT(std::is_same<vr,   remove_varargs_t<va_vr>>{});
+        CT_ASSERT(std::is_same<cv,   remove_varargs_t<va_cv>>{});
+        CT_ASSERT(std::is_same<cvl,  remove_varargs_t<va_cvl>>{});
+        CT_ASSERT(std::is_same<cvr,  remove_varargs_t<va_cvr>>{});
 
-        CT_ASSERT(std::is_same<f,   ct::remove_varargs_t<f>>{});
-        CT_ASSERT(std::is_same<l,   ct::remove_varargs_t<l>>{});
-        CT_ASSERT(std::is_same<r,   ct::remove_varargs_t<r>>{});
-        CT_ASSERT(std::is_same<c,   ct::remove_varargs_t<c>>{});
-        CT_ASSERT(std::is_same<cl,  ct::remove_varargs_t<cl>>{});
-        CT_ASSERT(std::is_same<cr,  ct::remove_varargs_t<cr>>{});
-        CT_ASSERT(std::is_same<v,   ct::remove_varargs_t<v>>{});
-        CT_ASSERT(std::is_same<vl,  ct::remove_varargs_t<vl>>{});
-        CT_ASSERT(std::is_same<vr,  ct::remove_varargs_t<vr>>{});
-        CT_ASSERT(std::is_same<cv,  ct::remove_varargs_t<cv>>{});
-        CT_ASSERT(std::is_same<cvl, ct::remove_varargs_t<cvl>>{});
-        CT_ASSERT(std::is_same<cvr, ct::remove_varargs_t<cvr>>{});
+        CT_ASSERT(std::is_same<f,    remove_varargs_t<f>>{});
+        CT_ASSERT(std::is_same<l,    remove_varargs_t<l>>{});
+        CT_ASSERT(std::is_same<r,    remove_varargs_t<r>>{});
+        CT_ASSERT(std::is_same<c,    remove_varargs_t<c>>{});
+        CT_ASSERT(std::is_same<cl,   remove_varargs_t<cl>>{});
+        CT_ASSERT(std::is_same<cr,   remove_varargs_t<cr>>{});
+        CT_ASSERT(std::is_same<v,    remove_varargs_t<v>>{});
+        CT_ASSERT(std::is_same<vl,   remove_varargs_t<vl>>{});
+        CT_ASSERT(std::is_same<vr,   remove_varargs_t<vr>>{});
+        CT_ASSERT(std::is_same<cv,   remove_varargs_t<cv>>{});
+        CT_ASSERT(std::is_same<cvl,  remove_varargs_t<cvl>>{});
+        CT_ASSERT(std::is_same<cvr,  remove_varargs_t<cvr>>{});
     }
 
 #ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
@@ -164,31 +153,31 @@ int main() {
         using va_cvl = void(...) const volatile LREF;
         using va_cvr = void(...) const volatile RREF;
 
-        CT_ASSERT(std::is_same<f,   ct::remove_varargs_t<va_f>>{});
-        CT_ASSERT(std::is_same<l,   ct::remove_varargs_t<va_l>>{});
-        CT_ASSERT(std::is_same<r,   ct::remove_varargs_t<va_r>>{});
-        CT_ASSERT(std::is_same<c,   ct::remove_varargs_t<va_c>>{});
-        CT_ASSERT(std::is_same<cl,  ct::remove_varargs_t<va_cl>>{});
-        CT_ASSERT(std::is_same<cr,  ct::remove_varargs_t<va_cr>>{});
-        CT_ASSERT(std::is_same<v,   ct::remove_varargs_t<va_v>>{});
-        CT_ASSERT(std::is_same<vl,  ct::remove_varargs_t<va_vl>>{});
-        CT_ASSERT(std::is_same<vr,  ct::remove_varargs_t<va_vr>>{});
-        CT_ASSERT(std::is_same<cv,  ct::remove_varargs_t<va_cv>>{});
-        CT_ASSERT(std::is_same<cvl, ct::remove_varargs_t<va_cvl>>{});
-        CT_ASSERT(std::is_same<cvr, ct::remove_varargs_t<va_cvr>>{});
+        CT_ASSERT(std::is_same<f,    remove_varargs_t<va_f>>{});
+        CT_ASSERT(std::is_same<l,    remove_varargs_t<va_l>>{});
+        CT_ASSERT(std::is_same<r,    remove_varargs_t<va_r>>{});
+        CT_ASSERT(std::is_same<c,    remove_varargs_t<va_c>>{});
+        CT_ASSERT(std::is_same<cl,   remove_varargs_t<va_cl>>{});
+        CT_ASSERT(std::is_same<cr,   remove_varargs_t<va_cr>>{});
+        CT_ASSERT(std::is_same<v,    remove_varargs_t<va_v>>{});
+        CT_ASSERT(std::is_same<vl,   remove_varargs_t<va_vl>>{});
+        CT_ASSERT(std::is_same<vr,   remove_varargs_t<va_vr>>{});
+        CT_ASSERT(std::is_same<cv,   remove_varargs_t<va_cv>>{});
+        CT_ASSERT(std::is_same<cvl,  remove_varargs_t<va_cvl>>{});
+        CT_ASSERT(std::is_same<cvr,  remove_varargs_t<va_cvr>>{});
 
-        CT_ASSERT(std::is_same<f,   ct::remove_varargs_t<f>>{});
-        CT_ASSERT(std::is_same<l,   ct::remove_varargs_t<l>>{});
-        CT_ASSERT(std::is_same<r,   ct::remove_varargs_t<r>>{});
-        CT_ASSERT(std::is_same<c,   ct::remove_varargs_t<c>>{});
-        CT_ASSERT(std::is_same<cl,  ct::remove_varargs_t<cl>>{});
-        CT_ASSERT(std::is_same<cr,  ct::remove_varargs_t<cr>>{});
-        CT_ASSERT(std::is_same<v,   ct::remove_varargs_t<v>>{});
-        CT_ASSERT(std::is_same<vl,  ct::remove_varargs_t<vl>>{});
-        CT_ASSERT(std::is_same<vr,  ct::remove_varargs_t<vr>>{});
-        CT_ASSERT(std::is_same<cv,  ct::remove_varargs_t<cv>>{});
-        CT_ASSERT(std::is_same<cvl, ct::remove_varargs_t<cvl>>{});
-        CT_ASSERT(std::is_same<cvr, ct::remove_varargs_t<cvr>>{});
+        CT_ASSERT(std::is_same<f,    remove_varargs_t<f>>{});
+        CT_ASSERT(std::is_same<l,    remove_varargs_t<l>>{});
+        CT_ASSERT(std::is_same<r,    remove_varargs_t<r>>{});
+        CT_ASSERT(std::is_same<c,    remove_varargs_t<c>>{});
+        CT_ASSERT(std::is_same<cl,   remove_varargs_t<cl>>{});
+        CT_ASSERT(std::is_same<cr,   remove_varargs_t<cr>>{});
+        CT_ASSERT(std::is_same<v,    remove_varargs_t<v>>{});
+        CT_ASSERT(std::is_same<vl,   remove_varargs_t<vl>>{});
+        CT_ASSERT(std::is_same<vr,   remove_varargs_t<vr>>{});
+        CT_ASSERT(std::is_same<cv,   remove_varargs_t<cv>>{});
+        CT_ASSERT(std::is_same<cvl,  remove_varargs_t<cvl>>{});
+        CT_ASSERT(std::is_same<cvr,  remove_varargs_t<cvr>>{});
     }
 
 #endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
@@ -196,6 +185,6 @@ int main() {
     {
         using f = void(&)();
         using va_f = void(&)(...);
-        CT_ASSERT(std::is_same<f,   ct::remove_varargs_t<va_f>>{});
+        CT_ASSERT(std::is_same<f,    remove_varargs_t<va_f>>{});
     }
 }

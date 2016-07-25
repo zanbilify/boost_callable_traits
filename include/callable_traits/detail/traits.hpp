@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -15,11 +14,8 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/fwd/pmf_fwd.hpp>
 #include <callable_traits/detail/fwd/function_fwd.hpp>
 #include <callable_traits/detail/fwd/function_object_fwd.hpp>
-#include <type_traits>
 
-namespace callable_traits {
-
-    namespace detail {
+CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
         template<typename T>
         using traits = typename CALLABLE_TRAITS_DISJUNCTION(
@@ -28,9 +24,9 @@ namespace callable_traits {
             pmf<T>,
             pmd<T>,
             function_object<T>,
-            default_callable_traits<T>
+            default_callable_traits<>
         )::traits;
-    }
-}
+
+CALLABLE_TRAITS_DETAIL_NAMESPACE_END
 
 #endif

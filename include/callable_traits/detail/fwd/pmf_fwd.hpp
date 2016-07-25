@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -12,11 +11,9 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/utility.hpp>
 
-namespace callable_traits {
+CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
-    namespace detail {
-
-        template<typename T, typename U = shallow_decay<T>>
+        template<typename T>
         struct pmf;
 
     }

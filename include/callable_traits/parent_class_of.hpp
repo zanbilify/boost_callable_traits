@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -12,6 +11,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
 //[ parent_class_of_hpp
 /*`
 [section:ref_parent_class_of parent_class_of]
@@ -20,21 +21,22 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
+template<typename T>
+using parent_class_of_t = //implementation-defined
+//<-
+    detail::fail_if_invalid<
+        typename detail::traits<T>::class_type,
+        type_is_not_a_member_pointer>;
+//->
 
-    template<typename T>
-    using parent_class_of_t = //implementation-defined
-    //<-
-        detail::fail_if_invalid<
-            typename detail::traits<T>::class_type,
-            type_is_not_a_member_pointer>;
-    //->
+template<typename T>
+struct parent_class_of {
+    using type = parent_class_of_t<T>;
+};
 
-    template<typename T>
-    struct parent_class_of {
-        using type = parent_class_of_t<T>;
-    };
-}
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
 
 /*`
 [heading Constraints]

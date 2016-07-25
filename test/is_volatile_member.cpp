@@ -8,32 +8,19 @@ Distributed under the Boost Software License, Version 1.0.
 #include <functional>
 #include <utility>
 #include <callable_traits/is_volatile_member.hpp>
-
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
-
-#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
-#define LREF
-#define RREF
-#else
-#define LREF &
-#define RREF &&
-#endif
+#include "test.hpp"
 
 struct foo {};
 
-namespace ct = callable_traits;
-
 template<typename T>
 void assert_volatile_qualified() {
-    CT_ASSERT(ct::is_volatile_member<T>::value);
+    CT_ASSERT( is_volatile_member<T>::value);
 }
 
 
 template<typename T>
 void assert_not_volatile_qualified() {
-    CT_ASSERT(!ct::is_volatile_member<T>::value);
+    CT_ASSERT(! is_volatile_member<T>::value);
 }
 
 int main() {
@@ -110,18 +97,18 @@ int main() {
         using cvl = void() const volatile LREF;
         using cvr = void() const volatile RREF;
 
-        CT_ASSERT(!ct::is_volatile_member<f>());
-        CT_ASSERT(!ct::is_volatile_member<l>());
-        CT_ASSERT(!ct::is_volatile_member<r>());
-        CT_ASSERT(!ct::is_volatile_member<c>());
-        CT_ASSERT(!ct::is_volatile_member<cl>());
-        CT_ASSERT(!ct::is_volatile_member<cr>());
-        CT_ASSERT(ct::is_volatile_member<v>());
-        CT_ASSERT(ct::is_volatile_member<vl>());
-        CT_ASSERT(ct::is_volatile_member<vr>());
-        CT_ASSERT(ct::is_volatile_member<cv>());
-        CT_ASSERT(ct::is_volatile_member<cvl>());
-        CT_ASSERT(ct::is_volatile_member<cvr>());
+        CT_ASSERT(! is_volatile_member<f>());
+        CT_ASSERT(! is_volatile_member<l>());
+        CT_ASSERT(! is_volatile_member<r>());
+        CT_ASSERT(! is_volatile_member<c>());
+        CT_ASSERT(! is_volatile_member<cl>());
+        CT_ASSERT(! is_volatile_member<cr>());
+        CT_ASSERT( is_volatile_member<v>());
+        CT_ASSERT( is_volatile_member<vl>());
+        CT_ASSERT( is_volatile_member<vr>());
+        CT_ASSERT( is_volatile_member<cv>());
+        CT_ASSERT( is_volatile_member<cvl>());
+        CT_ASSERT( is_volatile_member<cvr>());
     }
 
 #endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS

@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -12,6 +11,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
 //[ args_hpp
 /*`[section:ref_args args]
 [heading Header]
@@ -19,21 +20,22 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
+template<typename T>
+using args_t = //implementation-defined
+//<-
+    detail::fail_if_invalid<
+        typename detail::traits<T>::arg_types,
+        cannot_determine_parameters_for_this_type>;
+//->
 
-    template<typename T>
-    using args_t = //implementation-defined
-    //<-
-        detail::fail_if_invalid<
-            typename detail::traits<T>::arg_types,
-            cannot_determine_parameters_for_this_type>;
-    //->
+template<typename T>
+struct args {
+    using type = args_t<T>;
+};
 
-    template<typename T>
-    struct args {
-        using type = args_t<T>;
-    };
-}
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
 
 /*`
 [heading Constraints]

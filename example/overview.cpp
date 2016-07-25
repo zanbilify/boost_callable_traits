@@ -9,8 +9,6 @@ Distributed under the Boost Software License, Version 1.0.
 int main(){}
 #else
 
-
-
 //[ overview
 #include <callable_traits/callable_traits.hpp>
 

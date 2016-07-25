@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -10,8 +9,9 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef CALLABLE_TRAITS_HAS_VARARGS_HPP
 #define CALLABLE_TRAITS_HAS_VARARGS_HPP
 
-#include <callable_traits/detail/traits.hpp>
 #include <callable_traits/detail/core.hpp>
+
+CALLABLE_TRAITS_NAMESPACE_BEGIN
 
 //[ has_varargs_hpp
 /*`[section:ref_has_varargs has_varargs]
@@ -20,36 +20,38 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
 
-    template<typename T>
-    struct has_varargs; //implementation-defined
+template<typename T>
+struct has_varargs; //implementation-defined
 
-    //<-
-    template<typename T>
-    struct has_varargs
-        : detail::traits<T>::has_varargs {
-        using type = typename detail::traits<T>::has_varargs;
-    };
+//<-
+template<typename T>
+struct has_varargs
+    : detail::traits<T>::has_varargs {
+    using type = typename detail::traits<T>::has_varargs;
+};
+//->
 
-    #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+#ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
 
-    template<typename T>
-    struct has_varargs_v {
-        static_assert(sizeof(T) < 1,
-            "Variable templates not supported on this compiler.");
-    };
+template<typename T>
+struct has_varargs_v {
+    static_assert(sizeof(T) < 1,
+        "Variable templates not supported on this compiler.");
+};
 
-    #else
-    //->
-    template<typename T>
-    constexpr bool has_varargs_v = //implementation-defined
-    //<-
-        detail::traits<T>::has_varargs::value;
+#else
 
-    #endif
-    //->
-}
+template<typename T>
+constexpr bool has_varargs_v = //implementation-defined
+//<-
+    detail::traits<T>::has_varargs::value;
+//->
+#endif
+
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
 
 /*`
 [heading Constraints]

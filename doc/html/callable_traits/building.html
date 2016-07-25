@@ -6,7 +6,7 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="../index.html" title="CallableTraits">
 <link rel="up" href="../index.html" title="CallableTraits">
-<link rel="prev" href="reference.html" title="Reference Documentation">
+<link rel="prev" href="transactional_memory_features.html" title="Transactional Memory Features">
 <link rel="next" href="contact.html" title="Contact">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -20,7 +20,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="reference.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="contact.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="transactional_memory_features.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="contact.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
@@ -36,12 +36,9 @@
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>
-        For compilers with "basic" support in <code class="literal">CallableTraits</code>,
-        test cases for unsupported features are replaced with <code class="computeroutput"><span class="keyword">int</span>
-        <span class="identifier">main</span><span class="special">(){}</span></code>
-        via conditional compilation. For more information about compiler versions
-        and supported features, refer to the <a class="link" href="compatibility.html" title="Compatibility">Compatibility</a>
-        section.
+        Some test cases that use language features that do not work on some supported
+        compilers. These conflicts are "resolved" by replacing <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">main</span><span class="special">(){}</span></code> with the actual test via conditional
+        compilation.
       </p></td></tr>
 </table></div>
 <h4>
@@ -54,15 +51,15 @@
       version 3.0 or higher to use the test suite. For Windows users who wish to
       build the test suite with Visual Studio 2015 Update 2, it appears that CMake
       version 3.5 or higher is required. The build instructions assume that both
-      CMake and Git executables exist in your environment PATH.
+      CMake and Git are executable from your environment PATH.
     </p>
 <h4>
 <a name="callable_traits.building.h1"></a>
-      <span class="phrase"><a name="callable_traits.building.one_click_scripts"></a></span><a class="link" href="building.html#callable_traits.building.one_click_scripts">One-click
-      scripts</a>
+      <span class="phrase"><a name="callable_traits.building.one_click_build_scripts"></a></span><a class="link" href="building.html#callable_traits.building.one_click_build_scripts">One-click
+      build scripts</a>
     </h4>
 <p>
-      For convenience, one-click testing scripts for Linux and Windows are packaged
+      For convenience, one-click build scripts for Linux and Windows are packaged
       with <code class="literal">CallableTraits</code>, each of which must be run from the
       directory in which the script resides. Running one of these scripts will create
       a <code class="computeroutput"><span class="identifier">build</span><span class="special">-</span><span class="identifier">xxx</span></code> subdirectory in the <code class="literal">CallableTraits</code>
@@ -72,6 +69,9 @@
       testing scripts do not work for you.
     </p>
 <p>
+      I'm not a shell scripting expert, so use these scripts at your own risk.
+    </p>
+<p>
       First, clone the repository:
     </p>
 <pre class="programlisting"><span class="identifier">git</span> <span class="identifier">clone</span> <span class="identifier">http</span><span class="special">://</span><span class="identifier">github</span><span class="special">.</span><span class="identifier">com</span><span class="special">/</span><span class="identifier">badair</span><span class="special">/</span><span class="identifier">callable_traits</span>
@@ -79,12 +79,7 @@
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
           Linux (possibly OSX - untested)
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
-<li class="listitem">
-                Examples related to calling conventions are <span class="emphasis"><em>excluded</em></span>
-                from these build scripts
-              </li>
-<li class="listitem">
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
                 script directory: <code class="computeroutput"><span class="special">[</span><span class="identifier">CallableTraits</span> <span class="identifier">root</span><span class="special">]/</span><span class="identifier">scripts</span><span class="special">/</span><span class="identifier">posix</span></code>
                 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; ">
 <li class="listitem">
@@ -106,7 +101,7 @@
                             compiles with the clang++ executable in the PATH
                           </li>
 <li class="listitem">
-                            uses libc++ for the standard library implementation
+                            uses libc++ as the standard library implementation
                           </li>
 </ul></div>
                     </li>
@@ -117,35 +112,24 @@
                             compiles with the clang++ executable in the PATH
                           </li>
 <li class="listitem">
-                            uses libstdc++ for the standard library implementation
+                            uses libstdc++ as the standard library implementation
                           </li>
 </ul></div>
                     </li>
 </ul></div>
-              </li>
-</ul></div>
+              </li></ul></div>
         </li>
 <li class="listitem">
           Windows
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
-<li class="listitem">
-                Examples related to calling conventions are <span class="emphasis"><em>included</em></span>
-                in these build scripts
-              </li>
-<li class="listitem">
+          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
                 script directory: <code class="computeroutput"><span class="special">[</span><span class="identifier">CallableTraits</span> <span class="identifier">root</span><span class="special">]\</span><span class="identifier">scripts</span><span class="special">\</span><span class="identifier">windows</span></code>
                 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; ">
 <li class="listitem">
                       <code class="computeroutput"><span class="identifier">MSVC</span><span class="special">-</span><span class="identifier">Win32</span><span class="special">-</span><span class="identifier">Debug</span><span class="special">.</span><span class="identifier">bat</span></code>
-                      <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
-<li class="listitem">
-                            compiles with MSVC 19
-                          </li>
-<li class="listitem">
-                            Visual Studio 2015 must be installed in the default install
-                            directory
-                          </li>
-</ul></div>
+                      <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+                            compiles with Visual Studio 2015, which must be installed
+                            in the default install directory
+                          </li></ul></div>
                     </li>
 <li class="listitem">
                       <code class="computeroutput"><span class="identifier">LLVM</span><span class="special">-</span><span class="identifier">vs2014</span><span class="special">-</span><span class="identifier">Win32</span><span class="special">-</span><span class="identifier">Debug</span><span class="special">.</span><span class="identifier">bat</span></code>
@@ -160,8 +144,7 @@
 <li class="listitem">
                             This script assumes that the Windows Installer found
                             on <a href="http://llvm.org/builds/" target="_top">this page</a>
-                            was used to install LLVM, which is integrated with Visual
-                            Studio
+                            was used to install LLVM
                           </li>
 </ul></div>
                     </li>
@@ -172,18 +155,17 @@
                             compiles with a MinGW-based GCC build
                           </li>
 <li class="listitem">
-                            <span class="bold"><strong>requires a <a href="http://gnuwin32.sourceforge.net/packages/make.htm" target="_top">Windows
+                            requires a <a href="http://gnuwin32.sourceforge.net/packages/make.htm" target="_top">Windows
                             build of GNU Make</a> to be installed and present
-                            in the PATH</strong></span>
+                            in the PATH environment variable
                           </li>
 <li class="listitem">
-                            Expects to find the MinGW root directory at <code class="computeroutput"><span class="identifier">C</span><span class="special">:\\</span><span class="identifier">MinGW</span><span class="special">*</span></code>
+                            Expects to find the MinGW root directory at <code class="computeroutput"><span class="identifier">C</span><span class="special">:\\</span><span class="identifier">MinGW</span></code>
                           </li>
 </ul></div>
                     </li>
 </ul></div>
-              </li>
-</ul></div>
+              </li></ul></div>
         </li>
 </ul></div>
 <h4>
@@ -238,10 +220,8 @@
 <span class="string">"%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe"</span> <span class="identifier">check</span><span class="special">.</span><span class="identifier">vcxproj</span> <span class="special">/</span><span class="identifier">t</span><span class="special">:</span><span class="identifier">build</span> <span class="special">/</span><span class="identifier">p</span><span class="special">:</span><span class="identifier">Configuration</span><span class="special">=</span><span class="identifier">Debug</span> <span class="special">/</span><span class="identifier">p</span><span class="special">:</span><span class="identifier">Platform</span><span class="special">=</span><span class="identifier">Win32</span> <span class="special">/</span><span class="identifier">v</span><span class="special">:</span><span class="identifier">n</span> <span class="special">/</span><span class="identifier">nologo</span>
 </pre>
 <p>
-      To include the experimental examples for calling conventions in the build,
-      append <code class="computeroutput"><span class="special">-</span><span class="identifier">DCALLABLE_TRAITS_BUILD_EXPERIMENTAL</span><span class="special">=</span><span class="identifier">ON</span></code> to the
-      CMake arguments. To build with Clang/C2 instead of MSVC, append <code class="computeroutput"><span class="special">-</span><span class="identifier">TLLVM</span><span class="special">-</span><span class="identifier">vs2014</span></code> to the CMake arguments. This will
-      only work if you have <a href="http://llvm.org/builds/" target="_top">Clang/C2</a>
+      To build with Clang/C2 instead of MSVC, append <code class="computeroutput"><span class="special">-</span><span class="identifier">TLLVM</span><span class="special">-</span><span class="identifier">vs2014</span></code>
+      to the CMake arguments. This will only work if you have <a href="http://llvm.org/builds/" target="_top">Clang/C2</a>
       installed.
     </p>
 <div class="tip"><table border="0" summary="Tip">
@@ -251,7 +231,7 @@
 </tr>
 <tr><td align="left" valign="top"><p>
         If you need additional help building the test suite, <a class="link" href="contact.html" title="Contact">contact
-        the author</a>.
+        me</a>.
       </p></td></tr>
 </table></div>
 <div class="note"><table border="0" summary="Note">
@@ -260,10 +240,7 @@
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>
-        Boost.Build configuration files have not yet been written for building the
-        tests and examples. The <code class="computeroutput"><span class="identifier">Boost</span><span class="special">.</span><span class="identifier">Build</span></code>
-        configuration files are currently only used by the author to build this documentation
-        (along with some unpublished scripting hacks).
+        Boost.Build isn't supported yet, but it will be supported soon.
       </p></td></tr>
 </table></div>
 </div>
@@ -277,7 +254,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="reference.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="contact.html"><img src="../../src/images/next.png" alt="Next"></a>
+<a accesskey="p" href="transactional_memory_features.html"><img src="../../src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../../src/images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../../src/images/home.png" alt="Home"></a><a accesskey="n" href="contact.html"><img src="../../src/images/next.png" alt="Next"></a>
 </div>
 </body>
 </html>

@@ -8,24 +8,20 @@ Distributed under the Boost Software License, Version 1.0.
 #include <functional>
 #include <utility>
 #include <callable_traits/has_member_qualifiers.hpp>
+#include "test.hpp"
 
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
 
 
 struct foo {};
 
-namespace ct = callable_traits;
-
 template<typename T>
 void assert_qualified() {
-    CT_ASSERT(ct::has_member_qualifiers<T>::value);
+    CT_ASSERT( has_member_qualifiers<T>::value);
 }
 
 template<typename T>
 void assert_unqualified() {
-    CT_ASSERT(!ct::has_member_qualifiers<T>::value);
+    CT_ASSERT(! has_member_qualifiers<T>::value);
 }
 
 int main() {

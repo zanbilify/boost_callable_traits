@@ -33,31 +33,4 @@ template<class Return, class... Args> struct foo<Return(Args..., ...) const vola
 template<class Return, class... Args> struct foo<Return(Args..., ...) const volatile &> {};
 template<class Return, class... Args> struct foo<Return(Args..., ...) const volatile &&> {};
 
-//member function pointer type without varargs
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args...)> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args...) &> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args...) &&> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args...) const> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args...) const &> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args...) const &&> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args...) volatile> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args...) volatile &> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args...) volatile &&> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args...) const volatile> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args...) const volatile &> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args...) const volatile &&> {};
-
-//member function pointer type with varargs
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args..., ...)> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args..., ...) &> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args..., ...) &&> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args..., ...) const> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args..., ...) const &> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args..., ...) const &&> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args..., ...) volatile> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args..., ...) volatile &> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args..., ...) volatile &&> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args..., ...) const volatile> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args..., ...) const volatile &> {};
-template<class Return, class T, class... Args> struct foo<Return(T::*)(Args..., ...) const volatile &&> {};
 //]

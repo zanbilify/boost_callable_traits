@@ -11,6 +11,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
 //[ pop_front_args_hpp
 /*`
 [section:ref_pop_front_args pop_front_args]
@@ -19,22 +21,22 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
+template<typename T, std::size_t Count = 1>
+using pop_front_args_t = //implementation-defined
+//<-
+    detail::fail_if_invalid<
+        typename detail::traits<T>::template pop_front<Count>,
+        cannot_determine_parameters_for_this_type>;
+//->
 
-namespace callable_traits {
+template<typename T, std::size_t Count = 1>
+struct pop_front_args {
+    using type = pop_front_args_t<T, Count>;
+};
 
-    template<typename T, std::size_t Count = 1>
-    using pop_front_args_t = //implementation-defined
-    //<-
-        detail::fail_if_invalid<
-            typename detail::traits<T>::template pop_front<Count>,
-            cannot_determine_parameters_for_this_type>;
-    //->
-
-    template<typename T, std::size_t Count = 1>
-    struct pop_front_args {
-        using type = pop_front_args_t<T, Count>;
-    };
-}
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
 
 /*`
 [heading Constraints]
@@ -47,6 +49,7 @@ namespace callable_traits {
 [heading Behavior]
 * A substitution failure occurs if the constraints are violated.
 * The aliased type is identical to `T`, except that `Count` number of parameters are removed from the front of the parameter list.
+* If `Count` is greater than or equal to the number of parameters in `T`, then the aliased type will have an empty parameter list.
 
 [heading Input/Output Examples]
 [table
