@@ -20,38 +20,38 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 [heading Definition]
 */
 
+template<typename T>
+struct is_const_member; //implementation-defined
 
-    template<typename T>
-    struct is_const_member; //implementation-defined
+//<-
+template<typename T>
+struct is_const_member
+    : detail::traits<T>::is_const_member {
 
-    //<-
-    template<typename T>
-    struct is_const_member
-        : detail::traits<T>::is_const_member {
-
-        using type = typename detail::traits<T>::is_const_member;
-    };
-
-    #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
-
-    template<typename T>
-    struct is_const_member_v {
-        static_assert(sizeof(T) < 1,
-            "Variable templates not supported on this compiler.");
-    };
-
-    #else
-    //->
-    template<typename T>
-    constexpr bool is_const_member_v = //implementation-defined
-    //<-
-        detail::traits<T>::is_const_member::value;
-
-    #endif
-    //->//<-
-CALLABLE_TRAITS_NAMESPACE_END
+    using type = typename detail::traits<T>::is_const_member;
+};
 //->
 
+#ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+
+template<typename T>
+struct is_const_member_v {
+    static_assert(sizeof(T) < 1,
+        "Variable templates not supported on this compiler.");
+};
+
+#else
+
+template<typename T>
+constexpr bool is_const_member_v = //implementation-defined
+//<-
+    detail::traits<T>::is_const_member::value;
+//->
+#endif
+
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
 
 /*`
 [heading Constraints]

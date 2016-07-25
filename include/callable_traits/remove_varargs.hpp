@@ -12,6 +12,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
 //[ remove_varargs_hpp
 /*`
 [section:ref_remove_varargs remove_varargs]
@@ -20,24 +22,22 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+template<typename T>
+using remove_varargs_t = //implementation-defined
+//<-
+    detail::fail_if_invalid<
+        typename detail::traits<T>::remove_varargs,
+        varargs_are_illegal_for_this_type>;
+//->
 
-    template<typename T>
-    using remove_varargs_t = //implementation-defined
-    //<-
-        detail::fail_if_invalid<
-            typename detail::traits<T>::remove_varargs,
-            varargs_are_illegal_for_this_type>;
-    //->
+template<typename T>
+struct remove_varargs {
+    using type = remove_varargs_t<T>;
+};
 
-    template<typename T>
-    struct remove_varargs {
-        using type = remove_varargs_t<T>;
-    };
 //<-
 CALLABLE_TRAITS_NAMESPACE_END
 //->
-
 
 /*`
 [heading Constraints]

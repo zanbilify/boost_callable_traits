@@ -54,7 +54,6 @@ constexpr bool has_member_qualifiers_v = //implementation-defined
 CALLABLE_TRAITS_NAMESPACE_END
 //->
 
-
 /*`
 [heading Constraints]
 * none

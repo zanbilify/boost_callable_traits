@@ -41,8 +41,7 @@ struct default_callable_traits {
     // match the PMF's own qualifiers.
     using arg_types = invalid_type;
     
-    // used in pmf to offer a non-invoke std::tuple<Args...> to derived
-    // the function_object type
+    // arg_types without the decltype(*this) parameter for member functions
     using non_invoke_arg_types = invalid_type;
 
     // An "approximation" of a callable type, in the form

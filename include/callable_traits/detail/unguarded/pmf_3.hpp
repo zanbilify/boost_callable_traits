@@ -42,7 +42,6 @@ struct pmf<Return(CALLABLE_TRAITS_CC T::*)(Args...)
     >::type;
     
     using arg_types = std::tuple<invoke_type, Args...>;
-
     using non_invoke_arg_types = std::tuple<Args...>;
 
     // todo document that transaction_safe is not preserved

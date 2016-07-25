@@ -20,35 +20,37 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 [heading Definition]
 */
 
+template<typename T>
+struct is_cv_member; //implementation-defined
 
-    template<typename T>
-    struct is_cv_member; //implementation-defined
+//<-
+template<typename T>
+struct is_cv_member
+    : detail::traits<T>::is_cv_member {
 
-    //<-
-    template<typename T>
-    struct is_cv_member
-        : detail::traits<T>::is_cv_member {
+    using type = typename detail::traits<T>::is_cv_member;
+};
+//->
 
-        using type = typename detail::traits<T>::is_cv_member;
-    };
+#ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
 
-    #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+template<typename T>
+struct is_cv_member_v {
+    static_assert(sizeof(T) < 1,
+        "Variable templates not supported on this compiler.");
+};
 
-    template<typename T>
-    struct is_cv_member_v {
-        static_assert(sizeof(T) < 1,
-            "Variable templates not supported on this compiler.");
-    };
+#else
 
-    #else
-    //->
-    template<typename T>
-    constexpr bool is_cv_member_v = //implementation-defined
-    //<-
-        detail::traits<T>::is_cv_member::value;
+template<typename T>
+constexpr bool is_cv_member_v = //implementation-defined
+//<-
+    detail::traits<T>::is_cv_member::value;
+//->
 
-    #endif
-    //->//<-
+#endif
+
+//<-
 CALLABLE_TRAITS_NAMESPACE_END
 //->
 

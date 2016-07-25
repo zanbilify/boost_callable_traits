@@ -20,32 +20,33 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 [heading Definition]
 */
 
+template<typename T>
+struct has_void_return; //implementation-defined
 
-    template<typename T>
-    struct has_void_return; //implementation-defined
+//<-
+template<typename T>
+struct has_void_return
+    : std::is_same<typename detail::traits<T>::return_type, void> {};
+//->
 
-    //<-
-    template<typename T>
-    struct has_void_return
-        : std::is_same<typename detail::traits<T>::return_type, void> {};
+#ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
 
-    #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+template<typename T>
+struct has_void_return_v {
+    static_assert(sizeof(T) < 1,
+        "Variable templates not supported on this compiler.");
+};
 
-    template<typename T>
-    struct has_void_return_v {
-        static_assert(sizeof(T) < 1,
-            "Variable templates not supported on this compiler.");
-    };
+#else
 
-    #else
-    //->
-    template<typename T>
-    constexpr bool has_void_return_v = //implementation-defined
-    //<-
-        std::is_same<typename detail::traits<T>::return_type, void>::value;
+template<typename T>
+constexpr bool has_void_return_v = //implementation-defined
+//<-
+    std::is_same<typename detail::traits<T>::return_type, void>::value;
+//->
+#endif
 
-    #endif
-    //->//<-
+//<-
 CALLABLE_TRAITS_NAMESPACE_END
 //->
 

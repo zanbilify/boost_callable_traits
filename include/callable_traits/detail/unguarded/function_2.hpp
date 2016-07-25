@@ -36,6 +36,7 @@ struct function<Return(Args...)
     using return_type = Return;
 
     using arg_types = std::tuple<Args...>;
+    using non_invoke_arg_types = arg_types;
 
     using type = Return(Args...)
         CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;

@@ -45,25 +45,19 @@ namespace util_detail {
 
     template<typename T, bool Value>
     struct type_value {
-        
         static constexpr const bool value = Value;
-
-        struct _ {
-            using type = T;
-        };
+        struct _ { using type = T; };
     };
 }
 
 template<typename T, typename ErrorType>
 using fail_if_invalid = sfinae_try<T,
-    fail_if<std::is_same<T, invalid_type>::value, ErrorType>>;
+    fail_if<std::is_same<typename std::remove_reference<T>::type,
+        invalid_type>::value, ErrorType>>;
 
 template<typename T, typename Fallback>
 using fallback_if_invalid = typename std::conditional<
-    std::is_same<T, invalid_type>::value,
-    Fallback,
-    T
->::type;
+    std::is_same<T, invalid_type>::value, Fallback, T>::type;
 
 CALLABLE_TRAITS_DETAIL_NAMESPACE_END
 

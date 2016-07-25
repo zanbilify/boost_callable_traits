@@ -21,34 +21,36 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 */
 
 
-    template<typename T>
-    struct is_lvalue_reference_member; //implementation-defined
+template<typename T>
+struct is_lvalue_reference_member; //implementation-defined
 
-    //<-
-    template<typename T>
-    struct is_lvalue_reference_member
-        : detail::traits<T>::is_lvalue_reference_member {
+//<-
+template<typename T>
+struct is_lvalue_reference_member
+    : detail::traits<T>::is_lvalue_reference_member {
 
-        using type = typename detail::traits<T>::is_lvalue_reference_member;
-    };
+    using type = typename detail::traits<T>::is_lvalue_reference_member;
+};
+//->
 
-    #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+#ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
 
-    template<typename T>
-    struct is_lvalue_reference_member_v {
-        static_assert(sizeof(T) < 1,
-            "Variable templates not supported on this compiler.");
-    };
+template<typename T>
+struct is_lvalue_reference_member_v {
+    static_assert(sizeof(T) < 1,
+        "Variable templates not supported on this compiler.");
+};
 
-    #else
-    //->
-    template<typename T>
-    constexpr bool is_lvalue_reference_member_v = //implementation-defined
-    //<-
-        detail::traits<T>::is_lvalue_reference_member::value;
+#else
 
-    #endif
-    //->//<-
+template<typename T>
+constexpr bool is_lvalue_reference_member_v = //implementation-defined
+//<-
+    detail::traits<T>::is_lvalue_reference_member::value;
+//->
+#endif
+
+//<-
 CALLABLE_TRAITS_NAMESPACE_END
 //->
 

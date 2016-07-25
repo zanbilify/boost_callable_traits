@@ -10,32 +10,8 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_ARG_AT_HPP
 
 #include <callable_traits/detail/core.hpp>
+#include <callable_traits/detail/parameter_index_helper.hpp>
 #include <tuple>
-
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
-
-    template<std::size_t I, typename T>
-    struct arg_at_helper {
-
-        static constexpr bool has_parameter_list =
-            !std::is_same<typename detail::traits<T>::arg_types, invalid_type>::value;
-
-        using temp_tuple = typename std::conditional<has_parameter_list,
-            typename detail::traits<T>::arg_types, std::tuple<invalid_type>>::type;
-
-        static constexpr bool is_out_of_range = has_parameter_list &&
-            I >= std::tuple_size<temp_tuple>::value;
-
-        static constexpr std::size_t index =
-            has_parameter_list && !is_out_of_range ? I : 0;
-
-        using permissive_tuple = typename std::conditional<has_parameter_list && !is_out_of_range,
-            typename detail::traits<T>::arg_types, std::tuple<invalid_type>>::type;
-    };
-
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
-
-CALLABLE_TRAITS_NAMESPACE_BEGIN
 
 //[ arg_at_hpp
 /*`[section:ref_arg_at arg_at]
@@ -44,38 +20,41 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 [heading Definition]
 */
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
 
-    template<std::size_t I, typename T>
-    using arg_at_t = //implementation-defined
-    //<-
-    // substitution failure if index is out of range or if argument
-    // types cannot be determined. Simple error messages are provided
-    // in case the error occurs outside of a SFINAE context
-        detail::sfinae_try<
 
-            typename std::tuple_element<
-                detail::arg_at_helper<I, T>::index,
-                typename detail::arg_at_helper<I,T>::permissive_tuple
-            >::type,
 
-            detail::fail_if<
-                !detail::arg_at_helper<I, T>::has_parameter_list,
-                cannot_determine_parameters_for_this_type>,
+template<std::size_t I, typename T>
+using arg_at_t = //implementation-defined
+//<-
+// substitution failure if index is out of range or if argument
+// types cannot be determined. Simple error messages are provided
+// in case the error occurs outside of a SFINAE context
+    detail::sfinae_try<
 
-            detail::fail_if<
-                detail::arg_at_helper<I, T>::is_out_of_range,
-                index_out_of_range_for_parameter_list>
-        >;
-    //->
+        typename std::tuple_element<
+            detail::parameter_index_helper<I, T>::index,
+            typename detail::parameter_index_helper<I,T>::permissive_tuple
+        >::type,
 
-    template<std::size_t I, typename T>
-    struct arg_at {
-        using type = arg_at_t<I, T>;
-    };
+        detail::fail_if<
+            !detail::parameter_index_helper<I, T>::has_parameter_list,
+            cannot_determine_parameters_for_this_type>,
+
+        detail::fail_if<
+            detail::parameter_index_helper<I, T>::is_out_of_range,
+            index_out_of_range_for_parameter_list>
+    >;
+//->
+
+template<std::size_t I, typename T>
+struct arg_at {
+    using type = arg_at_t<I, T>;
+};
+
 //<-
 CALLABLE_TRAITS_NAMESPACE_END
 //->
-
 
 /*`
 [heading Constraints]

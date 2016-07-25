@@ -13,6 +13,9 @@ Distributed under the Boost Software License, Version 1.0.
 
 CALLABLE_TRAITS_NAMESPACE_BEGIN
 
+CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(clear_args)
+CALLABLE_TRAITS_SFINAE_MSG(clear_args, cannot_clear_the_parameter_list_of_this_type)
+
 //[ clear_args_hpp
 /*`[section:ref_clear_args clear_args]
 [heading Header]
@@ -20,23 +23,22 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 [heading Definition]
 */
 
+template<typename T>
+using clear_args_t = //implementation-defined
+//<-
+    detail::fail_if_invalid<
+        typename detail::traits<T>::clear_args,
+        cannot_clear_the_parameter_list_of_this_type>;
+//->
 
-    template<typename T>
-    using clear_args_t = //implementation-defined
-    //<-
-        detail::fail_if_invalid<
-            typename detail::traits<T>::clear_args,
-            cannot_clear_the_parameter_list_for_this_type>;
-    //->
+template<typename T>
+struct clear_args {
+    using type = clear_args_t<T>;
+};
 
-    template<typename T>
-    struct clear_args {
-        using type = clear_args_t<T>;
-    };
 //<-
 CALLABLE_TRAITS_NAMESPACE_END
 //->
-
 
 /*`
 [heading Constraints]

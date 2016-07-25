@@ -10,6 +10,12 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_REPLACE_ARGS_HPP
 
 #include <callable_traits/detail/core.hpp>
+#include <callable_traits/detail/parameter_index_helper.hpp>
+
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
+CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(replace_args)
+CALLABLE_TRAITS_SFINAE_MSG(replace_args, cannot_replace_parameters_in_this_type)
 
 //[ replace_args_hpp
 /*`
@@ -19,24 +25,40 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+template<std::size_t Index, typename T, typename... Args>
+using replace_args_t = //implementation-defined
+//<-
+    // substitution failure if index is out of range or if parameter
+    // types cannot be determined. Simple error messages are provided
+    // in case the error occurs outside of a SFINAE context
+    detail::fail_if_invalid<
 
-    template<std::size_t Index, typename T, typename... Args>
-    using replace_args_t = //implementation-defined
-    //<-
-        detail::fail_if_invalid<
-            typename detail::traits<T>::template replace_args<Index, Args...>,
-            cannot_determine_parameters_for_this_type>;
-    //->
+        detail::sfinae_try<
 
-    template<std::size_t Index, typename T, typename... Args>
-    struct replace_args {
-        using type = replace_args_t<Index, T, Args...>;
-    };
+            typename detail::traits<
+                typename detail::parameter_index_helper<Index, T, true, false>::permissive_function
+            >::template replace_args<detail::parameter_index_helper<Index, T, true, false>::index, Args...>,
+
+            detail::fail_if<
+                !detail::parameter_index_helper<Index, T, true, false>::has_parameter_list,
+                cannot_replace_parameters_in_this_type>,
+
+            detail::fail_if<
+                detail::parameter_index_helper<Index, T, true, false>::is_out_of_range,
+                index_out_of_range_for_parameter_list>
+        >,
+
+        cannot_replace_parameters_in_this_type>;
+//->
+
+template<std::size_t Index, typename T, typename... Args>
+struct replace_args {
+    using type = replace_args_t<Index, T, Args...>;
+};
+
 //<-
 CALLABLE_TRAITS_NAMESPACE_END
 //->
-
 
 /*`
 [heading Constraints]

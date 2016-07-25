@@ -12,6 +12,11 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
+CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(return_type)
+CALLABLE_TRAITS_SFINAE_MSG(return_type, unable_to_determine_return_type)
+
 //[ return_type_hpp
 /*`
 [section:ref_return_type return_type]
@@ -20,24 +25,22 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+template<typename T>
+using return_type_t = //implementation-defined
+//<-
+    detail::fail_if_invalid<
+        typename detail::traits<T>::return_type,
+        unable_to_determine_return_type>;
+//->
 
-    template<typename T>
-    using return_type_t = //implementation-defined
-    //<-
-        detail::fail_if_invalid<
-            typename detail::traits<T>::return_type,
-            unable_to_determine_return_type>;
-    //->
+template<typename T>
+struct return_type {
+    using type = return_type_t<T>;
+};
 
-    template<typename T>
-    struct return_type {
-        using type = return_type_t<T>;
-    };
 //<-
 CALLABLE_TRAITS_NAMESPACE_END
 //->
-
 
 /*`
 [heading Constraints]

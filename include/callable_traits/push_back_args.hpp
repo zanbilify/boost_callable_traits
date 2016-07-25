@@ -11,6 +11,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
 //[ push_back_args_hpp
 /*`
 [section:ref_push_back_args push_back_args]
@@ -19,24 +21,22 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+template<typename T, typename... Args>
+using push_back_args_t = //implementation-defined
+//<-
+    detail::fail_if_invalid<
+        typename detail::traits<T>::template push_back<Args...>,
+        cannot_determine_parameters_for_this_type>;
+//->
 
-    template<typename T, typename... Args>
-    using push_back_args_t = //implementation-defined
-    //<-
-        detail::fail_if_invalid<
-            typename detail::traits<T>::template push_back<Args...>,
-            cannot_determine_parameters_for_this_type>;
-    //->
+template<typename T, typename... Args>
+struct push_back_args {
+    using type = push_back_args_t<T, Args...>;
+};
 
-    template<typename T, typename... Args>
-    struct push_back_args {
-        using type = push_back_args_t<T, Args...>;
-    };
 //<-
 CALLABLE_TRAITS_NAMESPACE_END
 //->
-
 
 /*`
 [heading Constraints]

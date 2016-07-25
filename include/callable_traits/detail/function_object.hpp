@@ -27,6 +27,7 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
             using function_type = typename Base::function_object_signature;
 
             using arg_types = typename Base::non_invoke_arg_types;
+            using non_invoke_arg_types = arg_types;
 
             static constexpr const bool value = std::is_class<T>::value;
 

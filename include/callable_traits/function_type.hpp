@@ -20,23 +20,22 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 [heading Definition]
 */
 
+template<typename T>
+using function_type_t = //implementation-defined
+//<-
+    detail::fail_if_invalid<
+        typename detail::traits<T>::function_type,
+        cannot_determine_parameters_for_this_type>;
+//->
 
-    template<typename T>
-    using function_type_t = //implementation-defined
-    //<-
-        detail::fail_if_invalid<
-            typename detail::traits<T>::function_type,
-            cannot_determine_parameters_for_this_type>;
-    //->
+template<typename T>
+struct function_type {
+    using type = function_type_t<T>;
+};
 
-    template<typename T>
-    struct function_type {
-        using type = function_type_t<T>;
-    };
 //<-
 CALLABLE_TRAITS_NAMESPACE_END
 //->
-
 
 /*`
 [heading Constraints]

@@ -20,24 +20,23 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 [heading Definition]
 */
 
+template<typename T, template<class...> class Container, typename... RightArgs>
+using expand_args_left_t = //implementation-defined
+//<-
+    detail::fail_if_invalid<
+        typename detail::traits<T>::template
+            expand_args_left<Container, RightArgs...>,
+        cannot_expand_the_parameter_list_of_first_template_argument>;
+//->
 
-    template<typename T, template<class...> class Container, typename... RightArgs>
-    using expand_args_left_t = //implementation-defined
-    //<-
-        detail::fail_if_invalid<
-            typename detail::traits<T>::template
-                expand_args_left<Container, RightArgs...>,
-            cannot_expand_the_parameter_list_of_first_template_argument>;
-    //->
+template<typename T, template<class...> class Container, typename... RightArgs>
+struct expand_args_left {
+    using type = expand_args_left_t<T, Container, RightArgs...>;
+};
 
-    template<typename T, template<class...> class Container, typename... RightArgs>
-    struct expand_args_left {
-        using type = expand_args_left_t<T, Container, RightArgs...>;
-    };
 //<-
 CALLABLE_TRAITS_NAMESPACE_END
 //->
-
 
 /*`
 [heading Constraints]

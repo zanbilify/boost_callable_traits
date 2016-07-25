@@ -12,6 +12,11 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
+CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(add_transaction_safe)
+CALLABLE_TRAITS_SFINAE_MSG(add_transaction_safe, cannot_add_transaction_safe_to_this_type)
+
 //[ add_transaction_safe_hpp
 /*`
 [section:ref_add_transaction_safe add_transaction_safe]
@@ -20,32 +25,30 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
-
-    template<typename T>
-    using add_transaction_safe_t = //implementation-defined
+template<typename T>
+using add_transaction_safe_t = //implementation-defined
 //<-
 #ifdef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
 
-        detail::fail_if_invalid<
-            typename detail::traits<T>::add_transaction_safe,
-            cannot_add_transaction_safe_to_this_type>;
+    detail::fail_if_invalid<
+        typename detail::traits<T>::add_transaction_safe,
+        cannot_add_transaction_safe_to_this_type>;
 #else
 
-        detail::sfinae_try<T,
-            detail::fail_if<true,
-                transaction_safe_is_not_enabled_on_this_platform>>;
+    detail::sfinae_try<T,
+        detail::fail_if<true,
+            transaction_safe_is_not_enabled_on_this_platform>>;
 #endif
 //->
 
-    template<typename T>
-    struct add_transaction_safe {
-        using type = add_transaction_safe_t<T>;
-    };
+template<typename T>
+struct add_transaction_safe {
+    using type = add_transaction_safe_t<T>;
+};
+
 //<-
 CALLABLE_TRAITS_NAMESPACE_END
 //->
-
 
 /*`
 [heading Constraints]

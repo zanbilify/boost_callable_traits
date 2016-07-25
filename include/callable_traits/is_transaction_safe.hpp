@@ -22,34 +22,36 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 */
 
 
-    template<typename T>
-    struct is_transaction_safe; //implementation-defined
+template<typename T>
+struct is_transaction_safe; //implementation-defined
 
-    //<-
-    template<typename T>
-    struct is_transaction_safe
-        : detail::traits<T>::is_transaction_safe {
+//<-
+template<typename T>
+struct is_transaction_safe
+    : detail::traits<T>::is_transaction_safe {
 
-        using type = typename detail::traits<T>::is_transaction_safe;
-    };
+    using type = typename detail::traits<T>::is_transaction_safe;
+};
+//->
 
-    #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+#ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
 
-    template<typename T>
-    struct is_transaction_safe_v {
-        static_assert(sizeof(T) < 1,
-            "Variable templates not supported on this compiler.");
-    };
+template<typename T>
+struct is_transaction_safe_v {
+    static_assert(sizeof(T) < 1,
+        "Variable templates not supported on this compiler.");
+};
 
-    #else
-    //->
-    template<typename T>
-    constexpr bool is_transaction_safe_v = //implementation-defined
-    //<-
-        detail::traits<T>::is_transaction_safe::value;
+#else
 
-    #endif
-    //->//<-
+template<typename T>
+constexpr bool is_transaction_safe_v = //implementation-defined
+//<-
+    detail::traits<T>::is_transaction_safe::value;
+//->
+#endif
+
+//<-
 CALLABLE_TRAITS_NAMESPACE_END
 //->
 

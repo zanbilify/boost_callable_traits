@@ -33,6 +33,7 @@ struct function<CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC *)(Args...,
     using return_type = Return;
 
     using arg_types = std::tuple<Args...>;
+    using non_invoke_arg_types = arg_types;
 
     using type =
         CALLABLE_TRAITS_ST Return(CALLABLE_TRAITS_VARARGS_CC *)(Args..., ...)

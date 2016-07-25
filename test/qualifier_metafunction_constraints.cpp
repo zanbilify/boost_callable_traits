@@ -44,7 +44,7 @@ int main() {
 #include "qualifier_metafunction_constraints.hpp"
 #undef CALLABLE_TRAIT_UNDER_TEST
 
-#endif
+#endif // #ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
 
 }
 

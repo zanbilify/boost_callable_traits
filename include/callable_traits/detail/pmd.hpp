@@ -34,6 +34,8 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
             using function_type = typename std::add_lvalue_reference<D>::type(invoke_type);
             using qualified_function_type = D(invoke_type);
             using arg_types = std::tuple<invoke_type>;
+            using non_invoke_arg_types = std::tuple<>;
+
             using return_type = typename std::add_lvalue_reference<D>::type;
 
             template<typename C>
