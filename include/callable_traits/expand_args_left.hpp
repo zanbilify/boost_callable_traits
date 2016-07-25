@@ -54,12 +54,6 @@ CALLABLE_TRAITS_NAMESPACE_END
 * `expand_args_left` is identical to `expand_args`, except that additional type arguments for `Container` may be supplied. the types determined by `T` are expanded first (on the *left*), followed by the supplied `RightArgs...`.
 * If `Container` cannot be legally instantiated according to the behavior defined above with respect to `T` and `RightArgs...`, the behavior is undefined.
 
-[/TODO is this needed?
-* When `T` is a function, function pointer, or function reference, the aliased type is an instantiation of the `Container` template, where the first types passed to the template are the parameter list types of `T`, and the subsequent type arguments are the supplied `RightArgs...`
-* When `T` is a function object, the aliased type is an instantiation of the `Container` template, where the first types passed to the template are the parameter list types of `T`'s `operator()`, and the subsequent type arguments are the supplied `RightArgs...`
-* When `T` is a member function pointer, the aliased type is a `Container` template instantiation, where the first template type argument is a reference to the parent class of `T`, qualified according to the member qualifiers on `T`, such that this type is equivalent to `callable_traits::qualified_parent_class_of_t<T>`. The next type arguments passed to the `Container` template are the parameter list types of the member function. The supplied `RightArgs...` are passed as the right-most types in the template type argument list.
-* When `T` is a member data pointer, the aliased type is the `Container` template instantiated with a const reference to parent class of `T`, followed by the supplied `RightArgs...`.]
-
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`expand_args_left_t<T, std::tuple, short, void*>`]]

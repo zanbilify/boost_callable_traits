@@ -73,7 +73,7 @@ CALLABLE_TRAITS_NAMESPACE_END
 * Otherwise, `arg_at_t<Index, T>` is equivalent to `std::tuple_element_t<Index, callable_traits::args_t<T>>`.
 
 [heading Example Program]
-[/import ../example/arg_at.cpp]
+[import ../example/arg_at.cpp]
 [arg_at]
 [endsect]
 */

@@ -1,6 +1,10 @@
 index.html
-callable_traits/compatibility.html
 callable_traits/faq.html
 callable_traits/reference.html
+callable_traits/member_qualifier_features.html
+callable_traits/parameter_list_features.html
+callable_traits/return_type_features.html
+callable_traits/member_pointer_features.html
+callable_traits/transactional_memory_features.html
 callable_traits/building.html
 callable_traits/contact.html

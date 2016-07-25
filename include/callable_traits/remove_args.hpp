@@ -74,9 +74,11 @@ CALLABLE_TRAITS_NAMESPACE_END
   * function pointer type
   * function reference type
   * member function pointer type
+* `Index` must be less than the number of types in the parameter list of `T`
+* `Count` must be less than or equal to the number of types in the parameter list of `T` minus `Index`
 
 [heading Behavior]
-* A substitution failure occurs if the constraints are violated.
+* A substitution failure occurs at if the constraints are violated.
 * The aliased type is identical to `T`, except that `Count` number of types in the parameter list of `T`, starting at zero-based `Index`, do not exist in the parameter list of the aliased type.
 *
 [heading Input/Output Examples]

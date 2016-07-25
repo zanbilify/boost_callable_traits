@@ -49,6 +49,7 @@ CALLABLE_TRAITS_NAMESPACE_END
 [heading Behavior]
 * A substitution failure occurs if the constraints are violated.
 * The aliased type is identical to `T`, except that `Count` number of parameters are removed from the front of the parameter list.
+* If `Count` is greater than or equal to the number of parameters in `T`, then the aliased type will have an empty parameter list.
 
 [heading Input/Output Examples]
 [table

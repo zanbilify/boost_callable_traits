@@ -63,9 +63,6 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
         #undef CALLABLE_TRAITS_CC_TAG
         #undef CALLABLE_TRAITS_VARARGS_CC
 
-        //TODO: not sure how to tell whether __cdecl
-        //is implicit for varargs on a given platform...
-
         #endif //CALLABLE_TRAITS_ENABLE_CDECL
 
         #ifdef CALLABLE_TRAITS_ENABLE_STDCALL

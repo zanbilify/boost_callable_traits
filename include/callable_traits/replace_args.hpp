@@ -67,6 +67,7 @@ CALLABLE_TRAITS_NAMESPACE_END
   * function pointer type
   * function reference type
   * member function pointer type
+* `Index` must be less than the number of parameters in the parameter list of `T`
 
 [heading Behavior]
 * A substitution failure occurs if the constraints are violated.

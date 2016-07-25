@@ -41,7 +41,6 @@ struct function<Return(Args...)
     using type = Return(Args...)
         CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
 
-    // todo document that transaction_safe is not preserved
     using function_type = Return(Args...);
 
     using qualified_function_type = Return(Args...)
@@ -136,7 +135,6 @@ struct function<Return (Args..., ...)
     using type = Return (Args..., ...)
         CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
 
-    // todo document that transaction_safe is not preserved
     using function_type = Return(Args..., ...);
 
     using qualified_function_type = Return(Args..., ...)
