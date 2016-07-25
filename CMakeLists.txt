@@ -30,32 +30,39 @@ macro(callable_traits_append_flag testname flag)
     endif()
 endmacro()
 
+if(NOT MSVC OR ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
 
-callable_traits_append_flag(callable_traits_HAS_WERROR -Werror)
-callable_traits_append_flag(callable_traits_HAS_WX -WX)
-callable_traits_append_flag(callable_traits_HAS_QUNUSED_ARGUMENTS          -Qunused-arguments)
-callable_traits_append_flag(callable_traits_HAS_WNO_UNUSED_LOCAL_TYPEDEFS  -Wno-unused-local-typedefs)
-callable_traits_append_flag(callable_traits_HAS_WWRITE_STRINGS             -Wwrite-strings)
-
-if(NOT ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
-    callable_traits_append_flag(callable_traits_HAS_FGNU_TM                    -fgnu-tm)
-endif()
-
-if(MSVC AND NOT ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
-    #disable warning about symbol truncation. Doesn't matter, affected types are not linked
-    callable_traits_append_flag(callable_traits_HAS_WD4503                     -wd4503)
-    callable_traits_append_flag(callable_traits_HAS_W3                         -W3)
-else()
+    # enable all warnings and treat them all as errors
+    callable_traits_append_flag(callable_traits_HAS_WERROR -Werror)
+    callable_traits_append_flag(callable_traits_HAS_WX -WX)
     callable_traits_append_flag(callable_traits_HAS_W                          -W)
     callable_traits_append_flag(callable_traits_HAS_WALL                       -Wall)
     callable_traits_append_flag(callable_traits_HAS_WEXTRA                     -Wextra)
 endif()
 
-if(NOT MSVC)
+if(MSVC)
+
+    # MSVC/Clang-cl builds need -Qunused-arguments
+    callable_traits_append_flag(callable_traits_HAS_QUNUSED_ARGUMENTS          -Qunused-arguments)
+else()
+
+    # for better template error debugging
     callable_traits_append_flag(callable_traits_HAS_FTEMPLATE_BACKTRACE_LIMIT  -ftemplate-backtrace-limit=0)
+    
+    # enforce strict standards compliance
     callable_traits_append_flag(callable_traits_HAS_PEDANTIC                   -pedantic)
-    callable_traits_append_flag(callable_traits_HAS_STDCXX1Y                   -std=c++1y)
+    
+    # use the most recent C++ standard available
+    callable_traits_append_flag(callable_traits_HAS_STDCXX0x                   -std=c++0x)
+    callable_traits_append_flag(callable_traits_HAS_STDCXX1y                   -std=c++1y)
+    callable_traits_append_flag(callable_traits_HAS_STDCXX1z                   -std=c++1z)
 endif()
+
+# transactional memory - currently only available in GCC 6 and later
+if(NOT ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
+    callable_traits_append_flag(callable_traits_HAS_FGNU_TM                    -fgnu-tm)
+endif()
+
 
 find_package(Boost 1.59)
 if (Boost_FOUND)

@@ -11,6 +11,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
 //[ expand_args_hpp
 /*`[section:ref_expand_args expand_args]
 [heading Header]
@@ -18,21 +20,22 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
+template<typename T, template<class...> class Container>
+using expand_args_t = //implementation-defined
+//<-
+    detail::fail_if_invalid<
+        typename detail::traits<T>::template expand_args<Container>,
+        cannot_expand_the_parameter_list_of_first_template_argument>;
+//->
 
-    template<typename T, template<class...> class Container>
-    using expand_args_t = //implementation-defined
-    //<-
-        detail::fail_if_invalid<
-            typename detail::traits<T>::template expand_args<Container>,
-            cannot_expand_the_parameter_list_of_first_template_argument>;
-    //->
+template<typename T, template<class...> class Container>
+struct expand_args {
+    using type = expand_args_t<T, Container>;
+};
 
-    template<typename T, template<class...> class Container>
-    struct expand_args {
-        using type = expand_args_t<T, Container>;
-    };
-}
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
 
 /*`
 [heading Constraints]

@@ -1,4 +1,4 @@
-/*!
+/*
 @file remove_transaction_safe
 
 @copyright Barrett Adair 2015
@@ -12,6 +12,11 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
+CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(remove_transaction_safe)
+CALLABLE_TRAITS_SFINAE_MSG(remove_transaction_safe, cannot_remove_transaction_safe_from_this_type)
+
 //[ remove_transaction_safe_hpp
 /*`
 [section:ref_remove_transaction_safe remove_transaction_safe]
@@ -20,21 +25,22 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
+template<typename T>
+using remove_transaction_safe_t = //implementation-defined
+//<-
+    detail::fail_if_invalid<
+        typename detail::traits<T>::remove_transaction_safe,
+        cannot_remove_transaction_safe_from_this_type>;
+//->
 
-    template<typename T>
-    using remove_transaction_safe_t = //implementation-defined
-    //<-
-        detail::fail_if_invalid<
-            typename detail::traits<T>::remove_transaction_safe,
-            cannot_remove_transaction_safe_from_this_type>;
-    //->
+template<typename T>
+struct remove_transaction_safe {
+    using type = remove_transaction_safe_t<T>;
+};
 
-    template<typename T>
-    struct remove_transaction_safe {
-        using type = remove_transaction_safe_t<T>;
-    };
-}
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
 
 /*`
 

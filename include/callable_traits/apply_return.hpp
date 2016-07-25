@@ -11,6 +11,25 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
+CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(apply_return)
+CALLABLE_TRAITS_SFINAE_MSG(apply_return, invalid_types_for_apply_return)
+
+namespace detail {
+
+    template<typename T, typename R>
+    struct apply_return_helper {
+        using type = typename detail::traits<T>::template apply_return<R>;
+    };
+
+    //special case
+    template<typename... Args, typename R>
+    struct apply_return_helper<std::tuple<Args...>, R> {
+        using type = R(Args...);
+    };
+}
+
 //[ apply_return_hpp
 /*`
 [section:ref_apply_return apply_return]
@@ -18,23 +37,6 @@ Distributed under the Boost Software License, Version 1.0.
 ``#include<callable_traits/apply_return.hpp>``
 [heading Definition]
 */
-
-namespace callable_traits {
-    //<-
-    namespace detail {
-
-        template<typename T, typename R>
-        struct apply_return_helper {
-            using type = typename detail::traits<T>::template apply_return<R>;
-        };
-
-        //special case
-        template<typename... Args, typename R>
-        struct apply_return_helper<std::tuple<Args...>, R> {
-            using type = R(Args...);
-        };
-    }
-    //->
 
     template<typename T, typename R>
     using apply_return_t = //implementation-defined
@@ -48,7 +50,10 @@ namespace callable_traits {
     struct apply_return {
         using type = apply_return_t<T, R>;
     };
-}
+
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
 
 /*`
 [heading Constraints]

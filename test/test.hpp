@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <utility>
 #include <callable_traits/callable_traits.hpp>
 
-namespace ct = callable_traits;
+using namespace callable_traits;
 
 #ifndef CT_ASSERT
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)

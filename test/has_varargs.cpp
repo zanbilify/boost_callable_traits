@@ -8,33 +8,20 @@ Distributed under the Boost Software License, Version 1.0.
 #include <functional>
 #include <utility>
 #include <callable_traits/has_varargs.hpp>
-
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
-
-#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
-#define LREF
-#define RREF
-#else
-#define LREF &
-#define RREF &&
-#endif
+#include "test.hpp"
 
 struct foo {};
-
-namespace ct = callable_traits;
 
 template<typename T>
 void assert_has_varargs() {
 
-    CT_ASSERT(ct::has_varargs<T>::value);
+    CT_ASSERT( has_varargs<T>::value);
 }
 
 template<typename T>
 void assert_not_has_varargs() {
 
-    CT_ASSERT(!ct::has_varargs<T>::value);
+    CT_ASSERT(! has_varargs<T>::value);
 }
 
 
@@ -176,18 +163,18 @@ int main() {
         using cvl = void() const volatile LREF;
         using cvr = void() const volatile RREF;
 
-        CT_ASSERT(!ct::has_varargs<f>());
-        CT_ASSERT(!ct::has_varargs<l>());
-        CT_ASSERT(!ct::has_varargs<r>());
-        CT_ASSERT(!ct::has_varargs<c>());
-        CT_ASSERT(!ct::has_varargs<cl>());
-        CT_ASSERT(!ct::has_varargs<cr>());
-        CT_ASSERT(!ct::has_varargs<v>());
-        CT_ASSERT(!ct::has_varargs<vl>());
-        CT_ASSERT(!ct::has_varargs<vr>());
-        CT_ASSERT(!ct::has_varargs<cv>());
-        CT_ASSERT(!ct::has_varargs<cvl>());
-        CT_ASSERT(!ct::has_varargs<cvr>());
+        CT_ASSERT(! has_varargs<f>());
+        CT_ASSERT(! has_varargs<l>());
+        CT_ASSERT(! has_varargs<r>());
+        CT_ASSERT(! has_varargs<c>());
+        CT_ASSERT(! has_varargs<cl>());
+        CT_ASSERT(! has_varargs<cr>());
+        CT_ASSERT(! has_varargs<v>());
+        CT_ASSERT(! has_varargs<vl>());
+        CT_ASSERT(! has_varargs<vr>());
+        CT_ASSERT(! has_varargs<cv>());
+        CT_ASSERT(! has_varargs<cvl>());
+        CT_ASSERT(! has_varargs<cvr>());
     }
 
     {
@@ -204,18 +191,18 @@ int main() {
         using cvl = void(...) const volatile LREF;
         using cvr = void(...) const volatile RREF;
 
-        CT_ASSERT(ct::has_varargs<f>());
-        CT_ASSERT(ct::has_varargs<l>());
-        CT_ASSERT(ct::has_varargs<r>());
-        CT_ASSERT(ct::has_varargs<c>());
-        CT_ASSERT(ct::has_varargs<cl>());
-        CT_ASSERT(ct::has_varargs<cr>());
-        CT_ASSERT(ct::has_varargs<v>());
-        CT_ASSERT(ct::has_varargs<vl>());
-        CT_ASSERT(ct::has_varargs<vr>());
-        CT_ASSERT(ct::has_varargs<cv>());
-        CT_ASSERT(ct::has_varargs<cvl>());
-        CT_ASSERT(ct::has_varargs<cvr>());
+        CT_ASSERT( has_varargs<f>());
+        CT_ASSERT( has_varargs<l>());
+        CT_ASSERT( has_varargs<r>());
+        CT_ASSERT( has_varargs<c>());
+        CT_ASSERT( has_varargs<cl>());
+        CT_ASSERT( has_varargs<cr>());
+        CT_ASSERT( has_varargs<v>());
+        CT_ASSERT( has_varargs<vl>());
+        CT_ASSERT( has_varargs<vr>());
+        CT_ASSERT( has_varargs<cv>());
+        CT_ASSERT( has_varargs<cvl>());
+        CT_ASSERT( has_varargs<cvr>());
     }
 
 #endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS

@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -12,6 +11,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
 //[ remove_member_volatile_hpp
 /*`
 [section:ref_remove_member_volatile remove_member_volatile]
@@ -20,21 +21,21 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
+template<typename T>
+using remove_member_volatile_t = //implementation-defined
+//<-
+    detail::fail_if_invalid<
+        typename detail::traits<T>::remove_member_volatile,
+        member_qualifiers_are_illegal_for_this_type>;
+//->
 
-    template<typename T>
-    using remove_member_volatile_t = //implementation-defined
-    //<-
-        detail::fail_if_invalid<
-            typename detail::traits<T>::remove_member_volatile,
-            member_qualifiers_are_illegal_for_this_type>;
-    //->
-
-    template<typename T>
-    struct remove_member_volatile {
-        using type = remove_member_volatile_t<T>;
-    };
-}
+template<typename T>
+struct remove_member_volatile {
+    using type = remove_member_volatile_t<T>;
+};
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
 
 /*`
 [heading Constraints]

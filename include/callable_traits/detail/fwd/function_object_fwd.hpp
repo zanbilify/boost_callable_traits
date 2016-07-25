@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -13,9 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <callable_traits/detail/utility.hpp>
 #include <callable_traits/detail/pmf.hpp>
 
-namespace callable_traits {
-
-    namespace detail {
+CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
         template<typename T>
         struct has_normal_call_operator
@@ -40,7 +37,7 @@ namespace callable_traits {
 
         template<typename T>
         struct ambiguous_function_object_traits
-            : qualifier_traits<T>, default_callable_traits<T> {};
+            : default_callable_traits<T> {};
 
         template<typename T>
         using default_to_function_object = typename std::conditional<
@@ -56,8 +53,7 @@ namespace callable_traits {
             ambiguous_function_object_traits<T>
         >::type;
 
-        template<typename T, typename Base =
-            function_object_base<shallow_decay<T>>>
+        template<typename T, typename Base = function_object_base<T>>
         struct function_object;
     }
 }

@@ -1,4 +1,4 @@
-/*!
+/*
 Copyright Barrett Adair 2015
 
 Distributed under the Boost Software License, Version 1.0.
@@ -13,11 +13,8 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_DISJUNCTION(...) \
 ::callable_traits::detail::polyfills::disjunction<__VA_ARGS__>
 
-#include <type_traits>
 
-namespace callable_traits {
-
-    namespace detail {
+CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
         namespace polyfills {
             
@@ -35,7 +32,7 @@ namespace callable_traits {
                 : std::conditional<T::value != false, T, disjunction<Ts...>>::type {};
             
         }
-    }
-}
+
+CALLABLE_TRAITS_DETAIL_NAMESPACE_END
 
 #endif

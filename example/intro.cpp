@@ -5,98 +5,80 @@ Distributed under the Boost Software License, Version 1.0.
 ->*/
 
 #include <callable_traits/config.hpp>
-#ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifdef #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
 int main(){ return 0; }
 #else
 
 //[ intro
-//` This short program showcases some, but not all, of the features available in [libname].
-
 #include <type_traits>
-#include <functional>
 #include <tuple>
 #include <callable_traits/callable_traits.hpp>
 
 namespace ct = callable_traits;
 
-// foo is an example of a function object
+// This function template helps keep our example code neat
+template<typename A, typename B>
+void assert_same(){ static_assert(std::is_same<A, B>::value, ""); }
+
+// foo is a function object
 struct foo {
-    void operator()(int, int&&, const int&, void* = nullptr) const {}
+    void operator()(int, char, float) const {}
 };
 
 int main() {
 
-    // indexed argument types
-    using second_arg = ct::arg_at_t<1, foo>;
-    static_assert(std::is_same<second_arg, int&&>::value, "");
+    // Use args_t to retrieve a parameter list as a std::tuple:
+    assert_same<
+        ct::args_t<foo>,
+        std::tuple<int, char, float>
+    >();
 
-    // arg types are packaged into std::tuple, which serves as the default
-    // type list in ``[libname]`` (runtime capabilities are not used).
-    using args = ct::args_t<foo>;
-    using expected_args = std::tuple<int, int&&, const int&, void*>;
-    static_assert(std::is_same<args, expected_args>::value, "");
+    // arg_at_t gives us indexed access to a parameter list
+    assert_same<
+        ct::arg_at_t<1, foo>,
+        char
+    >();
 
-    // ``[namespace_scoped]``function_type "decays" a callable type to a plain
-    // function type, which is structured in terms of INVOKE.
-    using function_type = ct::function_type_t<foo>;
-    using expected_function_type = void(int, int&&, const int&, void*);
-    static_assert(std::is_same<function_type, expected_function_type>::value, "");
+    // has_void_return lets us perform a quick check for a void return type
+    static_assert(ct::has_void_return_v<foo>, "");
 
-    // quick check for void return
-    static_assert(ct::has_void_return<foo>::value, ""); //with type
+    // Detect C-style variadics (ellipses) in a signature (e.g. printf)
+    static_assert(!ct::has_varargs_v<foo>, "");
 
-    // C-style variadics detection (e.g. an ellipses in a signature)
-    static_assert(!ct::has_varargs<foo>::value, "");
-
-    // For function objects, the following checks are determined by the
-    // function qualifiers on operator(), rather than the qualifiers on
-    // of the type passed. This is done for consistency with member function
-    // pointers, where the checks below would look at the function qualifiers
-    // (rather than qualifiers on the pointer itself).
-    static_assert(ct::is_const_member<foo>(), "");
-    static_assert(!ct::is_volatile_member<foo>(), "");
-    static_assert(!ct::is_reference_member<foo>(), "");
-    static_assert(!ct::is_lvalue_reference_member<foo>(), "");
-    static_assert(!ct::is_rvalue_reference_member<foo>(), "");
-
+    // pmf is a pointer-to-member function: void (foo::*)(int, char, float) const
     using pmf = decltype(&foo::operator());
 
-    // So that you don't have to scroll to the top to check,
-    // here's the type of pmf for reference.
-    using with_const = void (foo::*)(int, int&&, const int&, void*) const;
-    static_assert(std::is_same<pmf, with_const>::value, "");
+    // remove_member_const_t lets you remove the const member qualifier
+    assert_same<
+        ct::remove_member_const_t<pmf>,
+        void (foo::*)(int, char, float) /*no const!*/
+    >();
 
-    // If you find yourself in the unfortunate-and-probably-avoidable
-    // situation of needing to transform member function pointer
-    // types, ``[libname]`` has all the tools you need to prolong
-    // your sanity.
+    // Conversely, add_member_const_t adds a const member qualifier
+    assert_same<
+        pmf,
+        ct::add_member_const_t<void (foo::*)(int, char, float)>
+    >();
 
-    // ``[libname]`` lets you manipulate qualifiers on PMF types.
-    // To remove const:
-    using mutable_pmf = ct::remove_member_const_t<pmf>;
-    using without_const = void (foo::*)(int, int&&, const int&, void*) /*no const!*/;
-    static_assert(std::is_same<mutable_pmf, without_const>::value, "");
+    // is_const_member_v checks for the presence of member const
+    static_assert(ct::is_const_member_v<pmf>, "");
 
-    // To add an rvalue qualifier:
-    using rvalue_pmf = ct::add_member_rvalue_reference_t<pmf>;
-    using with_rvalue = void (foo::*)(int, int&&, const int&, void*) const &&;
-    static_assert(std::is_same<rvalue_pmf, with_rvalue>::value, "");
+    // pop_front_args_t removes the first parameter from signature:
+    assert_same<
+        ct::pop_front_args_t<pmf>,
+        void (foo::*)(/*int is gone!*/ char, float) const
+    >();
 
-    // Just like std::add_rvalue_reference, ``[namespace_scoped]``add_member_rvalue_reference
-    // follows C++11 reference collapsing rules. While remove_member_const
-    // and add_member_rvalue_reference are somewhat clumsy names, they are the best
-    // the best the author could provide while still allowing both terseness
-    // and grep-ability against std::remove_const, etc. in <type_traits>.
-    // Naturally, ``[libname]`` provides similar tools for the other C++
-    // function qualifiers. Head to the reference section of this documentation
-    // for more examples.
-
-    // To remove member const:
-    using fn = void (int) const;
-    using not_abominable = ct::remove_member_const_t<fn>;
-    using expected_fn2 = void (int);
-    static_assert(std::is_same<not_abominable, expected_fn2>::value, "");
+    // clear_args_t removes all parameter types:
+    assert_same<
+        ct::clear_args_t<pmf>,
+        void (foo::*)(/* nothing to see here! */) const
+    >();
 }
+
+// This program is just a glimpse at CallableTraits' features. There
+// are many more traits and metafunctions which are not shown here. Every
+// feature is demonstrated and specified in the reference documentation.
 
 //]
 #endif

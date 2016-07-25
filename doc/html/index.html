@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="CallableTraits">
-<link rel="next" href="callable_traits/compatibility.html" title="Compatibility">
+<link rel="next" href="callable_traits/faq.html" title="FAQ">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
@@ -17,7 +17,7 @@
 <td align="center"><a href="../../more/index.htm">More</a></td>
 </tr></table>
 <hr>
-<div class="spirit-nav"><a accesskey="n" href="callable_traits/compatibility.html"><img src="../src/images/next.png" alt="Next"></a></div>
+<div class="spirit-nav"><a accesskey="n" href="callable_traits/faq.html"><img src="../src/images/next.png" alt="Next"></a></div>
 <div lang="en" class="article">
 <div class="titlepage">
 <div>
@@ -41,25 +41,73 @@
 <dl class="toc">
 <dt><span class="section"><a href="index.html#callable_traits.introduction">Overview</a></span></dt>
 <dd><dl>
-<dt><span class="section"><a href="index.html#callable_traits.introduction.prereqs">Prerequisite Topics</a></span></dt>
 <dt><span class="section"><a href="index.html#callable_traits.introduction.motivation">Motivation</a></span></dt>
 <dt><span class="section"><a href="index.html#callable_traits.introduction.boost_function_types">Regarding
       <code class="literal">Boost.FunctionTypes</code></a></span></dt>
+<dt><span class="section"><a href="index.html#callable_traits.introduction.compatibility">Compatibility</a></span></dt>
 </dl></dd>
-<dt><span class="section"><a href="callable_traits/compatibility.html">Compatibility</a></span></dt>
 <dt><span class="section"><a href="callable_traits/faq.html">FAQ</a></span></dt>
 <dt><span class="section"><a href="callable_traits/reference.html">Reference Documentation</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html">Member Qualifier
+    Features</a></span></dt>
 <dd><dl>
-<dt><span class="section"><a href="callable_traits/reference.html#callable_traits.reference.member_qualifier_features">Member
-      Qualifier Features</a></span></dt>
-<dt><span class="section"><a href="callable_traits/reference.html#callable_traits.reference.parameter_list_features">Parameter
-      List Features</a></span></dt>
-<dt><span class="section"><a href="callable_traits/reference.html#callable_traits.reference.return_type_features">Return
-      Type Features</a></span></dt>
-<dt><span class="section"><a href="callable_traits/reference.html#callable_traits.reference.member_pointer_features">Member
-      Pointer Features</a></span></dt>
-<dt><span class="section"><a href="callable_traits/reference.html#callable_traits.reference.transactional_memory_features">Transactional
-      Memory Features</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_add_member_const">add_member_const</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_remove_member_const">remove_member_const</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_add_member_volatile">add_member_volatile</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_remove_member_volatile">remove_member_volatile</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_add_member_cv">add_member_cv</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_remove_member_cv">remove_member_cv</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_add_member_lvalue_reference">add_member_lvalue_reference</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_add_member_rvalue_reference">add_member_rvalue_reference</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_remove_member_reference">remove_member_reference</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_has_member_qualifiers">has_member_qualifiers</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_is_const_member">is_const_member</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_is_volatile_member">is_volatile_member</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_is_cv_member">is_cv_member</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_is_lvalue_reference_member">is_lvalue_reference_member</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_is_rvalue_reference_member">is_rvalue_reference_member</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_qualifier_features.html#callable_traits.member_qualifier_features.ref_is_reference_member">is_reference_member</a></span></dt>
+</dl></dd>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html">Parameter List
+    Features</a></span></dt>
+<dd><dl>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_function_type">function_type</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_args">args</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_arg_at">arg_at</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_clear_args">clear_args</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_args">remove_args</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_replace_args">replace_args</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_insert_args">insert_args</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_back_args">pop_back_args</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_front_args">pop_front_args</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_push_back_args">push_back_args</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_push_front_args">push_front_args</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args">expand_args</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args_left">expand_args_left</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args_right">expand_args_right</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_add_varargs">add_varargs</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_varargs">remove_varargs</a></span></dt>
+<dt><span class="section"><a href="callable_traits/parameter_list_features.html#callable_traits.parameter_list_features.ref_has_varargs">has_varargs</a></span></dt>
+</dl></dd>
+<dt><span class="section"><a href="callable_traits/return_type_features.html">Return Type Features</a></span></dt>
+<dd><dl>
+<dt><span class="section"><a href="callable_traits/return_type_features.html#callable_traits.return_type_features.ref_return_type">return_type</a></span></dt>
+<dt><span class="section"><a href="callable_traits/return_type_features.html#callable_traits.return_type_features.ref_apply_return">apply_return</a></span></dt>
+<dt><span class="section"><a href="callable_traits/return_type_features.html#callable_traits.return_type_features.ref_has_void_return">has_void_return</a></span></dt>
+</dl></dd>
+<dt><span class="section"><a href="callable_traits/member_pointer_features.html">Member Pointer
+    Features</a></span></dt>
+<dd><dl>
+<dt><span class="section"><a href="callable_traits/member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer">apply_member_pointer</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of">parent_class_of</a></span></dt>
+<dt><span class="section"><a href="callable_traits/member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of">qualified_parent_class_of</a></span></dt>
+</dl></dd>
+<dt><span class="section"><a href="callable_traits/transactional_memory_features.html">Transactional
+    Memory Features</a></span></dt>
+<dd><dl>
+<dt><span class="section"><a href="callable_traits/transactional_memory_features.html#callable_traits.transactional_memory_features.ref_add_transaction_safe">add_transaction_safe</a></span></dt>
+<dt><span class="section"><a href="callable_traits/transactional_memory_features.html#callable_traits.transactional_memory_features.ref_remove_transaction_safe">remove_transaction_safe</a></span></dt>
+<dt><span class="section"><a href="callable_traits/transactional_memory_features.html#callable_traits.transactional_memory_features.ref_is_transaction_safe">is_transaction_safe</a></span></dt>
 </dl></dd>
 <dt><span class="section"><a href="callable_traits/building.html">Building the test suite</a></span></dt>
 <dt><span class="section"><a href="callable_traits/contact.html">Contact</a></span></dt>
@@ -70,220 +118,111 @@
 <a name="callable_traits.introduction"></a><a class="link" href="index.html#callable_traits.introduction" title="Overview">Overview</a>
 </h2></div></div></div>
 <div class="toc"><dl class="toc">
-<dt><span class="section"><a href="index.html#callable_traits.introduction.prereqs">Prerequisite Topics</a></span></dt>
 <dt><span class="section"><a href="index.html#callable_traits.introduction.motivation">Motivation</a></span></dt>
 <dt><span class="section"><a href="index.html#callable_traits.introduction.boost_function_types">Regarding
       <code class="literal">Boost.FunctionTypes</code></a></span></dt>
+<dt><span class="section"><a href="index.html#callable_traits.introduction.compatibility">Compatibility</a></span></dt>
 </dl></div>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">tuple</span><span class="special">&gt;</span>
-
-<span class="keyword">using</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">;</span>
-<span class="keyword">using</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">;</span>
-
-<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="identifier">callable_traits</span><span class="special">;</span>
-
-<span class="keyword">struct</span> <span class="identifier">number</span> <span class="special">{</span>
-    <span class="keyword">int</span> <span class="identifier">value</span><span class="special">;</span>
-    <span class="keyword">auto</span> <span class="identifier">add</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">n</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{</span> <span class="keyword">return</span> <span class="identifier">value</span> <span class="special">+</span> <span class="identifier">n</span><span class="special">;</span> <span class="special">}</span>
-<span class="special">};</span>
-
-<span class="keyword">using</span> <span class="identifier">pmf</span> <span class="special">=</span> <span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">number</span><span class="special">::</span><span class="identifier">add</span><span class="special">);</span>
-</pre>
 <p>
-      Manipulate member functions pointers with ease:
-    </p>
-<pre class="programlisting"><span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">remove_member_const_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
-    <span class="keyword">int</span><span class="special">(</span><span class="identifier">number</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">)</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">add_member_volatile_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
-    <span class="keyword">int</span><span class="special">(</span><span class="identifier">number</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span> <span class="keyword">volatile</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">parent_class_of_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
-    <span class="identifier">number</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-</pre>
-<p>
-      INVOKE-aware metafunctions:
-    </p>
-<pre class="programlisting"><span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">args_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
-    <span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">const</span> <span class="identifier">number</span><span class="special">&amp;,</span> <span class="keyword">int</span><span class="special">&gt;</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">arg_at_t</span><span class="special">&lt;</span><span class="number">0</span><span class="special">,</span> <span class="identifier">pmf</span><span class="special">&gt;,</span>
-    <span class="keyword">const</span> <span class="identifier">number</span><span class="special">&amp;</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">arg_at_t</span><span class="special">&lt;</span><span class="number">1</span><span class="special">,</span> <span class="identifier">pmf</span><span class="special">&gt;,</span>
-    <span class="keyword">int</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">return_type_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
-    <span class="keyword">int</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">function_type_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
-    <span class="keyword">int</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">number</span><span class="special">&amp;,</span> <span class="keyword">int</span><span class="special">)</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">qualified_parent_class_of_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
-    <span class="keyword">const</span> <span class="identifier">number</span><span class="special">&amp;</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-</pre>
-<p>
-      Here are a few other trait examples:
-    </p>
-<pre class="programlisting"><span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_const_member</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">is_volatile_member</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">has_void_return</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">has_varargs</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-</pre>
-<p>
-      You can use <code class="literal">CallableTraits</code> to manipulate parameter lists
-      (not defined in terms of INVOKE, since that wouldn't make sense here):
-    </p>
-<pre class="programlisting"><span class="keyword">using</span> <span class="identifier">pmf_2</span> <span class="special">=</span> <span class="identifier">push_back_args_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">,</span> <span class="keyword">long</span><span class="special">&gt;;</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">pmf_2</span><span class="special">,</span>
-    <span class="keyword">int</span><span class="special">(</span><span class="identifier">number</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">,</span> <span class="keyword">long</span><span class="special">)</span> <span class="keyword">const</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">pop_front_args_t</span><span class="special">&lt;</span><span class="identifier">pmf_2</span><span class="special">&gt;,</span>
-    <span class="keyword">int</span><span class="special">(</span><span class="identifier">number</span><span class="special">::*)(</span><span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">,</span> <span class="keyword">long</span><span class="special">)</span> <span class="keyword">const</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">insert_args_t</span><span class="special">&lt;</span><span class="number">2</span><span class="special">,</span> <span class="identifier">pmf_2</span><span class="special">,</span> <span class="keyword">short</span><span class="special">*,</span> <span class="keyword">long</span><span class="special">*&gt;,</span>
-    <span class="keyword">int</span><span class="special">(</span><span class="identifier">number</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">*,</span> <span class="keyword">long</span><span class="special">*,</span> <span class="keyword">short</span><span class="special">,</span> <span class="keyword">long</span><span class="special">)</span> <span class="keyword">const</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">replace_args_t</span><span class="special">&lt;</span><span class="number">2</span><span class="special">,</span> <span class="identifier">pmf_2</span><span class="special">,</span> <span class="keyword">short</span><span class="special">*,</span> <span class="keyword">long</span><span class="special">*&gt;,</span>
-    <span class="keyword">int</span><span class="special">(</span><span class="identifier">number</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">*,</span> <span class="keyword">long</span><span class="special">*)</span> <span class="keyword">const</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">remove_args_t</span><span class="special">&lt;</span><span class="number">2</span><span class="special">,</span> <span class="identifier">pmf_2</span><span class="special">&gt;,</span>
-    <span class="keyword">int</span><span class="special">(</span><span class="identifier">number</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">long</span><span class="special">)</span> <span class="keyword">const</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">clear_args_t</span><span class="special">&lt;</span><span class="identifier">pmf_2</span><span class="special">&gt;,</span>
-    <span class="keyword">int</span><span class="special">(</span><span class="identifier">number</span><span class="special">::*)()</span> <span class="keyword">const</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">add_varargs_t</span><span class="special">&lt;</span><span class="identifier">pmf_2</span><span class="special">&gt;,</span>
-    <span class="keyword">int</span><span class="special">(</span><span class="identifier">number</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">,</span> <span class="keyword">long</span><span class="special">,</span> <span class="special">...)</span> <span class="keyword">const</span>
-<span class="special">&gt;{},</span> <span class="string">""</span><span class="special">);</span>
-</pre>
-<p>
-      <code class="literal">CallableTraits</code> is a C++11/14/17 header-only library for
-      the inspection, synthesis, and decomposition of callable types. From <code class="computeroutput"><span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;</span></code> to container-like manipulation of
-      parameter lists, <code class="literal">CallableTraits</code> provides all the tools you
-      need to rid your codebase of function type specializations. <code class="literal">CallableTraits</code>
-      offers a comprehensive, fine-grained assortment of traits and metafunctions
-      for building and ripping apart C++'s most complicated and obscure types with
-      ease. <code class="literal">CallableTraits</code> fills the gaps where existing library
-      solutions fall short, aiming to be the "complete type manipulation facility
-      for function types" mentioned in the last section of <a href="http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html" target="_top">p0172</a>,
-      the C++17 proposal regarding "abominable function types". <code class="literal">CallableTraits</code>
-      currently supports GCC 4.8 and later, Clang 3.5 and later, AppleClang from
-      XCode 6.3 and later, and Visual Studio 2015.
+      <code class="literal">CallableTraits</code> is a C++11/14/17 library for the inspection,
+      synthesis, and decomposition of callable types. <code class="literal">CallableTraits</code>
+      aims to be the "complete type manipulation facility for function types"
+      mentioned in the final paragraph of C++17 proposal <a href="http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html" target="_top">p0172</a>,
+      and removes the need for template specializations for different function signatures.
     </p>
 <p>
-      <code class="literal">CallableTraits</code> is header-only, and does not depend on any
-      headers outside the standard library.
+      <code class="literal">CallableTraits</code> is...
     </p>
-<p>
-      <code class="literal">CallableTraits</code> is currently hosted at <a href="https://github.com/badair/callable_traits" target="_top">GitHub</a>.
-      <span class="bold"><strong><code class="literal">CallableTraits</code> is not a Boost library.</strong></span>
-    </p>
-<div class="section">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="callable_traits.introduction.prereqs"></a><a class="link" href="index.html#callable_traits.introduction.prereqs" title="Prerequisite Topics">Prerequisite Topics</a>
-</h3></div></div></div>
-<p>
-        This documentation will be most beneficial to readers who posess a basic
-        understanding of the following C++ features:
-      </p>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
-            <a href="http://en.cppreference.com/w/cpp/language/partial_specialization" target="_top">template
-            specializations</a>
-          </li>
+          header-only
+        </li>
 <li class="listitem">
-            <a href="http://en.cppreference.com/w/cpp/language/sfinae" target="_top">SFINAE</a>
-          </li>
+          dependency-free, only using the C++11 stdlib
+        </li>
 <li class="listitem">
-            <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>
-            rules
-          </li>
+          cross-platform, compatible with all major C++ compilers
+        </li>
 <li class="listitem">
-            function types
-          </li>
+          thoroughly tested
+        </li>
 <li class="listitem">
-            <a href="http://en.cppreference.com/w/cpp/language/pointer#Pointers_to_functions" target="_top">function
-            pointers</a>
-          </li>
+          currently hosted at <a href="https://github.com/badair/callable_traits" target="_top">GitHub</a>
+        </li>
 <li class="listitem">
-            <a href="http://stackoverflow.com/questions/480248/function-references" target="_top">function
-            references</a>
-          </li>
-<li class="listitem">
-            <a href="http://en.cppreference.com/w/cpp/language/pointer#Pointers_to_member_functions" target="_top">pointers
-            to member functions</a> (a.k.a. PMFs)
-          </li>
-<li class="listitem">
-            <a href="http://en.cppreference.com/w/cpp/language/pointer#Pointers_to_data_members" target="_top">pointers
-            to data members</a> (a.k.a. PMDs)
-          </li>
-<li class="listitem">
-            <a href="http://en.cppreference.com/w/cpp/language/operators#Function_call_operator" target="_top">the
-            function call operator, <code class="literal">operator()</code></a>
-          </li>
-<li class="listitem">
-            <a href="https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers" target="_top">universal
-            references</a> and <a href="http://stackoverflow.com/questions/13725747/concise-explanation-of-reference-collapsing-rules-requested-1-a-a-2" target="_top">reference
-            collapsing rules</a>
-          </li>
-<li class="listitem">
-            <a href="http://en.cppreference.com/w/cpp/language/member_functions#const-.2C_volatile-.2C_and_ref-qualified_member_functions" target="_top">cv-qualified
-            and ref-qualified member functions</a>
-          </li>
-<li class="listitem">
-            <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0172r0.html" target="_top">"abominable"
-            function types</a>
-          </li>
-<li class="listitem">
-            <a href="http://en.cppreference.com/w/cpp/language/overloaded_address" target="_top">taking
-            the address of overloaded functions</a>
-          </li>
-<li class="listitem">
-            <a href="http://en.cppreference.com/w/c/language/variadic" target="_top">C-style
-            variadics</a>, a.k.a. varargs
-          </li>
-<li class="listitem">
-            <a href="https://en.wikipedia.org/wiki/X86_calling_conventions" target="_top">calling
-            conventions</a>
-          </li>
+          not a Boost library
+        </li>
 </ul></div>
-</div>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">tuple</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+
+<span class="comment">// This function template helps keep our example code neat</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">A</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">B</span><span class="special">&gt;</span>
+<span class="identifier">assert_same</span><span class="special">(){</span> <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">A</span><span class="special">,</span> <span class="identifier">B</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span> <span class="special">}</span>
+
+<span class="comment">// foo is a function object</span>
+<span class="keyword">struct</span> <span class="identifier">foo</span> <span class="special">{</span>
+    <span class="keyword">void</span> <span class="keyword">operator</span><span class="special">()(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">float</span><span class="special">)</span> <span class="keyword">const</span> <span class="special">{}</span>
+<span class="special">};</span>
+
+<span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
+
+    <span class="comment">// Use args_t to retrieve a parameter list as a std::tuple:</span>
+    <span class="identifier">assert_same</span><span class="special">&lt;</span>
+        <span class="identifier">ct</span><span class="special">::</span><span class="identifier">args_t</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;,</span>
+        <span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">float</span><span class="special">&gt;</span>
+    <span class="special">&gt;();</span>
+
+    <span class="comment">// arg_at_t gives us indexed access to a parameter list</span>
+    <span class="identifier">assert_same</span><span class="special">&lt;</span>
+        <span class="identifier">ct</span><span class="special">::</span><span class="identifier">arg_at_t</span><span class="special">&lt;</span><span class="number">1</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">&gt;;</span>
+        <span class="keyword">char</span>
+    <span class="special">&gt;();</span>
+
+    <span class="comment">// has_void_return lets us perform a quick check for a void return type</span>
+    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_void_return_v</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;,</span> <span class="string">""</span><span class="special">);</span>
+
+    <span class="comment">// Detect C-style variadics (ellipses) in a signature (e.g. printf)</span>
+    <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_varargs_v</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">&gt;,</span> <span class="string">""</span><span class="special">);</span>
+
+    <span class="comment">// pmf is a pointer-to-member function: void (foo::*)(int, char, float) const</span>
+    <span class="keyword">using</span> <span class="identifier">pmf</span> <span class="special">=</span> <span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">foo</span><span class="special">::</span><span class="keyword">operator</span><span class="special">());</span>
+
+    <span class="comment">// remove_member_const_t lets you remove the const member qualifier</span>
+    <span class="identifier">assert_same</span><span class="special">&lt;</span>
+        <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_member_const_t</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
+        <span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">float</span><span class="special">)</span> <span class="comment">/*no const!*/</span>
+    <span class="special">&gt;();</span>
+
+    <span class="comment">// Conversely, add_member_const_t adds a const member qualifier</span>
+    <span class="identifier">assert_same</span><span class="special">&lt;</span>
+        <span class="identifier">pmf</span><span class="special">,</span>
+        <span class="identifier">ct</span><span class="special">::</span><span class="identifier">add_member_const</span><span class="special">&lt;</span><span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">float</span><span class="special">)</span>
+    <span class="special">&gt;();</span>
+
+    <span class="comment">// is_const_member_v checks for the presence of member const</span>
+    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_const_member_v</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span> <span class="string">""</span><span class="special">);</span>
+
+    <span class="comment">// pop_args_front removes the first parameter from signature:</span>
+    <span class="identifier">assert_same</span><span class="special">&lt;</span>
+        <span class="identifier">ct</span><span class="special">::</span><span class="identifier">pop_args_front</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
+        <span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(/*</span><span class="keyword">int</span> <span class="identifier">is</span> <span class="identifier">gone</span><span class="special">!*/</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">float</span><span class="special">)</span> <span class="keyword">const</span>
+    <span class="special">&gt;();</span>
+
+    <span class="comment">// clear_args removes all parameter types:</span>
+    <span class="identifier">assert_same</span><span class="special">&lt;</span>
+        <span class="identifier">ct</span><span class="special">::</span><span class="identifier">clear_args</span><span class="special">&lt;</span><span class="identifier">pmf</span><span class="special">&gt;,</span>
+        <span class="keyword">void</span> <span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(/*</span> <span class="identifier">nothing</span> <span class="identifier">to</span> <span class="identifier">see</span> <span class="identifier">here</span><span class="special">!</span> <span class="special">*/)</span> <span class="keyword">const</span>
+    <span class="special">&gt;();</span>
+<span class="special">}</span>
+
+<span class="comment">// This program is just a glimpse at CallableTraits' features. There</span>
+<span class="comment">// are many more traits and metafunctions which are not shown here. Every</span>
+<span class="comment">// feature is demonstrated and specified in the reference documentation.</span>
+</pre>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="callable_traits.introduction.motivation"></a><a class="link" href="index.html#callable_traits.introduction.motivation" title="Motivation">Motivation</a>
@@ -301,9 +240,8 @@
         </p>
 </blockquote></div>
 <p>
-        Consider for a moment the class template below, which defines all <span class="red"><span class="bold"><strong>48</strong></span></span> template specializations
-        necessary to account for all valid function types and member function pointer
-        types in C++11 and C++14:
+        Consider for a moment the code below, which defines all 24 template specializations
+        necessary to account for all the function types in C++11 and C++14:
       </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">;</span>
 
@@ -334,72 +272,24 @@
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span><span class="special">&gt;</span> <span class="special">{};</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&gt;</span> <span class="special">{};</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;&gt;</span> <span class="special">{};</span>
-
-<span class="comment">//member function pointer type without varargs</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)</span> <span class="special">&amp;&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)</span> <span class="special">&amp;&amp;&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)</span> <span class="keyword">const</span><span class="special">&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)</span> <span class="keyword">const</span> <span class="special">&amp;&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)</span> <span class="keyword">const</span> <span class="special">&amp;&amp;&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)</span> <span class="keyword">volatile</span><span class="special">&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)</span> <span class="keyword">volatile</span> <span class="special">&amp;&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span><span class="special">&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;&gt;</span> <span class="special">{};</span>
-
-<span class="comment">//member function pointer type with varargs</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="special">&amp;&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="special">&amp;&amp;&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span><span class="special">&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="special">&amp;&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="special">&amp;&amp;&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">volatile</span><span class="special">&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">volatile</span> <span class="special">&amp;&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span><span class="special">&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&gt;</span> <span class="special">{};</span>
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span> <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;&gt;</span> <span class="special">{};</span>
 </pre>
 <p>
-        Use cases for such obscure specializations are vitually nonexistent in run-of-the-mill
-        application codebases. Even in library code, these are exceedingly rare.
-        However, there are a handful of very specific metaprogramming scenarios that
-        can only be solved with such template "spam". While these use cases
-        are indeed rare, the writing and testing of these templates is incredibly
-        tedious and time consuming. On this premise, <code class="literal">CallableTraits</code>
-        offers a final and decisive library-level solution, so that authors of generic
-        code will <span class="bold"><strong>never again</strong></span> need to write these
-        specializations, for <span class="emphasis"><em>any</em></span> reason.
+        Things get even more complicated with member function pointers, function
+        pointers, function references, function objects, and C++17 <code class="computeroutput"><span class="identifier">transaction_safe</span></code>.
       </p>
 <p>
-        Template specializations like those in the code snippet above <span class="emphasis"><em>still</em></span>
-        do not account for function pointers, function references, function objects/lambdas,
-        or calling conventions. <code class="literal">CallableTraits</code> goes the extra
-        mile by accounting for all of them.
+        Granted, use cases for such obscure specializations are vitually nonexistent
+        in run-of-the-mill application codebases. Even in library code, these are
+        exceedingly rare. However, there are a handful of very specific metaprogramming
+        scenarios that can only be solved with this kind of template "spam".
+        Writing and testing these templates is tedious and time consuming, and often
+        requires lots of code duplication.
       </p>
-<div class="note"><table border="0" summary="Note">
-<tr>
-<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../src/images/note.png"></td>
-<th align="left">Note</th>
-</tr>
-<tr><td align="left" valign="top"><p>
-          The upcoming ISO standard for C++17 includes a <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html" target="_top">change
-          to the core language</a> which adds the <code class="literal">noexcept</code>
-          qualifier to the type system. If the author's understanding is correct,
-          this would increase the the count of necessary template specializations
-          to <span class="red"><span class="bold"><strong>96</strong></span></span> (<a class="link" href="callable_traits/contact.html" title="Contact">?</a>). Currently, C++17 <code class="computeroutput"><span class="keyword">noexcept</span></code> qualifiers are not handled in
-          <code class="literal">CallableTraits</code>, because compiler vendors have not implemented
-          support for this feature (to best of the author's knowledge). However,
-          features to account for and manipulate <code class="computeroutput"><span class="keyword">noexcept</span></code>
-          qualifiers are planned in <code class="literal">CallableTraits</code>, as soon as
-          feature is implemented by a compiler vendor. Of course, the <code class="literal">CallableTraits</code>
-          feature additions will be non-breaking for currently supported compiler
-          versions.
-        </p></td></tr>
-</table></div>
+<p>
+        <code class="literal">CallableTraits</code> offers a final and decisive library-level
+        solution to this problem, and removes the need for these specializations
+        entirely (except for platform-specific calling conventions).
+      </p>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
@@ -455,6 +345,18 @@
         be the only library option for inspecting and manipulating callable types.
       </p>
 </div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.introduction.compatibility"></a><a class="link" href="index.html#callable_traits.introduction.compatibility" title="Compatibility">Compatibility</a>
+</h3></div></div></div>
+<p>
+        <code class="literal">CallableTraits</code> is tested and working on GCC 4.7.4 and
+        later, Clang 3.5 and later, XCode 6.4 and later, and Visual Studio 2015.
+        Continuous integration is managed on <a href="https://ci.appveyor.com/project/badair/callable-traits" target="_top">Appveyor</a>
+        for Visual Studio, and on <a href="https://travis-ci.org/badair/callable_traits/builds" target="_top">Travis</a>
+        for everything else.
+      </p>
+</div>
 </div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
@@ -462,6 +364,6 @@
 <td align="right"><div class="copyright-footer"></div></td>
 </tr></table>
 <hr>
-<div class="spirit-nav"><a accesskey="n" href="callable_traits/compatibility.html"><img src="../src/images/next.png" alt="Next"></a></div>
+<div class="spirit-nav"><a accesskey="n" href="callable_traits/faq.html"><img src="../src/images/next.png" alt="Next"></a></div>
 </body>
 </html>

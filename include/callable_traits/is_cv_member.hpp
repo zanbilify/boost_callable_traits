@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -12,6 +11,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
 //[ is_cv_member_hpp
 /*`[section:ref_is_cv_member is_cv_member]
 [heading Header]
@@ -19,37 +20,40 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
+template<typename T>
+struct is_cv_member; //implementation-defined
 
-    template<typename T>
-    struct is_cv_member; //implementation-defined
+//<-
+template<typename T>
+struct is_cv_member
+    : detail::traits<T>::is_cv_member {
 
-    //<-
-    template<typename T>
-    struct is_cv_member
-        : detail::traits<T>::is_cv_member {
+    using type = typename detail::traits<T>::is_cv_member;
+};
+//->
 
-        using type = typename detail::traits<T>::is_cv_member;
-    };
+#ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
 
-    #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+template<typename T>
+struct is_cv_member_v {
+    static_assert(sizeof(T) < 1,
+        "Variable templates not supported on this compiler.");
+};
 
-    template<typename T>
-    struct is_cv_member_v {
-        static_assert(sizeof(T) < 1,
-            "Variable templates not supported on this compiler.");
-    };
+#else
 
-    #else
-    //->
-    template<typename T>
-    constexpr bool is_cv_member_v = //implementation-defined
-    //<-
-        detail::traits<T>::is_cv_member::value;
+template<typename T>
+constexpr bool is_cv_member_v = //implementation-defined
+//<-
+    detail::traits<T>::is_cv_member::value;
+//->
 
-    #endif
-    //->
-}
+#endif
+
+//<-
+CALLABLE_TRAITS_NAMESPACE_END
+//->
+
 /*`
 [heading Constraints]
 * none

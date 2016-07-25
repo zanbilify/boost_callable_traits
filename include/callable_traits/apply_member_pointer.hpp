@@ -1,5 +1,4 @@
-/*!
-@file
+/*
 
 @copyright Barrett Adair 2015
 Distributed under the Boost Software License, Version 1.0.
@@ -12,6 +11,36 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <callable_traits/detail/core.hpp>
 
+CALLABLE_TRAITS_NAMESPACE_BEGIN
+
+CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(apply_member_pointer)
+CALLABLE_TRAITS_SFINAE_MSG(apply_member_pointer, members_cannot_have_a_type_of_void)
+CALLABLE_TRAITS_SFINAE_MSG(apply_member_pointer, second_template_argument_must_be_a_class_or_struct)
+
+namespace detail {
+
+    template<typename T, typename C, bool = std::is_class<C>::value>
+    struct make_member_pointer;
+
+    template<typename T, typename C>
+    struct make_member_pointer<T, C, true> {
+        using type = typename std::remove_reference<T>::type C::*;
+    };
+
+    template<typename C>
+    struct make_member_pointer<void, C, true> {
+        using type = invalid_type;
+    };
+
+    template<typename T, typename C>
+    struct make_member_pointer<T, C, false> {
+        using type = invalid_type;
+    };
+
+    template<typename T, typename C>
+    using make_member_pointer_t = typename make_member_pointer<T, C>::type;
+}
+
 //[ apply_member_pointer_hpp
 /*`
 [section:ref_apply_member_pointer apply_member_pointer]
@@ -20,53 +49,29 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-namespace callable_traits {
+template<typename T, typename C>
+using apply_member_pointer_t = //implementation-defined
 //<-
-    namespace detail {
+    detail::sfinae_try<
+        detail::fallback_if_invalid<
+            typename detail::traits<T>::template apply_member_pointer<C>,
+            typename detail::make_member_pointer<T, C>::type>,
 
-        template<typename T, typename C, bool = std::is_class<C>::value>
-        struct make_member_pointer;
+        detail::fail_if<std::is_same<void, T>::value,
+            members_cannot_have_a_type_of_void>,
 
-        template<typename T, typename C>
-        struct make_member_pointer<T, C, true> {
-            using type = typename std::remove_reference<T>::type C::*;
-        };
-
-        template<typename C>
-        struct make_member_pointer<void, C, true> {
-            using type = invalid_type;
-        };
-
-        template<typename T, typename C>
-        struct make_member_pointer<T, C, false> {
-            using type = invalid_type;
-        };
-
-        template<typename T, typename C>
-        using make_member_pointer_t = typename make_member_pointer<T, C>::type;
-    }
+        detail::fail_if<!std::is_class<C>::value,
+            second_template_argument_must_be_a_class_or_struct> >;
 //->
 
-    template<typename T, typename C>
-    using apply_member_pointer_t = //implementation-defined
+template<typename T, typename C>
+struct apply_member_pointer {
+    using type = apply_member_pointer_t<T, C>;
+};
+
 //<-
-        detail::sfinae_try<
-            detail::fallback_if_invalid<
-                typename detail::traits<T>::template apply_member_pointer<C>,
-                typename detail::make_member_pointer<T, C>::type>,
-
-            detail::fail_if<std::is_same<void, T>::value,
-                members_cannot_have_a_type_of_void>,
-
-            detail::fail_if<!std::is_class<C>::value,
-                second_template_argument_must_be_a_class_or_struct> >;
+CALLABLE_TRAITS_NAMESPACE_END
 //->
-
-    template<typename T, typename C>
-    struct apply_member_pointer {
-        using type = apply_member_pointer_t<T, C>;
-    };
-}
 
 /*`
 [heading Constraints]

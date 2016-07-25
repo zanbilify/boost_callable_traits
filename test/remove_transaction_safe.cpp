@@ -6,10 +6,8 @@ Distributed under the Boost Software License, Version 1.0.
 ->*/
 
 #include <callable_traits/config.hpp>
+#include "test.hpp"
 
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
 
 #ifndef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
 int main(){}
@@ -17,12 +15,10 @@ int main(){}
 
 #include <callable_traits/remove_transaction_safe.hpp>
 
-namespace ct = callable_traits;
-
 template<typename Safe, typename NotSafe>
 void test() {
 
-    CT_ASSERT(std::is_same<NotSafe, ct::remove_transaction_safe_t<Safe>>::value);
+    CT_ASSERT(std::is_same<NotSafe,  remove_transaction_safe_t<Safe>>::value);
 
     //sanity check
     CT_ASSERT(!std::is_same<Safe, NotSafe>::value);

@@ -8,22 +8,9 @@ Distributed under the Boost Software License, Version 1.0.
 #include <functional>
 #include <tuple>
 #include <callable_traits/add_member_cv.hpp>
-
-#ifndef CT_ASSERT
-#define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
-#endif //CT_ASSERT
-
-#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
-#define LREF
-#define RREF
-#else
-#define LREF &
-#define RREF &&
-#endif
+#include "test.hpp"
 
 struct foo {};
-
-namespace ct = callable_traits;
 
 int main() {
 
@@ -41,18 +28,18 @@ int main() {
         using cvl = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile LREF;
         using cvr = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile RREF;
 
-        CT_ASSERT(std::is_same<cv,   ct::add_member_cv_t<f>>{});
-        CT_ASSERT(std::is_same<cv,   ct::add_member_cv_t<c>>{});
-        CT_ASSERT(std::is_same<cvl,  ct::add_member_cv_t<l>>{});
-        CT_ASSERT(std::is_same<cvl,  ct::add_member_cv_t<cl>>{});
-        CT_ASSERT(std::is_same<cvr,  ct::add_member_cv_t<r>>{});
-        CT_ASSERT(std::is_same<cvr,  ct::add_member_cv_t<cr>>{});
-        CT_ASSERT(std::is_same<cv,  ct::add_member_cv_t<v>>{});
-        CT_ASSERT(std::is_same<cv,  ct::add_member_cv_t<cv>>{});
-        CT_ASSERT(std::is_same<cvl, ct::add_member_cv_t<vl>>{});
-        CT_ASSERT(std::is_same<cvl, ct::add_member_cv_t<cvl>>{});
-        CT_ASSERT(std::is_same<cvr, ct::add_member_cv_t<vr>>{});
-        CT_ASSERT(std::is_same<cvr, ct::add_member_cv_t<cvr>>{});
+        CT_ASSERT(std::is_same<cv,    add_member_cv_t<f>>{});
+        CT_ASSERT(std::is_same<cv,    add_member_cv_t<c>>{});
+        CT_ASSERT(std::is_same<cvl,   add_member_cv_t<l>>{});
+        CT_ASSERT(std::is_same<cvl,   add_member_cv_t<cl>>{});
+        CT_ASSERT(std::is_same<cvr,   add_member_cv_t<r>>{});
+        CT_ASSERT(std::is_same<cvr,   add_member_cv_t<cr>>{});
+        CT_ASSERT(std::is_same<cv,   add_member_cv_t<v>>{});
+        CT_ASSERT(std::is_same<cv,   add_member_cv_t<cv>>{});
+        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<vl>>{});
+        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<cvl>>{});
+        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<vr>>{});
+        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<cvr>>{});
     }
 
     {
@@ -69,18 +56,18 @@ int main() {
         using cvl = void(foo::*)(int, int) const volatile LREF;
         using cvr = void(foo::*)(int, int) const volatile RREF;
 
-        CT_ASSERT(std::is_same<cv,  ct::add_member_cv_t<f>>{});
-        CT_ASSERT(std::is_same<cv,  ct::add_member_cv_t<c>>{});
-        CT_ASSERT(std::is_same<cvl, ct::add_member_cv_t<l>>{});
-        CT_ASSERT(std::is_same<cvl, ct::add_member_cv_t<cl>>{});
-        CT_ASSERT(std::is_same<cvr, ct::add_member_cv_t<r>>{});
-        CT_ASSERT(std::is_same<cvr, ct::add_member_cv_t<cr>>{});
-        CT_ASSERT(std::is_same<cv,  ct::add_member_cv_t<v>>{});
-        CT_ASSERT(std::is_same<cv,  ct::add_member_cv_t<cv>>{});
-        CT_ASSERT(std::is_same<cvl, ct::add_member_cv_t<vl>>{});
-        CT_ASSERT(std::is_same<cvl, ct::add_member_cv_t<cvl>>{});
-        CT_ASSERT(std::is_same<cvr, ct::add_member_cv_t<vr>>{});
-        CT_ASSERT(std::is_same<cvr, ct::add_member_cv_t<cvr>>{});
+        CT_ASSERT(std::is_same<cv,   add_member_cv_t<f>>{});
+        CT_ASSERT(std::is_same<cv,   add_member_cv_t<c>>{});
+        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<l>>{});
+        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<cl>>{});
+        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<r>>{});
+        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<cr>>{});
+        CT_ASSERT(std::is_same<cv,   add_member_cv_t<v>>{});
+        CT_ASSERT(std::is_same<cv,   add_member_cv_t<cv>>{});
+        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<vl>>{});
+        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<cvl>>{});
+        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<vr>>{});
+        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<cvr>>{});
     }
 
 #ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
@@ -99,18 +86,18 @@ int main() {
         using cvl = void() const volatile LREF;
         using cvr = void() const volatile RREF;
 
-        CT_ASSERT(std::is_same<cv,  ct::add_member_cv_t<f>>{});
-        CT_ASSERT(std::is_same<cv,  ct::add_member_cv_t<c>>{});
-        CT_ASSERT(std::is_same<cvl, ct::add_member_cv_t<l>>{});
-        CT_ASSERT(std::is_same<cvl, ct::add_member_cv_t<cl>>{});
-        CT_ASSERT(std::is_same<cvr, ct::add_member_cv_t<r>>{});
-        CT_ASSERT(std::is_same<cvr, ct::add_member_cv_t<cr>>{});
-        CT_ASSERT(std::is_same<cv,  ct::add_member_cv_t<v>>{});
-        CT_ASSERT(std::is_same<cv,  ct::add_member_cv_t<cv>>{});
-        CT_ASSERT(std::is_same<cvl, ct::add_member_cv_t<vl>>{});
-        CT_ASSERT(std::is_same<cvl, ct::add_member_cv_t<cvl>>{});
-        CT_ASSERT(std::is_same<cvr, ct::add_member_cv_t<vr>>{});
-        CT_ASSERT(std::is_same<cvr, ct::add_member_cv_t<cvr>>{});
+        CT_ASSERT(std::is_same<cv,   add_member_cv_t<f>>{});
+        CT_ASSERT(std::is_same<cv,   add_member_cv_t<c>>{});
+        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<l>>{});
+        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<cl>>{});
+        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<r>>{});
+        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<cr>>{});
+        CT_ASSERT(std::is_same<cv,   add_member_cv_t<v>>{});
+        CT_ASSERT(std::is_same<cv,   add_member_cv_t<cv>>{});
+        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<vl>>{});
+        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<cvl>>{});
+        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<vr>>{});
+        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<cvr>>{});
     }
 
 #endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS

@@ -27,22 +27,20 @@ CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER - `transaction_safe` when
 template<typename Return, typename... Args>
 struct function<Return(Args...)
     CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE>
- : qualifier_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>, default_callable_traits<> {
+ : default_callable_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS> {
      
     static constexpr bool value = true;
     
-    using is_function = std::true_type;
-
     using traits = function;
 
     using return_type = Return;
 
     using arg_types = std::tuple<Args...>;
+    using non_invoke_arg_types = arg_types;
 
     using type = Return(Args...)
         CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
 
-    // todo document that transaction_safe is not preserved
     using function_type = Return(Args...);
 
     using qualified_function_type = Return(Args...)
@@ -60,9 +58,9 @@ struct function<Return(Args...)
     using add_transaction_safe = Return(Args...)
         CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER;
 
-    using qualifiers = qualifier_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>;
+    using qualifiers = default_callable_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>;
     
-    template<flags Flags>
+    template<qualifier_flags Flags>
     using set_qualifiers = set_function_qualifiers<Flags, Return, Args...>;
     
     using remove_member_reference = set_qualifiers<qualifiers::cv_flags>;
@@ -125,12 +123,11 @@ struct function<Return(Args...)
 template<typename Return, typename... Args>
 struct function<Return (Args..., ...)
     CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE>
- : qualifier_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>, default_callable_traits<> {
+ : default_callable_traits<> {
      
     static constexpr bool value = true;
     
     using has_varargs = std::true_type;
-    using is_function = std::true_type;
     using traits = function;
     using return_type = Return;
     using arg_types = std::tuple<Args...>;
@@ -138,7 +135,6 @@ struct function<Return (Args..., ...)
     using type = Return (Args..., ...)
         CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_INCLUDE_TRANSACTION_SAFE;
 
-    // todo document that transaction_safe is not preserved
     using function_type = Return(Args..., ...);
 
     using qualified_function_type = Return(Args..., ...)
@@ -156,9 +152,9 @@ struct function<Return (Args..., ...)
     using add_transaction_safe = Return(Args..., ...)
         CALLABLE_TRAITS_INCLUDE_QUALIFIERS CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER;
 
-    using qualifiers = qualifier_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>;
+    using qualifiers = default_callable_traits<dummy CALLABLE_TRAITS_INCLUDE_QUALIFIERS>;
     
-    template<flags Flags>
+    template<qualifier_flags Flags>
     using set_qualifiers = set_varargs_function_qualifiers<Flags, Return, Args...>;
     
     using remove_member_reference = set_qualifiers<qualifiers::cv_flags>;
