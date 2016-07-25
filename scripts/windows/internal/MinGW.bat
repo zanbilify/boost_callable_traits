@@ -36,7 +36,7 @@ goto main_logic
 
     if not exist ".\Makefile" (
         @echo on
-        cmake -G "MinGW Makefiles" .. -DCMAKE_CXX_COMPILER=g++ -DCALLABLE_TRAITS_BUILD_EXPERIMENTAL=ON
+        cmake -G "MinGW Makefiles" .. -DCMAKE_CXX_COMPILER=g++
         @echo off
     ) else (
         @echo on

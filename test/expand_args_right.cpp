@@ -18,12 +18,14 @@ int main() {
         CT_ASSERT(std::is_same<test, expect>::value);
     }
 
+#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
     {
         using f = void(N<0>, N<1>) const volatile;
         using test =  expand_args_right_t<f, std::tuple, char, int>;
         using expect = std::tuple<char, int, N<0>, N<1>>;
         CT_ASSERT(std::is_same<test, expect>::value);
     }
+#endif // #ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
 
     {
         using f = void(&)(N<0>, N<1>);
