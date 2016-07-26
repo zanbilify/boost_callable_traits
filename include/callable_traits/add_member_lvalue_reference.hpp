@@ -21,6 +21,16 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 [heading Definition]
 */
 
+#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+
+template<typename T>
+struct add_member_lvalue_reference_t {
+    static_assert(sizeof(T) < 1,
+        "Reference member qualifiers are not supported by this configuration.");
+};
+
+#else
+
 template<typename T>
 using add_member_lvalue_reference_t = //implementation-defined
 //<-
@@ -28,6 +38,8 @@ using add_member_lvalue_reference_t = //implementation-defined
         typename detail::traits<T>::add_member_lvalue_reference,
         member_qualifiers_are_illegal_for_this_type>;
 //->
+
+#endif // #ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
 
 template<typename T>
 struct add_member_lvalue_reference {

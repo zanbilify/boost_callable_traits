@@ -1602,8 +1602,20 @@
 <a name="callable_traits.member_qualifier_features.ref_add_member_lvalue_reference.h1"></a>
         <span class="phrase"><a name="callable_traits.member_qualifier_features.ref_add_member_lvalue_reference.definition"></a></span><a class="link" href="member_qualifier_features.html#callable_traits.member_qualifier_features.ref_add_member_lvalue_reference.definition">Definition</a>
       </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="preprocessor">#ifdef</span> <span class="identifier">CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS</span>
+
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">add_member_lvalue_reference_t</span> <span class="special">{</span>
+    <span class="keyword">static_assert</span><span class="special">(</span><span class="keyword">sizeof</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span> <span class="special">&lt;</span> <span class="number">1</span><span class="special">,</span>
+        <span class="string">"Reference member qualifiers are not supported by this configuration."</span><span class="special">);</span>
+<span class="special">};</span>
+
+<span class="preprocessor">#else</span>
+
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">using</span> <span class="identifier">add_member_lvalue_reference_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+
+<span class="preprocessor">#endif</span> <span class="comment">// #ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">add_member_lvalue_reference</span> <span class="special">{</span>
@@ -1862,8 +1874,20 @@
 <a name="callable_traits.member_qualifier_features.ref_add_member_rvalue_reference.h1"></a>
         <span class="phrase"><a name="callable_traits.member_qualifier_features.ref_add_member_rvalue_reference.definition"></a></span><a class="link" href="member_qualifier_features.html#callable_traits.member_qualifier_features.ref_add_member_rvalue_reference.definition">Definition</a>
       </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="preprocessor">#ifdef</span> <span class="identifier">CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS</span>
+
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">add_member_rvalue_reference_t</span> <span class="special">{</span>
+    <span class="keyword">static_assert</span><span class="special">(</span><span class="keyword">sizeof</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span> <span class="special">&lt;</span> <span class="number">1</span><span class="special">,</span>
+        <span class="string">"Reference member qualifiers are not supported by this configuration."</span><span class="special">);</span>
+<span class="special">};</span>
+
+<span class="preprocessor">#else</span>
+
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">using</span> <span class="identifier">add_member_rvalue_reference_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+
+<span class="preprocessor">#endif</span> <span class="comment">// #ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">add_member_rvalue_reference</span> <span class="special">{</span>

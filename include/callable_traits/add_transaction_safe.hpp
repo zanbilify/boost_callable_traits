@@ -37,7 +37,7 @@ using add_transaction_safe_t = //implementation-defined
 
     detail::sfinae_try<T,
         detail::fail_if<true,
-            transaction_safe_is_not_enabled_on_this_platform>>;
+            transaction_safe_is_not_supported_by_this_configuration>>;
 #endif
 //->
 
