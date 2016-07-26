@@ -73,7 +73,7 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
     CALLABLE_TRAITS_SFINAE_MSG(member_qualifiers, member_qualifiers_are_illegal_for_this_type)
 
     CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(transaction_safe_)
-    CALLABLE_TRAITS_SFINAE_MSG(transaction_safe_, transaction_safe_is_not_enabled_on_this_platform)
+    CALLABLE_TRAITS_SFINAE_MSG(transaction_safe_, transaction_safe_is_not_supported_by_this_configuration)
 
     CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(expand_args)
     CALLABLE_TRAITS_SFINAE_MSG(expand_args, cannot_expand_the_parameter_list_of_first_template_argument)
