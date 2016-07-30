@@ -74,6 +74,9 @@ CALLABLE_TRAITS_NAMESPACE_END
 * The aliased type is identical to `T`, except that the parameter list types are "overwritten" by `Args...`, beginning at zero-based `Index`.
 * * If `sizeof...(Args)` is greater than then number of function parameters in `T` minus `Index`, the aliased type will contain more parameters than `T`.
 
+[heading Compatibility Notes]
+Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
+
 [heading Input/Output Examples]
 [table
     [[`T`]                                  [`replace_args_t<1, T, float, double>`]]

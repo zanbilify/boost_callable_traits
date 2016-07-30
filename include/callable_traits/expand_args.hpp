@@ -56,6 +56,9 @@ CALLABLE_TRAITS_NAMESPACE_END
 * When `T` is a member data pointer, the aliased type is the `Container` template instantiated with a `const` reference to the parent class of `T`.
 * If `Container` cannot be legally instantiated according to the behavior defined above with respect to `T`, the behavior is undefined.
 
+[heading Compatibility Notes]
+Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
+
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`expand_args_t<T, std::tuple>`]]

@@ -52,6 +52,9 @@ CALLABLE_TRAITS_NAMESPACE_END
 * When the constraints are violated, a substitution failure occurs.
 * The aliased type has an empty parameter list, but is otherwise identical to `T`.
 
+[heading Compatibility Notes]
+Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
+
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`clear_args_t<T>`]]

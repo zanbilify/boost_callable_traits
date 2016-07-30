@@ -46,6 +46,9 @@ CALLABLE_TRAITS_NAMESPACE_END
 * A substitution failure occurs if the constraints are violated.
 * The aliased type is the parent class of the member. In other words, if `T` is expanded to `U C::*`, the aliased type is `C`.
 
+[heading Compatibility Notes]
+Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
+
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`parent_class_of_t<T>`]]

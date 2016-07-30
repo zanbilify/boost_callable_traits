@@ -46,6 +46,9 @@ CALLABLE_TRAITS_NAMESPACE_END
 * A substitution failure occuers if the constraints are violated.
 * Removes member `&` or `&&` qualifiers from `T`, if present.
 
+[heading Compatibility Notes]
+Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
+
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`remove_member_const_t<T>`]]
