@@ -12,7 +12,9 @@ CallableTraits is a C++11/C++14/C++17 header-only library for the inspection, sy
 
 [Full documentation available here.](http://badair.github.io/callable_traits/index.html)
 
-## [License](LICENSE.md)
+Boost developers: I am currently seeking a Review Manager for a formal review. Contact me if you would like to volunteer.
+
+[Licensed under the Boost Software License, v. 1.0](LICENSE.md)
 
 <!-- Links -->
 [badge.Appveyor]: https://ci.appveyor.com/api/projects/status/uf0l91v7l4wc4kw6/branch/master?svg=true
