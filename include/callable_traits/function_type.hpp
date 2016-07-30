@@ -58,6 +58,9 @@ CALLABLE_TRAITS_NAMESPACE_END
 * When `T` is a member data pointer, the aliased type is a function type returning the underlying member type of `T`, taking a single parameter, which is a `const` reference to the parent type of `T`.
 * In all cases, the aliased function type will not have member qualifiers, and will not have the `transaction_safe` specifier.
 
+[heading Compatibility Notes]
+Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
+
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`function_type_t<T>`]]

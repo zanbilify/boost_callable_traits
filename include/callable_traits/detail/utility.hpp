@@ -24,6 +24,9 @@ struct pascal_tag{};
 
 struct invalid_type { invalid_type() = delete; };
 
+#ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+struct abominable_functions_not_supported_on_this_compiler{};
+#endif
 
 // used to convey "this type doesn't matter" in code
 struct dummy {};

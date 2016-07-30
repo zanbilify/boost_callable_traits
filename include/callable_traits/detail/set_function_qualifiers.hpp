@@ -24,13 +24,6 @@ struct set_varargs_function_qualifiers_t <                         \
     flag_map<int QUAL>::value, Return, Args...> {                  \
                                                                    \
     using type = Return(Args..., ...) QUAL;                        \
-};                                                                 \
-                                                                   \
-template<typename T>                                               \
-struct set_other_qualifiers_t <                                    \
-    flag_map<int QUAL>::value, T> {                                \
-                                                                   \
-    using type = T QUAL;                                           \
 }                                                                  \
 /**/
 
@@ -44,11 +37,6 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
         template<qualifier_flags Applied, typename Return, typename... Args>
         struct set_varargs_function_qualifiers_t {
             using type = Return(Args..., ...);
-        };
-
-        template<qualifier_flags Applied, typename T>
-        struct set_other_qualifiers_t {
-            using type = T;
         };
 
 #ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
@@ -78,10 +66,6 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
         template<qualifier_flags Flags, typename... Ts>
         using set_varargs_function_qualifiers =
             typename set_varargs_function_qualifiers_t<Flags, Ts...>::type;
-
-        template<qualifier_flags Flags, typename T>
-        using set_other_qualifiers =
-            typename set_other_qualifiers_t<Flags, T>::type;
 
 CALLABLE_TRAITS_DETAIL_NAMESPACE_END
 

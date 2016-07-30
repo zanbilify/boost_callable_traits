@@ -109,32 +109,10 @@
       is this a C++11 library if it uses newer features like variable templates?</a>
     </h4>
 <p>
-      If your compiler doesn't support a certain language feature, then that feature
-      will simply be unavailable to use. Here are some examples:
-    </p>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
-<li class="listitem">
-          GCC 4.7.4 doesn't like this type: <code class="computeroutput"><span class="keyword">void</span><span class="special">()</span> <span class="special">&amp;</span></code>.
-          So, <code class="computeroutput"><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">add_member_lvalue_reference</span><span class="special">&lt;</span><span class="keyword">void</span><span class="special">()&gt;</span></code>
-          will simply not work.
-        </li>
-<li class="listitem">
-          GCC 4.7.4 doesn't allow variable templates. As such, <code class="computeroutput"><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">has_void_return_v</span></code>
-          is conditionally compiled as a struct with a <code class="computeroutput"><span class="keyword">static_assert</span></code>
-          that always fails. Instead, you can use <code class="computeroutput"><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">has_void_return</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">value</span></code>.
-        </li>
-<li class="listitem">
-          At the time of this writing, <code class="computeroutput"><span class="identifier">transaction_safe</span></code>
-          features currently only work for GCC 6+, and only when the correct compiler
-          flag <code class="computeroutput"><span class="special">-</span><span class="identifier">fgnu</span><span class="special">-</span><span class="identifier">tm</span></code> is
-          enabled. In all other cases, <code class="computeroutput"><span class="identifier">transaction_safe</span></code>
-          features in <code class="literal">CallableTraits</code> are conditionally compiled
-          to fail upon usage, with appropriate error messages.
-        </li>
-</ul></div>
-<p>
-      It doesn't take much imagination to see how this pattern works for other language
-      features.
+      If your compiler doesn't support a certain language feature that is required
+      by a metafunction, the implementation will either trigger a <code class="computeroutput"><span class="keyword">static_assert</span></code>
+      or a substitution failure, depending on the situation. This is explained in
+      the "Compatibility Notes" section for each trait.
     </p>
 <h4>
 <a name="callable_traits.faq.h5"></a>
@@ -156,7 +134,7 @@
       it be the other way around?</a>
     </h4>
 <p>
-      Alias templates are much more friednly to SFINAE. The <code class="computeroutput"><span class="keyword">struct</span></code>-style
+      Alias templates are much more friendly to SFINAE. The <code class="computeroutput"><span class="keyword">struct</span></code>-style
       metafunctions are provided only to parallel the <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span></code>
       naming conventions.
     </p>

@@ -49,7 +49,10 @@ CALLABLE_TRAITS_NAMESPACE_END
 [heading Behavior]
 * A substitution failure occurs if the constraints are violated.
 * The aliased type is identical to `T`, except that `Args...` types have been added to the front of the parameter list.
-*
+
+[heading Compatibility Notes]
+Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
+
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`push_front_args_t<T, float, double>`]]

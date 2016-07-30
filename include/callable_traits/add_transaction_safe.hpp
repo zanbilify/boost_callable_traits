@@ -37,7 +37,7 @@ using add_transaction_safe_t = //implementation-defined
 
     detail::sfinae_try<T,
         detail::fail_if<true,
-            transaction_safe_is_not_enabled_on_this_platform>>;
+            transaction_safe_is_not_supported_by_this_configuration>>;
 #endif
 //->
 
@@ -60,7 +60,15 @@ CALLABLE_TRAITS_NAMESPACE_END
 
 [heading Behavior]
 * A substitution failure occurs if the constraints are violated.
+* Adds a member rvalue reference qualifier (`&&`) to `T`, if not already present.
+* If an lvalue reference qualifier is present, the lvalue reference qualifier remains (in accordance with reference collapsing rules).
+*
+[heading Behavior]
+* A substitution failure occurs if the constraints are violated.
 * Adds a `transaction_safe` specifier to `T`, if not already present.
+
+[heading Compatibility Notes]
+A `static_assert` always fails when instantiatic this template if your compiler doesn't support `transaction_safe`. At the time of this writing, GCC 6 with the `-fgnu-tm` is the only compiler that can use this feature.
 
 [heading Input/Output Examples]
 [table
