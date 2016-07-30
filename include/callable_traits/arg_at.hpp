@@ -72,6 +72,9 @@ CALLABLE_TRAITS_NAMESPACE_END
 * If any constraints are violated, a substitution failure occurs.
 * Otherwise, `arg_at_t<Index, T>` is equivalent to `std::tuple_element_t<Index, callable_traits::args_t<T>>`.
 
+[heading Compatibility Notes]
+Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
+
 [heading Example Program]
 [import ../example/arg_at.cpp]
 [arg_at]

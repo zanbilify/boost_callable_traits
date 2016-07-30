@@ -63,20 +63,32 @@ struct function<Return(Args...)
     template<qualifier_flags Flags>
     using set_qualifiers = set_function_qualifiers<Flags, Return, Args...>;
     
-    using remove_member_reference = set_qualifiers<qualifiers::cv_flags>;
-    
+    #ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+
+    using add_member_lvalue_reference = abominable_functions_not_supported_on_this_compiler;
+    using add_member_rvalue_reference = abominable_functions_not_supported_on_this_compiler;
+    using add_member_const = abominable_functions_not_supported_on_this_compiler;
+    using add_member_volatile = abominable_functions_not_supported_on_this_compiler;
+    using add_member_cv = abominable_functions_not_supported_on_this_compiler;
+
+    #else
+
     using add_member_lvalue_reference = set_qualifiers<
         collapse_flags<qualifiers::q_flags, lref_>::value>;
-        
+
     using add_member_rvalue_reference = set_qualifiers<
         collapse_flags<qualifiers::q_flags, rref_>::value>;
-        
+
     using add_member_const = set_qualifiers<qualifiers::q_flags | const_>;
 
     using add_member_volatile = set_qualifiers<qualifiers::q_flags | volatile_>;
 
     using add_member_cv = set_qualifiers<qualifiers::q_flags | cv_>;
+
+    #endif // #ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
     
+    using remove_member_reference = set_qualifiers<qualifiers::cv_flags>;
+
     using remove_member_const = set_qualifiers<
         qualifiers::ref_flags | remove_const_flag<qualifiers::cv_flags>::value>;
         
@@ -157,8 +169,16 @@ struct function<Return (Args..., ...)
     template<qualifier_flags Flags>
     using set_qualifiers = set_varargs_function_qualifiers<Flags, Return, Args...>;
     
-    using remove_member_reference = set_qualifiers<qualifiers::cv_flags>;
-    
+    #ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+
+    using add_member_lvalue_reference = abominable_functions_not_supported_on_this_compiler;
+    using add_member_rvalue_reference = abominable_functions_not_supported_on_this_compiler;
+    using add_member_const = abominable_functions_not_supported_on_this_compiler;
+    using add_member_volatile = abominable_functions_not_supported_on_this_compiler;
+    using add_member_cv = abominable_functions_not_supported_on_this_compiler;
+
+    #else
+
     using add_member_lvalue_reference = set_qualifiers<
         collapse_flags<qualifiers::q_flags, lref_>::value>;
         
@@ -171,6 +191,10 @@ struct function<Return (Args..., ...)
 
     using add_member_cv = set_qualifiers<qualifiers::q_flags | cv_>;
     
+    #endif // #ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+
+    using remove_member_reference = set_qualifiers<qualifiers::cv_flags>;
+
     using remove_member_const = set_qualifiers<
         qualifiers::ref_flags | remove_const_flag<qualifiers::cv_flags>::value>;
         

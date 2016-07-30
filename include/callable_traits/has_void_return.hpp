@@ -62,6 +62,9 @@ CALLABLE_TRAITS_NAMESPACE_END
   * `T` is a function object with a non-overloaded `operator()`, where the `operator()` function returns `void`.
 * On compilers that support variable templates, `has_void_return_v<T>` is equivalent to `has_void_return<T>::value`.
 
+[heading Compatibility Notes]
+Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
+
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`has_void_return_v<T>`]]

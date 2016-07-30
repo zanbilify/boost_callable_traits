@@ -77,6 +77,9 @@ CALLABLE_TRAITS_NAMESPACE_END
 * `Index` must be less than the number of types in the parameter list of `T`
 * `Count` must be less than or equal to the number of types in the parameter list of `T` minus `Index`
 
+[heading Compatibility Notes]
+Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
+
 [heading Behavior]
 * A substitution failure occurs at if the constraints are violated.
 * The aliased type is identical to `T`, except that `Count` number of types in the parameter list of `T`, starting at zero-based `Index`, do not exist in the parameter list of the aliased type.

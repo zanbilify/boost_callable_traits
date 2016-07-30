@@ -71,6 +71,7 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 
     CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(member_qualifiers)
     CALLABLE_TRAITS_SFINAE_MSG(member_qualifiers, member_qualifiers_are_illegal_for_this_type)
+    CALLABLE_TRAITS_SFINAE_MSG(member_qualifiers, this_compiler_doesnt_support_abominable_function_types)
 
     CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(transaction_safe_)
     CALLABLE_TRAITS_SFINAE_MSG(transaction_safe_, transaction_safe_is_not_supported_by_this_configuration)

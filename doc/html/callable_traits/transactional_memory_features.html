@@ -84,13 +84,40 @@
             A substitution failure occurs if the constraints are violated.
           </li>
 <li class="listitem">
+            Adds a member rvalue reference qualifier (<code class="computeroutput"><span class="special">&amp;&amp;</span></code>)
+            to <code class="computeroutput"><span class="identifier">T</span></code>, if not already
+            present.
+          </li>
+<li class="listitem">
+            If an lvalue reference qualifier is present, the lvalue reference qualifier
+            remains (in accordance with reference collapsing rules).
+          </li>
+<li class="listitem"><h5>
+<a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.h4"></a>
+            <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.behavior0"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_add_transaction_safe.behavior0">Behavior</a>
+          </h5></li>
+<li class="listitem">
+            A substitution failure occurs if the constraints are violated.
+          </li>
+<li class="listitem">
             Adds a <code class="computeroutput"><span class="identifier">transaction_safe</span></code>
             specifier to <code class="computeroutput"><span class="identifier">T</span></code>, if not
             already present.
           </li>
 </ul></div>
 <h5>
-<a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.h4"></a>
+<a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.h5"></a>
+        <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.compatibility_notes"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_add_transaction_safe.compatibility_notes">Compatibility
+        Notes</a>
+      </h5>
+<p>
+        A <code class="computeroutput"><span class="keyword">static_assert</span></code> always fails
+        when instantiatic this template if your compiler doesn't support <code class="computeroutput"><span class="identifier">transaction_safe</span></code>. At the time of this writing,
+        GCC 6 with the <code class="computeroutput"><span class="special">-</span><span class="identifier">fgnu</span><span class="special">-</span><span class="identifier">tm</span></code> is
+        the only compiler that can use this feature.
+      </p>
+<h5>
+<a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.h6"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.input_output_examples"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_add_transaction_safe.input_output_examples">Input/Output
         Examples</a>
       </h5>
@@ -259,7 +286,7 @@
 </tbody>
 </table></div>
 <h5>
-<a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.h5"></a>
+<a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.h7"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.example_program"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_add_transaction_safe.example_program">Example
         Program</a>
       </h5>
@@ -336,6 +363,14 @@
 </ul></div>
 <h5>
 <a name="callable_traits.transactional_memory_features.ref_remove_transaction_safe.h4"></a>
+        <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_remove_transaction_safe.compatibility_notes"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_remove_transaction_safe.compatibility_notes">Compatibility
+        Notes</a>
+      </h5>
+<p>
+        Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
+      </p>
+<h5>
+<a name="callable_traits.transactional_memory_features.ref_remove_transaction_safe.h5"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_remove_transaction_safe.input_output_examples"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_remove_transaction_safe.input_output_examples">Input/Output
         Examples</a>
       </h5>
@@ -488,7 +523,7 @@
 </tbody>
 </table></div>
 <h5>
-<a name="callable_traits.transactional_memory_features.ref_remove_transaction_safe.h5"></a>
+<a name="callable_traits.transactional_memory_features.ref_remove_transaction_safe.h6"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_remove_transaction_safe.example_program"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_remove_transaction_safe.example_program">Example
         Program</a>
       </h5>
@@ -541,14 +576,14 @@
 <a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.h2"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.constraints"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_is_transaction_safe.constraints">Constraints</a>
       </h5>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-            none
-          </li></ul></div>
-<h5>
-<a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.h3"></a>
-        <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.behavior"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_is_transaction_safe.behavior">Behavior</a>
-      </h5>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            none
+          </li>
+<li class="listitem"><h5>
+<a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.h3"></a>
+            <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.behavior"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_is_transaction_safe.behavior">Behavior</a>
+          </h5></li>
 <li class="listitem">
             <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code> is inherited by <code class="computeroutput"><span class="identifier">is_transaction_safe</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
             and is aliased by <code class="computeroutput"><span class="keyword">typename</span> <span class="identifier">is_transaction_safe</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span></code>, except when one of the following
@@ -574,6 +609,15 @@
 </ul></div>
 <h5>
 <a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.h4"></a>
+        <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.compatibility_notes"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_is_transaction_safe.compatibility_notes">Compatibility
+        Notes</a>
+      </h5>
+<p>
+        Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
+        Obviously, this will always be falsy for compilers that don't support <code class="computeroutput"><span class="identifier">transactiton_safe</span></code> at all.
+      </p>
+<h5>
+<a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.h5"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.input_output_examples"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_is_transaction_safe.input_output_examples">Input/Output
         Examples</a>
       </h5>
@@ -777,7 +821,7 @@
 </tbody>
 </table></div>
 <h5>
-<a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.h5"></a>
+<a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.h6"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.example_program"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_is_transaction_safe.example_program">Example
         Program</a>
       </h5>
