@@ -8,9 +8,9 @@ Distributed under the Boost Software License, Version 1.0.
 
 //[ arg_at
 #include <type_traits>
-#include <callable_traits/arg_at.hpp>
+#include <boost/callable_traits/arg_at.hpp>
 
-namespace ct = callable_traits;
+namespace ct = boost::callable_traits;
 
 int main() {
 

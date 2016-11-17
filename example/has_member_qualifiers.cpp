@@ -7,9 +7,9 @@ Distributed under the Boost Software License, Version 1.0.
 
 //[ has_member_qualifiers
 #include <type_traits>
-#include <callable_traits/has_member_qualifiers.hpp>
+#include <boost/callable_traits/has_member_qualifiers.hpp>
 
-namespace ct = callable_traits;
+namespace ct = boost::callable_traits;
 
 struct foo;
 

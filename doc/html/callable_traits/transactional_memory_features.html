@@ -12,11 +12,11 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
 <td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../boost.png"></td>
-<td align="center"><a href="../../../index.html">Home</a></td>
-<td align="center"><a href="../../../libs/libraries.htm">Libraries</a></td>
+<td align="center"><a href="../../../../../index.html">Home</a></td>
+<td align="center"><a href="../../../../../libs/libraries.htm">Libraries</a></td>
 <td align="center"><a href="http://www.boost.org/users/people.html">People</a></td>
 <td align="center"><a href="http://www.boost.org/users/faq.html">FAQ</a></td>
-<td align="center"><a href="../../../more/index.htm">More</a></td>
+<td align="center"><a href="../../../../../more/index.htm">More</a></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">
@@ -40,7 +40,7 @@
 <a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.h0"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.header"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_add_transaction_safe.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_transaction_safe</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_transaction_safe</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.h1"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.definition"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_add_transaction_safe.definition">Definition</a>
@@ -84,29 +84,13 @@
             A substitution failure occurs if the constraints are violated.
           </li>
 <li class="listitem">
-            Adds a member rvalue reference qualifier (<code class="computeroutput"><span class="special">&amp;&amp;</span></code>)
-            to <code class="computeroutput"><span class="identifier">T</span></code>, if not already
-            present.
-          </li>
-<li class="listitem">
-            If an lvalue reference qualifier is present, the lvalue reference qualifier
-            remains (in accordance with reference collapsing rules).
-          </li>
-<li class="listitem"><h5>
-<a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.h4"></a>
-            <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.behavior0"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_add_transaction_safe.behavior0">Behavior</a>
-          </h5></li>
-<li class="listitem">
-            A substitution failure occurs if the constraints are violated.
-          </li>
-<li class="listitem">
-            Adds a <code class="computeroutput"><span class="identifier">transaction_safe</span></code>
+            Adds the <code class="computeroutput"><span class="identifier">transaction_safe</span></code>
             specifier to <code class="computeroutput"><span class="identifier">T</span></code>, if not
             already present.
           </li>
 </ul></div>
 <h5>
-<a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.h5"></a>
+<a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.h4"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.compatibility_notes"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_add_transaction_safe.compatibility_notes">Compatibility
         Notes</a>
       </h5>
@@ -117,7 +101,7 @@
         the only compiler that can use this feature.
       </p>
 <h5>
-<a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.h6"></a>
+<a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.h5"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.input_output_examples"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_add_transaction_safe.input_output_examples">Input/Output
         Examples</a>
       </h5>
@@ -286,14 +270,14 @@
 </tbody>
 </table></div>
 <h5>
-<a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.h7"></a>
+<a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.h6"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_add_transaction_safe.example_program"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_add_transaction_safe.example_program">Example
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_transaction_safe</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_transaction_safe</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">using</span> <span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">add_transaction_safe_t</span><span class="special">;</span>
+<span class="keyword">using</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">add_transaction_safe_t</span><span class="special">;</span>
 
 <span class="keyword">using</span> <span class="identifier">not_safe</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">();</span>
 <span class="keyword">using</span> <span class="identifier">safe</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">()</span> <span class="identifier">transaction_safe</span><span class="special">;</span>
@@ -312,7 +296,7 @@
 <a name="callable_traits.transactional_memory_features.ref_remove_transaction_safe.h0"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_remove_transaction_safe.header"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_remove_transaction_safe.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_transaction_safe</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_transaction_safe</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.transactional_memory_features.ref_remove_transaction_safe.h1"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_remove_transaction_safe.definition"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_remove_transaction_safe.definition">Definition</a>
@@ -528,9 +512,9 @@
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_transaction_safe</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_transaction_safe</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">using</span> <span class="identifier">ts</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">()</span> <span class="identifier">transaction_safe</span><span class="special">;</span>
 <span class="keyword">using</span> <span class="identifier">not_ts</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">();</span>
@@ -549,7 +533,7 @@
 <a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.h0"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.header"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_is_transaction_safe.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_transaction_safe</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_transaction_safe</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.h1"></a>
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.definition"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_is_transaction_safe.definition">Definition</a>
@@ -614,7 +598,7 @@
       </h5>
 <p>
         Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-        Obviously, this will always be falsy for compilers that don't support <code class="computeroutput"><span class="identifier">transactiton_safe</span></code> at all.
+        Obviously, this will always be falsy for compilers that don't support <code class="computeroutput"><span class="identifier">transaction_safe</span></code> at all.
       </p>
 <h5>
 <a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.h5"></a>
@@ -825,9 +809,9 @@
         <span class="phrase"><a name="callable_traits.transactional_memory_features.ref_is_transaction_safe.example_program"></a></span><a class="link" href="transactional_memory_features.html#callable_traits.transactional_memory_features.ref_is_transaction_safe.example_program">Example
         Program</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_transaction_safe</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_transaction_safe</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">;</span>
 

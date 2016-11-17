@@ -17,7 +17,7 @@
 
 [template libname[][^CallableTraits]]
 [template lib_namespace[][^callable_traits]]
-[template namespace_scoped[][^callable_traits::]]
+[template namespace_scoped[][^boost::callable_traits::]]
 [template header_include_prefix[]callable_traits/]
 [template invoke[][@http://en.cppreference.com/w/cpp/utility/functional/invoke [^['INVOKE]]]]
 [template hana[][@https://boostorg.github.io/hana/ [^Boost.Hana]]]
@@ -99,7 +99,7 @@ Consider for a moment the code below, which defines all 24 template specializati
 [import ./hideous_template.snippet.cpp]
 [hideous_template]
 
-Things get even more complicated with member function pointers, function pointers, function references, function objects, and C++17 `transaction_safe`.
+Things get even more complicated with member function pointers, function pointers, function references, function objects, and C++17 `transaction_safe`/`noexcept`.
 
 Granted, use cases for such obscure specializations are vitually nonexistent in run-of-the-mill application codebases. Even in library code, these are exceedingly rare. However, there are a handful of very specific metaprogramming scenarios that can only be solved with this kind of template "spam". Writing and testing these templates is tedious and time consuming, and often requires lots of code duplication.
 
@@ -151,25 +151,25 @@ If you are not writing generic code, you should not use [libname].
 If you ['are] writing generic code, take a moment to skim your header files, and see if you can find code that looks like this:
 
     template<class Return, class First, class Second>
-	class foo<Return(First, Second)> {
-	    //     ^^^^^^^^^^^^^^^^^^^^^
-	};
+    class foo<Return(First, Second)> {
+        //     ^^^^^^^^^^^^^^^^^^^^^
+    };
 
 Or maybe something like this:
-	
+    
     template<class Return, class ...Args>
-	class foo<Return(*)(Args...)> {
-	    //     ^^^^^^^^^^^^^^^^^^
+    class foo<Return(*)(Args...)> {
+        //     ^^^^^^^^^^^^^^^^^^
         //...
-	};
-	
+    };
+    
 Or, if you are *really* unlucky, something like this:
 
     template<class Return, class T, class ...Args>
     class foo<Return(T::*)(Args..., ...) const volatile && transaction_safe> {
         //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         //...
-	};
+    };
 
 With [libname], you can get rid of all of these template specializations (unless you deal with platform-specific calling conventions). Even if you are only specializing a simple function type like `Return(Args...)`, [libname] might be useful to you. You may find that [libname] can help make your code more readable, more maintainable, more generic, and less error-prone.
 
@@ -196,10 +196,6 @@ Yes. The SFINAE-ability of violated constraints has been tested extensively on a
 [heading I see that `arg_at` is defined in terms of `arg_at_t`. Shouldn't it be the other way around?]
 
 Alias templates are much more friendly to SFINAE. The `struct`-style metafunctions are provided only to parallel the `<type_traits>` naming conventions.
-
-[heading What about C++17 `noexcept`?]
-
-The upcoming ISO standard for C++17 includes a [@http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html change to the core language] which adds the [^noexcept] qualifier to the type system. Currently, C++17 `noexcept` qualifiers are not handled in [libname], because compiler vendors have not implemented support for this feature (as far as I know). However, features are planned, and they will be non-breaking additions to the library.
 
 [heading What about calling conventions?]
 
@@ -230,52 +226,52 @@ This reference will be most beneficial to readers who posess a basic understandi
 
 [section:member_qualifier_features Member Qualifier Features]
 
-[import ../include/callable_traits/add_member_const.hpp]
+[import ../../../boost/callable_traits/add_member_const.hpp]
 [add_member_const_hpp]
 
-[import ../include/callable_traits/remove_member_const.hpp]
+[import ../../../boost/callable_traits/remove_member_const.hpp]
 [remove_member_const_hpp]
 
-[import ../include/callable_traits/add_member_volatile.hpp]
+[import ../../../boost/callable_traits/add_member_volatile.hpp]
 [add_member_volatile_hpp]
 
-[import ../include/callable_traits/remove_member_volatile.hpp]
+[import ../../../boost/callable_traits/remove_member_volatile.hpp]
 [remove_member_volatile_hpp]
 
-[import ../include/callable_traits/add_member_cv.hpp]
+[import ../../../boost/callable_traits/add_member_cv.hpp]
 [add_member_cv_hpp]
 
-[import ../include/callable_traits/remove_member_cv.hpp]
+[import ../../../boost/callable_traits/remove_member_cv.hpp]
 [remove_member_cv_hpp]
 
-[import ../include/callable_traits/add_member_lvalue_reference.hpp]
+[import ../../../boost/callable_traits/add_member_lvalue_reference.hpp]
 [add_member_lvalue_reference_hpp]
 
-[import ../include/callable_traits/add_member_rvalue_reference.hpp]
+[import ../../../boost/callable_traits/add_member_rvalue_reference.hpp]
 [add_member_rvalue_reference_hpp]
 
-[import ../include/callable_traits/remove_member_reference.hpp]
+[import ../../../boost/callable_traits/remove_member_reference.hpp]
 [remove_member_reference_hpp]
 
-[import ../include/callable_traits/has_member_qualifiers.hpp]
+[import ../../../boost/callable_traits/has_member_qualifiers.hpp]
 [has_member_qualifiers_hpp]
 
-[import ../include/callable_traits/is_const_member.hpp]
+[import ../../../boost/callable_traits/is_const_member.hpp]
 [is_const_member_hpp]
 
-[import ../include/callable_traits/is_volatile_member.hpp]
+[import ../../../boost/callable_traits/is_volatile_member.hpp]
 [is_volatile_member_hpp]
 
-[import ../include/callable_traits/is_cv_member.hpp]
+[import ../../../boost/callable_traits/is_cv_member.hpp]
 [is_cv_member_hpp]
 
-[import ../include/callable_traits/is_lvalue_reference_member.hpp]
+[import ../../../boost/callable_traits/is_lvalue_reference_member.hpp]
 [is_lvalue_reference_member_hpp]
 
-[import ../include/callable_traits/is_rvalue_reference_member.hpp]
+[import ../../../boost/callable_traits/is_rvalue_reference_member.hpp]
 [is_rvalue_reference_member_hpp]
 
-[import ../include/callable_traits/is_reference_member.hpp]
+[import ../../../boost/callable_traits/is_reference_member.hpp]
 [is_reference_member_hpp]
 
 [endsect][/section:member_qualifier_features]
@@ -284,55 +280,55 @@ This reference will be most beneficial to readers who posess a basic understandi
 
 [section:parameter_list_features Parameter List Features]
 
-[import ../include/callable_traits/function_type.hpp]
+[import ../../../boost/callable_traits/function_type.hpp]
 [function_type_hpp]
 
-[import ../include/callable_traits/args.hpp]
+[import ../../../boost/callable_traits/args.hpp]
 [args_hpp]
 
-[import ../include/callable_traits/arg_at.hpp]
+[import ../../../boost/callable_traits/arg_at.hpp]
 [arg_at_hpp]
 
-[import ../include/callable_traits/clear_args.hpp]
+[import ../../../boost/callable_traits/clear_args.hpp]
 [clear_args_hpp]
 
-[import ../include/callable_traits/remove_args.hpp]
+[import ../../../boost/callable_traits/remove_args.hpp]
 [remove_args_hpp]
 
-[import ../include/callable_traits/replace_args.hpp]
+[import ../../../boost/callable_traits/replace_args.hpp]
 [replace_args_hpp]
 
-[import ../include/callable_traits/insert_args.hpp]
+[import ../../../boost/callable_traits/insert_args.hpp]
 [insert_args_hpp]
 
-[import ../include/callable_traits/pop_back_args.hpp]
+[import ../../../boost/callable_traits/pop_back_args.hpp]
 [pop_back_args_hpp]
 
-[import ../include/callable_traits/pop_front_args.hpp]
+[import ../../../boost/callable_traits/pop_front_args.hpp]
 [pop_front_args_hpp]
 
-[import ../include/callable_traits/push_back_args.hpp]
+[import ../../../boost/callable_traits/push_back_args.hpp]
 [push_back_args_hpp]
 
-[import ../include/callable_traits/push_front_args.hpp]
+[import ../../../boost/callable_traits/push_front_args.hpp]
 [push_front_args_hpp]
 
-[import ../include/callable_traits/expand_args.hpp]
+[import ../../../boost/callable_traits/expand_args.hpp]
 [expand_args_hpp]
 
-[import ../include/callable_traits/expand_args_left.hpp]
+[import ../../../boost/callable_traits/expand_args_left.hpp]
 [expand_args_left_hpp]
 
-[import ../include/callable_traits/expand_args_right.hpp]
+[import ../../../boost/callable_traits/expand_args_right.hpp]
 [expand_args_right_hpp]
 
-[import ../include/callable_traits/add_varargs.hpp]
+[import ../../../boost/callable_traits/add_varargs.hpp]
 [add_varargs_hpp]
 
-[import ../include/callable_traits/remove_varargs.hpp]
+[import ../../../boost/callable_traits/remove_varargs.hpp]
 [remove_varargs_hpp]
 
-[import ../include/callable_traits/has_varargs.hpp]
+[import ../../../boost/callable_traits/has_varargs.hpp]
 [has_varargs_hpp]
 
 [endsect][/section:parameter_list_features]
@@ -341,13 +337,13 @@ This reference will be most beneficial to readers who posess a basic understandi
 
 [section:return_type_features Return Type Features]
 
-[import ../include/callable_traits/return_type.hpp]
+[import ../../../boost/callable_traits/return_type.hpp]
 [return_type_hpp]
 
-[import ../include/callable_traits/apply_return.hpp]
+[import ../../../boost/callable_traits/apply_return.hpp]
 [apply_return_hpp]
 
-[import ../include/callable_traits/has_void_return.hpp]
+[import ../../../boost/callable_traits/has_void_return.hpp]
 [has_void_return_hpp]
 
 [endsect][/section:return_type_features]
@@ -356,31 +352,40 @@ This reference will be most beneficial to readers who posess a basic understandi
 
 [section:member_pointer_features Member Pointer Features]
 
-[import ../include/callable_traits/apply_member_pointer.hpp]
+[import ../../../boost/callable_traits/apply_member_pointer.hpp]
 [apply_member_pointer_hpp]
 
-[import ../include/callable_traits/parent_class_of.hpp]
+[import ../../../boost/callable_traits/parent_class_of.hpp]
 [parent_class_of_hpp]
 
-[import ../include/callable_traits/qualified_parent_class_of.hpp]
+[import ../../../boost/callable_traits/qualified_parent_class_of.hpp]
 [qualified_parent_class_of_hpp]
 
 [endsect][/section:member_pointer_features]
 
 
 
-[section:transactional_memory_features Transactional Memory Features]
+[section:cpp_17_features C++17 Features]
 
-[import ../include/callable_traits/add_transaction_safe.hpp]
+[import ../../../boost/callable_traits/add_transaction_safe.hpp]
 [add_transaction_safe_hpp]
 
-[import ../include/callable_traits/remove_transaction_safe.hpp]
+[import ../../../boost/callable_traits/remove_transaction_safe.hpp]
 [remove_transaction_safe_hpp]
 
-[import ../include/callable_traits/is_transaction_safe.hpp]
+[import ../../../boost/callable_traits/is_transaction_safe.hpp]
 [is_transaction_safe_hpp]
 
-[endsect][/section:transactional_memory_features]
+[import ../../../boost/callable_traits/add_noexcept.hpp]
+[add_noexcept_hpp]
+
+[import ../../../boost/callable_traits/remove_noexcept.hpp]
+[remove_noexcept_hpp]
+
+[import ../../../boost/callable_traits/is_noexcept.hpp]
+[is_noexcept_hpp]
+
+[endsect][/section:cpp_17_features]
 
 
 

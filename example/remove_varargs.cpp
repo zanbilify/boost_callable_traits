@@ -8,9 +8,9 @@ Distributed under the Boost Software License, Version 1.0.
 
 //[ remove_varargs
 #include <type_traits>
-#include <callable_traits/remove_varargs.hpp>
+#include <boost/callable_traits/remove_varargs.hpp>
 
-namespace ct = callable_traits;
+namespace ct = boost::callable_traits;
 
 struct foo {};
 

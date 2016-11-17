@@ -7,9 +7,9 @@ Distributed under the Boost Software License, Version 1.0.
 
 //[ apply_member_pointer
 #include <type_traits>
-#include <callable_traits/apply_member_pointer.hpp>
+#include <boost/callable_traits/apply_member_pointer.hpp>
 
-namespace ct = callable_traits;
+namespace ct = boost::callable_traits;
 
 struct foo;
 struct bar;

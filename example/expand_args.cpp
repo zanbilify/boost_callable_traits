@@ -5,9 +5,9 @@ Distributed under the Boost Software License, Version 1.0.
 ->*/
 
 //[ expand_args
-#include <callable_traits/expand_args.hpp>
+#include <boost/callable_traits/expand_args.hpp>
 
-namespace ct = callable_traits;
+namespace ct = boost::callable_traits;
 
 void f(int, char);
 

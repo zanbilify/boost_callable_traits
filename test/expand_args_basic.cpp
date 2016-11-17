@@ -7,7 +7,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 
 #include <tuple>
-#include <callable_traits/expand_args.hpp>
+#include <boost/callable_traits/expand_args.hpp>
 #include "test.hpp"
 
 int main() {

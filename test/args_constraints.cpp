@@ -7,23 +7,23 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#include <callable_traits/args.hpp>
+#include <boost/callable_traits/args.hpp>
 #include "test.hpp"
 
 struct foo;
 
 int main() {
 
-    assert_sfinae<callable_traits::args_t, int>();
-    assert_sfinae<callable_traits::args_t, int &>();
-    assert_sfinae<callable_traits::args_t, int (* const &)()>();
-    assert_sfinae<callable_traits::args_t, int (foo::* &)()>();
-    assert_sfinae<callable_traits::args_t, int (foo::* const)()>();
-    assert_sfinae<callable_traits::args_t, int (foo::* const &)()>();
-    assert_sfinae<callable_traits::args_t, int (foo::* volatile)()>();
+    assert_sfinae<boost::callable_traits::args_t, int>();
+    assert_sfinae<boost::callable_traits::args_t, int &>();
+    assert_sfinae<boost::callable_traits::args_t, int (* const &)()>();
+    assert_sfinae<boost::callable_traits::args_t, int (foo::* &)()>();
+    assert_sfinae<boost::callable_traits::args_t, int (foo::* const)()>();
+    assert_sfinae<boost::callable_traits::args_t, int (foo::* const &)()>();
+    assert_sfinae<boost::callable_traits::args_t, int (foo::* volatile)()>();
 
     auto lambda = [](){};
-    assert_sfinae<callable_traits::args_t, decltype(lambda)&>();
-    assert_sfinae<callable_traits::args_t, void>();
+    assert_sfinae<boost::callable_traits::args_t, decltype(lambda)&>();
+    assert_sfinae<boost::callable_traits::args_t, void>();
 }
 

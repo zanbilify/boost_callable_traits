@@ -6,7 +6,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#include <callable_traits/remove_args.hpp>
+#include <boost/callable_traits/remove_args.hpp>
 #include <tuple>
 #include "test.hpp"
 
@@ -19,7 +19,7 @@ struct is_substitution_failure_remove_args {
     static auto test(...) -> std::true_type;
 
     template<typename U,
-        callable_traits::remove_args_t<I, U, Count>* = nullptr>
+        boost::callable_traits::remove_args_t<I, U, Count>* = nullptr>
     static auto test(int) -> std::false_type;
 
     static constexpr bool value = decltype(test<T>(0))::value;

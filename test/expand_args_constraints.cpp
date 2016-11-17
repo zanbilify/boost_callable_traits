@@ -6,7 +6,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#include <callable_traits/expand_args.hpp>
+#include <boost/callable_traits/expand_args.hpp>
 #include <tuple>
 #include "test.hpp"
 
@@ -19,7 +19,7 @@ struct is_substitution_failure_expand_args {
     static auto test(...) -> std::true_type;
 
     template<typename U,
-        callable_traits::expand_args_t<U, std::tuple>* = nullptr>
+        boost::callable_traits::expand_args_t<U, std::tuple>* = nullptr>
     static auto test(int) -> std::false_type;
 
     static constexpr bool value = decltype(test<T>(0))::value;

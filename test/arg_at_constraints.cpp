@@ -7,7 +7,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#include <callable_traits/arg_at.hpp>
+#include <boost/callable_traits/arg_at.hpp>
 #include "test.hpp"
 
 struct foo;

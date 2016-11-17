@@ -1,7 +1,7 @@
 #include <tuple>
 #include <utility>
 #include <type_traits>
-#include <callable_traits/insert_args.hpp>
+#include <boost/callable_traits/insert_args.hpp>
 #include "test.hpp"
 
 

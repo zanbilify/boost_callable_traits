@@ -4,13 +4,13 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
 ->*/
 
-#include <callable_traits/config.hpp>
+#include <boost/callable_traits/config.hpp>
 #ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
 int main(){}
 #else
 
 //[ overview
-#include <callable_traits/callable_traits.hpp>
+#include <boost/callable_traits.hpp>
 
 #include <type_traits>
 #include <tuple>
@@ -18,7 +18,7 @@ int main(){}
 using std::is_same;
 using std::tuple;
 
-using namespace callable_traits;
+using namespace boost::callable_traits;
 
 struct number {
     int value;

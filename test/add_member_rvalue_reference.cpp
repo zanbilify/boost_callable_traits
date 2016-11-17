@@ -7,7 +7,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <type_traits>
 #include <functional>
 #include <tuple>
-#include <callable_traits/callable_traits.hpp>
+#include <boost/callable_traits.hpp>
 #include "test.hpp"
 
 #ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS

@@ -5,16 +5,16 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 ->*/
 
-#include <callable_traits/config.hpp>
+#include <boost/callable_traits/config.hpp>
 
 #ifndef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
 int main(){}
 #else
 
 //[ is_transaction_safe
-#include <callable_traits/is_transaction_safe.hpp>
+#include <boost/callable_traits/is_transaction_safe.hpp>
 
-namespace ct = callable_traits;
+namespace ct = boost::callable_traits;
 
 struct foo;
 

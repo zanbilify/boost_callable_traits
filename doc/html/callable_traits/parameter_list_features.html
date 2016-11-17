@@ -12,11 +12,11 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
 <td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../boost.png"></td>
-<td align="center"><a href="../../../index.html">Home</a></td>
-<td align="center"><a href="../../../libs/libraries.htm">Libraries</a></td>
+<td align="center"><a href="../../../../../index.html">Home</a></td>
+<td align="center"><a href="../../../../../libs/libraries.htm">Libraries</a></td>
 <td align="center"><a href="http://www.boost.org/users/people.html">People</a></td>
 <td align="center"><a href="http://www.boost.org/users/faq.html">FAQ</a></td>
-<td align="center"><a href="../../../more/index.htm">More</a></td>
+<td align="center"><a href="../../../../../more/index.htm">More</a></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">
@@ -54,7 +54,7 @@
 <a name="callable_traits.parameter_list_features.ref_function_type.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_function_type.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_function_type.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">function_type</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">function_type</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_function_type.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_function_type.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_function_type.definition">Definition</a>
@@ -346,14 +346,14 @@
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">void</span> <span class="identifier">test</span><span class="special">(){</span>
 
-    <span class="comment">// this example shows how callable_traits::function_type_t</span>
+    <span class="comment">// this example shows how boost::callable_traits::function_type_t</span>
     <span class="comment">// bevaves consistently for many different types</span>
     <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">function_type_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
     <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">float</span><span class="special">&amp;,</span> <span class="keyword">const</span> <span class="keyword">char</span><span class="special">*);</span>
@@ -388,7 +388,7 @@
 <a name="callable_traits.parameter_list_features.ref_args.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_args.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_args.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_args.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_args.definition">Definition</a>
@@ -457,7 +457,7 @@
             instantiation, where the first tuple element is a reference to the parent
             class of <code class="computeroutput"><span class="identifier">T</span></code>, qualified
             according to the member qualifiers on <code class="computeroutput"><span class="identifier">T</span></code>,
-            such that this first tuple element type is equivalent to <code class="computeroutput"><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">qualified_parent_class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>.
+            such that this first tuple element type is equivalent to <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">qualified_parent_class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>.
             The subsequent template type arguments, if any, are the parameter types
             of the member function.
           </li>
@@ -677,9 +677,9 @@
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">memory</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">Expect</span><span class="special">&gt;</span>
 <span class="keyword">void</span> <span class="identifier">test</span><span class="special">(){</span>
@@ -739,7 +739,7 @@
 <a name="callable_traits.parameter_list_features.ref_arg_at.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_arg_at.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_arg_at.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">arg_at</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">arg_at</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_arg_at.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_arg_at.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_arg_at.definition">Definition</a>
@@ -790,7 +790,7 @@
           </li>
 <li class="listitem">
             <code class="computeroutput"><span class="identifier">I</span></code> must be less than
-            <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple_size</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;&gt;::</span><span class="identifier">value</span></code>
+            <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple_size</span><span class="special">&lt;</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;&gt;::</span><span class="identifier">value</span></code>
           </li>
 </ul></div>
 <h5>
@@ -803,7 +803,7 @@
           </li>
 <li class="listitem">
             Otherwise, <code class="computeroutput"><span class="identifier">arg_at_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">&gt;</span></code>
-            is equivalent to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple_element_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;&gt;</span></code>.
+            is equivalent to <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple_element_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;&gt;</span></code>.
           </li>
 </ul></div>
 <h5>
@@ -820,9 +820,9 @@
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">arg_at</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">arg_at</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
 
@@ -848,7 +848,7 @@
 <a name="callable_traits.parameter_list_features.ref_clear_args.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_clear_args.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_clear_args.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">clear_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">clear_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_clear_args.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_clear_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_clear_args.definition">Definition</a>
@@ -1081,9 +1081,9 @@
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_clear_args.example_program"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_clear_args.example_program">Example
         Program</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">clear_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">clear_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
 
@@ -1102,7 +1102,7 @@
 <a name="callable_traits.parameter_list_features.ref_remove_args.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_remove_args.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_args.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_remove_args.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_remove_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_args.definition">Definition</a>
@@ -1270,9 +1270,9 @@
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">int</span> <span class="identifier">I</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">N</span> <span class="special">{};</span>
@@ -1296,7 +1296,7 @@
 <a name="callable_traits.parameter_list_features.ref_replace_args.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_replace_args.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_replace_args.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">replace_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">replace_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_replace_args.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_replace_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_replace_args.definition">Definition</a>
@@ -1505,14 +1505,12 @@
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">replace_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">replace_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">int</span> <span class="identifier">I</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">N</span> <span class="special">{};</span>
-
-<span class="keyword">struct</span> <span class="identifier">foo</span> <span class="special">{};</span>
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
 
@@ -1531,7 +1529,7 @@
 <a name="callable_traits.parameter_list_features.ref_insert_args.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_insert_args.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_insert_args.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">insert_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">insert_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_insert_args.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_insert_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_insert_args.definition">Definition</a>
@@ -1802,9 +1800,9 @@
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">insert_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">insert_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">int</span> <span class="identifier">I</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">N</span> <span class="special">{};</span>
@@ -1826,7 +1824,7 @@
 <a name="callable_traits.parameter_list_features.ref_pop_back_args.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_pop_back_args.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_back_args.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">pop_back_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">pop_back_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_pop_back_args.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_pop_back_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_back_args.definition">Definition</a>
@@ -1976,9 +1974,9 @@
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_pop_back_args.example_program"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_back_args.example_program">Example
         Program</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">pop_back_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">pop_back_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span>
     <span class="identifier">ct</span><span class="special">::</span><span class="identifier">pop_back_args_t</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)&gt;,</span>
@@ -2014,7 +2012,7 @@
 <a name="callable_traits.parameter_list_features.ref_pop_front_args.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_pop_front_args.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_front_args.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">pop_front_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">pop_front_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_pop_front_args.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_pop_front_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_front_args.definition">Definition</a>
@@ -2163,9 +2161,9 @@
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_pop_front_args.example_program"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_front_args.example_program">Example
         Program</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">pop_front_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">pop_front_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span>
     <span class="identifier">ct</span><span class="special">::</span><span class="identifier">pop_front_args_t</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)&gt;,</span>
@@ -2201,7 +2199,7 @@
 <a name="callable_traits.parameter_list_features.ref_push_back_args.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_push_back_args.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_back_args.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">push_back_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">push_back_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_push_back_args.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_push_back_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_back_args.definition">Definition</a>
@@ -2346,9 +2344,9 @@
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_push_back_args.example_program"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_back_args.example_program">Example
         Program</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">push_back_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">push_back_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
 
@@ -2367,7 +2365,7 @@
 <a name="callable_traits.parameter_list_features.ref_push_front_args.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_push_front_args.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_front_args.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">push_front_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">push_front_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_push_front_args.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_push_front_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_front_args.definition">Definition</a>
@@ -2512,9 +2510,9 @@
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_push_front_args.example_program"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_front_args.example_program">Example
         Program</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">push_front_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">push_front_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
 
@@ -2533,7 +2531,7 @@
 <a name="callable_traits.parameter_list_features.ref_expand_args.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_expand_args.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">expand_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">expand_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_expand_args.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_expand_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args.definition">Definition</a>
@@ -2601,7 +2599,7 @@
             template instantiation, where the first template type argument is a reference
             to the parent class of <code class="computeroutput"><span class="identifier">T</span></code>,
             qualified according to the member qualifiers on <code class="computeroutput"><span class="identifier">T</span></code>,
-            such that this type is equivalent to <code class="computeroutput"><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">qualified_parent_class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>. The subsequent template type arguments
+            such that this type is equivalent to <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">qualified_parent_class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>. The subsequent template type arguments
             are the parameter list of the member function.
           </li>
 <li class="listitem">
@@ -2825,9 +2823,9 @@
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_expand_args.example_program"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args.example_program">Example
         Program</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">expand_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">expand_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">void</span> <span class="identifier">f</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">);</span>
 
@@ -2848,7 +2846,7 @@
 <a name="callable_traits.parameter_list_features.ref_expand_args_left.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_expand_args_left.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args_left.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">expand_args_left</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">expand_args_left</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_expand_args_left.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_expand_args_left.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args_left.definition">Definition</a>
@@ -3134,9 +3132,9 @@
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_expand_args_left.example_program"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args_left.example_program">Example
         Program</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">expand_args_left</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">expand_args_left</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">void</span> <span class="identifier">f</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">);</span>
 
@@ -3157,7 +3155,7 @@
 <a name="callable_traits.parameter_list_features.ref_expand_args_right.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_expand_args_right.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args_right.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">expand_args_right</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">expand_args_right</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_expand_args_right.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_expand_args_right.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args_right.definition">Definition</a>
@@ -3450,9 +3448,9 @@
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_expand_args_right.example_program"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args_right.example_program">Example
         Program</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">expand_args_right</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">expand_args_right</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">void</span> <span class="identifier">f</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">);</span>
 
@@ -3473,7 +3471,7 @@
 <a name="callable_traits.parameter_list_features.ref_add_varargs.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_add_varargs.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_add_varargs.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_add_varargs.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_add_varargs.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_add_varargs.definition">Definition</a>
@@ -3725,9 +3723,9 @@
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">add_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">struct</span> <span class="identifier">foo</span> <span class="special">{};</span>
 
@@ -3770,7 +3768,7 @@
 <a name="callable_traits.parameter_list_features.ref_remove_varargs.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_remove_varargs.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_varargs.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_remove_varargs.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_remove_varargs.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_varargs.definition">Definition</a>
@@ -4011,9 +4009,9 @@
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">struct</span> <span class="identifier">foo</span> <span class="special">{};</span>
 
@@ -4051,7 +4049,7 @@
 <a name="callable_traits.parameter_list_features.ref_has_varargs.h0"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_has_varargs.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_has_varargs.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span><span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">has_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">has_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.parameter_list_features.ref_has_varargs.h1"></a>
         <span class="phrase"><a name="callable_traits.parameter_list_features.ref_has_varargs.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_has_varargs.definition">Definition</a>
@@ -4272,11 +4270,9 @@
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">has_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">has_varargs</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">callable_traits</span><span class="special">;</span>
-
-<span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">;</span>
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(...)&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 <span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">has_varargs</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">()&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>

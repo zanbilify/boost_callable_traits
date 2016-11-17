@@ -6,7 +6,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#include <callable_traits/insert_args.hpp>
+#include <boost/callable_traits/insert_args.hpp>
 #include <tuple>
 #include "test.hpp"
 
@@ -19,7 +19,7 @@ struct is_substitution_failure_insert_args {
     static auto test(...) -> std::true_type;
 
     template<typename U,
-        callable_traits::insert_args_t<I, U, int, int>* = nullptr>
+        boost::callable_traits::insert_args_t<I, U, int, int>* = nullptr>
     static auto test(int) -> std::false_type;
 
     static constexpr bool value = decltype(test<T>(0))::value;

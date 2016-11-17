@@ -12,11 +12,11 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
 <td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../boost.png"></td>
-<td align="center"><a href="../../../index.html">Home</a></td>
-<td align="center"><a href="../../../libs/libraries.htm">Libraries</a></td>
+<td align="center"><a href="../../../../../index.html">Home</a></td>
+<td align="center"><a href="../../../../../libs/libraries.htm">Libraries</a></td>
 <td align="center"><a href="http://www.boost.org/users/people.html">People</a></td>
 <td align="center"><a href="http://www.boost.org/users/faq.html">FAQ</a></td>
-<td align="center"><a href="../../../more/index.htm">More</a></td>
+<td align="center"><a href="../../../../../more/index.htm">More</a></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">
@@ -84,8 +84,8 @@
 <h4>
 <a name="callable_traits.faq.h2"></a>
       <span class="phrase"><a name="callable_traits.faq.why_does_namespace_scoped_args_t"></a></span><a class="link" href="faq.html#callable_traits.faq.why_does_namespace_scoped_args_t">Why
-      does <code class="literal">callable_traits::</code><code class="literal">args_t</code> alias a
-      <code class="literal">std::tuple</code> instead of X?</a>
+      does <code class="literal">boost::callable_traits::</code><code class="literal">args_t</code> alias
+      a <code class="literal">std::tuple</code> instead of X?</a>
     </h4>
 <p>
       Boost contains a handful of excellent type containers. However, <code class="literal">CallableTraits</code>
@@ -140,19 +140,6 @@
     </p>
 <h4>
 <a name="callable_traits.faq.h7"></a>
-      <span class="phrase"><a name="callable_traits.faq.what_about_c_17_noexcept"></a></span><a class="link" href="faq.html#callable_traits.faq.what_about_c_17_noexcept">What
-      about C++17 <code class="computeroutput"><span class="keyword">noexcept</span></code>?</a>
-    </h4>
-<p>
-      The upcoming ISO standard for C++17 includes a <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0012r1.html" target="_top">change
-      to the core language</a> which adds the <code class="literal">noexcept</code> qualifier
-      to the type system. Currently, C++17 <code class="computeroutput"><span class="keyword">noexcept</span></code>
-      qualifiers are not handled in <code class="literal">CallableTraits</code>, because compiler
-      vendors have not implemented support for this feature (as far as I know). However,
-      features are planned, and they will be non-breaking additions to the library.
-    </p>
-<h4>
-<a name="callable_traits.faq.h8"></a>
       <span class="phrase"><a name="callable_traits.faq.what_about_calling_conventions"></a></span><a class="link" href="faq.html#callable_traits.faq.what_about_calling_conventions">What
       about calling conventions?</a>
     </h4>

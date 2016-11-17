@@ -1,23 +1,25 @@
-# Copyright 2010 Tim Blechmann
-# Copyright 2016 Modified Work Barrett Adair
-# Distributed under the Boost Software License, Version 1.0. (See accompanying
+# (C) Copyright 2008-11 Anthony Williams
+# (C) Copyright 2011-12 Vicente J. Botet Escriba
+# (C) Copyright 2016 Barrett Adair
+#
+# Distributed under the Boost Software License, Version 1.0. (See accompanying 
 # file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
-import quickbook ;
+using boostbook ;
+using quickbook ;
 
-xml callable_traits : callable_traits.qbk : ;
+xml callable_traits : callable_traits.qbk ;
 
 boostbook standalone
     : callable_traits
     : <xsl:param>html.stylesheet=boostbook.css
-#       <xsl:param>boost.root=./
-#       <xsl:param>boost.libraries=$BOOST_ROOT/libraries.htm
-      <format>pdf:<xsl:param>boost.url.prefix=http://www.boost.org/doc/libs/release/libs/callable_traits/doc/html
-    ;
+        <xsl:param>boost.root=../../../..
+#        <xsl:param>boost.libraries=../../../../doc/libraries.htm
+      <format>pdf:<xsl:param>boost.url.prefix=http://www.boost.org/doc/libs/release/doc/html
+;
 
-install css : [ glob src/css/*.css ]
-    : <location>html ;
-install images : [ glob src/images/*.png ]
-    : <location>html/images ;
-explicit css ;
-explicit images ;
+###############################################################################
+alias boostdoc ;
+
+install html : ../../../doc/src/boostbook.css ;
+install ../ : ../../../boost.png ;

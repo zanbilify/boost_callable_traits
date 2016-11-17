@@ -5,7 +5,7 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 ->*/
 
-#include <callable_traits/config.hpp>
+#include <boost/callable_traits/config.hpp>
 #include "test.hpp"
 
 
@@ -13,7 +13,7 @@ Distributed under the Boost Software License, Version 1.0.
 int main(){}
 #else
 
-#include <callable_traits/remove_transaction_safe.hpp>
+#include <boost/callable_traits/remove_transaction_safe.hpp>
 
 template<typename Safe, typename NotSafe>
 void test() {

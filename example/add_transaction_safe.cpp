@@ -5,7 +5,7 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 ->*/
 
-#include <callable_traits/config.hpp>
+#include <boost/callable_traits/config.hpp>
 
 #ifndef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
 int main(){}
@@ -13,9 +13,9 @@ int main(){}
 
 //[ add_transaction_safe
 #include <type_traits>
-#include <callable_traits/add_transaction_safe.hpp>
+#include <boost/callable_traits/add_transaction_safe.hpp>
 
-using callable_traits::add_transaction_safe_t;
+using boost::callable_traits::add_transaction_safe_t;
 
 using not_safe = int();
 using safe = int() transaction_safe;

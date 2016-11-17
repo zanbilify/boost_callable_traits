@@ -6,9 +6,9 @@ Distributed under the Boost Software License, Version 1.0.
 
 //[ insert_args
 #include <type_traits>
-#include <callable_traits/insert_args.hpp>
+#include <boost/callable_traits/insert_args.hpp>
 
-namespace ct = callable_traits;
+namespace ct = boost::callable_traits;
 
 template<int I>
 struct N {};

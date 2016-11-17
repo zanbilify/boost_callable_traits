@@ -7,7 +7,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <type_traits>
 #include <functional>
 #include <tuple>
-#include <callable_traits/add_varargs.hpp>
+#include <boost/callable_traits/add_varargs.hpp>
 #include "test.hpp"
 
 struct foo {};

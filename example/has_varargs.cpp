@@ -12,11 +12,9 @@ int main(){}
     
 //[ has_varargs
 #include <type_traits>
-#include <callable_traits/has_varargs.hpp>
+#include <boost/callable_traits/has_varargs.hpp>
 
-namespace ct = callable_traits;
-
-struct foo;
+namespace ct = boost::callable_traits;
 
 static_assert(ct::has_varargs<int(...)>::value, "");
 static_assert(!ct::has_varargs<int()>::value, "");

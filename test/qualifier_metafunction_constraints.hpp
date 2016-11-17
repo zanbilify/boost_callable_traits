@@ -13,21 +13,21 @@ HEADER GUARDS INTENTIONALLY OMITTED
 #endif
 
 auto PP_CAT(test_, CALLABLE_TRAIT_UNDER_TEST) = [](){
-    assert_sfinae<callable_traits::CALLABLE_TRAIT_UNDER_TEST, int>();
-    assert_sfinae<callable_traits::CALLABLE_TRAIT_UNDER_TEST, int &>();
-    assert_sfinae<callable_traits::CALLABLE_TRAIT_UNDER_TEST, int(&)()>();
-    assert_sfinae<callable_traits::CALLABLE_TRAIT_UNDER_TEST, int(*)()>();
-    assert_sfinae<callable_traits::CALLABLE_TRAIT_UNDER_TEST, int(* const foo::*)()>();
-    assert_sfinae<callable_traits::CALLABLE_TRAIT_UNDER_TEST, int foo::*>();
-    assert_sfinae<callable_traits::CALLABLE_TRAIT_UNDER_TEST, int (foo::* &)()>();
-    assert_sfinae<callable_traits::CALLABLE_TRAIT_UNDER_TEST, int (foo::* const)()>();
-    assert_sfinae<callable_traits::CALLABLE_TRAIT_UNDER_TEST, int (foo::* const &)()>();
-    assert_sfinae<callable_traits::CALLABLE_TRAIT_UNDER_TEST, int (foo::* volatile)()>();
+    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int>();
+    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int &>();
+    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int(&)()>();
+    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int(*)()>();
+    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int(* const foo::*)()>();
+    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int foo::*>();
+    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int (foo::* &)()>();
+    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int (foo::* const)()>();
+    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int (foo::* const &)()>();
+    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int (foo::* volatile)()>();
 
     auto lambda = [](){};
-    assert_sfinae<callable_traits::CALLABLE_TRAIT_UNDER_TEST, decltype(lambda)>();
-    assert_sfinae<callable_traits::CALLABLE_TRAIT_UNDER_TEST, decltype(lambda)&>();
-    assert_sfinae<callable_traits::CALLABLE_TRAIT_UNDER_TEST, void>();
+    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, decltype(lambda)>();
+    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, decltype(lambda)&>();
+    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, void>();
 };
 
 PP_CAT(test_, CALLABLE_TRAIT_UNDER_TEST)();
