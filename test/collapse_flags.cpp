@@ -6,16 +6,16 @@ Distributed under the Boost Software License, Version 1.0.
 */
 
 #include <type_traits>
-#include <callable_traits/detail/qualifier_flags.hpp>
+#include <boost/callable_traits/detail/qualifier_flags.hpp>
 #include "test.hpp"
 
 
-using namespace callable_traits;
-using namespace callable_traits::detail;
+using namespace boost::callable_traits;
+using namespace boost::callable_traits::detail;
 
 int main() {
 
-    // callable_traits::collapse_flags emulates the C++11
+    // boost::callable_traits::collapse_flags emulates the C++11
     // reference collapsing rules. Here, we test that behavior.
 
     using rref_plus_lref = collapse_flags<rref_, lref_>;

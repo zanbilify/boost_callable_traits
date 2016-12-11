@@ -9,9 +9,6 @@ project(callable_traits CXX)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 enable_testing()
 
-# Perform checks to make sure we support the current compiler
-include(CheckCxxCompilerSupport)
-
 if(BUILD_CXX_STD)
 else()
   # Defaults to C++14 if not set:
@@ -61,16 +58,6 @@ endif()
 # transactional memory - currently only available in GCC 6 and later
 if(NOT ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
     callable_traits_append_flag(callable_traits_HAS_FGNU_TM                    -fgnu-tm)
-endif()
-
-
-find_package(Boost 1.59)
-if (Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIRS})
-else()
-    message(WARNING
-        "The Boost library headers were not found; targets depending "
-        "on Boost won't be available.")
 endif()
 
 #

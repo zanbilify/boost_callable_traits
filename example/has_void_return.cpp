@@ -7,9 +7,9 @@ Distributed under the Boost Software License, Version 1.0.
 
 //[ has_void_return
 #include <type_traits>
-#include <callable_traits/has_void_return.hpp>
+#include <boost/callable_traits/has_void_return.hpp>
 
-namespace ct = callable_traits;
+namespace ct = boost::callable_traits;
 
 static_assert(ct::has_void_return<void()>::value, "");
 static_assert(!ct::has_void_return<int()>::value, "");

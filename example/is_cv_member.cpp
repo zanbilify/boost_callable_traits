@@ -7,9 +7,9 @@ Distributed under the Boost Software License, Version 1.0.
 
 //[ is_cv_member
 #include <type_traits>
-#include <callable_traits/is_cv_member.hpp>
+#include <boost/callable_traits/is_cv_member.hpp>
 
-namespace ct = callable_traits;
+namespace ct = boost::callable_traits;
 
 struct foo;
 

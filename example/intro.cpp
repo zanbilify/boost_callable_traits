@@ -4,7 +4,7 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
 ->*/
 
-#include <callable_traits/config.hpp>
+#include <boost/callable_traits/config.hpp>
 #ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
 int main(){ return 0; }
 #else
@@ -12,9 +12,9 @@ int main(){ return 0; }
 //[ intro
 #include <type_traits>
 #include <tuple>
-#include <callable_traits/callable_traits.hpp>
+#include <boost/callable_traits.hpp>
 
-namespace ct = callable_traits;
+namespace ct = boost::callable_traits;
 
 // This function template helps keep our example code neat
 template<typename A, typename B>

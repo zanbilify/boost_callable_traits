@@ -1,7 +1,7 @@
 #include <tuple>
 #include <utility>
 #include <type_traits>
-#include <callable_traits/expand_args_left.hpp>
+#include <boost/callable_traits/expand_args_left.hpp>
 #include "test.hpp"
 
 struct foo;

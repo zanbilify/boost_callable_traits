@@ -5,16 +5,16 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 ->*/
 
-#include <callable_traits/config.hpp>
+#include <boost/callable_traits/config.hpp>
 #ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
 int main(){ return 0; }
 #else
 
 //[ return_type
 #include <type_traits>
-#include <callable_traits/callable_traits.hpp>
+#include <boost/callable_traits.hpp>
 
-namespace ct = callable_traits;
+namespace ct = boost::callable_traits;
 
 using expect = int;
 

@@ -1,7 +1,7 @@
 #include <tuple>
 #include <utility>
 #include <type_traits>
-#include <callable_traits/clear_args.hpp>
+#include <boost/callable_traits/clear_args.hpp>
 #include "test.hpp"
 
 struct foo;

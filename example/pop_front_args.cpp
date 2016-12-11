@@ -8,9 +8,9 @@ Distributed under the Boost Software License, Version 1.0.
 ->*/
 
 //[ pop_front_args
-#include <callable_traits/pop_front_args.hpp>
+#include <boost/callable_traits/pop_front_args.hpp>
 
-namespace ct = callable_traits;
+namespace ct = boost::callable_traits;
 
 static_assert(std::is_same<
     ct::pop_front_args_t<int(char, short, int)>,
