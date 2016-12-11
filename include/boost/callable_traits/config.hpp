@@ -62,11 +62,13 @@ Distributed under the Boost Software License, Version 1.0.
 #  endif // #ifdef __clang__
 #endif // #ifdef _MSC_VER
 
-#ifdef __clang_major__
-#  if __clang_major__ >= 4
-#  ifndef CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
-#    define CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
-#  endif
+#ifndef __apple_build_version__
+#  ifdef __clang_major__
+#    if __clang_major__ >= 4
+#    ifndef CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
+#      define CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
+#    endif
+#    endif
 #  endif
 #endif
 
