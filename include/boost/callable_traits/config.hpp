@@ -21,7 +21,11 @@ Distributed under the Boost Software License, Version 1.0.
 #define CALLABLE_TRAITS_EMPTY CALLABLE_TRAITS_EMPTY_
 
 #ifdef __cpp_transactional_memory
-#define CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+# define CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+#endif
+
+#ifdef __cpp_noexcept_function_type
+# define CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
 #endif
 
 #ifdef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
@@ -33,11 +37,6 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef __clang__
 #  if defined(__GNUC__)
 #    define CALLABLE_TRAITS_GCC
-#    if __GNUC__ >= 7
-#      ifndef CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
-#        define CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
-#      endif
-#    endif
 #    if __GNUC__ >= 6
 #        define CALLABLE_TRAITS_GCC_AT_LEAST_6_0_0
 #    endif
@@ -61,16 +60,6 @@ Distributed under the Boost Software License, Version 1.0.
 #    define CALLABLE_TRAITS_MSVC
 #  endif // #ifdef __clang__
 #endif // #ifdef _MSC_VER
-
-#ifndef __apple_build_version__
-#  ifdef __clang_major__
-#    if __clang_major__ >= 4
-#    ifndef CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
-#      define CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
-#    endif
-#    endif
-#  endif
-#endif
 
 #define CALLABLE_TRAITS_IX_SEQ(...) ::std::index_sequence< __VA_ARGS__ >
 #define CALLABLE_TRAITS_MAKE_IX_SEQ(...) ::std::make_index_sequence< __VA_ARGS__ >
