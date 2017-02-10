@@ -23,7 +23,7 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 template<typename T>
 using function_type_t = //implementation-defined
 //<-
-    detail::fail_if_invalid<
+    detail::try_but_fail_if_invalid<
         typename detail::traits<T>::function_type,
         cannot_determine_parameters_for_this_type>;
 //->

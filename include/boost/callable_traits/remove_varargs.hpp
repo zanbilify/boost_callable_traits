@@ -25,7 +25,7 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 template<typename T>
 using remove_varargs_t = //implementation-defined
 //<-
-    detail::fail_if_invalid<
+    detail::try_but_fail_if_invalid<
         typename detail::traits<T>::remove_varargs,
         varargs_are_illegal_for_this_type>;
 //->

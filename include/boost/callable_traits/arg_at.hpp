@@ -39,7 +39,9 @@ using arg_at_t = //implementation-defined
 
         detail::fail_if<
             !detail::parameter_index_helper<I, T>::has_parameter_list,
-            cannot_determine_parameters_for_this_type>,
+            typename std::conditional<std::is_reference<T>::value,
+                reference_type_not_supported_by_this_metafunction,
+                cannot_determine_parameters_for_this_type>::type>,
 
         detail::fail_if<
             detail::parameter_index_helper<I, T>::is_out_of_range,

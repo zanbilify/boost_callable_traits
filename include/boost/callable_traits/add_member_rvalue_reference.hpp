@@ -39,18 +39,15 @@ using add_member_rvalue_reference_t = //implementation-defined
     detail::sfinae_try<
         typename detail::traits<T>::add_member_rvalue_reference,
 
-        detail::fail_if<
-            std::is_same<typename detail::traits<T>::add_member_rvalue_reference,
-                detail::abominable_functions_not_supported_on_this_compiler>::value,
+        detail::fail_when_same<typename detail::traits<T>::add_member_rvalue_reference,
+                detail::abominable_functions_not_supported_on_this_compiler,
             this_compiler_doesnt_support_abominable_function_types>,
 
-        detail::fail_if<
-            std::is_same<typename detail::traits<T>::add_member_rvalue_reference,
-                detail::invalid_type>::value,
+        detail::fail_if_invalid<typename detail::traits<T>::add_member_rvalue_reference,
             member_qualifiers_are_illegal_for_this_type>>;
 #else
 
-    detail::fail_if_invalid<
+    detail::try_but_fail_if_invalid<
         typename detail::traits<T>::add_member_rvalue_reference,
         member_qualifiers_are_illegal_for_this_type>;
 

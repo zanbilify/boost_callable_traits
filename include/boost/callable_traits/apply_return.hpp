@@ -41,7 +41,7 @@ namespace detail {
     template<typename T, typename R>
     using apply_return_t = //implementation-defined
     //<-
-        detail::fail_if_invalid<
+        detail::try_but_fail_if_invalid<
             typename detail::apply_return_helper<T, R>::type,
             invalid_types_for_apply_return>;
     //->

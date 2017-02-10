@@ -24,7 +24,7 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 template<typename T>
 using remove_member_const_t = //implementation-defined
 //<-
-    detail::fail_if_invalid<
+    detail::try_but_fail_if_invalid<
         typename detail::traits<T>::remove_member_const,
         member_qualifiers_are_illegal_for_this_type>;
 //->

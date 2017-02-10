@@ -24,7 +24,7 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
             pmf<T>,
             pmd<T>,
             function_object<T>,
-            default_callable_traits<>
+            default_callable_traits<T>
         )::traits;
 
 CALLABLE_TRAITS_DETAIL_NAMESPACE_END

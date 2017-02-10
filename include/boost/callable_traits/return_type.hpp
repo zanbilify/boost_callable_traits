@@ -28,7 +28,7 @@ CALLABLE_TRAITS_SFINAE_MSG(return_type, unable_to_determine_return_type)
 template<typename T>
 using return_type_t = //implementation-defined
 //<-
-    detail::fail_if_invalid<
+    detail::try_but_fail_if_invalid<
         typename detail::traits<T>::return_type,
         unable_to_determine_return_type>;
 //->

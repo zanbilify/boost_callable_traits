@@ -25,7 +25,7 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 template<typename T>
 using qualified_parent_class_of_t = //implementation-defined
 //<-
-    detail::fail_if_invalid<
+    detail::try_but_fail_if_invalid<
         typename detail::traits<T>::invoke_type,
         type_is_not_a_member_pointer>;
 //->

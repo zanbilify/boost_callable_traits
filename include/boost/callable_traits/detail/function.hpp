@@ -19,7 +19,7 @@ Distributed under the Boost Software License, Version 1.0.
 CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
 template<typename T>
-struct function : default_callable_traits<> {};
+struct function : default_callable_traits<T> {};
 
 #undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
 #define CALLABLE_TRAITS_INCLUDE_QUALIFIERS
@@ -141,7 +141,8 @@ struct function : default_callable_traits<> {};
 #endif
 
 template<typename T>
-struct function<T&> : function<T> {
+struct function<T&> : std::conditional<function<T>::value,
+    function<T>, default_callable_traits<T&>>::type {
 
     static constexpr const bool value = !std::is_pointer<T>::value;
 
@@ -151,15 +152,15 @@ struct function<T&> : function<T> {
     using remove_varargs = typename base::remove_varargs&;
     using add_varargs = typename base::add_varargs&;
 
-    using remove_member_reference = invalid_type;
-    using add_member_lvalue_reference = invalid_type;
-    using add_member_rvalue_reference = invalid_type;
-    using add_member_const = invalid_type;
-    using add_member_volatile = invalid_type;
-    using add_member_cv = invalid_type;
-    using remove_member_const = invalid_type;
-    using remove_member_volatile = invalid_type;
-    using remove_member_cv = invalid_type;
+    using remove_member_reference = reference_error;
+    using add_member_lvalue_reference = reference_error;
+    using add_member_rvalue_reference = reference_error;
+    using add_member_const = reference_error;
+    using add_member_volatile = reference_error;
+    using add_member_cv = reference_error;
+    using remove_member_const = reference_error;
+    using remove_member_volatile = reference_error;
+    using remove_member_cv = reference_error;
 
     template<typename NewReturn>
     using apply_return = typename base::template apply_return<NewReturn>&;

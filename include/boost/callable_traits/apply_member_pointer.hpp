@@ -34,7 +34,7 @@ namespace detail {
 
     template<typename T, typename C>
     struct make_member_pointer<T, C, false> {
-        using type = invalid_type;
+        using type = error_type<T>;
     };
 
     template<typename T, typename C>
@@ -57,8 +57,7 @@ using apply_member_pointer_t = //implementation-defined
             typename detail::traits<T>::template apply_member_pointer<C>,
             typename detail::make_member_pointer<T, C>::type>,
 
-        detail::fail_if<std::is_same<void, T>::value,
-            members_cannot_have_a_type_of_void>,
+        detail::fail_when_same<void, T, members_cannot_have_a_type_of_void>,
 
         detail::fail_if<!std::is_class<C>::value,
             second_template_argument_must_be_a_class_or_struct> >;

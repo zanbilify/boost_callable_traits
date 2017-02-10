@@ -26,7 +26,7 @@ CALLABLE_TRAITS_SFINAE_MSG(clear_args, cannot_clear_the_parameter_list_of_this_t
 template<typename T>
 using clear_args_t = //implementation-defined
 //<-
-    detail::fail_if_invalid<
+    detail::try_but_fail_if_invalid<
         typename detail::traits<T>::clear_args,
         cannot_clear_the_parameter_list_of_this_type>;
 //->

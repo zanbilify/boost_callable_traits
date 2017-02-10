@@ -24,7 +24,7 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 template<typename T, typename... Args>
 using push_back_args_t = //implementation-defined
 //<-
-    detail::fail_if_invalid<
+    detail::try_but_fail_if_invalid<
         typename detail::traits<T>::template push_back<Args...>,
         cannot_determine_parameters_for_this_type>;
 //->

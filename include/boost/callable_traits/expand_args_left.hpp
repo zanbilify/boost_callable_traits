@@ -23,7 +23,7 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 template<typename T, template<class...> class Container, typename... RightArgs>
 using expand_args_left_t = //implementation-defined
 //<-
-    detail::fail_if_invalid<
+    detail::try_but_fail_if_invalid<
         typename detail::traits<T>::template
             expand_args_left<Container, RightArgs...>,
         cannot_expand_the_parameter_list_of_first_template_argument>;

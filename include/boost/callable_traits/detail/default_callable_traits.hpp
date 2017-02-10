@@ -16,7 +16,7 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
           
 template<typename T = void>
 struct default_callable_traits {
-    
+
     // value is used by all traits classes to participate 
     // in the <callable_traits/detail/traits.hpp> disjunction.
     static constexpr bool value = false;
@@ -25,13 +25,15 @@ struct default_callable_traits {
     // <callable_traits/detail/traits.hpp>
     using traits = default_callable_traits;
     
+    using error_t = error_type<T>;
+
     // represents the type under consideration
-    using type = invalid_type;
+    using type = error_t;
     
     // std::true_type for callables with C-style variadics
     using has_varargs = std::false_type;
     
-    using return_type = invalid_type;
+    using return_type = error_t;
     
     // arg_types is a std::tuple of argument types for
     // callables that are not overloaded/templated function objects.
@@ -39,93 +41,93 @@ struct default_callable_traits {
     // a PMF's arg_types tuple will use a reference to its
     // parent class as the first argument, with qualifiers added to
     // match the PMF's own qualifiers.
-    using arg_types = invalid_type;
+    using arg_types = error_t;
     
     // arg_types without the decltype(*this) parameter for member functions
-    using non_invoke_arg_types = invalid_type;
+    using non_invoke_arg_types = error_t;
 
     // An "approximation" of a callable type, in the form
     // of a plain function type. Defined in terms of INVOKE.
     // An identity alias for qualified/unqualified plain function
     // types.
-    using function_type = invalid_type;
+    using function_type = error_t;
     
     // Used to smoothen the edges between PMFs and function objects
-    using function_object_signature = invalid_type;
+    using function_object_signature = error_t;
 
     // An identity alias for qualified/unqualified plain function
     // types. Equivalent to remove_member_pointer for PMFs. Same
     // as function_type for other callable types.
-    using qualified_function_type = invalid_type;
+    using qualified_function_type = error_t;
     
     // Removes C-style variadics from a signature, if present.
-    // Aliases invalid_type for function objects and PMDs.
-    using remove_varargs = invalid_type;
+    // Aliases error_t for function objects and PMDs.
+    using remove_varargs = error_t;
     
     // Adds C-style variadics to a signature. Aliases
-    // invalid_type for function objects and PMDs.
-    using add_varargs = invalid_type;
+    // error_t for function objects and PMDs.
+    using add_varargs = error_t;
     
     // std::true_type when the signature includes noexcept, when
     // the feature is available
     using is_noexcept = std::false_type;
 
     // adds noexcept to a signature if the feature is available
-    using add_noexcept = invalid_type;
+    using add_noexcept = error_t;
 
     // removes noexcept from a signature if present
-    using remove_noexcept = invalid_type;
+    using remove_noexcept = error_t;
 
     // std::true_type when the signature includes transaction_safe, when
     // the feature is available
     using is_transaction_safe = std::false_type;
 
     // adds transaction_safe to a signature if the feature is available
-    using add_transaction_safe = invalid_type;
+    using add_transaction_safe = error_t;
 
     // removes transaction_safe from a signature if present
-    using remove_transaction_safe = invalid_type;
+    using remove_transaction_safe = error_t;
 
-    // The class of a PMD or PMF. invalid_type for other types
-    using class_type = invalid_type;
+    // The class of a PMD or PMF. error_t for other types
+    using class_type = error_t;
     
-    // The qualified reference type of class_type. invalid_type
+    // The qualified reference type of class_type. error_t
     // for non-member-pointers.
-    using invoke_type = invalid_type;
+    using invoke_type = error_t;
     
     // Removes reference qualifiers from a signature.
-    using remove_reference = invalid_type;
+    using remove_reference = error_t;
     
     // Adds an lvalue qualifier to a signature, in arbitrary
     // accordance with C++11 reference collapsing rules.
-    using add_member_lvalue_reference = invalid_type;
+    using add_member_lvalue_reference = error_t;
     
     // Adds an rvalue qualifier to a signature, in arbitrary
     // accordance with C++11 reference collapsing rules.
-    using add_member_rvalue_reference = invalid_type;
+    using add_member_rvalue_reference = error_t;
     
     // Adds a const qualifier to a signature.
-    using add_member_const = invalid_type;
+    using add_member_const = error_t;
     
     // Adds a volatile qualifier to a signature.
-    using add_member_volatile = invalid_type;
+    using add_member_volatile = error_t;
     
     // Adds both const and volatile qualifiers to a signature.
-    using add_member_cv = invalid_type;
+    using add_member_cv = error_t;
     
     // Removes a const qualifier from a signature, if present.
-    using remove_member_const = invalid_type;
+    using remove_member_const = error_t;
     
     // Removes a volatile qualifier from a signature, if present.
-    using remove_member_volatile = invalid_type;
+    using remove_member_volatile = error_t;
     
     // Removes both const and volatile qualifiers from a
     // signature, if any.
-    using remove_member_cv = invalid_type;
+    using remove_member_cv = error_t;
     
     // Removes the member pointer from PMDs and PMFs. An identity
     // alias for other callable types.
-    using remove_member_pointer = invalid_type;
+    using remove_member_pointer = error_t;
     
     // Changes the parent class type for PMDs and PMFs. Turns
     // function pointers, function references, and
@@ -135,51 +137,51 @@ struct default_callable_traits {
         typename U = T,
         typename K = typename std::remove_reference<U>::type,
         typename L = typename std::conditional<
-            std::is_same<void, K>::value, invalid_type, K>::type,
+            std::is_same<void, K>::value, error_t, K>::type,
         typename Class = typename std::conditional<
-            std::is_class<C>::value, C, invalid_type>::type>
+            std::is_class<C>::value, C, error_t>::type>
     using apply_member_pointer = typename std::conditional<
-        std::is_same<L, invalid_type>::value || std::is_same<Class, invalid_type>::value,
-        invalid_type, L Class::*>::type;
+        std::is_same<L, error_t>::value || std::is_same<Class, error_t>::value,
+        error_t, L Class::*>::type;
     
     // Changes the return type of PMFs, function pointers, function
     // references, and qualified/unqualified function types. Changes
-    // the data type of PMDs. invalid_type for function objects.
+    // the data type of PMDs. error_t for function objects.
     template<typename>
-    using apply_return = invalid_type;
+    using apply_return = error_t;
 
     // Expands the argument types into a template
     template<template<class...> class Container>
-    using expand_args = invalid_type;
+    using expand_args = error_t;
 
     template<template<class...> class Container, typename... RightArgs>
-    using expand_args_left = invalid_type;
+    using expand_args_left = error_t;
 
     template<template<class...> class Container, typename... LeftArgs>
-    using expand_args_right = invalid_type;
+    using expand_args_right = error_t;
 
-    using clear_args = invalid_type;
+    using clear_args = error_t;
     
     template<typename... NewArgs>
-    using push_front = invalid_type;
+    using push_front = error_t;
 
     template<typename... NewArgs>
-    using push_back = invalid_type;
+    using push_back = error_t;
     
     template<std::size_t ElementCount>
-    using pop_front = invalid_type;
+    using pop_front = error_t;
 
     template<std::size_t ElementCount>
-    using pop_back = invalid_type;
+    using pop_back = error_t;
     
     template<std::size_t Index, typename... NewArgs>
-    using insert_args = invalid_type;
+    using insert_args = error_t;
 
     template<std::size_t Index, std::size_t Count>
-    using remove_args = invalid_type;
+    using remove_args = error_t;
 
     template<std::size_t Index, typename... NewArgs>
-    using replace_args = invalid_type;
+    using replace_args = error_t;
 
     static constexpr qualifier_flags cv_flags = cv_of<T>::value;
     static constexpr qualifier_flags ref_flags = ref_of<T>::value;
