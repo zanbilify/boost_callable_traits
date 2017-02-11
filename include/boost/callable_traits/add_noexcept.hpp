@@ -43,7 +43,7 @@ struct add_noexcept {
 template<typename T>
 using add_noexcept_t = //implementation-defined
 //<-
-    detail::fail_if_invalid<
+    detail::try_but_fail_if_invalid<
         typename detail::traits<T>::add_noexcept,
         cannot_add_noexcept_to_this_type>;
 //->

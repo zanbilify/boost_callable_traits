@@ -1,21 +1,26 @@
 #ifndef CALLABLE_TRAITS_PARAMETER_INDEX_HELPER_HPP
 #define CALLABLE_TRAITS_PARAMETER_INDEX_HELPER_HPP
 
+#include <tuple>
+
 CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
     template<std::size_t I, typename T, bool IgnoreThisPointer = false,
         bool AllowPlusOne = false, std::size_t Count = 0>
     struct parameter_index_helper {
 
+        using error_t = error_type<T>;
+
         using args_tuple = typename std::conditional<IgnoreThisPointer,
             typename detail::traits<T>::non_invoke_arg_types,
             typename detail::traits<T>::arg_types>::type;
 
         static constexpr bool has_parameter_list =
-            !std::is_same<args_tuple, invalid_type>::value;
+            !std::is_same<args_tuple, invalid_type>::value
+            && !std::is_same<args_tuple, reference_error>::value;
 
         using temp_tuple = typename std::conditional<has_parameter_list,
-            args_tuple, std::tuple<invalid_type>>::type;
+            args_tuple, std::tuple<error_t>>::type;
 
         static constexpr std::size_t parameter_list_size =
             std::tuple_size<temp_tuple>::value;
@@ -34,11 +39,11 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
 
         using permissive_tuple = typename std::conditional<
             has_parameter_list && !is_out_of_range,
-            args_tuple, std::tuple<invalid_type>>::type;
+            args_tuple, std::tuple<error_t>>::type;
 
         using permissive_function = typename std::conditional<
             has_parameter_list && !is_out_of_range,
-            T, invalid_type(invalid_type)>::type;
+            T, error_t(error_t)>::type;
     };
 
 

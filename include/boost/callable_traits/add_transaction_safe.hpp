@@ -44,7 +44,7 @@ struct add_transaction_safe {
 template<typename T>
 using add_transaction_safe_t = //implementation-defined
 //<-
-    detail::fail_if_invalid<
+    detail::try_but_fail_if_invalid<
         typename detail::traits<T>::add_transaction_safe,
         cannot_add_transaction_safe_to_this_type>;
 //->

@@ -36,10 +36,6 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
     };
 
     template<typename T>
-    struct ambiguous_function_object_traits
-        : default_callable_traits<T> {};
-
-    template<typename T>
     using default_to_function_object = typename std::conditional<
         has_normal_call_operator<T>::value,
         T,
@@ -50,7 +46,7 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
     using function_object_base = typename std::conditional<
         has_normal_call_operator<T>::value,
         pmf<decltype(&default_to_function_object<T>::operator())>,
-        ambiguous_function_object_traits<T>
+        default_callable_traits<T>
     >::type;
 
     template<typename T, typename Base = function_object_base<T>>

@@ -23,7 +23,7 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 template<typename T>
 using args_t = //implementation-defined
 //<-
-    detail::fail_if_invalid<
+    detail::try_but_fail_if_invalid<
         typename detail::traits<T>::arg_types,
         cannot_determine_parameters_for_this_type>;
 //->

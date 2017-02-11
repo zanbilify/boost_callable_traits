@@ -23,7 +23,7 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
         struct function_object : Base {
 
             using type = T;
-
+            using error_t = error_type<T>;
             using function_type = typename Base::function_object_signature;
 
             using arg_types = typename Base::non_invoke_arg_types;
@@ -32,26 +32,26 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
             static constexpr const bool value = std::is_class<T>::value;
 
             using traits = function_object;
-            using class_type = invalid_type;
-            using invoke_type = invalid_type;
+            using class_type = error_t;
+            using invoke_type = error_t;
 
-            using remove_varargs = invalid_type;
+            using remove_varargs = error_t;
 
-            using add_varargs = invalid_type;
+            using add_varargs = error_t;
 
             using is_noexcept = typename Base::is_noexcept;
 
-            using add_noexcept = invalid_type;
+            using add_noexcept = error_t;
 
-            using remove_noexcept = invalid_type;
+            using remove_noexcept = error_t;
 
             using is_transaction_safe = typename Base::is_transaction_safe;
 
-            using add_transaction_safe = invalid_type;
+            using add_transaction_safe = error_t;
 
-            using remove_transaction_safe = invalid_type;
+            using remove_transaction_safe = error_t;
 
-            using clear_args = invalid_type;
+            using clear_args = error_t;
 
             template<template<class...> class Container>
             using expand_args = typename function<function_type>::template
@@ -70,44 +70,44 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
                 typename std::remove_reference<U>::type C::*;
 
             template<typename>
-            using apply_return = invalid_type;
+            using apply_return = error_t;
 
             template<typename...>
-            using push_front = invalid_type;
+            using push_front = error_t;
             
             template<typename...>
-            using push_back = invalid_type;
+            using push_back = error_t;
             
             template<std::size_t ElementCount>
-            using pop_args_front = invalid_type;
+            using pop_args_front = error_t;
 
             template<std::size_t ElementCount>
-            using pop_args_back = invalid_type;
+            using pop_args_back = error_t;
             
             template<std::size_t Index, typename... NewArgs>
-            using insert_args = invalid_type;
+            using insert_args = error_t;
             
             template<std::size_t Index, std::size_t Count>
-            using remove_args = invalid_type;
+            using remove_args = error_t;
 
             template<std::size_t Index, typename... NewArgs>
-            using replace_args = invalid_type;
+            using replace_args = error_t;
 
             template<std::size_t Count>
-            using pop_front = invalid_type;
+            using pop_front = error_t;
 
             template<std::size_t Count>
-            using pop_back = invalid_type;
+            using pop_back = error_t;
 
-            using remove_member_reference = invalid_type;
-            using add_member_lvalue_reference = invalid_type;
-            using add_member_rvalue_reference = invalid_type;
-            using add_member_const = invalid_type;
-            using add_member_volatile = invalid_type;
-            using add_member_cv = invalid_type;
-            using remove_member_const = invalid_type;
-            using remove_member_volatile = invalid_type;
-            using remove_member_cv = invalid_type;
+            using remove_member_reference = error_t;
+            using add_member_lvalue_reference = error_t;
+            using add_member_rvalue_reference = error_t;
+            using add_member_const = error_t;
+            using add_member_volatile = error_t;
+            using add_member_cv = error_t;
+            using remove_member_const = error_t;
+            using remove_member_volatile = error_t;
+            using remove_member_cv = error_t;
         };
 
         template<typename T, typename U, typename Base>

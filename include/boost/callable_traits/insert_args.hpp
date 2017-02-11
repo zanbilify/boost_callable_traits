@@ -30,7 +30,7 @@ using insert_args_t = //implementation-defined
     // substitution failure if index is out of range or if parameter
     // types cannot be determined. Simple error messages are provided
     // in case the error occurs outside of a SFINAE context
-    detail::fail_if_invalid<
+    detail::try_but_fail_if_invalid<
 
         detail::sfinae_try<
 
@@ -40,7 +40,9 @@ using insert_args_t = //implementation-defined
 
             detail::fail_if<
                 !detail::parameter_index_helper<Index, T, true, true>::has_parameter_list,
-                cannot_insert_parameters_into_this_type>,
+                typename std::conditional<std::is_reference<T>::value,
+                    reference_type_not_supported_by_this_metafunction,
+                    cannot_insert_parameters_into_this_type>::type>,
 
             detail::fail_if<
                 detail::parameter_index_helper<Index, T, true, true>::is_out_of_range,

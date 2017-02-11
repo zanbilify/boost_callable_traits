@@ -28,7 +28,7 @@ CALLABLE_TRAITS_SFINAE_MSG(remove_transaction_safe, cannot_remove_transaction_sa
 template<typename T>
 using remove_transaction_safe_t = //implementation-defined
 //<-
-    detail::fail_if_invalid<
+    detail::try_but_fail_if_invalid<
         typename detail::traits<T>::remove_transaction_safe,
         cannot_remove_transaction_safe_from_this_type>;
 //->

@@ -23,6 +23,11 @@ struct fastcall_tag{};
 struct pascal_tag{};
 
 struct invalid_type { invalid_type() = delete; };
+struct reference_error { reference_error() = delete; };
+
+template<typename T>
+using error_type = typename std::conditional<
+    std::is_reference<T>::value, reference_error, invalid_type>::type;
 
 #ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
 struct abominable_functions_not_supported_on_this_compiler{};
@@ -44,10 +49,22 @@ using at = typename std::tuple_element<I, Tup>::type;
 template<typename T, typename Class>
 using add_member_pointer = T Class::*;
 
-template<typename T, typename ErrorType>
-using fail_if_invalid = sfinae_try<T,
-    fail_if<std::is_same<typename std::remove_reference<T>::type,
-        invalid_type>::value, ErrorType>>;
+template<typename L, typename R, typename ErrorType>
+ using fail_when_same = fail_if<std::is_same<L, R>::value, ErrorType>;
+
+template<typename T, typename ErrorType,
+	typename U = typename std::remove_reference<T>::type>
+using try_but_fail_if_invalid = sfinae_try<T,
+	fail_when_same<U, invalid_type, ErrorType>,
+	fail_when_same<U, reference_error, reference_type_not_supported_by_this_metafunction>>;
+
+template<typename T, typename ErrorType,
+	typename U = typename std::remove_reference<T>::type,
+	bool is_reference_error = std::is_same<reference_error, U>::value>
+using fail_if_invalid = fail_if<
+	std::is_same<U, invalid_type>::value || is_reference_error,
+	typename std::conditional<is_reference_error,
+		reference_type_not_supported_by_this_metafunction, ErrorType>::type>;
 
 template<typename T, typename Fallback>
 using fallback_if_invalid = typename std::conditional<

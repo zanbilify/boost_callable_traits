@@ -82,6 +82,9 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
     CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(member_pointer_required)
     CALLABLE_TRAITS_SFINAE_MSG(member_pointer_required, type_is_not_a_member_pointer)
 
+    CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(reference_error)
+    CALLABLE_TRAITS_SFINAE_MSG(reference_error, reference_type_not_supported_by_this_metafunction)
+
 CALLABLE_TRAITS_NAMESPACE_END
 
 #endif // #ifndef CALLABLE_TRAITS_SFINAE_ERRORS_HPP
