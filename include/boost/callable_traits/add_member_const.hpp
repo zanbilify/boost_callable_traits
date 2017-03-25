@@ -6,12 +6,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_ADD_MEMBER_CONST_HPP
-#define CALLABLE_TRAITS_ADD_MEMBER_CONST_HPP
+#ifndef BOOST_CLBL_TRTS_ADD_MEMBER_CONST_HPP
+#define BOOST_CLBL_TRTS_ADD_MEMBER_CONST_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 //[ add_member_const_hpp
 /*`
@@ -24,7 +24,7 @@ CALLABLE_TRAITS_NAMESPACE_BEGIN
 template<typename T>
 using add_member_const_t = //implementation-defined
 //<-
-#ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifdef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
     detail::sfinae_try<
         typename detail::traits<T>::add_member_const,
@@ -41,7 +41,7 @@ using add_member_const_t = //implementation-defined
         typename detail::traits<T>::add_member_const,
         member_qualifiers_are_illegal_for_this_type>;
 
-#endif // #ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#endif // #ifdef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 //->
 
 template<typename T>
@@ -50,7 +50,7 @@ struct add_member_const {
 };
 
 //<-
-CALLABLE_TRAITS_NAMESPACE_END
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 
@@ -90,7 +90,7 @@ A substitution failure occurs on GCC builds older than version 4.9.2 with functi
 */
 //]
 
-#endif //#ifndef CALLABLE_TRAITS_ADD_MEMBER_CONST_HPP
+#endif //#ifndef BOOST_CLBL_TRTS_ADD_MEMBER_CONST_HPP
 
 
 

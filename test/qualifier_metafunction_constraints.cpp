@@ -30,7 +30,7 @@ int main() {
 #include "qualifier_metafunction_constraints.hpp"
 #undef CALLABLE_TRAIT_UNDER_TEST
 
-#ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#ifndef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 
 #define CALLABLE_TRAIT_UNDER_TEST add_member_lvalue_reference_t
 #include "qualifier_metafunction_constraints.hpp"
@@ -44,7 +44,7 @@ int main() {
 #include "qualifier_metafunction_constraints.hpp"
 #undef CALLABLE_TRAIT_UNDER_TEST
 
-#endif // #ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#endif // #ifndef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 
 }
 

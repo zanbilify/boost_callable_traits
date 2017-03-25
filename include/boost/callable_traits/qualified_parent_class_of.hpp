@@ -7,12 +7,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_QUALIFIED_PARENT_CLASS_OF_HPP
-#define CALLABLE_TRAITS_QUALIFIED_PARENT_CLASS_OF_HPP
+#ifndef BOOST_CLBL_TRTS_QUALIFIED_PARENT_CLASS_OF_HPP
+#define BOOST_CLBL_TRTS_QUALIFIED_PARENT_CLASS_OF_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 //[ qualified_parent_class_of_hpp
 /*`
@@ -36,7 +36,7 @@ struct qualified_parent_class_of {
 };
 
 //<-
-CALLABLE_TRAITS_NAMESPACE_END
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 /*`
@@ -69,4 +69,4 @@ Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
 */
 //]
 
-#endif //#ifndef CALLABLE_TRAITS_QUALIFIED_PARENT_CLASS_OF_HPP
+#endif //#ifndef BOOST_CLBL_TRTS_QUALIFIED_PARENT_CLASS_OF_HPP

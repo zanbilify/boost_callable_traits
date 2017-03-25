@@ -5,7 +5,7 @@ Distributed under the Boost Software License, Version 1.0.
 ->*/
 
 #include <boost/callable_traits/config.hpp>
-#ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+#ifdef BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES
 int main(){ return 0; }
 #else
 

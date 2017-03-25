@@ -11,7 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include "test.hpp"
 
 
-#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 int main() { return 0; }
 #else
 
@@ -86,7 +86,7 @@ int main() {
         assert_qualified<cvr>();
     }
 
-#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
     {
         using f   = void();
@@ -116,7 +116,7 @@ int main() {
         CT_ASSERT( has_member_qualifiers<cvr>());
     }
 
-#endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#endif //#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
     using f_ptr = void(*)();
     assert_unqualified<f_ptr>();
@@ -125,4 +125,4 @@ int main() {
     assert_unqualified<void(&)()>();
 }
 
-#endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#endif //#ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS

@@ -7,17 +7,17 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_ADD_TRANSACTION_SAFE_HPP
-#define CALLABLE_TRAITS_ADD_TRANSACTION_SAFE_HPP
+#ifndef BOOST_CLBL_TRTS_ADD_TRANSACTION_SAFE_HPP
+#define BOOST_CLBL_TRTS_ADD_TRANSACTION_SAFE_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
-CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(add_transaction_safe)
-CALLABLE_TRAITS_SFINAE_MSG(add_transaction_safe, cannot_add_transaction_safe_to_this_type)
+BOOST_CLBL_TRTS_DEFINE_SFINAE_ERROR_ORIGIN(add_transaction_safe)
+BOOST_CLBL_TRTS_SFINAE_MSG(add_transaction_safe, cannot_add_transaction_safe_to_this_type)
 
-#ifndef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+#ifndef BOOST_CLBL_TRTS_ENABLE_TRANSACTION_SAFE
 template<typename T>
 struct add_transaction_safe_t {
     static_assert(sizeof(T) < 1,
@@ -55,8 +55,8 @@ struct add_transaction_safe {
 };
 
 //<-
-#endif // #ifndef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
-CALLABLE_TRAITS_NAMESPACE_END
+#endif // #ifndef BOOST_CLBL_TRTS_ENABLE_TRANSACTION_SAFE
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 /*`
@@ -72,7 +72,7 @@ CALLABLE_TRAITS_NAMESPACE_END
 * Adds the `transaction_safe` specifier to `T`, if not already present.
 
 [heading Compatibility Notes]
-A `static_assert` always fails when instantiatic this template if your compiler doesn't support `transaction_safe`. At the time of this writing, GCC 6 with the `-fgnu-tm` is the only compiler that can use this feature.
+A `static_assert` always fails when instantiating this template if your compiler doesn't support `transaction_safe`. At the time of this writing, GCC 6 with the `-fgnu-tm` is the only compiler that can use this feature.
 
 [heading Input/Output Examples]
 [table
@@ -97,4 +97,4 @@ A `static_assert` always fails when instantiatic this template if your compiler 
 */
 //]
 
-#endif //#ifndef CALLABLE_TRAITS_ADD_TRANSACTION_SAFE_HPP
+#endif //#ifndef BOOST_CLBL_TRTS_ADD_TRANSACTION_SAFE_HPP

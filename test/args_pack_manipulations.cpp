@@ -7,19 +7,19 @@
 #include "test.hpp"
 
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
 
 template<typename... Ts>
 struct pack {
 
-#define CALLABLE_TRAITS_BEGIN_PACK_MANIP void(
-#define CALLABLE_TRAITS_ARGS_PACK Ts
-#define CALLABLE_TRAITS_END_PACK_MANIP , ... )
+#define BOOST_CLBL_TRTS_BEGIN_PACK_MANIP void(
+#define BOOST_CLBL_TRTS_ARGS_PACK Ts
+#define BOOST_CLBL_TRTS_END_PACK_MANIP , ... )
 #include <boost/callable_traits/detail/unguarded/args_pack_manipulations.hpp>
 
 };  
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
 
 using namespace boost::callable_traits::detail;

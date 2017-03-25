@@ -6,12 +6,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_ADD_VARARGS_HPP
-#define CALLABLE_TRAITS_ADD_VARARGS_HPP
+#ifndef BOOST_CLBL_TRTS_ADD_VARARGS_HPP
+#define BOOST_CLBL_TRTS_ADD_VARARGS_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 //[ add_varargs_hpp
 /*`
@@ -35,7 +35,7 @@ struct add_varargs {
 };
 
 //<-
-CALLABLE_TRAITS_NAMESPACE_END
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 /*`

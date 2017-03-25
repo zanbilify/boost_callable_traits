@@ -81,7 +81,7 @@ int main() {
         assert_cv_qualified<cvr>();
     }
 
-#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
     {
         using f   = void();

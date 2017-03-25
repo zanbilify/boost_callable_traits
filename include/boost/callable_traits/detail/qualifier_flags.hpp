@@ -7,14 +7,14 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_QUALIFIER_FLAGS_HPP
-#define CALLABLE_TRAITS_QUALIFIER_FLAGS_HPP
+#ifndef BOOST_CLBL_TRTS_QUALIFIER_FLAGS_HPP
+#define BOOST_CLBL_TRTS_QUALIFIER_FLAGS_HPP
 
 #include <boost/callable_traits/config.hpp>
 #include <type_traits>
 #include <cstdint>
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
     
 //bit qualifier_flags used to signify cv/ref qualifiers
 using qualifier_flags = std::uint32_t;
@@ -51,7 +51,7 @@ constexpr qualifier_flags const_ = 1;
 // or member function overload.
 constexpr qualifier_flags volatile_ = 2;
 
-#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 
 constexpr qualifier_flags lref_ = default_;
 constexpr qualifier_flags rref_ = default_;
@@ -67,7 +67,7 @@ constexpr qualifier_flags lref_ = 4;
 // overload.
 constexpr qualifier_flags rref_ = 8;
 
-#endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#endif //#ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 
 constexpr qualifier_flags cv_ = 3;
 
@@ -121,6 +121,6 @@ template<typename T> struct flag_map<T const volatile> { static constexpr qualif
 template<typename T> struct flag_map<T const volatile &> { static constexpr qualifier_flags value = const_ | volatile_ | lref_; };
 template<typename T> struct flag_map<T const volatile &&> { static constexpr qualifier_flags value = const_ | volatile_ | rref_; };
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
-#endif //#ifndef CALLABLE_TRAITS_QUALIFIER_FLAGS_HPP
+#endif //#ifndef BOOST_CLBL_TRTS_QUALIFIER_FLAGS_HPP

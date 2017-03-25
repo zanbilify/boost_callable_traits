@@ -7,7 +7,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <boost/callable_traits/config.hpp>
 
-#ifndef CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
+#ifndef BOOST_CLBL_TRTS_ENABLE_NOEXCEPT_TYPES
 int main(){}
 #else
 

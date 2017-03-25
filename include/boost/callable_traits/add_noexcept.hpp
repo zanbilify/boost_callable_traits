@@ -7,17 +7,17 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_ADD_NOEXCEPT_HPP
-#define CALLABLE_TRAITS_ADD_NOEXCEPT_HPP
+#ifndef BOOST_CLBL_TRTS_ADD_NOEXCEPT_HPP
+#define BOOST_CLBL_TRTS_ADD_NOEXCEPT_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
-CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(add_noexcept)
-CALLABLE_TRAITS_SFINAE_MSG(add_noexcept, cannot_add_noexcept_to_this_type)
+BOOST_CLBL_TRTS_DEFINE_SFINAE_ERROR_ORIGIN(add_noexcept)
+BOOST_CLBL_TRTS_SFINAE_MSG(add_noexcept, cannot_add_noexcept_to_this_type)
 
-#ifndef CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
+#ifndef BOOST_CLBL_TRTS_ENABLE_NOEXCEPT_TYPES
 template<typename T>
 struct add_noexcept_t {
     static_assert(sizeof(T) < 1,
@@ -54,8 +54,8 @@ struct add_noexcept {
 };
 
 //<-
-#endif // #ifdef CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
-CALLABLE_TRAITS_NAMESPACE_END
+#endif // #ifdef BOOST_CLBL_TRTS_ENABLE_NOEXCEPT_TYPES
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 /*`
@@ -71,7 +71,7 @@ CALLABLE_TRAITS_NAMESPACE_END
 * Adds a `noexcept` specifier to `T`, if not already present.
 
 [heading Compatibility Notes]
-A `static_assert` always fails when instantiatic this template if your compiler doesn't support `noexcept` on types (a C++17 feature). At the time of this writing, GCC 7.0.0+ and Clang 4.0+  are the only compiler that can use feature.
+A `static_assert` always fails when instantiating this template if your compiler doesn't support `noexcept` on types (a C++17 feature). At the time of this writing, GCC 7.0.0+ and Clang 4.0+  are the only compiler that can use feature.
 
 [heading Input/Output Examples]
 [table
@@ -96,4 +96,4 @@ A `static_assert` always fails when instantiatic this template if your compiler 
 */
 //]
 
-#endif //#ifndef CALLABLE_TRAITS_ADD_NOEXCEPT_HPP
+#endif //#ifndef BOOST_CLBL_TRTS_ADD_NOEXCEPT_HPP

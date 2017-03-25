@@ -30,7 +30,7 @@ int main() {
     }
 
     {
-        using f = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int, ...) const volatile;
+        using f = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(int, ...) const volatile;
         using test =  parent_class_of_t<f>;
         using expect = foo;
         CT_ASSERT(std::is_same<test, expect>::value);

@@ -6,12 +6,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_HAS_VARARGS_HPP
-#define CALLABLE_TRAITS_HAS_VARARGS_HPP
+#ifndef BOOST_CLBL_TRTS_HAS_VARARGS_HPP
+#define BOOST_CLBL_TRTS_HAS_VARARGS_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 //[ has_varargs_hpp
 /*`[section:ref_has_varargs has_varargs]
@@ -26,13 +26,12 @@ struct has_varargs; //implementation-defined
 
 //<-
 template<typename T>
-struct has_varargs
-    : detail::traits<T>::has_varargs {
+struct has_varargs : detail::traits<T>::has_varargs {
     using type = typename detail::traits<T>::has_varargs;
 };
 //->
 
-#ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+#ifdef BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES
 
 template<typename T>
 struct has_varargs_v {
@@ -50,7 +49,7 @@ constexpr bool has_varargs_v = //implementation-defined
 #endif
 
 //<-
-CALLABLE_TRAITS_NAMESPACE_END
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 /*`

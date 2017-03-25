@@ -6,12 +6,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_HAS_MEMBER_QUALIFIERS_HPP
-#define CALLABLE_TRAITS_HAS_MEMBER_QUALIFIERS_HPP
+#ifndef BOOST_CLBL_TRTS_HAS_MEMBER_QUALIFIERS_HPP
+#define BOOST_CLBL_TRTS_HAS_MEMBER_QUALIFIERS_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 //[ has_member_qualifiers_hpp
 /*`[section:ref_has_member_qualifiers has_member_qualifiers]
@@ -25,14 +25,12 @@ struct has_member_qualifiers; //immplementation-defined
 
 //<-
 template<typename T>
-struct has_member_qualifiers
-
-    : detail::traits<T>::has_member_qualifiers {
+struct has_member_qualifiers : detail::traits<T>::has_member_qualifiers {
     using type = typename detail::traits<T>::has_member_qualifiers;
 };
 
 // older compilers don't support variable templates
-#ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+#ifdef BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES
 
 template<typename T>
 struct has_member_qualifiers_v {
@@ -51,7 +49,7 @@ constexpr bool has_member_qualifiers_v = //implementation-defined
 //->
 
 //<-
-CALLABLE_TRAITS_NAMESPACE_END
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 /*`
@@ -95,4 +93,4 @@ Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
 */
 //]
 
-#endif //CALLABLE_TRAITS_HAS_MEMBER_QUALIFIERS_HPP
+#endif //BOOST_CLBL_TRTS_HAS_MEMBER_QUALIFIERS_HPP

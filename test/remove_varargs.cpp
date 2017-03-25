@@ -30,18 +30,18 @@ int main() {
         using cvl    = void(foo::*)() const volatile LREF;
         using cvr    = void(foo::*)() const volatile RREF;
 
-        using va_f   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...);
-        using va_l   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) LREF;
-        using va_r   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) RREF ;
-        using va_c   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const;
-        using va_cl  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const LREF;
-        using va_cr  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const RREF;
-        using va_v   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) volatile;
-        using va_vl  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) volatile LREF;
-        using va_vr  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) volatile RREF;
-        using va_cv  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile;
-        using va_cvl = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile LREF;
-        using va_cvr = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile RREF;
+        using va_f   = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...);
+        using va_l   = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) LREF;
+        using va_r   = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) RREF ;
+        using va_c   = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) const;
+        using va_cl  = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) const LREF;
+        using va_cr  = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) const RREF;
+        using va_v   = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) volatile;
+        using va_vl  = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) volatile LREF;
+        using va_vr  = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) volatile RREF;
+        using va_cv  = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) const volatile;
+        using va_cvl = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) const volatile LREF;
+        using va_cvr = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) const volatile RREF;
 
         CT_ASSERT(std::is_same<f,    remove_varargs_t<va_f>>{});
         CT_ASSERT(std::is_same<l,    remove_varargs_t<va_l>>{});
@@ -84,18 +84,18 @@ int main() {
         using cvl    = void(foo::*)(int&, int&&) const volatile LREF;
         using cvr    = void(foo::*)(int&, int&&) const volatile RREF;
 
-        using va_f   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...);
-        using va_l   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) LREF;
-        using va_r   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) RREF ;
-        using va_c   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const;
-        using va_cl  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const LREF;
-        using va_cr  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const RREF;
-        using va_v   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) volatile;
-        using va_vl  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) volatile LREF;
-        using va_vr  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) volatile RREF;
-        using va_cv  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const volatile;
-        using va_cvl = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const volatile LREF;
-        using va_cvr = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const volatile RREF;
+        using va_f   = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...);
+        using va_l   = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) LREF;
+        using va_r   = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) RREF ;
+        using va_c   = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const;
+        using va_cl  = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const LREF;
+        using va_cr  = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const RREF;
+        using va_v   = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) volatile;
+        using va_vl  = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) volatile LREF;
+        using va_vr  = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) volatile RREF;
+        using va_cv  = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const volatile;
+        using va_cvl = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const volatile LREF;
+        using va_cvr = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(int&, int&&, ...) const volatile RREF;
 
         CT_ASSERT(std::is_same<f,    remove_varargs_t<va_f>>{});
         CT_ASSERT(std::is_same<l,    remove_varargs_t<va_l>>{});
@@ -124,7 +124,7 @@ int main() {
         CT_ASSERT(std::is_same<cvr,  remove_varargs_t<cvr>>{});
     }
 
-#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
     {
         using f      = void();
@@ -180,7 +180,7 @@ int main() {
         CT_ASSERT(std::is_same<cvr,  remove_varargs_t<cvr>>{});
     }
 
-#endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#endif //#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
     {
         using f = void(&)();

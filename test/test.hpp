@@ -16,7 +16,7 @@ using namespace boost::callable_traits;
 #define CT_ASSERT(...) static_assert(__VA_ARGS__, #__VA_ARGS__)
 #endif //CT_ASSERT
 
-#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 #define LREF
 #define RREF
 #else
@@ -24,8 +24,8 @@ using namespace boost::callable_traits;
 #define RREF &&
 #endif
 
-#define TX_SAFE CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER
-#define VA_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
+#define TX_SAFE BOOST_CLBL_TRTS_TRANSACTION_SAFE_SPECIFIER
+#define VA_CC BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC
 
 template<template<class...> class, typename...>
 struct is_substitution_failure;

@@ -6,8 +6,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_ARG_AT_HPP
-#define CALLABLE_TRAITS_ARG_AT_HPP
+#ifndef BOOST_CLBL_TRTS_ARG_AT_HPP
+#define BOOST_CLBL_TRTS_ARG_AT_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 #include <boost/callable_traits/detail/parameter_index_helper.hpp>
@@ -20,7 +20,7 @@ Distributed under the Boost Software License, Version 1.0.
 [heading Definition]
 */
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 
 
@@ -55,7 +55,7 @@ struct arg_at {
 };
 
 //<-
-CALLABLE_TRAITS_NAMESPACE_END
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 /*`

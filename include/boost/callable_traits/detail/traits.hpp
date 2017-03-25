@@ -6,8 +6,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_DETAIL_TRAITS_HPP
-#define CALLABLE_TRAITS_DETAIL_TRAITS_HPP
+#ifndef BOOST_CLBL_TRTS_DETAIL_TRAITS_HPP
+#define BOOST_CLBL_TRTS_DETAIL_TRAITS_HPP
 
 #include <boost/callable_traits/detail/utility.hpp>
 #include <boost/callable_traits/detail/fwd/pmd_fwd.hpp>
@@ -15,10 +15,11 @@ Distributed under the Boost Software License, Version 1.0.
 #include <boost/callable_traits/detail/fwd/function_fwd.hpp>
 #include <boost/callable_traits/detail/fwd/function_object_fwd.hpp>
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
 
+		// Here is where the magic happens
         template<typename T>
-        using traits = typename CALLABLE_TRAITS_DISJUNCTION(
+        using traits = typename BOOST_CLBL_TRTS_DISJUNCTION(
             function_object<T>,
             function<T>,
             pmf<T>,
@@ -27,6 +28,6 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
             default_callable_traits<T>
         )::traits;
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
 #endif

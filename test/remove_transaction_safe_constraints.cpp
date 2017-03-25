@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <tuple>
 #include "test.hpp"
 
-#ifndef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+#ifndef BOOST_CLBL_TRTS_ENABLE_TRANSACTION_SAFE
 int main(){}
 #else
 
@@ -34,4 +34,4 @@ int main() {
     assert_sfinae<boost::callable_traits::remove_transaction_safe_t, void(**)()>();
 }
 
-#endif //#ifndef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+#endif //#ifndef BOOST_CLBL_TRTS_ENABLE_TRANSACTION_SAFE

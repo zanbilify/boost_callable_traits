@@ -6,12 +6,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_REMOVE_MEMBER_VOLATILE_HPP
-#define CALLABLE_TRAITS_REMOVE_MEMBER_VOLATILE_HPP
+#ifndef BOOST_CLBL_TRTS_REMOVE_MEMBER_VOLATILE_HPP
+#define BOOST_CLBL_TRTS_REMOVE_MEMBER_VOLATILE_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 //[ remove_member_volatile_hpp
 /*`
@@ -34,7 +34,7 @@ struct remove_member_volatile {
     using type = remove_member_volatile_t<T>;
 };
 //<-
-CALLABLE_TRAITS_NAMESPACE_END
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 /*`
@@ -71,4 +71,4 @@ Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
 */
 //]
 
-#endif //#ifndef CALLABLE_TRAITS_REMOVE_MEMBER_VOLATILE_HPP
+#endif //#ifndef BOOST_CLBL_TRTS_REMOVE_MEMBER_VOLATILE_HPP

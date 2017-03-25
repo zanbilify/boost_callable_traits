@@ -81,7 +81,7 @@ int main() {
         assert_volatile_qualified<cvr>();
     }
 
-#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
     {
         using f   = void();
@@ -111,7 +111,7 @@ int main() {
         CT_ASSERT( is_volatile_member<cvr>());
     }
 
-#endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#endif //#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
     using f_ptr = void(*)();
     assert_not_volatile_qualified<f_ptr>();

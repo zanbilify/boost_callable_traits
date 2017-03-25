@@ -15,14 +15,14 @@ int main() {
         CT_ASSERT(std::is_same<test, expect>::value);
     }
 
-#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
     {
         using f = void(int, int, int, int, int) const;
         using test =  clear_args_t<f>;
         using expect = void() const;
         CT_ASSERT(std::is_same<test, expect>::value);
     }
-#endif // #ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#endif // #ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
     {
         using f = void(*)(int, int, int, int, int);

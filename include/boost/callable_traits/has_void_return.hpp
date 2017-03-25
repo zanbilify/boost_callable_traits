@@ -6,12 +6,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_HAS_VOID_RETURN_HPP
-#define CALLABLE_TRAITS_HAS_VOID_RETURN_HPP
+#ifndef BOOST_CLBL_TRTS_HAS_VOID_RETURN_HPP
+#define BOOST_CLBL_TRTS_HAS_VOID_RETURN_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 //[ has_void_return_hpp
 /*`[section:ref_has_void_return has_void_return]
@@ -29,7 +29,7 @@ struct has_void_return
     : std::is_same<typename detail::traits<T>::return_type, void> {};
 //->
 
-#ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+#ifdef BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES
 
 template<typename T>
 struct has_void_return_v {
@@ -47,7 +47,7 @@ constexpr bool has_void_return_v = //implementation-defined
 #endif
 
 //<-
-CALLABLE_TRAITS_NAMESPACE_END
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 

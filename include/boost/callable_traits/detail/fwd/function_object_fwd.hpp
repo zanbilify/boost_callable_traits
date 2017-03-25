@@ -6,13 +6,13 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_DETAIL_FWD_FUNCTION_OBJECT_FWD_HPP
-#define CALLABLE_TRAITS_DETAIL_FWD_FUNCTION_OBJECT_FWD_HPP
+#ifndef BOOST_CLBL_TRTS_DETAIL_FWD_FUNCTION_OBJECT_FWD_HPP
+#define BOOST_CLBL_TRTS_DETAIL_FWD_FUNCTION_OBJECT_FWD_HPP
 
 #include <boost/callable_traits/detail/utility.hpp>
 #include <boost/callable_traits/detail/pmf.hpp>
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
 
     template<typename T>
     struct has_normal_call_operator
@@ -52,7 +52,7 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
     template<typename T, typename Base = function_object_base<T>>
     struct function_object;
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
 
 #endif

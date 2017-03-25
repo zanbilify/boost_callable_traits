@@ -6,8 +6,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_DETAIL_FUNCTION_OBJECT_HPP
-#define CALLABLE_TRAITS_DETAIL_FUNCTION_OBJECT_HPP
+#ifndef BOOST_CLBL_TRTS_DETAIL_FUNCTION_OBJECT_HPP
+#define BOOST_CLBL_TRTS_DETAIL_FUNCTION_OBJECT_HPP
 
 #include <boost/callable_traits/detail/pmf.hpp>
 #include <boost/callable_traits/detail/default_callable_traits.hpp>
@@ -17,7 +17,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <tuple>
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
 
         template<typename T, typename Base>
         struct function_object : Base {
@@ -114,6 +114,6 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
         struct function_object <T U::*, Base>
             : default_callable_traits<> {};
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
 #endif

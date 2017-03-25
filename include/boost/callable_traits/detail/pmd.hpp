@@ -6,8 +6,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_DETAIL_PMD_HPP
-#define CALLABLE_TRAITS_DETAIL_PMD_HPP
+#ifndef BOOST_CLBL_TRTS_DETAIL_PMD_HPP
+#define BOOST_CLBL_TRTS_DETAIL_PMD_HPP
 
 
 #include <boost/callable_traits/detail/fwd/function_object_fwd.hpp>
@@ -16,7 +16,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <boost/callable_traits/detail/default_callable_traits.hpp>
 #include <boost/callable_traits/detail/utility.hpp>
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
 
         template<typename T>
         struct pmd : default_callable_traits<T> {};
@@ -48,6 +48,6 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
             using expand_args = Container<invoke_type>;
         };
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
 #endif

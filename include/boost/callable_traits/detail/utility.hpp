@@ -6,8 +6,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_DETAIL_UTILITY_HPP
-#define CALLABLE_TRAITS_DETAIL_UTILITY_HPP
+#ifndef BOOST_CLBL_TRTS_DETAIL_UTILITY_HPP
+#define BOOST_CLBL_TRTS_DETAIL_UTILITY_HPP
 
 #include <boost/callable_traits/detail/sfinae_errors.hpp>
 #include <boost/callable_traits/config.hpp>
@@ -15,7 +15,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <utility>
 #include <cstdint>
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
 
 struct cdecl_tag{};
 struct stdcall_tag{};
@@ -29,7 +29,7 @@ template<typename T>
 using error_type = typename std::conditional<
     std::is_reference<T>::value, reference_error, invalid_type>::type;
 
-#ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifdef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 struct abominable_functions_not_supported_on_this_compiler{};
 #endif
 
@@ -56,7 +56,8 @@ template<typename T, typename ErrorType,
 	typename U = typename std::remove_reference<T>::type>
 using try_but_fail_if_invalid = sfinae_try<T,
 	fail_when_same<U, invalid_type, ErrorType>,
-	fail_when_same<U, reference_error, reference_type_not_supported_by_this_metafunction>>;
+	fail_when_same<U, reference_error,
+		reference_type_not_supported_by_this_metafunction>>;
 
 template<typename T, typename ErrorType,
 	typename U = typename std::remove_reference<T>::type,
@@ -70,6 +71,6 @@ template<typename T, typename Fallback>
 using fallback_if_invalid = typename std::conditional<
     std::is_same<T, invalid_type>::value, Fallback, T>::type;
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
 #endif

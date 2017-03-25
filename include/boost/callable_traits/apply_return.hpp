@@ -6,15 +6,15 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_APPLY_RETURN_HPP
-#define CALLABLE_TRAITS_APPLY_RETURN_HPP
+#ifndef BOOST_CLBL_TRTS_APPLY_RETURN_HPP
+#define BOOST_CLBL_TRTS_APPLY_RETURN_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
-CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(apply_return)
-CALLABLE_TRAITS_SFINAE_MSG(apply_return, invalid_types_for_apply_return)
+BOOST_CLBL_TRTS_DEFINE_SFINAE_ERROR_ORIGIN(apply_return)
+BOOST_CLBL_TRTS_SFINAE_MSG(apply_return, invalid_types_for_apply_return)
 
 namespace detail {
 
@@ -52,7 +52,7 @@ namespace detail {
     };
 
 //<-
-CALLABLE_TRAITS_NAMESPACE_END
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 /*`

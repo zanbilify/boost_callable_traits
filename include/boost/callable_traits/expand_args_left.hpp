@@ -6,12 +6,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_EXPAND_ARGS_LEFT_HPP
-#define CALLABLE_TRAITS_EXPAND_ARGS_LEFT_HPP
+#ifndef BOOST_CLBL_TRTS_EXPAND_ARGS_LEFT_HPP
+#define BOOST_CLBL_TRTS_EXPAND_ARGS_LEFT_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 //[ expand_args_left_hpp
 /*`[section:ref_expand_args_left expand_args_left]
@@ -35,7 +35,7 @@ struct expand_args_left {
 };
 
 //<-
-CALLABLE_TRAITS_NAMESPACE_END
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 /*`
@@ -81,4 +81,4 @@ Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
 */
 //]
 
-#endif //CALLABLE_TRAITS_EXPAND_ARGS_LEFT_HPP
+#endif //BOOST_CLBL_TRTS_EXPAND_ARGS_LEFT_HPP

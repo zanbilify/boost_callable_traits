@@ -6,7 +6,7 @@ Distributed under the Boost Software License, Version 1.0.
 ->*/
 
 #include <boost/callable_traits/config.hpp>
-#ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifdef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 int main(){ return 0; }
 #else
 
@@ -45,4 +45,4 @@ int main() {
     test<abominable>();
 }
 //]
-#endif //#ifdef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#endif //#ifdef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS

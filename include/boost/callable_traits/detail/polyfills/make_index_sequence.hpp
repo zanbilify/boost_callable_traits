@@ -5,18 +5,18 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 */
 
-#ifndef CALLABLE_TRAITS_DETAIL_POLYFILLS_MAKE_INDEX_SEQUENCE_HPP
-#define CALLABLE_TRAITS_DETAIL_POLYFILLS_MAKE_INDEX_SEQUENCE_HPP
+#ifndef BOOST_CLBL_TRTS_DETAIL_POLYFILLS_MAKE_INDEX_SEQUENCE_HPP
+#define BOOST_CLBL_TRTS_DETAIL_POLYFILLS_MAKE_INDEX_SEQUENCE_HPP
 
-#undef CALLABLE_TRAITS_IX_SEQ
-#define CALLABLE_TRAITS_IX_SEQ(...) ::boost::callable_traits::detail::polyfills::index_sequence<__VA_ARGS__>
+#undef BOOST_CLBL_TRTS_IX_SEQ
+#define BOOST_CLBL_TRTS_IX_SEQ(...) ::boost::callable_traits::detail::polyfills::index_sequence<__VA_ARGS__>
 
-#undef CALLABLE_TRAITS_MAKE_IX_SEQ
-#define CALLABLE_TRAITS_MAKE_IX_SEQ(...) ::boost::callable_traits::detail::polyfills::make_index_sequence<__VA_ARGS__>
+#undef BOOST_CLBL_TRTS_MAKE_IX_SEQ
+#define BOOST_CLBL_TRTS_MAKE_IX_SEQ(...) ::boost::callable_traits::detail::polyfills::make_index_sequence<__VA_ARGS__>
 
 // http://stackoverflow.com/questions/17424477/implementation-c14-make-integer-sequence
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN 
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN 
 
 namespace polyfills {
     
@@ -54,6 +54,6 @@ namespace polyfills {
         typename make_index_sequence_t<I...>::type;
 }
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
 #endif
