@@ -11,28 +11,21 @@ Distributed under the Boost Software License, Version 1.0.
 
 #undef BOOST_CLBL_TRTS_CONJUNCTION
 #define BOOST_CLBL_TRTS_CONJUNCTION(...) \
-::boost::callable_traits::detail::polyfills::conjunction<__VA_ARGS__>
-
+    ::boost::callable_traits::detail::conjunction<__VA_ARGS__>
 
 BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
 
-namespace polyfills {
-    
-	//polyfill for C++17 std::conjunction
-	template<typename...>
-	struct conjunction
-	    : std::true_type {};
+//polyfill for C++17 std::conjunction
+template<typename...>
+struct conjunction : std::true_type {};
 
-	template<typename T>
-	struct conjunction<T>
-	    : T {};
+template<typename T>
+struct conjunction<T> : T {};
 
-	template<typename T, typename... Ts>
-	struct conjunction<T, Ts...>
-	    : std::conditional<T::value != false, T, conjunction<Ts...>>::type {};
-    
-}
+template<typename T, typename... Ts>
+struct conjunction<T, Ts...>
+    : std::conditional<T::value != false, T, conjunction<Ts...>>::type {};
 
 BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
-#endif
+#endif // #ifndef BOOST_CLBL_TRTS_DETAIL_POLYFILLS_CONJUNCTION_HPP

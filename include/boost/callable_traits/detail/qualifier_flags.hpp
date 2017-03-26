@@ -10,9 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef BOOST_CLBL_TRTS_QUALIFIER_FLAGS_HPP
 #define BOOST_CLBL_TRTS_QUALIFIER_FLAGS_HPP
 
-#include <boost/callable_traits/config.hpp>
-#include <type_traits>
-#include <cstdint>
+#include <boost/callable_traits/detail/config.hpp>
 
 BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
     
@@ -72,28 +70,27 @@ constexpr qualifier_flags rref_ = 8;
 constexpr qualifier_flags cv_ = 3;
 
 template<qualifier_flags Flags>
-using remove_const_flag = std::integral_constant<qualifier_flags, Flags & ~const_>;
+using remove_const_flag = std::integral_constant<
+    qualifier_flags, Flags & ~const_>;
 
 template<qualifier_flags Flags>
 using is_const = std::integral_constant<bool,
-    (Flags & const_) != 0
->;
+    (Flags & const_) != 0>;
 
 template<qualifier_flags Flags>
-using remove_volatile_flag = std::integral_constant<qualifier_flags, Flags & ~volatile_>;
+using remove_volatile_flag = std::integral_constant<
+    qualifier_flags, Flags & ~volatile_>;
 
 template<typename U, typename T = typename std::remove_reference<U>::type>
 using cv_of = std::integral_constant<qualifier_flags,
     (std::is_const<T>::value ? const_ : default_)
-    | (std::is_volatile<T>::value ? volatile_ : default_)
->;
+    | (std::is_volatile<T>::value ? volatile_ : default_)>;
 
 template<typename T>
 using ref_of = std::integral_constant<qualifier_flags,
     std::is_rvalue_reference<T>::value ? rref_
     : (std::is_lvalue_reference<T>::value ? lref_
-        : default_)
->;
+        : default_)>;
 
 //bit-flag implementation of C++11 reference collapsing rules
 template<qualifier_flags Existing,
@@ -123,4 +120,4 @@ template<typename T> struct flag_map<T const volatile &&> { static constexpr qua
 
 BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
-#endif //#ifndef BOOST_CLBL_TRTS_QUALIFIER_FLAGS_HPP
+#endif // #ifndef BOOST_CLBL_TRTS_QUALIFIER_FLAGS_HPP

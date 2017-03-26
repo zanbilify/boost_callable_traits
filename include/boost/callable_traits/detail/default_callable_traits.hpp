@@ -9,9 +9,6 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef BOOST_CLBL_TRTS_DETAIL_DEFAULT_BOOST_CLBL_TRTS_HPP
 #define BOOST_CLBL_TRTS_DETAIL_DEFAULT_BOOST_CLBL_TRTS_HPP
 
-#include <boost/callable_traits/config.hpp>
-#include <boost/callable_traits/detail/utility.hpp>
-
 BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
           
 template<typename T = void>

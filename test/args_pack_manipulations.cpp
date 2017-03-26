@@ -1,7 +1,7 @@
 #include <tuple>
 #include <utility>
 #include <type_traits>
-#include <boost/callable_traits/config.hpp>
+#include <boost/callable_traits/detail/config.hpp>
 
 #include <boost/callable_traits/detail/sfinae_errors.hpp>
 #include "test.hpp"

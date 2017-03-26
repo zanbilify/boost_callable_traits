@@ -100,8 +100,8 @@ BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
         BOOST_CLBL_TRTS_SET_FUNCTION_QUALIFIERS(const volatile &);
         BOOST_CLBL_TRTS_SET_FUNCTION_QUALIFIERS(const volatile &&);
 
-#endif //#ifndef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
-#endif //#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
+#endif // #ifndef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
+#endif // #ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
         template<qualifier_flags Flags, bool IsTransactionSafe, bool IsNoexcept,
             typename... Ts>

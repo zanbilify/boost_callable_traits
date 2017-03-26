@@ -90,7 +90,7 @@ A substitution failure occurs on GCC builds older than version 4.9.2 with functi
 */
 //]
 
-#endif //#ifndef BOOST_CLBL_TRTS_ADD_MEMBER_CONST_HPP
+#endif // #ifndef BOOST_CLBL_TRTS_ADD_MEMBER_CONST_HPP
 
 
 

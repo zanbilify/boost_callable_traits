@@ -16,4 +16,4 @@ Distributed under the Boost Software License, Version 1.0.
 #include <boost/callable_traits/detail/pmf.hpp>
 #include <boost/callable_traits/detail/pmd.hpp>
 
-#endif //#ifndef BOOST_CLBL_TRTS_DETAIL_CORE_HPP
+#endif // #ifndef BOOST_CLBL_TRTS_DETAIL_CORE_HPP

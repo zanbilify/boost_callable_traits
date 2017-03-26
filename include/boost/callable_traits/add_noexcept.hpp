@@ -96,4 +96,4 @@ A `static_assert` always fails when instantiating this template if your compiler
 */
 //]
 
-#endif //#ifndef BOOST_CLBL_TRTS_ADD_NOEXCEPT_HPP
+#endif // #ifndef BOOST_CLBL_TRTS_ADD_NOEXCEPT_HPP

@@ -9,12 +9,11 @@ Distributed under the Boost Software License, Version 1.0.
 #ifndef BOOST_CLBL_TRTS_DETAIL_FUNCTION_HPP
 #define BOOST_CLBL_TRTS_DETAIL_FUNCTION_HPP
 
+#include <boost/callable_traits/detail/config.hpp>
 #include <boost/callable_traits/detail/qualifier_flags.hpp>
-#include <boost/callable_traits/detail/fwd/function_fwd.hpp>
+#include <boost/callable_traits/detail/forward_declarations.hpp>
 #include <boost/callable_traits/detail/set_function_qualifiers.hpp>
 #include <boost/callable_traits/detail/default_callable_traits.hpp>
-
-#include <tuple>
 
 BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
 
@@ -46,7 +45,6 @@ struct function : default_callable_traits<T> {};
 #include <boost/callable_traits/detail/unguarded/function.hpp>
 #undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
 
-
 #define BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS &&
 #include <boost/callable_traits/detail/unguarded/function.hpp>
 #undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
@@ -75,8 +73,8 @@ struct function : default_callable_traits<T> {};
 #include <boost/callable_traits/detail/unguarded/function.hpp>
 #undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
 
-#endif //#ifndef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
-#endif //#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
+#endif // #ifndef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
+#endif // #ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
 // function pointers
 

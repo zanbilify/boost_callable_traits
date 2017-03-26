@@ -6,10 +6,13 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef BOOST_CLBL_TRTS_CONFIG_HPP
-#define BOOST_CLBL_TRTS_CONFIG_HPP
+#ifndef BOOST_CLBL_TRTS_DETAIL_CONFIG_HPP
+#define BOOST_CLBL_TRTS_DETAIL_CONFIG_HPP
 
 #include <type_traits>
+#include <tuple>
+#include <utility>
+#include <cstdint>
 
 #define BOOST_CLBL_TRTS_NAMESPACE_BEGIN namespace boost { namespace callable_traits {
 #define BOOST_CLBL_TRTS_NAMESPACE_END }}
@@ -58,7 +61,7 @@ Distributed under the Boost Software License, Version 1.0.
 #      define BOOST_CLBL_TRTS_GCC_OLDER_THAN_4_9_2
 #    endif //#if __GNUC__ >= 5
 #  endif //#if defined __GNUC__
-#endif //#ifndef __clang__
+#endif // #ifndef __clang__
 
 #ifdef _MSC_VER
 #  ifdef __clang__
@@ -112,4 +115,4 @@ Distributed under the Boost Software License, Version 1.0.
 #  define BOOST_CLBL_TRTS_NOEXCEPT_SPECIFIER BOOST_CLBL_TRTS_EMPTY
 #endif // #ifdef BOOST_CLBL_TRTS_ENABLE_NOEXCEPT_TYPES
 
-#endif //#ifndef BOOST_CLBL_TRTS_CONFIG_HPP
+#endif // #ifndef BOOST_CLBL_TRTS_DETAIL_CONFIG_HPP

@@ -91,4 +91,4 @@ Full support on GCC 4.9.2+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
 */
 //]
 
-#endif //#ifndef BOOST_CLBL_TRTS_IS_REFERENCE_MEMBER_HPP
+#endif // #ifndef BOOST_CLBL_TRTS_IS_REFERENCE_MEMBER_HPP
