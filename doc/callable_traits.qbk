@@ -109,7 +109,7 @@ Granted, use cases for such obscure specializations are vitually nonexistent in 
 
 [section:boost_function_types Regarding [^Boost.FunctionTypes]]
 
-The use cases for [libname] overlaop significantly with those of [function_types_link]. Here are some reasons why you might prefer [libname] over the latter:
+The use cases for [libname] overlap significantly with those of [function_types_link]. Here are some reasons why you might prefer [libname] over the latter:
 
 # [function_types] is tightly coupled to [@http://www.boost.org/doc/libs/1_60_0/libs/mpl/doc/index.html [^Boost.MPL]] sequences, while [libname] generally takes a lower-level approach. No knowledge of MPL terminology is needed to use [libname].
 # Other types in C++ receive fine-grained, low-level attention in [^Boost.TypeTraits] and [^<type_traits>]. [libname] gives callable types similar attention, without additional metaprogramming dependencies.
