@@ -42,7 +42,7 @@ def strip_comments(text):
 # Post the given JSON data to Wandbox's API, and return the result
 # as a JSON object.
 def upload(options):
-    request = urllib2.Request('http://melpon.org/wandbox/api/compile.json')
+    request = urllib2.Request('https://wandbox.org/api/compile.json')
     request.add_header('Content-Type', 'application/json')
     response = urllib2.urlopen(request, json.dumps(options))
     return json.loads(response.read())
@@ -103,7 +103,7 @@ def main():
             'code': strip_comments(open(header).read())
         } for header in headers(directory)],
         'options': 'warning,c++14',
-        'compiler': 'clang-3.6',
+        'compiler': 'clang-3.6.0',
         'save': True,
         'compiler-option-raw': '-I.'
     })
