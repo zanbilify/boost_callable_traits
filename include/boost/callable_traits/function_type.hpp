@@ -6,12 +6,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_FUNCTION_TYPE_HPP
-#define CALLABLE_TRAITS_FUNCTION_TYPE_HPP
+#ifndef BOOST_CLBL_TRTS_FUNCTION_TYPE_HPP
+#define BOOST_CLBL_TRTS_FUNCTION_TYPE_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 //[ function_type_hpp
 /*`[section:ref_function_type function_type]
@@ -34,7 +34,7 @@ struct function_type {
 };
 
 //<-
-CALLABLE_TRAITS_NAMESPACE_END
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 /*`

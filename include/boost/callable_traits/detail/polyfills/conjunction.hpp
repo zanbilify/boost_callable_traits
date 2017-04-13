@@ -6,33 +6,26 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_DETAIL_POLYFILLS_CONJUNCTION_HPP
-#define CALLABLE_TRAITS_DETAIL_POLYFILLS_CONJUNCTION_HPP
+#ifndef BOOST_CLBL_TRTS_DETAIL_POLYFILLS_CONJUNCTION_HPP
+#define BOOST_CLBL_TRTS_DETAIL_POLYFILLS_CONJUNCTION_HPP
 
-#undef CALLABLE_TRAITS_CONJUNCTION
-#define CALLABLE_TRAITS_CONJUNCTION(...) \
-::boost::callable_traits::detail::polyfills::conjunction<__VA_ARGS__>
+#undef BOOST_CLBL_TRTS_CONJUNCTION
+#define BOOST_CLBL_TRTS_CONJUNCTION(...) \
+    ::boost::callable_traits::detail::conjunction<__VA_ARGS__>
 
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
+//polyfill for C++17 std::conjunction
+template<typename...>
+struct conjunction : std::true_type {};
 
-namespace polyfills {
-    
-	//polyfill for C++17 std::conjunction
-	template<typename...>
-	struct conjunction
-	    : std::true_type {};
+template<typename T>
+struct conjunction<T> : T {};
 
-	template<typename T>
-	struct conjunction<T>
-	    : T {};
+template<typename T, typename... Ts>
+struct conjunction<T, Ts...>
+    : std::conditional<T::value != false, T, conjunction<Ts...>>::type {};
 
-	template<typename T, typename... Ts>
-	struct conjunction<T, Ts...>
-	    : std::conditional<T::value != false, T, conjunction<Ts...>>::type {};
-    
-}
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
-
-#endif
+#endif // #ifndef BOOST_CLBL_TRTS_DETAIL_POLYFILLS_CONJUNCTION_HPP

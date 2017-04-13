@@ -6,138 +6,136 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_DETAIL_FUNCTION_HPP
-#define CALLABLE_TRAITS_DETAIL_FUNCTION_HPP
+#ifndef BOOST_CLBL_TRTS_DETAIL_FUNCTION_HPP
+#define BOOST_CLBL_TRTS_DETAIL_FUNCTION_HPP
 
+#include <boost/callable_traits/detail/config.hpp>
 #include <boost/callable_traits/detail/qualifier_flags.hpp>
-#include <boost/callable_traits/detail/fwd/function_fwd.hpp>
+#include <boost/callable_traits/detail/forward_declarations.hpp>
 #include <boost/callable_traits/detail/set_function_qualifiers.hpp>
 #include <boost/callable_traits/detail/default_callable_traits.hpp>
 
-#include <tuple>
-
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
 
 template<typename T>
 struct function : default_callable_traits<T> {};
 
-#undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
-#define CALLABLE_TRAITS_INCLUDE_QUALIFIERS
+#undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
+#define BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
 #include <boost/callable_traits/detail/unguarded/function.hpp>
-#undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
+#undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
 
-#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
-#define CALLABLE_TRAITS_INCLUDE_QUALIFIERS const
+#define BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS const
 #include <boost/callable_traits/detail/unguarded/function.hpp>
-#undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
+#undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
 
-#define CALLABLE_TRAITS_INCLUDE_QUALIFIERS volatile
+#define BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS volatile
 #include <boost/callable_traits/detail/unguarded/function.hpp>
-#undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
+#undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
 
-#define CALLABLE_TRAITS_INCLUDE_QUALIFIERS const volatile
+#define BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS const volatile
 #include <boost/callable_traits/detail/unguarded/function.hpp>
-#undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
+#undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
 
-#ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#ifndef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 
-#define CALLABLE_TRAITS_INCLUDE_QUALIFIERS &
+#define BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS &
 #include <boost/callable_traits/detail/unguarded/function.hpp>
-#undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
+#undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
 
-
-#define CALLABLE_TRAITS_INCLUDE_QUALIFIERS &&
+#define BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS &&
 #include <boost/callable_traits/detail/unguarded/function.hpp>
-#undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
+#undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
 
-#define CALLABLE_TRAITS_INCLUDE_QUALIFIERS const &
+#define BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS const &
 #include <boost/callable_traits/detail/unguarded/function.hpp>
-#undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
+#undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
 
-#define CALLABLE_TRAITS_INCLUDE_QUALIFIERS const &&
+#define BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS const &&
 #include <boost/callable_traits/detail/unguarded/function.hpp>
-#undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
+#undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
 
-#define CALLABLE_TRAITS_INCLUDE_QUALIFIERS volatile &
+#define BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS volatile &
 #include <boost/callable_traits/detail/unguarded/function.hpp>
-#undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
+#undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
 
-#define CALLABLE_TRAITS_INCLUDE_QUALIFIERS volatile &&
+#define BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS volatile &&
 #include <boost/callable_traits/detail/unguarded/function.hpp>
-#undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
+#undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
 
-#define CALLABLE_TRAITS_INCLUDE_QUALIFIERS const volatile &
+#define BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS const volatile &
 #include <boost/callable_traits/detail/unguarded/function.hpp>
-#undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
+#undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
 
-#define CALLABLE_TRAITS_INCLUDE_QUALIFIERS const volatile &&
+#define BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS const volatile &&
 #include <boost/callable_traits/detail/unguarded/function.hpp>
-#undef CALLABLE_TRAITS_INCLUDE_QUALIFIERS
+#undef BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
 
-#endif //#ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
-#endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#endif // #ifndef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
+#endif // #ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
 // function pointers
 
-#define CALLABLE_TRAITS_CC_TAG dummy
-#define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
-#define CALLABLE_TRAITS_CC
-#define CALLABLE_TRAITS_ST
+#define BOOST_CLBL_TRTS_CC_TAG dummy
+#define BOOST_CLBL_TRTS_VARARGS_CC BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC
+#define BOOST_CLBL_TRTS_CC
+#define BOOST_CLBL_TRTS_ST
 #include <boost/callable_traits/detail/unguarded/function_ptr.hpp>
 #include <boost/callable_traits/detail/unguarded/function_ptr_varargs.hpp>
-#undef CALLABLE_TRAITS_ST
-#undef CALLABLE_TRAITS_CC
-#undef CALLABLE_TRAITS_CC_TAG
-#undef CALLABLE_TRAITS_VARARGS_CC
+#undef BOOST_CLBL_TRTS_ST
+#undef BOOST_CLBL_TRTS_CC
+#undef BOOST_CLBL_TRTS_CC_TAG
+#undef BOOST_CLBL_TRTS_VARARGS_CC
 
 /* ?
-#ifdef CALLABLE_TRAITS_ENABLE_CDECL
-#define CALLABLE_TRAITS_CC_TAG cdecl_tag
-#define CALLABLE_TRAITS_VARARGS_CC __cdecl
-#define CALLABLE_TRAITS_CC __cdecl
-#define CALLABLE_TRAITS_ST
+#ifdef BOOST_CLBL_TRTS_ENABLE_CDECL
+#define BOOST_CLBL_TRTS_CC_TAG cdecl_tag
+#define BOOST_CLBL_TRTS_VARARGS_CC __cdecl
+#define BOOST_CLBL_TRTS_CC __cdecl
+#define BOOST_CLBL_TRTS_ST
 #include <boost/callable_traits/detail/unguarded/function_ptr.hpp>
-#undef CALLABLE_TRAITS_ST
-#undef CALLABLE_TRAITS_CC
-#undef CALLABLE_TRAITS_CC_TAG
-#undef CALLABLE_TRAITS_VARARGS_CC
+#undef BOOST_CLBL_TRTS_ST
+#undef BOOST_CLBL_TRTS_CC
+#undef BOOST_CLBL_TRTS_CC_TAG
+#undef BOOST_CLBL_TRTS_VARARGS_CC
 #endif*/
 
-#ifdef CALLABLE_TRAITS_ENABLE_STDCALL
-#define CALLABLE_TRAITS_CC_TAG stdcall_tag
-#define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
-#define CALLABLE_TRAITS_CC __stdcall
-#define CALLABLE_TRAITS_ST
+#ifdef BOOST_CLBL_TRTS_ENABLE_STDCALL
+#define BOOST_CLBL_TRTS_CC_TAG stdcall_tag
+#define BOOST_CLBL_TRTS_VARARGS_CC BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC
+#define BOOST_CLBL_TRTS_CC __stdcall
+#define BOOST_CLBL_TRTS_ST
 #include <boost/callable_traits/detail/unguarded/function_ptr.hpp>
-#undef CALLABLE_TRAITS_ST
-#undef CALLABLE_TRAITS_CC
-#undef CALLABLE_TRAITS_CC_TAG
-#undef CALLABLE_TRAITS_VARARGS_CC
+#undef BOOST_CLBL_TRTS_ST
+#undef BOOST_CLBL_TRTS_CC
+#undef BOOST_CLBL_TRTS_CC_TAG
+#undef BOOST_CLBL_TRTS_VARARGS_CC
 #endif
 
-#ifdef CALLABLE_TRAITS_ENABLE_FASTCALL
-#define CALLABLE_TRAITS_CC_TAG fastcall_tag
-#define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
-#define CALLABLE_TRAITS_CC __fastcall
-#define CALLABLE_TRAITS_ST
+#ifdef BOOST_CLBL_TRTS_ENABLE_FASTCALL
+#define BOOST_CLBL_TRTS_CC_TAG fastcall_tag
+#define BOOST_CLBL_TRTS_VARARGS_CC BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC
+#define BOOST_CLBL_TRTS_CC __fastcall
+#define BOOST_CLBL_TRTS_ST
 #include <boost/callable_traits/detail/unguarded/function_ptr.hpp>
-#undef CALLABLE_TRAITS_CC
-#undef CALLABLE_TRAITS_ST
-#undef CALLABLE_TRAITS_CC_TAG
-#undef CALLABLE_TRAITS_VARARGS_CC
+#undef BOOST_CLBL_TRTS_CC
+#undef BOOST_CLBL_TRTS_ST
+#undef BOOST_CLBL_TRTS_CC_TAG
+#undef BOOST_CLBL_TRTS_VARARGS_CC
 #endif
 
-#ifdef CALLABLE_TRAITS_ENABLE_PASCAL
-#define CALLABLE_TRAITS_CC_TAG pascal_tag
-#define CALLABLE_TRAITS_VARARGS_CC CALLABLE_TRAITS_DEFAULT_VARARGS_CC
-#define CALLABLE_TRAITS_CC
-#define CALLABLE_TRAITS_ST pascal
+#ifdef BOOST_CLBL_TRTS_ENABLE_PASCAL
+#define BOOST_CLBL_TRTS_CC_TAG pascal_tag
+#define BOOST_CLBL_TRTS_VARARGS_CC BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC
+#define BOOST_CLBL_TRTS_CC
+#define BOOST_CLBL_TRTS_ST pascal
 #include <boost/callable_traits/detail/unguarded/function_ptr.hpp>
-#undef CALLABLE_TRAITS_CC
-#undef CALLABLE_TRAITS_ST
-#undef CALLABLE_TRAITS_CC_TAG
-#undef CALLABLE_TRAITS_VARARGS_CC
+#undef BOOST_CLBL_TRTS_CC
+#undef BOOST_CLBL_TRTS_ST
+#undef BOOST_CLBL_TRTS_CC_TAG
+#undef BOOST_CLBL_TRTS_VARARGS_CC
 #endif
 
 template<typename T>
@@ -189,6 +187,6 @@ struct function<T&> : std::conditional<function<T>::value,
     using replace_args = typename base::template replace_args<Index, NewArgs...>&;
 };
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
-#endif // #ifndef CALLABLE_TRAITS_DETAIL_FUNCTION_HPP
+#endif // #ifndef BOOST_CLBL_TRTS_DETAIL_FUNCTION_HPP

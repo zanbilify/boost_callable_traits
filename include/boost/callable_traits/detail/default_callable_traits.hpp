@@ -6,13 +6,10 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_DETAIL_DEFAULT_CALLABLE_TRAITS_HPP
-#define CALLABLE_TRAITS_DETAIL_DEFAULT_CALLABLE_TRAITS_HPP
+#ifndef BOOST_CLBL_TRTS_DETAIL_DEFAULT_BOOST_CLBL_TRTS_HPP
+#define BOOST_CLBL_TRTS_DETAIL_DEFAULT_BOOST_CLBL_TRTS_HPP
 
-#include <boost/callable_traits/config.hpp>
-#include <boost/callable_traits/detail/utility.hpp>
-
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
           
 template<typename T = void>
 struct default_callable_traits {
@@ -192,7 +189,7 @@ struct default_callable_traits {
     using is_volatile_member = std::integral_constant<bool, 0 < (cv_flags & volatile_)>;
     using is_cv_member = std::integral_constant<bool, cv_flags == (const_ | volatile_)>;
 
-#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
     using is_reference_member = std::false_type;
     using is_lvalue_reference_qualified = std::false_type;
     using is_rvalue_reference_qualified = std::false_type;
@@ -200,11 +197,11 @@ struct default_callable_traits {
     using is_reference_member = std::integral_constant<bool, 0 < ref_flags>;
     using is_lvalue_reference_member = std::integral_constant<bool, ref_flags == lref_>;
     using is_rvalue_reference_member = std::integral_constant<bool, ref_flags == rref_>;
-#endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#endif //#ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 
 };
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
-#endif // CALLABLE_TRAITS_DETAIL_DEFAULT_CALLABLE_TRAITS_HPP
+#endif // BOOST_CLBL_TRTS_DETAIL_DEFAULT_BOOST_CLBL_TRTS_HPP
 

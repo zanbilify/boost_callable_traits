@@ -20,7 +20,7 @@ int main() {
 
     test_case<int(),                               int(foo::*)()                               >();
 
-#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
     test_case<int() TX_SAFE,                       int(foo::*)() TX_SAFE                       >();
     test_case<int() LREF,                          int(foo::*)() LREF                          >();
     test_case<int() LREF TX_SAFE,                  int(foo::*)() LREF TX_SAFE                  >();
@@ -42,7 +42,7 @@ int main() {
 
     test_case<int(int),                            int(foo::*)(int)                            >();
 
-#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
     test_case<int(int) TX_SAFE,                    int(foo::*)(int) TX_SAFE                    >();
     test_case<int(int) LREF,                       int(foo::*)(int) LREF                       >();
     test_case<int(int) LREF TX_SAFE,               int(foo::*)(int) LREF TX_SAFE               >();
@@ -63,12 +63,12 @@ int main() {
 #endif
 
 //MSVC doesn't like varargs on abominable functions
-#ifndef CALLABLE_TRAITS_MSVC
+#ifndef BOOST_CLBL_TRTS_MSVC
 
     test_case<int(...),                            int(foo::*)(...)                            >();
 
 
-#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
     test_case<int(...) TX_SAFE,                    int(foo::*)(...) TX_SAFE                    >();
     test_case<int(...) LREF,                       int(foo::*)(...) LREF                       >();
     test_case<int(...) LREF TX_SAFE,               int(foo::*)(...) LREF TX_SAFE               >();
@@ -86,11 +86,11 @@ int main() {
     test_case<int(...) volatile LREF TX_SAFE,      int(foo::*)(...) volatile LREF TX_SAFE      >();
     test_case<int(...) volatile RREF,              int(foo::*)(...) volatile RREF              >();
     test_case<int(...) volatile RREF TX_SAFE,      int(foo::*)(...) volatile RREF TX_SAFE      >();
-#endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#endif //#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
     test_case<int(int, ...),                       int(foo::*)(int, ...)                       >();
 
-#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
     test_case<int(int, ...) TX_SAFE,               int(foo::*)(int, ...) TX_SAFE               >();
     test_case<int(int, ...) LREF,                  int(foo::*)(int, ...) LREF                  >();
     test_case<int(int, ...) LREF TX_SAFE,          int(foo::*)(int, ...) LREF TX_SAFE          >();
@@ -108,7 +108,7 @@ int main() {
     test_case<int(int, ...) volatile LREF TX_SAFE, int(foo::*)(int, ...) volatile LREF TX_SAFE >();
     test_case<int(int, ...) volatile RREF,         int(foo::*)(int, ...) volatile RREF         >();
     test_case<int(int, ...) volatile RREF TX_SAFE, int(foo::*)(int, ...) volatile RREF TX_SAFE >();
-#endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
-#endif //#ifndef CALLABLE_TRAITS_MSVC
+#endif //#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
+#endif //#ifndef BOOST_CLBL_TRTS_MSVC
 
 }

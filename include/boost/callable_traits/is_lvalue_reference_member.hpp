@@ -6,12 +6,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_IS_LVALUE_REFERENCE_MEMBER_HPP
-#define CALLABLE_TRAITS_IS_LVALUE_REFERENCE_MEMBER_HPP
+#ifndef BOOST_CLBL_TRTS_IS_LVALUE_REFERENCE_MEMBER_HPP
+#define BOOST_CLBL_TRTS_IS_LVALUE_REFERENCE_MEMBER_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 //[ is_lvalue_reference_member_hpp
 /*`[section:ref_is_lvalue_reference_member is_lvalue_reference_member]
@@ -28,12 +28,11 @@ struct is_lvalue_reference_member; //implementation-defined
 template<typename T>
 struct is_lvalue_reference_member
     : detail::traits<T>::is_lvalue_reference_member {
-
     using type = typename detail::traits<T>::is_lvalue_reference_member;
 };
 //->
 
-#ifdef CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES
+#ifdef BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES
 
 template<typename T>
 struct is_lvalue_reference_member_v {
@@ -51,7 +50,7 @@ constexpr bool is_lvalue_reference_member_v = //implementation-defined
 #endif
 
 //<-
-CALLABLE_TRAITS_NAMESPACE_END
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 /*`
@@ -92,4 +91,4 @@ Full support on GCC 4.9.2+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
 */
 //]
 
-#endif //#ifndef CALLABLE_TRAITS_IS_LVALUE_REFERENCE_MEMBER_HPP
+#endif // #ifndef BOOST_CLBL_TRTS_IS_LVALUE_REFERENCE_MEMBER_HPP

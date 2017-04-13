@@ -42,7 +42,7 @@ int main() {
         CT_ASSERT(std::is_same<cvr,  add_member_volatile_t<cvr>>{});
     }
     
-#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
     {
         using f   = foo();

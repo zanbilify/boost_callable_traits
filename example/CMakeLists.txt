@@ -11,7 +11,7 @@ include_directories(${callable_traits_SOURCE_DIR}/include)
 file(GLOB_RECURSE EXAMPLES "*.cpp")
 file(GLOB_RECURSE EXPERIMENTAL_EXAMPLES "experimental*.cpp")
 
-if (NOT CALLABLE_TRAITS_BUILD_EXPERIMENTAL)
+if (NOT BOOST_CLBL_TRTS_BUILD_EXPERIMENTAL)
     foreach(_experimental IN LISTS EXPERIMENTAL_EXAMPLES)
         list(REMOVE_ITEM EXAMPLES ${_experimental})
     endforeach()

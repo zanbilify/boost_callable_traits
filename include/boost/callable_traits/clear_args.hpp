@@ -6,15 +6,15 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_CLEAR_ARGS_HPP
-#define CALLABLE_TRAITS_CLEAR_ARGS_HPP
+#ifndef BOOST_CLBL_TRTS_CLEAR_ARGS_HPP
+#define BOOST_CLBL_TRTS_CLEAR_ARGS_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
-CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(clear_args)
-CALLABLE_TRAITS_SFINAE_MSG(clear_args, cannot_clear_the_parameter_list_of_this_type)
+BOOST_CLBL_TRTS_DEFINE_SFINAE_ERROR_ORIGIN(clear_args)
+BOOST_CLBL_TRTS_SFINAE_MSG(clear_args, cannot_clear_the_parameter_list_of_this_type)
 
 //[ clear_args_hpp
 /*`[section:ref_clear_args clear_args]
@@ -37,7 +37,7 @@ struct clear_args {
 };
 
 //<-
-CALLABLE_TRAITS_NAMESPACE_END
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 /*`
@@ -78,4 +78,4 @@ Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
 */
 //]
 
-#endif //CALLABLE_TRAITS_CLEAR_ARGS_HPP
+#endif //BOOST_CLBL_TRTS_CLEAR_ARGS_HPP

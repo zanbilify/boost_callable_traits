@@ -10,7 +10,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <boost/callable_traits/add_member_lvalue_reference.hpp>
 #include "test.hpp"
 
-#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 int main(){ return 0; }
 #else
 
@@ -48,18 +48,18 @@ int main() {
     } 
     
     {
-        using f   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...);
-        using l   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) &;
-        using r   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) &&;
-        using c   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const;
-        using cl  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const &;
-        using cr  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const &&;
-        using v   = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) volatile;
-        using vl  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) volatile &;
-        using vr  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) volatile &&;
-        using cv  = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile;
-        using cvl = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile &;
-        using cvr = void(CALLABLE_TRAITS_DEFAULT_VARARGS_CC foo::*)(...) const volatile &&;
+        using f   = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...);
+        using l   = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) &;
+        using r   = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) &&;
+        using c   = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) const;
+        using cl  = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) const &;
+        using cr  = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) const &&;
+        using v   = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) volatile;
+        using vl  = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) volatile &;
+        using vr  = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) volatile &&;
+        using cv  = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) const volatile;
+        using cvl = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) const volatile &;
+        using cvr = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) const volatile &&;
 
         CT_ASSERT(std::is_same<l,     add_member_lvalue_reference_t<f>>{});
         CT_ASSERT(std::is_same<cl,    add_member_lvalue_reference_t<c>>{});
@@ -105,7 +105,7 @@ int main() {
         CT_ASSERT(!std::is_same<cvr,  add_member_lvalue_reference_t<cvr>>{});
     }
 
-    #ifdef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+    #ifdef BOOST_CLBL_TRTS_ENABLE_TRANSACTION_SAFE
     {
         using f   = void(...) transaction_safe;
         using l   = void(...) & transaction_safe;
@@ -135,9 +135,9 @@ int main() {
         CT_ASSERT(!std::is_same<cvr,  add_member_lvalue_reference_t<cvr>>{});
 
     }
-    #endif // #ifdef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+    #endif // #ifdef BOOST_CLBL_TRTS_ENABLE_TRANSACTION_SAFE
 
-    #ifdef CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
+    #ifdef BOOST_CLBL_TRTS_ENABLE_NOEXCEPT_TYPES
     {
         using f   = void(...) noexcept;
         using l   = void(...) & noexcept;
@@ -166,10 +166,10 @@ int main() {
         CT_ASSERT(!std::is_same<vr,   add_member_lvalue_reference_t<vr>>{});
         CT_ASSERT(!std::is_same<cvr,  add_member_lvalue_reference_t<cvr>>{});
     }
-    #endif // #ifdef CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
+    #endif // #ifdef BOOST_CLBL_TRTS_ENABLE_NOEXCEPT_TYPES
 
-    #ifdef CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
-    #ifdef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+    #ifdef BOOST_CLBL_TRTS_ENABLE_NOEXCEPT_TYPES
+    #ifdef BOOST_CLBL_TRTS_ENABLE_TRANSACTION_SAFE
     {
         using f   = void(...) transaction_safe noexcept;
         using l   = void(...) & transaction_safe noexcept;
@@ -198,9 +198,9 @@ int main() {
         CT_ASSERT(!std::is_same<vr,   add_member_lvalue_reference_t<vr>>{});
         CT_ASSERT(!std::is_same<cvr,  add_member_lvalue_reference_t<cvr>>{});
     }
-    #endif // #ifdef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
-    #endif // #ifdef CALLABLE_TRAITS_ENABLE_NOEXCEPT_TYPES
+    #endif // #ifdef BOOST_CLBL_TRTS_ENABLE_TRANSACTION_SAFE
+    #endif // #ifdef BOOST_CLBL_TRTS_ENABLE_NOEXCEPT_TYPES
 }
 
-#endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#endif //#ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 

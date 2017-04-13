@@ -4,8 +4,8 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http ://boost.org/LICENSE_1_0.txt)
 ->*/
 
-#include <boost/callable_traits/config.hpp>
-#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#include <boost/callable_traits/detail/config.hpp>
+#ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 int main(){ return 0; }
 #else
 
@@ -42,4 +42,4 @@ int main() {
     }
 }
 //]
-#endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#endif //#ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS

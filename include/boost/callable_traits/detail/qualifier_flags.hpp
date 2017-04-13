@@ -7,14 +7,12 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_QUALIFIER_FLAGS_HPP
-#define CALLABLE_TRAITS_QUALIFIER_FLAGS_HPP
+#ifndef BOOST_CLBL_TRTS_QUALIFIER_FLAGS_HPP
+#define BOOST_CLBL_TRTS_QUALIFIER_FLAGS_HPP
 
-#include <boost/callable_traits/config.hpp>
-#include <type_traits>
-#include <cstdint>
+#include <boost/callable_traits/detail/config.hpp>
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
     
 //bit qualifier_flags used to signify cv/ref qualifiers
 using qualifier_flags = std::uint32_t;
@@ -51,7 +49,7 @@ constexpr qualifier_flags const_ = 1;
 // or member function overload.
 constexpr qualifier_flags volatile_ = 2;
 
-#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 
 constexpr qualifier_flags lref_ = default_;
 constexpr qualifier_flags rref_ = default_;
@@ -67,33 +65,32 @@ constexpr qualifier_flags lref_ = 4;
 // overload.
 constexpr qualifier_flags rref_ = 8;
 
-#endif //#ifdef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#endif //#ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 
 constexpr qualifier_flags cv_ = 3;
 
 template<qualifier_flags Flags>
-using remove_const_flag = std::integral_constant<qualifier_flags, Flags & ~const_>;
+using remove_const_flag = std::integral_constant<
+    qualifier_flags, Flags & ~const_>;
 
 template<qualifier_flags Flags>
 using is_const = std::integral_constant<bool,
-    (Flags & const_) != 0
->;
+    (Flags & const_) != 0>;
 
 template<qualifier_flags Flags>
-using remove_volatile_flag = std::integral_constant<qualifier_flags, Flags & ~volatile_>;
+using remove_volatile_flag = std::integral_constant<
+    qualifier_flags, Flags & ~volatile_>;
 
 template<typename U, typename T = typename std::remove_reference<U>::type>
 using cv_of = std::integral_constant<qualifier_flags,
     (std::is_const<T>::value ? const_ : default_)
-    | (std::is_volatile<T>::value ? volatile_ : default_)
->;
+    | (std::is_volatile<T>::value ? volatile_ : default_)>;
 
 template<typename T>
 using ref_of = std::integral_constant<qualifier_flags,
     std::is_rvalue_reference<T>::value ? rref_
     : (std::is_lvalue_reference<T>::value ? lref_
-        : default_)
->;
+        : default_)>;
 
 //bit-flag implementation of C++11 reference collapsing rules
 template<qualifier_flags Existing,
@@ -121,6 +118,6 @@ template<typename T> struct flag_map<T const volatile> { static constexpr qualif
 template<typename T> struct flag_map<T const volatile &> { static constexpr qualifier_flags value = const_ | volatile_ | lref_; };
 template<typename T> struct flag_map<T const volatile &&> { static constexpr qualifier_flags value = const_ | volatile_ | rref_; };
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
-#endif //#ifndef CALLABLE_TRAITS_QUALIFIER_FLAGS_HPP
+#endif // #ifndef BOOST_CLBL_TRTS_QUALIFIER_FLAGS_HPP

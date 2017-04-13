@@ -6,27 +6,23 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_DETAIL_TRAITS_HPP
-#define CALLABLE_TRAITS_DETAIL_TRAITS_HPP
+#ifndef BOOST_CLBL_TRTS_DETAIL_TRAITS_HPP
+#define BOOST_CLBL_TRTS_DETAIL_TRAITS_HPP
 
-#include <boost/callable_traits/detail/utility.hpp>
-#include <boost/callable_traits/detail/fwd/pmd_fwd.hpp>
-#include <boost/callable_traits/detail/fwd/pmf_fwd.hpp>
-#include <boost/callable_traits/detail/fwd/function_fwd.hpp>
-#include <boost/callable_traits/detail/fwd/function_object_fwd.hpp>
+#include <boost/callable_traits/detail/forward_declarations.hpp>
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
 
-        template<typename T>
-        using traits = typename CALLABLE_TRAITS_DISJUNCTION(
-            function_object<T>,
-            function<T>,
-            pmf<T>,
-            pmd<T>,
-            function_object<T>,
-            default_callable_traits<T>
-        )::traits;
+    // Here is where the magic happens
+    template<typename T>
+    using traits = typename BOOST_CLBL_TRTS_DISJUNCTION(
+        function_object<T>,
+        function<T>,
+        pmf<T>,
+        pmd<T>,
+        default_callable_traits<T>
+    )::traits;
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
-#endif
+#endif // #ifndef BOOST_CLBL_TRTS_DETAIL_TRAITS_HPP

@@ -6,16 +6,16 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_INSERT_ARGS_HPP
-#define CALLABLE_TRAITS_INSERT_ARGS_HPP
+#ifndef BOOST_CLBL_TRTS_INSERT_ARGS_HPP
+#define BOOST_CLBL_TRTS_INSERT_ARGS_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 #include <boost/callable_traits/detail/parameter_index_helper.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
-CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(insert_args)
-CALLABLE_TRAITS_SFINAE_MSG(insert_args, cannot_insert_parameters_into_this_type)
+BOOST_CLBL_TRTS_DEFINE_SFINAE_ERROR_ORIGIN(insert_args)
+BOOST_CLBL_TRTS_SFINAE_MSG(insert_args, cannot_insert_parameters_into_this_type)
 
 //[ insert_args_hpp
 /*`[section:ref_insert_args insert_args]
@@ -58,7 +58,7 @@ struct insert_args {
 };
 
 //<-
-CALLABLE_TRAITS_NAMESPACE_END
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 /*`
@@ -102,4 +102,4 @@ Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
 */
 //]
 
-#endif //CALLABLE_TRAITS_INSERT_ARGS_HPP
+#endif //BOOST_CLBL_TRTS_INSERT_ARGS_HPP

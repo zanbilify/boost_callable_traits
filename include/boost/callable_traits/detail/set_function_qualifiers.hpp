@@ -6,110 +6,102 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_DETAIL_SET_FUNCTION_QUALIFIERS_HPP
-#define CALLABLE_TRAITS_DETAIL_SET_FUNCTION_QUALIFIERS_HPP
+#ifndef BOOST_CLBL_TRTS_DETAIL_SET_FUNCTION_QUALIFIERS_HPP
+#define BOOST_CLBL_TRTS_DETAIL_SET_FUNCTION_QUALIFIERS_HPP
 
 #include <boost/callable_traits/detail/qualifier_flags.hpp>
 
-#define CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS(QUAL)              \
+#define BOOST_CLBL_TRTS_SET_FUNCTION_QUALIFIERS(QUAL)              \
 template<typename Return, typename... Args>                        \
 struct set_function_qualifiers_t <                                 \
     flag_map<int QUAL>::value, false, false, Return, Args...> {    \
-                                                                   \
     using type = Return(Args...) QUAL;                             \
 };                                                                 \
                                                                    \
 template<typename Return, typename... Args>                        \
 struct set_function_qualifiers_t <                                 \
     flag_map<int QUAL>::value, true, false, Return, Args...> {     \
-                                                                   \
     using type = Return(Args...) QUAL                              \
-        CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER;                \
+        BOOST_CLBL_TRTS_TRANSACTION_SAFE_SPECIFIER;                \
 };                                                                 \
                                                                    \
 template<typename Return, typename... Args>                        \
 struct set_function_qualifiers_t <                                 \
     flag_map<int QUAL>::value, false, true, Return, Args...> {     \
-                                                                   \
     using type = Return(Args...) QUAL                              \
-        CALLABLE_TRAITS_NOEXCEPT_SPECIFIER;                        \
+        BOOST_CLBL_TRTS_NOEXCEPT_SPECIFIER;                        \
 };                                                                 \
                                                                    \
 template<typename Return, typename... Args>                        \
 struct set_function_qualifiers_t <                                 \
     flag_map<int QUAL>::value, true, true, Return, Args...> {      \
-                                                                   \
     using type = Return(Args...) QUAL                              \
-        CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER                 \
-        CALLABLE_TRAITS_NOEXCEPT_SPECIFIER;                        \
+        BOOST_CLBL_TRTS_TRANSACTION_SAFE_SPECIFIER                 \
+        BOOST_CLBL_TRTS_NOEXCEPT_SPECIFIER;                        \
 };                                                                 \
                                                                    \
 template<typename Return, typename... Args>                        \
 struct set_varargs_function_qualifiers_t <                         \
     flag_map<int QUAL>::value, false, false, Return, Args...> {    \
-                                                                   \
     using type = Return(Args..., ...) QUAL;                        \
 };                                                                 \
                                                                    \
 template<typename Return, typename... Args>                        \
 struct set_varargs_function_qualifiers_t <                         \
     flag_map<int QUAL>::value, true, false, Return, Args...> {     \
-                                                                   \
     using type = Return(Args..., ...) QUAL                         \
-        CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER;                \
+        BOOST_CLBL_TRTS_TRANSACTION_SAFE_SPECIFIER;                \
 };                                                                 \
                                                                    \
 template<typename Return, typename... Args>                        \
 struct set_varargs_function_qualifiers_t <                         \
     flag_map<int QUAL>::value, false, true, Return, Args...> {     \
-                                                                   \
     using type = Return(Args..., ...) QUAL                         \
-        CALLABLE_TRAITS_NOEXCEPT_SPECIFIER;                        \
+        BOOST_CLBL_TRTS_NOEXCEPT_SPECIFIER;                        \
 };                                                                 \
                                                                    \
 template<typename Return, typename... Args>                        \
 struct set_varargs_function_qualifiers_t <                         \
     flag_map<int QUAL>::value, true, true, Return, Args...> {      \
-                                                                   \
     using type = Return(Args..., ...) QUAL                         \
-        CALLABLE_TRAITS_TRANSACTION_SAFE_SPECIFIER                 \
-        CALLABLE_TRAITS_NOEXCEPT_SPECIFIER;                        \
+        BOOST_CLBL_TRTS_TRANSACTION_SAFE_SPECIFIER                 \
+        BOOST_CLBL_TRTS_NOEXCEPT_SPECIFIER;                        \
 }                                                                  \
 /**/
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
 
-        template<qualifier_flags Applied, bool IsTransactionSafe, bool IsNoexcept,
-            typename Return, typename... Args>
+        template<qualifier_flags Applied, bool IsTransactionSafe,
+            bool IsNoexcept, typename Return, typename... Args>
         struct set_function_qualifiers_t {
             using type = Return(Args...);
         };
 
-        template<qualifier_flags Applied, bool IsTransactionSafe, bool IsNoexcept,
-            typename Return, typename... Args>
+        template<qualifier_flags Applied, bool IsTransactionSafe,
+            bool IsNoexcept, typename Return, typename... Args>
         struct set_varargs_function_qualifiers_t {
             using type = Return(Args..., ...);
         };
 
-#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
-        CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS(const);
-        CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS(volatile);
-        CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS(const volatile);
+        BOOST_CLBL_TRTS_SET_FUNCTION_QUALIFIERS(const);
+        BOOST_CLBL_TRTS_SET_FUNCTION_QUALIFIERS(volatile);
+        BOOST_CLBL_TRTS_SET_FUNCTION_QUALIFIERS(const volatile);
 
-#ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
+#ifndef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 
-        CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS(&);
-        CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS(&&);
-        CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS(const &);
-        CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS(const &&);
-        CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS(volatile &);
-        CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS(volatile &&);
-        CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS(const volatile &);
-        CALLABLE_TRAITS_SET_FUNCTION_QUALIFIERS(const volatile &&);
+        BOOST_CLBL_TRTS_SET_FUNCTION_QUALIFIERS(&);
+        BOOST_CLBL_TRTS_SET_FUNCTION_QUALIFIERS(&&);
+        BOOST_CLBL_TRTS_SET_FUNCTION_QUALIFIERS(const &);
+        BOOST_CLBL_TRTS_SET_FUNCTION_QUALIFIERS(const &&);
+        BOOST_CLBL_TRTS_SET_FUNCTION_QUALIFIERS(volatile &);
+        BOOST_CLBL_TRTS_SET_FUNCTION_QUALIFIERS(volatile &&);
+        BOOST_CLBL_TRTS_SET_FUNCTION_QUALIFIERS(const volatile &);
+        BOOST_CLBL_TRTS_SET_FUNCTION_QUALIFIERS(const volatile &&);
 
-#endif //#ifndef CALLABLE_TRAITS_DISABLE_REFERENCE_QUALIFIERS
-#endif //#ifndef CALLABLE_TRAITS_DISABLE_ABOMINABLE_FUNCTIONS
+#endif // #ifndef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
+#endif // #ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 
         template<qualifier_flags Flags, bool IsTransactionSafe, bool IsNoexcept,
             typename... Ts>
@@ -123,6 +115,6 @@ CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
             typename set_varargs_function_qualifiers_t<Flags, IsTransactionSafe,
                 IsNoexcept, Ts...>::type;
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
-#endif //CALLABLE_TRAITS_DETAIL_SET_FUNCTION_QUALIFIERS_HPP
+#endif //BOOST_CLBL_TRTS_DETAIL_SET_FUNCTION_QUALIFIERS_HPP

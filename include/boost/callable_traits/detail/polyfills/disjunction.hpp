@@ -6,33 +6,26 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_DETAIL_POLYFILLS_DISJUNCTION_HPP
-#define CALLABLE_TRAITS_DETAIL_POLYFILLS_DISJUNCTION_HPP
+#ifndef BOOST_CLBL_TRTS_DETAIL_POLYFILLS_DISJUNCTION_HPP
+#define BOOST_CLBL_TRTS_DETAIL_POLYFILLS_DISJUNCTION_HPP
 
-#undef CALLABLE_TRAITS_DISJUNCTION
-#define CALLABLE_TRAITS_DISJUNCTION(...) \
-::boost::callable_traits::detail::polyfills::disjunction<__VA_ARGS__>
+#undef BOOST_CLBL_TRTS_DISJUNCTION
+#define BOOST_CLBL_TRTS_DISJUNCTION(...) \
+    ::boost::callable_traits::detail::disjunction<__VA_ARGS__>
 
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_BEGIN
+//polyfill for C++17 std::disjunction
+template<typename...>
+struct disjunction : std::false_type {};
 
-namespace polyfills {
-    
-    //polyfill for C++17 std::disjunction
-    template<typename...>
-    struct disjunction
-        : std::false_type {};
+template<typename T>
+struct disjunction<T> : T {};
 
-    template<typename T>
-    struct disjunction<T>
-        : T {};
+template<typename T, typename... Ts>
+struct disjunction<T, Ts...>
+    : std::conditional<T::value != false, T, disjunction<Ts...>>::type {};
 
-    template<typename T, typename... Ts>
-    struct disjunction<T, Ts...>
-        : std::conditional<T::value != false, T, disjunction<Ts...>>::type {};
-    
-}
+BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
-CALLABLE_TRAITS_DETAIL_NAMESPACE_END
-
-#endif
+#endif // #ifndef BOOST_CLBL_TRTS_DETAIL_POLYFILLS_DISJUNCTION_HPP

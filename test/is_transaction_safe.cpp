@@ -5,9 +5,9 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 ->*/
 
-#include <boost/callable_traits/config.hpp>
+#include <boost/callable_traits/detail/config.hpp>
 
-#ifndef CALLABLE_TRAITS_ENABLE_TRANSACTION_SAFE
+#ifndef BOOST_CLBL_TRTS_ENABLE_TRANSACTION_SAFE
 int main(){}
 #else
 

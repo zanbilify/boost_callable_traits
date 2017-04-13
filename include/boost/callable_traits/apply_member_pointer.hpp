@@ -6,16 +6,16 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_APPLY_MEMBER_POINTER_HPP
-#define CALLABLE_TRAITS_APPLY_MEMBER_POINTER_HPP
+#ifndef BOOST_CLBL_TRTS_APPLY_MEMBER_POINTER_HPP
+#define BOOST_CLBL_TRTS_APPLY_MEMBER_POINTER_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
-CALLABLE_TRAITS_NAMESPACE_BEGIN
+BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
-CALLABLE_TRAITS_DEFINE_SFINAE_ERROR_ORIGIN(apply_member_pointer)
-CALLABLE_TRAITS_SFINAE_MSG(apply_member_pointer, members_cannot_have_a_type_of_void)
-CALLABLE_TRAITS_SFINAE_MSG(apply_member_pointer, second_template_argument_must_be_a_class_or_struct)
+BOOST_CLBL_TRTS_DEFINE_SFINAE_ERROR_ORIGIN(apply_member_pointer)
+BOOST_CLBL_TRTS_SFINAE_MSG(apply_member_pointer, members_cannot_have_a_type_of_void)
+BOOST_CLBL_TRTS_SFINAE_MSG(apply_member_pointer, second_template_argument_must_be_a_class_or_struct)
 
 namespace detail {
 
@@ -69,7 +69,7 @@ struct apply_member_pointer {
 };
 
 //<-
-CALLABLE_TRAITS_NAMESPACE_END
+BOOST_CLBL_TRTS_NAMESPACE_END
 //->
 
 /*`
