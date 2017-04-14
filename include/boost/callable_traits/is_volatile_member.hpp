@@ -23,7 +23,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 
 template<typename T>
-struct is_volatile_member; //implementation-defined
+struct is_volatile_member; //see below
 
 //<-
 template<typename T>
@@ -36,14 +36,14 @@ struct is_volatile_member : detail::traits<T>::is_volatile_member {
 
 template<typename T>
 struct is_volatile_member_v {
-    static_assert(sizeof(T) < 1,
+    static_assert(std::is_same<T, detail::dummy>::value,
         "Variable templates not supported on this compiler.");
 };
 
 #else
 
 template<typename T>
-constexpr bool is_volatile_member_v = //implementation-defined
+constexpr bool is_volatile_member_v = //see below
 //<-
     detail::traits<T>::is_volatile_member::value;
 //->

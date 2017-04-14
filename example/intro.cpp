@@ -40,10 +40,10 @@ int main() {
     >();
 
     // has_void_return lets us perform a quick check for a void return type
-    static_assert(ct::has_void_return_v<foo>, "");
+    static_assert(ct::has_void_return<foo>::value, "");
 
     // Detect C-style variadics (ellipses) in a signature (e.g. printf)
-    static_assert(!ct::has_varargs_v<foo>, "");
+    static_assert(!ct::has_varargs<foo>::value, "");
 
     // pmf is a pointer-to-member function: void (foo::*)(int, char, float) const
     using pmf = decltype(&foo::operator());
@@ -61,7 +61,7 @@ int main() {
     >();
 
     // is_const_member_v checks for the presence of member const
-    static_assert(ct::is_const_member_v<pmf>, "");
+    static_assert(ct::is_const_member<pmf>::value, "");
 
     // pop_front_args_t removes the first parameter from signature:
     assert_same<

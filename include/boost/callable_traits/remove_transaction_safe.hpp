@@ -26,7 +26,7 @@ BOOST_CLBL_TRTS_SFINAE_MSG(remove_transaction_safe, cannot_remove_transaction_sa
 */
 
 template<typename T>
-using remove_transaction_safe_t = //implementation-defined
+using remove_transaction_safe_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::remove_transaction_safe,

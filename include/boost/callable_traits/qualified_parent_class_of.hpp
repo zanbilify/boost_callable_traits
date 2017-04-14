@@ -23,7 +23,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 */
 
 template<typename T>
-using qualified_parent_class_of_t = //implementation-defined
+using qualified_parent_class_of_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::invoke_type,

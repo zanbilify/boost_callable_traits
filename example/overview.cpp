@@ -81,45 +81,6 @@ static_assert(!is_volatile_member<pmf>{}, "");
 static_assert(!has_void_return<pmf>{}, "");
 static_assert(!has_varargs<pmf>{}, "");
 
-//` You can use [libname] to manipulate parameter lists (not defined in terms of INVOKE, since that wouldn't make sense here):
-
-using pmf_2 = push_back_args_t<pmf, char, short, long>;
-
-static_assert(is_same<
-    pmf_2,
-    int(number::*)(int, char, short, long) const
->{}, "");
-
-static_assert(is_same<
-    pop_front_args_t<pmf_2>,
-    int(number::*)(char, short, long) const
->{}, "");
-
-static_assert(is_same<
-    insert_args_t<2, pmf_2, short*, long*>,
-    int(number::*)(int, char, short*, long*, short, long) const
->{}, "");
-
-static_assert(is_same<
-    replace_args_t<2, pmf_2, short*, long*>,
-    int(number::*)(int, char, short*, long*) const
->{}, "");
-
-static_assert(is_same<
-    remove_args_t<2, pmf_2>,
-    int(number::*)(int, char, long) const
->{}, "");
-
-static_assert(is_same<
-    clear_args_t<pmf_2>,
-    int(number::*)() const
->{}, "");
-
-static_assert(is_same<
-    add_varargs_t<pmf_2>,
-    int(number::*)(int, char, short, long, ...) const
->{}, "");
-
 //]
 
 int main() {}

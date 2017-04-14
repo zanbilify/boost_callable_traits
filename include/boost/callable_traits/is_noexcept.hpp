@@ -22,7 +22,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 */
 
 template<typename T>
-struct is_noexcept; //implementation-defined
+struct is_noexcept; //see below
 
 //<-
 template<typename T>
@@ -35,14 +35,14 @@ struct is_noexcept : detail::traits<T>::is_noexcept {
 
 template<typename T>
 struct is_noexcept_v {
-    static_assert(sizeof(T) < 1,
+    static_assert(std::is_same<T, detail::dummy>::value,
         "Variable templates not supported on this compiler.");
 };
 
 #else
 
 template<typename T>
-constexpr bool is_noexcept_v = //implementation-defined
+constexpr bool is_noexcept_v = //see below
 //<-
     detail::traits<T>::is_noexcept::value;
 //->

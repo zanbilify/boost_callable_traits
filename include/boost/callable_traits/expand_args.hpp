@@ -21,7 +21,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 */
 
 template<typename T, template<class...> class Container>
-using expand_args_t = //implementation-defined
+using expand_args_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::template expand_args<Container>,
@@ -54,7 +54,6 @@ BOOST_CLBL_TRTS_NAMESPACE_END
 * When `T` is a function object, the aliased type is the `Container` template instantiated with the types from the parameter list of `T`'s `operator()`.
 * When `T` is a member function pointer, the aliased type is a `Container` template instantiation, where the first template type argument is a reference to the parent class of `T`, qualified according to the member qualifiers on `T`, such that this type is equivalent to `boost::callable_traits::qualified_parent_class_of_t<T>`. The subsequent template type arguments are the parameter list of the member function.
 * When `T` is a member data pointer, the aliased type is the `Container` template instantiated with a `const` reference to the parent class of `T`.
-* If `Container` cannot be legally instantiated according to the behavior defined above with respect to `T`, the behavior is undefined.
 
 [heading Compatibility Notes]
 Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.

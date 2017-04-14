@@ -25,14 +25,14 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 template<typename T>
 struct add_member_rvalue_reference_t {
-    static_assert(sizeof(T) < 1,
+    static_assert(std::is_same<T, detail::dummy>::value,
         "Reference member qualifiers are not supported by this configuration.");
 };
 
 #else
 
 template<typename T>
-using add_member_rvalue_reference_t = //implementation-defined
+using add_member_rvalue_reference_t = //see below
 //<-
 #ifdef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 

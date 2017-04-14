@@ -21,7 +21,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 */
 
 template<typename T>
-using args_t = //implementation-defined
+using args_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::arg_types,

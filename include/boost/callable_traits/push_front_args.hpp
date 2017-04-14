@@ -22,7 +22,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 */
 
 template<typename T, typename... Args>
-using push_front_args_t = //implementation-defined
+using push_front_args_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::template push_front<Args...>,

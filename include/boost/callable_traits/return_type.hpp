@@ -26,7 +26,7 @@ BOOST_CLBL_TRTS_SFINAE_MSG(return_type, unable_to_determine_return_type)
 */
 
 template<typename T>
-using return_type_t = //implementation-defined
+using return_type_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::return_type,

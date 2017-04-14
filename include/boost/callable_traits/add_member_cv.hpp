@@ -22,7 +22,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 */
 
 template<typename T>
-using add_member_cv_t = //implementation-defined
+using add_member_cv_t = //see below
 //<-
 #ifdef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 

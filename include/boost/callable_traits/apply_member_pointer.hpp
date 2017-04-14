@@ -50,7 +50,7 @@ namespace detail {
 */
 
 template<typename T, typename C>
-using apply_member_pointer_t = //implementation-defined
+using apply_member_pointer_t = //see below
 //<-
     detail::sfinae_try<
         detail::fallback_if_invalid<

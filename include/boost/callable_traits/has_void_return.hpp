@@ -21,7 +21,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 */
 
 template<typename T>
-struct has_void_return; //implementation-defined
+struct has_void_return; //see below
 
 //<-
 template<typename T>
@@ -33,14 +33,14 @@ struct has_void_return
 
 template<typename T>
 struct has_void_return_v {
-    static_assert(sizeof(T) < 1,
+    static_assert(std::is_same<T, detail::dummy>::value,
         "Variable templates not supported on this compiler.");
 };
 
 #else
 
 template<typename T>
-constexpr bool has_void_return_v = //implementation-defined
+constexpr bool has_void_return_v = //see below
 //<-
     std::is_same<typename detail::traits<T>::return_type, void>::value;
 //->

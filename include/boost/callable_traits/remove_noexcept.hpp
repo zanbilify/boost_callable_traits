@@ -26,7 +26,7 @@ BOOST_CLBL_TRTS_SFINAE_MSG(remove_noexcept, cannot_remove_noexcept_from_this_typ
 */
 
 template<typename T>
-using remove_noexcept_t = //implementation-defined
+using remove_noexcept_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::remove_noexcept,

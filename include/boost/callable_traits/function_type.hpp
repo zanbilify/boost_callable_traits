@@ -21,7 +21,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 */
 
 template<typename T>
-using function_type_t = //implementation-defined
+using function_type_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::function_type,

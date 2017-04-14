@@ -25,7 +25,7 @@ BOOST_CLBL_TRTS_SFINAE_MSG(insert_args, cannot_insert_parameters_into_this_type)
 */
 
 template<std::size_t Index, typename T, typename... Args>
-using insert_args_t = //implementation-defined
+using insert_args_t = //see below
 //<-
     // substitution failure if index is out of range or if parameter
     // types cannot be determined. Simple error messages are provided

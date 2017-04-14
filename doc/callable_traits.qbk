@@ -61,28 +61,14 @@
 [template link_remove_member_reference[][link callable_traits.ref_remove_member_reference [^remove_member_reference]]]
 [template link_remove_varargs[][link callable_traits.ref_remove_varargs [^remove_varargs]]]
 [template link_remove_member_volatile[][link callable_traits.ref_remove_member_volatile [^remove_member_volatile]]]
-[template link_push_back_args[][link callable_traits.ref_push_back_args [^push_back_args]]]
 [template link_push_front_args[][link callable_traits.ref_push_front_args [^push_front_args]]]
-[template link_pop_back_args[][link callable_traits.ref_pop_back_args [^pop_back_args]]]
 [template link_pop_front_args[][link callable_traits.ref_pop_front_args [^pop_front_args]]]
-[template link_insert_args[][link callable_traits.ref_insert_args [^insert_args]]]
-[template link_remove_args[][link callable_traits.ref_remove_args [^remove_args]]]
-[template link_replace_args[][link callable_traits.ref_replace_args [^replace_args]]]
 [template link_return_type[][link callable_traits.ref_return_type [^return_type]]]
 ]
 
 [section:introduction Overview]
 
-[libname] is a C++11/14/17 library for the inspection, synthesis, and decomposition of callable types. [libname] aims to be the "complete type manipulation facility for function types" mentioned in the final paragraph of C++17 proposal [@http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html p0172], and removes the need for template specializations for different function signatures.
-
-[libname] is...
-
-* header-only
-* dependency-free, only using the C++11 stdlib
-* cross-platform, compatible with all major C++ compilers
-* thoroughly tested
-* currently hosted at [repo]
-* not a Boost library
+[libname] is a C++11 header-only library for the inspection, synthesis, and decomposition of callable types. [libname] aims to be the "complete type manipulation facility for function types" mentioned in the final paragraph of C++17 proposal [@http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html p0172], and removes the need for template specializations for different function signatures.
 
 [import ../example/intro.cpp]
 [intro]
@@ -94,12 +80,12 @@
 -- Stephan T. Lavavej, CppCon 2015, [@https://www.youtube.com/watch?v=zt7ThwVfap0&t=11m40s "functional: What's New, And Proper Usage"]
 ]
 
-Consider for a moment the code below, which defines all 24 template specializations necessary to account for all the function types in C++11 and C++14:
+Consider for a moment the code below, which defines all 24 template specializations necessary to account for all the function types in C++11:
 
 [import ./hideous_template.snippet.cpp]
 [hideous_template]
 
-Things get even more complicated with member function pointers, function pointers, function references, function objects, and C++17 `transaction_safe`/`noexcept`.
+Things get even more complicated with member function pointers, function pointers, function references, function objects, and `transaction_safe`/`noexcept`.
 
 Granted, use cases for such obscure specializations are vitually nonexistent in run-of-the-mill application codebases. Even in library code, these are exceedingly rare. However, there are a handful of very specific metaprogramming scenarios that can only be solved with this kind of template "spam". Writing and testing these templates is tedious and time consuming, and often requires lots of code duplication.
 
@@ -114,12 +100,12 @@ The use cases for [libname] overlap significantly with those of [function_types_
 # [function_types] is tightly coupled to [@http://www.boost.org/doc/libs/1_60_0/libs/mpl/doc/index.html [^Boost.MPL]] sequences, while [libname] generally takes a lower-level approach. No knowledge of MPL terminology is needed to use [libname].
 # Other types in C++ receive fine-grained, low-level attention in [^Boost.TypeTraits] and [^<type_traits>]. [libname] gives callable types similar attention, without additional metaprogramming dependencies.
 # [libname] aims to eliminate function type template specializations. [function_types] does not.
-# [libname] targets C++11/14/17 features. [function_types] does not.
+# [libname] targets features from C++11 and later. [function_types] does not.
 # The [function_types] interface relies heavily on tag types. [libname] does not.
 
 [function_types] is a good tool for projects already dependent on the MPL, which must also support very old compilers. However, the [function_types] interface is unpleasant to use. It relies heavily on both the MPL and tag types, for problems that are more simply solved with neither. Using [function_types] requires an understanding of the library's "big picture."
 
-[libname] reimplements much of the functionality found in [function_types], but offers a much more accessible `type_traits`-style interface. There is nothing inherently wrong with [function_types], but an MPL sequence-based solution with no C++11/14/17 support should not be the only library option for inspecting and manipulating callable types.
+[libname] reimplements much of the functionality found in [function_types], but offers a more accessible `type_traits`-style interface. There is nothing inherently wrong with [function_types], but an MPL sequence-based solution with no C++11 support should not be the only library option for inspecting and manipulating callable types.
 
 [endsect][/section:boost_function_types]
 
@@ -292,23 +278,8 @@ This reference will be most beneficial to readers who posess a basic understandi
 [import ../../../boost/callable_traits/clear_args.hpp]
 [clear_args_hpp]
 
-[import ../../../boost/callable_traits/remove_args.hpp]
-[remove_args_hpp]
-
-[import ../../../boost/callable_traits/replace_args.hpp]
-[replace_args_hpp]
-
-[import ../../../boost/callable_traits/insert_args.hpp]
-[insert_args_hpp]
-
-[import ../../../boost/callable_traits/pop_back_args.hpp]
-[pop_back_args_hpp]
-
 [import ../../../boost/callable_traits/pop_front_args.hpp]
 [pop_front_args_hpp]
-
-[import ../../../boost/callable_traits/push_back_args.hpp]
-[push_back_args_hpp]
 
 [import ../../../boost/callable_traits/push_front_args.hpp]
 [push_front_args_hpp]
@@ -365,7 +336,7 @@ This reference will be most beneficial to readers who posess a basic understandi
 
 
 
-[section:cpp_17_features C++17 Features]
+[section:other_features Other Features]
 
 [import ../../../boost/callable_traits/add_transaction_safe.hpp]
 [add_transaction_safe_hpp]
@@ -385,7 +356,7 @@ This reference will be most beneficial to readers who posess a basic understandi
 [import ../../../boost/callable_traits/is_noexcept.hpp]
 [is_noexcept_hpp]
 
-[endsect][/section:cpp_17_features]
+[endsect][/section:other_features]
 
 
 
