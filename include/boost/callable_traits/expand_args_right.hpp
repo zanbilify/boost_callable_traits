@@ -52,7 +52,6 @@ BOOST_CLBL_TRTS_NAMESPACE_END
 [heading Behavior]
 * When the constraints are violated, a substitution failure occurs.
 * `expand_args_right` is identical to `expand_args`, except that additional type arguments for `Container` may be supplied, which are expanded into the `Container` template first. The types determined by `T` are expanded last (to the *right* of the supplied `LeftArgs...`).
-* If `Container` cannot be legally instantiated according to the behavior defined above with respect to `T` and `LeftArgs...`, the behavior is undefined.
 
 [heading Compatibility Notes]
 Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
