@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Return Type Features</title>
 <link rel="stylesheet" href="../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="../index.html" title="CallableTraits">
 <link rel="up" href="../index.html" title="CallableTraits">
 <link rel="prev" href="parameter_list_features.html" title="Parameter List Features">
@@ -26,7 +26,7 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="callable_traits.return_type_features"></a><a class="link" href="return_type_features.html" title="Return Type Features">Return Type Features</a>
 </h2></div></div></div>
-<div class="toc"><dl class="toc">
+<div class="toc"><dl>
 <dt><span class="section"><a href="return_type_features.html#callable_traits.return_type_features.ref_return_type">return_type</a></span></dt>
 <dt><span class="section"><a href="return_type_features.html#callable_traits.return_type_features.ref_apply_return">apply_return</a></span></dt>
 <dt><span class="section"><a href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return">has_void_return</a></span></dt>
@@ -37,12 +37,12 @@
 </h3></div></div></div>
 <h5>
 <a name="callable_traits.return_type_features.ref_return_type.h0"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_return_type.header"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_return_type.header">Header</a>
+        <span><a name="callable_traits.return_type_features.ref_return_type.header"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_return_type.header">Header</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">return_type</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.return_type_features.ref_return_type.h1"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_return_type.definition"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_return_type.definition">Definition</a>
+        <span><a name="callable_traits.return_type_features.ref_return_type.definition"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_return_type.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">using</span> <span class="identifier">return_type_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -54,12 +54,12 @@
 </pre>
 <h5>
 <a name="callable_traits.return_type_features.ref_return_type.h2"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_return_type.constraints"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_return_type.constraints">Constraints</a>
+        <span><a name="callable_traits.return_type_features.ref_return_type.constraints"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_return_type.constraints">Constraints</a>
       </h5>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
             <code class="computeroutput"><span class="identifier">T</span></code> must be one of the
             following:
-            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+            <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem">
                   function
                 </li>
@@ -85,9 +85,9 @@
           </li></ul></div>
 <h5>
 <a name="callable_traits.return_type_features.ref_return_type.h3"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_return_type.behavior"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_return_type.behavior">Behavior</a>
+        <span><a name="callable_traits.return_type_features.ref_return_type.behavior"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_return_type.behavior">Behavior</a>
       </h5>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
             When the constraints are violated, a substitution failure occurs.
           </li>
@@ -97,7 +97,7 @@
 </ul></div>
 <h5>
 <a name="callable_traits.return_type_features.ref_return_type.h4"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_return_type.compatibility_notes"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_return_type.compatibility_notes">Compatibility
+        <span><a name="callable_traits.return_type_features.ref_return_type.compatibility_notes"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_return_type.compatibility_notes">Compatibility
         Notes</a>
       </h5>
 <p>
@@ -105,7 +105,7 @@
       </p>
 <h5>
 <a name="callable_traits.return_type_features.ref_return_type.h5"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_return_type.input_output_examples"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_return_type.input_output_examples">Input/Output
+        <span><a name="callable_traits.return_type_features.ref_return_type.input_output_examples"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_return_type.input_output_examples">Input/Output
         Examples</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -205,7 +205,7 @@
 </table></div>
 <h5>
 <a name="callable_traits.return_type_features.ref_return_type.h6"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_return_type.example_program"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_return_type.example_program">Example
+        <span><a name="callable_traits.return_type_features.ref_return_type.example_program"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_return_type.example_program">Example
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
@@ -243,12 +243,12 @@
 </h3></div></div></div>
 <h5>
 <a name="callable_traits.return_type_features.ref_apply_return.h0"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_apply_return.header"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_apply_return.header">Header</a>
+        <span><a name="callable_traits.return_type_features.ref_apply_return.header"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_apply_return.header">Header</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">apply_return</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.return_type_features.ref_apply_return.h1"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_apply_return.definition"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_apply_return.definition">Definition</a>
+        <span><a name="callable_traits.return_type_features.ref_apply_return.definition"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_apply_return.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">R</span><span class="special">&gt;</span>
 <span class="keyword">using</span> <span class="identifier">apply_return_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -260,11 +260,11 @@
 </pre>
 <h5>
 <a name="callable_traits.return_type_features.ref_apply_return.h2"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_apply_return.constraints"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_apply_return.constraints">Constraints</a>
+        <span><a name="callable_traits.return_type_features.ref_apply_return.constraints"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_apply_return.constraints">Constraints</a>
       </h5>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
             <code class="computeroutput"><span class="identifier">T</span></code> must one of the following:
-            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+            <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem">
                   <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span></code> template instantiation
                 </li>
@@ -287,9 +287,9 @@
           </li></ul></div>
 <h5>
 <a name="callable_traits.return_type_features.ref_apply_return.h3"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_apply_return.behavior"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_apply_return.behavior">Behavior</a>
+        <span><a name="callable_traits.return_type_features.ref_apply_return.behavior"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_apply_return.behavior">Behavior</a>
       </h5>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
             When <code class="computeroutput"><span class="identifier">T</span></code> is <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">tuple</span><span class="special">&lt;</span><span class="identifier">Args</span><span class="special">...&gt;</span></code>,
             the aliased type is <code class="computeroutput"><span class="identifier">R</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)</span></code>.
@@ -311,7 +311,7 @@
 </ul></div>
 <h5>
 <a name="callable_traits.return_type_features.ref_apply_return.h4"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_apply_return.compatibility_notes"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_apply_return.compatibility_notes">Compatibility
+        <span><a name="callable_traits.return_type_features.ref_apply_return.compatibility_notes"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_apply_return.compatibility_notes">Compatibility
         Notes</a>
       </h5>
 <p>
@@ -319,7 +319,7 @@
       </p>
 <h5>
 <a name="callable_traits.return_type_features.ref_apply_return.h5"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_apply_return.input_output_examples"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_apply_return.input_output_examples">Input/Output
+        <span><a name="callable_traits.return_type_features.ref_apply_return.input_output_examples"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_apply_return.input_output_examples">Input/Output
         Examples</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -508,7 +508,7 @@
 </table></div>
 <h5>
 <a name="callable_traits.return_type_features.ref_apply_return.h6"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_apply_return.example_program"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_apply_return.example_program">Example
+        <span><a name="callable_traits.return_type_features.ref_apply_return.example_program"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_apply_return.example_program">Example
         Program</a>
       </h5>
 <p>
@@ -521,18 +521,18 @@
 </h3></div></div></div>
 <h5>
 <a name="callable_traits.return_type_features.ref_has_void_return.h0"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_has_void_return.header"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return.header">Header</a>
+        <span><a name="callable_traits.return_type_features.ref_has_void_return.header"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return.header">Header</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">has_void_return</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.return_type_features.ref_has_void_return.h1"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_has_void_return.definition"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return.definition">Definition</a>
+        <span><a name="callable_traits.return_type_features.ref_has_void_return.definition"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">has_void_return</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
 
 
-<span class="preprocessor">#ifdef</span> <span class="identifier">CALLABLE_TRAITS_DISABLE_VARIABLE_TEMPLATES</span>
+<span class="preprocessor">#ifdef</span> <span class="identifier">BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">has_void_return_v</span> <span class="special">{</span>
@@ -548,22 +548,22 @@
 </pre>
 <h5>
 <a name="callable_traits.return_type_features.ref_has_void_return.h2"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_has_void_return.constraints"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return.constraints">Constraints</a>
+        <span><a name="callable_traits.return_type_features.ref_has_void_return.constraints"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return.constraints">Constraints</a>
       </h5>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
             none
           </li></ul></div>
 <h5>
 <a name="callable_traits.return_type_features.ref_has_void_return.h3"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_has_void_return.behavior"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return.behavior">Behavior</a>
+        <span><a name="callable_traits.return_type_features.ref_has_void_return.behavior"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return.behavior">Behavior</a>
       </h5>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
             <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code> is inherited by <code class="computeroutput"><span class="identifier">has_void_return</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
             and is aliased by <code class="computeroutput"><span class="keyword">typename</span> <span class="identifier">has_void_return</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span></code>, except when one of the following
             criteria is met, in which case <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">true_type</span></code>
             would be similarly inherited and aliased:
-            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; ">
+            <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem">
                   <code class="computeroutput"><span class="identifier">T</span></code> is a function,
                   function pointer, or function reference where the function's return
@@ -585,7 +585,7 @@
 </ul></div>
 <h5>
 <a name="callable_traits.return_type_features.ref_has_void_return.h4"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_has_void_return.compatibility_notes"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return.compatibility_notes">Compatibility
+        <span><a name="callable_traits.return_type_features.ref_has_void_return.compatibility_notes"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return.compatibility_notes">Compatibility
         Notes</a>
       </h5>
 <p>
@@ -593,7 +593,7 @@
       </p>
 <h5>
 <a name="callable_traits.return_type_features.ref_has_void_return.h5"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_has_void_return.input_output_examples"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return.input_output_examples">Input/Output
+        <span><a name="callable_traits.return_type_features.ref_has_void_return.input_output_examples"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return.input_output_examples">Input/Output
         Examples</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -740,7 +740,7 @@
 </table></div>
 <h5>
 <a name="callable_traits.return_type_features.ref_has_void_return.h6"></a>
-        <span class="phrase"><a name="callable_traits.return_type_features.ref_has_void_return.example_program"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return.example_program">Example
+        <span><a name="callable_traits.return_type_features.ref_has_void_return.example_program"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return.example_program">Example
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>

@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Member Pointer Features</title>
 <link rel="stylesheet" href="../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="../index.html" title="CallableTraits">
 <link rel="up" href="../index.html" title="CallableTraits">
 <link rel="prev" href="return_type_features.html" title="Return Type Features">
@@ -27,7 +27,7 @@
 <a name="callable_traits.member_pointer_features"></a><a class="link" href="member_pointer_features.html" title="Member Pointer Features">Member Pointer
     Features</a>
 </h2></div></div></div>
-<div class="toc"><dl class="toc">
+<div class="toc"><dl>
 <dt><span class="section"><a href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer">apply_member_pointer</a></span></dt>
 <dt><span class="section"><a href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of">parent_class_of</a></span></dt>
 <dt><span class="section"><a href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of">qualified_parent_class_of</a></span></dt>
@@ -38,12 +38,12 @@
 </h3></div></div></div>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_apply_member_pointer.h0"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_apply_member_pointer.header"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer.header">Header</a>
+        <span><a name="callable_traits.member_pointer_features.ref_apply_member_pointer.header"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer.header">Header</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">apply_member_pointer</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_apply_member_pointer.h1"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_apply_member_pointer.definition"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer.definition">Definition</a>
+        <span><a name="callable_traits.member_pointer_features.ref_apply_member_pointer.definition"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">C</span><span class="special">&gt;</span>
 <span class="keyword">using</span> <span class="identifier">apply_member_pointer_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -55,9 +55,9 @@
 </pre>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_apply_member_pointer.h2"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_apply_member_pointer.constraints"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer.constraints">Constraints</a>
+        <span><a name="callable_traits.member_pointer_features.ref_apply_member_pointer.constraints"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer.constraints">Constraints</a>
       </h5>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
             <code class="computeroutput"><span class="identifier">T</span></code> may be any type except
             <code class="computeroutput"><span class="keyword">void</span></code>
@@ -69,9 +69,9 @@
 </ul></div>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_apply_member_pointer.h3"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_apply_member_pointer.behavior"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer.behavior">Behavior</a>
+        <span><a name="callable_traits.member_pointer_features.ref_apply_member_pointer.behavior"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer.behavior">Behavior</a>
       </h5>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
             A substitution failure occurs if the constraints are violated.
           </li>
@@ -93,7 +93,7 @@
 </ul></div>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_apply_member_pointer.h4"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_apply_member_pointer.compatibility_notes"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer.compatibility_notes">Compatibility
+        <span><a name="callable_traits.member_pointer_features.ref_apply_member_pointer.compatibility_notes"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer.compatibility_notes">Compatibility
         Notes</a>
       </h5>
 <p>
@@ -101,7 +101,7 @@
       </p>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_apply_member_pointer.h5"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_apply_member_pointer.input_output_examples"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer.input_output_examples">Input/Output
+        <span><a name="callable_traits.member_pointer_features.ref_apply_member_pointer.input_output_examples"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer.input_output_examples">Input/Output
         Examples</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -304,7 +304,7 @@
 </table></div>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_apply_member_pointer.h6"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_apply_member_pointer.example_program"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer.example_program">Example
+        <span><a name="callable_traits.member_pointer_features.ref_apply_member_pointer.example_program"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer.example_program">Example
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
@@ -399,12 +399,12 @@
 </h3></div></div></div>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_parent_class_of.h0"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_parent_class_of.header"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.header">Header</a>
+        <span><a name="callable_traits.member_pointer_features.ref_parent_class_of.header"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.header">Header</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">parent_class_of</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_parent_class_of.h1"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_parent_class_of.definition"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.definition">Definition</a>
+        <span><a name="callable_traits.member_pointer_features.ref_parent_class_of.definition"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">using</span> <span class="identifier">parent_class_of_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -416,16 +416,16 @@
 </pre>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_parent_class_of.h2"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_parent_class_of.constraints"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.constraints">Constraints</a>
+        <span><a name="callable_traits.member_pointer_features.ref_parent_class_of.constraints"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.constraints">Constraints</a>
       </h5>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
             <code class="computeroutput"><span class="identifier">T</span></code> must be a member pointer
           </li></ul></div>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_parent_class_of.h3"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_parent_class_of.behavior"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.behavior">Behavior</a>
+        <span><a name="callable_traits.member_pointer_features.ref_parent_class_of.behavior"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.behavior">Behavior</a>
       </h5>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
             A substitution failure occurs if the constraints are violated.
           </li>
@@ -436,7 +436,7 @@
 </ul></div>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_parent_class_of.h4"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_parent_class_of.compatibility_notes"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.compatibility_notes">Compatibility
+        <span><a name="callable_traits.member_pointer_features.ref_parent_class_of.compatibility_notes"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.compatibility_notes">Compatibility
         Notes</a>
       </h5>
 <p>
@@ -444,7 +444,7 @@
       </p>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_parent_class_of.h5"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_parent_class_of.input_output_examples"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.input_output_examples">Input/Output
+        <span><a name="callable_traits.member_pointer_features.ref_parent_class_of.input_output_examples"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.input_output_examples">Input/Output
         Examples</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -494,7 +494,7 @@
 </table></div>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_parent_class_of.h6"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_parent_class_of.example_program"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.example_program">Example
+        <span><a name="callable_traits.member_pointer_features.ref_parent_class_of.example_program"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.example_program">Example
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
@@ -516,12 +516,12 @@
 </h3></div></div></div>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.h0"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.header"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.header">Header</a>
+        <span><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.header"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.header">Header</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">qualified_parent_class_of</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.h1"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.definition"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.definition">Definition</a>
+        <span><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.definition"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">using</span> <span class="identifier">qualified_parent_class_of_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
@@ -533,16 +533,16 @@
 </pre>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.h2"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.constraints"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.constraints">Constraints</a>
+        <span><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.constraints"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.constraints">Constraints</a>
       </h5>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
             <code class="computeroutput"><span class="identifier">T</span></code> must be a member pointer
           </li></ul></div>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.h3"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.behavior"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.behavior">Behavior</a>
+        <span><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.behavior"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.behavior">Behavior</a>
       </h5>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
             A substitution failure occurs if the constraints are violated.
           </li>
@@ -560,7 +560,7 @@
 </ul></div>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.h4"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.compatibility_notes"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.compatibility_notes">Compatibility
+        <span><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.compatibility_notes"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.compatibility_notes">Compatibility
         Notes</a>
       </h5>
 <p>
@@ -568,7 +568,7 @@
       </p>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.h5"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.input_output_examples"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.input_output_examples">Input/Output
+        <span><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.input_output_examples"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.input_output_examples">Input/Output
         Examples</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -673,7 +673,7 @@
 </table></div>
 <h5>
 <a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.h6"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.example_program"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.example_program">Example
+        <span><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.example_program"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.example_program">Example
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>

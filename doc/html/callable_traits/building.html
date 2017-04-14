@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Building the test suite</title>
 <link rel="stylesheet" href="../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="../index.html" title="CallableTraits">
 <link rel="up" href="../index.html" title="CallableTraits">
 <link rel="prev" href="cpp_17_features.html" title="C++17 Features">
@@ -11,12 +11,12 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr>
-<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../boost.png"></td>
-<td align="center"><a href="../../index.html">Home</a></td>
-<td align="center"><a href="../../libs/libraries.htm">Libraries</a></td>
+<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../boost.png"></td>
+<td align="center"><a href="../../../../../index.html">Home</a></td>
+<td align="center"><a href="../../../../../libs/libraries.htm">Libraries</a></td>
 <td align="center"><a href="http://www.boost.org/users/people.html">People</a></td>
 <td align="center"><a href="http://www.boost.org/users/faq.html">FAQ</a></td>
-<td align="center"><a href="../../more/index.htm">More</a></td>
+<td align="center"><a href="../../../../../more/index.htm">More</a></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">
@@ -43,11 +43,11 @@
 </table></div>
 <h4>
 <a name="callable_traits.building.h0"></a>
-      <span class="phrase"><a name="callable_traits.building.dependencies"></a></span><a class="link" href="building.html#callable_traits.building.dependencies">Dependencies</a>
+      <span><a name="callable_traits.building.dependencies"></a></span><a class="link" href="building.html#callable_traits.building.dependencies">Dependencies</a>
     </h4>
 <p>
       Even though the <code class="literal">CallableTraits</code> headers do not rely on external
-      dependencies, you'll need to install <a href="https:/cmake.org/" target="_top">CMake</a>
+      dependencies, you'll need to install <a href="https://cmake.org/" target="_top">CMake</a>
       version 3.0 or higher to use the test suite. For Windows users who wish to
       build the test suite with Visual Studio 2015 Update 2, it appears that CMake
       version 3.5 or higher is required. The build instructions assume that both
@@ -55,7 +55,7 @@
     </p>
 <h4>
 <a name="callable_traits.building.h1"></a>
-      <span class="phrase"><a name="callable_traits.building.one_click_build_scripts"></a></span><a class="link" href="building.html#callable_traits.building.one_click_build_scripts">One-click
+      <span><a name="callable_traits.building.one_click_build_scripts"></a></span><a class="link" href="building.html#callable_traits.building.one_click_build_scripts">One-click
       build scripts</a>
     </h4>
 <p>
@@ -74,17 +74,17 @@
 <p>
       First, clone the repository:
     </p>
-<pre class="programlisting"><span class="identifier">git</span> <span class="identifier">clone</span> <span class="identifier">http</span><span class="special">:/</span><span class="identifier">github</span><span class="special">.</span><span class="identifier">com</span><span class="special">/</span><span class="identifier">badair</span><span class="special">/</span><span class="identifier">callable_traits</span>
+<pre class="programlisting"><span class="identifier">git</span> <span class="identifier">clone</span> <span class="identifier">http</span><span class="special">://</span><span class="identifier">github</span><span class="special">.</span><span class="identifier">com</span><span class="special">/</span><span class="identifier">badair</span><span class="special">/</span><span class="identifier">callable_traits</span>
 </pre>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
           Linux (possibly OSX - untested)
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+          <div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem">
                 script directory: <code class="computeroutput"><span class="special">[</span><span class="identifier">CallableTraits</span> <span class="identifier">root</span><span class="special">]/</span><span class="identifier">scripts</span><span class="special">/</span><span class="identifier">posix</span></code>
-                <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; ">
+                <div class="itemizedlist"><ul class="itemizedlist" type="square">
 <li class="listitem">
                       <code class="computeroutput"><span class="identifier">gcc</span><span class="special">-</span><span class="identifier">libcstdxx</span><span class="special">.</span><span class="identifier">sh</span></code>
-                      <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+                      <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
                             compiles with the g++ version found in the PATH
                           </li>
@@ -96,7 +96,7 @@
                     </li>
 <li class="listitem">
                       <code class="computeroutput"><span class="identifier">clang</span><span class="special">-</span><span class="identifier">libcxx</span><span class="special">.</span><span class="identifier">sh</span></code>
-                      <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+                      <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
                             compiles with the clang++ executable in the PATH
                           </li>
@@ -107,7 +107,7 @@
                     </li>
 <li class="listitem">
                       <code class="computeroutput"><span class="identifier">clang</span><span class="special">-</span><span class="identifier">libcstdxx</span><span class="special">.</span><span class="identifier">sh</span></code>
-                      <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+                      <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
                             compiles with the clang++ executable in the PATH
                           </li>
@@ -121,19 +121,19 @@
         </li>
 <li class="listitem">
           Windows
-          <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+          <div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem">
                 script directory: <code class="computeroutput"><span class="special">[</span><span class="identifier">CallableTraits</span> <span class="identifier">root</span><span class="special">]\</span><span class="identifier">scripts</span><span class="special">\</span><span class="identifier">windows</span></code>
-                <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: square; ">
+                <div class="itemizedlist"><ul class="itemizedlist" type="square">
 <li class="listitem">
                       <code class="computeroutput"><span class="identifier">MSVC</span><span class="special">-</span><span class="identifier">Win32</span><span class="special">-</span><span class="identifier">Debug</span><span class="special">.</span><span class="identifier">bat</span></code>
-                      <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+                      <div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
                             compiles with Visual Studio 2015, which must be installed
                             in the default install directory
                           </li></ul></div>
                     </li>
 <li class="listitem">
                       <code class="computeroutput"><span class="identifier">LLVM</span><span class="special">-</span><span class="identifier">vs2014</span><span class="special">-</span><span class="identifier">Win32</span><span class="special">-</span><span class="identifier">Debug</span><span class="special">.</span><span class="identifier">bat</span></code>
-                      <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+                      <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
                             compiles with clang/c2
                           </li>
@@ -150,7 +150,7 @@
                     </li>
 <li class="listitem">
                       <code class="computeroutput"><span class="identifier">MinGW</span><span class="special">-</span><span class="identifier">Win32</span><span class="special">-</span><span class="identifier">Release</span><span class="special">.</span><span class="identifier">bat</span></code>
-                      <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+                      <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
                             compiles with a MinGW-based GCC build
                           </li>
@@ -170,7 +170,7 @@
 </ul></div>
 <h4>
 <a name="callable_traits.building.h2"></a>
-      <span class="phrase"><a name="callable_traits.building.console_instructions_linux_osx"></a></span><a class="link" href="building.html#callable_traits.building.console_instructions_linux_osx">Console instructions
+      <span><a name="callable_traits.building.console_instructions_linux_osx"></a></span><a class="link" href="building.html#callable_traits.building.console_instructions_linux_osx">Console instructions
       - Linux/OSX</a>
     </h4>
 <p>
@@ -185,7 +185,7 @@
 </pre>
 <h4>
 <a name="callable_traits.building.h3"></a>
-      <span class="phrase"><a name="callable_traits.building.console_instructions_windows"></a></span><a class="link" href="building.html#callable_traits.building.console_instructions_windows">Console
+      <span><a name="callable_traits.building.console_instructions_windows"></a></span><a class="link" href="building.html#callable_traits.building.console_instructions_windows">Console
       instructions - Windows</a>
     </h4>
 <div class="note"><table border="0" summary="Note">
@@ -212,7 +212,7 @@
         PATH. A 64 bit Windows install is assumed.
       </p></td></tr>
 </table></div>
-<pre class="programlisting"><span class="identifier">git</span> <span class="identifier">clone</span> <span class="identifier">http</span><span class="special">:/</span><span class="identifier">github</span><span class="special">.</span><span class="identifier">com</span><span class="special">/</span><span class="identifier">badair</span><span class="special">/</span><span class="identifier">callable_traits</span>
+<pre class="programlisting"><span class="identifier">git</span> <span class="identifier">clone</span> <span class="identifier">http</span><span class="special">://</span><span class="identifier">github</span><span class="special">.</span><span class="identifier">com</span><span class="special">/</span><span class="identifier">badair</span><span class="special">/</span><span class="identifier">callable_traits</span>
 <span class="identifier">cd</span> <span class="identifier">callable_traits</span>
 <span class="identifier">mkdir</span> <span class="identifier">build</span>
 <span class="identifier">cd</span> <span class="identifier">build</span>
@@ -244,7 +244,7 @@
       </p></td></tr>
 </table></div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/too/revision" width="100%"><tr>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>
 <td align="right"><div class="copyright-footer">Copyright &#169; 2016 Barrett Adair<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
