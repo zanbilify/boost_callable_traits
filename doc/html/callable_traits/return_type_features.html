@@ -45,7 +45,7 @@
         <span><a name="callable_traits.return_type_features.ref_return_type.definition"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_return_type.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">return_type_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">using</span> <span class="identifier">return_type_t</span> <span class="special">=</span> <span class="comment">//see below</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">return_type</span> <span class="special">{</span>
@@ -251,7 +251,7 @@
         <span><a name="callable_traits.return_type_features.ref_apply_return.definition"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_apply_return.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">R</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">apply_return_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">using</span> <span class="identifier">apply_return_t</span> <span class="special">=</span> <span class="comment">//see below</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">R</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">apply_return</span> <span class="special">{</span>
@@ -529,21 +529,21 @@
         <span><a name="callable_traits.return_type_features.ref_has_void_return.definition"></a></span><a class="link" href="return_type_features.html#callable_traits.return_type_features.ref_has_void_return.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">has_void_return</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">struct</span> <span class="identifier">has_void_return</span><span class="special">;</span> <span class="comment">//see below</span>
 
 
 <span class="preprocessor">#ifdef</span> <span class="identifier">BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">has_void_return_v</span> <span class="special">{</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="keyword">sizeof</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span> <span class="special">&lt;</span> <span class="number">1</span><span class="special">,</span>
+    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">detail</span><span class="special">::</span><span class="identifier">dummy</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span>
         <span class="string">"Variable templates not supported on this compiler."</span><span class="special">);</span>
 <span class="special">};</span>
 
 <span class="preprocessor">#else</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">has_void_return_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">has_void_return_v</span> <span class="special">=</span> <span class="comment">//see below</span>
 <span class="preprocessor">#endif</span>
 </pre>
 <h5>

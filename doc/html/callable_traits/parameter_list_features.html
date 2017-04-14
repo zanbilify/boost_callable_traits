@@ -32,12 +32,7 @@
 <dt><span class="section"><a href="parameter_list_features.html#callable_traits.parameter_list_features.ref_args">args</a></span></dt>
 <dt><span class="section"><a href="parameter_list_features.html#callable_traits.parameter_list_features.ref_arg_at">arg_at</a></span></dt>
 <dt><span class="section"><a href="parameter_list_features.html#callable_traits.parameter_list_features.ref_clear_args">clear_args</a></span></dt>
-<dt><span class="section"><a href="parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_args">remove_args</a></span></dt>
-<dt><span class="section"><a href="parameter_list_features.html#callable_traits.parameter_list_features.ref_replace_args">replace_args</a></span></dt>
-<dt><span class="section"><a href="parameter_list_features.html#callable_traits.parameter_list_features.ref_insert_args">insert_args</a></span></dt>
-<dt><span class="section"><a href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_back_args">pop_back_args</a></span></dt>
 <dt><span class="section"><a href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_front_args">pop_front_args</a></span></dt>
-<dt><span class="section"><a href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_back_args">push_back_args</a></span></dt>
 <dt><span class="section"><a href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_front_args">push_front_args</a></span></dt>
 <dt><span class="section"><a href="parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args">expand_args</a></span></dt>
 <dt><span class="section"><a href="parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args_left">expand_args_left</a></span></dt>
@@ -60,7 +55,7 @@
         <span><a name="callable_traits.parameter_list_features.ref_function_type.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_function_type.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">function_type_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">using</span> <span class="identifier">function_type_t</span> <span class="special">=</span> <span class="comment">//see below</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">function_type</span> <span class="special">{</span>
@@ -394,7 +389,7 @@
         <span><a name="callable_traits.parameter_list_features.ref_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_args.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">using</span> <span class="identifier">args_t</span> <span class="special">=</span> <span class="comment">//see below</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">args</span> <span class="special">{</span>
@@ -749,7 +744,7 @@
 
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">I</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">arg_at_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">using</span> <span class="identifier">arg_at_t</span> <span class="special">=</span> <span class="comment">//see below</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">I</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">arg_at</span> <span class="special">{</span>
@@ -854,7 +849,7 @@
         <span><a name="callable_traits.parameter_list_features.ref_clear_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_clear_args.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">clear_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">using</span> <span class="identifier">clear_args_t</span> <span class="special">=</span> <span class="comment">//see below</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">clear_args</span> <span class="special">{</span>
@@ -1096,916 +1091,6 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="callable_traits.parameter_list_features.ref_remove_args"></a><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_args" title="remove_args">remove_args</a>
-</h3></div></div></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_remove_args.h0"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_remove_args.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_args.header">Header</a>
-      </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_remove_args.h1"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_remove_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_args.definition">Definition</a>
-      </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Index</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Count</span> <span class="special">=</span> <span class="number">1</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">remove_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Index</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Count</span> <span class="special">=</span> <span class="number">1</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">remove_args</span> <span class="special">{</span>
-    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">remove_args_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">Count</span><span class="special">&gt;;</span>
-<span class="special">};</span>
-</pre>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_remove_args.h2"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_remove_args.constraints"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_args.constraints">Constraints</a>
-      </h5>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem">
-            <code class="computeroutput"><span class="identifier">T</span></code> must be one of the
-            following:
-            <div class="itemizedlist"><ul class="itemizedlist" type="circle">
-<li class="listitem">
-                  function type
-                </li>
-<li class="listitem">
-                  function pointer type
-                </li>
-<li class="listitem">
-                  function reference type
-                </li>
-<li class="listitem">
-                  member function pointer type
-                </li>
-</ul></div>
-          </li>
-<li class="listitem">
-            <code class="computeroutput"><span class="identifier">Index</span></code> must be less than
-            the number of types in the parameter list of <code class="computeroutput"><span class="identifier">T</span></code>
-          </li>
-<li class="listitem">
-            <code class="computeroutput"><span class="identifier">Count</span></code> must be less than
-            or equal to the number of types in the parameter list of <code class="computeroutput"><span class="identifier">T</span></code> minus <code class="computeroutput"><span class="identifier">Index</span></code>
-          </li>
-</ul></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_remove_args.h3"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_remove_args.compatibility_notes"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_args.compatibility_notes">Compatibility
-        Notes</a>
-      </h5>
-<p>
-        Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-      </p>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_remove_args.h4"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_remove_args.behavior"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_args.behavior">Behavior</a>
-      </h5>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem">
-            A substitution failure occurs at if the constraints are violated.
-          </li>
-<li class="listitem">
-            The aliased type is identical to <code class="computeroutput"><span class="identifier">T</span></code>,
-            except that <code class="computeroutput"><span class="identifier">Count</span></code> number
-            of types in the parameter list of <code class="computeroutput"><span class="identifier">T</span></code>,
-            starting at zero-based <code class="computeroutput"><span class="identifier">Index</span></code>,
-            do not exist in the parameter list of the aliased type.
-          </li>
-<li class="listitem">
-<h5>
-<a name="callable_traits.parameter_list_features.ref_remove_args.h5"></a>
-            <span><a name="callable_traits.parameter_list_features.ref_remove_args.input_output_examples"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_args.input_output_examples">Input/Output
-            Examples</a>
-          </h5>
-<div class="informaltable"><table class="table">
-<colgroup>
-<col>
-<col>
-</colgroup>
-<thead><tr>
-<th>
-                    <p>
-                      <code class="computeroutput"><span class="identifier">T</span></code>
-                    </p>
-                  </th>
-<th>
-                    <p>
-                      <code class="computeroutput"><span class="identifier">remove_args_t</span><span class="special">&lt;</span><span class="number">1</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span> <span class="number">2</span><span class="special">&gt;</span></code>
-                    </p>
-                  </th>
-</tr></thead>
-<tbody>
-<tr>
-<td>
-                    <p>
-                      <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">A</span><span class="special">,</span>
-                      <span class="identifier">B</span><span class="special">,</span>
-                      <span class="identifier">C</span><span class="special">,</span>
-                      <span class="identifier">D</span><span class="special">)</span></code>
-                    </p>
-                  </td>
-<td>
-                    <p>
-                      <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">A</span><span class="special">,</span>
-                      <span class="identifier">D</span><span class="special">)</span></code>
-                    </p>
-                  </td>
-</tr>
-<tr>
-<td>
-                    <p>
-                      <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(</span><span class="identifier">A</span><span class="special">,</span>
-                      <span class="identifier">B</span><span class="special">,</span>
-                      <span class="identifier">C</span><span class="special">,</span>
-                      <span class="identifier">D</span><span class="special">)</span></code>
-                    </p>
-                  </td>
-<td>
-                    <p>
-                      <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(</span><span class="identifier">A</span><span class="special">,</span>
-                      <span class="identifier">D</span><span class="special">)</span></code>
-                    </p>
-                  </td>
-</tr>
-<tr>
-<td>
-                    <p>
-                      <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="identifier">A</span><span class="special">,</span>
-                      <span class="identifier">B</span><span class="special">,</span>
-                      <span class="identifier">C</span><span class="special">,</span>
-                      <span class="identifier">D</span><span class="special">)</span></code>
-                    </p>
-                  </td>
-<td>
-                    <p>
-                      <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="identifier">A</span><span class="special">,</span>
-                      <span class="identifier">D</span><span class="special">)</span></code>
-                    </p>
-                  </td>
-</tr>
-<tr>
-<td>
-                    <p>
-                      <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="identifier">A</span><span class="special">,</span>
-                      <span class="identifier">B</span><span class="special">,</span>
-                      <span class="identifier">C</span><span class="special">,</span>
-                      <span class="identifier">D</span><span class="special">)</span></code>
-                    </p>
-                  </td>
-<td>
-                    <p>
-                      <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="identifier">A</span><span class="special">,</span>
-                      <span class="identifier">B</span><span class="special">,</span>
-                      <span class="identifier">C</span><span class="special">,</span>
-                      <span class="identifier">D</span><span class="special">)</span></code>
-                    </p>
-                  </td>
-</tr>
-</tbody>
-</table></div>
-</li>
-</ul></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_remove_args.h6"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_remove_args.example_program"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_args.example_program">Example
-        Program</a>
-      </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">int</span> <span class="identifier">I</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">N</span> <span class="special">{};</span>
-
-<span class="keyword">struct</span> <span class="identifier">foo</span> <span class="special">{};</span>
-
-<span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
-
-    <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="identifier">N</span><span class="special">&lt;</span><span class="number">0</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">2</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">3</span><span class="special">&gt;);</span>
-    <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">remove_args_t</span><span class="special">&lt;</span><span class="number">2</span><span class="special">,</span> <span class="identifier">f</span><span class="special">&gt;;</span>
-    <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="identifier">N</span><span class="special">&lt;</span><span class="number">0</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">3</span><span class="special">&gt;);</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-<span class="special">}</span>
-</pre>
-</div>
-<div class="section">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="callable_traits.parameter_list_features.ref_replace_args"></a><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_replace_args" title="replace_args">replace_args</a>
-</h3></div></div></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_replace_args.h0"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_replace_args.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_replace_args.header">Header</a>
-      </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">replace_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_replace_args.h1"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_replace_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_replace_args.definition">Definition</a>
-      </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Index</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">replace_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Index</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">replace_args</span> <span class="special">{</span>
-    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">replace_args_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">Args</span><span class="special">...&gt;;</span>
-<span class="special">};</span>
-</pre>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_replace_args.h2"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_replace_args.constraints"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_replace_args.constraints">Constraints</a>
-      </h5>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem">
-            <code class="computeroutput"><span class="identifier">T</span></code> must be one of the
-            following:
-            <div class="itemizedlist"><ul class="itemizedlist" type="circle">
-<li class="listitem">
-                  function type
-                </li>
-<li class="listitem">
-                  function pointer type
-                </li>
-<li class="listitem">
-                  function reference type
-                </li>
-<li class="listitem">
-                  member function pointer type
-                </li>
-</ul></div>
-          </li>
-<li class="listitem">
-            <code class="computeroutput"><span class="identifier">Index</span></code> must be less than
-            the number of parameters in the parameter list of <code class="computeroutput"><span class="identifier">T</span></code>
-          </li>
-</ul></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_replace_args.h3"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_replace_args.behavior"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_replace_args.behavior">Behavior</a>
-      </h5>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem">
-            A substitution failure occurs if the constraints are violated.
-          </li>
-<li class="listitem">
-            The aliased type is identical to <code class="computeroutput"><span class="identifier">T</span></code>,
-            except that the parameter list types are "overwritten" by
-            <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>,
-            beginning at zero-based <code class="computeroutput"><span class="identifier">Index</span></code>.
-          </li>
-<li class="listitem">
-            * If <code class="computeroutput"><span class="keyword">sizeof</span><span class="special">...(</span><span class="identifier">Args</span><span class="special">)</span></code>
-            is greater than then number of function parameters in <code class="computeroutput"><span class="identifier">T</span></code>
-            minus <code class="computeroutput"><span class="identifier">Index</span></code>, the aliased
-            type will contain more parameters than <code class="computeroutput"><span class="identifier">T</span></code>.
-          </li>
-</ul></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_replace_args.h4"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_replace_args.compatibility_notes"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_replace_args.compatibility_notes">Compatibility
-        Notes</a>
-      </h5>
-<p>
-        Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-      </p>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_replace_args.h5"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_replace_args.input_output_examples"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_replace_args.input_output_examples">Input/Output
-        Examples</a>
-      </h5>
-<div class="informaltable"><table class="table">
-<colgroup>
-<col>
-<col>
-</colgroup>
-<thead><tr>
-<th>
-                <p>
-                  <code class="computeroutput"><span class="identifier">T</span></code>
-                </p>
-              </th>
-<th>
-                <p>
-                  <code class="computeroutput"><span class="identifier">replace_args_t</span><span class="special">&lt;</span><span class="number">1</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">float</span><span class="special">,</span> <span class="keyword">double</span><span class="special">&gt;</span></code>
-                </p>
-              </th>
-</tr></thead>
-<tbody>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">)</span>
-                  <span class="keyword">const</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">float</span><span class="special">,</span>
-                  <span class="keyword">double</span><span class="special">)</span>
-                  <span class="keyword">const</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">)</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">float</span><span class="special">,</span>
-                  <span class="keyword">double</span><span class="special">)</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">)</span>
-                  <span class="identifier">transaction_safe</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">float</span><span class="special">,</span>
-                  <span class="keyword">double</span><span class="special">)</span>
-                  <span class="identifier">transaction_safe</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">)</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">float</span><span class="special">,</span>
-                  <span class="keyword">double</span><span class="special">)</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">)</span>
-                  <span class="keyword">const</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">float</span><span class="special">,</span>
-                  <span class="keyword">double</span><span class="special">)</span>
-                  <span class="keyword">const</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  (substitution failure)
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  (substitution failure)
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span> <span class="special">(*</span>
-                  <span class="keyword">const</span><span class="special">)()</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  (substitution failure)
-                </p>
-              </td>
-</tr>
-</tbody>
-</table></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_replace_args.h6"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_replace_args.example_program"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_replace_args.example_program">Example
-        Program</a>
-      </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">replace_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">int</span> <span class="identifier">I</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">N</span> <span class="special">{};</span>
-
-<span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
-
-    <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(&amp;)(</span><span class="identifier">N</span><span class="special">&lt;</span><span class="number">0</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">2</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">3</span><span class="special">&gt;);</span>
-    <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">replace_args_t</span><span class="special">&lt;</span><span class="number">2</span><span class="special">,</span> <span class="identifier">f</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&gt;;</span>
-    <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(&amp;)(</span><span class="identifier">N</span><span class="special">&lt;</span><span class="number">0</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;,</span> <span class="keyword">int</span><span class="special">,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">3</span><span class="special">&gt;);</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-<span class="special">}</span>
-</pre>
-</div>
-<div class="section">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="callable_traits.parameter_list_features.ref_insert_args"></a><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_insert_args" title="insert_args">insert_args</a>
-</h3></div></div></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_insert_args.h0"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_insert_args.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_insert_args.header">Header</a>
-      </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">insert_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_insert_args.h1"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_insert_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_insert_args.definition">Definition</a>
-      </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Index</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">insert_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Index</span><span class="special">,</span> <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">insert_args</span> <span class="special">{</span>
-    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">insert_args_t</span><span class="special">&lt;</span><span class="identifier">Index</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">Args</span><span class="special">...&gt;;</span>
-<span class="special">};</span>
-</pre>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_insert_args.h2"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_insert_args.constraints"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_insert_args.constraints">Constraints</a>
-      </h5>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem">
-            <code class="computeroutput"><span class="identifier">T</span></code> must be one of the
-            following:
-            <div class="itemizedlist"><ul class="itemizedlist" type="circle">
-<li class="listitem">
-                  function type
-                </li>
-<li class="listitem">
-                  function pointer type
-                </li>
-<li class="listitem">
-                  function reference type
-                </li>
-<li class="listitem">
-                  member function pointer type
-                </li>
-</ul></div>
-          </li>
-<li class="listitem">
-            <code class="computeroutput"><span class="identifier">Index</span></code> must be less than
-            or equal to the number of parameters in the parameter list of <code class="computeroutput"><span class="identifier">T</span></code>
-          </li>
-</ul></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_insert_args.h3"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_insert_args.behavior"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_insert_args.behavior">Behavior</a>
-      </h5>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem">
-            A substitution failure occurs if the constraints are violated.
-          </li>
-<li class="listitem">
-            The aliased type is identical to <code class="computeroutput"><span class="identifier">T</span></code>,
-            except that <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
-            are inserted into the parameter list of <code class="computeroutput"><span class="identifier">T</span></code>,
-            at <code class="computeroutput"><span class="identifier">Index</span></code> (zero-based).
-          </li>
-</ul></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_insert_args.h4"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_insert_args.compatibility_notes"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_insert_args.compatibility_notes">Compatibility
-        Notes</a>
-      </h5>
-<p>
-        Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-      </p>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_insert_args.h5"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_insert_args.input_output_examples"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_insert_args.input_output_examples">Input/Output
-        Examples</a>
-      </h5>
-<div class="informaltable"><table class="table">
-<colgroup>
-<col>
-<col>
-</colgroup>
-<thead><tr>
-<th>
-                <p>
-                  <code class="computeroutput"><span class="identifier">T</span></code>
-                </p>
-              </th>
-<th>
-                <p>
-                  <code class="computeroutput"><span class="identifier">insert_args_t</span><span class="special">&lt;</span><span class="number">1</span><span class="special">,</span> <span class="identifier">T</span><span class="special">,</span>
-                  <span class="identifier">foo</span><span class="special">,</span>
-                  <span class="identifier">bar</span><span class="special">&gt;</span></code>
-                </p>
-              </th>
-</tr></thead>
-<tbody>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">int</span><span class="special">)</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">,</span>
-                  <span class="identifier">bar</span><span class="special">)</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">)</span>
-                  <span class="keyword">const</span> <span class="special">&amp;</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">,</span>
-                  <span class="identifier">bar</span><span class="special">,</span>
-                  <span class="keyword">char</span><span class="special">)</span>
-                  <span class="keyword">const</span> <span class="special">&amp;</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(</span><span class="keyword">int</span><span class="special">)</span> <span class="identifier">transaction_safe</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">,</span>
-                  <span class="identifier">bar</span><span class="special">)</span>
-                  <span class="identifier">transaction_safe</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">)</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">,</span>
-                  <span class="identifier">bar</span><span class="special">,</span>
-                  <span class="keyword">char</span><span class="special">)</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="keyword">int</span><span class="special">)</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="keyword">int</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">,</span>
-                  <span class="identifier">bar</span><span class="special">)</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">)</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="keyword">int</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">,</span>
-                  <span class="identifier">bar</span><span class="special">,</span>
-                  <span class="keyword">char</span><span class="special">)</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">)</span> <span class="keyword">const</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">,</span>
-                  <span class="identifier">bar</span><span class="special">)</span>
-                  <span class="keyword">const</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">)</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">int</span><span class="special">,</span> <span class="identifier">foo</span><span class="special">,</span>
-                  <span class="identifier">bar</span><span class="special">,</span>
-                  <span class="keyword">char</span><span class="special">)</span>
-                  <span class="keyword">const</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">()</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  (substitution failure)
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  (substitution failure)
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  (substitution failure)
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  (substitution failure)
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span> <span class="special">(*</span>
-                  <span class="keyword">const</span><span class="special">)()</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  (substitution failure)
-                </p>
-              </td>
-</tr>
-</tbody>
-</table></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_insert_args.h6"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_insert_args.example_program"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_insert_args.example_program">Example
-        Program</a>
-      </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">insert_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">int</span> <span class="identifier">I</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">N</span> <span class="special">{};</span>
-
-<span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
-
-    <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(*)(</span><span class="identifier">N</span><span class="special">&lt;</span><span class="number">0</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">2</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">3</span><span class="special">&gt;);</span>
-    <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">insert_args_t</span><span class="special">&lt;</span><span class="number">1</span><span class="special">,</span> <span class="identifier">f</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&gt;;</span>
-    <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">int</span><span class="special">(*)(</span><span class="identifier">N</span><span class="special">&lt;</span><span class="number">0</span><span class="special">&gt;,</span> <span class="keyword">int</span><span class="special">,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">1</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">2</span><span class="special">&gt;,</span> <span class="identifier">N</span><span class="special">&lt;</span><span class="number">3</span><span class="special">&gt;);</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-<span class="special">}</span>
-</pre>
-</div>
-<div class="section">
-<div class="titlepage"><div><div><h3 class="title">
-<a name="callable_traits.parameter_list_features.ref_pop_back_args"></a><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_back_args" title="pop_back_args">pop_back_args</a>
-</h3></div></div></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_pop_back_args.h0"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_pop_back_args.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_back_args.header">Header</a>
-      </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">pop_back_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_pop_back_args.h1"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_pop_back_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_back_args.definition">Definition</a>
-      </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Count</span> <span class="special">=</span> <span class="number">1</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">pop_back_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Count</span> <span class="special">=</span> <span class="number">1</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">pop_back_args</span> <span class="special">{</span>
-    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">pop_back_args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">Count</span><span class="special">&gt;;</span>
-<span class="special">};</span>
-</pre>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_pop_back_args.h2"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_pop_back_args.constraints"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_back_args.constraints">Constraints</a>
-      </h5>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
-            <code class="computeroutput"><span class="identifier">T</span></code> must be one of the
-            following:
-            <div class="itemizedlist"><ul class="itemizedlist" type="circle">
-<li class="listitem">
-                  function type
-                </li>
-<li class="listitem">
-                  function pointer type
-                </li>
-<li class="listitem">
-                  function reference type
-                </li>
-<li class="listitem">
-                  member function pointer type
-                </li>
-</ul></div>
-          </li></ul></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_pop_back_args.h3"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_pop_back_args.behavior"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_back_args.behavior">Behavior</a>
-      </h5>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem">
-            A substitution failure occurs if the constraints are violated.
-          </li>
-<li class="listitem">
-            The aliased type is identical to <code class="computeroutput"><span class="identifier">T</span></code>,
-            except that <code class="computeroutput"><span class="identifier">Count</span></code> number
-            of parameters are removed from the back of the parameter list.
-          </li>
-<li class="listitem">
-            If <code class="computeroutput"><span class="identifier">Count</span></code> is greater than
-            or equal to the number of parameters in <code class="computeroutput"><span class="identifier">T</span></code>,
-            then the aliased type will have an empty parameter list.
-          </li>
-</ul></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_pop_back_args.h4"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_pop_back_args.compatibility_notes"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_back_args.compatibility_notes">Compatibility
-        Notes</a>
-      </h5>
-<p>
-        Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-      </p>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_pop_back_args.h5"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_pop_back_args.input_output_examples"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_back_args.input_output_examples">Input/Output
-        Examples</a>
-      </h5>
-<div class="informaltable"><table class="table">
-<colgroup>
-<col>
-<col>
-</colgroup>
-<thead><tr>
-<th>
-                <p>
-                  <code class="computeroutput"><span class="identifier">T</span></code>
-                </p>
-              </th>
-<th>
-                <p>
-                  <code class="computeroutput"><span class="identifier">pop_back_args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="number">2</span><span class="special">&gt;</span></code>
-                </p>
-              </th>
-</tr></thead>
-<tbody>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">char</span><span class="special">,</span>
-                  <span class="keyword">short</span><span class="special">,</span>
-                  <span class="keyword">int</span><span class="special">)</span>
-                  <span class="keyword">const</span> <span class="special">&amp;&amp;</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">char</span><span class="special">)</span>
-                  <span class="keyword">const</span> <span class="special">&amp;&amp;</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(</span><span class="keyword">char</span><span class="special">,</span>
-                  <span class="keyword">short</span><span class="special">,</span>
-                  <span class="keyword">int</span><span class="special">)</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(</span><span class="keyword">char</span><span class="special">)</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="keyword">char</span><span class="special">,</span>
-                  <span class="keyword">short</span><span class="special">,</span>
-                  <span class="keyword">int</span><span class="special">)</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="keyword">char</span><span class="special">)</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">char</span><span class="special">,</span>
-                  <span class="keyword">short</span><span class="special">,</span>
-                  <span class="keyword">int</span><span class="special">)</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">char</span><span class="special">)</span></code>
-                </p>
-              </td>
-</tr>
-</tbody>
-</table></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_pop_back_args.h6"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_pop_back_args.example_program"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_back_args.example_program">Example
-        Program</a>
-      </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">pop_back_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">ct</span><span class="special">::</span><span class="identifier">pop_back_args_t</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">,</span> <span class="keyword">int</span><span class="special">)&gt;,</span>
-    <span class="keyword">int</span><span class="special">(</span><span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">)</span>
-<span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">;</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">ct</span><span class="special">::</span><span class="identifier">pop_back_args_t</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">,</span> <span class="keyword">int</span><span class="special">),</span> <span class="number">2</span><span class="special">&gt;,</span>
-    <span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">char</span><span class="special">)</span>
-<span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="identifier">ct</span><span class="special">::</span><span class="identifier">pop_back_args_t</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(*)(</span><span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">,</span> <span class="keyword">int</span><span class="special">),</span> <span class="number">3</span><span class="special">&gt;,</span>
-    <span class="keyword">int</span><span class="special">(*)()</span>
-<span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span>
-    <span class="comment">//underflow is handled</span>
-    <span class="identifier">ct</span><span class="special">::</span><span class="identifier">pop_back_args_t</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="keyword">char</span><span class="special">,</span> <span class="keyword">short</span><span class="special">,</span> <span class="keyword">int</span><span class="special">),</span> <span class="number">27</span><span class="special">&gt;,</span>
-    <span class="keyword">int</span><span class="special">(&amp;)()</span>
-<span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-
-<span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
-</pre>
-</div>
-<div class="section">
-<div class="titlepage"><div><div><h3 class="title">
 <a name="callable_traits.parameter_list_features.ref_pop_front_args"></a><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_front_args" title="pop_front_args">pop_front_args</a>
 </h3></div></div></div>
 <h5>
@@ -2018,7 +1103,7 @@
         <span><a name="callable_traits.parameter_list_features.ref_pop_front_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_pop_front_args.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Count</span> <span class="special">=</span> <span class="number">1</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">pop_front_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">using</span> <span class="identifier">pop_front_args_t</span> <span class="special">=</span> <span class="comment">//see below</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">Count</span> <span class="special">=</span> <span class="number">1</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">pop_front_args</span> <span class="special">{</span>
@@ -2193,172 +1278,6 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="callable_traits.parameter_list_features.ref_push_back_args"></a><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_back_args" title="push_back_args">push_back_args</a>
-</h3></div></div></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_push_back_args.h0"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_push_back_args.header"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_back_args.header">Header</a>
-      </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">push_back_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_push_back_args.h1"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_push_back_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_back_args.definition">Definition</a>
-      </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">push_back_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">push_back_args</span> <span class="special">{</span>
-    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">push_back_args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">Args</span><span class="special">...&gt;;</span>
-<span class="special">};</span>
-</pre>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_push_back_args.h2"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_push_back_args.constraints"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_back_args.constraints">Constraints</a>
-      </h5>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
-            <code class="computeroutput"><span class="identifier">T</span></code> must be one of the
-            following:
-            <div class="itemizedlist"><ul class="itemizedlist" type="circle">
-<li class="listitem">
-                  function type
-                </li>
-<li class="listitem">
-                  function pointer type
-                </li>
-<li class="listitem">
-                  function reference type
-                </li>
-<li class="listitem">
-                  member function pointer type
-                </li>
-</ul></div>
-          </li></ul></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_push_back_args.h3"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_push_back_args.behavior"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_back_args.behavior">Behavior</a>
-      </h5>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem">
-            A substitution failure occurs if the constraints are violated.
-          </li>
-<li class="listitem">
-            The aliased type is identical to <code class="computeroutput"><span class="identifier">T</span></code>,
-            except that <code class="computeroutput"><span class="identifier">Args</span><span class="special">...</span></code>
-            types have been added to the back of the parameter list.
-          </li>
-</ul></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_push_back_args.h4"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_push_back_args.compatibility_notes"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_back_args.compatibility_notes">Compatibility
-        Notes</a>
-      </h5>
-<p>
-        Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-      </p>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_push_back_args.h5"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_push_back_args.input_output_examples"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_back_args.input_output_examples">Input/Output
-        Examples</a>
-      </h5>
-<div class="informaltable"><table class="table">
-<colgroup>
-<col>
-<col>
-</colgroup>
-<thead><tr>
-<th>
-                <p>
-                  <code class="computeroutput"><span class="identifier">T</span></code>
-                </p>
-              </th>
-<th>
-                <p>
-                  <code class="computeroutput"><span class="identifier">push_back_args_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="keyword">float</span><span class="special">,</span> <span class="keyword">double</span><span class="special">&gt;</span></code>
-                </p>
-              </th>
-</tr></thead>
-<tbody>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">char</span><span class="special">)</span>
-                  <span class="keyword">const</span> <span class="special">&amp;&amp;</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="keyword">char</span><span class="special">,</span>
-                  <span class="keyword">float</span><span class="special">,</span>
-                  <span class="keyword">double</span><span class="special">)</span>
-                  <span class="keyword">const</span> <span class="special">&amp;&amp;</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(</span><span class="keyword">char</span><span class="special">)</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(*)(</span><span class="keyword">char</span><span class="special">,</span>
-                  <span class="keyword">float</span><span class="special">,</span>
-                  <span class="keyword">double</span><span class="special">)</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="keyword">char</span><span class="special">)</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(&amp;)(</span><span class="keyword">char</span><span class="special">,</span>
-                  <span class="keyword">float</span><span class="special">,</span>
-                  <span class="keyword">double</span><span class="special">)</span></code>
-                </p>
-              </td>
-</tr>
-<tr>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">char</span><span class="special">)</span></code>
-                </p>
-              </td>
-<td>
-                <p>
-                  <code class="computeroutput"><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)(</span><span class="keyword">char</span><span class="special">,</span>
-                  <span class="keyword">float</span><span class="special">,</span>
-                  <span class="keyword">double</span><span class="special">)</span></code>
-                </p>
-              </td>
-</tr>
-</tbody>
-</table></div>
-<h5>
-<a name="callable_traits.parameter_list_features.ref_push_back_args.h6"></a>
-        <span><a name="callable_traits.parameter_list_features.ref_push_back_args.example_program"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_back_args.example_program">Example
-        Program</a>
-      </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">push_back_args</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
-
-<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
-
-<span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{</span>
-
-    <span class="keyword">using</span> <span class="identifier">f</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">);</span>
-    <span class="keyword">using</span> <span class="identifier">test</span> <span class="special">=</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">push_back_args_t</span><span class="special">&lt;</span><span class="identifier">f</span><span class="special">,</span> <span class="keyword">long</span><span class="special">,</span> <span class="keyword">void</span><span class="special">*&gt;;</span>
-    <span class="keyword">using</span> <span class="identifier">expect</span> <span class="special">=</span> <span class="keyword">void</span><span class="special">(</span><span class="keyword">int</span><span class="special">,</span> <span class="keyword">char</span><span class="special">,</span> <span class="keyword">long</span><span class="special">,</span> <span class="keyword">void</span><span class="special">*);</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">test</span><span class="special">,</span> <span class="identifier">expect</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-<span class="special">}</span>
-</pre>
-</div>
-<div class="section">
-<div class="titlepage"><div><div><h3 class="title">
 <a name="callable_traits.parameter_list_features.ref_push_front_args"></a><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_front_args" title="push_front_args">push_front_args</a>
 </h3></div></div></div>
 <h5>
@@ -2371,7 +1290,7 @@
         <span><a name="callable_traits.parameter_list_features.ref_push_front_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_push_front_args.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">push_front_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">using</span> <span class="identifier">push_front_args_t</span> <span class="special">=</span> <span class="comment">//see below</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">push_front_args</span> <span class="special">{</span>
@@ -2537,7 +1456,7 @@
         <span><a name="callable_traits.parameter_list_features.ref_expand_args.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">expand_args_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">using</span> <span class="identifier">expand_args_t</span> <span class="special">=</span> <span class="comment">//see below</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">expand_args</span> <span class="special">{</span>
@@ -2607,12 +1526,6 @@
             pointer, the aliased type is the <code class="computeroutput"><span class="identifier">Container</span></code>
             template instantiated with a <code class="computeroutput"><span class="keyword">const</span></code>
             reference to the parent class of <code class="computeroutput"><span class="identifier">T</span></code>.
-          </li>
-<li class="listitem">
-            If <code class="computeroutput"><span class="identifier">Container</span></code> cannot be
-            legally instantiated according to the behavior defined above with respect
-            to <code class="computeroutput"><span class="identifier">T</span></code>, the behavior is
-            undefined.
           </li>
 </ul></div>
 <h5>
@@ -2852,7 +1765,7 @@
         <span><a name="callable_traits.parameter_list_features.ref_expand_args_left.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args_left.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">RightArgs</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">expand_args_left_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">using</span> <span class="identifier">expand_args_left_t</span> <span class="special">=</span> <span class="comment">//see below</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">RightArgs</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">expand_args_left</span> <span class="special">{</span>
@@ -2905,12 +1818,6 @@
             may be supplied. the types determined by <code class="computeroutput"><span class="identifier">T</span></code>
             are expanded first (on the <span class="bold"><strong>left</strong></span>), followed
             by the supplied <code class="computeroutput"><span class="identifier">RightArgs</span><span class="special">...</span></code>.
-          </li>
-<li class="listitem">
-            If <code class="computeroutput"><span class="identifier">Container</span></code> cannot be
-            legally instantiated according to the behavior defined above with respect
-            to <code class="computeroutput"><span class="identifier">T</span></code> and <code class="computeroutput"><span class="identifier">RightArgs</span><span class="special">...</span></code>,
-            the behavior is undefined.
           </li>
 </ul></div>
 <h5>
@@ -3161,7 +2068,7 @@
         <span><a name="callable_traits.parameter_list_features.ref_expand_args_right.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_expand_args_right.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">LeftArgs</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">expand_args_right_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">using</span> <span class="identifier">expand_args_right_t</span> <span class="special">=</span> <span class="comment">//see below</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span><span class="special">...&gt;</span> <span class="keyword">class</span> <span class="identifier">Container</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">LeftArgs</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">expand_args_right</span> <span class="special">{</span>
@@ -3215,12 +2122,6 @@
             template first. The types determined by <code class="computeroutput"><span class="identifier">T</span></code>
             are expanded last (to the <span class="bold"><strong>right</strong></span> of the
             supplied <code class="computeroutput"><span class="identifier">LeftArgs</span><span class="special">...</span></code>).
-          </li>
-<li class="listitem">
-            If <code class="computeroutput"><span class="identifier">Container</span></code> cannot be
-            legally instantiated according to the behavior defined above with respect
-            to <code class="computeroutput"><span class="identifier">T</span></code> and <code class="computeroutput"><span class="identifier">LeftArgs</span><span class="special">...</span></code>,
-            the behavior is undefined.
           </li>
 </ul></div>
 <h5>
@@ -3477,7 +2378,7 @@
         <span><a name="callable_traits.parameter_list_features.ref_add_varargs.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_add_varargs.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">add_varargs_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">using</span> <span class="identifier">add_varargs_t</span> <span class="special">=</span> <span class="comment">//see below</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">add_varargs</span> <span class="special">{</span>
@@ -3774,7 +2675,7 @@
         <span><a name="callable_traits.parameter_list_features.ref_remove_varargs.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_remove_varargs.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">remove_varargs_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">using</span> <span class="identifier">remove_varargs_t</span> <span class="special">=</span> <span class="comment">//see below</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">remove_varargs</span> <span class="special">{</span>
@@ -4055,21 +2956,21 @@
         <span><a name="callable_traits.parameter_list_features.ref_has_varargs.definition"></a></span><a class="link" href="parameter_list_features.html#callable_traits.parameter_list_features.ref_has_varargs.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">has_varargs</span><span class="special">;</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">struct</span> <span class="identifier">has_varargs</span><span class="special">;</span> <span class="comment">//see below</span>
 
 
 <span class="preprocessor">#ifdef</span> <span class="identifier">BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">has_varargs_v</span> <span class="special">{</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="keyword">sizeof</span><span class="special">(</span><span class="identifier">T</span><span class="special">)</span> <span class="special">&lt;</span> <span class="number">1</span><span class="special">,</span>
+    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">detail</span><span class="special">::</span><span class="identifier">dummy</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span>
         <span class="string">"Variable templates not supported on this compiler."</span><span class="special">);</span>
 <span class="special">};</span>
 
 <span class="preprocessor">#else</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">has_varargs_v</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">has_varargs_v</span> <span class="special">=</span> <span class="comment">//see below</span>
 <span class="preprocessor">#endif</span>
 </pre>
 <h5>
