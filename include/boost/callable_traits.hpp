@@ -30,7 +30,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <boost/callable_traits/has_member_qualifiers.hpp>
 #include <boost/callable_traits/has_varargs.hpp>
 #include <boost/callable_traits/has_void_return.hpp>
-#include <boost/callable_traits/insert_args.hpp>
 #include <boost/callable_traits/is_const_member.hpp>
 #include <boost/callable_traits/is_lvalue_reference_member.hpp>
 #include <boost/callable_traits/is_reference_member.hpp>
@@ -39,12 +38,9 @@ Distributed under the Boost Software License, Version 1.0.
 #include <boost/callable_traits/is_transaction_safe.hpp>
 #include <boost/callable_traits/is_volatile_member.hpp>
 #include <boost/callable_traits/parent_class_of.hpp>
-#include <boost/callable_traits/pop_back_args.hpp>
 #include <boost/callable_traits/pop_front_args.hpp>
-#include <boost/callable_traits/push_back_args.hpp>
 #include <boost/callable_traits/push_front_args.hpp>
 #include <boost/callable_traits/qualified_parent_class_of.hpp>
-#include <boost/callable_traits/remove_args.hpp>
 #include <boost/callable_traits/remove_member_const.hpp>
 #include <boost/callable_traits/remove_member_cv.hpp>
 #include <boost/callable_traits/remove_member_reference.hpp>
@@ -52,7 +48,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <boost/callable_traits/remove_noexcept.hpp>
 #include <boost/callable_traits/remove_transaction_safe.hpp>
 #include <boost/callable_traits/remove_varargs.hpp>
-#include <boost/callable_traits/replace_args.hpp>
 #include <boost/callable_traits/return_type.hpp>
 
 #endif

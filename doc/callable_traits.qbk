@@ -61,13 +61,8 @@
 [template link_remove_member_reference[][link callable_traits.ref_remove_member_reference [^remove_member_reference]]]
 [template link_remove_varargs[][link callable_traits.ref_remove_varargs [^remove_varargs]]]
 [template link_remove_member_volatile[][link callable_traits.ref_remove_member_volatile [^remove_member_volatile]]]
-[template link_push_back_args[][link callable_traits.ref_push_back_args [^push_back_args]]]
 [template link_push_front_args[][link callable_traits.ref_push_front_args [^push_front_args]]]
-[template link_pop_back_args[][link callable_traits.ref_pop_back_args [^pop_back_args]]]
 [template link_pop_front_args[][link callable_traits.ref_pop_front_args [^pop_front_args]]]
-[template link_insert_args[][link callable_traits.ref_insert_args [^insert_args]]]
-[template link_remove_args[][link callable_traits.ref_remove_args [^remove_args]]]
-[template link_replace_args[][link callable_traits.ref_replace_args [^replace_args]]]
 [template link_return_type[][link callable_traits.ref_return_type [^return_type]]]
 ]
 
@@ -283,23 +278,8 @@ This reference will be most beneficial to readers who posess a basic understandi
 [import ../../../boost/callable_traits/clear_args.hpp]
 [clear_args_hpp]
 
-[import ../../../boost/callable_traits/remove_args.hpp]
-[remove_args_hpp]
-
-[import ../../../boost/callable_traits/replace_args.hpp]
-[replace_args_hpp]
-
-[import ../../../boost/callable_traits/insert_args.hpp]
-[insert_args_hpp]
-
-[import ../../../boost/callable_traits/pop_back_args.hpp]
-[pop_back_args_hpp]
-
 [import ../../../boost/callable_traits/pop_front_args.hpp]
 [pop_front_args_hpp]
-
-[import ../../../boost/callable_traits/push_back_args.hpp]
-[push_back_args_hpp]
 
 [import ../../../boost/callable_traits/push_front_args.hpp]
 [push_front_args_hpp]
