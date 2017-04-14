@@ -123,73 +123,6 @@ The reference documentation for each feature includes compatibility notes that m
 [endsect][/section:introduction]
 
 
-[/*********************************************************************]
-[/***************************** F A Q *********************************]
-[/*********************************************************************]
-
-
-[section:faq FAQ]
-
-[heading:reasons Why should I use [libname]?]
-
-If you are not writing generic code, you should not use [libname].
-
-If you ['are] writing generic code, take a moment to skim your header files, and see if you can find code that looks like this:
-
-    template<class Return, class First, class Second>
-    class foo<Return(First, Second)> {
-        //     ^^^^^^^^^^^^^^^^^^^^^
-    };
-
-Or maybe something like this:
-    
-    template<class Return, class ...Args>
-    class foo<Return(*)(Args...)> {
-        //     ^^^^^^^^^^^^^^^^^^
-        //...
-    };
-    
-Or, if you are *really* unlucky, something like this:
-
-    template<class Return, class T, class ...Args>
-    class foo<Return(T::*)(Args..., ...) const volatile && transaction_safe> {
-        //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        //...
-    };
-
-With [libname], you can get rid of all of these template specializations (unless you deal with platform-specific calling conventions). Even if you are only specializing a simple function type like `Return(Args...)`, [libname] might be useful to you. You may find that [libname] can help make your code more readable, more maintainable, more generic, and less error-prone.
-
-[heading Why should I use this instead of this 30 line header I wrote 10 years ago?]
-
-[libname] is very thoroughly tested on many platforms. [libname] correctly handles many corner cases that are often overlooked. The need for a proper library solution grows as more and more features area added to C++. Eventually, I will submit a proposal for [libname] features to the ISO C++20 standards committee.
-
-[heading Why does [namespace_scoped][^args_t] alias a [^std::tuple] instead of X?]
-
-Boost contains a handful of excellent type containers. However, [libname] is designed to only use the standard headers, so `<tuple>` was the only option under this limitation. It would be trivial to support other variadic containers, and I will consider doing so if there is sufficient interest.
-
-[heading Why use reference collapsing rules when adding member function ref-qualifiers?]
-
-Although arbitrary, the reference collapsing rules are well-defined and already known to many template metaprogrammers. Anything else would be a burden to memorize.
-
-[heading How is this a C++11 library if it uses newer features like variable templates?]
-
-If your compiler doesn't support a certain language feature that is required by a metafunction, the implementation will either trigger a `static_assert` or a substitution failure, depending on the situation. This is explained in the "Compatibility Notes" section for each trait.
-
-[heading Many features in this library cause a "substitution failure" when the template constraints are violated. Does this mean that I can violate the constraints in a SFINAE context, as long as there is another legal substitute?]
-
-Yes. The SFINAE-ability of violated constraints has been tested extensively on all compilers. Achieving this required some messy code in the public header files.
-
-[heading I see that `arg_at` is defined in terms of `arg_at_t`. Shouldn't it be the other way around?]
-
-Alias templates are much more friendly to SFINAE. The `struct`-style metafunctions are provided only to parallel the `<type_traits>` naming conventions.
-
-[heading What about calling conventions?]
-
-I originally implemented features for these. However, these features necessitated many, many more platform-specific test cases than I was willing to write for a version 1.0 release. The code is still designed to accommodate such features, so I would consider adding them in the future if there is sufficient interest.
-
-[endsect]
-
-
 [section:reference Reference Documentation]
 
 This reference will be most beneficial to readers who posess a basic understanding of the following C++ features:
@@ -359,6 +292,70 @@ This reference will be most beneficial to readers who posess a basic understandi
 [endsect][/section:other_features]
 
 
+[/*********************************************************************]
+[/***************************** F A Q *********************************]
+[/*********************************************************************]
+
+[section:faq FAQ]
+
+[heading:reasons Why should I use [libname]?]
+
+If you are not writing generic code, you should not use [libname].
+
+If you ['are] writing generic code, take a moment to skim your header files, and see if you can find code that looks like this:
+
+    template<class Return, class First, class Second>
+    class foo<Return(First, Second)> {
+        //     ^^^^^^^^^^^^^^^^^^^^^
+    };
+
+Or maybe something like this:
+    
+    template<class Return, class ...Args>
+    class foo<Return(*)(Args...)> {
+        //     ^^^^^^^^^^^^^^^^^^
+    };
+    
+Or, if you are *really* unlucky, something like this:
+
+    template<class Return, class T, class ...Args>
+    class foo<Return(T::*)(Args..., ...) const volatile & noexcept> {
+        //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    };
+
+With [libname], you can get rid of all of these template specializations (unless you deal with platform-specific calling conventions, for now). Even if you are only specializing a simple function type like `Return(Args...)`, [libname] might be useful to you. You may find that [libname] can help make your code more readable, more maintainable, more generic, and less error-prone.
+
+[libname] is thoroughly tested on many platforms. [libname] correctly handles many corner cases that are often overlooked. The need for a proper library solution grows as more features are added to C++.
+
+[heading: Ugh, I don't want to use Boost. It's a massive dependency.]
+
+No problem. [libname] doesn't have any dependencies, so all you need are the CallableTraits headers.
+
+[heading Why does [namespace_scoped][^args_t] alias a [^std::tuple] instead of X?]
+
+Boost contains a handful of excellent type containers. However, [libname] is designed to only use the standard headers, so `<tuple>` was the only option under this limitation. It would be trivial to support other variadic containers, and I will consider doing so if there is sufficient interest.
+
+[heading Why use reference collapsing rules when adding member function ref-qualifiers?]
+
+Although arbitrary, the reference collapsing rules are well-defined and already known to many template metaprogrammers. Anything else would be a burden to memorize. This also parallels the metafunctions provided in `<type_traits>`.
+
+[heading How is this a C++11 library if it uses newer features like variable templates?]
+
+If your compiler doesn't support a certain language feature that is required by a metafunction, the implementation will either trigger a `static_assert` or a substitution failure, depending on the situation. This is explained in the "Compatibility Notes" section for each trait.
+
+[heading Many features in this library cause a "substitution failure" when the template constraints are violated. Does this mean that I can violate the constraints in a SFINAE context, as long as there is another legal substitute?]
+
+Yes. The SFINAE-ability of violated constraints has been tested extensively on all compilers. Achieving this required some messy code in the public header files.
+
+[heading I see that `arg_at` is defined in terms of `arg_at_t`. Shouldn't it be the other way around?]
+
+Alias templates are much friendlier to SFINAE. The `struct`-style metafunctions are provided only to parallel the `<type_traits>` naming conventions. The only reason you might want to use the `struct`-style metafunctions would be to force a hard error instead of SFINAE.
+
+[heading What about calling conventions?]
+
+I originally implemented features for these. However, these features necessitated many, many more platform-specific test cases than I was willing to write for a version 1.0 release. The code is still designed to accommodate such features, so I would consider adding them in the future if there is sufficient interest.
+
+[endsect]
 
 [section:building Building the test suite]
 
@@ -374,7 +371,7 @@ Even though the [libname] headers do not rely on external dependencies, you'll n
 
 For convenience, one-click build scripts for Linux and Windows are packaged with [libname], each of which must be run from the directory in which the script resides. Running one of these scripts will create a `build-xxx` subdirectory in the [libname] root directory, and perform all testing there. Even though these scripts were designed to be as generic as possible, issues may exist because they have not seen widespread use. Refer to the console instructions below if the provided testing scripts do not work for you.
 
-I'm not a shell scripting expert, so use these scripts at your own risk.
+Use these scripts at your own risk.
 
 First, clone the repository:
 
