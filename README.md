@@ -4,7 +4,7 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 -->
 
-# CallableTraits <a target="_blank" href="https://travis-ci.org/badair/callable_traits">![Travis status][badge.Travis]</a> <a target="_blank" href="https://ci.appveyor.com/project/badair/callable-traits">![Appveyor status][badge.Appveyor]</a> <!--<a target="_blank" href="http://melpon.org/wandbox/permlink/msF9kKiSgfkoBHGi">![Try it online][badge.wandbox]</a>--> <a target="_blank" href="https://gitter.im/badair/callable_traits">![Gitter Chat][badge.Gitter]</a>
+# CallableTraits <a target="_blank" href="https://travis-ci.org/badair/callable_traits">![Travis status][badge.Travis]</a> <a target="_blank" href="https://ci.appveyor.com/project/badair/callable-traits">![Appveyor status][badge.Appveyor]</a> <a target="_blank" href="https://wandbox.org/permlink/UaAH4HhBj3yWeHOw">![Try it online][badge.wandbox]</a> <a target="_blank" href="https://gitter.im/badair/callable_traits">![Gitter Chat][badge.Gitter]</a>
 
 Current Version: 1.1.1
 
