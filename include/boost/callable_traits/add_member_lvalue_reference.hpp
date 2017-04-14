@@ -25,7 +25,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 template<typename T>
 struct add_member_lvalue_reference_t {
-    static_assert(sizeof(T) < 1,
+    static_assert(std::is_same<T, detail::dummy>::value,
         "Reference member qualifiers are not supported by this configuration.");
 };
 

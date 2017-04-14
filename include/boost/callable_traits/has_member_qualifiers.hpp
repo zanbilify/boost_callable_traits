@@ -34,7 +34,7 @@ struct has_member_qualifiers : detail::traits<T>::has_member_qualifiers {
 
 template<typename T>
 struct has_member_qualifiers_v {
-    static_assert(sizeof(T) < 1,
+    static_assert(std::is_same<T, detail::dummy>::value,
         "Variable templates not supported on this compiler.");
 };
 

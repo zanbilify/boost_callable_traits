@@ -36,7 +36,7 @@ struct is_transaction_safe : detail::traits<T>::is_transaction_safe {
 
 template<typename T>
 struct is_transaction_safe_v {
-    static_assert(sizeof(T) < 1,
+    static_assert(std::is_same<T, detail::dummy>::value,
         "Variable templates not supported on this compiler.");
 };
 

@@ -36,7 +36,7 @@ struct is_lvalue_reference_member
 
 template<typename T>
 struct is_lvalue_reference_member_v {
-    static_assert(sizeof(T) < 1,
+    static_assert(std::is_same<T, detail::dummy>::value,
         "Variable templates not supported on this compiler.");
 };
 

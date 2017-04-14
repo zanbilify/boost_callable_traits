@@ -33,7 +33,7 @@ struct has_void_return
 
 template<typename T>
 struct has_void_return_v {
-    static_assert(sizeof(T) < 1,
+    static_assert(std::is_same<T, detail::dummy>::value,
         "Variable templates not supported on this compiler.");
 };
 

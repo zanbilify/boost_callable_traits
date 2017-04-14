@@ -35,7 +35,7 @@ struct is_noexcept : detail::traits<T>::is_noexcept {
 
 template<typename T>
 struct is_noexcept_v {
-    static_assert(sizeof(T) < 1,
+    static_assert(std::is_same<T, detail::dummy>::value,
         "Variable templates not supported on this compiler.");
 };
 

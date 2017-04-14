@@ -35,7 +35,7 @@ BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
 
         template<typename FailMsg, typename ForceTwoPhaseLookup>
         struct fail {
-            using type = typename std::conditional<sizeof(ForceTwoPhaseLookup*) < 1,
+            using type = typename std::conditional<std::is_same<ForceTwoPhaseLookup, std::false_type>::value,
             FailMsg, FailMsg>::type::_::type;
         };
 
