@@ -23,7 +23,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 
 template<typename T>
-struct is_transaction_safe; //implementation-defined
+struct is_transaction_safe; //see below
 
 //<-
 template<typename T>
@@ -43,7 +43,7 @@ struct is_transaction_safe_v {
 #else
 
 template<typename T>
-constexpr bool is_transaction_safe_v = //implementation-defined
+constexpr bool is_transaction_safe_v = //see below
 //<-
     detail::traits<T>::is_transaction_safe::value;
 //->

@@ -22,7 +22,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 */
 
 template<typename T>
-struct is_noexcept; //implementation-defined
+struct is_noexcept; //see below
 
 //<-
 template<typename T>
@@ -42,7 +42,7 @@ struct is_noexcept_v {
 #else
 
 template<typename T>
-constexpr bool is_noexcept_v = //implementation-defined
+constexpr bool is_noexcept_v = //see below
 //<-
     detail::traits<T>::is_noexcept::value;
 //->

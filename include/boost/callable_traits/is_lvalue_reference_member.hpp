@@ -22,7 +22,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 
 template<typename T>
-struct is_lvalue_reference_member; //implementation-defined
+struct is_lvalue_reference_member; //see below
 
 //<-
 template<typename T>
@@ -43,7 +43,7 @@ struct is_lvalue_reference_member_v {
 #else
 
 template<typename T>
-constexpr bool is_lvalue_reference_member_v = //implementation-defined
+constexpr bool is_lvalue_reference_member_v = //see below
 //<-
     detail::traits<T>::is_lvalue_reference_member::value;
 //->

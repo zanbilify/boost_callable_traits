@@ -41,7 +41,7 @@ struct has_member_qualifiers_v {
 #else
 //->
 template<typename T>
-constexpr bool has_member_qualifiers_v = //implementation-defined
+constexpr bool has_member_qualifiers_v = //see below
 //<-
     detail::traits<T>::has_member_qualifiers::value;
 

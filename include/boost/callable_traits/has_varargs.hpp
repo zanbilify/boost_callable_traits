@@ -22,7 +22,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 
 template<typename T>
-struct has_varargs; //implementation-defined
+struct has_varargs; //see below
 
 //<-
 template<typename T>
@@ -42,7 +42,7 @@ struct has_varargs_v {
 #else
 
 template<typename T>
-constexpr bool has_varargs_v = //implementation-defined
+constexpr bool has_varargs_v = //see below
 //<-
     detail::traits<T>::has_varargs::value;
 //->

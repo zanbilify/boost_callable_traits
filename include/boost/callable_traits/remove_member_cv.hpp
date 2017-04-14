@@ -23,7 +23,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 */
 
 template<typename T>
-using remove_member_cv_t = //implementation-defined
+using remove_member_cv_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::remove_member_cv,

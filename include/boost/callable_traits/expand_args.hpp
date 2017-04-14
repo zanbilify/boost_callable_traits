@@ -21,7 +21,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 */
 
 template<typename T, template<class...> class Container>
-using expand_args_t = //implementation-defined
+using expand_args_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::template expand_args<Container>,

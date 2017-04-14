@@ -27,7 +27,7 @@ BOOST_CLBL_TRTS_SFINAE_MSG(remove_args, parameter_list_too_short_to_remove_this_
 */
 
 template<std::size_t Index, typename T, std::size_t Count = 1>
-using remove_args_t = //implementation-defined
+using remove_args_t = //see below
 //<-
     // substitution failure if index is out of range or if parameter
     // types cannot be determined. Simple error messages are provided

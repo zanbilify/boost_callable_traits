@@ -25,7 +25,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
 
 template<std::size_t I, typename T>
-using arg_at_t = //implementation-defined
+using arg_at_t = //see below
 //<-
 // substitution failure if index is out of range or if argument
 // types cannot be determined. Simple error messages are provided

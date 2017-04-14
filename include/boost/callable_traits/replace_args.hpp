@@ -26,7 +26,7 @@ BOOST_CLBL_TRTS_SFINAE_MSG(replace_args, cannot_replace_parameters_in_this_type)
 */
 
 template<std::size_t Index, typename T, typename... Args>
-using replace_args_t = //implementation-defined
+using replace_args_t = //see below
 //<-
     // substitution failure if index is out of range or if parameter
     // types cannot be determined. Simple error messages are provided

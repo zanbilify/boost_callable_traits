@@ -32,7 +32,7 @@ struct add_member_rvalue_reference_t {
 #else
 
 template<typename T>
-using add_member_rvalue_reference_t = //implementation-defined
+using add_member_rvalue_reference_t = //see below
 //<-
 #ifdef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 

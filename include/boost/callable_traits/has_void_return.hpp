@@ -21,7 +21,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 */
 
 template<typename T>
-struct has_void_return; //implementation-defined
+struct has_void_return; //see below
 
 //<-
 template<typename T>
@@ -40,7 +40,7 @@ struct has_void_return_v {
 #else
 
 template<typename T>
-constexpr bool has_void_return_v = //implementation-defined
+constexpr bool has_void_return_v = //see below
 //<-
     std::is_same<typename detail::traits<T>::return_type, void>::value;
 //->

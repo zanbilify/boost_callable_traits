@@ -22,7 +22,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 */
 
 template<typename T>
-using parent_class_of_t = //implementation-defined
+using parent_class_of_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::class_type,

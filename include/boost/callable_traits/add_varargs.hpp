@@ -22,7 +22,7 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 */
 
 template<typename T>
-using add_varargs_t = //implementation-defined
+using add_varargs_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::add_varargs,
