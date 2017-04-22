@@ -20,17 +20,17 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 [heading Definition]
 */
 
-template<typename T>
+template<typename T, template<class...> class Container = std::tuple>
 using args_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
-        typename detail::traits<T>::arg_types,
-        cannot_determine_parameters_for_this_type>;
+        typename detail::traits<T>::template expand_args<Container>,
+        cannot_expand_the_parameter_list_of_first_template_argument>;
 //->
 
-template<typename T>
+template<typename T, template<class...> class Container = std::tuple>
 struct args {
-    using type = args_t<T>;
+    using type = args_t<T, Container>;
 };
 
 //<-
@@ -50,10 +50,10 @@ BOOST_CLBL_TRTS_NAMESPACE_END
 
 [heading Behavior]
 * When the constraints are violated, a substitution failure occurs.
-* When `T` is a function, function pointer, or function reference, the aliased type is a `std::tuple` whose element types match those of the function's parameter list.
-* When `T` is a function object, the aliased type is a `std::tuple` whose element types match those of the function object's `operator()` parameter list.
-* When `T` is a member function pointer, the aliased type is a `std::tuple` instantiation, where the first tuple element is a reference to the parent class of `T`, qualified according to the member qualifiers on `T`, such that this first tuple element type is equivalent to `boost::callable_traits::qualified_parent_class_of_t<T>`. The subsequent template type arguments, if any, are the parameter types of the member function.
-* When `T` is a member data pointer, the aliased type is a `std::tuple` with a single element, which is a `const` reference to the parent class of `T`.
+* When `T` is a function, function pointer, or function reference, the aliased type is `Container` instantiated with the function's parameter types.
+* When `T` is a function object, the aliased type is `Container` instantiated with the `T::operator()` parameter types.
+* When `T` is a member function pointer, the aliased type is a `Container` instantiation, where the first type argument is a reference to the parent class of `T`, qualified according to the member qualifiers on `T`, such that the first type is equivalent to `boost::callable_traits::qualified_parent_class_of_t<T>`. The subsequent type arguments, if any, are the parameter types of the member function.
+* When `T` is a member data pointer, the aliased type is `Container` with a single element, which is a `const` reference to the parent class of `T`.
 
 [heading Compatibility Notes]
 Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
