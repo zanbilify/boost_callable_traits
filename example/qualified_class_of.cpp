@@ -10,22 +10,22 @@ Distributed under the Boost Software License, Version 1.0.
 int main(){ return 0; }
 #else
 
-//[ qualified_parent_class_of
+//[ qualified_class_of
 #include <type_traits>
-#include <boost/callable_traits/qualified_parent_class_of.hpp>
+#include <boost/callable_traits/qualified_class_of.hpp>
 
 namespace ct = boost::callable_traits;
 
 struct foo;
 
 static_assert(std::is_same<foo &,
-    ct::qualified_parent_class_of_t<int(foo::*)()>>::value, "");
+    ct::qualified_class_of_t<int(foo::*)()>>::value, "");
     
 static_assert(std::is_same<foo const &,
-    ct::qualified_parent_class_of_t<int(foo::*)() const>>::value, "");
+    ct::qualified_class_of_t<int(foo::*)() const>>::value, "");
 
 static_assert(std::is_same<foo volatile &&,
-    ct::qualified_parent_class_of_t<int(foo::*)() volatile &&>>::value, "");
+    ct::qualified_class_of_t<int(foo::*)() volatile &&>>::value, "");
 
 int main() {}
 //]

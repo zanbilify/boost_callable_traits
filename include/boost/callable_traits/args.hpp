@@ -54,7 +54,7 @@ BOOST_CLBL_TRTS_NAMESPACE_END
 * When the constraints are violated, a substitution failure occurs.
 * When `T` is a function, function pointer, or function reference, the aliased type is `Container` instantiated with the function's parameter types.
 * When `T` is a function object, the aliased type is `Container` instantiated with the `T::operator()` parameter types.
-* When `T` is a member function pointer, the aliased type is a `Container` instantiation, where the first type argument is a reference to the parent class of `T`, qualified according to the member qualifiers on `T`, such that the first type is equivalent to `boost::callable_traits::qualified_parent_class_of_t<T>`. The subsequent type arguments, if any, are the parameter types of the member function.
+* When `T` is a member function pointer, the aliased type is a `Container` instantiation, where the first type argument is a reference to the parent class of `T`, qualified according to the member qualifiers on `T`, such that the first type is equivalent to `boost::callable_traits::qualified_class_of_t<T>`. The subsequent type arguments, if any, are the parameter types of the member function.
 * When `T` is a member data pointer, the aliased type is `Container` with a single element, which is a `const` reference to the parent class of `T`.
 
 [heading Compatibility Notes]

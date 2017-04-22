@@ -7,7 +7,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#include <boost/callable_traits/qualified_parent_class_of.hpp>
+#include <boost/callable_traits/qualified_class_of.hpp>
 #include "test.hpp"
 
 template<typename T>
@@ -18,7 +18,7 @@ struct is_substitution_failure_qualified_class_of {
 
     template<typename A,
         typename std::remove_reference<
-            TRAIT(qualified_parent_class_of, A)>::type* = nullptr>
+            TRAIT(qualified_class_of, A)>::type* = nullptr>
     static auto test(int) -> std::false_type;
 
     static constexpr bool value = decltype(test<T>(0))::value;

@@ -141,27 +141,11 @@ This reference will be most beneficial to readers who posess a basic understandi
 * [abominable_paper]
 * [@http://en.cppreference.com/w/c/language/variadic C-style variadics], a.k.a. varargs
 
-[endsect][/section:reference]
-
-[section:member_qualifier_features Member Qualifier Features]
-
 [import ../../../boost/callable_traits/add_member_const.hpp]
 [add_member_const_hpp]
 
-[import ../../../boost/callable_traits/remove_member_const.hpp]
-[remove_member_const_hpp]
-
-[import ../../../boost/callable_traits/add_member_volatile.hpp]
-[add_member_volatile_hpp]
-
-[import ../../../boost/callable_traits/remove_member_volatile.hpp]
-[remove_member_volatile_hpp]
-
 [import ../../../boost/callable_traits/add_member_cv.hpp]
 [add_member_cv_hpp]
-
-[import ../../../boost/callable_traits/remove_member_cv.hpp]
-[remove_member_cv_hpp]
 
 [import ../../../boost/callable_traits/add_member_lvalue_reference.hpp]
 [add_member_lvalue_reference_hpp]
@@ -169,17 +153,44 @@ This reference will be most beneficial to readers who posess a basic understandi
 [import ../../../boost/callable_traits/add_member_rvalue_reference.hpp]
 [add_member_rvalue_reference_hpp]
 
-[import ../../../boost/callable_traits/remove_member_reference.hpp]
-[remove_member_reference_hpp]
+[import ../../../boost/callable_traits/add_member_volatile.hpp]
+[add_member_volatile_hpp]
+
+[import ../../../boost/callable_traits/add_noexcept.hpp]
+[add_noexcept_hpp]
+
+[import ../../../boost/callable_traits/add_transaction_safe.hpp]
+[add_transaction_safe_hpp]
+
+[import ../../../boost/callable_traits/add_varargs.hpp]
+[add_varargs_hpp]
+
+[import ../../../boost/callable_traits/apply_member_pointer.hpp]
+[apply_member_pointer_hpp]
+
+[import ../../../boost/callable_traits/apply_return.hpp]
+[apply_return_hpp]
+
+[import ../../../boost/callable_traits/args.hpp]
+[args_hpp]
+
+[import ../../../boost/callable_traits/class_of.hpp]
+[class_of_hpp]
+
+[import ../../../boost/callable_traits/function_type.hpp]
+[function_type_hpp]
 
 [import ../../../boost/callable_traits/has_member_qualifiers.hpp]
 [has_member_qualifiers_hpp]
 
+[import ../../../boost/callable_traits/has_varargs.hpp]
+[has_varargs_hpp]
+
+[import ../../../boost/callable_traits/has_void_return.hpp]
+[has_void_return_hpp]
+
 [import ../../../boost/callable_traits/is_const_member.hpp]
 [is_const_member_hpp]
-
-[import ../../../boost/callable_traits/is_volatile_member.hpp]
-[is_volatile_member_hpp]
 
 [import ../../../boost/callable_traits/is_cv_member.hpp]
 [is_cv_member_hpp]
@@ -187,89 +198,49 @@ This reference will be most beneficial to readers who posess a basic understandi
 [import ../../../boost/callable_traits/is_lvalue_reference_member.hpp]
 [is_lvalue_reference_member_hpp]
 
-[import ../../../boost/callable_traits/is_rvalue_reference_member.hpp]
-[is_rvalue_reference_member_hpp]
-
 [import ../../../boost/callable_traits/is_reference_member.hpp]
 [is_reference_member_hpp]
 
-[endsect][/section:member_qualifier_features]
-
-
-
-[section:parameter_list_features Parameter List Features]
-
-[import ../../../boost/callable_traits/function_type.hpp]
-[function_type_hpp]
-
-[import ../../../boost/callable_traits/args.hpp]
-[args_hpp]
-
-[import ../../../boost/callable_traits/add_varargs.hpp]
-[add_varargs_hpp]
-
-[import ../../../boost/callable_traits/remove_varargs.hpp]
-[remove_varargs_hpp]
-
-[import ../../../boost/callable_traits/has_varargs.hpp]
-[has_varargs_hpp]
-
-[endsect][/section:parameter_list_features]
-
-
-
-[section:return_type_features Return Type Features]
-
-[import ../../../boost/callable_traits/return_type.hpp]
-[return_type_hpp]
-
-[import ../../../boost/callable_traits/apply_return.hpp]
-[apply_return_hpp]
-
-[import ../../../boost/callable_traits/has_void_return.hpp]
-[has_void_return_hpp]
-
-[endsect][/section:return_type_features]
-
-
-
-[section:member_pointer_features Member Pointer Features]
-
-[import ../../../boost/callable_traits/apply_member_pointer.hpp]
-[apply_member_pointer_hpp]
-
-[import ../../../boost/callable_traits/parent_class_of.hpp]
-[parent_class_of_hpp]
-
-[import ../../../boost/callable_traits/qualified_parent_class_of.hpp]
-[qualified_parent_class_of_hpp]
-
-[endsect][/section:member_pointer_features]
-
-
-
-[section:other_features Other Features]
-
-[import ../../../boost/callable_traits/add_transaction_safe.hpp]
-[add_transaction_safe_hpp]
-
-[import ../../../boost/callable_traits/remove_transaction_safe.hpp]
-[remove_transaction_safe_hpp]
-
-[import ../../../boost/callable_traits/is_transaction_safe.hpp]
-[is_transaction_safe_hpp]
-
-[import ../../../boost/callable_traits/add_noexcept.hpp]
-[add_noexcept_hpp]
-
-[import ../../../boost/callable_traits/remove_noexcept.hpp]
-[remove_noexcept_hpp]
+[import ../../../boost/callable_traits/is_rvalue_reference_member.hpp]
+[is_rvalue_reference_member_hpp]
 
 [import ../../../boost/callable_traits/is_noexcept.hpp]
 [is_noexcept_hpp]
 
-[endsect][/section:other_features]
+[import ../../../boost/callable_traits/is_transaction_safe.hpp]
+[is_transaction_safe_hpp]
 
+[import ../../../boost/callable_traits/is_volatile_member.hpp]
+[is_volatile_member_hpp]
+
+[import ../../../boost/callable_traits/qualified_class_of.hpp]
+[qualified_class_of_hpp]
+
+[import ../../../boost/callable_traits/remove_member_const.hpp]
+[remove_member_const_hpp]
+
+[import ../../../boost/callable_traits/remove_member_cv.hpp]
+[remove_member_cv_hpp]
+
+[import ../../../boost/callable_traits/remove_member_reference.hpp]
+[remove_member_reference_hpp]
+
+[import ../../../boost/callable_traits/remove_member_volatile.hpp]
+[remove_member_volatile_hpp]
+
+[import ../../../boost/callable_traits/remove_noexcept.hpp]
+[remove_noexcept_hpp]
+
+[import ../../../boost/callable_traits/remove_transaction_safe.hpp]
+[remove_transaction_safe_hpp]
+
+[import ../../../boost/callable_traits/remove_varargs.hpp]
+[remove_varargs_hpp]
+
+[import ../../../boost/callable_traits/return_type.hpp]
+[return_type_hpp]
+
+[endsect][/section:reference]
 
 [/*********************************************************************]
 [/***************************** F A Q *********************************]
