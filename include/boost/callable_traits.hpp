@@ -21,7 +21,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <boost/callable_traits/apply_member_pointer.hpp>
 #include <boost/callable_traits/apply_return.hpp>
 #include <boost/callable_traits/args.hpp>
-#include <boost/callable_traits/expand_args.hpp>
 #include <boost/callable_traits/function_type.hpp>
 #include <boost/callable_traits/has_member_qualifiers.hpp>
 #include <boost/callable_traits/has_varargs.hpp>
