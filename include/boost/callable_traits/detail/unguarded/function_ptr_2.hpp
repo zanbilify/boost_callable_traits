@@ -86,34 +86,7 @@ struct function<
             BOOST_CLBL_TRTS_INCLUDE_TRANSACTION_SAFE
             BOOST_CLBL_TRTS_NOEXCEPT_SPEC;
 
-    using clear_args =
-        BOOST_CLBL_TRTS_ST Return(BOOST_CLBL_TRTS_CC *)()
-            BOOST_CLBL_TRTS_INCLUDE_TRANSACTION_SAFE
-            BOOST_CLBL_TRTS_NOEXCEPT_SPEC;
-
     template<template<class...> class Container>
     using expand_args = Container<Args...>;
-
-    template<template<class...> class Container, typename... RightArgs>
-    using expand_args_left = Container<Args..., RightArgs...>;
-
-    template<template<class...> class Container, typename... LeftArgs>
-    using expand_args_right = Container<LeftArgs..., Args...>;
-
-#undef BOOST_CLBL_TRTS_BEGIN_PACK_MANIP
-#undef BOOST_CLBL_TRTS_ARGS_PACK
-#undef BOOST_CLBL_TRTS_END_PACK_MANIP
-
-#define BOOST_CLBL_TRTS_BEGIN_PACK_MANIP Return(BOOST_CLBL_TRTS_CC *)(
-
-#define BOOST_CLBL_TRTS_ARGS_PACK Args
-
-#define BOOST_CLBL_TRTS_END_PACK_MANIP \
-    ) BOOST_CLBL_TRTS_INCLUDE_TRANSACTION_SAFE BOOST_CLBL_TRTS_NOEXCEPT_SPEC
-
-#include <boost/callable_traits/detail/unguarded/args_pack_manipulations.hpp>
-#undef BOOST_CLBL_TRTS_BEGIN_PACK_MANIP
-#undef BOOST_CLBL_TRTS_ARGS_PACK
-#undef BOOST_CLBL_TRTS_END_PACK_MANIP
 };
 

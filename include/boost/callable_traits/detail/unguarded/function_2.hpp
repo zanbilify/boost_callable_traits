@@ -142,31 +142,6 @@ struct function<Return(Args...)
     
     template<template<class...> class Container>
     using expand_args = Container<Args...>;
-
-    template<template<class...> class Container, typename... RightArgs>
-    using expand_args_left = Container<Args..., RightArgs...>;
-
-    template<template<class...> class Container, typename... LeftArgs>
-    using expand_args_right = Container<LeftArgs..., Args...>;
-
-    using clear_args = Return()
-        BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
-        BOOST_CLBL_TRTS_INCLUDE_TRANSACTION_SAFE
-        BOOST_CLBL_TRTS_NOEXCEPT_SPEC;
-    
-#undef BOOST_CLBL_TRTS_BEGIN_PACK_MANIP
-#undef BOOST_CLBL_TRTS_ARGS_PACK
-#undef BOOST_CLBL_TRTS_END_PACK_MANIP
-
-#define BOOST_CLBL_TRTS_BEGIN_PACK_MANIP Return(
-#define BOOST_CLBL_TRTS_ARGS_PACK Args
-
-#define BOOST_CLBL_TRTS_END_PACK_MANIP \
-    ) BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS BOOST_CLBL_TRTS_INCLUDE_TRANSACTION_SAFE
-
-#include <boost/callable_traits/detail/unguarded/args_pack_manipulations.hpp>
-#undef BOOST_CLBL_TRTS_BEGIN_PACK_MANIP
-#undef BOOST_CLBL_TRTS_END_PACK_MANIP
 };
 
 
@@ -280,22 +255,5 @@ struct function<Return (Args..., ...)
     
     template<template<class...> class Container>
     using expand_args = Container<Args...>;
-
-    using clear_args = Return()
-        BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS
-        BOOST_CLBL_TRTS_INCLUDE_TRANSACTION_SAFE
-        BOOST_CLBL_TRTS_NOEXCEPT_SPEC;
-    
-#define BOOST_CLBL_TRTS_BEGIN_PACK_MANIP Return(
-#define BOOST_CLBL_TRTS_ARGS_PACK Args
-
-#define BOOST_CLBL_TRTS_END_PACK_MANIP \
-    , ...) BOOST_CLBL_TRTS_INCLUDE_QUALIFIERS BOOST_CLBL_TRTS_INCLUDE_TRANSACTION_SAFE BOOST_CLBL_TRTS_NOEXCEPT_SPEC
-
-
-#include <boost/callable_traits/detail/unguarded/args_pack_manipulations.hpp>
-#undef BOOST_CLBL_TRTS_BEGIN_PACK_MANIP
-#undef BOOST_CLBL_TRTS_ARGS_PACK
-#undef BOOST_CLBL_TRTS_END_PACK_MANIP
 
 };
