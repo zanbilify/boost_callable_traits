@@ -51,16 +51,6 @@ static_assert(is_same<
 >{}, "");
 
 static_assert(is_same<
-    arg_at_t<0, pmf>,
-    const number&
->{}, "");
-
-static_assert(is_same<
-    arg_at_t<1, pmf>,
-    int
->{}, "");
-
-static_assert(is_same<
     return_type_t<pmf>,
     int
 >{}, "");

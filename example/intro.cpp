@@ -33,12 +33,6 @@ int main() {
         std::tuple<int, char, float>
     >();
 
-    // arg_at_t gives us indexed access to a parameter list
-    assert_same<
-        ct::arg_at_t<1, foo>,
-        char
-    >();
-
     // has_void_return lets us perform a quick check for a void return type
     static_assert(ct::has_void_return<foo>::value, "");
 
@@ -62,23 +56,7 @@ int main() {
 
     // is_const_member_v checks for the presence of member const
     static_assert(ct::is_const_member<pmf>::value, "");
-
-    // pop_front_args_t removes the first parameter from signature:
-    assert_same<
-        ct::pop_front_args_t<pmf>,
-        void (foo::*)(/*int is gone!*/ char, float) const
-    >();
-
-    // clear_args_t removes all parameter types:
-    assert_same<
-        ct::clear_args_t<pmf>,
-        void (foo::*)(/* nothing to see here! */) const
-    >();
 }
-
-// This program is just a glimpse at CallableTraits' features. There
-// are many more traits and metafunctions which are not shown here. Every
-// feature is demonstrated and specified in the reference documentation.
 
 //]
 #endif
