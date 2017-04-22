@@ -7,7 +7,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#include <boost/callable_traits/parent_class_of.hpp>
+#include <boost/callable_traits/class_of.hpp>
 #include "test.hpp"
 
 struct foo;
@@ -20,7 +20,7 @@ struct is_substitution_failure_class_of {
 
     template<typename A,
         typename std::remove_reference<
-            TRAIT(parent_class_of, A)>::type* = nullptr>
+            TRAIT(class_of, A)>::type* = nullptr>
     static auto test(int) -> std::false_type;
 
     static constexpr bool value = decltype(test<T>(0))::value;

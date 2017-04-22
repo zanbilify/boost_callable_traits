@@ -29,8 +29,8 @@
 </h2></div></div></div>
 <div class="toc"><dl class="toc">
 <dt><span class="section"><a href="member_pointer_features.html#callable_traits.member_pointer_features.ref_apply_member_pointer">apply_member_pointer</a></span></dt>
-<dt><span class="section"><a href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of">parent_class_of</a></span></dt>
-<dt><span class="section"><a href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of">qualified_parent_class_of</a></span></dt>
+<dt><span class="section"><a href="member_pointer_features.html#callable_traits.member_pointer_features.ref_class_of">class_of</a></span></dt>
+<dt><span class="section"><a href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_class_of">qualified_class_of</a></span></dt>
 </dl></div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
@@ -395,35 +395,35 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="callable_traits.member_pointer_features.ref_parent_class_of"></a><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of" title="parent_class_of">parent_class_of</a>
+<a name="callable_traits.member_pointer_features.ref_class_of"></a><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_class_of" title="class_of">class_of</a>
 </h3></div></div></div>
 <h5>
-<a name="callable_traits.member_pointer_features.ref_parent_class_of.h0"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_parent_class_of.header"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.header">Header</a>
+<a name="callable_traits.member_pointer_features.ref_class_of.h0"></a>
+        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_class_of.header"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_class_of.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">parent_class_of</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">class_of</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
-<a name="callable_traits.member_pointer_features.ref_parent_class_of.h1"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_parent_class_of.definition"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.definition">Definition</a>
+<a name="callable_traits.member_pointer_features.ref_class_of.h1"></a>
+        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_class_of.definition"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_class_of.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">parent_class_of_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">using</span> <span class="identifier">class_of_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">parent_class_of</span> <span class="special">{</span>
-    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">parent_class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+<span class="keyword">struct</span> <span class="identifier">class_of</span> <span class="special">{</span>
+    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
 <span class="special">};</span>
 </pre>
 <h5>
-<a name="callable_traits.member_pointer_features.ref_parent_class_of.h2"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_parent_class_of.constraints"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.constraints">Constraints</a>
+<a name="callable_traits.member_pointer_features.ref_class_of.h2"></a>
+        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_class_of.constraints"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_class_of.constraints">Constraints</a>
       </h5>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
             <code class="computeroutput"><span class="identifier">T</span></code> must be a member pointer
           </li></ul></div>
 <h5>
-<a name="callable_traits.member_pointer_features.ref_parent_class_of.h3"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_parent_class_of.behavior"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.behavior">Behavior</a>
+<a name="callable_traits.member_pointer_features.ref_class_of.h3"></a>
+        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_class_of.behavior"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_class_of.behavior">Behavior</a>
       </h5>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
@@ -435,16 +435,16 @@
           </li>
 </ul></div>
 <h5>
-<a name="callable_traits.member_pointer_features.ref_parent_class_of.h4"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_parent_class_of.compatibility_notes"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.compatibility_notes">Compatibility
+<a name="callable_traits.member_pointer_features.ref_class_of.h4"></a>
+        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_class_of.compatibility_notes"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_class_of.compatibility_notes">Compatibility
         Notes</a>
       </h5>
 <p>
         Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
       </p>
 <h5>
-<a name="callable_traits.member_pointer_features.ref_parent_class_of.h5"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_parent_class_of.input_output_examples"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.input_output_examples">Input/Output
+<a name="callable_traits.member_pointer_features.ref_class_of.h5"></a>
+        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_class_of.input_output_examples"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_class_of.input_output_examples">Input/Output
         Examples</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -460,7 +460,7 @@
               </th>
 <th>
                 <p>
-                  <code class="computeroutput"><span class="identifier">parent_class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+                  <code class="computeroutput"><span class="identifier">class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
                 </p>
               </th>
 </tr></thead>
@@ -493,54 +493,54 @@
 </tbody>
 </table></div>
 <h5>
-<a name="callable_traits.member_pointer_features.ref_parent_class_of.h6"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_parent_class_of.example_program"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_parent_class_of.example_program">Example
+<a name="callable_traits.member_pointer_features.ref_class_of.h6"></a>
+        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_class_of.example_program"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_class_of.example_program">Example
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">parent_class_of</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">class_of</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">;</span>
 
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">,</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">parent_class_of_t</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()&gt;&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
-<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">,</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">parent_class_of_t</span><span class="special">&lt;</span><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*&gt;&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">,</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">class_of_t</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()&gt;&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">,</span> <span class="identifier">ct</span><span class="special">::</span><span class="identifier">class_of_t</span><span class="special">&lt;</span><span class="keyword">int</span> <span class="identifier">foo</span><span class="special">::*&gt;&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
 </pre>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of"></a><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of" title="qualified_parent_class_of">qualified_parent_class_of</a>
+<a name="callable_traits.member_pointer_features.ref_qualified_class_of"></a><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_class_of" title="qualified_class_of">qualified_class_of</a>
 </h3></div></div></div>
 <h5>
-<a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.h0"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.header"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.header">Header</a>
+<a name="callable_traits.member_pointer_features.ref_qualified_class_of.h0"></a>
+        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_class_of.header"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_class_of.header">Header</a>
       </h5>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">qualified_parent_class_of</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">qualified_class_of</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
 <h5>
-<a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.h1"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.definition"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.definition">Definition</a>
+<a name="callable_traits.member_pointer_features.ref_qualified_class_of.h1"></a>
+        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_class_of.definition"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_class_of.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">using</span> <span class="identifier">qualified_parent_class_of_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
+<span class="keyword">using</span> <span class="identifier">qualified_class_of_t</span> <span class="special">=</span> <span class="comment">//implementation-defined</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">qualified_parent_class_of</span> <span class="special">{</span>
-    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">qualified_parent_class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
+<span class="keyword">struct</span> <span class="identifier">qualified_class_of</span> <span class="special">{</span>
+    <span class="keyword">using</span> <span class="identifier">type</span> <span class="special">=</span> <span class="identifier">qualified_class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;;</span>
 <span class="special">};</span>
 </pre>
 <h5>
-<a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.h2"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.constraints"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.constraints">Constraints</a>
+<a name="callable_traits.member_pointer_features.ref_qualified_class_of.h2"></a>
+        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_class_of.constraints"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_class_of.constraints">Constraints</a>
       </h5>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
             <code class="computeroutput"><span class="identifier">T</span></code> must be a member pointer
           </li></ul></div>
 <h5>
-<a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.h3"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.behavior"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.behavior">Behavior</a>
+<a name="callable_traits.member_pointer_features.ref_qualified_class_of.h3"></a>
+        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_class_of.behavior"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_class_of.behavior">Behavior</a>
       </h5>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
@@ -555,20 +555,20 @@
           </li>
 <li class="listitem">
             If <code class="computeroutput"><span class="identifier">T</span></code> is a member data
-            pointer, the aliased type is equivalent to <code class="computeroutput"><span class="identifier">ct</span><span class="special">::</span><span class="identifier">parent_class_of</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span> <span class="keyword">const</span> <span class="special">&amp;</span></code>.
+            pointer, the aliased type is equivalent to <code class="computeroutput"><span class="identifier">ct</span><span class="special">::</span><span class="identifier">class_of</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span> <span class="keyword">const</span> <span class="special">&amp;</span></code>.
           </li>
 </ul></div>
 <h5>
-<a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.h4"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.compatibility_notes"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.compatibility_notes">Compatibility
+<a name="callable_traits.member_pointer_features.ref_qualified_class_of.h4"></a>
+        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_class_of.compatibility_notes"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_class_of.compatibility_notes">Compatibility
         Notes</a>
       </h5>
 <p>
         Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
       </p>
 <h5>
-<a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.h5"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.input_output_examples"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.input_output_examples">Input/Output
+<a name="callable_traits.member_pointer_features.ref_qualified_class_of.h5"></a>
+        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_class_of.input_output_examples"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_class_of.input_output_examples">Input/Output
         Examples</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -584,7 +584,7 @@
               </th>
 <th>
                 <p>
-                  <code class="computeroutput"><span class="identifier">qualified_parent_class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
+                  <code class="computeroutput"><span class="identifier">qualified_class_of_t</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
                 </p>
               </th>
 </tr></thead>
@@ -672,25 +672,25 @@
 </tbody>
 </table></div>
 <h5>
-<a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.h6"></a>
-        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_parent_class_of.example_program"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_parent_class_of.example_program">Example
+<a name="callable_traits.member_pointer_features.ref_qualified_class_of.h6"></a>
+        <span class="phrase"><a name="callable_traits.member_pointer_features.ref_qualified_class_of.example_program"></a></span><a class="link" href="member_pointer_features.html#callable_traits.member_pointer_features.ref_qualified_class_of.example_program">Example
         Program</a>
       </h5>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
-<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">qualified_parent_class_of</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">qualified_class_of</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
 
 <span class="keyword">struct</span> <span class="identifier">foo</span><span class="special">;</span>
 
 <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">foo</span> <span class="special">&amp;,</span>
-    <span class="identifier">ct</span><span class="special">::</span><span class="identifier">qualified_parent_class_of_t</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()&gt;&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+    <span class="identifier">ct</span><span class="special">::</span><span class="identifier">qualified_class_of_t</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()&gt;&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
 <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">foo</span> <span class="keyword">const</span> <span class="special">&amp;,</span>
-    <span class="identifier">ct</span><span class="special">::</span><span class="identifier">qualified_parent_class_of_t</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">const</span><span class="special">&gt;&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+    <span class="identifier">ct</span><span class="special">::</span><span class="identifier">qualified_class_of_t</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">const</span><span class="special">&gt;&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
 <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">foo</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;,</span>
-    <span class="identifier">ct</span><span class="special">::</span><span class="identifier">qualified_parent_class_of_t</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;&gt;&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+    <span class="identifier">ct</span><span class="special">::</span><span class="identifier">qualified_class_of_t</span><span class="special">&lt;</span><span class="keyword">int</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()</span> <span class="keyword">volatile</span> <span class="special">&amp;&amp;&gt;&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
 
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
 </pre>

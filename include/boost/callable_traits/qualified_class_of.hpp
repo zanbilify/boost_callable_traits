@@ -7,31 +7,31 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef BOOST_CLBL_TRTS_QUALIFIED_PARENT_CLASS_OF_HPP
-#define BOOST_CLBL_TRTS_QUALIFIED_PARENT_CLASS_OF_HPP
+#ifndef BOOST_CLBL_TRTS_QUALIFIED_class_of_HPP
+#define BOOST_CLBL_TRTS_QUALIFIED_class_of_HPP
 
 #include <boost/callable_traits/detail/core.hpp>
 
 BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 
-//[ qualified_parent_class_of_hpp
+//[ qualified_class_of_hpp
 /*`
-[section:ref_qualified_parent_class_of qualified_parent_class_of]
+[section:ref_qualified_class_of qualified_class_of]
 [heading Header]
-``#include <boost/callable_traits/qualified_parent_class_of.hpp>``
+``#include <boost/callable_traits/qualified_class_of.hpp>``
 [heading Definition]
 */
 
 template<typename T>
-using qualified_parent_class_of_t = //see below
+using qualified_class_of_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::invoke_type,
         type_is_not_a_member_pointer>;
 //->
 
-template<typename T, typename U = qualified_parent_class_of_t<T>>
-struct qualified_parent_class_of {
+template<typename T, typename U = qualified_class_of_t<T>>
+struct qualified_class_of {
     using type = U;
 };
 
@@ -46,14 +46,14 @@ BOOST_CLBL_TRTS_NAMESPACE_END
 [heading Behavior]
 * A substitution failure occurs if the constraints are violated.
 * If `T` is a member function pointer, the aliased type is the parent class of the member, qualified according to the member qualifiers on `T`. If `T` does not have a member reference qualifier, then the aliased type will be an lvalue reference.
-* If `T` is a member data pointer, the aliased type is equivalent to `ct::parent_class_of<T> const &`.
+* If `T` is a member data pointer, the aliased type is equivalent to `ct::class_of<T> const &`.
 
 [heading Compatibility Notes]
 Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
 
 [heading Input/Output Examples]
 [table
-    [[`T`]                              [`qualified_parent_class_of_t<T>`]]
+    [[`T`]                              [`qualified_class_of_t<T>`]]
     [[`void(foo::*)()`]                 [`foo &`]]
     [[`void(foo::*)() const`]           [`foo const &`]]
     [[`void(foo::*)() &&`]              [`foo &&`]]
@@ -63,10 +63,10 @@ Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
 ]
 
 [heading Example Program]
-[import ../example/qualified_parent_class_of.cpp]
-[qualified_parent_class_of]
+[import ../example/qualified_class_of.cpp]
+[qualified_class_of]
 [endsect]
 */
 //]
 
-#endif // #ifndef BOOST_CLBL_TRTS_QUALIFIED_PARENT_CLASS_OF_HPP
+#endif // #ifndef BOOST_CLBL_TRTS_QUALIFIED_class_of_HPP

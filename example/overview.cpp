@@ -39,7 +39,7 @@ static_assert(is_same<
 >{}, "");
 
 static_assert(is_same<
-    parent_class_of_t<pmf>,
+    class_of_t<pmf>,
     number
 >{}, "");
 
@@ -61,7 +61,7 @@ static_assert(is_same<
 >{}, "");
 
 static_assert(is_same<
-    qualified_parent_class_of_t<pmf>,
+    qualified_class_of_t<pmf>,
     const number&
 >{}, "");
 
