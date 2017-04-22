@@ -277,9 +277,9 @@ With [libname], you can get rid of all of these template specializations (unless
 
 [libname] is thoroughly tested on many platforms. [libname] correctly handles many corner cases that are often overlooked. The need for a proper library solution grows as more features are added to C++.
 
-[heading: Ugh, I don't want to use Boost. It's a massive dependency.]
+[heading Boost is a massive dependency. Do I really need it?]
 
-No problem. [libname] doesn't have any dependencies, so all you need are the CallableTraits headers.
+Nope! [libname] doesn't have any dependencies, so all you need are the [libname] headers.
 
 [heading Why does [namespace_scoped][^args_t] alias a [^std::tuple] instead of X?]
 
@@ -296,10 +296,6 @@ If your compiler doesn't support a certain language feature that is required by 
 [heading Many features in this library cause a "substitution failure" when the template constraints are violated. Does this mean that I can violate the constraints in a SFINAE context, as long as there is another legal substitute?]
 
 Yes. The SFINAE-ability of violated constraints has been tested extensively on all compilers. Achieving this required some messy code in the public header files.
-
-[heading I see that `arg_at` is defined in terms of `arg_at_t`. Shouldn't it be the other way around?]
-
-Alias templates are much friendlier to SFINAE. The `struct`-style metafunctions are provided only to parallel the `<type_traits>` naming conventions. The only reason you might want to use the `struct`-style metafunctions would be to force a hard error instead of SFINAE.
 
 [heading What about calling conventions?]
 

@@ -75,12 +75,12 @@
     </p>
 <h4>
 <a name="callable_traits.faq.h1"></a>
-      <span><a name="callable_traits.faq.Ugh"></a></span><a class="link" href="faq.html#callable_traits.faq.Ugh">,
-      I don't want to use Boost. It's a massive dependency.</a>
+      <span><a name="callable_traits.faq.boost_is_a_massive_dependency_do"></a></span><a class="link" href="faq.html#callable_traits.faq.boost_is_a_massive_dependency_do">Boost
+      is a massive dependency. Do I really need it?</a>
     </h4>
 <p>
-      No problem. <code class="literal">CallableTraits</code> doesn't have any dependencies,
-      so all you need are the CallableTraits headers.
+      Nope! <code class="literal">CallableTraits</code> doesn't have any dependencies, so all
+      you need are the <code class="literal">CallableTraits</code> headers.
     </p>
 <h4>
 <a name="callable_traits.faq.h2"></a>
@@ -129,19 +129,6 @@
     </p>
 <h4>
 <a name="callable_traits.faq.h6"></a>
-      <span><a name="callable_traits.faq.i_see_that_arg_at_is_defined_in_"></a></span><a class="link" href="faq.html#callable_traits.faq.i_see_that_arg_at_is_defined_in_">I
-      see that <code class="computeroutput"><span class="identifier">arg_at</span></code> is defined
-      in terms of <code class="computeroutput"><span class="identifier">arg_at_t</span></code>. Shouldn't
-      it be the other way around?</a>
-    </h4>
-<p>
-      Alias templates are much friendlier to SFINAE. The <code class="computeroutput"><span class="keyword">struct</span></code>-style
-      metafunctions are provided only to parallel the <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span></code>
-      naming conventions. The only reason you might want to use the <code class="computeroutput"><span class="keyword">struct</span></code>-style metafunctions would be to force
-      a hard error instead of SFINAE.
-    </p>
-<h4>
-<a name="callable_traits.faq.h7"></a>
       <span><a name="callable_traits.faq.what_about_calling_conventions"></a></span><a class="link" href="faq.html#callable_traits.faq.what_about_calling_conventions">What
       about calling conventions?</a>
     </h4>
