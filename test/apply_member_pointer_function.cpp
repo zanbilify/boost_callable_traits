@@ -13,7 +13,7 @@ struct foo;
 
 template<typename Input, typename Output>
 void test_case() {
-    assert_same< apply_member_pointer_t<Input, foo>, Output>();
+    assert_same<TRAIT(apply_member_pointer, Input, foo), Output>();
 }
 
 int main() {

@@ -12,22 +12,37 @@ HEADER GUARDS INTENTIONALLY OMITTED
 #define PP_CAT(x, y) PP_CAT_(x, y)
 #endif
 
-auto PP_CAT(test_, CALLABLE_TRAIT_UNDER_TEST) = [](){
-    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int>();
-    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int &>();
-    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int(&)()>();
-    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int(*)()>();
-    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int(* const foo::*)()>();
-    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int foo::*>();
-    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int (foo::* &)()>();
-    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int (foo::* const)()>();
-    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int (foo::* const &)()>();
-    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, int (foo::* volatile)()>();
+template<typename T>
+struct PP_CAT(is_sub_failure_, CALLABLE_TRAIT_UNDER_TEST) {
 
-    auto lambda = [](){};
-    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, decltype(lambda)>();
-    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, decltype(lambda)&>();
-    assert_sfinae<boost::callable_traits::CALLABLE_TRAIT_UNDER_TEST, void>();
+    template<typename>
+    static auto test(...) -> std::true_type;
+
+    template<typename A,
+        typename std::remove_reference<
+            TRAIT(CALLABLE_TRAIT_UNDER_TEST, A)>::type* = nullptr>
+    static auto test(int) -> std::false_type;
+
+    static constexpr bool value = decltype(test<T>(0))::value;
 };
 
-PP_CAT(test_, CALLABLE_TRAIT_UNDER_TEST)();
+bool PP_CAT(test_, CALLABLE_TRAIT_UNDER_TEST)() {
+    CT_ASSERT(PP_CAT(is_sub_failure_, CALLABLE_TRAIT_UNDER_TEST)<int>::value);
+    CT_ASSERT(PP_CAT(is_sub_failure_, CALLABLE_TRAIT_UNDER_TEST)<int &>::value);
+    CT_ASSERT(PP_CAT(is_sub_failure_, CALLABLE_TRAIT_UNDER_TEST)<int(&)()>::value);
+    CT_ASSERT(PP_CAT(is_sub_failure_, CALLABLE_TRAIT_UNDER_TEST)<int(*)()>::value);
+    CT_ASSERT(PP_CAT(is_sub_failure_, CALLABLE_TRAIT_UNDER_TEST)<int(* const foo::*)()>::value);
+    CT_ASSERT(PP_CAT(is_sub_failure_, CALLABLE_TRAIT_UNDER_TEST)<int foo::*>::value);
+    CT_ASSERT(PP_CAT(is_sub_failure_, CALLABLE_TRAIT_UNDER_TEST)<int (foo::* &)()>::value);
+    CT_ASSERT(PP_CAT(is_sub_failure_, CALLABLE_TRAIT_UNDER_TEST)<int (foo::* const)()>::value);
+    CT_ASSERT(PP_CAT(is_sub_failure_, CALLABLE_TRAIT_UNDER_TEST)<int (foo::* const &)()>::value);
+    CT_ASSERT(PP_CAT(is_sub_failure_, CALLABLE_TRAIT_UNDER_TEST)<int (foo::* volatile)()>::value);
+
+    auto lambda = [](){};
+    CT_ASSERT(PP_CAT(is_sub_failure_, CALLABLE_TRAIT_UNDER_TEST)<decltype(lambda)>::value);
+    CT_ASSERT(PP_CAT(is_sub_failure_, CALLABLE_TRAIT_UNDER_TEST)<decltype(lambda)&>::value);
+    CT_ASSERT(PP_CAT(is_sub_failure_, CALLABLE_TRAIT_UNDER_TEST)<void>::value);
+    return true;
+}
+
+auto PP_CAT(var_, CALLABLE_TRAIT_UNDER_TEST) = PP_CAT(test_, CALLABLE_TRAIT_UNDER_TEST)();

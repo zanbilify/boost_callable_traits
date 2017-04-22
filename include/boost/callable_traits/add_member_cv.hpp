@@ -44,9 +44,9 @@ using add_member_cv_t = //see below
 #endif // #ifdef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 //->
 
-template<typename T>
+template<typename T, typename U = add_member_cv_t<T>>
 struct add_member_cv {
-    using type = add_member_cv_t<T>;
+    using type = U;
 };
 
 //<-

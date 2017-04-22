@@ -12,24 +12,38 @@ Distributed under the Boost Software License, Version 1.0.
 
 struct foo;
 
+template<typename T>
+struct is_substitution_failure_class_of {
+
+    template<typename>
+    static auto test(...) -> std::true_type;
+
+    template<typename A,
+        typename std::remove_reference<
+            TRAIT(parent_class_of, A)>::type* = nullptr>
+    static auto test(int) -> std::false_type;
+
+    static constexpr bool value = decltype(test<T>(0))::value;
+};
+
 int main() {
 
     auto lambda = [](){};
 
-    assert_sfinae<boost::callable_traits::parent_class_of_t, decltype(lambda)>();
-    assert_sfinae<boost::callable_traits::parent_class_of_t, decltype(lambda)&>();
-    assert_sfinae<boost::callable_traits::parent_class_of_t, void>();
-    assert_sfinae<boost::callable_traits::parent_class_of_t, void*>();
-    assert_sfinae<boost::callable_traits::parent_class_of_t, int>();
-    assert_sfinae<boost::callable_traits::parent_class_of_t, int &>();
-    assert_sfinae<boost::callable_traits::parent_class_of_t, int()>();
-    assert_sfinae<boost::callable_traits::parent_class_of_t, int(*)()>();
-    assert_sfinae<boost::callable_traits::parent_class_of_t, int(**)()>();
-    assert_sfinae<boost::callable_traits::parent_class_of_t, int(&)()>();
-    assert_sfinae<boost::callable_traits::parent_class_of_t, int (* const &)()>();
-    assert_sfinae<boost::callable_traits::parent_class_of_t, int (foo::* &)()>();
-    assert_sfinae<boost::callable_traits::parent_class_of_t, int (foo::* const)()>();
-    assert_sfinae<boost::callable_traits::parent_class_of_t, int (foo::* const &)()>();
-    assert_sfinae<boost::callable_traits::parent_class_of_t, int (foo::* volatile)()>();
+    CT_ASSERT(is_substitution_failure_class_of<decltype(lambda)>::value);
+    CT_ASSERT(is_substitution_failure_class_of<decltype(lambda)&>::value);
+    CT_ASSERT(is_substitution_failure_class_of<void>::value);
+    CT_ASSERT(is_substitution_failure_class_of<void*>::value);
+    CT_ASSERT(is_substitution_failure_class_of<int>::value);
+    CT_ASSERT(is_substitution_failure_class_of<int &>::value);
+    CT_ASSERT(is_substitution_failure_class_of<int()>::value);
+    CT_ASSERT(is_substitution_failure_class_of<int(*)()>::value);
+    CT_ASSERT(is_substitution_failure_class_of<int(**)()>::value);
+    CT_ASSERT(is_substitution_failure_class_of<int(&)()>::value);
+    CT_ASSERT(is_substitution_failure_class_of<int (* const &)()>::value);
+    CT_ASSERT(is_substitution_failure_class_of<int (foo::* &)()>::value);
+    CT_ASSERT(is_substitution_failure_class_of<int (foo::* const)()>::value);
+    CT_ASSERT(is_substitution_failure_class_of<int (foo::* const &)()>::value);
+    CT_ASSERT(is_substitution_failure_class_of<int (foo::* volatile)()>::value);
 }
 

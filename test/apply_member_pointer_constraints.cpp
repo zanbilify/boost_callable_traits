@@ -10,9 +10,23 @@ Distributed under the Boost Software License, Version 1.0.
 
 struct foo;
 
+template<typename T, typename U>
+struct is_substitution_failure_apply_member_pointer {
+
+    template<typename, typename>
+    static auto test(...) -> std::true_type;
+
+    template<typename A, typename B,
+        typename std::remove_reference<
+            TRAIT(apply_member_pointer, A, B)>::type* = nullptr>
+    static auto test(int) -> std::false_type;
+
+    static constexpr bool value = decltype(test<T, U>(0))::value;
+};
+
 int main() {
-    assert_sfinae< apply_member_pointer_t, void, foo>();
-    assert_sfinae< apply_member_pointer_t, int,  int>();
-    assert_sfinae< apply_member_pointer_t, void, int>();
+    CT_ASSERT(is_substitution_failure_apply_member_pointer<void, foo>::value);
+    CT_ASSERT(is_substitution_failure_apply_member_pointer<int,  int>::value);
+    CT_ASSERT(is_substitution_failure_apply_member_pointer<void, int>::value);
 }
 

@@ -56,9 +56,9 @@ using add_member_rvalue_reference_t = //see below
 
 #endif // #ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 
-template<typename T>
+template<typename T, typename U = add_member_rvalue_reference_t<T>>
 struct add_member_rvalue_reference {
-    using type = add_member_rvalue_reference_t<T>;
+    using type = U;
 };
 
 //<-

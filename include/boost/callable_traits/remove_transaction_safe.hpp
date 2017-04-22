@@ -33,9 +33,9 @@ using remove_transaction_safe_t = //see below
         cannot_remove_transaction_safe_from_this_type>;
 //->
 
-template<typename T>
+template<typename T, typename U = remove_transaction_safe_t<T>>
 struct remove_transaction_safe {
-    using type = remove_transaction_safe_t<T>;
+  using type = U;
 };
 
 //<-

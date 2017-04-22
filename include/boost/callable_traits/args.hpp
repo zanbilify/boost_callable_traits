@@ -28,9 +28,11 @@ using args_t = //see below
         cannot_expand_the_parameter_list_of_first_template_argument>;
 //->
 
-template<typename T, template<class...> class Container = std::tuple>
+template<typename T,
+  template<class...> class Container = std::tuple,
+  typename U = args_t<T, Container>>
 struct args {
-    using type = args_t<T, Container>;
+    using type = U;
 };
 
 //<-

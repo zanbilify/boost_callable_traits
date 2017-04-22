@@ -49,9 +49,9 @@ using add_transaction_safe_t = //see below
         cannot_add_transaction_safe_to_this_type>;
 //->
 
-template<typename T>
+template<typename T, typename U = add_transaction_safe_t<T>>
 struct add_transaction_safe {
-    using type = add_transaction_safe_t<T>;
+    using type = U;
 };
 
 //<-

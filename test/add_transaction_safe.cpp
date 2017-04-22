@@ -18,7 +18,7 @@ int main(){}
 template<typename Safe, typename NotSafe>
 void test() {
 
-    CT_ASSERT(std::is_same<Safe,  add_transaction_safe_t<NotSafe>>::value);
+    CT_ASSERT(std::is_same<Safe,  TRAIT(add_transaction_safe, NotSafe)>::value);
 
     //sanity check
     CT_ASSERT(!std::is_same<Safe, NotSafe>::value);
