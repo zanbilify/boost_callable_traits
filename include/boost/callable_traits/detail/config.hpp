@@ -96,7 +96,7 @@ Distributed under the Boost Software License, Version 1.0.
 #  define BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC
 #endif // #if defined(BOOST_CLBL_TRTS_MSVC) && !defined(BOOST_DISABLE_WIN32))
 
-#if defined(BOOST_CLBL_TRTS_GCC) && !defined(BOOST_CLBL_TRTS_GCC_AT_LEAST_4_9_2) || defined(__INTEL_COMPILER)
+#if defined(BOOST_CLBL_TRTS_GCC) && !defined(BOOST_CLBL_TRTS_GCC_AT_LEAST_4_9_2)
 #  define BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 #  define BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 #endif // #if defined BOOST_CLBL_TRTS_GCC && !defined(BOOST_CLBL_TRTS_GCC_AT_LEAST_4_9_2)
