@@ -29,9 +29,9 @@ using parent_class_of_t = //see below
         type_is_not_a_member_pointer>;
 //->
 
-template<typename T>
+template<typename T, typename U = parent_class_of_t<T>>
 struct parent_class_of {
-    using type = parent_class_of_t<T>;
+    using type = U;
 };
 
 //<-

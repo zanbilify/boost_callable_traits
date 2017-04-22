@@ -14,7 +14,7 @@ struct b;
 
 template<typename Input, typename Output>
 void test_case() {
-    assert_same< apply_member_pointer_t<Input, b>, Output>();
+    assert_same< TRAIT(apply_member_pointer, Input, b), Output>();
 }
 
 int main() {

@@ -19,29 +19,24 @@ struct is_substitution_failure_args {
     static auto test(...) -> std::true_type;
 
     template<typename U,
-        boost::callable_traits::args_t<U, std::tuple>* = nullptr>
+        TRAIT(boost::callable_traits::args, U, std::tuple)* = nullptr>
     static auto test(int) -> std::false_type;
 
     static constexpr bool value = decltype(test<T>(0))::value;
 };
 
-template<typename T>
-void assert_sfinae_args() {
-    CT_ASSERT(is_substitution_failure_args<T>::value);
-}
-
 int main() {
 
-    assert_sfinae_args<int>();
-    assert_sfinae_args<int &>();
-    assert_sfinae_args<int (* const &)()>();
-    assert_sfinae_args<int (foo::* &)()>();
-    assert_sfinae_args<int (foo::* const)()>();
-    assert_sfinae_args<int (foo::* const &)()>();
-    assert_sfinae_args<int (foo::* volatile)()>();
+    CT_ASSERT(is_substitution_failure_args<int>::value);
+    CT_ASSERT(is_substitution_failure_args<int &>::value);
+    CT_ASSERT(is_substitution_failure_args<int (* const &)()>::value);
+    CT_ASSERT(is_substitution_failure_args<int (foo::* &)()>::value);
+    CT_ASSERT(is_substitution_failure_args<int (foo::* const)()>::value);
+    CT_ASSERT(is_substitution_failure_args<int (foo::* const &)()>::value);
+    CT_ASSERT(is_substitution_failure_args<int (foo::* volatile)()>::value);
 
     auto lambda = [](){};
-    assert_sfinae_args<decltype(lambda)&>();
-    assert_sfinae_args<void>();
+    CT_ASSERT(is_substitution_failure_args<decltype(lambda)&>::value);
+    CT_ASSERT(is_substitution_failure_args<void>::value);
 }
 

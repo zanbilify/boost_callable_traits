@@ -28,18 +28,18 @@ int main() {
         using cvl = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) const volatile LREF;
         using cvr = void(BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC foo::*)(...) const volatile RREF;
 
-        CT_ASSERT(std::is_same<cv,    add_member_cv_t<f>>{});
-        CT_ASSERT(std::is_same<cv,    add_member_cv_t<c>>{});
-        CT_ASSERT(std::is_same<cvl,   add_member_cv_t<l>>{});
-        CT_ASSERT(std::is_same<cvl,   add_member_cv_t<cl>>{});
-        CT_ASSERT(std::is_same<cvr,   add_member_cv_t<r>>{});
-        CT_ASSERT(std::is_same<cvr,   add_member_cv_t<cr>>{});
-        CT_ASSERT(std::is_same<cv,   add_member_cv_t<v>>{});
-        CT_ASSERT(std::is_same<cv,   add_member_cv_t<cv>>{});
-        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<vl>>{});
-        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<cvl>>{});
-        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<vr>>{});
-        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<cvr>>{});
+        CT_ASSERT(std::is_same<cv,    TRAIT(add_member_cv, f)>{});
+        CT_ASSERT(std::is_same<cv,    TRAIT(add_member_cv, c)>{});
+        CT_ASSERT(std::is_same<cvl,   TRAIT(add_member_cv, l)>{});
+        CT_ASSERT(std::is_same<cvl,   TRAIT(add_member_cv, cl)>{});
+        CT_ASSERT(std::is_same<cvr,   TRAIT(add_member_cv, r)>{});
+        CT_ASSERT(std::is_same<cvr,   TRAIT(add_member_cv, cr)>{});
+        CT_ASSERT(std::is_same<cv,   TRAIT(add_member_cv, v)>{});
+        CT_ASSERT(std::is_same<cv,   TRAIT(add_member_cv, cv)>{});
+        CT_ASSERT(std::is_same<cvl,  TRAIT(add_member_cv, vl)>{});
+        CT_ASSERT(std::is_same<cvl,  TRAIT(add_member_cv, cvl)>{});
+        CT_ASSERT(std::is_same<cvr,  TRAIT(add_member_cv, vr)>{});
+        CT_ASSERT(std::is_same<cvr,  TRAIT(add_member_cv, cvr)>{});
     }
 
     {
@@ -56,18 +56,18 @@ int main() {
         using cvl = void(foo::*)(int, int) const volatile LREF;
         using cvr = void(foo::*)(int, int) const volatile RREF;
 
-        CT_ASSERT(std::is_same<cv,   add_member_cv_t<f>>{});
-        CT_ASSERT(std::is_same<cv,   add_member_cv_t<c>>{});
-        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<l>>{});
-        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<cl>>{});
-        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<r>>{});
-        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<cr>>{});
-        CT_ASSERT(std::is_same<cv,   add_member_cv_t<v>>{});
-        CT_ASSERT(std::is_same<cv,   add_member_cv_t<cv>>{});
-        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<vl>>{});
-        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<cvl>>{});
-        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<vr>>{});
-        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<cvr>>{});
+        CT_ASSERT(std::is_same<cv,   TRAIT(add_member_cv, f)>{});
+        CT_ASSERT(std::is_same<cv,   TRAIT(add_member_cv, c)>{});
+        CT_ASSERT(std::is_same<cvl,  TRAIT(add_member_cv, l)>{});
+        CT_ASSERT(std::is_same<cvl,  TRAIT(add_member_cv, cl)>{});
+        CT_ASSERT(std::is_same<cvr,  TRAIT(add_member_cv, r)>{});
+        CT_ASSERT(std::is_same<cvr,  TRAIT(add_member_cv, cr)>{});
+        CT_ASSERT(std::is_same<cv,   TRAIT(add_member_cv, v)>{});
+        CT_ASSERT(std::is_same<cv,   TRAIT(add_member_cv, cv)>{});
+        CT_ASSERT(std::is_same<cvl,  TRAIT(add_member_cv, vl)>{});
+        CT_ASSERT(std::is_same<cvl,  TRAIT(add_member_cv, cvl)>{});
+        CT_ASSERT(std::is_same<cvr,  TRAIT(add_member_cv, vr)>{});
+        CT_ASSERT(std::is_same<cvr,  TRAIT(add_member_cv, cvr)>{});
     }
 
 #ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
@@ -86,18 +86,18 @@ int main() {
         using cvl = void() const volatile LREF;
         using cvr = void() const volatile RREF;
 
-        CT_ASSERT(std::is_same<cv,   add_member_cv_t<f>>{});
-        CT_ASSERT(std::is_same<cv,   add_member_cv_t<c>>{});
-        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<l>>{});
-        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<cl>>{});
-        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<r>>{});
-        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<cr>>{});
-        CT_ASSERT(std::is_same<cv,   add_member_cv_t<v>>{});
-        CT_ASSERT(std::is_same<cv,   add_member_cv_t<cv>>{});
-        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<vl>>{});
-        CT_ASSERT(std::is_same<cvl,  add_member_cv_t<cvl>>{});
-        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<vr>>{});
-        CT_ASSERT(std::is_same<cvr,  add_member_cv_t<cvr>>{});
+        CT_ASSERT(std::is_same<cv,   TRAIT(add_member_cv, f)>{});
+        CT_ASSERT(std::is_same<cv,   TRAIT(add_member_cv, c)>{});
+        CT_ASSERT(std::is_same<cvl,  TRAIT(add_member_cv, l)>{});
+        CT_ASSERT(std::is_same<cvl,  TRAIT(add_member_cv, cl)>{});
+        CT_ASSERT(std::is_same<cvr,  TRAIT(add_member_cv, r)>{});
+        CT_ASSERT(std::is_same<cvr,  TRAIT(add_member_cv, cr)>{});
+        CT_ASSERT(std::is_same<cv,   TRAIT(add_member_cv, v)>{});
+        CT_ASSERT(std::is_same<cv,   TRAIT(add_member_cv, cv)>{});
+        CT_ASSERT(std::is_same<cvl,  TRAIT(add_member_cv, vl)>{});
+        CT_ASSERT(std::is_same<cvl,  TRAIT(add_member_cv, cvl)>{});
+        CT_ASSERT(std::is_same<cvr,  TRAIT(add_member_cv, vr)>{});
+        CT_ASSERT(std::is_same<cvr,  TRAIT(add_member_cv, cvr)>{});
     }
 
 #endif //#ifndef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS

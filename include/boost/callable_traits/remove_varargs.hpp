@@ -30,9 +30,9 @@ using remove_varargs_t = //see below
         varargs_are_illegal_for_this_type>;
 //->
 
-template<typename T>
+template<typename T, typename U = remove_varargs_t<T>>
 struct remove_varargs {
-    using type = remove_varargs_t<T>;
+    using type = U;
 };
 
 //<-

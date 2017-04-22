@@ -28,9 +28,9 @@ using function_type_t = //see below
         cannot_determine_parameters_for_this_type>;
 //->
 
-template<typename T>
+template<typename T, typename U = function_type_t<T>>
 struct function_type {
-    using type = function_type_t<T>;
+    using type = U;
 };
 
 //<-

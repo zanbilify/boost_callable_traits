@@ -30,9 +30,9 @@ using qualified_parent_class_of_t = //see below
         type_is_not_a_member_pointer>;
 //->
 
-template<typename T>
+template<typename T, typename U = qualified_parent_class_of_t<T>>
 struct qualified_parent_class_of {
-    using type = qualified_parent_class_of_t<T>;
+    using type = U;
 };
 
 //<-

@@ -14,24 +14,38 @@ Distributed under the Boost Software License, Version 1.0.
 int main(){}
 #else
 
+template<typename T>
+struct is_substitution_failure_remove_tx_safe {
+
+    template<typename>
+    static auto test(...) -> std::true_type;
+
+    template<typename A,
+        typename std::remove_reference<
+            TRAIT(remove_transaction_safe, A)>::type* = nullptr>
+    static auto test(int) -> std::false_type;
+
+    static constexpr bool value = decltype(test<T>(0))::value;
+};
+
 struct foo;
 
 int main() {
 
     auto lambda = [](){};
 
-    assert_sfinae<boost::callable_traits::remove_transaction_safe_t, decltype(lambda)>();
-    assert_sfinae<boost::callable_traits::remove_transaction_safe_t, decltype(lambda)&>();
-    assert_sfinae<boost::callable_traits::remove_transaction_safe_t, int>();
-    assert_sfinae<boost::callable_traits::remove_transaction_safe_t, int &>();
-    assert_sfinae<boost::callable_traits::remove_transaction_safe_t, int (* const &)()>();
-    assert_sfinae<boost::callable_traits::remove_transaction_safe_t, int (foo::* &)()>();
-    assert_sfinae<boost::callable_traits::remove_transaction_safe_t, int (foo::* const)()>();
-    assert_sfinae<boost::callable_traits::remove_transaction_safe_t, int (foo::* const &)()>();
-    assert_sfinae<boost::callable_traits::remove_transaction_safe_t, int (foo::* volatile)()>();
-    assert_sfinae<boost::callable_traits::remove_transaction_safe_t, void>();
-    assert_sfinae<boost::callable_traits::remove_transaction_safe_t, void*>();
-    assert_sfinae<boost::callable_traits::remove_transaction_safe_t, void(**)()>();
+    CT_ASSERT(is_substitution_failure_remove_tx_safe<decltype(lambda)>::value);
+    CT_ASSERT(is_substitution_failure_remove_tx_safe<decltype(lambda)&>::value);
+    CT_ASSERT(is_substitution_failure_remove_tx_safe<int>::value);
+    CT_ASSERT(is_substitution_failure_remove_tx_safe<int &>::value);
+    CT_ASSERT(is_substitution_failure_remove_tx_safe<int (* const &)()>::value);
+    CT_ASSERT(is_substitution_failure_remove_tx_safe<int (foo::* &)()>::value);
+    CT_ASSERT(is_substitution_failure_remove_tx_safe<int (foo::* const)()>::value);
+    CT_ASSERT(is_substitution_failure_remove_tx_safe<int (foo::* const &)()>::value);
+    CT_ASSERT(is_substitution_failure_remove_tx_safe<int (foo::* volatile)()>::value);
+    CT_ASSERT(is_substitution_failure_remove_tx_safe<void>::value);
+    CT_ASSERT(is_substitution_failure_remove_tx_safe<void*>::value);
+    CT_ASSERT(is_substitution_failure_remove_tx_safe<void(**)()>::value);
 }
 
 #endif //#ifndef BOOST_CLBL_TRTS_ENABLE_TRANSACTION_SAFE

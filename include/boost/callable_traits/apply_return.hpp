@@ -46,9 +46,9 @@ namespace detail {
             invalid_types_for_apply_return>;
     //->
 
-    template<typename T, typename R>
+    template<typename T, typename R, typename U = apply_return_t<T, R>>
     struct apply_return {
-        using type = apply_return_t<T, R>;
+        using type = U;
     };
 
 //<-

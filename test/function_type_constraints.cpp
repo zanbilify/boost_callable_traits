@@ -12,17 +12,31 @@ Distributed under the Boost Software License, Version 1.0.
 
 struct foo;
 
+template<typename T>
+struct is_substitution_failure_function_type {
+
+    template<typename>
+    static auto test(...) -> std::true_type;
+
+    template<typename A,
+        typename std::remove_reference<
+            TRAIT(function_type, A)>::type* = nullptr>
+    static auto test(int) -> std::false_type;
+
+    static constexpr bool value = decltype(test<T>(0))::value;
+};
+
 int main() {
 
-    assert_sfinae<boost::callable_traits::function_type_t, int>();
-    assert_sfinae<boost::callable_traits::function_type_t, int &>();
-    assert_sfinae<boost::callable_traits::function_type_t, int (foo::* &)()>();
-    assert_sfinae<boost::callable_traits::function_type_t, int (foo::* const)()>();
-    assert_sfinae<boost::callable_traits::function_type_t, int (foo::* const &)()>();
-    assert_sfinae<boost::callable_traits::function_type_t, int (foo::* volatile)()>();
+    CT_ASSERT(is_substitution_failure_function_type<int>::value);
+    CT_ASSERT(is_substitution_failure_function_type<int &>::value);
+    CT_ASSERT(is_substitution_failure_function_type<int (foo::* &)()>::value);
+    CT_ASSERT(is_substitution_failure_function_type<int (foo::* const)()>::value);
+    CT_ASSERT(is_substitution_failure_function_type<int (foo::* const &)()>::value);
+    CT_ASSERT(is_substitution_failure_function_type<int (foo::* volatile)()>::value);
 
     auto lambda = [](){};
-    assert_sfinae<boost::callable_traits::function_type_t, decltype(lambda)&>();
-    assert_sfinae<boost::callable_traits::function_type_t, void>();
+    CT_ASSERT(is_substitution_failure_function_type<decltype(lambda)&>::value);
+    CT_ASSERT(is_substitution_failure_function_type<void>::value);
 }
 

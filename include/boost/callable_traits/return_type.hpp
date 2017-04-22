@@ -33,9 +33,9 @@ using return_type_t = //see below
         unable_to_determine_return_type>;
 //->
 
-template<typename T>
+template<typename T, typename U = return_type_t<T>>
 struct return_type {
-    using type = return_type_t<T>;
+    using type = U;
 };
 
 //<-

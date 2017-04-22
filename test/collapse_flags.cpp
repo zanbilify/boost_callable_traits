@@ -15,7 +15,7 @@ using namespace boost::callable_traits::detail;
 
 int main() {
 
-    // boost::callable_traits::collapse_flags emulates the C++11
+    // boost::callable_traits::detail::collapse_flags emulates the C++11
     // reference collapsing rules. Here, we test that behavior.
 
     using rref_plus_lref = collapse_flags<rref_, lref_>;

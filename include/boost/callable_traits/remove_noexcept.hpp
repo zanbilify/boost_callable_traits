@@ -33,9 +33,9 @@ using remove_noexcept_t = //see below
         cannot_remove_noexcept_from_this_type>;
 //->
 
-template<typename T>
+template<typename T, typename U = remove_noexcept_t<T>>
 struct remove_noexcept {
-    using type = remove_noexcept_t<T>;
+    using type = U;
 };
 
 //<-

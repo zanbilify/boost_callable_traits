@@ -63,9 +63,9 @@ using apply_member_pointer_t = //see below
             second_template_argument_must_be_a_class_or_struct> >;
 //->
 
-template<typename T, typename C>
+template<typename T, typename C, typename U = apply_member_pointer_t<T, C>>
 struct apply_member_pointer {
-    using type = apply_member_pointer_t<T, C>;
+    using type = U;
 };
 
 //<-

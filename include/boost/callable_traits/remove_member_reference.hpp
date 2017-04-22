@@ -29,9 +29,9 @@ using remove_member_reference_t = //see below
         member_qualifiers_are_illegal_for_this_type>;
 //->
 
-template<typename T>
+template<typename T, typename U = remove_member_reference_t<T>>
 struct remove_member_reference {
-    using type = remove_member_reference_t<T>;
+    using type = U;
 };
 
 //<-

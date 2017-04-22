@@ -69,6 +69,11 @@ template<typename T, typename Fallback>
 using fallback_if_invalid = typename std::conditional<
     std::is_same<T, invalid_type>::value, Fallback, T>::type;
 
+template<typename T, template<class> class Alias, typename U = Alias<T>>
+struct force_sfinae {
+    using type = U;
+};
+
 BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
 
 #endif // #ifndef BOOST_CLBL_TRTS_DETAIL_UTILITY_HPP

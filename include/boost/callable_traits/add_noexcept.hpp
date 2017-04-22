@@ -48,9 +48,9 @@ using add_noexcept_t = //see below
         cannot_add_noexcept_to_this_type>;
 //->
 
-template<typename T>
+template<typename T, typename U = add_noexcept_t<T>>
 struct add_noexcept {
-    using type = add_noexcept_t<T>;
+    using type = U;
 };
 
 //<-

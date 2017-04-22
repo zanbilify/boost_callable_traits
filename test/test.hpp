@@ -27,44 +27,16 @@ using namespace boost::callable_traits;
 #define TX_SAFE BOOST_CLBL_TRTS_TRANSACTION_SAFE_SPECIFIER
 #define VA_CC BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC
 
-template<template<class...> class, typename...>
-struct is_substitution_failure;
+#ifndef PP_CAT
+#define PP_CAT_(x, y) x ## y
+#define PP_CAT(x, y) PP_CAT_(x, y)
+#endif
 
-template<template<class> class MetaFn, typename T>
-struct is_substitution_failure<MetaFn, T> {
-
-    template<typename>
-    static auto test(...) -> std::true_type;
-
-    template<typename U,
-        typename std::remove_reference<MetaFn<U>>::type* = nullptr>
-    static auto test(int) -> std::false_type;
-
-    static constexpr bool value = decltype(test<T>(0))::value;
-};
-
-template<template<class, class> class MetaFn, typename T1, typename T2>
-struct is_substitution_failure<MetaFn, T1, T2> {
-
-    template<typename, typename>
-    static auto test(...) -> std::true_type;
-
-    template<typename A, typename B,
-        typename std::remove_reference<MetaFn<A, B>>::type* = nullptr>
-    static auto test(int) -> std::false_type;
-
-    static constexpr bool value = decltype(test<T1, T2>(0))::value;
-};
-
-template<template<class, class> class Template, typename T1, typename T2>
-void assert_sfinae() {
-    CT_ASSERT(is_substitution_failure<Template, T1, T2>::value);
-}
-
-template<template<class> class Template, typename T>
-void assert_sfinae() {
-    CT_ASSERT(is_substitution_failure<Template, T>::value);
-}
+#ifdef USE_LAZY_TYPES
+#define TRAIT(trait, ...) PP_CAT(trait, _t)<__VA_ARGS__>
+#else
+#define TRAIT(trait, ...) typename trait<__VA_ARGS__>::type
+#endif
 
 template<typename T1, typename T2>
 void assert_same() {

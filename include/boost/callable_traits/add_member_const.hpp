@@ -44,9 +44,9 @@ using add_member_const_t = //see below
 #endif // #ifdef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 //->
 
-template<typename T>
+template<typename T, typename U = add_member_const_t<T>>
 struct add_member_const {
-    using type = add_member_const_t<T>;
+    using type = U;
 };
 
 //<-
