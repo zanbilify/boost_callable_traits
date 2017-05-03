@@ -116,9 +116,12 @@ add_subdirectory(example)
 add_subdirectory(test)
 
 ##############################################################################
-# Setup the 'install' target.
-# This copies the whole content of include/ to ${CMAKE_INSTALL_PREFIX}.
+# Setup the 'install' target and the package config file.
 ##############################################################################
-
-install(DIRECTORY include/boost DESTINATION include
-        PATTERN ".DS_Store" EXCLUDE)
+add_library(callable_traits INTERFACE)
+target_include_directories(callable_traits INTERFACE
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+    $<INSTALL_INTERFACE:include>)
+install(TARGETS callable_traits     EXPORT CallableTraitsConfig)
+install(EXPORT CallableTraitsConfig DESTINATION lib/cmake/CallableTraits)
+install(DIRECTORY include/boost     DESTINATION include FILES_MATCHING PATTERN "*.hpp")
