@@ -29,10 +29,10 @@
 <h4>
 <a name="callable_traits.faq.h0"></a>
       <span><a name="callable_traits.faq.reasons"></a></span><a class="link" href="faq.html#callable_traits.faq.reasons">Why
-      should I use <code class="literal">CallableTraits</code>?</a>
+      should I use <code class="literal">Boost.CallableTraits</code>?</a>
     </h4>
 <p>
-      If you are not writing generic code, you should not use <code class="literal">CallableTraits</code>.
+      If you are not writing generic code, you should not use <code class="literal">Boost.CallableTraits</code>.
     </p>
 <p>
       If you <span class="emphasis"><em>are</em></span> writing generic code, take a moment to skim
@@ -61,17 +61,18 @@
 <span class="special">};</span>
 </pre>
 <p>
-      With <code class="literal">CallableTraits</code>, you can get rid of all of these template
-      specializations (unless you deal with platform-specific calling conventions,
-      for now). Even if you are only specializing a simple function type like <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)</span></code>, <code class="literal">CallableTraits</code> might
-      be useful to you. You may find that <code class="literal">CallableTraits</code> can help
-      make your code more readable, more maintainable, more generic, and less error-prone.
+      With <code class="literal">Boost.CallableTraits</code>, you can get rid of all of these
+      template specializations (unless you deal with platform-specific calling conventions,
+      for now). Even if you are only specializing a simple function type like <code class="computeroutput"><span class="identifier">Return</span><span class="special">(</span><span class="identifier">Args</span><span class="special">...)</span></code>, <code class="literal">Boost.CallableTraits</code>
+      might be useful to you. You may find that <code class="literal">Boost.CallableTraits</code>
+      can help make your code more readable, more maintainable, more generic, and
+      less error-prone.
     </p>
 <p>
-      <code class="literal">CallableTraits</code> is thoroughly tested on many platforms.
-      <code class="literal">CallableTraits</code> correctly handles many corner cases that
-      are often overlooked. The need for a proper library solution grows as more
-      features are added to C++.
+      <code class="literal">Boost.CallableTraits</code> is thoroughly tested on many platforms.
+      <code class="literal">Boost.CallableTraits</code> correctly handles many corner cases
+      that are often overlooked. The need for a proper library solution grows as
+      more features are added to C++.
     </p>
 <h4>
 <a name="callable_traits.faq.h1"></a>
@@ -79,8 +80,8 @@
       is a massive dependency. Do I really need it?</a>
     </h4>
 <p>
-      Nope! <code class="literal">CallableTraits</code> doesn't have any dependencies, so all
-      you need are the <code class="literal">CallableTraits</code> headers.
+      Nope! <code class="literal">Boost.CallableTraits</code> doesn't have any dependencies,
+      so all you need are the <code class="literal">Boost.CallableTraits</code> headers.
     </p>
 <h4>
 <a name="callable_traits.faq.h2"></a>
@@ -89,7 +90,7 @@
       a <code class="literal">std::tuple</code> instead of X?</a>
     </h4>
 <p>
-      Boost contains a handful of excellent type containers. However, <code class="literal">CallableTraits</code>
+      Boost contains a handful of excellent type containers. However, <code class="literal">Boost.CallableTraits</code>
       is designed to only use the standard headers, so <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">tuple</span><span class="special">&gt;</span></code>
       was the only option under this limitation. It would be trivial to support other
       variadic containers, and I will consider doing so if there is sufficient interest.

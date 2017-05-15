@@ -12,7 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <boost/callable_traits/detail/core.hpp>
 
-BOOST_CLBL_TRTS_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits {
 
 //[ is_noexcept_hpp
 /*`[section:ref_is_noexcept is_noexcept]
@@ -21,15 +21,15 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 [heading Definition]
 */
 
+// inherits from either std::true_type or std::false_type
 template<typename T>
-struct is_noexcept; //see below
+struct is_noexcept;
 
 //<-
 template<typename T>
 struct is_noexcept : detail::traits<T>::is_noexcept {
     using type = typename detail::traits<T>::is_noexcept;
 };
-//->
 
 #ifdef BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES
 
@@ -40,16 +40,19 @@ struct is_noexcept_v {
 };
 
 #else
-
+//->
+// only available when variable templates are supported
 template<typename T>
+//<-
+BOOST_CLBL_TRAITS_INLINE_VAR
+//->
 constexpr bool is_noexcept_v = //see below
 //<-
     detail::traits<T>::is_noexcept::value;
-//->
+
 #endif
 
-//<-
-BOOST_CLBL_TRTS_NAMESPACE_END
+}} // namespace boost::callable_traits
 //->
 
 /*`

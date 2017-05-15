@@ -15,7 +15,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <boost/callable_traits/detail/default_callable_traits.hpp>
 #include <boost/callable_traits/detail/utility.hpp>
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits { namespace detail {
 
 template<qualifier_flags Applied, bool IsTransactionSafe, bool IsNoExcept,
     typename CallingConvention, typename T, typename Return,
@@ -92,6 +92,6 @@ struct pmf : default_callable_traits<T> {};
 #undef BOOST_CLBL_TRTS_VARARGS_CC
 #endif // #ifdef BOOST_CLBL_TRTS_ENABLE_FASTCALL
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
+}}} // namespace boost::callable_traits::detail
 
 #endif // #ifndef BOOST_CLBL_TRTS_DETAIL_PMF_HPP

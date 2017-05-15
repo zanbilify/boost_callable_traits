@@ -15,7 +15,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <boost/callable_traits/detail/default_callable_traits.hpp>
 #include <boost/callable_traits/detail/utility.hpp>
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits { namespace detail {
 
 template<typename T>
 struct pmd : default_callable_traits<T> {};
@@ -46,6 +46,6 @@ struct pmd<D T::*> : default_callable_traits<> {
     using expand_args = Container<invoke_type>;
 };
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
+}}} // namespace boost::callable_traits::detail
 
 #endif

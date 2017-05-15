@@ -12,7 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <boost/callable_traits/detail/config.hpp>
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits { namespace detail {
     
 //bit qualifier_flags used to signify cv/ref qualifiers
 using qualifier_flags = std::uint32_t;
@@ -118,6 +118,6 @@ template<typename T> struct flag_map<T const volatile> { static constexpr qualif
 template<typename T> struct flag_map<T const volatile &> { static constexpr qualifier_flags value = const_ | volatile_ | lref_; };
 template<typename T> struct flag_map<T const volatile &&> { static constexpr qualifier_flags value = const_ | volatile_ | rref_; };
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
+}}} // namespace boost::callable_traits::detail
 
 #endif // #ifndef BOOST_CLBL_TRTS_QUALIFIER_FLAGS_HPP

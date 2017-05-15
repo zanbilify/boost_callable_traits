@@ -15,7 +15,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <boost/callable_traits/detail/set_function_qualifiers.hpp>
 #include <boost/callable_traits/detail/default_callable_traits.hpp>
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits { namespace detail {
 
 template<typename T>
 struct function : default_callable_traits<T> {};
@@ -187,6 +187,6 @@ struct function<T&> : std::conditional<function<T>::value,
     using replace_args = typename base::template replace_args<Index, NewArgs...>&;
 };
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
+}}} // namespace boost::callable_traits::detail
 
 #endif // #ifndef BOOST_CLBL_TRTS_DETAIL_FUNCTION_HPP

@@ -3,7 +3,7 @@
 
 #include <boost/callable_traits/detail/config.hpp>
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits { namespace detail {
 
 template<std::size_t I, typename T, bool IgnoreThisPointer = false,
     bool AllowPlus1 = false, std::size_t Count = 0>
@@ -46,6 +46,6 @@ struct parameter_index_helper {
         T, error_t(error_t)>::type;
 };
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
+}}} // namespace boost::callable_traits::detail
 
 #endif // #ifndef BOOST_CLBL_TRTS_PARAMETER_INDEX_HELPER_HPP

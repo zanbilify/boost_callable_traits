@@ -11,7 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <boost/callable_traits/detail/core.hpp>
 
-BOOST_CLBL_TRTS_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits {
 
 //[ has_member_qualifiers_hpp
 /*`[section:ref_has_member_qualifiers has_member_qualifiers]
@@ -20,8 +20,9 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 [heading Definition]
 */
 
+// inherits from either std::true_type or std::false_type
 template<typename T>
-struct has_member_qualifiers; //immplementation-defined
+struct has_member_qualifiers;
 
 //<-
 template<typename T>
@@ -40,16 +41,18 @@ struct has_member_qualifiers_v {
 
 #else
 //->
+// only available when variable templates are supported
 template<typename T>
+//<-
+BOOST_CLBL_TRAITS_INLINE_VAR
+//->
 constexpr bool has_member_qualifiers_v = //see below
 //<-
     detail::traits<T>::has_member_qualifiers::value;
 
 #endif
-//->
 
-//<-
-BOOST_CLBL_TRTS_NAMESPACE_END
+}} // namespace boost::callable_traits
 //->
 
 /*`

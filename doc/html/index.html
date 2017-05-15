@@ -98,11 +98,13 @@
 <dt><span class="section"><a href="index.html#callable_traits.introduction.compatibility">Compatibility</a></span></dt>
 </dl></div>
 <p>
-      <code class="literal">CallableTraits</code> is a C++11 header-only library for the inspection,
-      synthesis, and decomposition of callable types. <code class="literal">CallableTraits</code>
+      <code class="literal">Boost.CallableTraits</code> is a C++11 header-only library for
+      the inspection, synthesis, and decomposition of callable types. <code class="literal">Boost.CallableTraits</code>
       aims to be the "complete type manipulation facility for function types"
       mentioned in the final paragraph of C++17 proposal <a href="http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html" target="_top">p0172</a>,
       and removes the need for template specializations for different function signatures.
+      C++17 <code class="computeroutput"><span class="keyword">noexcept</span></code> and the Transactional
+      Memory TS are also supported if available.
     </p>
 <pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
 <span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">tuple</span><span class="special">&gt;</span>
@@ -215,7 +217,7 @@
         requires lots of code duplication.
       </p>
 <p>
-        <code class="literal">CallableTraits</code> offers a final and decisive library-level
+        <code class="literal">Boost.CallableTraits</code> offers a final and decisive library-level
         solution to this problem, and removes the need for these specializations
         entirely (except for platform-specific calling conventions).
       </p>
@@ -226,52 +228,92 @@
       <code class="literal">Boost.FunctionTypes</code></a>
 </h3></div></div></div>
 <p>
-        The use cases for <code class="literal">CallableTraits</code> overlap significantly
-        with those of <a href="http://www.boost.org/doc/libs/1_61_0/libs/function_types/doc/html/index.html" target="_top"><code class="literal">Boost.FunctionTypes</code></a>.
-        Here are some reasons why you might prefer <code class="literal">CallableTraits</code>
-        over the latter:
+        The features in <code class="literal">Boost.CallableTraits</code> largely overlap with
+        <a href="http://www.boost.org/doc/libs/1_61_0/libs/function_types/doc/html/index.html" target="_top"><code class="literal">Boost.FunctionTypes</code></a>.
+        Here are some reasons why you might prefer <code class="literal">Boost.CallableTraits</code>:
       </p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
-            <code class="literal">Boost.FunctionTypes</code> is tightly coupled to <a href="http://www.boost.org/doc/libs/1_60_0/libs/mpl/doc/index.html" target="_top"><code class="literal">Boost.MPL</code></a>
-            sequences, while <code class="literal">CallableTraits</code> generally takes a
-            lower-level approach. No knowledge of MPL terminology is needed to use
-            <code class="literal">CallableTraits</code>.
+            <code class="literal">Boost.FunctionTypes</code> is tightly coupled to <a href="http://www.boost.org/doc/libs/1_64_0/libs/mpl/doc/index.html" target="_top"><code class="literal">Boost.MPL</code></a>
+            sequences, while <code class="literal">Boost.CallableTraits</code> has no dependencies
+            other than the standard library.
           </li>
 <li class="listitem">
-            Other types in C++ receive fine-grained, low-level attention in <code class="literal">Boost.TypeTraits</code>
-            and <code class="literal">&lt;type_traits&gt;</code>. <code class="literal">CallableTraits</code>
-            gives callable types similar attention, without additional metaprogramming
-            dependencies.
+            <code class="literal">Boost.CallableTraits</code> targets C++11 and later:
+            <div class="orderedlist"><ol class="orderedlist" type="a">
+<li class="listitem">
+                  <code class="literal">Boost.CallableTraits</code> treats function objects/lambdas
+                  as first-class citizens.
+                </li>
+<li class="listitem">
+                  <code class="literal">Boost.CallableTraits</code> supports lvalue/rvalue
+                  reference member qualifiers.
+                </li>
+<li class="listitem">
+                  <code class="literal">Boost.CallableTraits</code> supports <code class="computeroutput"><span class="keyword">noexcept</span></code> and <code class="computeroutput"><span class="identifier">transaction_safe</span></code>.
+                </li>
+</ol></div>
           </li>
 <li class="listitem">
-            <code class="literal">CallableTraits</code> aims to eliminate function type template
-            specializations. <code class="literal">Boost.FunctionTypes</code> does not.
+            <code class="literal">Boost.FunctionTypes</code> does not attempt to factor all
+            callable types into a unified, <a href="http://en.cppreference.com/w/cpp/utility/functional/invoke" target="_top"><code class="literal"><span class="emphasis"><em>INVOKE</em></span></code></a>-aware
+            interface.
           </li>
 <li class="listitem">
-            <code class="literal">CallableTraits</code> targets features from C++11 and later.
-            <code class="literal">Boost.FunctionTypes</code> does not.
-          </li>
-<li class="listitem">
-            The <code class="literal">Boost.FunctionTypes</code> interface relies heavily on
-            tag types. <code class="literal">CallableTraits</code> does not.
+            <code class="literal">Boost.FunctionTypes</code> relies heavily on "tag"
+            types, while <code class="literal">Boost.CallableTraits</code> follows the style
+            of &lt;type_traits&gt; instead. Supporting C++11 and later in <code class="literal">Boost.FunctionTypes</code>
+            would have required significant proliferation of these tags.
           </li>
 </ol></div>
 <p>
-        <code class="literal">Boost.FunctionTypes</code> is a good tool for projects already
-        dependent on the MPL, which must also support very old compilers. However,
-        the <code class="literal">Boost.FunctionTypes</code> interface is unpleasant to use.
-        It relies heavily on both the MPL and tag types, for problems that are more
-        simply solved with neither. Using <code class="literal">Boost.FunctionTypes</code>
-        requires an understanding of the library's "big picture."
+        For example, here is how to remove member <code class="computeroutput"><span class="keyword">const</span></code>
+        from a member function pointer type in the <code class="literal">Boost.FunctionTypes</code>
+        library:
+      </p>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">function_types</span><span class="special">/</span><span class="identifier">components</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">function_types</span><span class="special">/</span><span class="identifier">member_function_pointer</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+
+<span class="keyword">struct</span> <span class="identifier">foo</span> <span class="special">{</span>
+    <span class="keyword">void</span> <span class="identifier">bar</span><span class="special">()</span> <span class="keyword">const</span> <span class="special">{}</span>
+<span class="special">};</span>
+
+<span class="keyword">using</span> <span class="identifier">const_removed</span> <span class="special">=</span> <span class="keyword">typename</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">function_types</span><span class="special">::</span><span class="identifier">member_function_pointer</span><span class="special">&lt;</span>
+    <span class="keyword">typename</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">function_types</span><span class="special">::</span><span class="identifier">components</span><span class="special">&lt;</span><span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">foo</span><span class="special">::</span><span class="identifier">bar</span><span class="special">)&gt;::</span><span class="identifier">types</span><span class="special">,</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">function_types</span><span class="special">::</span><span class="identifier">non_const</span><span class="special">&gt;::</span><span class="identifier">type</span><span class="special">;</span>
+
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">const_removed</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+
+<span class="keyword">int</span> <span class="identifier">main</span><span class="special">(){}</span>
+</pre>
+<p>
+        <code class="literal">Boost.CallableTraits</code> makes this easier:
+      </p>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">remove_member_const</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+
+<span class="keyword">struct</span> <span class="identifier">foo</span> <span class="special">{</span>
+        <span class="keyword">void</span> <span class="identifier">bar</span><span class="special">()</span> <span class="keyword">const</span> <span class="special">{}</span>
+<span class="special">};</span>
+
+<span class="keyword">using</span> <span class="identifier">const_removed</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">::</span><span class="identifier">remove_member_const_t</span><span class="special">&lt;</span><span class="keyword">decltype</span><span class="special">(&amp;</span><span class="identifier">foo</span><span class="special">::</span><span class="identifier">bar</span><span class="special">)&gt;;</span>
+
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">const_removed</span><span class="special">,</span> <span class="keyword">void</span><span class="special">(</span><span class="identifier">foo</span><span class="special">::*)()&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+
+<span class="keyword">int</span> <span class="identifier">main</span><span class="special">(){}</span>
+</pre>
+<p>
+        The <code class="literal">Boost.FunctionTypes</code> library includes an excellent
+        <a href="http://www.boost.org/doc/libs/1_64_0/libs/function_types/example/interface_example.cpp" target="_top">example</a>
+        for generating type-erased interfaces (implementation <a href="http://www.boost.org/doc/libs/1_64_0/libs/function_types/example/interface.hpp" target="_top">here</a>).
+        This example was <a href="https://github.com/badair/eraserface/blob/master/include/eraserface/eraserface.hpp" target="_top">re-implemented</a>
+        using <code class="literal">Boost.CallableTraits</code> to yield a <a href="https://github.com/badair/eraserface/blob/master/example/basic_example.cpp" target="_top">slightly
+        more intuitive interface</a>.
       </p>
 <p>
-        <code class="literal">CallableTraits</code> reimplements much of the functionality
-        found in <code class="literal">Boost.FunctionTypes</code>, but offers a more accessible
-        <code class="computeroutput"><span class="identifier">type_traits</span></code>-style interface.
-        There is nothing inherently wrong with <code class="literal">Boost.FunctionTypes</code>,
-        but an MPL sequence-based solution with no C++11 support should not be the
-        only library option for inspecting and manipulating callable types.
+        <code class="literal">Boost.FunctionTypes</code> is a fine library, but its interface
+        left room for improvement.
       </p>
 </div>
 <div class="section">
@@ -279,9 +321,9 @@
 <a name="callable_traits.introduction.compatibility"></a><a class="link" href="index.html#callable_traits.introduction.compatibility" title="Compatibility">Compatibility</a>
 </h3></div></div></div>
 <p>
-        <code class="literal">CallableTraits</code> is tested on GCC 4.7.4 and later, Clang
-        3.5 and later, XCode 6.4 and later, and Visual Studio 2015. Continuous integration
-        is managed on <a href="https://ci.appveyor.com/project/badair/callable-traits" target="_top">Appveyor</a>
+        <code class="literal">Boost.CallableTraits</code> is tested on GCC 4.7.4 and later,
+        Clang 3.5 and later, XCode 6.4 and later, and Visual Studio 2015. Continuous
+        integration is managed on <a href="https://ci.appveyor.com/project/badair/callable-traits" target="_top">Appveyor</a>
         for Visual Studio, and on <a href="https://travis-ci.org/badair/callable_traits/builds" target="_top">Travis</a>
         for everything else.
       </p>

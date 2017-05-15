@@ -14,17 +14,17 @@ Distributed under the Boost Software License, Version 1.0.
 #include <utility>
 #include <cstdint>
 
-#define BOOST_CLBL_TRTS_NAMESPACE_BEGIN namespace boost { namespace callable_traits {
-#define BOOST_CLBL_TRTS_NAMESPACE_END }}
-
-#define BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN namespace boost { namespace callable_traits { namespace detail {
-#define BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END }}}
-
 #define BOOST_CLBL_TRTS_EMPTY_
 #define BOOST_CLBL_TRTS_EMPTY BOOST_CLBL_TRTS_EMPTY_
 
 #ifdef __cpp_transactional_memory
 # define BOOST_CLBL_TRTS_ENABLE_TRANSACTION_SAFE
+#endif
+
+#ifdef __cpp_inline_variables
+# define BOOST_CLBL_TRAITS_INLINE_VAR inline
+#else
+# define BOOST_CLBL_TRAITS_INLINE_VAR
 #endif
 
 #ifdef __cpp_noexcept_function_type
@@ -74,14 +74,12 @@ Distributed under the Boost Software License, Version 1.0.
 #define BOOST_CLBL_TRTS_IX_SEQ(...) ::std::index_sequence< __VA_ARGS__ >
 #define BOOST_CLBL_TRTS_MAKE_IX_SEQ(...) ::std::make_index_sequence< __VA_ARGS__ >
 #define BOOST_CLBL_TRTS_DISJUNCTION(...) ::std::disjunction< __VA_ARGS__ >
-#define BOOST_CLBL_TRTS_CONJUNCTION(...) ::std::conjunction< __VA_ARGS__ >
 
 #ifndef __cpp_variable_templates
 #  define BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES
 #endif
 
 #ifndef __cpp_lib_logical_traits
-#  include <boost/callable_traits/detail/polyfills/conjunction.hpp>
 #  include <boost/callable_traits/detail/polyfills/disjunction.hpp>
 #endif //__cpp_lib_logical_traits
 

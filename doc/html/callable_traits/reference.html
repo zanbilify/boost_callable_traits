@@ -3771,6 +3771,7 @@
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">has_member_qualifiers</span><span class="special">;</span> <span class="comment">//immplementation-defined</span>
 
+<span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">has_member_qualifiers_v</span> <span class="special">=</span> <span class="comment">//see below</span>
 </pre>
@@ -4068,17 +4069,7 @@
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">has_varargs</span><span class="special">;</span> <span class="comment">//see below</span>
 
-
-<span class="preprocessor">#ifdef</span> <span class="identifier">BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">has_varargs_v</span> <span class="special">{</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">detail</span><span class="special">::</span><span class="identifier">dummy</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span>
-        <span class="string">"Variable templates not supported on this compiler."</span><span class="special">);</span>
-<span class="special">};</span>
-
-<span class="preprocessor">#else</span>
-
+<span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">has_varargs_v</span> <span class="special">=</span> <span class="comment">//see below</span>
 <span class="preprocessor">#endif</span>
@@ -4318,6 +4309,8 @@
 
 <span class="preprocessor">#else</span>
 
+
+<span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">has_void_return_v</span> <span class="special">=</span> <span class="comment">//see below</span>
 <span class="preprocessor">#endif</span>
@@ -4546,17 +4539,7 @@
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">is_const_member</span><span class="special">;</span> <span class="comment">//see below</span>
 
-
-<span class="preprocessor">#ifdef</span> <span class="identifier">BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_const_member_v</span> <span class="special">{</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">detail</span><span class="special">::</span><span class="identifier">dummy</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span>
-        <span class="string">"Variable templates not supported on this compiler."</span><span class="special">);</span>
-<span class="special">};</span>
-
-<span class="preprocessor">#else</span>
-
+<span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_const_member_v</span> <span class="special">=</span> <span class="comment">//see below</span>
 <span class="preprocessor">#endif</span>
@@ -4861,17 +4844,7 @@
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">is_cv_member</span><span class="special">;</span> <span class="comment">//see below</span>
 
-
-<span class="preprocessor">#ifdef</span> <span class="identifier">BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_cv_member_v</span> <span class="special">{</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">detail</span><span class="special">::</span><span class="identifier">dummy</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span>
-        <span class="string">"Variable templates not supported on this compiler."</span><span class="special">);</span>
-<span class="special">};</span>
-
-<span class="preprocessor">#else</span>
-
+<span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_cv_member_v</span> <span class="special">=</span> <span class="comment">//see below</span>
 
@@ -5155,17 +5128,7 @@
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">is_lvalue_reference_member</span><span class="special">;</span> <span class="comment">//see below</span>
 
-
-<span class="preprocessor">#ifdef</span> <span class="identifier">BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_lvalue_reference_member_v</span> <span class="special">{</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">detail</span><span class="special">::</span><span class="identifier">dummy</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span>
-        <span class="string">"Variable templates not supported on this compiler."</span><span class="special">);</span>
-<span class="special">};</span>
-
-<span class="preprocessor">#else</span>
-
+<span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_lvalue_reference_member_v</span> <span class="special">=</span> <span class="comment">//see below</span>
 <span class="preprocessor">#endif</span>
@@ -5431,17 +5394,7 @@
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">is_reference_member</span><span class="special">;</span> <span class="comment">//see below</span>
 
-
-<span class="preprocessor">#ifdef</span> <span class="identifier">BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_reference_member_v</span> <span class="special">{</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">detail</span><span class="special">::</span><span class="identifier">dummy</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span>
-        <span class="string">"Variable templates not supported on this compiler."</span><span class="special">);</span>
-<span class="special">};</span>
-
-<span class="preprocessor">#else</span>
-
+<span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_reference_member_v</span> <span class="special">=</span> <span class="comment">//see below</span>
 <span class="preprocessor">#endif</span>
@@ -5721,17 +5674,7 @@
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">is_rvalue_reference_member</span><span class="special">;</span> <span class="comment">//see below</span>
 
-
-<span class="preprocessor">#ifdef</span> <span class="identifier">BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_rvalue_reference_member_v</span> <span class="special">{</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">detail</span><span class="special">::</span><span class="identifier">dummy</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span>
-        <span class="string">"Variable templates not supported on this compiler."</span><span class="special">);</span>
-<span class="special">};</span>
-
-<span class="preprocessor">#else</span>
-
+<span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_rvalue_reference_member_v</span> <span class="special">=</span> <span class="comment">//see below</span>
 
@@ -5998,17 +5941,7 @@
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">is_noexcept</span><span class="special">;</span> <span class="comment">//see below</span>
 
-
-<span class="preprocessor">#ifdef</span> <span class="identifier">BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_noexcept_v</span> <span class="special">{</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">detail</span><span class="special">::</span><span class="identifier">dummy</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span>
-        <span class="string">"Variable templates not supported on this compiler."</span><span class="special">);</span>
-<span class="special">};</span>
-
-<span class="preprocessor">#else</span>
-
+<span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_noexcept_v</span> <span class="special">=</span> <span class="comment">//see below</span>
 <span class="preprocessor">#endif</span>
@@ -6301,17 +6234,7 @@
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">is_transaction_safe</span><span class="special">;</span> <span class="comment">//see below</span>
 
-
-<span class="preprocessor">#ifdef</span> <span class="identifier">BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_transaction_safe_v</span> <span class="special">{</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">detail</span><span class="special">::</span><span class="identifier">dummy</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span>
-        <span class="string">"Variable templates not supported on this compiler."</span><span class="special">);</span>
-<span class="special">};</span>
-
-<span class="preprocessor">#else</span>
-
+<span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_transaction_safe_v</span> <span class="special">=</span> <span class="comment">//see below</span>
 <span class="preprocessor">#endif</span>
@@ -6602,19 +6525,9 @@
         <span><a name="callable_traits.reference.ref_is_volatile_member.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_volatile_member.definition">Definition</a>
       </h5>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_volatile_member</span><span class="special">;</span> <span class="comment">//see below</span>
+<span class="keyword">struct</span> <span class="identifier">is_volatile_member</span><span class="special">;</span>
 
-
-<span class="preprocessor">#ifdef</span> <span class="identifier">BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_volatile_member_v</span> <span class="special">{</span>
-    <span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_same</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">,</span> <span class="identifier">detail</span><span class="special">::</span><span class="identifier">dummy</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span>
-        <span class="string">"Variable templates not supported on this compiler."</span><span class="special">);</span>
-<span class="special">};</span>
-
-<span class="preprocessor">#else</span>
-
+<span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_volatile_member_v</span> <span class="special">=</span> <span class="comment">//see below</span>
 

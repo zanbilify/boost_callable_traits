@@ -11,7 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <boost/callable_traits/detail/core.hpp>
 
-BOOST_CLBL_TRTS_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits {
 
 //[ add_varargs_hpp
 /*`
@@ -35,7 +35,7 @@ struct add_varargs {
 };
 
 //<-
-BOOST_CLBL_TRTS_NAMESPACE_END
+}} // namespace boost::callable_traits
 //->
 
 /*`

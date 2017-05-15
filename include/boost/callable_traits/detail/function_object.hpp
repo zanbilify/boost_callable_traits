@@ -14,7 +14,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <boost/callable_traits/detail/forward_declarations.hpp>
 #include <boost/callable_traits/detail/utility.hpp>
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits { namespace detail {
 
 template<typename T, typename Base>
 struct function_object : Base {
@@ -101,6 +101,6 @@ template<typename T, typename U, typename Base>
 struct function_object <T U::*, Base>
     : default_callable_traits<> {};
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
+}}} // namespace boost::callable_traits::detail
 
 #endif // #ifndef BOOST_CLBL_TRTS_DETAIL_FUNCTION_OBJECT_HPP

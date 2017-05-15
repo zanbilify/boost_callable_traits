@@ -15,7 +15,7 @@
 
 [/ developer: you should enable word wrap before you read further]
 
-[template libname[][^CallableTraits]]
+[template libname[][^Boost.CallableTraits]]
 [template lib_namespace[][^callable_traits]]
 [template namespace_scoped[][^boost::callable_traits::]]
 [template header_include_prefix[]callable_traits/]
@@ -68,8 +68,7 @@
 
 [section:introduction Overview]
 
-[libname] is a C++11 header-only library for the inspection, synthesis, and decomposition of callable types. [libname] aims to be the "complete type manipulation facility for function types" mentioned in the final paragraph of C++17 proposal [@http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html p0172], and removes the need for template specializations for different function signatures.
-
+[libname] is a C++11 header-only library for the inspection, synthesis, and decomposition of callable types. [libname] aims to be the "complete type manipulation facility for function types" mentioned in the final paragraph of C++17 proposal [@http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2015/p0172r0.html p0172], and removes the need for template specializations for different function signatures. C++17 `noexcept` and the Transactional Memory TS are also supported if available.
 [import ../example/intro.cpp]
 [intro]
 
@@ -95,17 +94,42 @@ Granted, use cases for such obscure specializations are vitually nonexistent in 
 
 [section:boost_function_types Regarding [^Boost.FunctionTypes]]
 
-The use cases for [libname] overlap significantly with those of [function_types_link]. Here are some reasons why you might prefer [libname] over the latter:
+The features in [libname] largely overlap with [function_types_link]. Here are some reasons why you might prefer [libname]:
 
-# [function_types] is tightly coupled to [@http://www.boost.org/doc/libs/1_60_0/libs/mpl/doc/index.html [^Boost.MPL]] sequences, while [libname] generally takes a lower-level approach. No knowledge of MPL terminology is needed to use [libname].
-# Other types in C++ receive fine-grained, low-level attention in [^Boost.TypeTraits] and [^<type_traits>]. [libname] gives callable types similar attention, without additional metaprogramming dependencies.
-# [libname] aims to eliminate function type template specializations. [function_types] does not.
-# [libname] targets features from C++11 and later. [function_types] does not.
-# The [function_types] interface relies heavily on tag types. [libname] does not.
+# [function_types] is tightly coupled to [@http://www.boost.org/doc/libs/1_64_0/libs/mpl/doc/index.html [^Boost.MPL]] sequences, while [libname] has no dependencies other than the standard library.
+# [libname] targets C++11 and later:
+  # [libname] treats function objects/lambdas as first-class citizens.
+  # [libname] supports lvalue/rvalue reference member qualifiers.
+  # [libname] supports `noexcept` and `transaction_safe`.
+# [function_types] does not attempt to factor all callable types into a unified, [invoke]-aware interface.
+# [function_types] relies heavily on "tag" types, while [libname] follows the style of <type_traits> instead. Supporting C++11 and later in [function_types] would have required significant proliferation of these tags. 
 
-[function_types] is a good tool for projects already dependent on the MPL, which must also support very old compilers. However, the [function_types] interface is unpleasant to use. It relies heavily on both the MPL and tag types, for problems that are more simply solved with neither. Using [function_types] requires an understanding of the library's "big picture."
+For example, here is how to remove member `const` from a member function pointer type in the [function_types] library:
 
-[libname] reimplements much of the functionality found in [function_types], but offers a more accessible `type_traits`-style interface. There is nothing inherently wrong with [function_types], but an MPL sequence-based solution with no C++11 support should not be the only library option for inspecting and manipulating callable types.
+    #include <type_traits>
+    #include <boost/function_types/components.hpp>
+    #include <boost/function_types/member_function_pointer.hpp>
+
+    struct foo {
+        void bar() const {}
+    };
+
+    using const_removed = typename boost::function_types::member_function_pointer<
+        typename boost::function_types::components<decltype(&foo::bar)>::types,
+        boost::function_types::non_const>::type;
+
+    static_assert(std::is_same<const_removed, void(foo::*)()>::value, "");
+
+    int main(){}
+
+[libname] makes this easier:
+
+[import ../example/function_types_remove_const_comparison.cpp]
+[function_types_remove_const_comparison]
+
+The [function_types] library includes an excellent [@http://www.boost.org/doc/libs/1_64_0/libs/function_types/example/interface_example.cpp example] for generating type-erased interfaces (implementation [@http://www.boost.org/doc/libs/1_64_0/libs/function_types/example/interface.hpp here]). This example was [@https://github.com/badair/eraserface/blob/master/include/eraserface/eraserface.hpp re-implemented] using [libname] to yield a [@https://github.com/badair/eraserface/blob/master/example/basic_example.cpp slightly more intuitive interface].
+
+[function_types] is a fine library, but its interface left room for improvement.
 
 [endsect][/section:boost_function_types]
 
