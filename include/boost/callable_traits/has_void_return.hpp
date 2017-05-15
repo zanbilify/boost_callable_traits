@@ -11,7 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <boost/callable_traits/detail/core.hpp>
 
-BOOST_CLBL_TRTS_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits {
 
 //[ has_void_return_hpp
 /*`[section:ref_has_void_return has_void_return]
@@ -20,8 +20,9 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 [heading Definition]
 */
 
+// inherits from either std::true_type or std::false_type
 template<typename T>
-struct has_void_return; //see below
+struct has_void_return;
 
 //<-
 template<typename T>
@@ -39,15 +40,19 @@ struct has_void_return_v {
 
 #else
 
+
+// only available when variable templates are supported
 template<typename T>
+//<-
+BOOST_CLBL_TRAITS_INLINE_VAR
+//->
 constexpr bool has_void_return_v = //see below
 //<-
     std::is_same<typename detail::traits<T>::return_type, void>::value;
-//->
+
 #endif
 
-//<-
-BOOST_CLBL_TRTS_NAMESPACE_END
+}} // namespace boost::callable_traits
 //->
 
 

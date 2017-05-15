@@ -12,7 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <boost/callable_traits/detail/core.hpp>
 
-BOOST_CLBL_TRTS_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits {
 
 //[ qualified_class_of_hpp
 /*`
@@ -36,7 +36,7 @@ struct qualified_class_of {
 };
 
 //<-
-BOOST_CLBL_TRTS_NAMESPACE_END
+}} // namespace boost::callable_traits
 //->
 
 /*`

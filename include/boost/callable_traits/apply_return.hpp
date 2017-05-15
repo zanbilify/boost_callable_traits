@@ -11,7 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <boost/callable_traits/detail/core.hpp>
 
-BOOST_CLBL_TRTS_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits {
 
 BOOST_CLBL_TRTS_DEFINE_SFINAE_ERROR_ORIGIN(apply_return)
 BOOST_CLBL_TRTS_SFINAE_MSG(apply_return, invalid_types_for_apply_return)
@@ -52,7 +52,7 @@ namespace detail {
     };
 
 //<-
-BOOST_CLBL_TRTS_NAMESPACE_END
+}} // namespace boost::callable_traits
 //->
 
 /*`

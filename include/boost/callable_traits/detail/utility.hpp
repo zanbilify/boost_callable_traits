@@ -13,7 +13,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <boost/callable_traits/detail/sfinae_errors.hpp>
 #include <boost/callable_traits/detail/qualifier_flags.hpp>
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits { namespace detail {
 
 struct cdecl_tag{};
 struct stdcall_tag{};
@@ -74,6 +74,6 @@ struct force_sfinae {
     using type = U;
 };
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
+}}} // namespace boost::callable_traits::detail
 
 #endif // #ifndef BOOST_CLBL_TRTS_DETAIL_UTILITY_HPP

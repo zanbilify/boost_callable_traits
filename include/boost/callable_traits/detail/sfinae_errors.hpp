@@ -11,7 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <boost/callable_traits/detail/config.hpp>
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits { namespace detail {
 
         struct sfinae_error{};
 
@@ -39,7 +39,7 @@ BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
             FailMsg, FailMsg>::type::_::type;
         };
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
+}}} // namespace boost::callable_traits::detail
 
 #define BOOST_CLBL_TRTS_PP_CAT_(x, y) x ## y
 #define BOOST_CLBL_TRTS_PP_CAT(x, y) BOOST_CLBL_TRTS_PP_CAT_(x, y)
@@ -59,7 +59,7 @@ struct name : error::origin<                     \
     BOOST_CLBL_TRTS_PP_CAT(name, _ )>{};         \
 /**/
 
-BOOST_CLBL_TRTS_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits {
 
     BOOST_CLBL_TRTS_DEFINE_SFINAE_ERROR_ORIGIN(parameters)
     BOOST_CLBL_TRTS_SFINAE_MSG(parameters, index_out_of_range_for_parameter_list)
@@ -84,6 +84,6 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
     BOOST_CLBL_TRTS_DEFINE_SFINAE_ERROR_ORIGIN(reference_error)
     BOOST_CLBL_TRTS_SFINAE_MSG(reference_error, reference_type_not_supported_by_this_metafunction)
 
-BOOST_CLBL_TRTS_NAMESPACE_END
+}} // namespace boost::callable_traits
 
 #endif // #ifndef BOOST_CLBL_TRTS_SFINAE_ERRORS_HPP

@@ -12,7 +12,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <boost/callable_traits/detail/core.hpp>
 
-BOOST_CLBL_TRTS_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits {
 
 //[ is_transaction_safe_hpp
 /*`[section:ref_is_transaction_safe is_transaction_safe]
@@ -22,15 +22,15 @@ BOOST_CLBL_TRTS_NAMESPACE_BEGIN
 */
 
 
+// inherits from either std::true_type or std::false_type
 template<typename T>
-struct is_transaction_safe; //see below
+struct is_transaction_safe;
 
 //<-
 template<typename T>
 struct is_transaction_safe : detail::traits<T>::is_transaction_safe {
     using type = typename detail::traits<T>::is_transaction_safe;
 };
-//->
 
 #ifdef BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES
 
@@ -41,16 +41,19 @@ struct is_transaction_safe_v {
 };
 
 #else
-
+//->
+// only available when variable templates are supported
 template<typename T>
+//<-
+BOOST_CLBL_TRAITS_INLINE_VAR
+//->
 constexpr bool is_transaction_safe_v = //see below
 //<-
     detail::traits<T>::is_transaction_safe::value;
-//->
+
 #endif
 
-//<-
-BOOST_CLBL_TRTS_NAMESPACE_END
+}} // namespace boost::callable_traits
 //->
 
 /*`

@@ -11,7 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <boost/callable_traits/detail/forward_declarations.hpp>
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits { namespace detail {
 
     // Here is where the magic happens
     template<typename T>
@@ -23,6 +23,6 @@ BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
         default_callable_traits<T>
     )::traits;
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
+}}} // namespace boost::callable_traits::detail
 
 #endif // #ifndef BOOST_CLBL_TRTS_DETAIL_TRAITS_HPP

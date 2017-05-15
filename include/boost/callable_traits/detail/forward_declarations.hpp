@@ -3,7 +3,7 @@
 #include <boost/callable_traits/detail/config.hpp>
 #include <boost/callable_traits/detail/default_callable_traits.hpp>
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits { namespace detail {
 
 template<typename T>
 struct function;
@@ -49,6 +49,6 @@ using function_object_base = typename std::conditional<
 template<typename T, typename Base = function_object_base<T>>
 struct function_object;
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
+}}} // namespace boost::callable_traits::detail
 
 #endif // #ifndef BOOST_CLBL_TRTS_DETAIL_FORWARD_DECLARATIONS

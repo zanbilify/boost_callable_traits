@@ -69,7 +69,7 @@ struct set_varargs_function_qualifiers_t <                         \
 }                                                                  \
 /**/
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
+namespace boost { namespace callable_traits { namespace detail {
 
         template<qualifier_flags Applied, bool IsTransactionSafe,
             bool IsNoexcept, typename Return, typename... Args>
@@ -115,6 +115,6 @@ BOOST_CLBL_TRTS_DETAIL_NAMESPACE_BEGIN
             typename set_varargs_function_qualifiers_t<Flags, IsTransactionSafe,
                 IsNoexcept, Ts...>::type;
 
-BOOST_CLBL_TRTS_DETAIL_NAMESPACE_END
+}}} // namespace boost::callable_traits::detail
 
 #endif //BOOST_CLBL_TRTS_DETAIL_SET_FUNCTION_QUALIFIERS_HPP
