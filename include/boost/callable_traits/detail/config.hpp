@@ -29,13 +29,6 @@ Distributed under the Boost Software License, Version 1.0.
 
 #ifdef __cpp_noexcept_function_type
 # define BOOST_CLBL_TRTS_ENABLE_NOEXCEPT_TYPES
-#define BOOST_CLBL_TRTS_NOEXCEPT_TEMPL , bool IsNoexcept
-#define BOOST_CLBL_TRTS_NOEXCEPT_SPEC noexcept (IsNoexcept)
-#define BOOST_CLBL_TRTS_IS_NOEXCEPT std::integral_constant<bool, IsNoexcept>
-#else
-#define BOOST_CLBL_TRTS_NOEXCEPT_TEMPL
-#define BOOST_CLBL_TRTS_NOEXCEPT_SPEC
-#define BOOST_CLBL_TRTS_IS_NOEXCEPT std::false_type
 #endif
 
 #ifdef BOOST_CLBL_TRTS_ENABLE_TRANSACTION_SAFE
