@@ -88,5 +88,7 @@ struct function<
 
     template<template<class...> class Container>
     using expand_args = Container<Args...>;
+
+    using is_member_pointer = std::false_type;
 };
 

@@ -142,4 +142,6 @@ struct pmf<Return(BOOST_CLBL_TRTS_CC T::*)(Args...)
         
     template<template<class...> class Container>
     using expand_args = Container<invoke_type, Args...>;
+
+    using is_member_pointer = std::true_type;
 };
