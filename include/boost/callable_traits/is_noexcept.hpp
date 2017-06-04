@@ -60,7 +60,7 @@ constexpr bool is_noexcept_v = //see below
 * none
 *
 [heading Behavior]
-* `std::false_type` is inherited by `is_noexcept<T>` and is aliased by `typename is_noexcept<T>::type`, except when one of the following criteria is met, in which case `std::true_type` would be similarly inherited and aliased:
+* `is_noexcept<T>::value` is `true` when either: 
   * `T` is a function type, function pointer type, function reference type, or member function pointer type where the function has a `noexcept` specifier
   * `T` is a function object with a non-overloaded `operator()`, where the `operator()` has a `noexcept` specifier
 * On compilers that support variable templates, `is_noexcept_v<T>` is equivalent to `is_noexcept<T>::value`.

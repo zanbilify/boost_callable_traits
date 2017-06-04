@@ -60,7 +60,7 @@ constexpr bool is_const_member_v = //see below
 * none
 
 [heading Behavior]
-* `std::false_type` is inherited by `is_const_member<T>` and is aliased by `typename is_const_member<T>::type`, except when one of the following criteria is met, in which case `std::true_type` would be similarly inherited and aliased:
+* `is_const_member<T>::value` is `true` when either:
   * `T` is a function type with a `const` member qualifier
   * `T` is a pointer to a member function with a `const` member qualifier
   * `T` is a function object with a non-overloaded `operator()`, where the `operator()` has a `const` member qualifier

@@ -60,16 +60,7 @@ constexpr bool is_invocable_v = //see below
 * none
 
 [heading Behavior]
-* polyfill for c++1z `std::is_invocable`
-
-[heading Compatibility Notes]
-TODO
-
-[heading Input/Output Examples]
-[table
-    [[`T`]                              [`is_invocable<T>`]]
-    [[`todo`]                           [`todo`]]
-]
+* standalone c++11 implementation of c++17 `std::is_invocable`
 
 [heading Example Program]
 [import ../example/is_invocable.cpp]
