@@ -219,6 +219,9 @@ This reference will be most beneficial to readers who posess a basic understandi
 [import ../../../boost/callable_traits/is_cv_member.hpp]
 [is_cv_member_hpp]
 
+[import ../../../boost/callable_traits/is_invocable.hpp]
+[is_invocable_hpp]
+
 [import ../../../boost/callable_traits/is_lvalue_reference_member.hpp]
 [is_lvalue_reference_member_hpp]
 

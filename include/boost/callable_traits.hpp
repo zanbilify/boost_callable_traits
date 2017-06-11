@@ -27,6 +27,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <boost/callable_traits/has_varargs.hpp>
 #include <boost/callable_traits/has_void_return.hpp>
 #include <boost/callable_traits/is_const_member.hpp>
+#include <boost/callable_traits/is_invocable.hpp>
 #include <boost/callable_traits/is_lvalue_reference_member.hpp>
 #include <boost/callable_traits/is_reference_member.hpp>
 #include <boost/callable_traits/is_rvalue_reference_member.hpp>

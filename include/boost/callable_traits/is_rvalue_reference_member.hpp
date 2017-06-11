@@ -62,7 +62,7 @@ constexpr bool is_rvalue_reference_member_v = //see below
 * none
 
 [heading Behavior]
-* `std::false_type` is inherited by `is_rvalue_reference_member<T>` and is aliased by `typename is_rvalue_reference_member<T>::type`, except when one of the following criteria is met, in which case `std::true_type` would be similarly inherited and aliased:
+* `is_rvalue_reference_member<T>::value` is `true` when either: 
   * `T` is a function type with a '&&' member qualifier
   * `T` is a pointer to a member function with a '&&' member qualifiers
   * `T` is a function object with a non-overloaded `operator()`, where the `operator()` has a '&&' member qualifier

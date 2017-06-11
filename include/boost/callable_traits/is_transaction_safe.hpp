@@ -61,7 +61,7 @@ constexpr bool is_transaction_safe_v = //see below
 * none
 *
 [heading Behavior]
-* `std::false_type` is inherited by `is_transaction_safe<T>` and is aliased by `typename is_transaction_safe<T>::type`, except when one of the following criteria is met, in which case `std::true_type` would be similarly inherited and aliased:
+* `is_transaction_safe<T>::value` is `true` when either: 
   * `T` is a function type, function pointer type, function reference type, or member function pointer type where the function has a `transaction_safe` specifier
   * `T` is a function object with a non-overloaded `operator()`, where the `operator()` has a `transaction_safe` specifier
 * On compilers that support variable templates, `is_transaction_safe_v<T>` is equivalent to `is_transaction_safe<T>::value`.

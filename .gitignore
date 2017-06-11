@@ -1,4 +1,5 @@
 build*/
 *.user
+*.swp
 /test/Makefile
 /example/Makefile

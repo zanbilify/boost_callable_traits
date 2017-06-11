@@ -17,8 +17,8 @@ int main(){}
 template<typename Noexcept, typename NotNoexcept>
 void test() {
 
-    CT_ASSERT( is_noexcept<Safe>::value);
-    CT_ASSERT(! is_noexcept<NotSafe>::value);
+    CT_ASSERT( is_noexcept<Noexcept>::value);
+    CT_ASSERT(! is_noexcept<NotNoexcept>::value);
 }
 
 #define TEST_NOEXCEPT(not_noexcept) test<not_noexcept noexcept, not_noexcept>()

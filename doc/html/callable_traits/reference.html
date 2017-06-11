@@ -45,6 +45,7 @@
 <dt><span class="section"><a href="reference.html#callable_traits.reference.ref_has_void_return">has_void_return</a></span></dt>
 <dt><span class="section"><a href="reference.html#callable_traits.reference.ref_is_const_member">is_const_member</a></span></dt>
 <dt><span class="section"><a href="reference.html#callable_traits.reference.ref_is_cv_member">is_cv_member</a></span></dt>
+<dt><span class="section"><a href="reference.html#callable_traits.reference.ref_is_invocable">is_invocable</a></span></dt>
 <dt><span class="section"><a href="reference.html#callable_traits.reference.ref_is_lvalue_reference_member">is_lvalue_reference_member</a></span></dt>
 <dt><span class="section"><a href="reference.html#callable_traits.reference.ref_is_reference_member">is_reference_member</a></span></dt>
 <dt><span class="section"><a href="reference.html#callable_traits.reference.ref_is_rvalue_reference_member">is_rvalue_reference_member</a></span></dt>
@@ -3768,8 +3769,9 @@
 <a name="callable_traits.reference.ref_has_member_qualifiers.h1"></a>
         <span><a name="callable_traits.reference.ref_has_member_qualifiers.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_has_member_qualifiers.definition">Definition</a>
       </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">has_member_qualifiers</span><span class="special">;</span> <span class="comment">//immplementation-defined</span>
+<pre class="programlisting"><span class="comment">// inherits from either std::true_type or std::false_type</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">has_member_qualifiers</span><span class="special">;</span>
 
 <span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
@@ -4066,13 +4068,13 @@
 <a name="callable_traits.reference.ref_has_varargs.h1"></a>
         <span><a name="callable_traits.reference.ref_has_varargs.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_has_varargs.definition">Definition</a>
       </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">has_varargs</span><span class="special">;</span> <span class="comment">//see below</span>
+<pre class="programlisting"><span class="comment">// inherits from either std::true_type or std::false_type</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">has_varargs</span><span class="special">;</span>
 
 <span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">has_varargs_v</span> <span class="special">=</span> <span class="comment">//see below</span>
-<span class="preprocessor">#endif</span>
 </pre>
 <h5>
 <a name="callable_traits.reference.ref_has_varargs.h2"></a>
@@ -4295,8 +4297,9 @@
 <a name="callable_traits.reference.ref_has_void_return.h1"></a>
         <span><a name="callable_traits.reference.ref_has_void_return.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_has_void_return.definition">Definition</a>
       </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">has_void_return</span><span class="special">;</span> <span class="comment">//see below</span>
+<pre class="programlisting"><span class="comment">// inherits from either std::true_type or std::false_type</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">has_void_return</span><span class="special">;</span>
 
 
 <span class="preprocessor">#ifdef</span> <span class="identifier">BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES</span>
@@ -4313,7 +4316,6 @@
 <span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">has_void_return_v</span> <span class="special">=</span> <span class="comment">//see below</span>
-<span class="preprocessor">#endif</span>
 </pre>
 <h5>
 <a name="callable_traits.reference.ref_has_void_return.h2"></a>
@@ -4536,13 +4538,13 @@
 <a name="callable_traits.reference.ref_is_const_member.h1"></a>
         <span><a name="callable_traits.reference.ref_is_const_member.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_const_member.definition">Definition</a>
       </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_const_member</span><span class="special">;</span> <span class="comment">//see below</span>
+<pre class="programlisting"><span class="comment">// inherits from either std::true_type or std::false_type</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">is_const_member</span><span class="special">;</span>
 
 <span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_const_member_v</span> <span class="special">=</span> <span class="comment">//see below</span>
-<span class="preprocessor">#endif</span>
 </pre>
 <h5>
 <a name="callable_traits.reference.ref_is_const_member.h2"></a>
@@ -4557,10 +4559,8 @@
       </h5>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
-            <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code> is inherited by <code class="computeroutput"><span class="identifier">is_const_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-            and is aliased by <code class="computeroutput"><span class="keyword">typename</span> <span class="identifier">is_const_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span></code>, except when one of the following
-            criteria is met, in which case <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">true_type</span></code>
-            would be similarly inherited and aliased:
+            <code class="computeroutput"><span class="identifier">is_const_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">value</span></code> is <code class="computeroutput"><span class="keyword">true</span></code>
+            when either:
             <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem">
                   <code class="computeroutput"><span class="identifier">T</span></code> is a function
@@ -4841,14 +4841,13 @@
 <a name="callable_traits.reference.ref_is_cv_member.h1"></a>
         <span><a name="callable_traits.reference.ref_is_cv_member.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_cv_member.definition">Definition</a>
       </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_cv_member</span><span class="special">;</span> <span class="comment">//see below</span>
+<pre class="programlisting"><span class="comment">// inherits from either std::true_type or std::false_type</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">is_cv_member</span><span class="special">;</span>
 
 <span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_cv_member_v</span> <span class="special">=</span> <span class="comment">//see below</span>
-
-<span class="preprocessor">#endif</span>
 </pre>
 <h5>
 <a name="callable_traits.reference.ref_is_cv_member.h2"></a>
@@ -4863,10 +4862,8 @@
       </h5>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
-            <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code> is inherited by <code class="computeroutput"><span class="identifier">is_cv_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-            and is aliased by <code class="computeroutput"><span class="keyword">typename</span> <span class="identifier">is_cv_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span></code>, except when one of the following
-            criteria is met, in which case <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">true_type</span></code>
-            would be similarly inherited and aliased:
+            <code class="computeroutput"><span class="identifier">is_cv_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">value</span></code> is <code class="computeroutput"><span class="keyword">true</span></code>
+            when either:
             <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem">
                   <code class="computeroutput"><span class="identifier">T</span></code> is a function
@@ -5114,6 +5111,63 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
+<a name="callable_traits.reference.ref_is_invocable"></a><a class="link" href="reference.html#callable_traits.reference.ref_is_invocable" title="is_invocable">is_invocable</a>
+</h3></div></div></div>
+<h5>
+<a name="callable_traits.reference.ref_is_invocable.h0"></a>
+        <span><a name="callable_traits.reference.ref_is_invocable.header"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_invocable.header">Header</a>
+      </h5>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_invocable</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span></pre>
+<h5>
+<a name="callable_traits.reference.ref_is_invocable.h1"></a>
+        <span><a name="callable_traits.reference.ref_is_invocable.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_invocable.definition">Definition</a>
+      </h5>
+<pre class="programlisting"><span class="comment">// inherits from either std::true_type or std::false_type</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">is_invocable</span><span class="special">;</span>
+
+<span class="comment">// only available when variable templates are supported</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">typename</span><span class="special">...</span> <span class="identifier">Args</span><span class="special">&gt;</span>
+<span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_invocable_v</span> <span class="special">=</span> <span class="comment">//see below</span>
+</pre>
+<h5>
+<a name="callable_traits.reference.ref_is_invocable.h2"></a>
+        <span><a name="callable_traits.reference.ref_is_invocable.constraints"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_invocable.constraints">Constraints</a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+            none
+          </li></ul></div>
+<h5>
+<a name="callable_traits.reference.ref_is_invocable.h3"></a>
+        <span><a name="callable_traits.reference.ref_is_invocable.behavior"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_invocable.behavior">Behavior</a>
+      </h5>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+            standalone c++11 implementation of c++17 <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_invocable</span></code>
+          </li></ul></div>
+<h5>
+<a name="callable_traits.reference.ref_is_invocable.h4"></a>
+        <span><a name="callable_traits.reference.ref_is_invocable.example_program"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_invocable.example_program">Example
+        Program</a>
+      </h5>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span>
+<span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">callable_traits</span><span class="special">/</span><span class="identifier">is_invocable</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+
+<span class="keyword">namespace</span> <span class="identifier">ct</span> <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">callable_traits</span><span class="special">;</span>
+
+<span class="keyword">struct</span> <span class="identifier">foo</span> <span class="special">{</span>
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+    <span class="keyword">typename</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">enable_if</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">is_integral</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">&gt;::</span><span class="identifier">type</span>
+    <span class="keyword">operator</span><span class="special">()(</span><span class="identifier">T</span><span class="special">){}</span>
+<span class="special">};</span>
+
+<span class="keyword">static_assert</span><span class="special">(</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_invocable</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">,</span> <span class="keyword">int</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+<span class="keyword">static_assert</span><span class="special">(!</span><span class="identifier">ct</span><span class="special">::</span><span class="identifier">is_invocable</span><span class="special">&lt;</span><span class="identifier">foo</span><span class="special">,</span> <span class="keyword">double</span><span class="special">&gt;::</span><span class="identifier">value</span><span class="special">,</span> <span class="string">""</span><span class="special">);</span>
+
+<span class="keyword">int</span> <span class="identifier">main</span><span class="special">()</span> <span class="special">{}</span>
+</pre>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
 <a name="callable_traits.reference.ref_is_lvalue_reference_member"></a><a class="link" href="reference.html#callable_traits.reference.ref_is_lvalue_reference_member" title="is_lvalue_reference_member">is_lvalue_reference_member</a>
 </h3></div></div></div>
 <h5>
@@ -5125,13 +5179,13 @@
 <a name="callable_traits.reference.ref_is_lvalue_reference_member.h1"></a>
         <span><a name="callable_traits.reference.ref_is_lvalue_reference_member.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_lvalue_reference_member.definition">Definition</a>
       </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_lvalue_reference_member</span><span class="special">;</span> <span class="comment">//see below</span>
+<pre class="programlisting"><span class="comment">// inherits from either std::true_type or std::false_type</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">is_lvalue_reference_member</span><span class="special">;</span>
 
 <span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_lvalue_reference_member_v</span> <span class="special">=</span> <span class="comment">//see below</span>
-<span class="preprocessor">#endif</span>
 </pre>
 <h5>
 <a name="callable_traits.reference.ref_is_lvalue_reference_member.h2"></a>
@@ -5146,10 +5200,8 @@
       </h5>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
-            <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code> is inherited by <code class="computeroutput"><span class="identifier">is_lvalue_reference_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-            and is aliased by <code class="computeroutput"><span class="keyword">typename</span> <span class="identifier">is_lvalue_reference_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span></code>, except when one of the following
-            criteria is met, in which case <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">true_type</span></code>
-            would be similarly inherited and aliased:
+            <code class="computeroutput"><span class="identifier">is_lvalue_reference_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">value</span></code>
+            is <code class="computeroutput"><span class="keyword">true</span></code> when either:
             <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem">
                   <code class="computeroutput"><span class="identifier">T</span></code> is a function
@@ -5391,13 +5443,13 @@
 <a name="callable_traits.reference.ref_is_reference_member.h1"></a>
         <span><a name="callable_traits.reference.ref_is_reference_member.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_reference_member.definition">Definition</a>
       </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_reference_member</span><span class="special">;</span> <span class="comment">//see below</span>
+<pre class="programlisting"><span class="comment">// inherits from either std::true_type or std::false_type</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">is_reference_member</span><span class="special">;</span>
 
 <span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_reference_member_v</span> <span class="special">=</span> <span class="comment">//see below</span>
-<span class="preprocessor">#endif</span>
 </pre>
 <h5>
 <a name="callable_traits.reference.ref_is_reference_member.h2"></a>
@@ -5412,10 +5464,8 @@
       </h5>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
-            <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code> is inherited by <code class="computeroutput"><span class="identifier">is_reference_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-            and is aliased by <code class="computeroutput"><span class="keyword">typename</span> <span class="identifier">is_reference_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span></code>, except when one of the following
-            criteria is met, in which case <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">true_type</span></code>
-            would be similarly inherited and aliased:
+            <code class="computeroutput"><span class="identifier">is_reference_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">value</span></code> is <code class="computeroutput"><span class="keyword">true</span></code>
+            when either:
             <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem">
                   <code class="computeroutput"><span class="identifier">T</span></code> is a function
@@ -5671,14 +5721,13 @@
 <a name="callable_traits.reference.ref_is_rvalue_reference_member.h1"></a>
         <span><a name="callable_traits.reference.ref_is_rvalue_reference_member.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_rvalue_reference_member.definition">Definition</a>
       </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_rvalue_reference_member</span><span class="special">;</span> <span class="comment">//see below</span>
+<pre class="programlisting"><span class="comment">// inherits from either std::true_type or std::false_type</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">is_rvalue_reference_member</span><span class="special">;</span>
 
 <span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_rvalue_reference_member_v</span> <span class="special">=</span> <span class="comment">//see below</span>
-
-<span class="preprocessor">#endif</span>
 </pre>
 <h5>
 <a name="callable_traits.reference.ref_is_rvalue_reference_member.h2"></a>
@@ -5693,10 +5742,8 @@
       </h5>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
-            <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code> is inherited by <code class="computeroutput"><span class="identifier">is_rvalue_reference_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-            and is aliased by <code class="computeroutput"><span class="keyword">typename</span> <span class="identifier">is_rvalue_reference_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span></code>, except when one of the following
-            criteria is met, in which case <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">true_type</span></code>
-            would be similarly inherited and aliased:
+            <code class="computeroutput"><span class="identifier">is_rvalue_reference_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">value</span></code>
+            is <code class="computeroutput"><span class="keyword">true</span></code> when either:
             <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem">
                   <code class="computeroutput"><span class="identifier">T</span></code> is a function
@@ -5938,13 +5985,13 @@
 <a name="callable_traits.reference.ref_is_noexcept.h1"></a>
         <span><a name="callable_traits.reference.ref_is_noexcept.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_noexcept.definition">Definition</a>
       </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_noexcept</span><span class="special">;</span> <span class="comment">//see below</span>
+<pre class="programlisting"><span class="comment">// inherits from either std::true_type or std::false_type</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">is_noexcept</span><span class="special">;</span>
 
 <span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_noexcept_v</span> <span class="special">=</span> <span class="comment">//see below</span>
-<span class="preprocessor">#endif</span>
 </pre>
 <h5>
 <a name="callable_traits.reference.ref_is_noexcept.h2"></a>
@@ -5959,10 +6006,8 @@
             <span><a name="callable_traits.reference.ref_is_noexcept.behavior"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_noexcept.behavior">Behavior</a>
           </h5></li>
 <li class="listitem">
-            <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code> is inherited by <code class="computeroutput"><span class="identifier">is_noexcept</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-            and is aliased by <code class="computeroutput"><span class="keyword">typename</span> <span class="identifier">is_noexcept</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span></code>, except when one of the following
-            criteria is met, in which case <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">true_type</span></code>
-            would be similarly inherited and aliased:
+            <code class="computeroutput"><span class="identifier">is_noexcept</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">value</span></code> is <code class="computeroutput"><span class="keyword">true</span></code>
+            when either:
             <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem">
                   <code class="computeroutput"><span class="identifier">T</span></code> is a function
@@ -6231,13 +6276,13 @@
 <a name="callable_traits.reference.ref_is_transaction_safe.h1"></a>
         <span><a name="callable_traits.reference.ref_is_transaction_safe.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_transaction_safe.definition">Definition</a>
       </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
-<span class="keyword">struct</span> <span class="identifier">is_transaction_safe</span><span class="special">;</span> <span class="comment">//see below</span>
+<pre class="programlisting"><span class="comment">// inherits from either std::true_type or std::false_type</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<span class="keyword">struct</span> <span class="identifier">is_transaction_safe</span><span class="special">;</span>
 
 <span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_transaction_safe_v</span> <span class="special">=</span> <span class="comment">//see below</span>
-<span class="preprocessor">#endif</span>
 </pre>
 <h5>
 <a name="callable_traits.reference.ref_is_transaction_safe.h2"></a>
@@ -6252,10 +6297,8 @@
             <span><a name="callable_traits.reference.ref_is_transaction_safe.behavior"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_transaction_safe.behavior">Behavior</a>
           </h5></li>
 <li class="listitem">
-            <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code> is inherited by <code class="computeroutput"><span class="identifier">is_transaction_safe</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-            and is aliased by <code class="computeroutput"><span class="keyword">typename</span> <span class="identifier">is_transaction_safe</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span></code>, except when one of the following
-            criteria is met, in which case <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">true_type</span></code>
-            would be similarly inherited and aliased:
+            <code class="computeroutput"><span class="identifier">is_transaction_safe</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">value</span></code> is <code class="computeroutput"><span class="keyword">true</span></code>
+            when either:
             <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem">
                   <code class="computeroutput"><span class="identifier">T</span></code> is a function
@@ -6524,14 +6567,13 @@
 <a name="callable_traits.reference.ref_is_volatile_member.h1"></a>
         <span><a name="callable_traits.reference.ref_is_volatile_member.definition"></a></span><a class="link" href="reference.html#callable_traits.reference.ref_is_volatile_member.definition">Definition</a>
       </h5>
-<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="comment">// inherits from either std::true_type or std::false_type</span>
+<span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">is_volatile_member</span><span class="special">;</span>
 
 <span class="comment">// only available when variable templates are supported</span>
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">constexpr</span> <span class="keyword">bool</span> <span class="identifier">is_volatile_member_v</span> <span class="special">=</span> <span class="comment">//see below</span>
-
-<span class="preprocessor">#endif</span>
 </pre>
 <h5>
 <a name="callable_traits.reference.ref_is_volatile_member.h2"></a>
@@ -6546,10 +6588,8 @@
       </h5>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">
-            <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">false_type</span></code> is inherited by <code class="computeroutput"><span class="identifier">is_volatile_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;</span></code>
-            and is aliased by <code class="computeroutput"><span class="keyword">typename</span> <span class="identifier">is_volatile_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">type</span></code>, except when one of the following
-            criteria is met, in which case <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">true_type</span></code>
-            would be similarly inherited and aliased:
+            <code class="computeroutput"><span class="identifier">is_volatile_member</span><span class="special">&lt;</span><span class="identifier">T</span><span class="special">&gt;::</span><span class="identifier">value</span></code> is <code class="computeroutput"><span class="keyword">true</span></code>
+            when either:
             <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem">
                   <code class="computeroutput"><span class="identifier">T</span></code> is a function
