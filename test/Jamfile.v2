@@ -15,7 +15,7 @@ rule callable_traits-all-tests {
     local toolset =
         <toolset>clang:<cxxflags>"-std=c++1z -pedantic -Wall -Wextra"
         <toolset>darwin:<cxxflags>"-std=c++1z -pedantic -Wall -Wextra"
-        <toolset>gcc:<cxxflags>"-std=c++1z -pedantic -Wall -Wextra -fgnu-tm"
+        <toolset>gcc:<cxxflags>"-Wno-error=unknown-warning -std=c++11 -std=c++14 -std=c++1z -std=c++17 -pedantic -Wall -Wextra -fgnu-tm"
     ;
 
     local result ;
