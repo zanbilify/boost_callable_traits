@@ -111,7 +111,10 @@ int main() {
         ,invoke_case<false, std::reference_wrapper<foo>, int>
     >();
 
-    run_tests<void(foo::*)() const &
+// MSVC doesn't handle cv + ref qualifiers in expression sfinae correctly
+#ifndef BOOST_CLBL_TRTS_MSVC
+
+    run_tests<void(foo::*)() const LREF
         ,invoke_case<false, foo>
         ,invoke_case<true, foo*>
         ,invoke_case<true, foo&>
@@ -129,7 +132,7 @@ int main() {
         ,invoke_case<false, std::reference_wrapper<foo>, int>
     >();
 
-    run_tests<void(foo::*)() const &&
+    run_tests<void(foo::*)() const RREF
         ,invoke_case<true, foo>
         ,invoke_case<false, foo*>
         ,invoke_case<false, foo&>
@@ -146,6 +149,8 @@ int main() {
         ,invoke_case<false, foo&&, int>
         ,invoke_case<false, std::reference_wrapper<foo>, int>
     >();
+
+#endif // #ifndef BOOST_CLBL_TRTS_MSVC
 
     run_tests<int
         ,invoke_case<false, foo>
