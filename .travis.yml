@@ -27,10 +27,16 @@ env:
 
 addons:
   apt:
-    packages:
-      - g++-6
     sources: &sources
       - ubuntu-toolchain-r-test
+
+cache:
+  directories:
+    - ${TRAVIS_BUILD_DIR}/deps/llvm-3.6.2
+    - ${TRAVIS_BUILD_DIR}/deps/llvm-3.7.1
+    - ${TRAVIS_BUILD_DIR}/deps/llvm-3.8.0
+    - ${TRAVIS_BUILD_DIR}/deps/llvm-3.9.0
+    - ${TRAVIS_BUILD_DIR}/deps/boost-1.64.0
 
 matrix:
   exclude:
@@ -73,6 +79,17 @@ matrix:
       env: UNIT_TESTS=true BOOST_VERSION=default
       osx_image: xcode7.2
 
+
+    # Xcode 7.3
+    - os: osx
+      env: UNIT_TESTS=true BOOST_VERSION=default
+      osx_image: xcode7.3
+
+    # Xcode 8
+    - os: osx
+      env: UNIT_TESTS=true BOOST_VERSION=default
+      osx_image: xcode8
+
     ##########################################################################
     # Build with variations in the configuration
     ##########################################################################
@@ -80,10 +97,23 @@ matrix:
     # Build with libstdc++ instead of libc++
     - env: UNIT_TESTS=true LLVM_VERSION=default STDLIB=libstdc++ BOOST_VERSION=default
 
+    # GCC 7
+    - env: UNIT_TESTS=true CPP=17 GCC_VERSION=7 STDLIB=libstdc++ BOOST_VERSION=default
+      os: linux
+      compiler: gcc
+      addons:
+        apt:
+          packages: ["gcc-7"]
+          sources: *sources
+
     # GCC 6
     - env: UNIT_TESTS=true CPP=17 GCC_VERSION=6 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: gcc
+      addons:
+        apt:
+          packages: ["g++-6"]
+          sources: *sources
 
     # GCC 5.2
     - env: UNIT_TESTS=true GCC_VERSION=5 STDLIB=libstdc++ BOOST_VERSION=default
@@ -135,7 +165,7 @@ install:
   # Setup default versions
   ############################################################################
   - if [[ "${LLVM_VERSION}" == "default" ]]; then LLVM_VERSION=3.8.0; fi
-  - if [[ "${BOOST_VERSION}" == "default" ]]; then BOOST_VERSION=1.60.0; fi
+  - if [[ "${BOOST_VERSION}" == "default" ]]; then BOOST_VERSION=1.64.0; fi
 
 
   ############################################################################
@@ -143,8 +173,7 @@ install:
   ############################################################################
   
   - if [[ -d ${DEPS_DIR}/boost ]]; then CMAKE_OPTIONS+=" -DBOOST_ROOT=${DEPS_DIR}/boost"; fi
-  - if [[ "${BOOST_VERSION}" == "1.59.0" ]]; then BOOST_URL="http://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.gz"; fi
-  - if [[ "${BOOST_VERSION}" == "1.60.0" ]]; then BOOST_URL="http://sourceforge.net/projects/boost/files/boost/1.60.0/boost_1_60_0.tar.gz"; fi
+  - if [[ "${BOOST_VERSION}" == "1.64.0" ]]; then BOOST_URL="http://sourceforge.net/projects/boost/files/boost/1.64.0/boost_1_64_0.tar.gz"; fi
   - if [[ "${BOOST_URL}" != "" ]]; then mkdir boost && travis_retry wget --quiet -O - ${BOOST_URL} | tar --strip-components=1 -xz -C boost; fi
 
   - |
@@ -172,10 +201,8 @@ install:
   # Install Boost.Build
   ############################################################################
   - |
-    if [[ "${BOOST_BUILD}" == "true" ]]; then
-      (cd boost/tools/build && ./bootstrap.sh && ./b2 install --prefix=${DEPS_DIR}/b2)
-      export PATH=${DEPS_DIR}/b2/bin:${PATH}
-    fi
+    (cd boost/tools/build && ./bootstrap.sh && ./b2 install --prefix=${DEPS_DIR}/b2)
+    export PATH=${DEPS_DIR}/b2/bin:${PATH}
 
   ############################################################################
   # Install Clang
