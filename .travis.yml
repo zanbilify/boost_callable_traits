@@ -32,8 +32,12 @@ addons:
     sources: &sources
       - ubuntu-toolchain-r-test
 
+cache:
+  directories:
+    - ${TRAVIS_BUILD_DIR}/deps
+
 matrix:
-  exclude:
+  exclude::wq:w:
     - env: TRAVIS_EMPTY_JOB_WORKAROUND=true
 
   include:
@@ -42,16 +46,21 @@ matrix:
     # Build with the main configuration on all the supported compilers
     ##########################################################################
     # Clang 3.5
-    - env: UNIT_TESTS=true LLVM_VERSION=3.5.2 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=11 LLVM_VERSION=3.5.2 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=14 LLVM_VERSION=3.5.2 BOOST_VERSION=default
 
     # Clang 3.6
-    - env: UNIT_TESTS=true LLVM_VERSION=3.6.2 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=11 LLVM_VERSION=3.6.2 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=14 LLVM_VERSION=3.6.2 BOOST_VERSION=default
 
     # Clang 3.7
-    - env: UNIT_TESTS=true LLVM_VERSION=3.7.1 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=11 LLVM_VERSION=3.7.1 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=14 LLVM_VERSION=3.7.1 BOOST_VERSION=default
 
     # Clang 3.8		 
-    - env: UNIT_TESTS=true LLVM_VERSION=3.8.0 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=11 LLVM_VERSION=3.8.0 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=14 LLVM_VERSION=3.8.0 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=1z LLVM_VERSION=3.8.0 BOOST_VERSION=default
 
     # Xcode 6.4
     - os: osx
@@ -73,6 +82,17 @@ matrix:
       env: UNIT_TESTS=true BOOST_VERSION=default
       osx_image: xcode7.2
 
+
+    # Xcode 7.3
+    - os: osx
+      env: UNIT_TESTS=true BOOST_VERSION=default
+      osx_image: xcode7.3
+
+    # Xcode 8
+    - os: osx
+      env: UNIT_TESTS=true BOOST_VERSION=default
+      osx_image: xcode8
+
     ##########################################################################
     # Build with variations in the configuration
     ##########################################################################
@@ -80,13 +100,35 @@ matrix:
     # Build with libstdc++ instead of libc++
     - env: UNIT_TESTS=true LLVM_VERSION=default STDLIB=libstdc++ BOOST_VERSION=default
 
-    # GCC 6
+    # GCC 7
+    #- env: UNIT_TESTS=true CPP=17 GCC_VERSION=7 STDLIB=libstdc++ BOOST_VERSION=default
+    #  os: linux
+    #  compiler: gcc
+    #  addons:
+    #    apt:
+    #      packages: ["g++-7"]
+    #      sources: *sources
+
+    # GCC 6 with 17
     - env: UNIT_TESTS=true CPP=17 GCC_VERSION=6 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: gcc
+      addons:
+        apt:
+          packages: ["g++-6"]
+          sources: *sources
 
-    # GCC 5.2
-    - env: UNIT_TESTS=true GCC_VERSION=5 STDLIB=libstdc++ BOOST_VERSION=default
+    # GCC 6 with 14
+    - env: UNIT_TESTS=true CPP=14 GCC_VERSION=6 STDLIB=libstdc++ BOOST_VERSION=default
+      os: linux
+      compiler: gcc
+      addons:
+        apt:
+          packages: ["g++-6"]
+          sources: *sources
+
+    # GCC 5.2 with 14
+    - env: UNIT_TESTS=true CPP=14 GCC_VERSION=5 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: g++
       addons:
@@ -94,8 +136,17 @@ matrix:
           packages: ["g++-5"]
           sources: *sources
 
-    # GCC 4.9
-    - env: UNIT_TESTS=true GCC_VERSION=4.9 STDLIB=libstdc++ BOOST_VERSION=default
+    # GCC 5.2 with 11
+    - env: UNIT_TESTS=true CPP=11 GCC_VERSION=5 STDLIB=libstdc++ BOOST_VERSION=default
+      os: linux
+      compiler: g++
+      addons:
+        apt:
+          packages: ["g++-5"]
+          sources: *sources
+
+    # GCC 4.9 with 14
+    - env: UNIT_TESTS=true CPP=11 GCC_VERSION=4.9 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: g++
       addons:
@@ -103,7 +154,16 @@ matrix:
           packages: ["g++-4.9"]
           sources: *sources
 
-    # GCC 4.8
+    # GCC 4.9 with 11
+    - env: UNIT_TESTS=true CPP=11 GCC_VERSION=4.9 STDLIB=libstdc++ BOOST_VERSION=default
+      os: linux
+      compiler: g++
+      addons:
+        apt:
+          packages: ["g++-4.9"]
+          sources: *sources
+
+    # GCC 4.8 with 1y
     - env: UNIT_TESTS=true CPP=1y GCC_VERSION=4.8 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: g++
@@ -112,7 +172,16 @@ matrix:
           packages: ["g++-4.8"]
           sources: *sources
 
-    # GCC 4.7
+    # GCC 4.8 with 0x
+    - env: UNIT_TESTS=true CPP=0x GCC_VERSION=4.8 STDLIB=libstdc++ BOOST_VERSION=default
+      os: linux
+      compiler: g++
+      addons:
+        apt:
+          packages: ["g++-4.8"]
+          sources: *sources
+
+    # GCC 4.7 with 1y
     - env: UNIT_TESTS=true CPP=1y GCC_VERSION=4.7 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: g++
@@ -120,6 +189,16 @@ matrix:
         apt:
           packages: ["g++-4.7"]
           sources: *sources
+
+    # GCC 4.7 with 0x
+    - env: UNIT_TESTS=true CPP=0x GCC_VERSION=4.7 STDLIB=libstdc++ BOOST_VERSION=default
+      os: linux
+      compiler: g++
+      addons:
+        apt:
+          packages: ["g++-4.7"]
+          sources: *sources
+
 before_install:
 
   - if [ -z "$CPP" ]; then export CPP="14"; fi
@@ -129,13 +208,13 @@ install:
   # All the dependencies are installed in ${TRAVIS_BUILD_DIR}/deps/
   ############################################################################
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
-  - mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
+  - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
 
  ############################################################################
   # Setup default versions
   ############################################################################
   - if [[ "${LLVM_VERSION}" == "default" ]]; then LLVM_VERSION=3.8.0; fi
-  - if [[ "${BOOST_VERSION}" == "default" ]]; then BOOST_VERSION=1.60.0; fi
+  - if [[ "${BOOST_VERSION}" == "default" ]]; then BOOST_VERSION=1.64.0; fi
 
 
   ############################################################################
@@ -143,8 +222,7 @@ install:
   ############################################################################
   
   - if [[ -d ${DEPS_DIR}/boost ]]; then CMAKE_OPTIONS+=" -DBOOST_ROOT=${DEPS_DIR}/boost"; fi
-  - if [[ "${BOOST_VERSION}" == "1.59.0" ]]; then BOOST_URL="http://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.gz"; fi
-  - if [[ "${BOOST_VERSION}" == "1.60.0" ]]; then BOOST_URL="http://sourceforge.net/projects/boost/files/boost/1.60.0/boost_1_60_0.tar.gz"; fi
+  - if [[ "${BOOST_VERSION}" == "1.64.0" ]]; then BOOST_URL="http://sourceforge.net/projects/boost/files/boost/1.64.0/boost_1_64_0.tar.gz"; fi
   - if [[ "${BOOST_URL}" != "" ]]; then mkdir boost && travis_retry wget --quiet -O - ${BOOST_URL} | tar --strip-components=1 -xz -C boost; fi
 
   - |
@@ -172,10 +250,8 @@ install:
   # Install Boost.Build
   ############################################################################
   - |
-    if [[ "${BOOST_BUILD}" == "true" ]]; then
-      (cd boost/tools/build && ./bootstrap.sh && ./b2 install --prefix=${DEPS_DIR}/b2)
-      export PATH=${DEPS_DIR}/b2/bin:${PATH}
-    fi
+    (cd boost/tools/build && ./bootstrap.sh && ./b2 install --prefix=${DEPS_DIR}/b2)
+    export PATH=${DEPS_DIR}/b2/bin:${PATH}
 
   ############################################################################
   # Install Clang
@@ -235,11 +311,15 @@ script:
   ############################################################################
   # Build and run the unit tests and examples.
   ############################################################################
+
   - |
-    if [[ "${UNIT_TESTS}" == "true" ]]; then
-      export CTEST_PARALLEL_LEVEL=2 # Run unit tests on two cores
-      (cd build && make check -j2 -k)
-    fi
+    touch Jamroot
+    echo "using clang : : ${CXX} ;" > project-config.jam
+    (cd test && b2 toolset=clang cxxflags="-std=c++$CPP ${CXXFLAGS}")
+
+  - |
+    export CTEST_PARALLEL_LEVEL=2 # Run unit tests on two cores
+    (cd build && make check -j2 -k)
 
 notifications:
   webhooks:
