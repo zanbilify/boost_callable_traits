@@ -46,16 +46,21 @@ matrix:
     # Build with the main configuration on all the supported compilers
     ##########################################################################
     # Clang 3.5
-    - env: UNIT_TESTS=true LLVM_VERSION=3.5.2 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=11 LLVM_VERSION=3.5.2 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=14 LLVM_VERSION=3.5.2 BOOST_VERSION=default
 
     # Clang 3.6
-    - env: UNIT_TESTS=true LLVM_VERSION=3.6.2 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=11 LLVM_VERSION=3.6.2 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=14 LLVM_VERSION=3.6.2 BOOST_VERSION=default
 
     # Clang 3.7
-    - env: UNIT_TESTS=true LLVM_VERSION=3.7.1 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=11 LLVM_VERSION=3.7.1 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=14 LLVM_VERSION=3.7.1 BOOST_VERSION=default
 
     # Clang 3.8		 
-    - env: UNIT_TESTS=true LLVM_VERSION=3.8.0 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=11 LLVM_VERSION=3.8.0 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=14 LLVM_VERSION=3.8.0 BOOST_VERSION=default
+    - env: UNIT_TESTS=true CPP=1z LLVM_VERSION=3.8.0 BOOST_VERSION=default
 
     # Xcode 6.4
     - os: osx
@@ -104,7 +109,7 @@ matrix:
     #      packages: ["g++-7"]
     #      sources: *sources
 
-    # GCC 6
+    # GCC 6 with 17
     - env: UNIT_TESTS=true CPP=17 GCC_VERSION=6 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: gcc
@@ -113,8 +118,17 @@ matrix:
           packages: ["g++-6"]
           sources: *sources
 
-    # GCC 5.2
-    - env: UNIT_TESTS=true GCC_VERSION=5 STDLIB=libstdc++ BOOST_VERSION=default
+    # GCC 6 with 14
+    - env: UNIT_TESTS=true CPP=14 GCC_VERSION=6 STDLIB=libstdc++ BOOST_VERSION=default
+      os: linux
+      compiler: gcc
+      addons:
+        apt:
+          packages: ["g++-6"]
+          sources: *sources
+
+    # GCC 5.2 with 14
+    - env: UNIT_TESTS=true CPP=14 GCC_VERSION=5 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: g++
       addons:
@@ -122,8 +136,17 @@ matrix:
           packages: ["g++-5"]
           sources: *sources
 
-    # GCC 4.9
-    - env: UNIT_TESTS=true GCC_VERSION=4.9 STDLIB=libstdc++ BOOST_VERSION=default
+    # GCC 5.2 with 11
+    - env: UNIT_TESTS=true CPP=11 GCC_VERSION=5 STDLIB=libstdc++ BOOST_VERSION=default
+      os: linux
+      compiler: g++
+      addons:
+        apt:
+          packages: ["g++-5"]
+          sources: *sources
+
+    # GCC 4.9 with 14
+    - env: UNIT_TESTS=true CPP=11 GCC_VERSION=4.9 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: g++
       addons:
@@ -131,7 +154,16 @@ matrix:
           packages: ["g++-4.9"]
           sources: *sources
 
-    # GCC 4.8
+    # GCC 4.9 with 11
+    - env: UNIT_TESTS=true CPP=11 GCC_VERSION=4.9 STDLIB=libstdc++ BOOST_VERSION=default
+      os: linux
+      compiler: g++
+      addons:
+        apt:
+          packages: ["g++-4.9"]
+          sources: *sources
+
+    # GCC 4.8 with 1y
     - env: UNIT_TESTS=true CPP=1y GCC_VERSION=4.8 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: g++
@@ -140,7 +172,16 @@ matrix:
           packages: ["g++-4.8"]
           sources: *sources
 
-    # GCC 4.7
+    # GCC 4.8 with 0x
+    - env: UNIT_TESTS=true CPP=0x GCC_VERSION=4.8 STDLIB=libstdc++ BOOST_VERSION=default
+      os: linux
+      compiler: g++
+      addons:
+        apt:
+          packages: ["g++-4.8"]
+          sources: *sources
+
+    # GCC 4.7 with 1y
     - env: UNIT_TESTS=true CPP=1y GCC_VERSION=4.7 STDLIB=libstdc++ BOOST_VERSION=default
       os: linux
       compiler: g++
@@ -148,6 +189,16 @@ matrix:
         apt:
           packages: ["g++-4.7"]
           sources: *sources
+
+    # GCC 4.7 with 0x
+    - env: UNIT_TESTS=true CPP=0x GCC_VERSION=4.7 STDLIB=libstdc++ BOOST_VERSION=default
+      os: linux
+      compiler: g++
+      addons:
+        apt:
+          packages: ["g++-4.7"]
+          sources: *sources
+
 before_install:
 
   - if [ -z "$CPP" ]; then export CPP="14"; fi

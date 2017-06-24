@@ -1,6 +1,6 @@
 //TODO how to accomodate Boost license?
 
-//These are from libc++ tests for std::functional. I've modified them
+//These are from libc++ tests for <functional>. I've modified them
 //slightly to instead test boost::callable_traits::is_invocable
 
 //===----------------------------------------------------------------------===//
@@ -128,8 +128,8 @@ void bullet_one_two_tests() {
         test_b12<int volatile&(NonCopyable&&) volatile &, int volatile&>(cl);
         test_b12<int const volatile&(NonCopyable&&) const volatile &, int const volatile&>(cl);
 
-//MSVC doesn't handle these correctly AFAICT
-#if ! defined(_MSC_VER) || _MSC_VER > 1900
+//MSVC doesn't handle cv + ref qualifiers correctly in expression SFINAE
+#if ! defined(_MSC_VER)
         test_b12<int&&(NonCopyable&&) && , int&&>(std::move(cl));
         test_b12<int const&&(NonCopyable&&) const &&, int const&&>(std::move(cl));
         test_b12<int volatile&&(NonCopyable&&) volatile &&, int volatile&&>(std::move(cl));
