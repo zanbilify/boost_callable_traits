@@ -12,12 +12,11 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <boost/callable_traits/detail/config.hpp>
 #include <boost/callable_traits/detail/forward_declarations.hpp>
+#include <boost/callable_traits/detail/utility.hpp>
 #include <type_traits>
 #include <utility>
 
 namespace boost { namespace callable_traits { namespace detail {
-    
-    struct substition_failure {};
 
     template<typename T>
     using shallow_decay = typename std::remove_const<
@@ -151,9 +150,7 @@ namespace boost { namespace callable_traits { namespace detail {
         using traits = detail::traits<T>;
         using test = detail::test_invoke<traits, Args...>;
         using result = decltype(test{}(::std::declval<T>(), ::std::declval<Args>()...));
-        using failure = detail::substitution_failure;
-        using is_invalid_invoke = std::is_same<result, failure>;
-        using type = std::integral_constant<bool, !is_invalid_invoke::value>;
+        using type = std::integral_constant<bool, result::value>;
     };
 
     template<typename... Args>
