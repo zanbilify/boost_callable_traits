@@ -156,66 +156,23 @@ namespace boost { namespace callable_traits { namespace detail {
         using type = std::integral_constant<bool, !is_invalid_invoke::value>;
     };
 
-    /*template<typename IsMemberPointer, typename Traits, typename... Args>
-    struct build_invoke_t;
-
-    template<typename Traits, typename... Args>
-    struct build_invoke_t<std::false_type, Traits, Args...> {
-        using test = detail::test_invoke<Traits, Args...>;
-        using original_type = typename Traits::type;
-
-        using result = decltype(test{}(
-            ::std::declval<original_type>(),
-            ::std::declval<Args>()...
-        ));
-
-        using failure = detail::substitution_failure;
-        using type = std::integral_constant<bool, !std::is_same<result, failure>::value>;
+    template<typename... Args>
+    struct is_invocable_impl<void, Args...> {
+        using type = std::false_type;
     };
 
-    template<typename Traits, typename... Args>
-    struct build_invoke_t<std::true_type, Traits, Args...> {
-        using test = test_invoke<Traits, Args...>;
-        using original_type = typename Traits::type;
-        using invoke_type = typename Traits::invoke_type;
-
-        using result = decltype(test{}(
-            ::std::declval<original_type>(),
-            ::std::declval<invoke_type>(),
-            ::std::declval<Args>()...
-        ));
-
-        using failure = detail::substitution_failure;
-        using type = std::integral_constant<bool, !std::is_same<result, failure>::value>;
+    template<typename IsInvocable, typename Ret, typename T, typename... Args>
+    struct is_invocable_r_impl {
+        using traits = detail::traits<T>;
+        using test = detail::test_invoke<traits, Args...>;
+        using result = decltype(test{}(::std::declval<T>(), ::std::declval<Args>()...));
+        using type = typename std::is_convertible<typename result::_::type, Ret>::type;
     };
 
-    template<typename Traits>
-    struct build_invoke_t<std::false_type, Traits, void> {
-        using test = test_invoke<Traits>;
-        using original_type = typename Traits::type;
-        using result = decltype(test{}(static_cast<original_type>(::std::declval<original_type>())));
-        using failure = detail::substitution_failure;
-        using type = std::integral_constant<bool, !std::is_same<result, failure>::value>;
+    template<typename Ret, typename T, typename... Args>
+    struct is_invocable_r_impl<std::false_type, Ret, T, Args...> {
+        using type = std::false_type;
     };
-
-    template<typename Traits>
-    struct build_invoke_t<std::true_type, Traits, void> {
-        using test = test_invoke<Traits>;
-        using original_type = typename Traits::type;
-        using invoke_type = typename Traits::invoke_type;
-
-        using result = decltype(test{}(
-            ::std::declval<original_type>(),
-            static_cast<invoke_type>(::std::declval<invoke_type>())
-        ));
-
-        using failure = detail::substitution_failure;
-        using type = std::integral_constant<bool, !std::is_same<result, failure>::value>;
-    };
-
-    template<typename Traits, typename... Args>
-    using is_invocable_impl = typename build_invoke_t<
-        typename Traits::is_member_pointer, Traits, Args...>::type;*/
 
 }}} // namespace boost::callable_traits::detail
 

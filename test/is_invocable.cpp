@@ -184,6 +184,61 @@ int main() {
         ,invoke_case<false, char>
         ,invoke_case<false, void*>
     >();
+
+    run_tests<void
+        ,invoke_case<false, foo>
+        ,invoke_case<false, foo*>
+        ,invoke_case<false, foo&>
+        ,invoke_case<false, foo&&>
+        ,invoke_case<false, std::reference_wrapper<foo>>
+        ,invoke_case<false, foo const>
+        ,invoke_case<false, foo const*>
+        ,invoke_case<false, foo const&>
+        ,invoke_case<false, foo const&&>
+        ,invoke_case<false, std::reference_wrapper<foo const>>
+        ,invoke_case<false, foo, int>
+        ,invoke_case<false, foo*, int>
+        ,invoke_case<false, foo&, int>
+        ,invoke_case<false, foo&&, int>
+        ,invoke_case<false, std::reference_wrapper<foo>, int>
+    >();
+
+
+    run_tests<int
+        ,invoke_case<false, foo>
+        ,invoke_case<false, foo*>
+        ,invoke_case<false, foo&>
+        ,invoke_case<false, foo&&>
+        ,invoke_case<false, std::reference_wrapper<foo>>
+        ,invoke_case<false, foo const>
+        ,invoke_case<false, foo const*>
+        ,invoke_case<false, foo const&>
+        ,invoke_case<false, foo const&&>
+        ,invoke_case<false, std::reference_wrapper<foo const>>
+        ,invoke_case<false, foo, int>
+        ,invoke_case<false, foo*, int>
+        ,invoke_case<false, foo&, int>
+        ,invoke_case<false, foo&&, int>
+        ,invoke_case<false, std::reference_wrapper<foo>, int>
+    >();
+
+    run_tests<void*
+        ,invoke_case<false, foo>
+        ,invoke_case<false, foo*>
+        ,invoke_case<false, foo&>
+        ,invoke_case<false, foo&&>
+        ,invoke_case<false, std::reference_wrapper<foo>>
+        ,invoke_case<false, foo const>
+        ,invoke_case<false, foo const*>
+        ,invoke_case<false, foo const&>
+        ,invoke_case<false, foo const&&>
+        ,invoke_case<false, std::reference_wrapper<foo const>>
+        ,invoke_case<false, foo, int>
+        ,invoke_case<false, foo*, int>
+        ,invoke_case<false, foo&, int>
+        ,invoke_case<false, foo&&, int>
+        ,invoke_case<false, std::reference_wrapper<foo>, int>
+    >();
 }
 
 #endif //#ifdef BOOST_CLBL_TRTS_GCC_OLDER_THAN_4_9_2
