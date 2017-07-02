@@ -409,21 +409,21 @@ If you ['are] writing generic code, take a moment to skim your header files, and
 
     template<class Return, class First, class Second>
     class foo<Return(First, Second)> {
-        //     ^^^^^^^^^^^^^^^^^^^^^
+        //    ^^^^^^^^^^^^^^^^^^^^^
     };
 
 Or maybe something like this:
     
     template<class Return, class ...Args>
     class foo<Return(*)(Args...)> {
-        //     ^^^^^^^^^^^^^^^^^^
+        //    ^^^^^^^^^^^^^^^^^^
     };
     
 Or, if you are *really* unlucky, something like this:
 
     template<class Return, class T, class ...Args>
     class foo<Return(T::*)(Args..., ...) const volatile & noexcept> {
-        //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     };
 
 With [libname], you can get rid of all of these template specializations (unless you deal with platform-specific calling conventions, for now). Even if you are only specializing a simple function type like `Return(Args...)`, [libname] might be useful to you. You may find that [libname] can help make your code more readable, more maintainable, more generic, and less error-prone.
@@ -448,7 +448,7 @@ If your compiler doesn't support a certain language feature that is required by 
 
 [heading Many features in this library cause a "substitution failure" when the template constraints are violated. Does this mean that I can violate the constraints in a SFINAE context, as long as there is another legal substitute?]
 
-Yes. The SFINAE-ability of violated constraints has been tested extensively on all compilers. Achieving this required some messy code in the public header files.
+Yes. The SFINAE-ability of violated constraints has been tested extensively on all supported compilers. Achieving this required some messy code in the public header files.
 
 [heading What about calling conventions?]
 
@@ -464,45 +464,9 @@ This section contains the instructions for building and running the test cases a
 
 [heading Dependencies]
 
-Even though the [libname] headers do not rely on external dependencies, you'll need to install [@https://cmake.org/ CMake] version 3.0 or higher to use the test suite. For Windows users who wish to build the test suite with Visual Studio 2015 Update 2, it appears that CMake version 3.5 or higher is required. The build instructions assume that both CMake and Git are executable from your environment PATH.
+Even though the [libname] headers do not rely on external dependencies, you'll need to install [@https://cmake.org/ CMake] version 3.5 or higher to run the full test suite. The build instructions assume that both CMake and Git are available from your environment PATH. Boost.Build is also supported.
 
-[heading One-click build scripts]
-
-For convenience, one-click build scripts for Linux and Windows are packaged with [libname], each of which must be run from the directory in which the script resides. Running one of these scripts will create a `build-xxx` subdirectory in the [libname] root directory, and perform all testing there. Even though these scripts were designed to be as generic as possible, issues may exist because they have not seen widespread use. Refer to the console instructions below if the provided testing scripts do not work for you.
-
-Use these scripts at your own risk.
-
-First, clone the repository:
-
- git clone http://github.com/badair/callable_traits
-
-* Linux (possibly OSX - untested)
-  * script directory: `[CallableTraits root]/scripts/posix`
-    * `gcc-libcstdxx.sh`
-      * compiles with the g++ version found in the PATH
-      * This is the script most likely to work out-of-the-box, since GCC 4.8 comes pre-installed on many Linux distributions
-    * `clang-libcxx.sh`
-      * compiles with the clang++ executable in the PATH
-      * uses libc++ as the standard library implementation
-    * `clang-libcstdxx.sh`
-      * compiles with the clang++ executable in the PATH
-      * uses libstdc++ as the standard library implementation
-
-* Windows
-  * script directory: `[CallableTraits root]\scripts\windows`
-    * `MSVC-Win32-Debug.bat`
-      * compiles with Visual Studio 2015, which must be installed in the default install directory
-    * `LLVM-vs2014-Win32-Debug.bat`
-      * compiles with clang/c2
-      * Visual Studio 2015 must be installed in the default install directory
-      * This script assumes that the Windows Installer found on [@http://llvm.org/builds/ this page] was used to install LLVM
-    * `MinGW-Win32-Release.bat`
-      * compiles with a MinGW-based GCC build
-      * requires a [@http://gnuwin32.sourceforge.net/packages/make.htm Windows build of GNU Make] to be installed and present in the PATH environment variable
-      * Expects to find the MinGW root directory at `C:\\MinGW`
-
-
-[heading Console instructions - Linux/OSX]
+[heading Linux/OSX - clone and run test suite]
 
 Open a shell and enter the following commands:
 
@@ -515,28 +479,22 @@ cmake .. -DCMAKE_CXX_COMPILER=/path/to/compiler
 make check
 ```
 
-[heading Console instructions - Windows]
+[heading Windows - clone and run test suite]
 
 [note Cygwin and MSYS users should refer to the Linux section (you know who you are).]
 
 Fire up `cmd.exe` and enter the following commands:
-
-[note These commands assume that Visual Studio 2015 was installed in the default directory. git and CMake executables are expected to be present in the evironment PATH. A 64 bit Windows install is assumed.]
 
 ```
 git clone http://github.com/badair/callable_traits
 cd callable_traits
 mkdir build
 cd build
-cmake .. -G"Visual Studio 14 2015"
-"%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" check.vcxproj /t:build /p:Configuration=Debug /p:Platform=Win32 /v:n /nologo
+cmake ..
+path\to\msbuild.exe check.vcxproj /t:build /p:Configuration=Debug /p:Platform=Win32 /v:n /nologo
 ```
 
-To build with Clang/C2 instead of MSVC, append `-TLLVM-vs2014` to the CMake arguments. This will only work if you have [@http://llvm.org/builds/ Clang/C2] installed.
-
-[tip If you need additional help building the test suite, [link_contact_the_author].]
-
-[note Boost.Build isn't supported yet, but it will be supported soon.]
+To build with Clang/C2 instead of MSVC, append `-TLLVM-vs2014` to the CMake arguments. This will only work if you have Clang/C2 installed.
 
 [endsect][/section:building]
 
@@ -553,10 +511,5 @@ Comments, feedback, bug reports, and questions are appreciated, which can be sub
 
 # Open a new issue [@https://github.com/badair/callable_traits/issues/new here] on GitHub
 # Message me [@https://gitter.im/badair/callable_traits here] on Gitter
-# Send me an email at
-  * barrettellisadair
-  * at...
-  * gmail dot com
-  * (please excuse the anti-spam formatting)
 
 [endsect][/section:contact]
