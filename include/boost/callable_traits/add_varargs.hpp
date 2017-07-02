@@ -50,9 +50,6 @@ struct add_varargs {
 * A substitution failure occurs if the constraints are violated.
 * Adds C-style variadics (`...`) to the signature of `T`, if not already present.
 
-[heading Compatibility Notes]
-Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`add_varargs_t<T>`]]

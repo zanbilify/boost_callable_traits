@@ -70,9 +70,6 @@ namespace detail {
 * When `T` is a function, function pointer, function reference, or member function pointer, the aliased type's return type is `R`, but is otherwise identical to `T`.
 * When `T` is a member data pointer of class `foo` to a `U` type (such that `T` is `U foo::*`), the aliased type is `R foo::*`.
 
-[heading Compatibility Notes]
-Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`apply_return_t<T, float>`]]

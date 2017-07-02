@@ -66,9 +66,6 @@ constexpr bool has_member_qualifiers_v = //see below
   * `T` is a function object with a member-qualified `operator()`
 * On compilers that support variable templates, `has_member_qualifiers_v<T>` is equivalent to `has_member_qualifiers<T>::value`.
 
-[heading Compatibility Notes]
-Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`has_member_qualifiers_v<T>`]]

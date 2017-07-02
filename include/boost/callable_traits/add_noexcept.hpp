@@ -70,9 +70,6 @@ struct add_noexcept {
 * A substitution failure occurs if the constraints are violated.
 * Adds a `noexcept` specifier to `T`, if not already present.
 
-[heading Compatibility Notes]
-A `static_assert` always fails when instantiating this template if your compiler doesn't support `noexcept` on types (a C++17 feature). At the time of this writing, GCC 7.0.0+ and Clang 4.0+  are the only compiler that can use feature.
-
 [heading Input/Output Examples]
 [table
     [[`T`]                                    [`add_noexcept_t<T>`]]

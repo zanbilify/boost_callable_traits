@@ -71,9 +71,6 @@ struct add_transaction_safe {
 * A substitution failure occurs if the constraints are violated.
 * Adds the `transaction_safe` specifier to `T`, if not already present.
 
-[heading Compatibility Notes]
-A `static_assert` always fails when instantiating this template if your compiler doesn't support `transaction_safe`. At the time of this writing, GCC 6 with the `-fgnu-tm` is the only compiler that can use this feature.
-
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`add_transaction_safe_t<T>`]]

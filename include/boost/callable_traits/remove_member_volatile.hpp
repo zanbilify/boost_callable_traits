@@ -45,9 +45,6 @@ struct remove_member_volatile {
 * A substitution failure occurs if the constraints are violated.
 * Removes the member `volatile` qualifier from `T`, if present.
 
-[heading Compatibility Notes]
-Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`remove_member_volatile_t<T>`]]

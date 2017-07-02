@@ -62,10 +62,6 @@ struct add_member_const {
 * A substitution failure occurs if the constraints are violated.
 * Adds a member `const` qualifier to `T`, if not already present.
 
-[heading Compatibility Notes]
-A substitution failure occurs on GCC builds older than version 4.9.2 with function types, because those versions did not support abominable function types. Full support on GCC 4.9.2+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-
-
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`add_member_const_t<T>`]]

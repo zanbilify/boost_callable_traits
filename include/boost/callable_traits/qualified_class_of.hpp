@@ -48,9 +48,6 @@ struct qualified_class_of {
 * If `T` is a member function pointer, the aliased type is the parent class of the member, qualified according to the member qualifiers on `T`. If `T` does not have a member reference qualifier, then the aliased type will be an lvalue reference.
 * If `T` is a member data pointer, the aliased type is equivalent to `ct::class_of<T> const &`.
 
-[heading Compatibility Notes]
-Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`qualified_class_of_t<T>`]]

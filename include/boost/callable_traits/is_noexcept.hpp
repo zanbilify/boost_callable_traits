@@ -65,9 +65,6 @@ constexpr bool is_noexcept_v = //see below
   * `T` is a function object with a non-overloaded `operator()`, where the `operator()` has a `noexcept` specifier
 * On compilers that support variable templates, `is_noexcept_v<T>` is equivalent to `is_noexcept<T>::value`.
 
-[heading Compatibility Notes]
-Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+. Obviously, this will always be falsy for compilers that don't support `noexcept` at all.
-
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`is_noexcept_v<T>`]]

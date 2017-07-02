@@ -55,9 +55,6 @@ struct remove_transaction_safe {
 * A substitution failure occurs if the constraints are violated.
 * Removes the member `transaction_safe` specifier from `T`, if present.
 
-[heading Compatibility Notes]
-Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`remove_transaction_safe_t<T>`]]

@@ -66,9 +66,6 @@ constexpr bool is_cv_member_v = //see below
   * `T` is a function object with a non-overloaded `operator()`, where the `operator()` has both `const` and `volatile` member qualifiers
 * On compilers that support variable templates, `is_cv_member_v<T>` is equivalent to `is_cv_member<T>::value`.
 
-[heading Compatibility Notes]
-Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`is_cv_member_v<T>`]]

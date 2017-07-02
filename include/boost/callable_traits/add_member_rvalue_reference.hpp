@@ -74,9 +74,6 @@ struct add_member_rvalue_reference {
 * Adds a member rvalue reference qualifier (`&&`) to `T`, if not already present.
 * If an lvalue reference qualifier is present, the lvalue reference qualifier remains (in accordance with reference collapsing rules).
 
-[heading Compatibility Notes]
-A `static_assert` always fails on GCC builds older than version 4.9.2, because those versions did not support reference member qualifiers. Full support on GCC 4.9.2+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-
 [heading Input/Output Examples]
 [table
     [[`T`]                              [`add_member_rvalue_reference_t<T>`]]
