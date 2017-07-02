@@ -40,7 +40,7 @@
     </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">First</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">Second</span><span class="special">&gt;</span>
 <span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">First</span><span class="special">,</span> <span class="identifier">Second</span><span class="special">)&gt;</span> <span class="special">{</span>
-    <span class="comment">//     ^^^^^^^^^^^^^^^^^^^^^</span>
+    <span class="comment">//    ^^^^^^^^^^^^^^^^^^^^^</span>
 <span class="special">};</span>
 </pre>
 <p>
@@ -48,7 +48,7 @@
     </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span>
 <span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(*)(</span><span class="identifier">Args</span><span class="special">...)&gt;</span> <span class="special">{</span>
-    <span class="comment">//     ^^^^^^^^^^^^^^^^^^</span>
+    <span class="comment">//    ^^^^^^^^^^^^^^^^^^</span>
 <span class="special">};</span>
 </pre>
 <p>
@@ -57,7 +57,7 @@
     </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">Return</span><span class="special">,</span> <span class="keyword">class</span> <span class="identifier">T</span><span class="special">,</span> <span class="keyword">class</span> <span class="special">...</span><span class="identifier">Args</span><span class="special">&gt;</span>
 <span class="keyword">class</span> <span class="identifier">foo</span><span class="special">&lt;</span><span class="identifier">Return</span><span class="special">(</span><span class="identifier">T</span><span class="special">::*)(</span><span class="identifier">Args</span><span class="special">...,</span> <span class="special">...)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="special">&amp;</span> <span class="keyword">noexcept</span><span class="special">&gt;</span> <span class="special">{</span>
-    <span class="comment">//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+    <span class="comment">//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
 <span class="special">};</span>
 </pre>
 <p>
@@ -125,8 +125,8 @@
     </h4>
 <p>
       Yes. The SFINAE-ability of violated constraints has been tested extensively
-      on all compilers. Achieving this required some messy code in the public header
-      files.
+      on all supported compilers. Achieving this required some messy code in the
+      public header files.
     </p>
 <h4>
 <a name="callable_traits.faq.h6"></a>
@@ -142,7 +142,7 @@
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright &#169; 2016 Barrett Adair<p>
+<td align="right"><div class="copyright-footer">Copyright &#169; 2016, 2017 Barrett Adair<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE.md or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

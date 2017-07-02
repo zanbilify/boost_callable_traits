@@ -48,130 +48,14 @@
 <p>
       Even though the <code class="literal">Boost.CallableTraits</code> headers do not rely
       on external dependencies, you'll need to install <a href="https://cmake.org/" target="_top">CMake</a>
-      version 3.0 or higher to use the test suite. For Windows users who wish to
-      build the test suite with Visual Studio 2015 Update 2, it appears that CMake
-      version 3.5 or higher is required. The build instructions assume that both
-      CMake and Git are executable from your environment PATH.
+      version 3.5 or higher to run the full test suite. The build instructions assume
+      that both CMake and Git are available from your environment PATH. Boost.Build
+      is also supported.
     </p>
 <h4>
 <a name="callable_traits.building.h1"></a>
-      <span><a name="callable_traits.building.one_click_build_scripts"></a></span><a class="link" href="building.html#callable_traits.building.one_click_build_scripts">One-click
-      build scripts</a>
-    </h4>
-<p>
-      For convenience, one-click build scripts for Linux and Windows are packaged
-      with <code class="literal">Boost.CallableTraits</code>, each of which must be run from
-      the directory in which the script resides. Running one of these scripts will
-      create a <code class="computeroutput"><span class="identifier">build</span><span class="special">-</span><span class="identifier">xxx</span></code> subdirectory in the <code class="literal">Boost.CallableTraits</code>
-      root directory, and perform all testing there. Even though these scripts were
-      designed to be as generic as possible, issues may exist because they have not
-      seen widespread use. Refer to the console instructions below if the provided
-      testing scripts do not work for you.
-    </p>
-<p>
-      Use these scripts at your own risk.
-    </p>
-<p>
-      First, clone the repository:
-    </p>
-<pre class="programlisting"><span class="identifier">git</span> <span class="identifier">clone</span> <span class="identifier">http</span><span class="special">://</span><span class="identifier">github</span><span class="special">.</span><span class="identifier">com</span><span class="special">/</span><span class="identifier">badair</span><span class="special">/</span><span class="identifier">callable_traits</span>
-</pre>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem">
-          Linux (possibly OSX - untested)
-          <div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem">
-                script directory: <code class="computeroutput"><span class="special">[</span><span class="identifier">CallableTraits</span> <span class="identifier">root</span><span class="special">]/</span><span class="identifier">scripts</span><span class="special">/</span><span class="identifier">posix</span></code>
-                <div class="itemizedlist"><ul class="itemizedlist" type="square">
-<li class="listitem">
-                      <code class="computeroutput"><span class="identifier">gcc</span><span class="special">-</span><span class="identifier">libcstdxx</span><span class="special">.</span><span class="identifier">sh</span></code>
-                      <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem">
-                            compiles with the g++ version found in the PATH
-                          </li>
-<li class="listitem">
-                            This is the script most likely to work out-of-the-box,
-                            since GCC 4.8 comes pre-installed on many Linux distributions
-                          </li>
-</ul></div>
-                    </li>
-<li class="listitem">
-                      <code class="computeroutput"><span class="identifier">clang</span><span class="special">-</span><span class="identifier">libcxx</span><span class="special">.</span><span class="identifier">sh</span></code>
-                      <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem">
-                            compiles with the clang++ executable in the PATH
-                          </li>
-<li class="listitem">
-                            uses libc++ as the standard library implementation
-                          </li>
-</ul></div>
-                    </li>
-<li class="listitem">
-                      <code class="computeroutput"><span class="identifier">clang</span><span class="special">-</span><span class="identifier">libcstdxx</span><span class="special">.</span><span class="identifier">sh</span></code>
-                      <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem">
-                            compiles with the clang++ executable in the PATH
-                          </li>
-<li class="listitem">
-                            uses libstdc++ as the standard library implementation
-                          </li>
-</ul></div>
-                    </li>
-</ul></div>
-              </li></ul></div>
-        </li>
-<li class="listitem">
-          Windows
-          <div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem">
-                script directory: <code class="computeroutput"><span class="special">[</span><span class="identifier">CallableTraits</span> <span class="identifier">root</span><span class="special">]\</span><span class="identifier">scripts</span><span class="special">\</span><span class="identifier">windows</span></code>
-                <div class="itemizedlist"><ul class="itemizedlist" type="square">
-<li class="listitem">
-                      <code class="computeroutput"><span class="identifier">MSVC</span><span class="special">-</span><span class="identifier">Win32</span><span class="special">-</span><span class="identifier">Debug</span><span class="special">.</span><span class="identifier">bat</span></code>
-                      <div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
-                            compiles with Visual Studio 2015, which must be installed
-                            in the default install directory
-                          </li></ul></div>
-                    </li>
-<li class="listitem">
-                      <code class="computeroutput"><span class="identifier">LLVM</span><span class="special">-</span><span class="identifier">vs2014</span><span class="special">-</span><span class="identifier">Win32</span><span class="special">-</span><span class="identifier">Debug</span><span class="special">.</span><span class="identifier">bat</span></code>
-                      <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem">
-                            compiles with clang/c2
-                          </li>
-<li class="listitem">
-                            Visual Studio 2015 must be installed in the default install
-                            directory
-                          </li>
-<li class="listitem">
-                            This script assumes that the Windows Installer found
-                            on <a href="http://llvm.org/builds/" target="_top">this page</a>
-                            was used to install LLVM
-                          </li>
-</ul></div>
-                    </li>
-<li class="listitem">
-                      <code class="computeroutput"><span class="identifier">MinGW</span><span class="special">-</span><span class="identifier">Win32</span><span class="special">-</span><span class="identifier">Release</span><span class="special">.</span><span class="identifier">bat</span></code>
-                      <div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem">
-                            compiles with a MinGW-based GCC build
-                          </li>
-<li class="listitem">
-                            requires a <a href="http://gnuwin32.sourceforge.net/packages/make.htm" target="_top">Windows
-                            build of GNU Make</a> to be installed and present
-                            in the PATH environment variable
-                          </li>
-<li class="listitem">
-                            Expects to find the MinGW root directory at <code class="computeroutput"><span class="identifier">C</span><span class="special">:\\</span><span class="identifier">MinGW</span></code>
-                          </li>
-</ul></div>
-                    </li>
-</ul></div>
-              </li></ul></div>
-        </li>
-</ul></div>
-<h4>
-<a name="callable_traits.building.h2"></a>
-      <span><a name="callable_traits.building.console_instructions_linux_osx"></a></span><a class="link" href="building.html#callable_traits.building.console_instructions_linux_osx">Console instructions
-      - Linux/OSX</a>
+      <span><a name="callable_traits.building.linux_osx_clone_and_run_test_sui"></a></span><a class="link" href="building.html#callable_traits.building.linux_osx_clone_and_run_test_sui">Linux/OSX
+      - clone and run test suite</a>
     </h4>
 <p>
       Open a shell and enter the following commands:
@@ -184,9 +68,9 @@
 <span class="identifier">make</span> <span class="identifier">check</span>
 </pre>
 <h4>
-<a name="callable_traits.building.h3"></a>
-      <span><a name="callable_traits.building.console_instructions_windows"></a></span><a class="link" href="building.html#callable_traits.building.console_instructions_windows">Console
-      instructions - Windows</a>
+<a name="callable_traits.building.h2"></a>
+      <span><a name="callable_traits.building.windows_clone_and_run_test_suite"></a></span><a class="link" href="building.html#callable_traits.building.windows_clone_and_run_test_suite">Windows
+      - clone and run test suite</a>
     </h4>
 <div class="note"><table border="0" summary="Note">
 <tr>
@@ -201,52 +85,21 @@
 <p>
       Fire up <code class="computeroutput"><span class="identifier">cmd</span><span class="special">.</span><span class="identifier">exe</span></code> and enter the following commands:
     </p>
-<div class="note"><table border="0" summary="Note">
-<tr>
-<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../../src/images/note.png"></td>
-<th align="left">Note</th>
-</tr>
-<tr><td align="left" valign="top"><p>
-        These commands assume that Visual Studio 2015 was installed in the default
-        directory. git and CMake executables are expected to be present in the evironment
-        PATH. A 64 bit Windows install is assumed.
-      </p></td></tr>
-</table></div>
 <pre class="programlisting"><span class="identifier">git</span> <span class="identifier">clone</span> <span class="identifier">http</span><span class="special">://</span><span class="identifier">github</span><span class="special">.</span><span class="identifier">com</span><span class="special">/</span><span class="identifier">badair</span><span class="special">/</span><span class="identifier">callable_traits</span>
 <span class="identifier">cd</span> <span class="identifier">callable_traits</span>
 <span class="identifier">mkdir</span> <span class="identifier">build</span>
 <span class="identifier">cd</span> <span class="identifier">build</span>
-<span class="identifier">cmake</span> <span class="special">..</span> <span class="special">-</span><span class="identifier">G</span><span class="string">"Visual Studio 14 2015"</span>
-<span class="string">"%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe"</span> <span class="identifier">check</span><span class="special">.</span><span class="identifier">vcxproj</span> <span class="special">/</span><span class="identifier">t</span><span class="special">:</span><span class="identifier">build</span> <span class="special">/</span><span class="identifier">p</span><span class="special">:</span><span class="identifier">Configuration</span><span class="special">=</span><span class="identifier">Debug</span> <span class="special">/</span><span class="identifier">p</span><span class="special">:</span><span class="identifier">Platform</span><span class="special">=</span><span class="identifier">Win32</span> <span class="special">/</span><span class="identifier">v</span><span class="special">:</span><span class="identifier">n</span> <span class="special">/</span><span class="identifier">nologo</span>
+<span class="identifier">cmake</span> <span class="special">..</span>
+<span class="identifier">path</span><span class="special">\</span><span class="identifier">to</span><span class="special">\</span><span class="identifier">msbuild</span><span class="special">.</span><span class="identifier">exe</span> <span class="identifier">check</span><span class="special">.</span><span class="identifier">vcxproj</span> <span class="special">/</span><span class="identifier">t</span><span class="special">:</span><span class="identifier">build</span> <span class="special">/</span><span class="identifier">p</span><span class="special">:</span><span class="identifier">Configuration</span><span class="special">=</span><span class="identifier">Debug</span> <span class="special">/</span><span class="identifier">p</span><span class="special">:</span><span class="identifier">Platform</span><span class="special">=</span><span class="identifier">Win32</span> <span class="special">/</span><span class="identifier">v</span><span class="special">:</span><span class="identifier">n</span> <span class="special">/</span><span class="identifier">nologo</span>
 </pre>
 <p>
       To build with Clang/C2 instead of MSVC, append <code class="computeroutput"><span class="special">-</span><span class="identifier">TLLVM</span><span class="special">-</span><span class="identifier">vs2014</span></code>
-      to the CMake arguments. This will only work if you have <a href="http://llvm.org/builds/" target="_top">Clang/C2</a>
-      installed.
+      to the CMake arguments. This will only work if you have Clang/C2 installed.
     </p>
-<div class="tip"><table border="0" summary="Tip">
-<tr>
-<td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="../../src/images/tip.png"></td>
-<th align="left">Tip</th>
-</tr>
-<tr><td align="left" valign="top"><p>
-        If you need additional help building the test suite, <a class="link" href="contact.html" title="Contact">contact
-        me</a>.
-      </p></td></tr>
-</table></div>
-<div class="note"><table border="0" summary="Note">
-<tr>
-<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../../src/images/note.png"></td>
-<th align="left">Note</th>
-</tr>
-<tr><td align="left" valign="top"><p>
-        Boost.Build isn't supported yet, but it will be supported soon.
-      </p></td></tr>
-</table></div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright &#169; 2016 Barrett Adair<p>
+<td align="right"><div class="copyright-footer">Copyright &#169; 2016, 2017 Barrett Adair<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE.md or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

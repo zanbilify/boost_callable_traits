@@ -1,6 +1,6 @@
 /*
 
-@copyright Barrett Adair 2015
+@Copyright Barrett Adair 2015-2017
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 
@@ -65,9 +65,6 @@ constexpr bool has_member_qualifiers_v = //see below
   * `T` is a member function pointer with member qualifiers
   * `T` is a function object with a member-qualified `operator()`
 * On compilers that support variable templates, `has_member_qualifiers_v<T>` is equivalent to `has_member_qualifiers<T>::value`.
-
-[heading Compatibility Notes]
-Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
 
 [heading Input/Output Examples]
 [table

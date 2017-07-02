@@ -1,6 +1,6 @@
 /*
 
-@copyright Barrett Adair 2015
+@Copyright Barrett Adair 2015-2017
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 
@@ -61,10 +61,6 @@ struct add_member_const {
 [heading Behavior]
 * A substitution failure occurs if the constraints are violated.
 * Adds a member `const` qualifier to `T`, if not already present.
-
-[heading Compatibility Notes]
-A substitution failure occurs on GCC builds older than version 4.9.2 with function types, because those versions did not support abominable function types. Full support on GCC 4.9.2+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
-
 
 [heading Input/Output Examples]
 [table

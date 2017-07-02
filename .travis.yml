@@ -1,5 +1,5 @@
  # Copyright Louis Dionne 2015
-# Modified Work Copyright Barrett Adair 2015
+# Modified Work Copyright Barrett Adair 2015-2017
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 
@@ -223,7 +223,7 @@ install:
   
   - if [[ -d ${DEPS_DIR}/boost ]]; then CMAKE_OPTIONS+=" -DBOOST_ROOT=${DEPS_DIR}/boost"; fi
   - if [[ "${BOOST_VERSION}" == "1.64.0" ]]; then BOOST_URL="http://sourceforge.net/projects/boost/files/boost/1.64.0/boost_1_64_0.tar.gz"; fi
-  - if [[ "${BOOST_URL}" != "" ]]; then mkdir boost && travis_retry wget --quiet -O - ${BOOST_URL} | tar --strip-components=1 -xz -C boost; fi
+  - if [[ "${BOOST_URL}" != "" ]]; then mkdir -p boost && travis_retry wget --quiet -O - ${BOOST_URL} | tar --strip-components=1 -xz -C boost; fi
 
   - |
     if [[ "${BOOST_VERSION}" == "trunk" ]]; then
@@ -239,7 +239,7 @@ install:
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
       CMAKE_URL="http://www.cmake.org/files/v3.3/cmake-3.3.2-Linux-x86_64.tar.gz"
-      mkdir cmake && travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
+      mkdir -p cmake && travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
       export PATH=${DEPS_DIR}/cmake/bin:${PATH}
     else
       brew unlink cmake
@@ -314,9 +314,13 @@ script:
 
   - |
     touch Jamroot
-    echo "using clang : : ${CXX} ;" > project-config.jam
-    (cd test && b2 toolset=clang cxxflags="-std=c++$CPP ${CXXFLAGS}")
-
+    if [[ "${GCC_VERSION}" != "" ]]; then
+      echo "using gcc : : ${CXX} ;" > project-config.jam
+      (cd test && b2 toolset=gcc)
+    else
+      echo "using clang : : ${CXX} ;" > project-config.jam
+      (cd test && b2 toolset=clang)
+    fi
   - |
     export CTEST_PARALLEL_LEVEL=2 # Run unit tests on two cores
     (cd build && make check -j2 -k)

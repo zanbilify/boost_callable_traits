@@ -1,6 +1,6 @@
 /*
 
-@copyright Barrett Adair 2015
+@Copyright Barrett Adair 2015-2017
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 
@@ -74,9 +74,6 @@ struct add_member_lvalue_reference {
 * A substitution failure occurs if the constraints are violated.
 * Adds a member lvalue reference qualifier (`&`) to `T`, if not already present.
 * If an rvalue reference qualifier is present, the lvalue reference qualifier replaces it (in accordance with reference collapsing rules).
-
-[heading Compatibility Notes]
-A `static_assert` always fails on GCC builds older than version 4.9.2, because those versions did not support reference member qualifiers. Full support on GCC 4.9.2+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
 
 [heading Input/Output Examples]
 [table

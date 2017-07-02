@@ -1,6 +1,6 @@
 /*
 
-@copyright Barrett Adair 2015
+@Copyright Barrett Adair 2015-2017
 
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
@@ -56,9 +56,6 @@ struct return_type {
 [heading Behavior]
 * When the constraints are violated, a substitution failure occurs.
 * The aliased type is the return type of `T`.
-
-[heading Compatibility Notes]
-Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
 
 [heading Input/Output Examples]
 [table

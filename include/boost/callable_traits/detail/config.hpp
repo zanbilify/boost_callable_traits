@@ -1,5 +1,5 @@
 /*
-@copyright Barrett Adair 2016
+@Copyright Barrett Adair 2016-2017
 
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
@@ -87,7 +87,7 @@ Distributed under the Boost Software License, Version 1.0.
 #  define BOOST_CLBL_TRTS_DEFAULT_VARARGS_CC
 #endif // #if defined(BOOST_CLBL_TRTS_MSVC) && !defined(BOOST_DISABLE_WIN32))
 
-#if defined(BOOST_CLBL_TRTS_GCC) && !defined(BOOST_CLBL_TRTS_GCC_AT_LEAST_4_9_2)
+#if (defined(BOOST_CLBL_TRTS_GCC) && !defined(BOOST_CLBL_TRTS_GCC_AT_LEAST_4_9_2)) || defined(__INTEL_COMPILER)
 #  define BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 #  define BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
 #endif // #if defined BOOST_CLBL_TRTS_GCC && !defined(BOOST_CLBL_TRTS_GCC_AT_LEAST_4_9_2)

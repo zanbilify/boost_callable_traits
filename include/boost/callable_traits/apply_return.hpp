@@ -1,6 +1,6 @@
 /*
 
-@copyright Barrett Adair 2015
+@Copyright Barrett Adair 2015-2017
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 
@@ -69,9 +69,6 @@ namespace detail {
 * When `T` is `std::tuple<Args...>`, the aliased type is `R(Args...)`.
 * When `T` is a function, function pointer, function reference, or member function pointer, the aliased type's return type is `R`, but is otherwise identical to `T`.
 * When `T` is a member data pointer of class `foo` to a `U` type (such that `T` is `U foo::*`), the aliased type is `R foo::*`.
-
-[heading Compatibility Notes]
-Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
 
 [heading Input/Output Examples]
 [table

@@ -1,7 +1,7 @@
 /*
 @file add_transaction_safe
 
-@copyright Barrett Adair 2015
+@Copyright Barrett Adair 2015-2017
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 
@@ -70,9 +70,6 @@ struct add_transaction_safe {
 [heading Behavior]
 * A substitution failure occurs if the constraints are violated.
 * Adds the `transaction_safe` specifier to `T`, if not already present.
-
-[heading Compatibility Notes]
-A `static_assert` always fails when instantiating this template if your compiler doesn't support `transaction_safe`. At the time of this writing, GCC 6 with the `-fgnu-tm` is the only compiler that can use this feature.
 
 [heading Input/Output Examples]
 [table

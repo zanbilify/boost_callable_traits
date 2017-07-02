@@ -1,6 +1,6 @@
 /*
 
-@copyright Barrett Adair 2015
+@Copyright Barrett Adair 2015-2017
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 
@@ -82,9 +82,6 @@ struct apply_member_pointer {
 * When `T` is a function, function pointer, or function reference, then the aliased type is a member function pointer of `C` with the same parameters and return type.
 * When `T` is a member function pointer of any type, the aliased type is a member function pointer of `C` with the same parameters and return type.
 * Otherwise, the aliased type is a member data pointer equivalent to `std::remove_reference_t<T> C::*`.
-
-[heading Compatibility Notes]
-Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+.
 
 [heading Input/Output Examples]
 [table

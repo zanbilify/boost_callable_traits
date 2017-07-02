@@ -1,7 +1,7 @@
 /*
 @file is_transaction_safe
 
-@copyright Barrett Adair 2015
+@Copyright Barrett Adair 2015-2017
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 
@@ -65,9 +65,6 @@ constexpr bool is_transaction_safe_v = //see below
   * `T` is a function type, function pointer type, function reference type, or member function pointer type where the function has a `transaction_safe` specifier
   * `T` is a function object with a non-overloaded `operator()`, where the `operator()` has a `transaction_safe` specifier
 * On compilers that support variable templates, `is_transaction_safe_v<T>` is equivalent to `is_transaction_safe<T>::value`.
-
-[heading Compatibility Notes]
-Full support on GCC 4.7.4+, Clang 3.5+, Visual Studio 2015, and XCode 6.4+. Obviously, this will always be falsy for compilers that don't support `transaction_safe` at all.
 
 [heading Input/Output Examples]
 [table
