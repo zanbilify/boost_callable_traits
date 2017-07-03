@@ -69,7 +69,7 @@
       less error-prone.
     </p>
 <p>
-      <code class="literal">Boost.CallableTraits</code> is thoroughly tested on many platforms.
+      <code class="literal">Boost.CallableTraits</code> is well-tested on many platforms.
       <code class="literal">Boost.CallableTraits</code> correctly handles many corner cases
       that are often overlooked. The need for a proper library solution grows as
       more features are added to C++.
@@ -85,18 +85,6 @@
     </p>
 <h4>
 <a name="callable_traits.faq.h2"></a>
-      <span><a name="callable_traits.faq.why_does_namespace_scoped_args_t"></a></span><a class="link" href="faq.html#callable_traits.faq.why_does_namespace_scoped_args_t">Why
-      does <code class="literal">boost::callable_traits::</code><code class="literal">args_t</code> alias
-      a <code class="literal">std::tuple</code> instead of X?</a>
-    </h4>
-<p>
-      Boost contains a handful of excellent type containers. However, <code class="literal">Boost.CallableTraits</code>
-      is designed to only use the standard headers, so <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">tuple</span><span class="special">&gt;</span></code>
-      was the only option under this limitation. It would be trivial to support other
-      variadic containers, and I will consider doing so if there is sufficient interest.
-    </p>
-<h4>
-<a name="callable_traits.faq.h3"></a>
       <span><a name="callable_traits.faq.why_use_reference_collapsing_rul"></a></span><a class="link" href="faq.html#callable_traits.faq.why_use_reference_collapsing_rul">Why
       use reference collapsing rules when adding member function ref-qualifiers?</a>
     </h4>
@@ -106,18 +94,7 @@
       memorize. This also parallels the metafunctions provided in <code class="computeroutput"><span class="special">&lt;</span><span class="identifier">type_traits</span><span class="special">&gt;</span></code>.
     </p>
 <h4>
-<a name="callable_traits.faq.h4"></a>
-      <span><a name="callable_traits.faq.how_is_this_a_c_11_library_if_it"></a></span><a class="link" href="faq.html#callable_traits.faq.how_is_this_a_c_11_library_if_it">How
-      is this a C++11 library if it uses newer features like variable templates?</a>
-    </h4>
-<p>
-      If your compiler doesn't support a certain language feature that is required
-      by a metafunction, the implementation will either trigger a <code class="computeroutput"><span class="keyword">static_assert</span></code>
-      or a substitution failure, depending on the situation. This is explained in
-      the "Compatibility Notes" section for each trait.
-    </p>
-<h4>
-<a name="callable_traits.faq.h5"></a>
+<a name="callable_traits.faq.h3"></a>
       <span><a name="callable_traits.faq.many_features_in_this_library_ca"></a></span><a class="link" href="faq.html#callable_traits.faq.many_features_in_this_library_ca">Many
       features in this library cause a "substitution failure" when the
       template constraints are violated. Does this mean that I can violate the constraints
@@ -125,19 +102,19 @@
     </h4>
 <p>
       Yes. The SFINAE-ability of violated constraints has been tested extensively
-      on all supported compilers. Achieving this required some messy code in the
-      public header files.
+      on supported compilers. Achieving this required some messy code in the public
+      header files.
     </p>
 <h4>
-<a name="callable_traits.faq.h6"></a>
+<a name="callable_traits.faq.h4"></a>
       <span><a name="callable_traits.faq.what_about_calling_conventions"></a></span><a class="link" href="faq.html#callable_traits.faq.what_about_calling_conventions">What
       about calling conventions?</a>
     </h4>
 <p>
       I originally implemented features for these. However, these features necessitated
-      many, many more platform-specific test cases than I was willing to write for
-      a version 1.0 release. The code is still designed to accommodate such features,
-      so I would consider adding them in the future if there is sufficient interest.
+      many, many more platform-specific test cases. The code is still designed to
+      accommodate such features, so I would consider adding them in the future if
+      there is sufficient interest.
     </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
