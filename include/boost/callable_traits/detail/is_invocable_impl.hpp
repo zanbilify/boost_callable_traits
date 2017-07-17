@@ -7,8 +7,8 @@ Distributed under the Boost Software License, Version 1.0.
 
 */
 
-#ifndef CALLABLE_TRAITS_DETAIL_TEST_INVOKE_HPP
-#define CALLABLE_TRAITS_DETAIL_TEST_INVOKE_HPP
+#ifndef BOOST_CLBL_TRTS_IS_INVOCABLE_IMPL_HPP
+#define BOOST_CLBL_TRTS_IS_INVOCABLE_IMPL_HPP
 
 #include <boost/callable_traits/detail/config.hpp>
 #include <boost/callable_traits/detail/forward_declarations.hpp>
@@ -173,4 +173,4 @@ namespace boost { namespace callable_traits { namespace detail {
 
 }}} // namespace boost::callable_traits::detail
 
-#endif // #ifndef CALLABLE_TRAITS_DETAIL_TEST_INVOKE_HPP
+#endif // #ifndef BOOST_CLBL_TRTS_IS_INVOCABLE_IMPL_HPP

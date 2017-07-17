@@ -28,7 +28,6 @@ struct has_void_return;
 template<typename T>
 struct has_void_return
     : std::is_same<typename detail::traits<T>::return_type, void> {};
-//->
 
 #ifdef BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES
 
@@ -39,7 +38,7 @@ struct has_void_return_v {
 };
 
 #else
-
+//->
 
 // only available when variable templates are supported
 template<typename T>
