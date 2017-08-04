@@ -1,42 +1,19 @@
 # Copyright Louis Dionne 2013-2016
 # Modified Work Copyright Barrett Adair 2016
+# Copyright 20017 Peter Dimov
+#
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 
 import testing ;
-import regex ;
 
-project callable_traits :
+project :
     requirements
-        <include>../include
+        <toolset>clang:<cxxflags>"-pedantic -Wall -Wextra"
+        <toolset>darwin:<cxxflags>"-pedantic -Wall -Wextra"
 ;
 
-rule callable_traits-all-tests {
-    local toolset =
-        <toolset>clang:<cxxflags>"-std=c++1y -pedantic -Wall -Wextra"
-        <toolset>darwin:<cxxflags>"-std=c++1y -pedantic -Wall -Wextra"
-    ;
-
-    local result ;
-
-    local sources = [ glob-tree *.cpp ] ;
-    for local source in $(sources)
-    {
-        local target = [ regex.replace $(source) "\.cpp" "" ] ;
-        target = [ regex.replace $(target) "/" "." ] ;
-        result += [ run $(source) : : : $(toolset) : test.$(target) ] ;
-    }
-
-    return $(result) ;
+for local source in [ glob *.cpp ]
+{
+    run $(source) ;
 }
-
-test-suite callable_traits : [ callable_traits-all-tests ] ;
-
-# Satisfy the Boost library requirements
-test-suite minimal  : callable_traits ;
-test-suite full     : callable_traits ;
-test-suite extra    : callable_traits ;
-
-explicit callable_traits ;
-explicit minimal ;
-explicit extra ;
