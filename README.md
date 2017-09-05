@@ -10,9 +10,9 @@ Current Version: 2.1.1
 
 CallableTraits is a C++11 header-only library for the inspection, synthesis, and decomposition of callable types.
 
-[Full documentation available here.](http://badair.github.io/callable_traits/index.html)
+[Full documentation available here.](http://www.boost.org/doc/libs/develop/libs/callable_traits/doc/html/index.html)
 
-On April 17, 2017, CallableTraits was [conditionally accepted into the Boost C++ Libraries](https://lists.boost.org/Archives/boost/2017/04/234513.php). You can read more about the formal review process [here](http://www.boost.org/community/reviews.html).
+On April 17, 2017, CallableTraits was [conditionally accepted](https://lists.boost.org/Archives/boost/2017/04/234513.php)  into the Boost C++ Libraries, and is slated for release in Boost 1.66. You can read more about the Boost formal review process [here](http://www.boost.org/community/reviews.html).
 
 [Licensed under the Boost Software License, v. 1.0](LICENSE.md)
 
