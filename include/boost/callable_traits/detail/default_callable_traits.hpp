@@ -191,8 +191,8 @@ struct default_callable_traits {
 
 #ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
     using is_reference_member = std::false_type;
-    using is_lvalue_reference_qualified = std::false_type;
-    using is_rvalue_reference_qualified = std::false_type;
+    using is_lvalue_reference_member = std::false_type;
+    using is_rvalue_reference_member = std::false_type;
 #else
     using is_reference_member = std::integral_constant<bool, 0 < ref_flags>;
     using is_lvalue_reference_member = std::integral_constant<bool, ref_flags == lref_>;
