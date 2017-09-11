@@ -22,7 +22,7 @@ using namespace boost::callable_traits;
 
 struct number {
     int value;
-    auto add(int n) const { return value + n; }
+    int add(int n) const { return value + n; }
 };
 
 using pmf = decltype(&number::add);
