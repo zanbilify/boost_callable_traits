@@ -25,7 +25,8 @@ struct function_object : Base {
     using arg_types = typename Base::non_invoke_arg_types;
     using non_invoke_arg_types = arg_types;
 
-    static constexpr const bool value = std::is_class<T>::value;
+    static constexpr const bool value = std::is_class<
+        typename std::remove_reference<T>::type>::value;
 
     using traits = function_object;
     using class_type = error_t;

@@ -19,35 +19,6 @@ Distributed under the Boost Software License, Version 1.0.
 namespace boost { namespace callable_traits { namespace detail {
 
     template<typename T>
-    using shallow_decay = typename std::remove_const<
-        typename std::remove_reference<T>::type>::type;
-
-    template<typename T>
-    struct is_reference_wrapper_t {
-        using type = std::false_type;
-    };
-
-    template<typename T>
-    struct is_reference_wrapper_t<std::reference_wrapper<T>> {
-        using type = std::true_type;
-    };
-
-    template<typename T>
-    using is_reference_wrapper =
-        typename is_reference_wrapper_t<shallow_decay<T>>::type;
-
-
-    template<typename T, typename = std::true_type>
-    struct unwrap_reference_t {
-        using type = T;
-    };
-
-    template<typename T>
-    struct unwrap_reference_t<T, is_reference_wrapper<T>> {
-        using type = decltype(std::declval<T>().get());
-    };
-
-    template<typename T>
     struct can_dereference_t
     {
         template<typename>
@@ -101,46 +72,46 @@ namespace boost { namespace callable_traits { namespace detail {
     using generalize_if_dissimilar = typename std::conditional<
         IsBaseOf::value || IsSame::value, T, generalize<T>>::type;
 
-    // removes std::reference_wrapper
-    template<typename T>
-    using unwrap_reference = typename unwrap_reference_t<T>::type;
+    template<typename Traits, bool = Traits::is_cv_member::value
+        || Traits::is_lvalue_reference_member::value
+        || Traits::is_rvalue_reference_member::value>
+    struct test_invoke {
 
-    template<typename...>
-    struct test_invoke;
+        template<typename... Rgs,
+            typename U = typename Traits::type>
+        auto operator()(Rgs&&... rgs) const ->
+            success<decltype(std::declval<U>()(static_cast<Rgs&&>(rgs)...))>;
 
-    template<typename Pmf, typename T, typename... Args>
-    struct test_invoke<pmf<Pmf>, T, Args...> {
+        auto operator()(...) const -> substitution_failure;
+    };
+
+    template<typename F>
+    struct test_invoke<function<F>, true /*abominable*/> {
+        auto operator()(...) const -> substitution_failure;
+    };
+
+    template<typename Pmf, bool Ignored>
+    struct test_invoke<pmf<Pmf>, Ignored> {
 
         using class_t = typename pmf<Pmf>::class_type;
 
-       template<typename P, typename U, typename... Rgs,
+       template<typename U, typename... Rgs,
             typename Obj = generalize_if_dissimilar<class_t, U&&>>
-        auto operator()(P&& p, U&& u, Rgs&&... rgs) const ->
-            success<decltype((std::declval<Obj>().*p)(static_cast<Rgs&&>(rgs)...))>;
+        auto operator()(U&& u, Rgs&&... rgs) const ->
+            success<decltype((std::declval<Obj>().*std::declval<Pmf>())(static_cast<Rgs&&>(rgs)...))>;
 
         auto operator()(...) const -> substitution_failure;
     };
 
-    template<typename Pmd, typename... Args>
-    struct test_invoke<pmd<Pmd>, Args...> {
+    template<typename Pmd, bool Ignored>
+    struct test_invoke<pmd<Pmd>, Ignored> {
 
         using class_t = typename pmd<Pmd>::class_type;
 
-        template<typename P, typename U,
+        template<typename U,
             typename Obj = generalize_if_dissimilar<class_t, U&&>>
-        auto operator()(P&& p, U&& u) const ->
-            success<decltype((std::declval<Obj>().*p))>;
-
-        auto operator()(...) const -> substitution_failure;
-    };
-
-    template<typename F, typename... Args>
-    struct test_invoke<F, Args...> {
-
-        template<typename T, typename... Rgs,
-            typename U = unwrap_reference<typename std::remove_reference<T>::type>>
-        auto operator()(T&& t, Rgs&&... rgs) const ->
-            success<decltype(std::declval<U>()(static_cast<Rgs&&>(rgs)...))>;
+        auto operator()(U&& u) const ->
+            success<decltype(std::declval<Obj>().*std::declval<Pmd>())>;
 
         auto operator()(...) const -> substitution_failure;
     };
@@ -148,8 +119,8 @@ namespace boost { namespace callable_traits { namespace detail {
     template<typename T, typename... Args>
     struct is_invocable_impl {
         using traits = detail::traits<T>;
-        using test = detail::test_invoke<traits, Args...>;
-        using result = decltype(test{}(::std::declval<T>(), ::std::declval<Args>()...));
+        using test = detail::test_invoke<traits>;
+        using result = decltype(test{}(::std::declval<Args>()...));
         using type = std::integral_constant<bool, result::value>;
     };
 
@@ -161,8 +132,8 @@ namespace boost { namespace callable_traits { namespace detail {
     template<typename IsInvocable, typename Ret, typename T, typename... Args>
     struct is_invocable_r_impl {
         using traits = detail::traits<T>;
-        using test = detail::test_invoke<traits, Args...>;
-        using result = decltype(test{}(::std::declval<T>(), ::std::declval<Args>()...));
+        using test = detail::test_invoke<traits>;
+        using result = decltype(test{}(::std::declval<Args>()...));
         using type = typename std::is_convertible<typename result::_::type, Ret>::type;
     };
 

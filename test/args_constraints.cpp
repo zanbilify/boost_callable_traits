@@ -36,7 +36,7 @@ int main() {
     CT_ASSERT(is_substitution_failure_args<int (foo::* volatile)()>::value);
 
     auto lambda = [](){};
-    CT_ASSERT(is_substitution_failure_args<decltype(lambda)&>::value);
+    CT_ASSERT(!is_substitution_failure_args<decltype(lambda)&>::value);
     CT_ASSERT(is_substitution_failure_args<void>::value);
 }
 

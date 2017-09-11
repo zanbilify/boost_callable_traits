@@ -178,9 +178,69 @@ int main() {
         ,invoke_case<false, void*>
     >();
 
+    run_tests<decltype(f)&
+        ,invoke_case<true, int>
+        ,invoke_case<true, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(std::ref(f))
+        ,invoke_case<true, int>
+        ,invoke_case<true, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(std::ref(f))&
+        ,invoke_case<true, int>
+        ,invoke_case<true, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(std::ref(f))&&
+        ,invoke_case<true, int>
+        ,invoke_case<true, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(std::ref(f)) const &
+        ,invoke_case<true, int>
+        ,invoke_case<true, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(std::ref(f)) const &&
+        ,invoke_case<true, int>
+        ,invoke_case<true, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(f)&&
+        ,invoke_case<true, int>
+        ,invoke_case<true, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(f) const &
+        ,invoke_case<true, int>
+        ,invoke_case<true, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(f) const &&
+        ,invoke_case<true, int>
+        ,invoke_case<true, char>
+        ,invoke_case<false, void*>
+    >();
+
     run_tests<void(int)
         ,invoke_case<true, int>
         ,invoke_case<true, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<void(int) const
+        ,invoke_case<false, int>
+        ,invoke_case<false, char>
         ,invoke_case<false, void*>
     >();
 
