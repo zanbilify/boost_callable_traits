@@ -74,6 +74,38 @@ struct force_sfinae {
     using type = U;
 };
 
+template<typename T>
+using shallow_decay = typename std::remove_const<
+    typename std::remove_reference<T>::type>::type;
+
+template<typename T>
+struct is_reference_wrapper_t {
+    using type = std::false_type;
+};
+
+template<typename T>
+struct is_reference_wrapper_t<std::reference_wrapper<T>> {
+    using type = std::true_type;
+};
+
+template<typename T>
+using is_reference_wrapper =
+    typename is_reference_wrapper_t<shallow_decay<T>>::type;
+
+template<typename T, typename = std::true_type>
+struct unwrap_reference_t {
+    using type = T;
+};
+
+template<typename T>
+struct unwrap_reference_t<T, is_reference_wrapper<T>> {
+    using type = decltype(std::declval<T>().get());
+};
+
+// removes std::reference_wrapper
+template<typename T>
+using unwrap_reference = typename unwrap_reference_t<T>::type;
+
 }}} // namespace boost::callable_traits::detail
 
 #endif // #ifndef BOOST_CLBL_TRTS_DETAIL_UTILITY_HPP

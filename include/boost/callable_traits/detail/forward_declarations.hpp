@@ -40,7 +40,7 @@ struct pmf;
 template<typename T>
 struct pmd;
 
-template<typename T>
+template<typename F, typename T = typename std::remove_reference<F>::type>
 using function_object_base = typename std::conditional<
     has_normal_call_operator<T>::value,
     pmf<decltype(&default_to_function_object<T>::operator())>,

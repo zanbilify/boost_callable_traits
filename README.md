@@ -4,9 +4,9 @@ Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 -->
 
-# CallableTraits <a target="_blank" href="https://travis-ci.org/boostorg/callable_traits">![Travis status][badge.Travis]</a> <a target="_blank" href="https://ci.appveyor.com/project/boostorg/callable-traits">![Appveyor status][badge.Appveyor]</a> <a target="_blank" href="https://wandbox.org/permlink/v8t6f7u3yDxTiI3z">![Try it online][badge.wandbox]</a>
+# CallableTraits <a target="_blank" href="https://travis-ci.org/boostorg/callable_traits">![Travis status][badge.Travis]</a> <a target="_blank" href="https://ci.appveyor.com/project/boostorg/callable-traits">![Appveyor status][badge.Appveyor]</a> <a target="_blank" href="https://wandbox.org/permlink/NMDczXQZOlYntYdj">![Try it online][badge.wandbox]</a>
 
-Current Version: 2.1.1
+Current Version: 2.2.1
 
 CallableTraits is a C++11 header-only library for the inspection, synthesis, and decomposition of callable types.
 
