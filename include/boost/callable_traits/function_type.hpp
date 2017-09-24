@@ -26,12 +26,24 @@ using function_type_t = //see below
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::function_type,
         cannot_determine_parameters_for_this_type>;
+
+namespace detail {
+
+    template<typename T, typename = std::false_type>
+    struct function_type_impl {};
+
+    template<typename T>
+    struct function_type_impl <T, typename std::is_same<
+        function_type_t<T>, detail::dummy>::type>
+    {
+        using type = function_type_t<T>;
+    };
+}
+
 //->
 
-template<typename T, typename U = function_type_t<T>>
-struct function_type {
-    using type = U;
-};
+template<typename T>
+struct function_type : detail::function_type_impl<T> {};
 
 //<-
 }} // namespace boost::callable_traits

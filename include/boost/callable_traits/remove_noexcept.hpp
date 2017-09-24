@@ -31,12 +31,24 @@ using remove_noexcept_t = //see below
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::remove_noexcept,
         cannot_remove_noexcept_from_this_type>;
+
+namespace detail {
+
+    template<typename T, typename = std::false_type>
+    struct remove_noexcept_impl {};
+
+    template<typename T>
+    struct remove_noexcept_impl <T, typename std::is_same<
+        remove_noexcept_t<T>, detail::dummy>::type>
+    {
+        using type = remove_noexcept_t<T>;
+    };
+}
+
 //->
 
-template<typename T, typename U = remove_noexcept_t<T>>
-struct remove_noexcept {
-    using type = U;
-};
+template<typename T>
+struct remove_noexcept : detail::remove_noexcept_impl<T> {};
 
 //<-
 }} // namespace boost::callable_traits

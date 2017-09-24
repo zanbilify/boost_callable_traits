@@ -31,12 +31,24 @@ using remove_transaction_safe_t = //see below
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::remove_transaction_safe,
         cannot_remove_transaction_safe_from_this_type>;
+
+namespace detail {
+
+    template<typename T, typename = std::false_type>
+    struct remove_transaction_safe_impl {};
+
+    template<typename T>
+    struct remove_transaction_safe_impl <T, typename std::is_same<
+        remove_transaction_safe_t<T>, detail::dummy>::type>
+    {
+        using type = remove_transaction_safe_t<T>;
+    };
+}
+
 //->
 
-template<typename T, typename U = remove_transaction_safe_t<T>>
-struct remove_transaction_safe {
-  using type = U;
-};
+template<typename T>
+struct remove_transaction_safe : detail::remove_transaction_safe_impl<T> {};
 
 //<-
 }} // namespace boost::callable_traits

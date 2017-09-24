@@ -28,12 +28,24 @@ using remove_varargs_t = //see below
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::remove_varargs,
         varargs_are_illegal_for_this_type>;
+
+namespace detail {
+
+    template<typename T, typename = std::false_type>
+    struct remove_varargs_impl {};
+
+    template<typename T>
+    struct remove_varargs_impl <T, typename std::is_same<
+        remove_varargs_t<T>, detail::dummy>::type>
+    {
+        using type = remove_varargs_t<T>;
+    };
+}
+
 //->
 
-template<typename T, typename U = remove_varargs_t<T>>
-struct remove_varargs {
-    using type = U;
-};
+template<typename T>
+struct remove_varargs : detail::remove_varargs_impl<T> {};
 
 //<-
 }} // namespace boost::callable_traits

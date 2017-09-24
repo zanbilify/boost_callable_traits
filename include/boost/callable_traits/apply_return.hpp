@@ -38,18 +38,29 @@ namespace detail {
 [heading Definition]
 */
 
+template<typename T, typename R>
+using apply_return_t = //see below
+//<-
+    detail::try_but_fail_if_invalid<
+        typename detail::apply_return_helper<T, R>::type,
+        invalid_types_for_apply_return>;
+
+namespace detail {
+
+    template<typename T, typename R, typename = std::false_type>
+    struct apply_return_impl {};
+
     template<typename T, typename R>
-    using apply_return_t = //see below
-    //<-
-        detail::try_but_fail_if_invalid<
-            typename detail::apply_return_helper<T, R>::type,
-            invalid_types_for_apply_return>;
+    struct apply_return_impl <T, R, typename std::is_same<
+        apply_return_t<T, R>, detail::dummy>::type>
+    {
+        using type = apply_return_t<T, R>;
+    };
+}
     //->
 
-    template<typename T, typename R, typename U = apply_return_t<T, R>>
-    struct apply_return {
-        using type = U;
-    };
+template<typename T, typename R>
+struct apply_return : detail::apply_return_impl<T, R> {};
 
 //<-
 }} // namespace boost::callable_traits

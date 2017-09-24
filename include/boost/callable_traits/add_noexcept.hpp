@@ -46,12 +46,23 @@ using add_noexcept_t = //see below
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::add_noexcept,
         cannot_add_noexcept_to_this_type>;
+
+namespace detail {
+
+    template<typename T, typename = std::false_type>
+    struct add_noexcept_impl {};
+
+    template<typename T>
+    struct add_noexcept_impl <T, typename std::is_same<
+        add_noexcept_t<T>, detail::dummy>::type>
+    {
+        using type = add_noexcept_t<T>;
+    };
+}
 //->
 
-template<typename T, typename U = add_noexcept_t<T>>
-struct add_noexcept {
-    using type = U;
-};
+template<typename T>
+struct add_noexcept : detail::add_noexcept_impl<T> {};
 
 //<-
 #endif // #ifdef BOOST_CLBL_TRTS_ENABLE_NOEXCEPT_TYPES

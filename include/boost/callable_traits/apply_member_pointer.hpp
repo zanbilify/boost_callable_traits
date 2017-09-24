@@ -61,12 +61,24 @@ using apply_member_pointer_t = //see below
 
         detail::fail_if<!std::is_class<C>::value,
             second_template_argument_must_be_a_class_or_struct> >;
+
+namespace detail {
+
+    template<typename T, typename C, typename = std::false_type>
+    struct apply_member_pointer_impl {};
+
+    template<typename T, typename C>
+    struct apply_member_pointer_impl <T, C, typename std::is_same<
+        apply_member_pointer_t<T, C>, detail::dummy>::type>
+    {
+        using type = apply_member_pointer_t<T, C>;
+    };
+}
+
 //->
 
-template<typename T, typename C, typename U = apply_member_pointer_t<T, C>>
-struct apply_member_pointer {
-    using type = U;
-};
+template<typename T, typename C>
+struct apply_member_pointer : detail::apply_member_pointer_impl<T, C> {};
 
 //<-
 }} // namespace boost::callable_traits

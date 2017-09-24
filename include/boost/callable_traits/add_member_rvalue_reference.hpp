@@ -52,14 +52,26 @@ using add_member_rvalue_reference_t = //see below
         member_qualifiers_are_illegal_for_this_type>;
 
 #endif // #ifdef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
-//->
-
 #endif // #ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 
-template<typename T, typename U = add_member_rvalue_reference_t<T>>
-struct add_member_rvalue_reference {
-    using type = U;
-};
+namespace detail {
+
+    template<typename T, typename = std::false_type>
+    struct add_member_rvalue_reference_impl {};
+
+    template<typename T>
+    struct add_member_rvalue_reference_impl <T, typename std::is_same<
+        add_member_rvalue_reference_t<T>, detail::dummy>::type>
+    {
+        using type = add_member_rvalue_reference_t<T>;
+    };
+}
+//->
+
+
+template<typename T>
+struct add_member_rvalue_reference
+  : detail::add_member_rvalue_reference_impl<T> {};
 
 //<-
 }} // namespace boost::callable_traits
