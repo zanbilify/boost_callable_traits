@@ -27,12 +27,25 @@ using remove_member_reference_t = //see below
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::remove_member_reference,
         member_qualifiers_are_illegal_for_this_type>;
+
+namespace detail {
+
+    template<typename T, typename = std::false_type>
+    struct remove_member_reference_impl {};
+
+    template<typename T>
+    struct remove_member_reference_impl <T, typename std::is_same<
+        remove_member_reference_t<T>, detail::dummy>::type>
+    {
+        using type = remove_member_reference_t<T>;
+    };
+}
+
 //->
 
-template<typename T, typename U = remove_member_reference_t<T>>
-struct remove_member_reference {
-    using type = U;
-};
+template<typename T>
+struct remove_member_reference
+  : detail::remove_member_reference_impl<T> {};
 
 //<-
 }} // namespace boost::callable_traits

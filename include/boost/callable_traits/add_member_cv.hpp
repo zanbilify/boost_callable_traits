@@ -42,12 +42,24 @@ using add_member_cv_t = //see below
         member_qualifiers_are_illegal_for_this_type>;
 
 #endif // #ifdef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
+
+namespace detail {
+
+    template<typename T, typename = std::false_type>
+    struct add_member_cv_impl {};
+
+    template<typename T>
+    struct add_member_cv_impl <T, typename std::is_same<
+        add_member_cv_t<T>, detail::dummy>::type>
+    {
+        using type = add_member_cv_t<T>;
+    };
+}
+
 //->
 
-template<typename T, typename U = add_member_cv_t<T>>
-struct add_member_cv {
-    using type = U;
-};
+template<typename T>
+struct add_member_cv : detail::add_member_cv_impl<T> {};
 
 //<-
 }} // namespace boost::callable_traits

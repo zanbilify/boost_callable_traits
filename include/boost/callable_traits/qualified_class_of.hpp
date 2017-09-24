@@ -28,12 +28,24 @@ using qualified_class_of_t = //see below
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::invoke_type,
         type_is_not_a_member_pointer>;
+
+namespace detail {
+
+    template<typename T, typename = std::false_type>
+    struct qualified_class_of_impl {};
+
+    template<typename T>
+    struct qualified_class_of_impl <T, typename std::is_same<
+        qualified_class_of_t<T>, detail::dummy>::type>
+    {
+        using type = qualified_class_of_t<T>;
+    };
+}
+
 //->
 
-template<typename T, typename U = qualified_class_of_t<T>>
-struct qualified_class_of {
-    using type = U;
-};
+template<typename T>
+struct qualified_class_of : detail::qualified_class_of_impl<T> {};
 
 //<-
 }} // namespace boost::callable_traits

@@ -31,12 +31,24 @@ using return_type_t = //see below
     detail::try_but_fail_if_invalid<
         typename detail::traits<T>::return_type,
         unable_to_determine_return_type>;
+
+namespace detail {
+
+    template<typename T, typename = std::false_type>
+    struct return_type_impl {};
+
+    template<typename T>
+    struct return_type_impl <T, typename std::is_same<
+        return_type_t<T>, detail::dummy>::type>
+    {
+        using type = return_type_t<T>;
+    };
+}
+
 //->
 
-template<typename T, typename U = return_type_t<T>>
-struct return_type {
-    using type = U;
-};
+template<typename T>
+struct return_type : detail::return_type_impl<T> {};
 
 //<-
 }} // namespace boost::callable_traits
