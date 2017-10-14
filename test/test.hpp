@@ -33,9 +33,9 @@ using namespace boost::callable_traits;
 #endif
 
 #ifdef USE_LAZY_TYPES
-#define TRAIT(trait, ...) PP_CAT(trait, _t)<__VA_ARGS__>
-#else
 #define TRAIT(trait, ...) typename trait<__VA_ARGS__>::type
+#else
+#define TRAIT(trait, ...) PP_CAT(trait, _t)<__VA_ARGS__>
 #endif
 
 template<typename T1, typename T2>
