@@ -18,4 +18,5 @@ project :
 for local source in [ glob *.cpp ]
 {
     run $(source) ;
+    run $(source) : : : <define>USE_LAZY_TYPES : $(source:B)__lazy ;
 }
