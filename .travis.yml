@@ -317,7 +317,6 @@ script:
   - |-
     echo "using $TOOLSET : : $COMPILER : <cxxflags>-std=$CXXSTD ;" > ~/user-config.jam
   - ./b2 libs/callable_traits/test toolset=$TOOLSET
-  - ./b2 libs/callable_traits/test toolset=$TOOLSET define=USE_LAZY_TYPES
   - ./b2 libs/callable_traits/example toolset=$TOOLSET
 
 notifications:
