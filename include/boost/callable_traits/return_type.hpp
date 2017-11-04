@@ -29,7 +29,7 @@ template<typename T>
 using return_type_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
-        typename detail::traits<T>::return_type,
+        typename detail::traits<detail::shallow_decay<T>>::return_type,
         unable_to_determine_return_type>;
 
 namespace detail {

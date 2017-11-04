@@ -75,7 +75,7 @@ struct force_sfinae {
 };
 
 template<typename T>
-using shallow_decay = typename std::remove_const<
+using shallow_decay = typename std::remove_cv<
     typename std::remove_reference<T>::type>::type;
 
 template<typename T>

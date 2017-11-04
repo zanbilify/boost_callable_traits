@@ -27,8 +27,9 @@ struct is_cv_member;
 //<-
 template<typename T>
 struct is_cv_member
-    : detail::traits<T>::is_cv_member {
-    using type = typename detail::traits<T>::is_cv_member;
+    : detail::traits<detail::shallow_decay<T>>::is_cv_member {
+    using type = typename detail::traits<
+        detail::shallow_decay<T>>::is_cv_member;
 };
 
 #ifdef BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES
@@ -48,7 +49,7 @@ BOOST_CLBL_TRAITS_INLINE_VAR
 //->
 constexpr bool is_cv_member_v = //see below
 //<-
-    detail::traits<T>::is_cv_member::value;
+    detail::traits<detail::shallow_decay<T>>::is_cv_member::value;
 
 #endif
 

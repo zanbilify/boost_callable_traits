@@ -27,8 +27,11 @@ struct has_varargs;
 
 //<-
 template<typename T>
-struct has_varargs : detail::traits<T>::has_varargs {
-    using type = typename detail::traits<T>::has_varargs;
+struct has_varargs : detail::traits<
+    detail::shallow_decay<T>>::has_varargs {
+
+    using type = typename detail::traits<
+        detail::shallow_decay<T>>::has_varargs;
 };
 
 #ifdef BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES
@@ -48,7 +51,7 @@ BOOST_CLBL_TRAITS_INLINE_VAR
 //->
 constexpr bool has_varargs_v = //see below
 //<-
-    detail::traits<T>::has_varargs::value;
+    detail::traits<detail::shallow_decay<T>>::has_varargs::value;
 
 #endif
 

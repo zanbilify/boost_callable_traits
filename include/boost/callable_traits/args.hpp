@@ -24,7 +24,8 @@ template<typename T, template<class...> class Container = std::tuple>
 using args_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
-        typename detail::traits<T>::template expand_args<Container>,
+        typename detail::traits<
+            detail::shallow_decay<T>>::template expand_args<Container>,
         cannot_expand_the_parameter_list_of_first_template_argument>;
 
 namespace detail {
