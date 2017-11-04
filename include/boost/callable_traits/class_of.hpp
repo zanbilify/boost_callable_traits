@@ -25,7 +25,7 @@ template<typename T>
 using class_of_t = //see below
 //<-
     detail::try_but_fail_if_invalid<
-        typename detail::traits<T>::class_type,
+        typename detail::traits<detail::shallow_decay<T>>::class_type,
         type_is_not_a_member_pointer>;
 
 namespace detail {

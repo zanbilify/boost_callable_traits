@@ -46,7 +46,7 @@ int main() {
     assert_not_void_return<int>();
     assert_not_void_return<void*>();
     assert_not_void_return<void* foo::*>();
-    assert_not_void_return<void(* const)()>();
+    assert_not_void_return<void(** const)()>();
     assert_not_void_return<int()>();
     assert_not_void_return<int(*)()>();
     assert_not_void_return<int(&)()>();

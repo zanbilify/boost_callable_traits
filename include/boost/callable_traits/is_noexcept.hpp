@@ -27,8 +27,9 @@ struct is_noexcept;
 
 //<-
 template<typename T>
-struct is_noexcept : detail::traits<T>::is_noexcept {
-    using type = typename detail::traits<T>::is_noexcept;
+struct is_noexcept : detail::traits<detail::shallow_decay<T>>::is_noexcept {
+    using type = typename detail::traits<
+        detail::shallow_decay<T>>::is_noexcept;
 };
 
 #ifdef BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES
@@ -48,7 +49,7 @@ BOOST_CLBL_TRAITS_INLINE_VAR
 //->
 constexpr bool is_noexcept_v = //see below
 //<-
-    detail::traits<T>::is_noexcept::value;
+    detail::traits<detail::shallow_decay<T>>::is_noexcept::value;
 
 #endif
 

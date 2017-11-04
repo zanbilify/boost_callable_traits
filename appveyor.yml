@@ -39,3 +39,4 @@ build: off
 
 test_script:
   - b2 libs/callable_traits/test toolset=%TOOLSET%
+  - b2 libs/callable_traits/example toolset=%TOOLSET%

@@ -26,8 +26,11 @@ struct has_member_qualifiers;
 
 //<-
 template<typename T>
-struct has_member_qualifiers : detail::traits<T>::has_member_qualifiers {
-    using type = typename detail::traits<T>::has_member_qualifiers;
+struct has_member_qualifiers : detail::traits<
+    detail::shallow_decay<T>>::has_member_qualifiers {
+
+    using type = typename detail::traits<
+        detail::shallow_decay<T>>::has_member_qualifiers;
 };
 
 // older compilers don't support variable templates
@@ -48,7 +51,7 @@ BOOST_CLBL_TRAITS_INLINE_VAR
 //->
 constexpr bool has_member_qualifiers_v = //see below
 //<-
-    detail::traits<T>::has_member_qualifiers::value;
+    detail::traits<detail::shallow_decay<T>>::has_member_qualifiers::value;
 
 #endif
 

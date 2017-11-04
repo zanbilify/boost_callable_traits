@@ -33,9 +33,21 @@ using namespace boost::callable_traits;
 #endif
 
 #ifdef USE_LAZY_TYPES
-#define TRAIT(trait, ...) PP_CAT(trait, _t)<__VA_ARGS__>
-#else
 #define TRAIT(trait, ...) typename trait<__VA_ARGS__>::type
+#else
+#define TRAIT(trait, ...) PP_CAT(trait, _t)<__VA_ARGS__>
+#endif
+
+#ifdef BOOST_CLBL_TRTS_ENABLE_NOEXCEPT_TYPES
+#define TEST_NOEXCEPT_QUAL noexcept
+#else
+#define TEST_NOEXCEPT_QUAL
+#endif
+
+#ifdef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
+#define TEST_ABOM_V
+#else
+#define TEST_ABOM_V volatile
 #endif
 
 template<typename T1, typename T2>
