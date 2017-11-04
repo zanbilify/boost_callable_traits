@@ -38,6 +38,18 @@ using namespace boost::callable_traits;
 #define TRAIT(trait, ...) PP_CAT(trait, _t)<__VA_ARGS__>
 #endif
 
+#ifdef BOOST_CLBL_TRTS_ENABLE_NOEXCEPT_TYPES
+#define TEST_NOEXCEPT_QUAL noexcept
+#else
+#define TEST_NOEXCEPT_QUAL
+#endif
+
+#ifdef BOOST_CLBL_TRTS_DISABLE_ABOMINABLE_FUNCTIONS
+#define TEST_ABOM_V
+#else
+#define TEST_ABOM_V volatile
+#endif
+
 template<typename T1, typename T2>
 void assert_same() {
     CT_ASSERT(std::is_same<T1, T2>::value);

@@ -30,10 +30,14 @@ int main() {
 
     CT_ASSERT(is_substitution_failure_function_type<int>::value);
     CT_ASSERT(is_substitution_failure_function_type<int &>::value);
-    CT_ASSERT(is_substitution_failure_function_type<int (foo::* &)()>::value);
-    CT_ASSERT(is_substitution_failure_function_type<int (foo::* const)()>::value);
-    CT_ASSERT(is_substitution_failure_function_type<int (foo::* const &)()>::value);
-    CT_ASSERT(is_substitution_failure_function_type<int (foo::* volatile)()>::value);
+    CT_ASSERT(is_substitution_failure_function_type<int (foo::** &)()>::value);
+    CT_ASSERT(is_substitution_failure_function_type<int (foo::** const)()>::value);
+    CT_ASSERT(is_substitution_failure_function_type<int (foo::** const &)()>::value);
+    CT_ASSERT(is_substitution_failure_function_type<int (foo::** volatile)()>::value);
+    CT_ASSERT(!is_substitution_failure_function_type<int (foo::* &)()>::value);
+    CT_ASSERT(!is_substitution_failure_function_type<int (foo::* const)()>::value);
+    CT_ASSERT(!is_substitution_failure_function_type<int (foo::* const &)()>::value);
+    CT_ASSERT(!is_substitution_failure_function_type<int (foo::* volatile)()>::value);
 
     auto lambda = [](){};
     CT_ASSERT(!is_substitution_failure_function_type<decltype(lambda)&>::value);

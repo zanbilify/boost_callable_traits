@@ -27,7 +27,8 @@ struct has_void_return;
 //<-
 template<typename T>
 struct has_void_return
-    : std::is_same<typename detail::traits<T>::return_type, void> {};
+    : std::is_same<typename detail::traits<
+        detail::shallow_decay<T>>::return_type, void> {};
 
 #ifdef BOOST_CLBL_TRTS_DISABLE_VARIABLE_TEMPLATES
 
@@ -47,7 +48,8 @@ BOOST_CLBL_TRAITS_INLINE_VAR
 //->
 constexpr bool has_void_return_v = //see below
 //<-
-    std::is_same<typename detail::traits<T>::return_type, void>::value;
+    std::is_same<typename detail::traits<
+        detail::shallow_decay<T>>::return_type, void>::value;
 
 #endif
 

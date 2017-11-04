@@ -40,10 +40,6 @@ int main() {
     CT_ASSERT(is_substitution_failure_class_of<int(*)()>::value);
     CT_ASSERT(is_substitution_failure_class_of<int(**)()>::value);
     CT_ASSERT(is_substitution_failure_class_of<int(&)()>::value);
-    CT_ASSERT(is_substitution_failure_class_of<int (* const &)()>::value);
-    CT_ASSERT(is_substitution_failure_class_of<int (foo::* &)()>::value);
-    CT_ASSERT(is_substitution_failure_class_of<int (foo::* const)()>::value);
-    CT_ASSERT(is_substitution_failure_class_of<int (foo::* const &)()>::value);
-    CT_ASSERT(is_substitution_failure_class_of<int (foo::* volatile)()>::value);
+    CT_ASSERT(is_substitution_failure_class_of<int (foo::** const)()>::value);
 }
 

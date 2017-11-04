@@ -8,29 +8,22 @@ Distributed under the Boost Software License, Version 1.0.
 #include <boost/callable_traits/detail/config.hpp>
 #include "test.hpp"
 
-
-#ifndef BOOST_CLBL_TRTS_ENABLE_NOEXCEPT_TYPES
-int main(){}
-#else
-
 #include <boost/callable_traits/remove_noexcept.hpp>
 
 template<typename Noexcept, typename NotNoexcept>
 void test() {
 
     CT_ASSERT(std::is_same<NotNoexcept,  TRAIT(remove_noexcept, Noexcept)>::value);
-
-    //sanity check
-    CT_ASSERT(!std::is_same<NotNoexcept, Noexcept>::value);
 }
 
-#define TEST_NOEXCEPT(not_noexcept) test<not_noexcept noexcept, not_noexcept>()
+#define TEST_NOEXCEPT(not_noexcept) \
+    test<not_noexcept BOOST_CLBL_TRTS_NOEXCEPT_SPECIFIER, not_noexcept>()
 
 int main() {
 
-    TEST_NOEXCEPT(int(int) &);
+    TEST_NOEXCEPT(int(int) LREF);
     TEST_NOEXCEPT(int(*)(int));
-    TEST_NOEXCEPT(int(int, ...) &&);
+    TEST_NOEXCEPT(int(int, ...) RREF);
     TEST_NOEXCEPT(int(*)(int, ...));
 
     struct foo;
@@ -40,6 +33,4 @@ int main() {
     TEST_NOEXCEPT(int(foo::*)(int, ...));
     TEST_NOEXCEPT(int(foo::*)(int, ...) volatile);
 }
-
-#endif // #ifndef BOOST_CLBL_TRTS_ENABLE_NOEXCEPT_TYPES
 
