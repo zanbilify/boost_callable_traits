@@ -64,9 +64,9 @@ struct qualified_class_of : detail::qualified_class_of_impl<T> {};
 [table
     [[`T`]                              [`qualified_class_of_t<T>`]]
     [[`void(foo::*)()`]                 [`foo &`]]
-    [[`void(foo::*)() const`]           [`foo const &`]]
+    [[`void(foo::* volatile)() const`]           [`foo const &`]]
     [[`void(foo::*)() &&`]              [`foo &&`]]
-    [[`void(foo::*)() volatile &&`]     [`foo volatile &&`]]
+    [[`void(foo::*&)() volatile &&`]     [`foo volatile &&`]]
     [[`int foo::*`]                     [`foo const &`]]
     [[`const int foo::*`]               [`foo const &`]]
 ]
