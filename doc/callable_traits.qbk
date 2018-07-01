@@ -44,16 +44,16 @@
 -- Stephan T. Lavavej, CppCon 2015, [@https://www.youtube.com/watch?v=zt7ThwVfap0&t=11m40s "functional: What's New, And Proper Usage"]
 ]
 
-Consider for a moment the code below, which defines all 24 template specializations necessary to account for all the function types in C++11:
+Consider for a moment the code below, which defines all 48 template specializations necessary to specialize for every valid function type in pure C++17:
 
 [import ./hideous_template.snippet.cpp]
 [hideous_template]
 
-Things get even more complicated with member function pointers, function pointers, function references, function objects, and `transaction_safe`/`noexcept`.
+Things get even more complicated with member function pointers, function pointers, function references, function objects, and `transaction_safe`.
 
-Granted, use cases for such obscure specializations are vitually nonexistent in run-of-the-mill application codebases. Even in library code, these are exceedingly rare. However, there are a handful of very specific metaprogramming scenarios that can only be solved with this kind of template "spam". Writing and testing these templates is tedious and time consuming, and often requires lots of code duplication.
+Granted, use cases for such obscure specializations are vitually nonexistent in run-of-the-mill application codebases. Even in library code, these are exceedingly rare. However, there are a handful of metaprogramming scenarios that can only be solved with this kind of template "spam". Writing, testing, and maintaining such code is tedious and costly.
 
-[libname] offers a final and decisive library-level solution to this problem, and removes the need for these specializations entirely (except for platform-specific calling conventions).
+[libname] offers a final and decisive library-level solution to this problem, and removes the need for these specializations entirely (platform-specific calling conventions notwithstanding).
 
 [endsect][/section:motivation]
 
@@ -103,7 +103,7 @@ The [function_types] library includes an excellent [@http://www.boost.org/doc/li
 [template link_travis_ci[][@https://travis-ci.org/boostorg/callable_traits/builds Travis]]
 [template link_appveyor_ci[][@https://ci.appveyor.com/project/boostorg/callable-traits Appveyor]]
 
-[libname] is tested on GCC 4.7.4 and later, Clang 3.5.2 and later, XCode 6.4 and later, and Visual Studio 2015. Continuous integration is managed on [link_appveyor_ci] for Visual Studio, and on [link_travis_ci] for everything else. The Intel C++ Compiler is not officially supported, although the 2017 version for Linux does pass a handful of test cases.
+[libname] supports on GCC 4.7.4+, Clang 3.5.2+, XCode 6.4+, and Visual Studio 2015+. Continuous integration is managed on [link_appveyor_ci] for Visual Studio, and on [link_travis_ci] for everything else. The Intel C++ Compiler is not officially supported yet, although the 2017 version for Linux does pass a handful of test cases.
 
 [template yes[][role green \u2713]]
 [template c11[][role green c++11]]
@@ -275,7 +275,7 @@ The [function_types] library includes an excellent [@http://www.boost.org/doc/li
 
 [section:reference Reference Documentation]
 
-This reference will be most beneficial to readers who posess a basic understanding of the following C++ features:
+This reference will be most beneficial to readers familiar with the following C++ topics:
 
 * [@http://en.cppreference.com/w/cpp/language/partial_specialization template specializations]
 * [@http://en.cppreference.com/w/cpp/language/sfinae SFINAE]
@@ -486,7 +486,7 @@ cmake ..
 path\to\msbuild.exe check.vcxproj /t:build /p:Configuration=Debug /p:Platform=Win32 /v:n /nologo
 ```
 
-To build with Clang/C2 instead of MSVC, append `-TLLVM-vs2014` to the CMake arguments. This will only work if you have Clang/C2 installed.
+To build with Clang/C2 instead of MSVC, append `-TLLVM-vs2014` (or similar supported flag) to the CMake arguments. This will only work if you have Clang/C2 installed.
 
 [endsect][/section:building]
 
