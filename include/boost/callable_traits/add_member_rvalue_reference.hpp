@@ -20,7 +20,7 @@ namespace boost { namespace callable_traits {
 ``#include <boost/callable_traits/add_member_rvalue_reference.hpp>``
 [heading Definition]
 */
-
+//<-
 #ifdef BOOST_CLBL_TRTS_DISABLE_REFERENCE_QUALIFIERS
 
 template<typename T>
@@ -30,7 +30,7 @@ struct add_member_rvalue_reference_t {
 };
 
 #else
-
+//->
 template<typename T>
 using add_member_rvalue_reference_t = //see below
 //<-
