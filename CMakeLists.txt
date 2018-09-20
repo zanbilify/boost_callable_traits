@@ -107,10 +107,15 @@ endfunction()
 ##############################################################################
 
 
-add_custom_target(check
+add_custom_target(callable_traits_check
     COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     COMMENT "Build and then run all the tests and examples.")
+if (NOT TARGET check)
+    add_custom_target(check DEPENDS callable_traits_check)
+else()
+    add_dependencies(check callable_traits_check)
+endif()
 
 add_subdirectory(example)
 add_subdirectory(test)
