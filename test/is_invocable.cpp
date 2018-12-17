@@ -24,7 +24,14 @@ template<bool Expect, typename... Args>
 struct invoke_case {
    template<typename Callable>
    void operator()(tag<Callable>) const {
+
+// when available, test parity with std implementation
+#ifdef __cpp_lib_is_invocable
+       CT_ASSERT((std::is_invocable<Callable, Args...>() == boost::callable_traits::is_invocable<Callable, Args...>()));
+#else
        CT_ASSERT((Expect == boost::callable_traits::is_invocable<Callable, Args...>()));
+#endif
+
    }
 };
 

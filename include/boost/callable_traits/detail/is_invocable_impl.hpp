@@ -135,7 +135,9 @@ namespace boost { namespace callable_traits { namespace detail {
         using traits = detail::traits<T>;
         using test = detail::test_invoke<traits>;
         using result = decltype(test{}(0, ::std::declval<Args>()...));
-        using type = typename std::is_convertible<typename result::_::type, Ret>::type;
+        using type = std::integral_constant<bool,
+            std::is_convertible<typename result::_::type, Ret>::value
+                || std::is_same<Ret, void>::value>;
     };
 
     template<typename Ret, typename T, typename... Args>
