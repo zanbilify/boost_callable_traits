@@ -252,6 +252,9 @@ int main() {
         ,invoke_case<false, void, void*>
     >();
 
+// libc++ requires constructible types be passed to std::is_invocable
+#ifndef  _LIBCPP_VERSION
+
     run_tests<void(int)
         ,invoke_case<true, void, int>
         ,invoke_case<true, void, char>
@@ -283,7 +286,7 @@ int main() {
         ,invoke_case<false, void, foo&&, int>
         ,invoke_case<false, void, std::reference_wrapper<foo>, int>
     >();
-
+#endif
 
     run_tests<int
         ,invoke_case<false, void, foo>
