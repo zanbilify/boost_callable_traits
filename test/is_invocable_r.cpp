@@ -25,8 +25,8 @@ struct invoke_case {
    template<typename Callable>
    void operator()(tag<Callable>) const {
 
-// when available, test parity with std implementation
-#ifdef __cpp_lib_is_invocable
+// when available, test parity with std implementation (c++2a breaks our expectations but we still match std impl)
+#if defined(__cpp_lib_is_invocable) || __cplusplus >= 201707L
         CT_ASSERT((std::is_invocable_r<Ret, Callable, Args...>() == boost::callable_traits::is_invocable_r<Ret, Callable, Args...>()));
 #else
         CT_ASSERT((Expect == boost::callable_traits::is_invocable_r<Ret, Callable, Args...>()));
