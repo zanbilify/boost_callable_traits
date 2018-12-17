@@ -232,6 +232,68 @@ int main() {
         ,invoke_case<false, void*>
     >();
 
+    auto g = [](){};
+
+    run_tests<decltype(g)
+        ,invoke_case<true>
+        ,invoke_case<false, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(g)&
+        ,invoke_case<true>
+        ,invoke_case<false, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(std::ref(g))
+        ,invoke_case<true>
+        ,invoke_case<false, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(std::ref(g))&
+        ,invoke_case<true>
+        ,invoke_case<false, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(std::ref(g))&&
+        ,invoke_case<true>
+        ,invoke_case<false, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(std::ref(g)) const &
+        ,invoke_case<true>
+        ,invoke_case<false, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(std::ref(g)) const &&
+        ,invoke_case<true>
+        ,invoke_case<false, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(g)&&
+        ,invoke_case<true>
+        ,invoke_case<false, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(g) const &
+        ,invoke_case<true>
+        ,invoke_case<false, char>
+        ,invoke_case<false, void*>
+    >();
+
+    run_tests<decltype(g) const &&
+        ,invoke_case<true>
+        ,invoke_case<false, char>
+        ,invoke_case<false, void*>
+    >();
+
     run_tests<void(int)
         ,invoke_case<true, int>
         ,invoke_case<true, char>

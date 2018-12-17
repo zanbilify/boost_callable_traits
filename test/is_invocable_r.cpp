@@ -233,6 +233,18 @@ int main() {
         ,invoke_case<false, void, void*>
     >();
 
+    auto g = [](){};
+
+    run_tests<decltype(g)
+        ,invoke_case<true, void>
+        ,invoke_case<true, void>
+        ,invoke_case<false, void, int>
+        ,invoke_case<false, void, char>
+        ,invoke_case<false, int, int>
+        ,invoke_case<false, int, char>
+        ,invoke_case<false, void, void*>
+    >();
+
     run_tests<void(int)
         ,invoke_case<true, void, int>
         ,invoke_case<true, void, char>
