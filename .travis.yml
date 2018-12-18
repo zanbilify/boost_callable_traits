@@ -81,11 +81,22 @@ matrix:
     - os: linux
       dist: trusty
       compiler: g++-7
-      env: TOOLSET=gcc COMPILER=g++-7 CXXSTD=11,14,1z
+      env: TOOLSET=gcc COMPILER=g++-7 CXXSTD=11,14,1z,17
       addons:
         apt:
           packages:
             - g++-7
+          sources:
+            - ubuntu-toolchain-r-test
+
+    - os: linux
+      dist: trusty
+      compiler: g++-8
+      env: TOOLSET=gcc COMPILER=g++-8 CXXSTD=11,14,1z,17,2a
+      addons:
+        apt:
+          packages:
+            - g++-8
           sources:
             - ubuntu-toolchain-r-test
 
@@ -156,6 +167,39 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-4.0
+
+    - os: linux
+      compiler: clang++-5.0
+      env: TOOLSET=clang COMPILER=clang++-5.0 CXXSTD=11,14,1z,17
+      addons:
+        apt:
+          packages:
+            - clang-5.0
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-5.0
+
+    - os: linux
+      compiler: clang++-6.0
+      env: TOOLSET=clang COMPILER=clang++-6.0 CXXSTD=11,14,1z,17
+      addons:
+        apt:
+          packages:
+            - clang-6.0
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-6.0
+
+    - os: linux
+      compiler: clang++-7
+      env: TOOLSET=clang COMPILER=clang++-7 CXXSTD=11,14,1z,17
+      addons:
+        apt:
+          packages:
+            - clang-7
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-7
 
     - os: osx
       compiler: clang++
