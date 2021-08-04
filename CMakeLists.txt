@@ -49,6 +49,8 @@ else()
     boost_callable_traits_append_flag(boost_callable_traits_HAS_STDCXX1z                   -std=c++1z)
     boost_callable_traits_append_flag(boost_callable_traits_HAS_STDCXX17                   -std=c++17)
     boost_callable_traits_append_flag(boost_callable_traits_HAS_STDCXX2a                   -std=c++2a)
+    boost_callable_traits_append_flag(boost_callable_traits_HAS_STDCXX20                   -std=c++20)
+    boost_callable_traits_append_flag(boost_callable_traits_HAS_STDCXX2b                   -std=c++2b)
 endif()
 
 # transactional memory - currently only available in GCC 6 and later
