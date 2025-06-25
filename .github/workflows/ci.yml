@@ -20,7 +20,7 @@ jobs:
           - name: "gcc 4.7"
             buildtype: "boost"
             packages: "g++-4.7"
-            os: "ubuntu-20.04"
+            os: "ubuntu-latest"
             container: "ubuntu:16.04"
             llvm_os: ""
             llvm_ver: ""
@@ -29,7 +29,7 @@ jobs:
             cxxstd: "11"
           - name: "gcc 4.8"
             packages: "g++-4.8"
-            os: "ubuntu-20.04"
+            os: "ubuntu-latest"
             container: "ubuntu:16.04"
             llvm_os: ""
             llvm_ver: ""
@@ -38,7 +38,7 @@ jobs:
             cxxstd: "11"
           - name: "gcc 4.9"
             packages: "g++-4.9"
-            os: "ubuntu-20.04"
+            os: "ubuntu-latest"
             container: "ubuntu:16.04"
             llvm_os: ""
             llvm_ver: ""
@@ -47,7 +47,7 @@ jobs:
             cxxstd: "11"
           - name: "gcc 5"
             packages: "g++-5"
-            os: "ubuntu-20.04"
+            os: "ubuntu-latest"
             container: "ubuntu:16.04"
             llvm_os: ""
             llvm_ver: ""
@@ -56,8 +56,8 @@ jobs:
             cxxstd: "11,14,1z"
           - name: "gcc 6"
             packages: "g++-6"
-            os: "ubuntu-20.04"
-            container: "ubuntu:16.04"
+            os: "ubuntu-latest"
+            container: "ubuntu:18.04"
             llvm_os: ""
             llvm_ver: ""
             toolset: "gcc"
@@ -65,8 +65,8 @@ jobs:
             cxxstd: "11,14,1z"
           - name: "gcc 7"
             packages: "g++-7"
-            os: "ubuntu-20.04"
-            container: ""
+            os: "ubuntu-latest"
+            container: "ubuntu:18.04"
             llvm_os: ""
             llvm_ver: ""
             toolset: "gcc"
@@ -74,8 +74,8 @@ jobs:
             cxxstd: "11,14,1z,17"
           - name: "gcc 8"
             packages: "g++-8"
-            os: "ubuntu-20.04"
-            container: ""
+            os: "ubuntu-latest"
+            container: "ubuntu:18.04"
             llvm_os: ""
             llvm_ver: ""
             toolset: "gcc"
@@ -83,8 +83,8 @@ jobs:
             cxxstd: "11,14,1z,17,2a"
           - name: "gcc 9"
             packages: "g++-9"
-            os: "ubuntu-20.04"
-            container: ""
+            os: "ubuntu-latest"
+            container: "ubuntu:20.04"
             llvm_os: ""
             llvm_ver: ""
             toolset: "gcc"
@@ -92,8 +92,8 @@ jobs:
             cxxstd: "11,14,17,2a"
           - name: "gcc 10"
             packages: "g++-10"
-            os: "ubuntu-20.04"
-            container: ""
+            os: "ubuntu-latest"
+            container: "ubuntu:20.04"
             llvm_os: ""
             llvm_ver: ""
             toolset: "gcc"
@@ -101,7 +101,7 @@ jobs:
             cxxstd: "11,14,17,20"
           - name: "clang 3.5"
             packages: "clang-3.5"
-            os: "ubuntu-20.04"
+            os: "ubuntu-latest"
             container: "ubuntu:16.04"
             llvm_os: "precise"
             llvm_ver: "3.5"
@@ -110,7 +110,7 @@ jobs:
             cxxstd: "11"
           - name: "clang 3.6"
             packages: "clang-3.6"
-            os: "ubuntu-20.04"
+            os: "ubuntu-latest"
             container: "ubuntu:16.04"
             llvm_os: "precise"
             llvm_ver: "3.6"
@@ -119,7 +119,7 @@ jobs:
             cxxstd: "11"
           - name: "clang 3.7"
             packages: "clang-3.7"
-            os: "ubuntu-20.04"
+            os: "ubuntu-latest"
             container: "ubuntu:16.04"
             llvm_os: "precise"
             llvm_ver: "3.7"
@@ -128,7 +128,7 @@ jobs:
             cxxstd: "11"
           - name: "clang 3.8"
             packages: "clang-3.8 libstdc++-4.9-dev"
-            os: "ubuntu-20.04"
+            os: "ubuntu-latest"
             container: "ubuntu:16.04"
             llvm_os: "precise"
             llvm_ver: "3.8"
@@ -137,7 +137,7 @@ jobs:
             cxxstd: "11,14"
           - name: "clang 3.9"
             packages: "clang-3.9 libstdc++-4.9-dev"
-            os: "ubuntu-20.04"
+            os: "ubuntu-latest"
             container: "ubuntu:16.04"
             llvm_os: "precise"
             llvm_ver: "3.9"
@@ -146,7 +146,7 @@ jobs:
             cxxstd: "11,14"
           - name: "clang 4.0"
             packages: "clang-4.0"
-            os: "ubuntu-20.04"
+            os: "ubuntu-latest"
             container: "ubuntu:16.04"
             llvm_os: "xenial"
             llvm_ver: "4.0"
@@ -155,7 +155,7 @@ jobs:
             cxxstd: "11,14"
           - name: "clang 5.0"
             packages: "clang-5.0"
-            os: "ubuntu-20.04"
+            os: "ubuntu-latest"
             container: "ubuntu:16.04"
             llvm_os: ""
             llvm_ver: ""
@@ -164,7 +164,7 @@ jobs:
             cxxstd: "11,14,1z,17"
           - name: "clang 6.0"
             packages: "clang-6.0"
-            os: "ubuntu-20.04"
+            os: "ubuntu-latest"
             container: "ubuntu:16.04"
             llvm_os: ""
             llvm_ver: ""
@@ -173,26 +173,26 @@ jobs:
             cxxstd: "11,14,1z,17,2a"
           - name: "clang 7"
             packages: "clang-7"
-            os: "ubuntu-20.04"
-            container: "ubuntu:16.04"
+            os: "ubuntu-latest"
+            container: "ubuntu:20.04"
             llvm_os: "xenial"
             llvm_ver: "7"
             toolset: "clang"
             compiler: "clang++-7"
-            cxxstd: "11,14,1z,17,2a"
+            cxxstd: "11,14,1z,17"
           - name: "clang 8"
             packages: "clang-8"
-            os: "ubuntu-20.04"
-            container: "ubuntu:16.04"
+            os: "ubuntu-latest"
+            container: "ubuntu:20.04"
             llvm_os: "xenial"
             llvm_ver: "8"
             toolset: "clang"
             compiler: "clang++-8"
-            cxxstd: "11,14,17,2a"
+            cxxstd: "11,14,17"
           - name: "clang 9"
             packages: "clang-9"
-            os: "ubuntu-20.04"
-            container: ""
+            os: "ubuntu-latest"
+            container: "ubuntu:20.04"
             llvm_os: "focal"
             llvm_ver: "9"
             toolset: "clang"
@@ -200,8 +200,8 @@ jobs:
             cxxstd: "11,14,17,2a"
           - name: "clang 10"
             packages: "clang-10"
-            os: "ubuntu-20.04"
-            container: ""
+            os: "ubuntu-latest"
+            container: "ubuntu:20.04"
             llvm_os: "focal"
             llvm_ver: "10"
             toolset: "clang"
@@ -209,8 +209,8 @@ jobs:
             cxxstd: "11,14,17,20"
           - name: "clang 11"
             packages: "clang-11"
-            os: "ubuntu-20.04"
-            container: ""
+            os: "ubuntu-latest"
+            container: "ubuntu:20.04"
             sources: ""
             llvm_os: "focal"
             llvm_ver: "11"
@@ -219,8 +219,8 @@ jobs:
             cxxstd: "11,14,17,20,latest"
           - name: "clang 12"
             packages: "clang-12"
-            os: "ubuntu-20.04"
-            container: ""
+            os: "ubuntu-latest"
+            container: "ubuntu:20.04"
             sources: ""
             llvm_os: "focal"
             llvm_ver: "12"
@@ -229,16 +229,29 @@ jobs:
             cxxstd: "11,14,17,20,latest"
 
     runs-on: ${{ matrix.os }}
-    container: ${{ matrix.container }}
+    container:
+      image: ${{matrix.container}}
+      volumes:
+        - /node20217:/node20217:rw,rshared
+        - ${{ startsWith(matrix.container, 'ubuntu:1') && '/node20217:/__e/node20:ro,rshared' || ' ' }}
 
     steps:
-      - name: Check if running in container
-        if: matrix.container != ''
-        run: echo "GHA_CONTAINER=${{ matrix.container }}" >> $GITHUB_ENV
-      - name: If running in container, upgrade packages
-        if: matrix.container != ''
+      - name: Setup container environment
+        if: matrix.container
         run: |
-            apt-get -o Acquire::Retries=3 update && DEBIAN_FRONTEND=noninteractive apt-get -y install tzdata && apt-get -o Acquire::Retries=3 install -y sudo software-properties-common wget apt-transport-https make apt-file sudo unzip libssl-dev build-essential g++ git
+          apt-get update
+          apt-get -y install sudo python3 git g++ curl xz-utils
+
+      - name: Install nodejs20glibc2.17
+        if: ${{ startsWith( matrix.container, 'ubuntu:1' ) }}
+        run: |
+          curl -LO https://archives.boost.io/misc/node/node-v20.9.0-linux-x64-glibc-217.tar.xz
+          tar -xf node-v20.9.0-linux-x64-glibc-217.tar.xz --strip-components 1 -C /node20217
+          ldd /__e/node20/bin/node
+
+      - name: Install packages
+        if: matrix.packages
+        run: sudo apt-get -y install ${{matrix.packages}}
 
       - uses: actions/checkout@v2
 
@@ -256,19 +269,6 @@ jobs:
           TRAVIS_OS_NAME: "linux"
         run: |
           set -e
-          for i in {1..3}; do sudo -E apt-add-repository -y "ppa:ubuntu-toolchain-r/test" && break || sleep 2; done
-          if test -n "${LLVM_OS}" ; then
-              wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
-              if test -n "${LLVM_VER}" ; then
-                  sudo -E apt-add-repository "deb http://apt.llvm.org/${LLVM_OS}/ llvm-toolchain-${LLVM_OS}-${LLVM_VER} main"
-              else
-                  # Snapshot (i.e. trunk) build of clang
-                  sudo -E apt-add-repository "deb http://apt.llvm.org/${LLVM_OS}/ llvm-toolchain-${LLVM_OS} main"
-              fi
-          fi
-          sudo -E apt-get -o Acquire::Retries=3 update
-          sudo -E DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=3 -y --no-install-suggests --no-install-recommends install ${PACKAGES}
-
           export TRAVIS_BUILD_DIR=$(pwd)
           export TRAVIS_BRANCH=${TRAVIS_BRANCH:-$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')}
           export VCS_COMMIT_ID=$GITHUB_SHA
@@ -297,10 +297,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: "xcode 11.7"
-            os: "macos-10.15"
+          - name: "xcode"
+            os: "macos-15"
             cxx: "clang++"
-            xcode_version: 11.7
             toolset: "clang"
             compiler: "clang++"
             cxxstd: "11,14,17"
@@ -309,12 +308,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Set DEVELOPER_DIR
-        if: matrix.xcode_version != ''
-        run: echo "DEVELOPER_DIR=/Applications/Xcode_${{ matrix.xcode_version }}.app/Contents/Developer" >> $GITHUB_ENV
-      - name: Test DEVELOPER_DIR
-        run: echo $DEVELOPER_DIR
 
       - name: "osx"
         shell: bash
@@ -357,13 +350,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - toolset: msvc-14.1
-            cxxstd: "11,14,17"
-            arch: 32
-            os: windows-2016
           - toolset: msvc-14.2
             cxxstd: "11,14,17,latest"
             os: windows-2019
+          - toolset: msvc-14.3
+            cxxstd: "11,14,17,20,latest"
+            os: windows-2022
 
     runs-on: ${{matrix.os}}
 
@@ -393,4 +385,3 @@ jobs:
           git submodule update --init libs/headers
           cmd /c bootstrap
           b2 libs\callable_traits\test toolset=${{matrix.toolset}} cxxstd=${{matrix.cxxstd}} address-model="32,64" && b2 libs\callable_traits\example toolset=${{matrix.toolset}} cxxstd=${{matrix.cxxstd}} address-model="32,64"
-

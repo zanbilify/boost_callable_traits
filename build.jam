@@ -1,0 +1,19 @@
+# Copyright René Ferdinand Rivera Morell 2023-2024
+# Distributed under the Boost Software License, Version 1.0.
+# (See accompanying file LICENSE_1_0.txt or copy at
+# http://www.boost.org/LICENSE_1_0.txt)
+
+require-b2 5.2 ;
+
+project /boost/callable_traits
+    ;
+
+explicit
+    [ alias boost_callable_traits : : :
+        : <include>include <library>$(boost_dependencies) ]
+    [ alias all : boost_callable_traits example test ]
+    ;
+
+call-if : boost-library callable_traits
+    ;
+
