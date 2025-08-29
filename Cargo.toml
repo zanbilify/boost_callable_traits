@@ -1,0 +1,16 @@
+[package]
+name = "boost_callable_traits"
+description = "Boost C++ library boost_callable_traits packaged using Zanbil"
+version = "0.1.0"
+edition = "2024"
+links = "boost_callable_traits"
+license = "BSL-1.0"
+repository = "https://github.com/zanbilify/boost_callable_traits"
+
+[package.metadata.zanbil]
+make_dependencies_public = true
+
+[dependencies]
+
+[build-dependencies]
+zanbil-boost-build = "0.1.0"
